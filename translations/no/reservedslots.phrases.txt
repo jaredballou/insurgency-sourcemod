@@ -1,0 +1,8 @@
+"Phrases"
+{
+	"Slot reserved"
+	{
+		"no"		"Kicket fordi en spiller brukte sin reserverte plass."
+	}
+
+}

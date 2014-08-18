@@ -1,0 +1,156 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"pl"		"gameMe - Strona Główna
+	}
+	"IngameMenu_Menu1"
+	{
+		"pl"		"Wyświetl Ranking"
+	}
+	"IngameMenu_Menu2"
+	{
+		"pl"		"Następni Gracze"
+	}
+	"IngameMenu_Menu3"
+	{
+		"pl"		"Top10 Graczy"
+	}
+	"IngameMenu_Menu4"
+	{
+		"pl"		"Ustawienia automatycznego wyświetlania"		
+	}
+	"IngameMenu_Menu5"
+	{
+		"pl"		"Opcje czatu"
+	}
+	"IngameMenu_Menu6"
+	{
+		"pl"		"Ustawienia wyświetlania w rankingu"
+	}
+	"IngameMenu_Menu7"
+	{
+		"pl"		"Ranking Klanów"
+	}
+	"IngameMenu_Menu8"
+	{
+		"pl"		"Status Serwera"
+	}
+	"IngameMenu_Menu9"
+	{
+		"pl"		"Twoje Statystyki"
+	}
+	"IngameMenu_Menu10"
+	{
+		"pl"		"Używane bronie"
+	}
+	"IngameMenu_Menu11"
+	{
+		"pl"		"Celność"
+	}
+	"IngameMenu_Menu12"
+	{
+		"pl"		"Cele Broni"
+	}
+	"IngameMenu_Menu13"
+	{
+		"pl"		"Zabicia przez graczy"
+	}
+	"IngameMenu_Menu14"
+	{
+		"pl"		"Lista Banów"
+	}
+	"IngameMenu_Menu15"
+	{
+		"pl"		"Wyświetl Pomoc"
+	}
+	"IngameMenu_Menu16"
+	{
+		"pl"		"Restart Statystyk"
+	}
+
+
+	"AutoMenu_Caption"
+	{
+		"pl"		"Automatyczne Wyświetlanie Rankungu"
+	}
+	"AutoMenu_Menu1"
+	{
+		"pl"		"Wyświetl przy starcie rundy"
+	}
+	"AutoMenu_Menu2"
+	{
+		"pl"		"Wyświetl przy końcu rundy"
+	}
+	"AutoMenu_Menu3"
+	{
+		"pl"		"Wyświetl po śmierci"
+	}
+	"AutoMenu_Menu4"
+	{
+		"pl"		"Wyłącz"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"pl"		"Wydarzenia czatu"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"pl"		"Włącz wyświetlanie punktów na czacie"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"pl"		"Wyłącz wyświetlanie punktów na czacie"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"pl"		"Włącz globalny czat"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"pl"		"Wyłącz globalny czat"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"pl"		"Atakujący"
+	}
+	"DamagePanel_Killed"
+	{
+		"pl"		"Zgonów"
+	}
+	"DamagePanel_Wounded"
+	{
+		"pl"		"Zranionych"
+	}
+	"DamagePanel_Killer"
+	{
+		"pl"		"Zabójca"
+	}
+	"DamagePanel_Dmg"
+	{
+		"pl"		"Obrażeń"
+	}
+	"DamagePanel_Hit"
+	{
+		"pl"		"Strzał"
+	}
+	"DamagePanel_Hits"
+	{
+		"pl"		"Strzałów"
+	}
+	"DamagePanel_Hp"
+	{
+		"pl"		"hp"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"pl"		"{1} zabił Cię z {2} dmg, {3} hp zostało"
+	}
+
+}

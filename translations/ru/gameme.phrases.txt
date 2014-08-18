@@ -1,0 +1,156 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"ru"		"gameME - Гл. меню"
+	}
+	"IngameMenu_Menu1"
+	{
+		"ru"		"Показать ранг"
+	}
+	"IngameMenu_Menu2"
+	{
+		"ru"		"Следующие игроки"
+	}
+	"IngameMenu_Menu3"
+	{
+		"ru"		"Топ 10 игроков"
+	}
+	"IngameMenu_Menu4"
+	{
+		"ru"		"Авто-показ ранга"
+	}
+	"IngameMenu_Menu5"
+	{
+		"ru"		"События чата"
+	}
+	"IngameMenu_Menu6"
+	{
+		"ru"		"Скрыть/показать себя в статистике"
+	}
+	"IngameMenu_Menu7"
+	{
+		"ru"		"Ранг кланов"
+	}
+	"IngameMenu_Menu8"
+	{
+		"ru"		"Статус сервера"
+	}
+	"IngameMenu_Menu9"
+	{
+		"ru"		"Моя статистика"
+	}
+	"IngameMenu_Menu10"
+	{
+		"ru"		"Использование оружия"
+	}
+	"IngameMenu_Menu11"
+	{
+		"ru"		"Точность оружия"
+	}
+	"IngameMenu_Menu12"
+	{
+		"ru"		"Цели оружия"
+	}
+	"IngameMenu_Menu13"
+	{
+		"ru"		"Убийства игроков"
+	}
+	"IngameMenu_Menu14"
+	{
+		"ru"		"Бан-лист"
+	}
+	"IngameMenu_Menu15"
+	{
+		"ru"		"Показать помощь"
+	}
+	"IngameMenu_Menu16"
+	{
+		"ru" 		"Сбросить статистику"
+	}
+
+
+	"AutoMenu_Caption"
+	{
+		"ru"		"Авто-показ ранга"
+	}
+	"AutoMenu_Menu1"
+	{
+		"ru"		"Включить в начале раунда"
+	}
+	"AutoMenu_Menu2"
+	{
+		"ru"		"Включить в конце раунда"
+	}
+	"AutoMenu_Menu3"
+	{
+		"ru"		"Включить при смерти игрока"
+	}
+	"AutoMenu_Menu4"
+	{
+		"ru"		"Выключить"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"ru"		"События чата"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"ru"		"Включить события"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"ru"		"Выключить события"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"ru"		"Включить глобальный чат"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"ru"		"Выключить глобальный чат"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"ru"		"Атакующие"
+	}
+	"DamagePanel_Killed"
+	{
+		"ru"		"Убито"
+	}
+	"DamagePanel_Wounded"
+	{
+		"ru"		"Ранены"
+	}
+	"DamagePanel_Killer"
+	{
+		"ru"		"Вас убил"
+	}
+	"DamagePanel_Dmg"
+	{
+		"ru"		"урона"
+	}
+	"DamagePanel_Hit"
+	{
+		"ru"		"попадание"
+	}
+	"DamagePanel_Hits"
+	{
+		"ru"		"попаданий"
+	}
+	"DamagePanel_Hp"
+	{
+		"ru"		"хп"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"ru"		"{1} имея {3} hp убил вас нанеся {2} урона"
+	}
+
+}

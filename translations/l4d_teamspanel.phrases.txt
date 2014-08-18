@@ -1,0 +1,9 @@
+"Phrases"
+{
+	"announce_command_message"
+	{
+		"en"	"Say !teams to show a Playerlist Panel of the Teams"
+	}
+}
+
+

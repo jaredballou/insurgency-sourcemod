@@ -1,0 +1,27 @@
+﻿"Phrases"
+{
+	"CHEATS_NOTIFY_FAILURE_CLIENT"
+	{
+		"ru"	"Вы не имеете права использовать читы."
+	}
+	"CHEATS_NOTIFY_FAILURE_LOG"
+	{
+		"ru"	"{1} был не допущен к использованию чита: {2}."
+	}
+	"CHEATS_NOTIFY_FAILURE_CHAT"
+	{
+		"ru"	"{1} был не допущен к использованию чита: {2}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_CLIENT"
+	{
+		"ru"	"Выполнен чит: {1}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_LOG"
+	{
+		"ru"	"{1} выполнил чит: {2}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_CHAT"
+	{
+		"ru"	"{1} выполнил чит: {2}."
+	}
+}

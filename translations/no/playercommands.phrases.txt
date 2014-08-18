@@ -1,0 +1,48 @@
+"Phrases"
+{
+	"Slap player"
+	{
+		"no"		"Slap spiller"
+	}
+
+	"Slap damage"
+	{
+		"no"		"Slap-skade"
+	}
+
+	"Slay player"
+	{
+		"no"		"Slay spiller"
+	}
+
+	"Slapped target"
+	{
+		"no"		"Slappet {1}"
+	}
+
+	"Slayed target"
+	{
+		"no"		"Slayet {1}"
+	}
+
+	"Name changed"
+	{
+		"no"		"En admin har endret aliaset ditt"
+	}
+
+	"Renamed target"
+	{
+		"no"		"Endret aliaset til {1}"
+	}
+
+	"Rename player"
+	{
+		"no"		"Endre alias til spiller"
+	}
+
+	"Dead Player Rename"
+	{
+		"no"		"{1} vill få endret nicket neste runde."
+	}
+
+}

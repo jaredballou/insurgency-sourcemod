@@ -1,0 +1,93 @@
+"Phrases"
+{
+	"Initiate Vote"
+	{
+		"no"		"Startet en avstemming {1}"
+	}
+
+	"Initiated Vote Map"
+	{
+		"no"		"Startet en bane avstemming"
+	}
+
+	"Initiated Vote Kick"
+	{
+		"no"		"Startet en \"kast ut\" avstemming {1}."
+	}
+
+	"Initiated Vote Ban"
+	{
+		"no"		"Startet en \"ban\" avstemming "
+	}
+
+	"Map Vote"
+	{
+		"no"		"Bane stemme {1}."
+	}
+
+	"Change Map To"
+	{
+		"no"		"Bytte bane til {1}? "
+	}
+
+	"Votekick Player"
+	{
+		"no"		"Kaste ut {1}? "
+	}
+
+	"Voteban Player"
+	{
+		"no"		"Bannlyse {1}?"
+	}
+
+	"Vote Successful"
+	{
+		"no"		"Avstemming suksessfull. ( Mottok {1}%% of {2} stemmer )"
+	}
+
+	"Vote Failed"
+	{
+		"no"		"Avstemmningen feilet {1}%% var nødvendig. (Mottok {2}%% av {3} stemmer )"
+	}
+
+	"Vote End"
+	{
+		"no"		"Svaret til {1} is: {2}."
+	}
+
+	"Kick vote"
+	{
+		"no"		"Kast ut stemme"
+	}
+
+	"Ban vote"
+	{
+		"no"		"Banlysnings avstemming"
+	}
+
+	"Map vote"
+	{
+		"no"		"Bane avstemmning"
+	}
+
+	"Confirm Vote"
+	{
+		"no"		"Bekreft avstemmning"
+	}
+
+	"Map Vote In Use"
+	{
+		"no"		"En annen admin bruker baneavstemmningsmenyen"
+	}
+
+	"Please select a map"
+	{
+		"no"		"Venligst stem på en bane"
+	}
+
+	"Start the Vote"
+	{
+		"no"		"Start avstemmningen "
+	}
+
+}

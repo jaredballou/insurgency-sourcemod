@@ -1,0 +1,103 @@
+"Phrases"
+{
+	"Rock The Vote"
+	{
+		"no"		"Rock the Vote:"
+	}
+
+	"RTV Not Allowed"
+	{
+		"no"		"Rock the Vote er ikke mulig enda."
+	}
+
+	"RTV Started"
+	{
+		"no"		"Rock the Vote er allerede påbegynt."
+	}
+
+	"RTV Ended"
+	{
+		"no"		"RTV er allerede avsluttet, du kan ikke starte det avstemningen på nytt eller nominere flere kart."
+	}
+
+	"Already Voted"
+	{
+		"no"		"Du har allerede avgitt din stemme til Rock the Vote."
+	}
+
+	"Minimal Players Not Met"
+	{
+		"no"		"Målet for minimum antall spillere er ikke nådd."
+	}
+
+	"Map Already In Vote"
+	{
+		"no"		"Kartet '{1}' er allerede i Roc the Vote-listen."
+	}
+
+	"Map Inserted"
+	{
+		"no"		"Kartet '{1}' er lagt til Rock the Vote."
+	}
+
+	"RTV Requested"
+	{
+		"no"		"{1} vil starte Rock the Vote. ({2} stemmer - {3} påkrevd)"
+	}
+
+	"RTV Vote Ready"
+	{
+		"no"		"Rocking the Vote!"
+	}
+
+	"Don't Change"
+	{
+		"no"		"Behold gjeldende kart."
+	}
+
+	"Already Nominated"
+	{
+		"no"		"Du har allerede nominert et kart."
+	}
+
+	"Max Nominations"
+	{
+		"no"		"Maksimalt antall kart er nominert."
+	}
+
+	"Selected Map"
+	{
+		"no"		"{1} har valgt {2}"
+	}
+
+	"No Votes"
+	{
+		"no"		"Ingen avstemninger mottatt for Rock the vote - beholder gjeldende kart."
+	}
+
+	"Current Map Stays"
+	{
+		"no"		"Gjeldende kart fortsettes! Rock the Vote har talt!"
+	}
+
+	"Changing Maps"
+	{
+		"no"		"Bytter kart til {1}! Rock the Vote har talt!"
+	}
+
+	"Map Already Nominated"
+	{
+		"no"		"Kartet du valgte er allerede nominert."
+	}
+
+	"Map Nominated"
+	{
+		"no"		"{1} har nominert {2} for Rock the Vote."
+	}
+
+	"Nominate Title"
+	{
+		"no"		"Nominér kart:"
+	}
+
+}

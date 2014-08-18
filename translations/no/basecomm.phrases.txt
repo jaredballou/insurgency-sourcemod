@@ -1,0 +1,73 @@
+"Phrases"
+{
+	"Gag/Mute player"
+	{
+		"no"		"Kneble/Demp spiller"
+	}
+
+	"Choose Type"
+	{
+		"no"		"Velg metode"
+	}
+
+	"Gagged target"
+	{
+		"no"		"Kneblet {1}."
+	}
+
+	"Ungagged target"
+	{
+		"no"		"Fjernet knebling {1}."
+	}
+
+	"Muted target"
+	{
+		"no"		"Dempet {1}."
+	}
+
+	"Unmuted target"
+	{
+		"no"		"Fjernet demping {1}."
+	}
+
+	"Silenced target"
+	{
+		"no"		"Bringte til taushet {1}."
+	}
+
+	"Unsilenced target"
+	{
+		"no"		"Fjernet full demping fra {1}."
+	}
+
+	"Mute Player"
+	{
+		"no"		"Demp spiller"
+	}
+
+	"UnMute Player"
+	{
+		"no"		"Fjern demping"
+	}
+
+	"Gag Player"
+	{
+		"no"		"Kneble spiller"
+	}
+
+	"UnGag Player"
+	{
+		"no"		"Omgjør knebling"
+	}
+
+	"Silence Player"
+	{
+		"no"		"Bring til taushet"
+	}
+
+	"UnSilence Player"
+	{
+		"no"		"Fjern full demping av spiller"
+	}
+
+}

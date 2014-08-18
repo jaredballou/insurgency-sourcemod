@@ -1,0 +1,32 @@
+"Phrases"
+{
+	"CHEATS_NOTIFY_FAILURE_CLIENT"
+	{
+		"en"	"You are not allowed to use cheats."
+	}
+	"CHEATS_NOTIFY_FAILURE_LOG"
+	{
+		"#format"	"{1:L},{2:s}"
+		"en"	"{1} was prevented from using cheat command: {2}."
+	}
+	"CHEATS_NOTIFY_FAILURE_CHAT"
+	{
+		"#format"	"{1:N},{2:s}"
+		"en"	"{1} was prevented from using cheat command: {2}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_CLIENT"
+	{
+		"#format"	"{1:s}"
+		"en"	"Executed cheat command: {1}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_LOG"
+	{
+		"#format"	"{1:L},{2:s}"
+		"en"	"{1} has executed cheat command: {2}."
+	}
+	"CHEATS_NOTIFY_SUCCESS_CHAT"
+	{
+		"#format"	"{1:N},{2:s}"
+		"en"	"{1} has executed cheat command: {2}."
+	}
+}

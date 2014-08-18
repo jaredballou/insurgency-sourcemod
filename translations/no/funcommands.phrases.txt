@@ -1,0 +1,168 @@
+"Phrases"
+{
+	"Burn player"
+	{
+		"no"		"Brenn spilleren."
+	}
+
+	"FireBomb player"
+	{
+		"no"		"Send en brannbombe på spilleren."
+	}
+
+	"Freeze player"
+	{
+		"no"		"Frys spilleren."
+	}
+
+	"FreezeBomb player"
+	{
+		"no"		"Send en frys bombe på spilleren."
+	}
+
+	"TimeBomb player"
+	{
+		"no"		"Sett en tidsinnstilt bombe på spilleren."
+	}
+
+	"Beacon player"
+	{
+		"no"		"Send en sonde på spilleren."
+	}
+
+	"NoClip player"
+	{
+		"no"		"Gi spilleren noclip"
+	}
+
+	"Blind player"
+	{
+		"no"		"Gjør spilleren blind."
+	}
+
+	"Drug player"
+	{
+		"no"		"Gi dop til spilleren."
+	}
+
+	"Gravity player"
+	{
+		"no"		"Juster spillerens tyngdekraft. "
+	}
+
+	"Blind amount"
+	{
+		"no"		"Hvor blind?"
+	}
+
+	"Fully blind"
+	{
+		"no"		"Helt blind."
+	}
+
+	"Half blind"
+	{
+		"no"		"Halvblind"
+	}
+
+	"No blind"
+	{
+		"no"		"Ikke blind"
+	}
+
+	"Gravity amount"
+	{
+		"no"		"Tyngdekraft?"
+	}
+
+	"Gravity Very High"
+	{
+		"no"		"Veldig høy tyngdekraft."
+	}
+
+	"Gravity High"
+	{
+		"no"		"Høy tyngdekraft."
+	}
+
+	"Gravity Normal"
+	{
+		"no"		"Normal tyngdekraft."
+	}
+
+	"Gravity Low"
+	{
+		"no"		"Lav tyngdekraft."
+	}
+
+	"Gravity Very Low"
+	{
+		"no"		"Veldig lav tyngdekraft."
+	}
+
+	"Set target on fire"
+	{
+		"no"		"Satte fyr på {1}."
+	}
+
+	"Toggled FireBomb on target"
+	{
+		"no"		"Satte/fjernet en brannbombe på {1}."
+	}
+
+	"Froze target"
+	{
+		"no"		"Frøs {1}."
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"no"		"Satte/fjernet en frys bombe på {1}. "
+	}
+
+	"Toggled beacon on target"
+	{
+		"no"		"Satte/fjernet en sonde på {1}."
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"no"		"Satte/fjernet en tidsinnstilt bombe på {1}."
+	}
+
+	"Toggled noclip on target"
+	{
+		"no"		"Satte/fjernet noclip på {1}."
+	}
+
+	"Toggled drug on target"
+	{
+		"no"		"Ga/fjernet dop(et) til {1}."
+	}
+
+	"Set blind on target"
+	{
+		"no"		"blendet {1}."
+	}
+
+	"Set gravity on target"
+	{
+		"no"		"endret på {1}s tyngdekraft."
+	}
+
+	"Till Explodes"
+	{
+		"no"		"{2} sekund(er) til {1} eksploderer."
+	}
+
+	"Unfrozen"
+	{
+		"no"		"Du er ikke lenger fryst."
+	}
+
+	"You will be unfrozen"
+	{
+		"no"		"Du vil ikke lenger være fryst om {1} sekunder."
+	}
+
+}

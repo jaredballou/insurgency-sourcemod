@@ -1,0 +1,155 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"fr"		"gameME - Menu Principal"
+	}
+	"IngameMenu_Menu1"
+	{
+		"fr"		"Afficher le classement"
+	}
+	"IngameMenu_Menu2"
+	{
+		"fr"		"Joueurs suivants"
+	}
+	"IngameMenu_Menu3"
+	{
+		"fr"		"Top10 Joueurs"
+	}
+	"IngameMenu_Menu4"
+	{
+		"fr"		"Classement auto"
+	}
+	"IngameMenu_Menu5"
+	{
+		"fr"		"Chat-Actions"
+	}
+	"IngameMenu_Menu6"
+	{
+		"fr"		"Changer l'affichage du classement"
+	}
+	"IngameMenu_Menu7"
+	{
+		"fr"		"Classement des clans"
+	}
+	"IngameMenu_Menu8"
+	{
+		"fr"		"Status du serveur"
+	}
+	"IngameMenu_Menu9"
+	{
+		"fr"		"Statsme"
+	}
+	"IngameMenu_Menu10"
+	{
+		"fr"		"Utilisation des armes"
+	}
+	"IngameMenu_Menu11"
+	{
+		"fr"		"Précision des armes"
+	}
+	"IngameMenu_Menu12"
+	{
+		"fr"		"Cibles des armes"
+	}
+	"IngameMenu_Menu13"
+	{
+		"fr"		"Kills des joueurs"
+	}
+	"IngameMenu_Menu14"
+	{
+		"fr"		"Liste des Bans"
+	}
+	"IngameMenu_Menu15"
+	{
+		"fr"		"Afficher l'aide"
+	}
+	"IngameMenu_Menu16"
+	{
+		"fr"		"Reinitialiser les statistiques"
+	}
+
+	"AutoMenu_Caption"
+	{
+		"fr"		"gameME - Classement auto"
+	}
+	"AutoMenu_Menu1"
+	{
+		"fr"		"Activer au début du round"
+	}
+	"AutoMenu_Menu2"
+	{
+		"fr"		"Activer à la fin du round"
+	}
+	"AutoMenu_Menu3"
+	{
+		"fr"		"Activer à la mort du joueur"
+	}
+	"AutoMenu_Menu4"
+	{
+		"fr"		"Désactiver"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"fr"		"gameME - Chat-Actions"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"fr"		"Activer les actions"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"fr"		"Désactiver les actions"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"fr"		"Activer le chat global"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"fr"		"Désactiver le chat global"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"fr"		"Attaqueurs"
+	}
+	"DamagePanel_Killed"
+	{
+		"fr"		"Tués"
+	}
+	"DamagePanel_Wounded"
+	{
+		"fr"		"Blessés"
+	}
+	"DamagePanel_Killer"
+	{
+		"fr"		"Tueurs"
+	}
+	"DamagePanel_Dmg"
+	{
+		"fr"		"Dmg"
+	}
+	"DamagePanel_Hit"
+	{
+		"fr"		"Hit"
+	}
+	"DamagePanel_Hits"
+	{
+		"fr"		"Hits"
+	}
+	"DamagePanel_Hp"
+	{
+		"fr"		"HP"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"fr"		"{1} vous a tué avec {2} dmg, {3} HP restants"
+	}
+
+}
