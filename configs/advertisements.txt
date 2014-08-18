@@ -25,21 +25,6 @@
 	"1"
 	{
 		"type"		"S"
-		"text"		"HLStatsX - http://ins.jballou.com/hlstatsx"
-	}
-	"2"
-	{
-		"type"		"S"
-		"text"		"Having issues? Make sure your theater file is up to date. See http://ins.jballou.com for details"
-	}
-	"4"
-	{
-		"type"		"S"
-		"text"		"Want to remove fog? Go to console and type 'fog_override 1' and 'fog_enable 0' and turn it off"
-	}
-	"3"
-	{
-		"type"		"S"
 		"text"		"Next map is {SM_NEXTMAP} in {TIMELEFT} minutes."
 		"flags"		"cft"
 	}
