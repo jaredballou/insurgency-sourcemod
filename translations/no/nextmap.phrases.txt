@@ -1,0 +1,43 @@
+"Phrases"
+{
+	"Next Map"
+	{
+		"no"		"Neste bane: {1} "
+	}
+
+	"Map History"
+	{
+		"no"		"Bane Historikk"
+	}
+
+	"Map"
+	{
+		"no"		"[BANE]"
+	}
+
+	"Started"
+	{
+		"no"		"[Startet]"
+	}
+
+	"Played Time"
+	{
+		"no"		"[Spilt tid]"
+	}
+
+	"Reason"
+	{
+		"no"		"[Grunn for avsluttning]"
+	}
+
+	"Current Map"
+	{
+		"no"		"Gjellende bane"
+	}
+
+	"ago"
+	{
+		"no"		"siden"
+	}
+
+}

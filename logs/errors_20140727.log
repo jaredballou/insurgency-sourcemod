@@ -1,0 +1,4 @@
+L 07/27/2014 - 01:34:48: SourceMod error session started
+L 07/27/2014 - 01:34:48: Info (map "ministry_coop") (file "errors_20140727.log")
+L 07/27/2014 - 01:34:48: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 07/27/2014 - 02:19:11: Error log file session closed.

@@ -1,0 +1,48 @@
+"Phrases"
+{
+	"Cookie List"
+	{
+		"no"		"Sourcemod informasjonskapsel liste"
+	}
+
+	"Printing Cookie List"
+	{
+		"no"		"Sriver informasjonskapselsliste til consolen"
+	}
+
+	"Cookie not Found"
+	{
+		"no"		"Fant ikke informasjonskapselen \"{1}\""
+	}
+
+	"Cookie Value"
+	{
+		"no"		"Verdien til {1} er {2}"
+	}
+
+	"Protected Cookie"
+	{
+		"no"		"Kan ikke endre verdien til den beskyttede informasjonskapselen \"{1}\""
+	}
+
+	"Cookie Changed Value"
+	{
+		"no"		"Endret verdien for informasjonskapsel \"{1}\" til \"{2}\" "
+	}
+
+	"No Console"
+	{
+		"no"		"Kan ikke vise innstillingsmenyen i consolen"
+	}
+
+	"Choose Option"
+	{
+		"no"		"Ta et valg"
+	}
+
+	"Client Settings"
+	{
+		"no"		"Klientinnstillinger"
+	}
+
+}

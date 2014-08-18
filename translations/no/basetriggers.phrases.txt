@@ -1,0 +1,108 @@
+"Phrases"
+{
+	"Timeleft"
+	{
+		"no"		"Gjenstående tid for kartet:"
+	}
+
+	"Thetime"
+	{
+		"no"		"Gjeldende servertid er {1}."
+	}
+
+	"Friendly Fire On"
+	{
+		"no"		"Friendly fire er på."
+	}
+
+	"Friendly Fire Off"
+	{
+		"no"		"Friendly fire er av."
+	}
+
+	"Current Map"
+	{
+		"no"		"Gjeldende kart er {1}."
+	}
+
+	"LastRound"
+	{
+		"no"		"Dette er siste runde!"
+	}
+
+	"NoTimelimit"
+	{
+		"no"		"Ingen tidsgrense for kartet."
+	}
+
+	"Next Map"
+	{
+		"no"		"Neste kart: {1}"
+	}
+
+	"Pending Vote"
+	{
+		"no"		"Ventende avstemning."
+	}
+
+	"WinLimitAppend"
+	{
+		"no"		", eller bytter kart når et lag vinner én runde."
+	}
+
+	"WinLimit"
+	{
+		"no"		"Bytter kart når et lag vinner én runde."
+	}
+
+	"MaxRoundsAppend"
+	{
+		"no"		", eller bytter kart etter én runde."
+	}
+
+	"MaxRounds"
+	{
+		"no"		"Bytter kart etter én runde."
+	}
+
+	"FragLimitAppend"
+	{
+		"no"		", eller bytter kart når en spiller når én kill."
+	}
+
+	"FragLimit"
+	{
+		"no"		"Bytter kart når en spiller når én kill."
+	}
+
+	"WinLimitAppendPlural"
+	{
+		"no"		", eller bytter kart når et lag vinner {1} runder."
+	}
+
+	"WinLimitPlural"
+	{
+		"no"		"Bytter kart når et lag vinner {1} runder."
+	}
+
+	"MaxRoundsAppendPlural"
+	{
+		"no"		", eller bytter kart etter {1} runder."
+	}
+
+	"MaxRoundsPlural"
+	{
+		"no"		"Bytter kart etter {1} runder."
+	}
+
+	"FragLimitAppendPlural"
+	{
+		"no"		", eller bytter kart når en spiller når {1} kills."
+	}
+
+	"FragLimitPlural"
+	{
+		"no"		"Bytter kart når en spiller når {1} kills."
+	}
+
+}

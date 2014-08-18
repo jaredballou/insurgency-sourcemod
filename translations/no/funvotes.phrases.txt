@@ -1,0 +1,98 @@
+"Phrases"
+{
+	"Initiated Vote Gravity"
+	{
+		"no"		"Satte i gang en tyngdekraft-avstemning."
+	}
+
+	"Initiated Vote Burn"
+	{
+		"no"		"Satte i gang en brennings-avstemning mot {1}."
+	}
+
+	"Initiated Vote Slay"
+	{
+		"no"		"Satte i gang en slay-avstemning mot {1}."
+	}
+
+	"Initiated Vote Alltalk"
+	{
+		"no"		"Satte i gang en alltalk-avstemning."
+	}
+
+	"Initiated Vote FF"
+	{
+		"no"		"Satte i gang en friendly fire-avstemning."
+	}
+
+	"Gravity Vote"
+	{
+		"no"		"tyngdekraft-avstemning: {1}"
+	}
+
+	"Change Gravity To"
+	{
+		"no"		"Endre tyngdekraften"
+	}
+
+	"Voteburn player"
+	{
+		"no"		"Brenn {1}?"
+	}
+
+	"Voteslay Player"
+	{
+		"no"		"Slay {1}?"
+	}
+
+	"Votealltalk Off"
+	{
+		"no"		"Skru av alltalk? {1}"
+	}
+
+	"Votealltalk On"
+	{
+		"no"		"Skru på alltalk? {1}"
+	}
+
+	"Voteff Off"
+	{
+		"no"		"Skru av friendly fire? {1}"
+	}
+
+	"Voteff On"
+	{
+		"no"		"Skru på friendly fire? {1}"
+	}
+
+	"Gravity vote"
+	{
+		"no"		"tyngdekraft-avstemning"
+	}
+
+	"Vote FF"
+	{
+		"no"		"Friendly fire-avstemning"
+	}
+
+	"Burn vote"
+	{
+		"no"		"Brennings-avstemning"
+	}
+
+	"Alltalk vote"
+	{
+		"no"		"alltalk-avstemning"
+	}
+
+	"Slay vote"
+	{
+		"no"		"Slay-avstemning"
+	}
+
+	"Slayed player"
+	{
+		"no"		"Slayet spilleren '{1}'"
+	}
+
+}

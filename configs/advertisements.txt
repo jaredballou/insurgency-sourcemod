@@ -1,0 +1,46 @@
+// Advertisements 0.5
+// by Tsunami
+// 
+// Types
+// -----
+// C: Center message
+// H: Hint message
+// M: Menu message
+// S: Say message
+//    - Colors:  {DEFAULT}, {TEAM}, {GREEN}, {LIGHTGREEN}
+//    - Example: {GREEN}Current {LIGHTGREEN}Map: {DEFAULT}{CURRENTMAP}
+// T: Top message
+//    - Colors:  {WHITE},  {RED},  {GREEN}, {BLUE}, {YELLOW}, {PURPLE}, {CYAN},
+//               {ORANGE}, {PINK}, {OLIVE}, {LIME}, {VIOLET}, {LIGHTBLUE}
+//    - Example: {ORANGE} www.domain.com
+//
+// Flags (optional)
+// -----
+// Accepts flags of admins that will not see the advertisement.
+// When omitted everyone will see the advertisement.
+// When left empty only admins will see the advertisement.
+
+"Advertisements"
+{
+	"1"
+	{
+		"type"		"S"
+		"text"		"HLStatsX - http://ins.jballou.com/hlstatsx"
+	}
+	"2"
+	{
+		"type"		"S"
+		"text"		"Having issues? Make sure your theater file is up to date. See http://ins.jballou.com for details"
+	}
+	"4"
+	{
+		"type"		"S"
+		"text"		"Want to remove fog? Go to console and type 'fog_override 1' and 'fog_enable 0' and turn it off"
+	}
+	"3"
+	{
+		"type"		"S"
+		"text"		"Next map is {SM_NEXTMAP} in {TIMELEFT} minutes."
+		"flags"		"cft"
+	}
+}

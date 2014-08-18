@@ -1,0 +1,26 @@
+L 07/30/2014 - 00:34:03: SourceMod error session started
+L 07/30/2014 - 00:34:03: Info (map "ministry_coop") (file "errors_20140730.log")
+L 07/30/2014 - 00:34:03: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 07/30/2014 - 00:50:50: Error log file session closed.
+L 07/30/2014 - 19:48:06: SourceMod error session started
+L 07/30/2014 - 19:48:06: Info (map "siege_coop") (file "errors_20140730.log")
+L 07/30/2014 - 19:48:06: [SM] Native "FindEntityByClassname" reported: Entity 668 is not valid
+L 07/30/2014 - 19:48:06: [SM] Displaying call stack trace for plugin "restrictedarea.smx":
+L 07/30/2014 - 19:48:06: [SM]   [0]  Line 34, restrictedarea.sp::remove_restrictedarea()
+L 07/30/2014 - 19:48:06: [SM]   [1]  Line 25, restrictedarea.sp::OnPluginStart()
+L 07/30/2014 - 19:51:10: SourceMod error session started
+L 07/30/2014 - 19:51:10: Info (map "ministry_coop") (file "errors_20140730.log")
+L 07/30/2014 - 19:51:10: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 07/30/2014 - 19:51:21: [SM] Plugin encountered error 30: Script execution timed out
+L 07/30/2014 - 19:51:21: [SM] Displaying call stack trace for plugin "restrictedarea.smx":
+L 07/30/2014 - 19:51:21: [SM]   [0]  Line 36, restrictedarea.sp::remove_restrictedarea()
+L 07/30/2014 - 19:51:21: [SM]   [1]  Line 25, restrictedarea.sp::OnPluginStart()
+L 07/30/2014 - 19:58:41: [SM] Native "FindEntityByClassname" reported: Entity 237 is not valid
+L 07/30/2014 - 19:58:41: [SM] Displaying call stack trace for plugin "restrictedarea.smx":
+L 07/30/2014 - 19:58:41: [SM]   [0]  Line 34, restrictedarea.sp::remove_restrictedarea()
+L 07/30/2014 - 19:58:41: [SM]   [1]  Line 25, restrictedarea.sp::OnPluginStart()
+L 07/30/2014 - 20:00:40: [SM] Native "FindEntityByClassname" reported: Entity 242 is not valid
+L 07/30/2014 - 20:00:40: [SM] Displaying call stack trace for plugin "restrictedarea.smx":
+L 07/30/2014 - 20:00:40: [SM]   [0]  Line 34, restrictedarea.sp::remove_restrictedarea()
+L 07/30/2014 - 20:00:40: [SM]   [1]  Line 25, restrictedarea.sp::OnPluginStart()
+L 07/30/2014 - 20:08:40: Error log file session closed.

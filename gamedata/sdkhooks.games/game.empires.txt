@@ -1,0 +1,89 @@
+"Games"
+{
+	"empires"
+	{
+		"Offsets"
+		{
+			"EndTouch"
+			{
+				"windows"	"103"
+			}
+			"FireBullets"
+			{
+				"windows"	"115"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"62"
+			}
+			"PreThink"
+			{
+				"windows"	"337"
+			}
+			"PostThink"
+			{
+				"windows"	"338"
+			}
+			"Reload"
+			{
+				"windows"	"274"
+			}
+			"SetTransmit"
+			{
+				"windows"	"20"
+			}
+			"ShouldCollide"
+			{
+				"windows"	"16"
+			}
+			"Spawn"
+			{
+				"windows"	"22"
+			}
+			"StartTouch"
+			{
+				"windows"	"101"
+			}
+			"Think"
+			{
+				"windows"	"47"
+			}
+			"Touch"
+			{
+				"windows"	"102"
+			}
+			"TraceAttack"
+			{
+				"windows"	"60"
+			}
+			"Use"
+			{
+				"windows"	"100"
+			}
+			"VPhysicsUpdate"
+			{
+				"windows"	"163"
+			}
+			"Weapon_CanSwitchTo"
+			{
+				"windows"	"271"
+			}
+			"Weapon_CanUse"
+			{
+				"windows"	"265"
+			}
+			"Weapon_Drop"
+			{
+				"windows"	"268"
+			}
+			"Weapon_Equip"
+			{
+				"windows"	"266"
+			}
+			"Weapon_Switch"
+			{
+				"windows"	"269"
+			}
+		}
+	}
+}

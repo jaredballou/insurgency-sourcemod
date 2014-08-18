@@ -1,0 +1,156 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"rs"		"gameME - Glavni meni"
+	}
+	"IngameMenu_Menu1"
+	{
+		"rs"		"Prikaži rank"
+	}
+	"IngameMenu_Menu2"
+	{
+		"rs"		"Sledeći igrači"
+	}
+	"IngameMenu_Menu3"
+	{
+		"rs"		"Top10 Igrači"
+	}
+	"IngameMenu_Menu4"
+	{
+		"rs"		"Auto Ranking"
+	}
+	"IngameMenu_Menu5"
+	{
+		"rs"		"Chat-Events"
+	}
+	"IngameMenu_Menu6"
+	{
+		"rs"		"Promeni prikaz ranka"
+	}
+	"IngameMenu_Menu7"
+	{
+		"rs"		"Rank klanova"
+	}
+	"IngameMenu_Menu8"
+	{
+		"rs"		"Status servera"
+	}
+	"IngameMenu_Menu9"
+	{
+		"rs"		"Moja statistika"
+	}
+	"IngameMenu_Menu10"
+	{
+		"rs"		"Upotreba oružja"
+	}
+	"IngameMenu_Menu11"
+	{
+		"rs"		"Preciznost oružja"
+	}
+	"IngameMenu_Menu12"
+	{
+		"rs"		"Pogoci oružja"
+	}
+	"IngameMenu_Menu13"
+	{
+		"rs"		"Ubistva igrača"
+	}
+	"IngameMenu_Menu14"
+	{
+		"rs"		"Banlista"
+	}
+	"IngameMenu_Menu15"
+	{
+		"rs"		"Prikaži pomoć"
+	}
+	"IngameMenu_Menu16"
+	{
+		"rs"		"Reset Statistics"
+	}
+
+
+	"AutoMenu_Caption"
+	{
+		"rs"		"gameME - Auto-Ranking"
+	}
+	"AutoMenu_Menu1"
+	{
+		"rs"		"Uključi na početku runde"
+	}
+	"AutoMenu_Menu2"
+	{
+		"rs"		"Uključi na kraju runde"
+	}
+	"AutoMenu_Menu3"
+	{
+		"rs"		"Uključi kad igrač pogine"
+	}
+	"AutoMenu_Menu4"
+	{
+		"rs"		"Isključi"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"rs"		"gameME - Ispisivanje u chatu"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"rs"		"Uključi ispisivanje u chatu"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"rs"		"Isključi ispisivanje u chatu"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"rs"		"Uključi globalni chat"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"rs"		"Isključi globalni chat"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"rs"		"Napadači"
+	}
+	"DamagePanel_Killed"
+	{
+		"rs"		"Ubio"
+	}
+	"DamagePanel_Wounded"
+	{
+		"rs"		"Ranio"
+	}
+	"DamagePanel_Killer"
+	{
+		"rs"		"Ubica"
+	}
+	"DamagePanel_Dmg"
+	{
+		"rs"		"Šteta"
+	}
+	"DamagePanel_Hit"
+	{
+		"rs"		"Pogodak"
+	}
+	"DamagePanel_Hits"
+	{
+		"rs"		"Pogoci"
+	}
+	"DamagePanel_Hp"
+	{
+		"rs"		"hp"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"rs"		"{1} te je ubio sa {2} dmg, {3} hp ostalo"
+	}
+
+}

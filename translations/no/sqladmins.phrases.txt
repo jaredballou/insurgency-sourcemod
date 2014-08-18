@@ -1,0 +1,78 @@
+"Phrases"
+{
+	"Invalid authtype"
+	{
+		"no"		"Gjenkjenningstypen (auth) må enten være 'steam', 'name' (navn) eller 'ip'."
+	}
+
+	"Invalid immunity"
+	{
+		"no"		"Immunitet må ha en positivt helltall"
+	}
+
+	"SQL Admin already exists"
+	{
+		"no"		"En administrator med den angitte data eksisterer allerede."
+	}
+
+	"SQL Admin added"
+	{
+		"no"		"Administratoren ble lagt til i databasen."
+	}
+
+	"SQL Admin deleted"
+	{
+		"no"		"Administratoren ble slettet fra databasen."
+	}
+
+	"SQL Admin not found"
+	{
+		"no"		"Ingen administratorer med de angitte data ble funnet. "
+	}
+
+	"SQL Group already exists"
+	{
+		"no"		"En gruppe med dette navnet eksisterer allerede."
+	}
+
+	"SQL Group added"
+	{
+		"no"		"Gruppen ble lagt til databasen."
+	}
+
+	"SQL Group deleted"
+	{
+		"no"		"Gruppen ble slettet fra databasen."
+	}
+
+	"SQL Group not found"
+	{
+		"no"		"Ingen grupper med det angitte navnet ble funnet."
+	}
+
+	"SQL Admin groups reset"
+	{
+		"no"		"Administrative grupper ble tillbakestilt."
+	}
+
+	"SQL Group X not found"
+	{
+		"no"		"Fant ikke gruppen: \"{1}\""
+	}
+
+	"SQL Group X failed to bind"
+	{
+		"no"		"Gruppen misslykkes i å skrives : \"{1}\" "
+	}
+
+	"Added group to user"
+	{
+		"no"		"La til en gruppe til den angitte administratoren."
+	}
+
+	"Added groups to user"
+	{
+		"no"		"La til {1} gruppe(r) til den angitte administratoren."
+	}
+
+}

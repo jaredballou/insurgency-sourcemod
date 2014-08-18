@@ -1,0 +1,63 @@
+"Phrases"
+{
+	"Ban player"
+	{
+		"no"		"Ban spilleren"
+	}
+
+	"Ban reason"
+	{
+		"no"		"Ban-grunn"
+	}
+
+	"Permabanned player"
+	{
+		"no"		"Permban spilleren \"{1}\""
+	}
+
+	"Permabanned player reason"
+	{
+		"no"		"Bannet spilleren \"{1}\" permanent (grunn: {2})."
+	}
+
+	"Banned player"
+	{
+		"no"		"Bannet spilleren \"{1}\" i {2} minutt(er)."
+	}
+
+	"Banned player reason"
+	{
+		"no"		"Bannet spilleren \"{1}\" i {2} minutt(er) (grunn: {3})."
+	}
+
+	"Removed bans matching"
+	{
+		"no"		"Fjernet bans for filteret: {1}"
+	}
+
+	"Ban added"
+	{
+		"no"		"Ban er lagt til."
+	}
+
+	"Cannot ban that IP"
+	{
+		"no"		"Du kan ikke banne den IP-adressen."
+	}
+
+	"Custom ban reason explanation"
+	{
+		"no"		"Skriv inn tilpasset grunn i chaten. Bruk {1} for å avbryte dette. "
+	}
+
+	"AbortBan applied successfully"
+	{
+		"no"		"Banning avbrudt"
+	}
+
+	"AbortBan not waiting for custom reason"
+	{
+		"no"		"Venter ikke på bangrunn til å bli skrevet, ingen ban til å avbryte"
+	}
+
+}

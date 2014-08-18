@@ -1,0 +1,128 @@
+"Phrases"
+{
+	"Unable to find cvar"
+	{
+		"no"		"Fant ikke kommandoen: {1}"
+	}
+
+	"No access to cvar"
+	{
+		"no"		"Du har ikke tilgang til denne kommandoen."
+	}
+
+	"Value of cvar"
+	{
+		"no"		"Verdi for kommandoen \"{1}\" er: \"{2}\"."
+	}
+
+	"Cvar changed"
+	{
+		"no"		"Endret kommandoen \"{1}\" til \"{2}\"."
+	}
+
+	"Config not found"
+	{
+		"no"		"Konfigureringsfilen \"{1}\" ble ikke funnet."
+	}
+
+	"Executed config"
+	{
+		"no"		"Kjører konfigureringsfilen \"{1}\"."
+	}
+
+	"Permabanned player"
+	{
+		"no"		"Permbannet spilleren \"{1}\""
+	}
+
+	"Permabanned player reason"
+	{
+		"no"		"Permbannet spilleren \"{1}\" (grunn: {2})."
+	}
+
+	"Banned player"
+	{
+		"no"		"Bannet spilleren \"{1}\" for {2} minutt(er)."
+	}
+
+	"Banned player reason"
+	{
+		"no"		"Bannet spilleren \"{1}\" for {2} minutt(er) (grunn: {3})."
+	}
+
+	"Removed bans matching"
+	{
+		"no"		"Fjernet bans som samsvarer med filteret: {1}"
+	}
+
+	"Ban added"
+	{
+		"no"		"Ban er lagt til."
+	}
+
+	"Admin cache refreshed"
+	{
+		"no"		"Admin-cachen ble oppdatert."
+	}
+
+	"Identify player"
+	{
+		"no"		"Identifisér spiller"
+	}
+
+	"Choose Map"
+	{
+		"no"		"Velg kart."
+	}
+
+	"Exec CFG"
+	{
+		"no"		"Kjør CFG!"
+	}
+
+	"Admin logged in as"
+	{
+		"no"		"\"{1}\" er logget inn som \"{2}\" med tilgangen: {3}."
+	}
+
+	"Admin logged in anon"
+	{
+		"no"		"\"{1}\" har tilgangen: {2}"
+	}
+
+	"Player is not an admin"
+	{
+		"no"		"\"{1}\" er ikke en admin."
+	}
+
+	"Player is an admin"
+	{
+		"no"		"\"{1}\" er admin."
+	}
+
+	"Username"
+	{
+		"no"		"Brukernavn"
+	}
+
+	"Kicked target"
+	{
+		"no"		"Kicket {1}"
+	}
+
+	"Admin access"
+	{
+		"no"		"Admintilgang"
+	}
+
+	"Cvar is now protected"
+	{
+		"no"		"Kommandoen {1} er nå beskyttet."
+	}
+
+	"Kicked target reason"
+	{
+		"no"		"Kicket {1} (Grunn: {2})"
+	}
+
+}

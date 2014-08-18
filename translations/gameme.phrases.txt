@@ -1,0 +1,157 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"en"		"gameME - Main Menu"
+	}
+	"IngameMenu_Menu1"
+	{
+		"en"		"Display Rank"
+	}
+	"IngameMenu_Menu2"
+	{
+		"en"		"Next Players"
+	}
+	"IngameMenu_Menu3"
+	{
+		"en"		"Top10 Players"
+	}
+	"IngameMenu_Menu4"
+	{
+		"en"		"Auto Ranking"
+	}
+	"IngameMenu_Menu5"
+	{
+		"en"		"Chat-Events"
+	}
+	"IngameMenu_Menu6"
+	{
+		"en"		"Toggle Ranking Display"
+	}
+	"IngameMenu_Menu7"
+	{
+		"en"		"Clan Ranking"
+	}
+	"IngameMenu_Menu8"
+	{
+		"en"		"Server Status"
+	}
+	"IngameMenu_Menu9"
+	{
+		"en"		"Statsme"
+	}
+	"IngameMenu_Menu10"
+	{
+		"en"		"Weapon Usage"
+	}
+	"IngameMenu_Menu11"
+	{
+		"en"		"Weapons Accuracy"
+	}
+	"IngameMenu_Menu12"
+	{
+		"en"		"Weapons Targets"
+	}
+	"IngameMenu_Menu13"
+	{
+		"en"		"Player Kills"
+	}
+	"IngameMenu_Menu14"
+	{
+		"en"		"Banlist"
+	}
+	"IngameMenu_Menu15"
+	{
+		"en"		"Display Help"
+	}
+	"IngameMenu_Menu16"
+	{
+		"en"		"Reset Statistics"
+	}
+
+
+	"AutoMenu_Caption"
+	{
+		"en"		"gameME - Auto-Ranking"
+	}
+	"AutoMenu_Menu1"
+	{
+		"en"		"Enable on round-start"
+	}
+	"AutoMenu_Menu2"
+	{
+		"en"		"Enable on round-end"
+	}
+	"AutoMenu_Menu3"
+	{
+		"en"		"Enable on player death"
+	}
+	"AutoMenu_Menu4"
+	{
+		"en"		"Disable"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"en"		"gameME - Chat-Events"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"en"		"Enable Events"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"en"		"Disable Events"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"en"		"Enable Global Chat"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"en"		"Disable Global Chat"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"en"		"Attackers"
+	}
+	"DamagePanel_Killed"
+	{
+		"en"		"Killed"
+	}
+	"DamagePanel_Wounded"
+	{
+		"en"		"Wounded"
+	}
+	"DamagePanel_Killer"
+	{
+		"en"		"Killer"
+	}
+	"DamagePanel_Dmg"
+	{
+		"en"		"Dmg"
+	}
+	"DamagePanel_Hit"
+	{
+		"en"		"Hit"
+	}
+	"DamagePanel_Hits"
+	{
+		"en"		"Hits"
+	}
+	"DamagePanel_Hp"
+	{
+		"en"		"hp"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"#format"	"{1:s},{2:d},{3:d}"
+		"en"		"{1} killed you with {2} dmg, {3} hp left"
+	}
+
+}

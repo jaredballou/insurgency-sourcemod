@@ -1,0 +1,296 @@
+L 07/28/2014 - 00:02:51: SourceMod log file session started (file "L20140728.log") (Version "1.6.0")
+L 07/28/2014 - 00:02:51: [SM] Changed map to "contact_coop"
+L 07/28/2014 - 00:02:52: -------- Mapchange to contact_coop --------
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 00:02:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 00:21:33: [SM] Changed map to "district_coop"
+L 07/28/2014 - 00:21:34: -------- Mapchange to district_coop --------
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 00:21:34: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 00:39:14: [SM] Changed map to "ministry_coop"
+L 07/28/2014 - 00:39:15: -------- Mapchange to ministry_coop --------
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 00:39:15: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 00:53:03: [SM] Changed map to "siege_coop"
+L 07/28/2014 - 00:53:04: -------- Mapchange to siege_coop --------
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 00:53:04: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 01:14:47: [SM] Changed map to "peak_coop"
+L 07/28/2014 - 01:14:47: -------- Mapchange to peak_coop --------
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 01:14:47: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 01:48:49: [SM] Changed map to "sinjar_coop"
+L 07/28/2014 - 01:48:50: -------- Mapchange to sinjar_coop --------
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 01:48:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 02:12:48: [SM] Changed map to "revolt_coop"
+L 07/28/2014 - 02:12:49: -------- Mapchange to revolt_coop --------
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 02:12:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 03:45:48: [SM] Changed map to "buhriz_coop"
+L 07/28/2014 - 03:45:48: [SM] Changed map to "buhriz_coop"
+L 07/28/2014 - 03:45:49: -------- Mapchange to buhriz_coop --------
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 03:45:49: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 04:25:34: [SM] Changed map to "market_coop"
+L 07/28/2014 - 04:25:35: -------- Mapchange to market_coop --------
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 04:25:35: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 05:02:38: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 05:02:38: -------- Mapchange to heights_coop --------
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 05:02:38: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 05:39:52: [SM] Changed map to "contact_coop"
+L 07/28/2014 - 05:39:52: -------- Mapchange to contact_coop --------
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 05:39:52: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 05:57:16: [SM] Changed map to "district_coop"
+L 07/28/2014 - 05:57:17: -------- Mapchange to district_coop --------
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 05:57:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 06:18:49: [SM] Changed map to "ministry_coop"
+L 07/28/2014 - 06:18:50: -------- Mapchange to ministry_coop --------
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 06:18:50: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 06:36:00: [SM] Changed map to "siege_coop"
+L 07/28/2014 - 06:36:01: -------- Mapchange to siege_coop --------
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 06:36:01: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 07:08:27: [SM] Changed map to "peak_coop"
+L 07/28/2014 - 07:08:27: -------- Mapchange to peak_coop --------
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 07:08:27: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 07:43:05: [SM] Changed map to "sinjar_coop"
+L 07/28/2014 - 07:43:06: -------- Mapchange to sinjar_coop --------
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 07:43:06: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 08:43:58: [SM] Changed map to "revolt_coop"
+L 07/28/2014 - 08:43:59: -------- Mapchange to revolt_coop --------
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 08:43:59: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 09:07:45: [SM] Changed map to "buhriz_coop"
+L 07/28/2014 - 09:07:46: -------- Mapchange to buhriz_coop --------
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 09:07:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 10:03:35: [SM] Changed map to "market_coop"
+L 07/28/2014 - 10:03:35: [SM] Changed map to "market_coop"
+L 07/28/2014 - 10:03:36: -------- Mapchange to market_coop --------
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 10:03:36: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 10:58:45: [SM] Changed map to "market_coop"
+L 07/28/2014 - 10:58:45: [SM] Changed map to "market_coop"
+L 07/28/2014 - 10:58:45: -------- Mapchange to market_coop --------
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 10:58:45: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 11:53:53: [SM] Changed map to "market_coop"
+L 07/28/2014 - 11:53:53: [SM] Changed map to "market_coop"
+L 07/28/2014 - 11:53:54: -------- Mapchange to market_coop --------
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 11:53:54: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 12:55:42: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 12:55:42: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 12:55:43: -------- Mapchange to heights_coop --------
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 12:55:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 13:50:52: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 13:50:52: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 13:50:53: -------- Mapchange to heights_coop --------
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 13:50:53: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 14:33:50: [SM] Changed map to "contact_coop"
+L 07/28/2014 - 14:33:51: -------- Mapchange to contact_coop --------
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 14:33:51: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 14:50:57: [SM] Changed map to "district_coop"
+L 07/28/2014 - 14:50:58: -------- Mapchange to district_coop --------
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 14:50:58: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 16:10:17: [SM] Changed map to "ministry_coop"
+L 07/28/2014 - 16:10:18: -------- Mapchange to ministry_coop --------
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 16:10:18: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 17:09:16: [SM] Changed map to "siege_coop"
+L 07/28/2014 - 17:09:16: [SM] Changed map to "siege_coop"
+L 07/28/2014 - 17:09:17: -------- Mapchange to siege_coop --------
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 17:09:17: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 18:29:32: [SM] Changed map to "peak_coop"
+L 07/28/2014 - 18:29:33: -------- Mapchange to peak_coop --------
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 18:29:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 18:49:56: [SM] Changed map to "sinjar_coop"
+L 07/28/2014 - 18:49:57: -------- Mapchange to sinjar_coop --------
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 18:49:57: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 19:10:47: [SM] Changed map to "revolt_coop"
+L 07/28/2014 - 19:10:48: -------- Mapchange to revolt_coop --------
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 19:10:48: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 19:47:45: [SM] Changed map to "buhriz_coop"
+L 07/28/2014 - 19:47:46: -------- Mapchange to buhriz_coop --------
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 19:47:46: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 20:20:42: [SM] Changed map to "market_coop"
+L 07/28/2014 - 20:20:43: -------- Mapchange to market_coop --------
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 20:20:43: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 20:47:10: [SM] Changed map to "heights_coop"
+L 07/28/2014 - 20:47:11: -------- Mapchange to heights_coop --------
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 20:47:11: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 21:53:32: [SM] Changed map to "contact_coop"
+L 07/28/2014 - 21:53:33: -------- Mapchange to contact_coop --------
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 21:53:33: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 22:09:28: [SM] Changed map to "district_coop"
+L 07/28/2014 - 22:09:29: -------- Mapchange to district_coop --------
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 22:09:29: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")
+L 07/28/2014 - 22:47:23: [SM] Changed map to "ministry_coop"
+L 07/28/2014 - 22:47:24: -------- Mapchange to ministry_coop --------
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_max_setup_gate_defend_range") (value "3000")
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_defend_range") (value "500")
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_min_setup_gate_sniper_defend_range") (value "100")
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "ins_bot_suppressing_fire_duration") (value "3.0")
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_flashbang_effect_max_distance") (value "1500")
+L 07/28/2014 - 22:47:24: [basecommands.smx] "Console<0><Console><Console>" changed cvar (cvar "bot_hearing_silenced_weapon_sound_reduction") (value "0.75")

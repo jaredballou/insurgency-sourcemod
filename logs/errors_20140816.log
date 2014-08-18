@@ -1,0 +1,632 @@
+L 08/16/2014 - 00:03:50: SourceMod error session started
+L 08/16/2014 - 00:03:50: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 00:03:50: Error log file session closed.
+L 08/16/2014 - 00:03:50: SourceMod error session started
+L 08/16/2014 - 00:03:50: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 00:03:50: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 00:03:50: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 00:03:50: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 00:03:50: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 00:03:50: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 00:03:50: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 00:49:43: Error log file session closed.
+L 08/16/2014 - 00:49:43: SourceMod error session started
+L 08/16/2014 - 00:49:43: Info (map "heights_coop") (file "errors_20140816.log")
+L 08/16/2014 - 00:49:43: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 00:49:43: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 00:49:46: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 00:49:46: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 00:49:46: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 00:49:46: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:14:16: Error log file session closed.
+L 08/16/2014 - 01:14:16: SourceMod error session started
+L 08/16/2014 - 01:14:16: Info (map "district_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:14:16: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:14:16: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:14:16: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:14:16: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:14:16: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:14:16: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:19:59: Error log file session closed.
+L 08/16/2014 - 01:19:59: SourceMod error session started
+L 08/16/2014 - 01:19:59: Info (map "heights_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:19:59: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:19:59: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:20:02: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:20:02: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:20:02: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:20:02: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:25:09: Error log file session closed.
+L 08/16/2014 - 01:25:09: SourceMod error session started
+L 08/16/2014 - 01:25:09: Info (map "ministry_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:25:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:25:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:25:10: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:25:10: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:25:10: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:25:10: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:29:08: Error log file session closed.
+L 08/16/2014 - 01:29:08: SourceMod error session started
+L 08/16/2014 - 01:29:08: Info (map "uprising_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:29:08: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:29:08: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:29:08: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:29:08: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:29:08: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:29:08: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:31:36: Error log file session closed.
+L 08/16/2014 - 01:31:36: SourceMod error session started
+L 08/16/2014 - 01:31:36: Info (map "panj_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:31:36: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:31:36: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:31:42: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:31:42: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:31:42: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:31:42: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:38:16: Error log file session closed.
+L 08/16/2014 - 01:38:16: SourceMod error session started
+L 08/16/2014 - 01:38:16: Info (map "contact_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 01:38:16: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:38:16: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:38:16: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:38:16: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:38:16: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:38:16: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:41:49: Error log file session closed.
+L 08/16/2014 - 01:41:49: SourceMod error session started
+L 08/16/2014 - 01:41:49: Info (map "sinjar_coop") (file "errors_20140816.log")
+L 08/16/2014 - 01:41:49: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:41:49: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:41:56: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:41:56: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:41:56: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:41:56: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 01:57:12: Error log file session closed.
+L 08/16/2014 - 01:57:12: SourceMod error session started
+L 08/16/2014 - 01:57:12: Info (map "revolt_coop") (file "errors_20140816.log")
+L 08/16/2014 - 01:57:12: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 01:57:12: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 01:57:12: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 01:57:12: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 01:57:12: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 01:57:12: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 02:25:50: Error log file session closed.
+L 08/16/2014 - 02:25:50: SourceMod error session started
+L 08/16/2014 - 02:25:50: Info (map "buhriz_coop") (file "errors_20140816.log")
+L 08/16/2014 - 02:25:50: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 02:25:50: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 02:26:06: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 02:26:06: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 02:26:06: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 02:26:06: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 02:43:01: Error log file session closed.
+L 08/16/2014 - 02:43:01: SourceMod error session started
+L 08/16/2014 - 02:43:01: Info (map "market_coop") (file "errors_20140816.log")
+L 08/16/2014 - 02:43:01: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 02:43:01: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 02:43:02: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 02:43:02: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 02:43:02: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 02:43:02: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 03:07:38: Error log file session closed.
+L 08/16/2014 - 03:07:38: SourceMod error session started
+L 08/16/2014 - 03:07:38: Info (map "heights_coop") (file "errors_20140816.log")
+L 08/16/2014 - 03:07:38: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 03:07:38: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 03:07:41: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 03:07:41: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 03:07:41: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 03:07:41: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 03:30:39: Error log file session closed.
+L 08/16/2014 - 03:30:39: SourceMod error session started
+L 08/16/2014 - 03:30:39: Info (map "contact_coop") (file "errors_20140816.log")
+L 08/16/2014 - 03:30:39: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 03:30:39: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 03:30:39: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 03:30:39: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 03:30:39: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 03:30:39: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 03:51:09: SourceMod error session started
+L 08/16/2014 - 03:51:09: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 03:51:09: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 08/16/2014 - 03:51:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 03:51:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 03:52:06: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 03:52:06: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 03:52:06: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 03:52:06: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 04:22:38: Error log file session closed.
+L 08/16/2014 - 04:22:38: SourceMod error session started
+L 08/16/2014 - 04:22:38: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 04:22:38: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 04:22:38: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 04:22:39: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 04:22:39: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 04:22:39: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 04:22:39: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 04:28:02: Error log file session closed.
+L 08/16/2014 - 04:28:02: SourceMod error session started
+L 08/16/2014 - 04:28:02: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 04:28:02: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 04:28:02: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 04:28:03: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 04:28:03: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 04:28:03: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 04:28:03: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 04:58:04: Error log file session closed.
+L 08/16/2014 - 04:58:04: SourceMod error session started
+L 08/16/2014 - 04:58:04: Info (map "district_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 04:58:04: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 04:58:04: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 04:58:05: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 04:58:05: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 04:58:05: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 04:58:05: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 05:02:18: Error log file session closed.
+L 08/16/2014 - 05:02:18: SourceMod error session started
+L 08/16/2014 - 05:02:18: Info (map "district_coop") (file "errors_20140816.log")
+L 08/16/2014 - 05:02:18: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 05:02:18: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 05:02:19: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 05:02:19: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 05:02:19: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 05:02:19: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 05:55:11: Error log file session closed.
+L 08/16/2014 - 05:55:11: SourceMod error session started
+L 08/16/2014 - 05:55:11: Info (map "heights_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 05:55:11: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 05:55:11: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 05:55:13: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 05:55:13: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 05:55:13: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 05:55:13: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 06:00:18: Error log file session closed.
+L 08/16/2014 - 06:00:18: SourceMod error session started
+L 08/16/2014 - 06:00:18: Info (map "ministry_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 06:00:18: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 06:00:18: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 06:00:19: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 06:00:19: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 06:00:19: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 06:00:19: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 06:03:42: Error log file session closed.
+L 08/16/2014 - 06:03:42: SourceMod error session started
+L 08/16/2014 - 06:03:42: Info (map "uprising_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 06:03:42: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 06:03:42: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 06:03:43: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 06:03:43: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 06:03:43: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 06:03:43: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 06:53:37: Error log file session closed.
+L 08/16/2014 - 06:53:37: SourceMod error session started
+L 08/16/2014 - 06:53:37: Info (map "panj_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 06:53:37: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 06:53:37: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 06:53:42: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 06:53:42: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 06:53:42: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 06:53:42: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 06:58:31: Error log file session closed.
+L 08/16/2014 - 06:58:31: SourceMod error session started
+L 08/16/2014 - 06:58:31: Info (map "contact_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 06:58:31: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 06:58:31: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 06:58:32: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 06:58:32: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 06:58:32: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 06:58:32: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 07:03:09: Error log file session closed.
+L 08/16/2014 - 07:03:09: SourceMod error session started
+L 08/16/2014 - 07:03:09: Info (map "sinjar_coop") (file "errors_20140816.log")
+L 08/16/2014 - 07:03:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 07:03:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 07:03:15: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 07:03:15: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 07:03:15: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 07:03:15: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 07:36:05: Error log file session closed.
+L 08/16/2014 - 07:36:05: SourceMod error session started
+L 08/16/2014 - 07:36:05: Info (map "revolt_coop") (file "errors_20140816.log")
+L 08/16/2014 - 07:36:05: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 07:36:05: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 07:36:05: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 07:36:05: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 07:36:05: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 07:36:05: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 07:59:47: Error log file session closed.
+L 08/16/2014 - 07:59:47: SourceMod error session started
+L 08/16/2014 - 07:59:47: Info (map "buhriz_coop") (file "errors_20140816.log")
+L 08/16/2014 - 07:59:47: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 07:59:47: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 08:00:01: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 08:00:01: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 08:00:01: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 08:00:01: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 08:34:45: Error log file session closed.
+L 08/16/2014 - 08:34:45: SourceMod error session started
+L 08/16/2014 - 08:34:45: Info (map "market_coop") (file "errors_20140816.log")
+L 08/16/2014 - 08:34:45: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 08:34:45: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 08:34:45: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 08:34:45: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 08:34:45: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 08:34:45: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 09:00:06: Error log file session closed.
+L 08/16/2014 - 09:00:06: SourceMod error session started
+L 08/16/2014 - 09:00:06: Info (map "heights_coop") (file "errors_20140816.log")
+L 08/16/2014 - 09:00:06: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 09:00:06: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 09:00:09: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 09:00:09: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 09:00:09: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 09:00:09: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 09:09:14: Error log file session closed.
+L 08/16/2014 - 09:09:14: SourceMod error session started
+L 08/16/2014 - 09:09:14: Info (map "contact_coop") (file "errors_20140816.log")
+L 08/16/2014 - 09:09:14: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 09:09:14: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 09:09:14: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 09:09:14: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 09:09:14: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 09:09:14: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 10:09:41: Error log file session closed.
+L 08/16/2014 - 10:09:41: SourceMod error session started
+L 08/16/2014 - 10:09:41: Info (map "district_coop") (file "errors_20140816.log")
+L 08/16/2014 - 10:09:41: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 10:09:41: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 10:38:01: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 10:38:01: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 10:38:01: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 10:38:01: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 11:09:40: Error log file session closed.
+L 08/16/2014 - 11:09:40: SourceMod error session started
+L 08/16/2014 - 11:09:40: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 11:09:40: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 11:09:40: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 11:38:44: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 11:38:44: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 11:38:44: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 11:38:44: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 11:46:02: Error log file session closed.
+L 08/16/2014 - 11:46:02: SourceMod error session started
+L 08/16/2014 - 11:46:02: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 11:46:02: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 11:46:02: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 11:46:03: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 11:46:03: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 11:46:03: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 11:46:03: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 11:52:41: Error log file session closed.
+L 08/16/2014 - 11:52:41: SourceMod error session started
+L 08/16/2014 - 11:52:41: Info (map "district_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 11:52:41: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 11:52:41: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 11:52:42: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 11:52:42: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 11:52:42: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 11:52:42: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 13:25:52: Error log file session closed.
+L 08/16/2014 - 13:25:52: SourceMod error session started
+L 08/16/2014 - 13:25:52: Info (map "heights_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 13:25:52: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 13:25:52: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 13:25:54: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 13:25:54: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 13:25:54: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 13:25:54: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 13:32:22: Error log file session closed.
+L 08/16/2014 - 13:32:22: SourceMod error session started
+L 08/16/2014 - 13:32:22: Info (map "ministry_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 13:32:22: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 13:32:22: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 13:32:22: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 13:32:22: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 13:32:22: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 13:32:22: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 13:38:26: Error log file session closed.
+L 08/16/2014 - 13:38:26: SourceMod error session started
+L 08/16/2014 - 13:38:26: Info (map "uprising_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 13:38:26: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 13:38:26: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 13:38:27: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 13:38:27: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 13:38:27: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 13:38:27: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 13:49:07: Error log file session closed.
+L 08/16/2014 - 13:49:07: SourceMod error session started
+L 08/16/2014 - 13:49:07: Info (map "panj_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 13:49:07: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 13:49:07: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 13:49:13: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 13:49:13: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 13:49:13: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 13:49:13: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 14:00:45: Error log file session closed.
+L 08/16/2014 - 14:00:45: SourceMod error session started
+L 08/16/2014 - 14:00:45: Info (map "contact_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 14:00:45: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 14:00:45: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 14:00:45: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 14:00:45: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 14:00:45: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 14:00:45: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 14:04:39: Error log file session closed.
+L 08/16/2014 - 14:04:39: SourceMod error session started
+L 08/16/2014 - 14:04:39: Info (map "sinjar_coop") (file "errors_20140816.log")
+L 08/16/2014 - 14:04:39: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 14:04:39: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 14:04:45: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 14:04:45: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 14:04:45: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 14:04:45: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 14:33:42: Error log file session closed.
+L 08/16/2014 - 14:33:42: SourceMod error session started
+L 08/16/2014 - 14:33:42: Info (map "revolt_coop") (file "errors_20140816.log")
+L 08/16/2014 - 14:33:42: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 14:33:42: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 14:33:42: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 14:33:42: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 14:33:42: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 14:33:42: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 14:51:49: Error log file session closed.
+L 08/16/2014 - 14:51:49: SourceMod error session started
+L 08/16/2014 - 14:51:49: Info (map "buhriz_coop") (file "errors_20140816.log")
+L 08/16/2014 - 14:51:49: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 14:51:49: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 14:52:04: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 14:52:04: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 14:52:04: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 14:52:04: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 15:07:40: Error log file session closed.
+L 08/16/2014 - 15:07:40: SourceMod error session started
+L 08/16/2014 - 15:07:40: Info (map "market_coop") (file "errors_20140816.log")
+L 08/16/2014 - 15:07:40: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 15:07:40: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 15:07:41: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 15:07:41: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 15:07:41: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 15:07:41: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 15:26:56: Error log file session closed.
+L 08/16/2014 - 15:26:56: SourceMod error session started
+L 08/16/2014 - 15:26:56: Info (map "heights_coop") (file "errors_20140816.log")
+L 08/16/2014 - 15:26:56: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 15:26:56: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 15:26:59: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 15:26:59: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 15:26:59: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 15:26:59: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 15:49:03: Error log file session closed.
+L 08/16/2014 - 15:49:03: SourceMod error session started
+L 08/16/2014 - 15:49:03: Info (map "contact_coop") (file "errors_20140816.log")
+L 08/16/2014 - 15:49:03: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 15:49:03: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 15:49:03: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 15:49:03: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 15:49:03: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 15:49:03: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 16:17:54: Error log file session closed.
+L 08/16/2014 - 16:17:54: SourceMod error session started
+L 08/16/2014 - 16:17:54: Info (map "district_coop") (file "errors_20140816.log")
+L 08/16/2014 - 16:17:54: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 16:17:54: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 16:17:54: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 16:17:54: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 16:17:54: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 16:17:54: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 16:42:41: Error log file session closed.
+L 08/16/2014 - 16:42:41: SourceMod error session started
+L 08/16/2014 - 16:42:41: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 16:42:41: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 16:42:41: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 16:42:41: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 16:42:41: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 16:42:41: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 16:42:41: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 16:58:46: Error log file session closed.
+L 08/16/2014 - 16:58:46: SourceMod error session started
+L 08/16/2014 - 16:58:46: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 16:58:46: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 16:58:46: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 16:58:46: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 16:58:46: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 16:58:46: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 16:58:46: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 17:49:15: Error log file session closed.
+L 08/16/2014 - 17:49:15: SourceMod error session started
+L 08/16/2014 - 17:49:15: Info (map "district_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 17:49:15: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 17:49:15: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 17:49:16: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 17:49:16: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 17:49:16: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 17:49:16: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 17:55:10: Error log file session closed.
+L 08/16/2014 - 17:55:10: SourceMod error session started
+L 08/16/2014 - 17:55:10: Info (map "heights_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 17:55:10: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 17:55:10: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 17:55:13: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 17:55:13: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 17:55:13: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 17:55:13: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 18:01:06: Error log file session closed.
+L 08/16/2014 - 18:01:06: SourceMod error session started
+L 08/16/2014 - 18:01:06: Info (map "ministry_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 18:01:06: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 18:01:06: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 18:01:07: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 18:01:07: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 18:01:07: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 18:01:07: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 18:14:39: Error log file session closed.
+L 08/16/2014 - 18:14:39: SourceMod error session started
+L 08/16/2014 - 18:14:39: Info (map "uprising_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 18:14:39: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 18:14:39: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 18:14:39: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 18:14:39: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 18:14:39: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 18:14:39: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 18:19:19: Error log file session closed.
+L 08/16/2014 - 18:19:19: SourceMod error session started
+L 08/16/2014 - 18:19:19: Info (map "panj_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 18:19:19: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 18:19:19: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 18:19:25: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 18:19:25: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 18:19:25: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 18:19:25: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 18:53:45: Error log file session closed.
+L 08/16/2014 - 18:53:45: SourceMod error session started
+L 08/16/2014 - 18:53:45: Info (map "contact_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 18:53:45: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 18:53:45: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 18:53:45: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 18:53:45: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 18:53:45: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 18:53:45: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 19:05:45: Error log file session closed.
+L 08/16/2014 - 19:05:45: SourceMod error session started
+L 08/16/2014 - 19:05:45: Info (map "sinjar_coop") (file "errors_20140816.log")
+L 08/16/2014 - 19:05:45: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 19:05:45: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 19:05:52: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 19:05:52: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 19:05:52: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 19:05:52: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 19:55:09: Error log file session closed.
+L 08/16/2014 - 19:55:09: SourceMod error session started
+L 08/16/2014 - 19:55:09: Info (map "revolt_coop") (file "errors_20140816.log")
+L 08/16/2014 - 19:55:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 19:55:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 19:55:10: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 19:55:10: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 19:55:10: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 19:55:10: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 20:24:03: Error log file session closed.
+L 08/16/2014 - 20:24:03: SourceMod error session started
+L 08/16/2014 - 20:24:03: Info (map "buhriz_coop") (file "errors_20140816.log")
+L 08/16/2014 - 20:24:03: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 20:24:03: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 20:24:19: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 20:24:19: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 20:24:19: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 20:24:19: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 20:57:25: Error log file session closed.
+L 08/16/2014 - 20:57:25: SourceMod error session started
+L 08/16/2014 - 20:57:25: Info (map "market_coop") (file "errors_20140816.log")
+L 08/16/2014 - 20:57:25: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 20:57:25: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 20:57:26: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 20:57:26: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 20:57:26: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 20:57:26: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 21:30:10: Error log file session closed.
+L 08/16/2014 - 21:30:10: SourceMod error session started
+L 08/16/2014 - 21:30:10: Info (map "heights_coop") (file "errors_20140816.log")
+L 08/16/2014 - 21:30:10: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 21:30:10: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 21:30:13: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 21:30:13: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 21:30:13: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 21:30:13: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 21:54:10: SourceMod error session started
+L 08/16/2014 - 21:54:10: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 21:54:10: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 08/16/2014 - 21:54:10: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 21:54:10: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 21:54:21: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 21:54:21: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 21:54:21: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 21:54:21: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 22:09:47: Error log file session closed.
+L 08/16/2014 - 22:09:47: SourceMod error session started
+L 08/16/2014 - 22:09:47: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 22:09:47: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 22:09:47: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 22:09:48: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 22:09:48: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 22:09:48: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 22:09:48: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 22:12:09: SourceMod error session started
+L 08/16/2014 - 22:12:09: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 22:12:09: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 08/16/2014 - 22:12:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 22:12:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 22:12:13: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 22:12:13: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 22:12:13: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 22:12:13: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 22:27:09: SourceMod error session started
+L 08/16/2014 - 22:27:09: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 22:27:09: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 08/16/2014 - 22:27:09: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 22:27:09: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 22:27:15: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 22:27:15: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 22:27:15: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 22:27:15: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 22:44:22: Error log file session closed.
+L 08/16/2014 - 22:44:22: SourceMod error session started
+L 08/16/2014 - 22:44:22: Info (map "contact_coop") (file "errors_20140816.log")
+L 08/16/2014 - 22:44:22: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 22:44:22: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 22:44:23: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 22:44:23: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 22:44:23: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 22:44:23: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:00:02: Error log file session closed.
+L 08/16/2014 - 23:00:02: SourceMod error session started
+L 08/16/2014 - 23:00:02: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 23:00:02: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:00:02: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:00:03: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:00:03: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:00:03: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:00:03: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:04:03: SourceMod error session started
+L 08/16/2014 - 23:04:03: Info (map "ministry_coop") (file "errors_20140816.log")
+L 08/16/2014 - 23:04:03: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 08/16/2014 - 23:04:03: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:04:03: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:04:12: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:04:12: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:04:12: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:04:12: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:19:36: Error log file session closed.
+L 08/16/2014 - 23:19:36: SourceMod error session started
+L 08/16/2014 - 23:19:36: Info (map "siege_coop") (file "errors_20140816.log")
+L 08/16/2014 - 23:19:36: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:19:36: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:19:36: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:19:36: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:19:36: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:19:36: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:36:39: Error log file session closed.
+L 08/16/2014 - 23:36:39: SourceMod error session started
+L 08/16/2014 - 23:36:39: Info (map "revolt_coop") (file "errors_20140816.log")
+L 08/16/2014 - 23:36:39: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:36:39: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:36:39: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:36:39: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:36:39: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:36:39: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:54:57: Error log file session closed.
+L 08/16/2014 - 23:54:57: SourceMod error session started
+L 08/16/2014 - 23:54:57: Info (map "district_hunt") (file "errors_20140816.log")
+L 08/16/2014 - 23:54:57: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:54:57: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:54:57: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:54:57: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:54:57: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:54:57: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()
+L 08/16/2014 - 23:59:01: Error log file session closed.
+L 08/16/2014 - 23:59:01: SourceMod error session started
+L 08/16/2014 - 23:59:01: Info (map "contact_coop") (file "errors_20140816.log")
+L 08/16/2014 - 23:59:01: [SM] Fatal error encountered parsing translation file "sm_hidename.phrases.txt"
+L 08/16/2014 - 23:59:01: [SM] Error (line 0, column 0): Stream failed to open
+L 08/16/2014 - 23:59:01: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+L 08/16/2014 - 23:59:01: [SM] Native "Format" reported: Language phrase "Prefix_Chat" not found
+L 08/16/2014 - 23:59:01: [SM] Displaying call stack trace for plugin "hidename.smx":
+L 08/16/2014 - 23:59:01: [SM]   [0]  Line 83, hidename.sp::OnConfigsExecuted()

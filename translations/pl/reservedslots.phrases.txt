@@ -1,0 +1,8 @@
+"Phrases"
+{
+	"Slot reserved"
+	{
+		"pl"		"Wyrzucono cię z powodu rezerwacji slotów."
+	}
+
+}

@@ -1,0 +1,68 @@
+"Phrases"
+{
+	"Already Nominated"
+	{
+		"no"		"Du har allerede nominert en bane"
+	}
+
+	"Max Nominations"
+	{
+		"no"		"Maksimalt antall baner er nominert. "
+	}
+
+	"Map Already In Vote"
+	{
+		"no"		"Banen '{1}' er allerede i nominasjonslisten"
+	}
+
+	"Map Inserted"
+	{
+		"no"		"Banen '{1}' ble lagt til nominasjonslisten"
+	}
+
+	"Map Already Nominated"
+	{
+		"no"		"Banen du valgte er allerede nominert"
+	}
+
+	"Map Nominated"
+	{
+		"no"		"{1} nominerte {2}."
+	}
+
+	"Map Nomination Changed"
+	{
+		"no"		"{1} endret sin nominasjon til {2}."
+	}
+
+	"Nominate Title"
+	{
+		"no"		"Nominer bane:"
+	}
+
+	"Current Map"
+	{
+		"no"		"Gjellende bane"
+	}
+
+	"Map in Exclude List"
+	{
+		"no"		"Banen du valgte ble nylig spilt og kan dermed ikke bli nominert. "
+	}
+
+	"Can't Nominate Current Map"
+	{
+		"no"		"Banen du valgte er den gjeldende banen og kan dermed ikke bli nominert."
+	}
+
+	"Recently Played"
+	{
+		"no"		"Nylig spilt"
+	}
+
+	"Nominated"
+	{
+		"no"		"Nominert"
+	}
+
+}

@@ -1,0 +1,28 @@
+L 07/26/2014 - 10:19:00: SourceMod error session started
+L 07/26/2014 - 10:19:00: Info (map "peak_coop") (file "errors_20140726.log")
+L 07/26/2014 - 10:19:00: [SM] Native "FakeClientCommand" reported: Client index 0 is invalid
+L 07/26/2014 - 10:19:00: [SM] Displaying call stack trace for plugin "sm_cheat.smx":
+L 07/26/2014 - 10:19:00: [SM]   [0]  Line 37, sm_cheat.sp::PerformCheatCommand()
+L 07/26/2014 - 10:19:00: [SM]   [1]  Line 26, sm_cheat.sp::Command_cheat_command()
+L 07/26/2014 - 10:27:51: [SM] Plugin encountered error 15: Array index is out of bounds
+L 07/26/2014 - 10:27:51: [SM] Displaying call stack trace for plugin "tools_cvarlist.smx":
+L 07/26/2014 - 10:27:51: [SM]   [0]  Line 275, tools_cvarlist.sp::ConVarFlagsToString()
+L 07/26/2014 - 10:27:51: [SM]   [1]  Line 75, tools_cvarlist.sp::tools_cvarlist()
+L 07/26/2014 - 10:31:02: [SM] Plugin encountered error 15: Array index is out of bounds
+L 07/26/2014 - 10:31:02: [SM] Displaying call stack trace for plugin "tools_cvarlist.smx":
+L 07/26/2014 - 10:31:02: [SM]   [0]  Line 275, tools_cvarlist.sp::ConVarFlagsToString()
+L 07/26/2014 - 10:31:02: [SM]   [1]  Line 75, tools_cvarlist.sp::tools_cvarlist()
+L 07/26/2014 - 10:33:27: [SM] Plugin encountered error 15: Array index is out of bounds
+L 07/26/2014 - 10:33:27: [SM] Displaying call stack trace for plugin "tools_cvarlist.smx":
+L 07/26/2014 - 10:33:27: [SM]   [0]  Line 275, tools_cvarlist.sp::ConVarFlagsToString()
+L 07/26/2014 - 10:33:27: [SM]   [1]  Line 106, tools_cvarlist.sp::tools_cvarlist()
+L 07/26/2014 - 10:46:35: [SM] Unable to load plugin "cooplobby.smx": Required extension "SteamTools" file("steamtools.ext") not running
+L 07/26/2014 - 10:48:03: SourceMod error session started
+L 07/26/2014 - 10:48:03: Info (map "ministry_coop") (file "errors_20140726.log")
+L 07/26/2014 - 10:48:03: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 07/26/2014 - 10:48:03: [SM] Unable to load plugin "cooplobby.smx": Required extension "SteamTools" file("steamtools.ext") not running
+L 07/26/2014 - 10:50:35: Error log file session closed.
+L 07/26/2014 - 10:51:03: SourceMod error session started
+L 07/26/2014 - 10:51:03: Info (map "ministry_coop") (file "errors_20140726.log")
+L 07/26/2014 - 10:51:03: [SM] Unable to load extension "steamtools.ext": libvstdlib_srv.so: cannot open shared object file: No such file or directory
+L 07/26/2014 - 12:29:29: Error log file session closed.

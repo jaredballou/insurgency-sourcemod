@@ -1,0 +1,156 @@
+"Phrases"
+{
+
+	"IngameMenu_Caption"
+	{
+		"de"		"gameME - Hauptmenü"
+	}
+	"IngameMenu_Menu1"
+	{
+		"de"		"Eigene Platzierung"
+	}
+	"IngameMenu_Menu2"
+	{
+		"de"		"Nächsten Spieler"
+	}
+	"IngameMenu_Menu3"
+	{
+		"de"		"Top10-Spieler"
+	}
+	"IngameMenu_Menu4"
+	{
+		"de"		"Auto-Ranking"
+	}
+	"IngameMenu_Menu5"
+	{
+		"de"		"Chat-Ereignisse"
+	}
+	"IngameMenu_Menu6"
+	{
+		"de"		"Rankingteilnahme ein-/ausschalten"
+	}
+	"IngameMenu_Menu7"
+	{
+		"de"		"Clan Rangliste"
+	}
+	"IngameMenu_Menu8"
+	{
+		"de"		"Server-Status"
+	}
+	"IngameMenu_Menu9"
+	{
+		"de"		"Statsme"
+	}
+	"IngameMenu_Menu10"
+	{
+		"de"		"Waffenbenutzung"
+	}
+	"IngameMenu_Menu11"
+	{
+		"de"		"Waffengenauigkeit"
+	}
+	"IngameMenu_Menu12"
+	{
+		"de"		"Trefferstatistiken"
+	}
+	"IngameMenu_Menu13"
+	{
+		"de"		"Kills gegen Spieler"
+	}
+	"IngameMenu_Menu14"
+	{
+		"de"		"Bannliste"
+	}
+	"IngameMenu_Menu15"
+	{
+		"de"		"Hilfe anzeigen"
+	}
+	"IngameMenu_Menu16"
+	{
+		"de"		"Statistiken zurücksetzen"
+	}
+
+
+	"AutoMenu_Caption"
+	{
+		"de"		"gameME - Auto-Ranking"
+	}
+	"AutoMenu_Menu1"
+	{
+		"de"		"Aktivieren bei Rundenstart"
+	}
+	"AutoMenu_Menu2"
+	{
+		"de"		"Aktivieren bei Rundenende"
+	}
+	"AutoMenu_Menu3"
+	{
+		"de"		"Aktivieren bei eigenem Tod"
+	}
+	"AutoMenu_Menu4"
+	{
+		"de"		"Deaktivieren"
+	}
+
+
+	"ConsoleMenu_Caption"
+	{
+		"de"		"gameME - Chat-Ereignisse"
+	}
+	"ConsoleMenu_Menu1"
+	{
+		"de"		"Chatanzeige aktivieren"
+	}
+	"ConsoleMenu_Menu2"
+	{
+		"de"		"Chatanzeige deaktivieren"
+	}
+	"ConsoleMenu_Menu3"
+	{
+		"de"		"Globale Chatanzeige aktivieren"
+	}
+	"ConsoleMenu_Menu4"
+	{
+		"de"		"Globale Chatanzeige deaktivieren"
+	}
+
+
+	"DamagePanel_Attackers"
+	{
+		"de"		"Angreifer"
+	}
+	"DamagePanel_Killed"
+	{
+		"de"		"Getötet"
+	}
+	"DamagePanel_Wounded"
+	{
+		"de"		"Verwundet"
+	}
+	"DamagePanel_Killer"
+	{
+		"de"		"Killer"
+	}
+	"DamagePanel_Dmg"
+	{
+		"de"		"Dmg"
+	}
+	"DamagePanel_Hit"
+	{
+		"de"		"Hit"
+	}
+	"DamagePanel_Hits"
+	{
+		"de"		"Hits"
+	}
+	"DamagePanel_Hp"
+	{
+		"de"		"hp"
+	}
+
+	"DamageChat_Killedyou"
+	{
+		"de"		"Von {1} getötet mit {2} dmg, noch {3} hp"
+	}
+
+}
