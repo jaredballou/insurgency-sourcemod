@@ -26,7 +26,7 @@ new Handle:PanelTimers[MAXPLAYERS+1];
  
 public OnClientPutInServer(client)
 {
-	PanelTimers[client] = CreateTimer(15.0, RefreshPanel, client, TIMER_REPEAT);
+	PanelTimers[client] = CreateTimer(60.0, RefreshPanel, client, TIMER_REPEAT);
 }
  
 public OnClientDisconnect(client)

@@ -1,0 +1,98 @@
+﻿"Phrases"
+{
+	"Vote Nextmap"
+	{
+		"de"		"Stimme für die nächste Karte!"
+	}
+
+	"Nextmap Voting Started"
+	{
+		"de"		"Abstimmung für die nächste Karte wurde gestartet."
+	}
+
+	"Nextmap Voting Finished"
+	{
+		"de"		"Karten-Abstimmung wurde abgeschlossen. Nächste Karte wird {1} sein. ({2}%% von {3} Stimmen erhalten) "
+	}
+
+	"Current Map Extended"
+	{
+		"de"		"Die aktuelle Karte wurde verlängert. ({1}%% von {2} Stimmen erhalten) "
+	}
+
+	"Extend Map"
+	{
+		"de"		"Verlängere aktuelle Karte"
+	}
+
+	"Dont Change"
+	{
+		"de"		"Nicht wechseln"
+	}
+
+	"Current Map Stays"
+	{
+		"de"		"Aktuelle Karte geht weiter! Die Abstimmung hat entschieden! ({1}%% von {2} Stimmen erhalten) "
+	}
+
+	"Changed Next Map"
+	{
+		"de"		"Nächste Karte wurde  auf \"{1}\" geändert. "
+	}
+
+	"Runoff Vote Nextmap"
+	{
+		"de"		"Stichwahl für die nächste Karte!"
+	}
+
+	"Number Of Votes"
+	{
+		"de"		"Anzahl der Stimmen"
+	}
+
+	"Custom"
+	{
+		"de"		"{1} (nicht vorhanden)"
+	}
+
+	"Revote Is Needed"
+	{
+		"de"		"Keine Karte hat mehr als {1}%% der Stimmen.\nEine neue Abstimmung ist erforderlich!"
+	}
+
+	"Revote Warning"
+	{
+		"de"		"Stichwahl startet in: {1} Sekunden"
+	}
+
+	"Vote Warning"
+	{
+		"de"		"Achtung! Die Abstimmung für die nächste Karte startet in: {1} Sekunden"
+	}
+
+	"Line One"
+	{
+		"de"		"Überlegen Sie, welche Karte Sie spielen möchten ..."
+	}
+
+	"Line Two"
+	{
+		"de"		"... und nicht unüberlegt wählen!"
+	}
+
+	"Cannot Start Vote"
+	{
+		"de"		"Abstimmung ist bereits im Gange. Versuch Sie es erneut in {1} Sekunden"
+	}
+
+	"Tie Vote"
+	{
+		"de"		"Die Top-{1} Karten haben gleich viele Stimmen!.\nEine neue Abstimmung ist erforderlich!"
+	}
+
+	"Custom Marked"
+	{
+		"de"		"*{1}"
+	}
+
+}

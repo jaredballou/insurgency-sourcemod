@@ -1,0 +1,87 @@
+"Phrases"
+{
+	"Vote Nextmap"
+	{
+		"fr"            "Voter pour la prochaine map!"
+	}	
+
+	"Nextmap Voting Started"
+	{
+		"fr"            "Voter pour la prochaine map est lancer."
+	}	
+
+	"Nextmap Voting Finished"
+	{
+		"fr"            "Le VoteMap est terminer. La prochaine map sera {1}. (Reçu {2}%% sur {3} votes)"
+	}
+
+	"Current Map Extended"
+	{
+		"fr"            "La map actuelle a été prolonger. (Reçu {1}%% sur {2} votes)"
+	}
+	
+	"Extend Map"
+	{
+		"fr"            "Prolonger la map"
+	}
+
+	"Dont Change"
+	{
+		"fr"            "Ne pas changer"
+	}
+
+	"Current Map Stays"
+	{
+		"fr"			"La map continue! Le vote a tranché! (Reçu {1}%% sur {2} votes)"
+	}
+
+	"Changed Next Map"
+	{
+		"fr"        "La map suivante sera \"{1}\"."
+	}
+
+	"Runoff Vote Nextmap"
+	{
+		"fr"        "Votez a nouveau pour la prochaine Map!"
+	}
+
+	"Number Of Votes"
+	{
+		"fr"		"Nombres de votes"
+	}
+
+	"Custom"
+	{
+		"fr"        "{1} (Custom)"
+	}
+
+	"Revote Is Needed"
+	{
+		"fr"		"Aucune map n'a reçu plus de {1}%% du vote.\nAlors, quels maps va gagner? Un nouveau vote va être lancé!"
+	}
+
+	"Revote Warning"
+	{
+		"fr"		"Un nouveau vote commence dans: {1}s"
+	}
+
+	"Vote Warning"
+	{
+		"fr"        "Attention! Le vote pour la prochaine map commence dans: {1}s"
+	}
+
+	"Line One"
+	{
+		"fr"		"Voter pour la map que vous voulez jouer..."
+	}
+
+	"Line Two"
+	{
+		"fr"		"...et ne pas cliquez sur une touche comme un con ;-)"
+	}
+
+	"Cannot Start Vote"
+	{
+		"fr"        "Vote déjà en cours.  Reassayer dans {1}s."
+	}
+}

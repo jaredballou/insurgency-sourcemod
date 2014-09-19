@@ -33,27 +33,27 @@
 			"CTTeamScoreOffset"
 			{
 				"windows"	"98"
-				"linux"		"124"
+				"linux"		"109"
 				"mac"		"150"
 			}
 			//Offset into CheckRestartRound
 			"TTeamScoreOffset"
 			{
 				"windows"	"122"
-				"linux"		"159"
+				"linux"		"142"
 				"mac"		"185"
 			}
 			"ClanTagOffset"
 			{
 				"windows"	"12"
-				"linux"		"41"
+				"linux"		"29"
 				"mac"		"22"
 			}
 			//Offset into HandleCommand_Buy_Internal
 			"CCSPlayerInventoryOffset"
 			{
 				"windows"	"285"
-				"linux"		"87"
+				"linux"		"32"
 				"mac"		"109"
 			}
 			"GetItemInLoadout"

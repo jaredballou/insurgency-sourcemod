@@ -1,0 +1,92 @@
+"Phrases"
+{
+	"Vote Nextmap"
+	{
+		"es"			"Vota para el siguiente mapa!"
+	}	
+
+	"Nextmap Voting Started"
+	{
+		"es"			"La votacion para el siguiente mapa ha comenzado."
+	}	
+
+	"Nextmap Voting Finished"
+	{
+		"es"			"Votacion de Mapa finalizado. El siguiente mapa sera {1}. (Recibidos {2}%% de {3} votos)"
+	}
+
+	"Current Map Extended"
+	{
+		"es"			"El mapa actual ha sido extendido. (Recibidos {1}%% de {2} votos)"
+	}
+	
+	"Extend Map"
+	{
+		"es"			"Extender mapa actual"
+	}
+
+	"Dont Change"
+	{
+		"es"			"No cambiar"
+	}
+
+	"Current Map Stays"
+	{
+		"es"			"El mapa actual continua! La votacion ha hablado! (Recibidos {1}%% de {2} votos)"
+	}
+
+	"Changed Next Map"
+	{
+		"es"		"El siguiente mapa ha cambiado a \"{1}\"."	
+	}
+
+	"Runoff Vote Nextmap"
+	{
+		"es"		"Hacer votacion para el siguiente mapa!"
+	}
+
+	"Number Of Votes"
+	{
+		"es"		"Numero de Votaciones"
+	}
+
+	"Custom"
+	{
+		"es"		"{1} (Custom)"
+	}
+
+	"Revote Is Needed"
+	{
+		"es"		"No hay ningun mapa que haya recibido el {1}%% de votaciones.\nEntonces, que mapa ganara? Es necesario otra votacion!"
+	}
+
+	"Revote Warning"
+	{
+		"es"		"La votacion empezara en: {1}s"
+	}
+
+	"Vote Warning"
+	{
+		"es"		"Atencion! La votacion para el siguiente mapa se iniciara en: {1}s"
+	}
+
+	"Line One"
+	{
+		"es"		"Considera que mapa quieres jugar..."
+	}
+
+	"Line Two"
+	{
+		"es"		"...y no pulse los botones sin pensar ;-)"
+	}
+
+	"Cannot Start Vote"
+	{
+		"es"		"Votacion ya iniciada.  Intentando de nuevo en {1}s."
+	}
+
+	"Tie Vote"
+	{
+		"es"		"El top {1} de mapas tienen el mismo numero de votaciones.\nSe necesita una nueva votacion!"
+	}
+}
