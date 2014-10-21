@@ -1,3 +1,6 @@
+# (C) 2014 Jared Ballou <sourcemod@jballou.com>
+# Released under GPLv3
+
 #include <sourcemod>
 
 new IMPULS_FLASHLIGHT = 100;

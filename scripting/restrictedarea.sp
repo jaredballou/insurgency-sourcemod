@@ -1,3 +1,6 @@
+# (C) 2014 Jared Ballou <sourcemod@jballou.com>
+# Released under GPLv3
+
 #pragma semicolon 1
 
 #include <sourcemod>
