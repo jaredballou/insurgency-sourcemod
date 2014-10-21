@@ -45,18 +45,3 @@ public remove_restrictedarea()
 		}
 	}
 }
-public nope()
-{
-	new ent = -1;
-	while (ent = FindEntityByClassname(ent,"ins_blockzone"))
-	{
-		if (IsValidEntity(ent))
-		{
-			decl String:entity_name[128];
-			GetEntPropString(ent, Prop_Data, "m_iName", entity_name, sizeof(entity_name));
-			PrintToServer("Found blockzone named %s",entity_name);
-			RemoveEdict(ent);
-			PrintToServer("Deleted blockzone named %s",entity_name);
-		}
-	}
-}

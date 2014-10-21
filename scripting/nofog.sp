@@ -1,69 +1,43 @@
-#include <sourcemod>
 #pragma semicolon 1
-#define VERSION "0.1.1"
+
+#include <sourcemod>
+#include <sdktools>
+
+#define AUTOLOAD_EXTENSIONS
+#define REQUIRE_EXTENSIONS
+
+#define PLUGIN_VERSION "0.0.1"
 
 public Plugin:myinfo = {
-	name = "No Fog",
-	author = "jballou",
-	description = "Removes fog",
-	version = VERSION,
-	url = "N/A"
-}
-
-new Handle:cvar_fog_override=INVALID_HANDLE;
-new Handle:cvar_fog_end=INVALID_HANDLE;
-new Handle:cvar_fog_enable=INVALID_HANDLE;
-new Handle:cvar_fog_endskybox=INVALID_HANDLE;
+name= "No Fog",
+author  = "Jared Ballou (jballou)",
+description = "Removes fog",
+version = PLUGIN_VERSION,
+url = "http://jballou.com/"
+};
 
 public OnPluginStart()
 {
-	//cvars needed to abuse for listining servers
-	cvar_fog_override = FindConVar("fog_override");
-	if(cvar_fog_override!=INVALID_HANDLE)
-	{
-		SetConVarInt(cvar_fog_override, 1, true);
-	}
-	cvar_fog_end = FindConVar("fog_end");
-	if(cvar_fog_end!=INVALID_HANDLE)
-	{
-		SetConVarInt(cvar_fog_end, 1000000, true);
-	}
-	cvar_fog_endskybox = FindConVar("fog_endskybox");
-	if(cvar_fog_endskybox!=INVALID_HANDLE)
-	{
-		SetConVarInt(cvar_fog_endskybox, 1000000, true);
-	}	
-	cvar_fog_enable = FindConVar("fog_enable");
-	if(cvar_fog_enable!=INVALID_HANDLE)
-	{
-		SetConVarInt(cvar_fog_enable, 0, true);
-	}
-	HookEvent("player_spawn",SpawnEvent);
+	HookEvent("server_spawn", Event_GameStart, EventHookMode_Pre);
+	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);
+	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);
+	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
+	remove_fog();
 }
-public Action:SpawnEvent(Handle:event,const String:name[],bool:dontBroadcast)
+public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	new client_id = GetEventInt(event, "userid");
-	new client = GetClientOfUserId(client_id);
-	removeFog(client);
+	remove_fog();
 }
-
-public OnClientPutInServer(client) {
-	removeFog(client);
-}
-
-removeFog(client)
+public remove_fog()
 {
-	if(!IsFakeClient(client))
-	{
-		decl String:ipaddr[24];
-		GetClientIP(client, ipaddr, sizeof(ipaddr));
-	
-		if (!StrEqual(ipaddr,"loopback",false))
-		{
-			//I learned to do this by lookig at grandwazir's blindluck plugin, http://forums.alliedmods.net/showthread.php?t=84926
-			SendConVarValue(client, FindConVar("sv_cheats"), "1");
-			ClientCommand(client, "fog_override 1");
-			ClientCommand(client, "fog_enable 0");
+	new String:name[32];
+	for(new i=0;i<= GetMaxEntities() ;i++){
+		if(!IsValidEntity(i))
+			continue;
+		if(GetEdictClassname(i, name, sizeof(name))){
+			if (StrEqual("env_fog_controller", name,false)) {
+				RemoveEdict(i);
+			}
 		}
 	}
 }

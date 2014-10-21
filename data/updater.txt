@@ -1,0 +1,28 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"1.2.1"
+		}
+		
+		"Notes"		"Added support for SourceMod 1.7."
+		"Notes"		"Minor fixes for http-redirects."
+	}
+	
+	"Files"
+	{
+		"Plugin"		"Path_SM/plugins/updater.smx"
+		
+		"Source"		"Path_SM/scripting/updater.sp"
+		"Source"		"Path_SM/scripting/updater/api.sp"
+		"Source"		"Path_SM/scripting/updater/download.sp"
+		"Source"		"Path_SM/scripting/updater/download_curl.sp"
+		"Source"		"Path_SM/scripting/updater/download_socket.sp"
+		"Source"		"Path_SM/scripting/updater/download_steamtools.sp"
+		"Source"		"Path_SM/scripting/updater/filesys.sp"
+		"Source"		"Path_SM/scripting/updater/plugins.sp"
+		"Source"		"Path_SM/scripting/include/updater.inc"
+	}
+}
