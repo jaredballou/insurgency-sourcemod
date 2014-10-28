@@ -297,6 +297,24 @@ public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast 
 	new currentTeam = GetClientTeam( client );
 	
 	new currentClass = GetEntProp( client, Prop_Send, "m_nClassTemplateHandle" );
+
+	new String:strModel[150];
+	GetEntPropString(client, Prop_Data, "m_ModelName", strModel, sizeof(strModel));
+	PrintToServer("m_ModelName: %s",strModel);
+
+	new String:strClass[150];
+	GetEntPropString(client, Prop_Data, "m_iClassname", strClass, sizeof(strClass));
+	PrintToServer("m_iClassname: %s",strClass);
+
+//	new classname = GetEntProp( client, Prop_Send, "m_iClassname" );
+//	PrintToServer("m_iclassname: %s",classname);
+	new squad = GetEntProp( client, Prop_Send, "m_iSquad" );
+	PrintToServer("m_iSquad: %s",squad);
+	new squadslot = GetEntProp( client, Prop_Send, "m_iSquadSlot" );
+	PrintToServer("m_iSquadSlot: %s",squadslot);
+	new inve = GetEntProp( client, Prop_Send, "m_PlayerInventory" );
+	PrintToServer("m_PlayerInventory: %s",inve);
+
 	if( g_LastClass[client] != currentClass || g_LastTeam[client] != currentTeam )
 	{
 		decl String:szRoleString[32];
