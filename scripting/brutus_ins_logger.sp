@@ -19,6 +19,10 @@ new NumWeaponsDefined = 0;
 new Handle:kv  = INVALID_HANDLE;
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
+
+new g_LastClass[MAXPLAYERS+1] = { -1, ... };
+new g_LastTeam[MAXPLAYERS+1] = { -1, ... };
+
 //============================================================================================================
 #include <loghelper>
 #include <wstatshelper>
@@ -282,14 +286,26 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	return Plugin_Continue;
 }
 
-public Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
+public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
 {
-	// "userid""short"         // user ID on server          
-
-	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if (client > 0)
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	if( client == 0 || !IsClientInGame(client) )
+		return;
+	
+	reset_player_stats( client );
+	
+	new currentTeam = GetClientTeam( client );
+//	if( currentTeam != DDD_TEAM_ALLIES && currentTeam != DDD_TEAM_AXIS )
+//		return;
+	
+	new currentClass = GetEntProp( client, Prop_Send, "m_iPlayerClass" );
+	if( g_LastClass[client] != currentClass || g_LastTeam[client] != currentTeam )
 	{
-		reset_player_stats(client);
+		decl String:szRoleString[32];
+		Format( szRoleString, sizeof(szRoleString), "%s", currentClass);
+		LogRoleChange( client, szRoleString );
+		g_LastTeam[client] = currentTeam;
+		g_LastClass[client] = currentClass;
 	}
 }
 
