@@ -295,10 +295,8 @@ public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast 
 	reset_player_stats( client );
 	
 	new currentTeam = GetClientTeam( client );
-//	if( currentTeam != DDD_TEAM_ALLIES && currentTeam != DDD_TEAM_AXIS )
-//		return;
 	
-	new currentClass = GetEntProp( client, Prop_Send, "m_iPlayerClass" );
+	new currentClass = GetEntProp( client, Prop_Send, "m_nClassTemplateHandle" );
 	if( g_LastClass[client] != currentClass || g_LastTeam[client] != currentTeam )
 	{
 		decl String:szRoleString[32];
