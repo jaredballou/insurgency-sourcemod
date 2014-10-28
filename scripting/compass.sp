@@ -42,7 +42,7 @@ public Action:Check_Compass(client, args)
 		sDisplay[1] = 'E';
 	} else if (angle[1] < 112) {
 		sDisplay[0] = 'N';
-	} else if (angle[1] < 158) {
+	} else {
 		sDisplay[0] = 'N';
 		sDisplay[1] = 'W';
 	}
