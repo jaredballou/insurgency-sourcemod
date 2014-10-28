@@ -1,0 +1,598 @@
+"Games"
+{
+	"cstrike"
+	{
+		"Signatures"
+		{
+			"IEntityFactoryDictionary"
+			{
+				"library"	"server"
+				"windows"	"\xB8\x01\x00\x00\x00\x84\x2A\x2A\x2A\x2A\x2A\x75\x1D\x09\x2A\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\xB8\x2A\x2A\x2A\x2A\xC3"
+				"linux"		"@_Z23EntityFactoryDictionaryv"
+			}
+		}
+		"Offsets"
+		{
+			"UpdateOnRemove"
+			{
+				"windows"	"95"
+				"linux"		"96"
+			}
+			"WeaponDrop"
+			{
+				"windows"	"219"
+				"linux"		"220"
+			}
+			"WeaponCanUse"
+			{
+				"windows"	"216"
+				"linux"		"217"
+			}
+			"WeaponCanSwitchTo"
+			{
+				"windows"	"222"
+				"linux"		"223"
+			}
+			"OnChangeActiveWeapon"
+			{
+				"windows"	"260"
+				"linux"		"261"
+			}
+			"StartTouch"
+			{
+				"windows"	"88"
+				"linux"		"89"
+			}
+			"Touch"
+			{
+				"windows"	"89"
+				"linux"		"90"
+			}
+			"EndTouch"
+			{
+				"windows"	"90"
+				"linux"		"91"
+			}
+			"EventKilled"
+			{
+				"windows"	"62"
+				"linux"		"63"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"60"
+				"linux"		"61"
+			}
+			"TraceAttack"
+			{
+				"windows"	"58"
+				"linux"		"59"
+			}
+			"Spawn"
+			{
+				"windows"	"23"
+				"linux"		"24"
+			}
+			"EntityThink"
+			{
+				"windows"	"46"
+				"linux"		"47"
+			}
+			"ClientPreThink"
+			{
+				"windows"	"273"
+				"linux"		"274"
+			}
+			"ClientPostThink"
+			{
+				"windows"	"274"
+				"linux"		"275"
+			}
+			"PlayerJump"
+			{
+				"windows"	"271"
+				"linux"		"272"
+			}
+			"PlayerDuck"
+			{
+				"windows"	"272"
+				"linux"		"273"
+			}
+			"CommitSuicide"
+			{
+				"windows"	"357"
+				"linux"		"358"
+			}
+			"Respawn"
+			{
+				"windows"	"103"
+				"linux"		"104"
+			}
+			"SetModel"
+			{
+				"windows"	"25"
+				"linux"		"26"
+			}
+			"ShowViewPortPanel"
+			{
+				"windows"	"269"
+				"linux"		"270"
+			}
+			"ImpulseCommands"
+			{
+				"windows"	"298"
+				"linux"		"299"
+			}
+		}
+	}
+	"tf"
+	{
+		"Signatures"
+		{
+			"IEntityFactoryDictionary"
+			{
+				"library"	"server"
+				"windows"	"\xB8\x01\x00\x00\x00\x84\x2A\x2A\x2A\x2A\x2A\x75\x1D\x09\x2A\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\xB8\x2A\x2A\x2A\x2A\xC3"
+				"linux"		"@_Z23EntityFactoryDictionaryv"
+			}
+		}
+		"Offsets"
+		{
+			"UpdateOnRemove"
+			{
+				"windows"	"97"
+				"linux"		"98"
+			}
+			"WeaponDrop"
+			{
+				"windows"	"230"
+				"linux"		"231"
+			}
+			"WeaponCanUse"
+			{
+				"windows"	"227"
+				"linux"		"228"
+			}
+			"WeaponCanSwitchTo"
+			{
+				"windows"	"233"
+				"linux"		"234"
+			}
+			"OnChangeActiveWeapon"
+			{
+				"windows"	"273"
+				"linux"		"274"
+			}
+			"StartTouch"
+			{
+				"windows"	"90"
+				"linux"		"91"
+			}
+			"Touch"
+			{
+				"windows"	"91"
+				"linux"		"92"
+			}
+			"EndTouch"
+			{
+				"windows"	"92"
+				"linux"		"93"
+			}
+			"EventKilled"
+			{
+				"windows"	"63"
+				"linux"		"62"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"60"
+				"linux"		"61"
+			}
+			"TraceAttack"
+			{
+				"windows"	"58"
+				"linux"		"59"
+			}
+			"Spawn"
+			{
+				"windows"	"21"
+				"linux"		"22"
+			}
+			"EntityThink"
+			{
+				"windows"	"45"
+				"linux"		"46"
+			}
+			"ClientPreThink"
+			{
+				"windows"	"287"
+				"linux"		"288"
+			}
+			"ClientPostThink"
+			{
+				"windows"	"288"
+				"linux"		"289"
+			}
+			"PlayerJump"
+			{
+				"windows"	"285"
+				"linux"		"286"
+			}
+			"PlayerDuck"
+			{
+				"windows"	"286"
+				"linux"		"287"
+			}
+			"Respawn"
+			{
+				"windows"	"106"
+				"linux"		"107"
+			}
+			"SetModel"
+			{
+				"windows"	"23"
+				"linux"		"24"
+			}
+			"ShowViewPortPanel"
+			{
+				"windows"	"283"
+				"linux"		"284"
+			}
+			"ImpulseCommands"
+			{
+				"windows"	"315"
+				"linux"		"316"
+			}
+		}
+	}
+	"dod"
+	{
+		"Signatures"
+		{
+			"IEntityFactoryDictionary"
+			{
+				"library"	"server"
+				"windows"	"\xB8\x01\x00\x00\x00\x84\x2A\x2A\x2A\x2A\x2A\x75\x1D\x09\x2A\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\xB8\x2A\x2A\x2A\x2A\xC3"
+				"linux"		"@_Z23EntityFactoryDictionaryv"
+			}
+		}
+		"Offsets"
+		{
+			"UpdateOnRemove"
+			{
+				"windows"	"95"
+				"linux"		"96"
+			}
+			"WeaponDrop"
+			{
+				"windows"	"219"
+				"linux"		"220"
+			}
+			"WeaponCanUse"
+			{
+				"windows"	"216"
+				"linux"		"217"
+			}
+			"WeaponCanSwitchTo"
+			{
+				"windows"	"222"
+				"linux"		"223"
+			}
+			"OnChangeActiveWeapon"
+			{
+				"windows"	"260"
+				"linux"		"261"
+			}
+			"StartTouch"
+			{
+				"windows"	"88"
+				"linux"		"89"
+			}
+			"Touch"
+			{
+				"windows"	"89"
+				"linux"		"90"
+			}
+			"EndTouch"
+			{
+				"windows"	"90"
+				"linux"		"91"
+			}
+			"EventKilled"
+			{
+				"windows"	"62"
+				"linux"		"63"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"60"
+				"linux"		"61"
+			}
+			"TraceAttack"
+			{
+				"windows"	"58"
+				"linux"		"59"
+			}
+			"Spawn"
+			{
+				"windows"	"23"
+				"linux"		"24"
+			}
+			"EntityThink"
+			{
+				"windows"	"46"
+				"linux"		"47"
+			}
+			"ClientPreThink"
+			{
+				"windows"	"273"
+				"linux"		"274"
+			}
+			"ClientPostThink"
+			{
+				"windows"	"274"
+				"linux"		"275"
+			}
+			"PlayerJump"
+			{
+				"windows"	"271"
+				"linux"		"272"
+			}
+			"PlayerDuck"
+			{
+				"windows"	"272"
+				"linux"		"273"
+			}
+			"CommitSuicide"
+			{
+				"windows"	"356"
+				"linux"		"357"
+			}
+			"Respawn"
+			{
+				"windows"	"103"
+				"linux"		"104"
+			}
+			"SetModel"
+			{
+				"windows"	"25"
+				"linux"		"26"
+			}
+			"ShowViewPortPanel"
+			{
+				"windows"	"269"
+				"linux"		"270"
+			}
+			"ImpulseCommands"
+			{
+				"windows"	"297"
+				"linux"		"298"
+			}
+		}
+	}
+	"hl2mp"
+	{
+		"Signatures"
+		{
+			"IEntityFactoryDictionary"
+			{
+				"library"	"server"
+				"windows"	"\xB8\x01\x00\x00\x00\x84\x2A\x2A\x2A\x2A\x2A\x75\x1D\x09\x2A\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\xB8\x2A\x2A\x2A\x2A\xC3"
+				"linux"		"@_Z23EntityFactoryDictionaryv"
+			}
+		}
+		"Offsets"
+		{
+			"UpdateOnRemove"
+			{
+				"windows"	"95"
+				"linux"		"96"
+			}
+			"WeaponDrop"
+			{
+				"windows"	"219"
+				"linux"		"220"
+			}
+			"WeaponCanUse"
+			{
+				"windows"	"216"
+				"linux"		"217"
+			}
+			"WeaponCanSwitchTo"
+			{
+				"windows"	"222"
+				"linux"		"223"
+			}
+			"OnChangeActiveWeapon"
+			{
+				"windows"	"260"
+				"linux"		"261"
+			}
+			"StartTouch"
+			{
+				"windows"	"88"
+				"linux"		"89"
+			}
+			"Touch"
+			{
+				"windows"	"89"
+				"linux"		"90"
+			}
+			"EndTouch"
+			{
+				"windows"	"90"
+				"linux"		"91"
+			}
+			"EventKilled"
+			{
+				"windows"	"62"
+				"linux"		"63"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"60"
+				"linux"		"61"
+			}
+			"TraceAttack"
+			{
+				"windows"	"58"
+				"linux"		"59"
+			}
+			"Spawn"
+			{
+				"windows"	"23"
+				"linux"		"24"
+			}
+			"EntityThink"
+			{
+				"windows"	"46"
+				"linux"		"47"
+			}
+			"ClientPreThink"
+			{
+				"windows"	"273"
+				"linux"		"274"
+			}
+			"ClientPostThink"
+			{
+				"windows"	"274"
+				"linux"		"275"
+			}
+			"PlayerJump"
+			{
+				"windows"	"271"
+				"linux"		"272"
+			}
+			"PlayerDuck"
+			{
+				"windows"	"272"
+				"linux"		"273"
+			}
+			"CommitSuicide"
+			{
+				"windows"	"356"
+				"linux"		"357"
+			}
+			"Respawn"
+			{
+				"windows"	"103"
+				"linux"		"104"
+			}
+			"SetModel"
+			{
+				"windows"	"25"
+				"linux"		"26"
+			}
+			"ShowViewPortPanel"
+			{
+				"windows"	"269"
+				"linux"		"270"
+			}
+			"ImpulseCommands"
+			{
+				"windows"	"297"
+				"linux"		"298"
+			}
+		}
+	}
+	"!Insurgency"
+	{
+		"Signatures"
+		{
+			"IEntityFactoryDictionary"
+			{
+				"library"	"server"
+				"windows"	"\xB8\x01\x00\x00\x00\x84\x2A\x2A\x2A\x2A\x2A\x75\x1D\x09\x2A\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x68\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\xC4\x04\xB8\x2A\x2A\x2A\x2A\xC3"
+				"linux"		"@_Z23EntityFactoryDictionaryv"
+			}
+		}
+		"Offsets"
+		{
+			"UpdateOnRemove"
+			{
+				"windows"	"89"
+				"linux"		"90"
+			}
+			"WeaponCanUse"
+			{
+				"windows"	"216"
+				"linux"		"217"
+			}
+			"WeaponCanSwitchTo"
+			{
+				"windows"	"213"
+				"linux"		"214"
+			}
+			"StartTouch"
+			{
+				"windows"	"82"
+				"linux"		"83"
+			}
+			"Touch"
+			{
+				"windows"	"83"
+				"linux"		"84"
+			}
+			"EndTouch"
+			{
+				"windows"	"84"
+				"linux"		"85"
+			}
+			"EventKilled"
+			{
+				"windows"	"55"
+				"linux"		"56"
+			}
+			"OnTakeDamage"
+			{
+				"windows"	"53"
+				"linux"		"54"
+			}
+			"TraceAttack"
+			{
+				"windows"	"52"
+				"linux"		"53"
+			}
+			"Spawn"
+			{
+				"windows"	"22"
+				"linux"		"23"
+			}
+			"EntityThink"
+			{
+				"windows"	"45"
+				"linux"		"46"
+			}
+			"ClientPreThink"
+			{
+				"windows"	"189"
+				"linux"		"190"
+			}
+			"ClientPostThink"
+			{
+				"windows"	"190"
+				"linux"		"191"
+			}
+			"CommitSuicide"
+			{
+				"windows"	"288"
+				"linux"		"289"
+			}
+			"Respawn"
+			{
+				"windows"	"94"
+				"linux"		"95"
+			}
+			"SetModel"
+			{
+				"windows"	"24"
+				"linux"		"25"
+			}
+			"ShowViewPortPanel"
+			{
+				"windows"	"186"
+				"linux"		"187"
+			}
+		}
+	}
+}
