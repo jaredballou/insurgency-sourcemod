@@ -45,6 +45,8 @@ public Action:RefreshPanel(Handle:timer, any:client)
 {
 	if (IsValidPlayer(client))
 	{
+		new myteam = GetClientTeam(client);
+		new otherteam = (myteam == TEAM_SECURITY) ? TEAM_INSURGENTS : TEAM_SECURITY;
 		decl String:hint[40];
 		new num_ins = 0, total_ins;
 		new maxplayers = GetMaxClients();
@@ -53,14 +55,14 @@ public Action:RefreshPanel(Handle:timer, any:client)
 		{
 			if (IsClientConnected(i) && IsClientInGame(i) && IsPlayerAlive(i))
 			{
-				if (GetClientTeam(i) == TEAM_INSURGENTS)
+				if (GetClientTeam(i) == otherteam)
 				{
 					num_ins++;
 				}
 			}
 		}
-		total_ins = GetTeamClientCount(TEAM_INSURGENTS);
-		Format(hint, 255,"Insurgents Remaining: %i of %i", num_ins, total_ins);
+		total_ins = GetTeamClientCount(otherteam);
+		Format(hint, 255,"Enemies Remaining: %i of %i", num_ins, total_ins);
 
 		PrintHintText(client, "%s", hint);
 	}
