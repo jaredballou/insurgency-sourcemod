@@ -20,6 +20,7 @@ new NumWeaponsDefined = 0;
 new Handle:kv  = INVALID_HANDLE;
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
+//jballou - LogRole support
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
 
 
@@ -66,9 +67,10 @@ public OnPluginStart()
 	HookEvent("weapon_fire", Event_WeaponFired);
 	
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
+	//jballou - LogRole support
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 	HookEvent("player_death", Event_PlayerDeath);
-	//TODO: player_avenged_teammate
+	//jballou TODO: player_avenged_teammate
 
 	HookEvent("object_destroyed", Event_CPDestroyed);
 	HookEvent("controlpoint_captured", Event_CPCapped);
@@ -90,7 +92,7 @@ public Handle:LoadValues()
 {
 
 	new numWeapons = 0;
-	g_weap_array = CreateArray(32);
+	g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
 	PrintToServer("[LOGGER] starting LoadValues");
 	if(kv)
 		CloseHandle(kv);
@@ -288,6 +290,7 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	
 	return Plugin_Continue;
 }
+//jballou - LogRole support
 public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	//"squad_slot" "byte"
