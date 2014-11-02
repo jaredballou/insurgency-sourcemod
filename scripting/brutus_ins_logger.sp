@@ -7,6 +7,7 @@
 
 #include <sourcemod>
 #include <regex>
+#include <sdktools>
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
 #define PREFIX_LEN 7
@@ -19,9 +20,8 @@ new NumWeaponsDefined = 0;
 new Handle:kv  = INVALID_HANDLE;
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
+new String:g_client_last_classstring[MAXPLAYERS+1][64];
 
-new g_LastClass[MAXPLAYERS+1] = { -1, ... };
-new g_LastTeam[MAXPLAYERS+1] = { -1, ... };
 
 //============================================================================================================
 #include <loghelper>
@@ -32,6 +32,8 @@ new g_LastTeam[MAXPLAYERS+1] = { -1, ... };
 
 new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
+
+
 //============================================================================================================
 
 public Plugin:myinfo =
@@ -64,8 +66,10 @@ public OnPluginStart()
 	HookEvent("weapon_fire", Event_WeaponFired);
 	
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
+	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 	HookEvent("player_death", Event_PlayerDeath);
-	
+	//TODO: player_avenged_teammate
+
 	HookEvent("object_destroyed", Event_CPDestroyed);
 	HookEvent("controlpoint_captured", Event_CPCapped);
 	
@@ -87,7 +91,6 @@ public Handle:LoadValues()
 
 	new numWeapons = 0;
 	g_weap_array = CreateArray(32);
-	decl String:strBuf[32];
 	PrintToServer("[LOGGER] starting LoadValues");
 	if(kv)
 		CloseHandle(kv);
@@ -95,7 +98,7 @@ public Handle:LoadValues()
 	kv = CreateKeyValues("weapons");
 	PrintToServer("[LOGGER] ckv");
 
-	decl String:sFile[256], String:sPath[256];
+	decl String:sPath[256];
 	BuildPath(Path_SM, sPath, sizeof(sPath), "configs/brutus_ins_logger_weapons.cfg");
 	if(!FileExists(sPath))
 		SetFailState("File Not Found: %s", sPath);
@@ -285,6 +288,27 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	
 	return Plugin_Continue;
 }
+public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	//"squad_slot" "byte"
+	//"squad" "byte"
+	//"userid" "short"
+	//"class_template" "string"
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	new squad = GetEventInt( event, "squad" );
+	new squad_slot = GetEventInt( event, "squad_slot" );
+	decl String:class_template[64];
+	GetEventString(event, "class_template",class_template,sizeof(class_template));
+	PrintToServer("squad: %d squad_slot: %d",squad,squad_slot);
+
+	if( client == 0)
+		return;
+	if(!StrEqual(g_client_last_classstring[client],class_template)) {
+		LogRoleChange( client, class_template );
+		g_client_last_classstring[client] = class_template;
+	}
+}
+
 
 public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -292,37 +316,7 @@ public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast 
 	if( client == 0 || !IsClientInGame(client) )
 		return;
 	
-	reset_player_stats( client );
-	
-	new currentTeam = GetClientTeam( client );
-	
-	new currentClass = GetEntProp( client, Prop_Send, "m_nClassTemplateHandle" );
-
-	new String:strModel[150];
-	GetEntPropString(client, Prop_Data, "m_ModelName", strModel, sizeof(strModel));
-	PrintToServer("m_ModelName: %s",strModel);
-
-	new String:strClass[150];
-	GetEntPropString(client, Prop_Data, "m_iClassname", strClass, sizeof(strClass));
-	PrintToServer("m_iClassname: %s",strClass);
-
-//	new classname = GetEntProp( client, Prop_Send, "m_iClassname" );
-//	PrintToServer("m_iclassname: %s",classname);
-	new squad = GetEntProp( client, Prop_Send, "m_iSquad" );
-	PrintToServer("m_iSquad: %s",squad);
-	new squadslot = GetEntProp( client, Prop_Send, "m_iSquadSlot" );
-	PrintToServer("m_iSquadSlot: %s",squadslot);
-	new inve = GetEntProp( client, Prop_Send, "m_PlayerInventory" );
-	PrintToServer("m_PlayerInventory: %s",inve);
-
-	if( g_LastClass[client] != currentClass || g_LastTeam[client] != currentTeam )
-	{
-		decl String:szRoleString[32];
-		Format( szRoleString, sizeof(szRoleString), "%s", currentClass);
-		LogRoleChange( client, szRoleString );
-		g_LastTeam[client] = currentTeam;
-		g_LastClass[client] = currentClass;
-	}
+	reset_player_stats( client );	
 }
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)

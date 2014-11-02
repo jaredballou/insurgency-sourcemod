@@ -1754,7 +1754,7 @@ public Action:hlx_sm_team_action(args)
 	decl String: team_action[64];
 	GetCmdArg(2, team_action, sizeof(team_action));
 
-	LogToGame("Team \"%s\" triggered \"%s\"", team_name, team_action); 
+	LogToGame("Team goober \"%s\" triggered \"%s\"", team_name, team_action); 
 
 	return Plugin_Handled;
 }

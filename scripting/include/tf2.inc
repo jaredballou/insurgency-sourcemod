@@ -153,6 +153,10 @@ enum TFCond
 	TFCond_HalloweenTiny,
 	TFCond_HalloweenInHell,
 	TFCond_HalloweenGhostMode,
+
+	TFCond_DodgeChance = 79,
+	TFCond_Parachute,
+	TFCond_BlastJumping,
 };
 
 const Float:TFCondDuration_Infinite = -1.0;
@@ -360,6 +364,17 @@ native bool:TF2_IsHolidayActive(TFHoliday:holiday);
 native bool:TF2_IsPlayerInDuel(client);
 
 /**
+ * Removes an econ wearable (hat, misc, etc) from a player.
+ * This also deletes the wearable entity.
+ *
+ * @param client	Client index.
+ * @param wearable	Index of the wearable entity.
+ * @noreturn
+ * @error			Invalid client index, client not in game, invalid wearable entity, or no mod support.
+*/
+native TF2_RemoveWearable(client, wearable);
+
+/**
  * Called after a condition is added to a player
  *
  * @param client		Index of the client to which the conditon is being added.
@@ -436,5 +451,6 @@ public __ext_tf2_SetNTVOptional()
 	MarkNativeAsOptional("TF2_GetClass");
 	MarkNativeAsOptional("TF2_IsPlayerInDuel");
 	MarkNativeAsOptional("TF2_IsHolidayActive");
+	MarkNativeAsOptional("TF2_RemoveWearable");
 }
 #endif

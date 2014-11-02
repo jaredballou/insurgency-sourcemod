@@ -21,7 +21,7 @@ public OnPluginStart()
 public Action:Check_Compass(client, args)
 {
 //	new Handle:hHudText = CreateHudSynchronizer();
-//	SetHudTextParams(0.2, 0.2, 5.0, 0, 255, 0, 255);
+//	SetHudTextParams(-1.0, 0.2, 5.0, 255, 0, 0, 255);
 	decl Float:angle[3];
 	new String:sDisplay[512];
 	GetClientEyeAngles(client, angle);
@@ -47,7 +47,7 @@ public Action:Check_Compass(client, args)
 		sDisplay[1] = 'W';
 	}
 	PrintHintText(client, "%s",sDisplay);
-//	ShowSyncHudText(client, hHudText, "%f %f %f   %f %f %f",angle[0],angle[1],angle[2],start[0],start[1],start[2]);
+//	ShowSyncHudText(client, hHudText, "%s",sDisplay);
 //	CloseHandle(hHudText);
 	return Plugin_Handled;
 }  
