@@ -67,10 +67,18 @@ public OnPluginStart()
 	HookEvent("weapon_fire", Event_WeaponFired);
 	
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
+	HookEvent("player_death", Event_PlayerDeath);
 	//jballou - LogRole support
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
-	HookEvent("player_death", Event_PlayerDeath);
-	//jballou TODO: player_avenged_teammate
+//jballou - new events
+	HookEvent("player_suppressed", Event_PlayerSuppressed);
+	HookEvent("player_avenged_teammate", Event_PlayerAvengedTeammate);
+	HookEvent("grenade_thrown", Event_GrenadeThrown);
+	HookEvent("grenade_detonate", Event_GrenadeDetonate);
+	HookEvent("game_end", Event_GameEnd, EventHookMode_PostNoCopy);
+	HookEvent("round_end", Event_RoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("missile_launched", Event_MissileLaunched);
+	HookEvent("missile_detonate", Event_MissileDetonate);
 
 	HookEvent("object_destroyed", Event_CPDestroyed);
 	HookEvent("controlpoint_captured", Event_CPCapped);
@@ -144,13 +152,6 @@ hook_wstats()
 	HookEvent("player_first_spawn", Event_PlayerSpawn);
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
-}
-
-unhook_wstats()
-{
-	UnhookEvent("player_first_spawn", Event_PlayerSpawn);
-	UnhookEvent("player_spawn", Event_PlayerSpawn);
-	UnhookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
 //=====================================================================================================
 
@@ -287,7 +288,6 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	LogKillLoc(GetClientOfUserId(GetEventInt(event, "attacker")), GetClientOfUserId(GetEventInt(event, "userid")));
-	
 	return Plugin_Continue;
 }
 //jballou - LogRole support
@@ -311,14 +311,108 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 		g_client_last_classstring[client] = class_template;
 	}
 }
+public Event_PlayerSuppressed( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"attacker" "short"
+	//"victim" "short"
+	new victim   = GetClientOfUserId(GetEventInt(event, "victim"));
+	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
+	if (attacker == 0 || victim == 0 || attacker == victim)
+	{
+		return;
+	}
+	LogPlyrPlyrEvent(attacker, victim, "triggered", "suppressed");
+}
+public Event_PlayerAvengedTeammate( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"avenger_id" "short"
+	//"avenged_player_id" "short"
+	new attacker = GetClientOfUserId(GetEventInt(event, "avenger_id"));
+	if (attacker == 0)
+	{
+		return;
+	}
+	LogPlayerEvent(attacker, "triggered", "avenged");
+//	LogPlyrPlyrEvent(attacker, avenged_player, "triggered", "suppressed");
+}
+public Event_GrenadeThrown( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"entityid" "long"
+	//"userid" "short"
+	//"id" "short"
+}
+public Event_GrenadeDetonate( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"userid" "short"
+	//"effectedEnemies" "short"
+	//"y" "float"
+	//"x" "float"
+	//"entityid" "long"
+	//"z" "float"
+	//"id" "short"
+}
+public Event_GameNewMap( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"mapname" "string"
+}
+public Event_GameEnd( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"team2_score" "short"
+	//"winner" "byte"
+	//"team1_score" "short"
+	new winner = GetEventInt( event, "winner");
+	new team1_score = GetEventInt( event, "team1_score");
+	new team2_score = GetEventInt( event, "team2_score");
+	LogToGame("World triggered game_end winner:%d team1_score:%d team2_score: %d", winner,team1_score,team2_score);
+}
+public Event_RoundStart( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"priority" "short"
+	//"timelimit" "short"
+	//"lives" "short"
+	//"gametype" "short"
+	new priority = GetEventInt( event, "priority");
+	new timelimit = GetEventInt( event, "timelimit");
+	new lives = GetEventInt( event, "lives");
+	new gametype = GetEventInt( event, "gametype");
+	LogToGame("World triggered round_start priority:%d timelimit:%d lives:%d gametype:%d",priority,timelimit,lives,gametype);
+}
+public Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
+{
+//"reason" "byte"
+//"winner" "byte"
+//"message" "string"
+//"message_string" "string"
+	new winner = GetEventInt( event, "winner");
+	new reason = GetEventInt( event, "reason");
+	decl String:message[255],String:message_string[255];
+	GetEventString(event, "message",message,sizeof(message));
+	GetEventString(event, "message_string",message_string,sizeof(message_string));
+	LogToGame("World triggered round_end winner:%d reason:%d message:\"%s\" message_string:\"%s\"",winner,reason,message,message_string);
+	WstatsDumpAll();
+}
+public Event_MissileLaunched( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"entityid" "long"
+	//"userid" "short"
+	//"id" "short"
+}
+public Event_MissileDetonate( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"userid" "short"
+	//"y" "float"
+	//"x" "float"
+	//"entityid" "long"
+	//"z" "float"
+	//"id" "short"
+}
 
 
 public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
-		return;
-	
+		return;	
 	reset_player_stats( client );	
 }
 
@@ -346,7 +440,10 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	{
 		return;
 	}
-	
+	new assister = GetClientOfUserId(GetEventInt(event, "assister"));
+	if (assister) {
+		LogPlayerEvent(assister, "triggered", "kill assist");
+	}
 	new weapon_index = g_client_last_weapon[attacker];
 	//decl String:weap[32];
 	//GetEventString(event, "weapon", weap, sizeof(weap));
@@ -381,8 +478,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]++;
 		}
 	
-		//PrintToChat(attacker, "Kills: %d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);		
-		
+		//PrintToChat(attacker, "Kills: %d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);
 		dump_player_stats(victim);
 	}
 }
