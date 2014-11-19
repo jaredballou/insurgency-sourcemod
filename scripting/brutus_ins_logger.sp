@@ -75,8 +75,8 @@ public OnPluginStart()
 	HookEvent("player_avenged_teammate", Event_PlayerAvengedTeammate);
 	HookEvent("grenade_thrown", Event_GrenadeThrown);
 	HookEvent("grenade_detonate", Event_GrenadeDetonate);
-	HookEvent("game_end", Event_GameEnd, EventHookMode_PostNoCopy);
-	HookEvent("round_end", Event_RoundEnd, EventHookMode_PostNoCopy);
+	HookEvent("game_end", Event_GameEnd);
+	HookEvent("round_end", Event_RoundEnd);
 	HookEvent("missile_launched", Event_MissileLaunched);
 	HookEvent("missile_detonate", Event_MissileDetonate);
 
@@ -223,6 +223,10 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	new plrid = GetClientOfUserId(GetEventInt(event, "userid"));
 	new String:shotWeapName[32];
 	GetClientWeapon(plrid, shotWeapName, sizeof(shotWeapName));
+/*
+//Commented out by jballou
+//Easier to handle the weapons in HLStatsX by weapon name when using string lookups
+//and other fancy tools
 	//PrintToChatAll("WeapFire: %s", shotWeapName);
 	//WORKAROUND! THIS IS VERY BAD BUT I DONT WANT ANOTHER STAT WIPE TO AFFECT ANYONE
 	//THROWABLES
@@ -251,7 +255,7 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	}
 	//PrintToChatAll("WeapFire Replaced: %s", shotWeapName);
 	//new weapon_index = get_weapon_index(shotWeapName, GetEventInt(event, "weaponid"));
-	
+*/	
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
 	new weapon_index = GetWeaponArrayIndex(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
