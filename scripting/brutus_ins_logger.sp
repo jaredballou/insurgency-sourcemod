@@ -10,6 +10,7 @@
 #include <sdktools>
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
+#define MAX_CONTROLPOINTS 32
 #define PREFIX_LEN 7
 
 #define INS
@@ -19,7 +20,10 @@ new Handle:g_weap_array = INVALID_HANDLE;
 new NumWeaponsDefined = 0;
 new Handle:kv  = INVALID_HANDLE;
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
+new g_controlpoint_players[MAXPLAYERS+1][MAX_CONTROLPOINTS];
+
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
+new String:g_client_hurt_weaponstring[MAXPLAYERS+1][64];
 //jballou - LogRole support
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
 
@@ -80,9 +84,11 @@ public OnPluginStart()
 	HookEvent("missile_launched", Event_MissileLaunched);
 	HookEvent("missile_detonate", Event_MissileDetonate);
 
-	HookEvent("object_destroyed", Event_CPDestroyed);
-	HookEvent("controlpoint_captured", Event_CPCapped);
-	
+	HookEvent("object_destroyed", Event_ObjectDestroyed);
+	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
+	HookEvent("controlpoint_neutralized", Event_ControlPointNeutralized);
+	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
+	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
 	//Begin Engine LogHooks
 	AddGameLogHook(LogEvent);
 	
@@ -135,7 +141,7 @@ public Handle:LoadValues()
 		} while (KvGotoNextKey(kv, true));
 		KvRewind(kv);
 	}
-	//PrintToServer("Weapons Loaded: %d", numWeapons);
+	PrintToServer("[LOGGER] Weapons Loaded: %d", numWeapons);
 	NumWeaponsDefined = numWeapons;
 	for(new i = 0; i < NumWeaponsDefined; i++)
 	{
@@ -161,36 +167,112 @@ public RepopulateWeaponTrie()
 	CreatePopulateWeaponTrie();
 }
 
-public Action:Event_CPCapped(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	new cap_team_index = GetEventInt(event, "team");
+	//"priority" "short"
+	//"cp" "byte"
+	//"cappers" "string"
+	//"cpname" "string"
+	//"team" "byte"
+	decl String:cappers[64],String:cpname[64];
+	new priority = GetEventInt(event, "priority");
+	new cp = GetEventInt(event, "cp");
+	GetEventString(event, "cappers", cappers, sizeof(cappers));
+	GetEventString(event, "cpname", cpname, sizeof(cpname));
+	new team = GetEventInt(event, "team");
+
+	new capperlen = GetCharBytes(cappers);
+	//PrintToServer("[LOGGER] Event_ControlPointCaptured priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
+
 	new player_team_index;
 	//"cp" "byte" - for naming, currently not needed
 	for (new i=1; i<=MaxClients; i++)
 	{
-		//player_team_index = GetClientTeam(i);
-	
-		if(IsClientInGame(i) && IsClientConnected(i) && !IsFakeClient(i))
+		if(g_controlpoint_players[i][cp])//(IsClientInGame(i) && IsClientConnected(i) && !IsFakeClient(i))
 		{
 			player_team_index = GetClientTeam(i);
-			if(player_team_index == cap_team_index)
+			if(player_team_index == team)
 			{
-				decl String: player_authid[64];
+				decl String:player_authid[64];
 				if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
 				{
 					strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 				}
 				new player_userid = GetClientUserId(i);
-				
 				LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", i, player_userid, player_authid, g_team_list[player_team_index]);
 			}
 		}
 	}
 }
-
-public Action:Event_CPDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	new cap_team_index = GetEventInt(event, "attackerteam");
+	//"priority" "short"
+	//"cp" "byte"
+	//"cappers" "string"
+	//"cpname" "string"
+	//"team" "byte"
+}
+public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new area = GetEventInt(event, "area");
+	new object = GetEventInt(event, "object");
+	new player = GetEventInt(event, "player");
+	new team = GetEventInt(event, "team");
+	new owner = GetEventInt(event, "owner");
+	new type = GetEventInt(event, "type");
+	//PrintToServer("[LOGGER] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,object,player,team,owner,type);
+	g_controlpoint_players[player][area] = 1;
+}
+public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	//"owner" "short"
+	//"player" "short"
+	//"team" "short"
+	//"area" "byte"
+	new owner = GetEventInt(event, "owner");
+	new player = GetEventInt(event, "player");
+	new team = GetEventInt(event, "team");
+	new area = GetEventInt(event, "area");
+
+	//PrintToServer("[LOGGER] Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
+	g_controlpoint_players[player][area] = 0;
+}
+
+public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	//"team" "byte"
+	//"attacker" "byte"
+	//"cp" "short"
+	//"index" "short"
+	//"type" "byte"
+	//"weapon" "string"
+	//"weaponid" "short"
+	//"assister" "byte"
+	//"attackerteam" "byte"
+	new team = GetEventInt(event, "team");
+	new attacker = GetEventInt(event, "attacker");
+	new cp = GetEventInt(event, "cp");
+	new index = GetEventInt(event, "index");
+	new type = GetEventInt(event, "type");
+//weapon
+	new weaponid = GetEventInt(event, "weaponid");
+	new assister = GetEventInt(event, "assister");
+	new attackerteam = GetEventInt(event, "attackerteam");
+
+	//PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
+
+	decl String: player_authid[64];
+	if (!GetClientAuthString(attacker, player_authid, sizeof(player_authid)))
+	{
+		strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
+	}
+	new player_userid = GetClientUserId(attacker);
+//	player_team_index = GetClientTeam(i);
+
+	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, player_userid, player_authid, g_team_list[attackerteam]);
+}
+/*
+//Not giving whole team credit
 	new player_team_index;
 	//"cp" "byte" - for naming, currently not needed
 	for (new i=1; i<=MaxClients; i++)
@@ -200,7 +282,7 @@ public Action:Event_CPDestroyed(Handle:event, const String:name[], bool:dontBroa
 		if(IsClientInGame(i) && IsClientConnected(i) && !IsFakeClient(i))
 		{
 			player_team_index = GetClientTeam(i);
-			if(player_team_index == cap_team_index)
+			if(player_team_index == attackerteam)
 			{
 				decl String: player_authid[64];
 				if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
@@ -214,7 +296,7 @@ public Action:Event_CPDestroyed(Handle:event, const String:name[], bool:dontBroa
 		}
 	}
 }
-
+*/
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	//"weaponid" "short"
@@ -255,7 +337,7 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	}
 	//PrintToChatAll("WeapFire Replaced: %s", shotWeapName);
 	//new weapon_index = get_weapon_index(shotWeapName, GetEventInt(event, "weaponid"));
-*/	
+*/
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
 	new weapon_index = GetWeaponArrayIndex(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
@@ -306,7 +388,7 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 	new squad_slot = GetEventInt( event, "squad_slot" );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	PrintToServer("squad: %d squad_slot: %d",squad,squad_slot);
+	//PrintToServer("[LOGGER] squad: %d squad_slot: %d",squad,squad_slot);
 
 	if( client == 0)
 		return;
@@ -440,19 +522,35 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
 	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
 	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-	if (attacker == 0 || victim == 0 || attacker == victim)
-	{
-		return;
-	}
+	decl String:weapon[32];
+	GetEventString(event, "weapon", weapon, sizeof(weapon));
+	new weaponid = GetEventInt(event, "weaponid");
+
 	new assister = GetClientOfUserId(GetEventInt(event, "assister"));
 	if (assister) {
 		LogPlayerEvent(assister, "triggered", "kill assist");
 	}
+/*
+	for(new i = 0; i < NumWeaponsDefined; i++)
+	{
+		
+	}
+	StrContains(shotWeapName, "rpg7") > -1)	//rpg7 launcher (weapon_rpg7)
+	{
+		ReplaceString(shotWeapName, sizeof(shotWeapName), "weapon", "rocket", false);
+	}
+*/
+
 	new weapon_index = g_client_last_weapon[attacker];
-	//decl String:weap[32];
-	//GetEventString(event, "weapon", weap, sizeof(weap));
-	//PrintToChatAll("WeapID: %d -> %s", weapon_index, weap);
-	//new weapon_index2 = GetEventInt(event, "weaponid");
+	decl String:strLastWeapon[32];
+	GetArrayString(g_weap_array, weapon_index, strLastWeapon, sizeof(strLastWeapon));
+	//PrintToServer("[LOGGER] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
+	
+	if (attacker == 0 || victim == 0 || attacker == victim)
+	{
+		return;
+	}
+
 	/*
 	PrintToChatAll("======WEAPON (%s)======", g_client_last_weaponstring[attacker]);
 	PrintToChatAll("Shots: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_SHOTS]);
@@ -500,7 +598,18 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	new attacker  = GetClientOfUserId(GetEventInt(event, "attacker"));
 	new victim = GetClientOfUserId(GetEventInt(event, "userid"));
 	GetEventString(event, "weapon", weapon, sizeof(weapon));
-	
+
+	if (StrEqual(weapon,"player")) {
+		g_client_hurt_weaponstring[victim] = weapon;
+	} else {
+		if(StrContains(weapon, "grenade_") > -1 || StrContains(weapon, "rocket_") > -1) {
+			ReplaceString(weapon, sizeof(weapon), "grenade_c4", "weapon_c4_clicker", false);
+			ReplaceString(weapon, sizeof(weapon), "grenade_", "weapon_", false);
+			ReplaceString(weapon, sizeof(weapon), "rocket_", "weapon_", false);
+		}
+		g_client_hurt_weaponstring[victim] = weapon;
+	}
+	//PrintToServer("[LOGGER] PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
 	if (attacker > 0 && attacker != victim)
 	{
 		new hitgroup  = GetEventInt(event, "hitgroup");
@@ -573,6 +682,8 @@ public Action:LogEvent(const String:message[])
 			Format(strRegexKillerNameFull, sizeof(strRegexKillerNameFull), "%s", strBuffer);
 			//PrintToChatAll("[REGEX] SubStr1: %s", strRegexKillerNameFull);
 			//RETRIEVE KILLER'S WEAPON HERE!
+//Commented by jballou - updated to use last hurt weapon
+/*
 			for (new k=1; k<=MaxClients; k++)
 			{
 				if(IsClientInGame(k) && IsClientConnected(k))
@@ -586,13 +697,28 @@ public Action:LogEvent(const String:message[])
 					}
 				}
 			}
-			
+*/			
 			//SUBSTRING 2: VICTIM
 			GetRegexSubString(kill_regex, 2, strBuffer, sizeof(strBuffer));
 			Format(strRegexVictimNameFull, sizeof(strRegexVictimNameFull), "%s", strBuffer);
 			
 			//SUBSTRING 3: WEAPON NAME
 			//No need to do anything with weapon name, we are going to replace it
+
+			//Load client last hurt weapon
+			for (new v=1; v<=MaxClients; v++)
+			{
+				if(IsClientInGame(v) && IsClientConnected(v))
+				{
+					GetClientName(v, strBuffer, sizeof(strBuffer));
+					if(StrContains(strRegexVictimNameFull, strBuffer) > -1)
+					{
+						strWeapName = g_client_hurt_weaponstring[v];
+						found_weap = true;
+						break;
+					}
+				}
+			}
 			
 			//SUBSTRING 4: PARAMETERS
 			GetRegexSubString(kill_regex, 4, strBuffer, sizeof(strBuffer));
