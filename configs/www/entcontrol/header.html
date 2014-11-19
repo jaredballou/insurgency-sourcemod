@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>IN ADMIN PANEL | Powered by INDEZINER</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/clockp.js"></script>
+<script type="text/javascript" src="js/clockh.js"></script> 
+<link href="css/start/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="js/jquery-1.8.3.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.js"></script>
+
+<script type="text/javascript" src="js/jconfirmaction.jquery.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$('.ask').jConfirmAction();
+	});
+	
+</script>
+
+<script language="javascript" type="text/javascript" src="js/niceforms.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="css/niceforms-default.css" />
+
+<link rel="stylesheet" href="css/jquery.dataTables_themeroller.css" />
+<script src="js/jquery.dataTables.min.js"></script>
+<script>
+	$(document).ready(function()
+	{
+		$('#table').dataTable(
+		{
+			"bJQueryUI": true,
+			"bPaginate": true,
+			"bFilter": true,
+			"bSort": true,
+			"bInfo": true,
+			"bAutoWidth": true
+		});
+	});
+</script>
+</head>
+<body>
+<div id="main_container">
+	<div class="header">
+    <div class="logo"><a href="#"><img src="images/logo.png" alt="" title="" border="0" /></a></div>
+    
+    <div class="right_header">
+</div>
+    <div id="clock_a"></div>
+    </div>
+
+    <div class="main_content">
+
+                    <div class="menu">
+                    <ul>
+                    <li><a href="">ENTCONTROL<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <ul>
+                        <li><a href="p_list" title="p_list">I am hidden</a></li>
+                        </ul>
+                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                    <li><a href="">Entities<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <ul>
+                        <li><a href="entitylist.html" title="entitylist">Entitylist</a></li>
+                        </ul>
+                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                    <li><a href="">Common Settings<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <!--[if lte IE 6]><table><tr><td><![endif]-->
+                        <ul>
+                        <li><a href="version.html" title="version">Version</a></li>
+                        </ul>
+                    <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+                    </li>
+                    </ul>
+                    </div> 
+                    
+    <div class="center_content">  
+    
+    <div class="left_content">
+    
+    		<div class="sidebar_search">
+            <form>
+            <input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
+            <input type="image" class="search_submit" src="images/search.png" />
+            </form>            
+            </div>
+            
+            <div class="sidebar_box">
+                <div class="sidebar_box_top"></div>
+                <div class="sidebar_box_content">
+                <h3>SERVER STATUS</h3>
+                <img src="images/info.png" alt="" title="" class="sidebar_icon_right" />
+                <p>
+Game: ec::GetGameFolder()<br/>
+MapName: ec::GetMapName()<br/>
+Lanserver: ec::IsLANServer()<br/>
+Players: ec::GetPlayerCount()/ec::GetMaxClients()<br/>
+                </p>                
+                </div>
+                <div class="sidebar_box_bottom"></div>
+            </div>
+            
+            <div class="sidebar_box">
+                <div class="sidebar_box_top"></div>
+                <div class="sidebar_box_content">
+                <h4>NAVIGATION</h4>
+                <img src="images/notice.png" alt="" title="" class="sidebar_icon_right" />
+                <p>
+HidingSpots: ec::GetNavHidingSpots()<br/>
+Areas: ec::GetNavAreas()<br/>
+Places: ec::GetNavPlaces()<br/>
+Ladders: ec::GetNavLadders()<br/>
+MagicNumber: ec::GetNavMagicNumber()<br/>
+SaveBSPSize: ec::GetNavSaveBSPSize()<br/>
+Version: ec::GetNavVersion()<br/>
+SubVersion: ec::GetNavSubVersion()<br/>
+                </p>                
+                </div>
+                <div class="sidebar_box_bottom"></div>
+            </div>
+			
+            <div class="sidebar_box">
+                <div class="sidebar_box_top"></div>
+                <div class="sidebar_box_content">
+                <h4>PLAYER</h4>
+                <img src="images/notice.png" alt="" title="" class="sidebar_icon_right" />
+                <p>
+ec::GetHTMLFormatedPlayerInfo()
+                </p>                
+                </div>
+                <div class="sidebar_box_bottom"></div>
+            </div>
+    </div>  
+    
+    <div class="right_content">

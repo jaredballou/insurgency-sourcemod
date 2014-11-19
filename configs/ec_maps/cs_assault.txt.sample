@@ -1,0 +1,17 @@
+"cs_assault"
+{
+	"179"
+	{
+		"classname"		"light_dynamic"
+		"position"		"6222.150879 7090.882813 -511.968750"
+		"_light"		"100 255 100 255"
+		"brightness"	5.0
+	}
+	"180"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props_interiors/VendingMachineSoda01a.mdl"
+		"position"		"6448.457520 7198.316406 -463.513123"
+		"angle"		"0.019887 1.546373 -0.032318"
+	}
+}

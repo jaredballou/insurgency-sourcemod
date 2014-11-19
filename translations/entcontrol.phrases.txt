@@ -1,0 +1,159 @@
+"Phrases"
+{
+	// Common
+	"Wrong entity"
+	{
+		"en"	"Wrong Entity"
+		"de"	"Falsches Objekt"
+	}
+
+	"Wrong Position"
+	{
+		"en"	"Wrong Position"
+		"de"	"Ungueltige Position"
+	}
+
+	"Moved to saved position"
+	{
+		"en"	"Moved to saved position"
+		"de"	"Zur Position teleportiert"
+	}
+
+	"Select Position first"
+	{
+		"en"	"You have to save a position first!"
+		"de"	"Du musst zuerst eine Position speichern!"
+	}
+
+	"Position saved"
+	{
+		"en"	"Position saved"
+		"de"	"Position gespeichert"
+	}
+
+	"Distance"
+	{
+		"#format"	"{1:f}"
+		"en"	"Distance: {1}"
+		"de"	"Abstand: {1}"
+	}
+
+	"Spawned"
+	{
+		"#format"	"{1:s}"
+		"en"	"Spawned: {1}"
+		"de"	"Erstellt: {1}"
+	}
+
+	// Edit
+	"Frozen"
+	{
+		"en"	"Object is now frozen"
+		"de"	"Objekt vereist"
+	}
+
+	"UnFrozen"
+	{
+		"en"	"Object is now unfrozen"
+		"de"	"Objekt enteist"
+	}
+
+	"Breakable"
+	{
+		"en"	"Object is now breakable"
+		"de"	"Objekt zerstoerbar"
+	}
+
+	"Invincible"
+	{
+		"en"	"Object is now invincible"
+		"de"	"Objekt unverwundbar"
+	}
+
+	"Gravity"
+	{
+		"#format"	"{1:f}"
+		"en"	"Gravity: {1}"
+		"de"	"Gravitation: {1}"
+	}
+
+	"Size"
+	{
+		"#format"	"{1:f}"
+		"en"	"Size: {1}"
+		"de"	"Groesse: {1}"
+	}
+	
+	"Speed"
+	{
+		"#format"	"{1:f}"
+		"en"	"Speed: {1}"
+		"de"	"Geschwindigkeit: {1}"
+	}
+
+	"Touched"
+	{
+		"en"	"Object touched"
+		"de"	"Benutzen simuliert"
+	}
+
+	"Ignited"
+	{
+		"en"	"Object ignited"
+		"de"	"Objekt entzündet"
+	}
+
+	"Visible"
+	{
+		"en"	"Object is now visible"
+		"de"	"Objekt ist nun sichtbar"
+	}
+
+	"Invisible"
+	{
+		"en"	"Object is now invisible"
+		"de"	"Objekt ist nun unsichtbar"
+	}
+
+	"Solid"
+	{
+		"en"	"Object is now solid"
+		"de"	"Objekt ist nun undurchgehbar"
+	}
+
+	"Unsolid"
+	{
+		"en"	"Object is now unsolid"
+		"de"	"Objekt ist nun durchgehbar"
+	}
+
+	"Activated"
+	{
+		"en"	"Object is now activated"
+		"de"	"Objekt aktiviert"
+	}
+
+	"HealthToOne"
+	{
+		"en"	"Set health to 1"
+		"de"	"Gesundheit auf 1 gesetzt"
+	}
+
+	"HealthToFull"
+	{
+		"en"	"Set health to 100"
+		"de"	"Gesundheit auf 100 gesetzt"
+	}
+
+	"SkinChanged"
+	{
+		"en"	"Skin changed"
+		"de"	"Skin geaendert"
+	}
+
+	"SaveSkinFirst"
+	{
+		"en"	"You have to save a skin first (helper menu)"
+		"de"	"Du musst zuerst einen Skin speichern (Im Hilfsmenue)"
+	}
+}

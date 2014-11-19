@@ -1,0 +1,355 @@
+"mh_stab_aroundtown_v3c_v2"
+{
+	"139"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-659.969849 857.910889 384.031250"
+	}
+	"314"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-752.411987 849.111694 384.031250"
+	}
+	"317"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-812.844971 845.010620 384.031250"
+	}
+	"323"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-913.421326 1003.993958 384.031250"
+	}
+	"320"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-661.997498 971.658813 384.031250"
+	}
+	"329"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-617.223450 1173.899292 384.031250"
+	}
+	"326"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-796.866028 1145.507202 384.031250"
+	}
+	"332"
+	{
+		"classname"		"npc_antlionguard"
+		"position"		"-1013.138916 411.727722 768.031250"
+	}
+	"334"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-483.917297 418.307129 768.031250"
+	}
+	"338"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-442.172791 463.551605 768.031250"
+	}
+	"380"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-388.885925 472.720642 768.031250"
+	}
+	"340"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-399.596375 410.491241 768.031250"
+	}
+	"336"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-441.955017 363.750885 768.031250"
+	}
+	"382"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"-304.439362 716.550964 0.031250"
+	}
+	"384"
+	{
+		"classname"		"npc_vortigaunt"
+		"position"		"1559.744263 2110.001953 256.031250"
+	}
+	"386"
+	{
+		"classname"		"npc_vortigaunt"
+		"position"		"1480.461060 2113.385986 256.031250"
+	}
+	"390"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"794.273499 997.319336 33.078659"
+	}
+	"396"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"878.362244 1054.732666 33.078651"
+	}
+	"395"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"904.171509 1013.678894 33.078659"
+	}
+	"392"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"857.387573 992.131287 64.376732"
+	}
+	"398"
+	{
+		"classname"		"npc_zombie"
+		"position"		"835.357117 511.180969 35.078659"
+	}
+	"400"
+	{
+		"classname"		"npc_police"
+		"position"		"-1574.551025 -36.223129 -3.968750"
+	}
+	"403"
+	{
+		"classname"		"npc_police"
+		"position"		"-1585.783081 30.193687 -3.968750"
+	}
+	"406"
+	{
+		"classname"		"npc_police"
+		"position"		"-1594.073975 115.694214 -8.806168"
+	}
+	"409"
+	{
+		"classname"		"npc_barney"
+		"position"		"-1509.423950 38.941544 -3.968750"
+	}
+	"412"
+	{
+		"classname"		"npc_vortigaunt"
+		"position"		"-1719.833008 2698.266602 384.031250"
+	}
+	"414"
+	{
+		"classname"		"npc_zombie"
+		"position"		"-1297.623901 2642.719238 13.148788"
+	}
+	"416"
+	{
+		"classname"		"npc_barney"
+		"position"		"578.865601 1715.623413 136.031250"
+	}
+	"421"
+	{
+		"classname"		"npc_soldier"
+		"position"		"528.488281 1526.525513 136.031250"
+	}
+	"424"
+	{
+		"classname"		"npc_soldier"
+		"position"		"-1674.685303 232.580994 0.000000"
+	}
+	"427"
+	{
+		"classname"		"npc_vortigaunt"
+		"position"		"-378.844513 1241.185913 153.920563"
+	}
+	"437"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"392.666077 326.054108 0.031250"
+	}
+	"433"
+	{
+		"classname"		"npc_zombie"
+		"position"		"464.291260 439.373260 0.031250"
+	}
+	"435"
+	{
+		"classname"		"npc_zombie"
+		"position"		"334.642883 440.374786 0.031250"
+	}
+	"431"
+	{
+		"classname"		"npc_zombie"
+		"position"		"327.407501 562.124329 0.031250"
+	}
+	"442"
+	{
+		"classname"		"npc_soldier"
+		"position"		"404.430420 663.703369 264.031250"
+	}
+	"445"
+	{
+		"classname"		"npc_vortigaunt"
+		"position"		"451.140930 726.998108 264.031250"
+	}
+	"439"
+	{
+		"classname"		"npc_soldier"
+		"position"		"477.970032 668.130981 264.031250"
+	}
+	"447"
+	{
+		"classname"		"npc_headcrab"
+		"position"		"552.514160 575.008362 136.031250"
+	}
+	"480"
+	{
+		"classname"		"npc_soldier"
+		"position"		"465.142700 1681.367065 768.031250"
+	}
+	"489"
+	{
+		"classname"		"npc_antlion"
+		"position"		"472.364105 870.668030 512.031250"
+	}
+	"487"
+	{
+		"classname"		"npc_antlion"
+		"position"		"327.034210 865.672363 512.031250"
+	}
+	"491"
+	{
+		"classname"		"npc_antlion"
+		"position"		"369.358276 736.382446 512.031250"
+	}
+	"493"
+	{
+		"classname"		"npc_antlion"
+		"position"		"482.747284 731.816223 512.031250"
+	}
+	"495"
+	{
+		"classname"		"npc_barney"
+		"position"		"313.786346 430.153625 388.031250"
+	}
+	"501"
+	{
+		"classname"		"npc_sentrygun"
+		"position"		"445.078308 375.964996 388.697998"
+	}
+	"502"
+	{
+		"classname"		"npc_barney"
+		"position"		"297.421844 1087.560669 388.031250"
+	}
+	"504"
+	{
+		"classname"		"npc_zombie"
+		"position"		"441.743622 1062.712280 388.031250"
+	}
+	"443"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"613.926819 1668.999878 148.989273"
+		"angle"		"-0.197899 -0.000598 0.346540"
+	}
+	"446"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"609.332642 1754.882568 148.961212"
+		"angle"		"0.009510 -0.000001 -0.016449"
+	}
+	"137"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"611.501831 1707.279541 148.993454"
+		"angle"		"-0.265244 -0.001074 0.464391"
+	}
+	"456"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"319.754425 499.373932 400.977203"
+		"angle"		"-0.069957 -0.000075 0.122635"
+	}
+	"478"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"350.976410 511.031311 400.983521"
+		"angle"		"-0.124157 -0.000235 0.217492"
+	}
+	"481"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"346.819550 559.426575 400.993408"
+		"angle"		"-0.271232 -0.001123 0.474874"
+	}
+	"482"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"300.509186 566.107849 400.957977"
+		"angle"		"0.019192 -0.000006 -0.033386"
+	}
+	"479"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"286.123322 521.019165 400.981079"
+		"angle"		"-0.100488 -0.000154 0.176069"
+	}
+	"484"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props_interiors/Radiator01a.mdl"
+		"position"		"357.037964 1055.424438 406.646881"
+		"angle"		"0.616036 -0.010504 -0.148529"
+	}
+	"485"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props/cs_assault/dryer_box.mdl"
+		"position"		"309.747314 1033.062866 388.463013"
+		"angle"		"-0.023923 -0.024677 0.024401"
+	}
+	"393"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props_interiors/Radiator01a.mdl"
+		"position"		"-1475.132080 82.501228 14.570357"
+		"angle"		"-0.914350 0.050297 -0.079163"
+	}
+	"135"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props_interiors/Radiator01a.mdl"
+		"position"		"-1477.827271 5.086035 14.607080"
+		"angle"		"0.199872 -0.014262 -0.148956"
+	}
+	"394"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/props_interiors/Radiator01a.mdl"
+		"position"		"-1516.441650 84.364609 -1.478275"
+		"angle"		"-86.207405 89.721275 -76.811066"
+	}
+	"215"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"615.421875 1640.258667 149.000183"
+		"angle"		"-0.477792 -0.003487 0.836332"
+	}
+	"166"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"612.952332 1681.319458 148.983536"
+		"angle"		"-0.125679 -0.000241 0.220153"
+	}
+	"165"
+	{
+		"classname"		"prop_physics"
+		"modelname"		"models/roller_spikes.mdl"
+		"position"		"604.097168 1723.345215 148.992447"
+		"angle"		"-0.247547 -0.000936 0.433422"
+	}
+}
