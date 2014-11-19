@@ -1,3 +1,21 @@
 "DamageReportSetting"
 {
+	"STEAM_1:0:17729270"
+	{
+		"OnOff"		"0"
+		"PopChat"		"1"
+		"ShortLong"		"1"
+	}
+	"STEAM_1:0:4165325"
+	{
+		"OnOff"		"1"
+		"PopChat"		"1"
+		"ShortLong"		"0"
+	}
+	"STEAM_1:1:4968862"
+	{
+		"OnOff"		"1"
+		"PopChat"		"0"
+		"ShortLong"		"1"
+	}
 }
