@@ -231,23 +231,12 @@ public Action:UserMessage_SayText2(UserMsg:msg_id, Handle:bf, const players[], p
 	}
 */
 	decl String:message[256];
-
-	BfReadShort(bf); // team color
-
 	BfReadString(bf, message, sizeof(message));
-	// check for Name_Change, not #TF_Name_Change (compatibility?)
-	if (StrContains(message, "changed name to \"[BOT]") != -1)
+	BfReadString(bf, message, sizeof(message));
+	if (StrContains(message, "Name_Change") != -1)
 	{
-		BfReadString(bf, message, sizeof(message)); // original
-		BfReadString(bf, message, sizeof(message)); // new
-		if (FindStringInArray(bot_names, message) != -1)
-		{
-			// 'tis a bot!
-			return Plugin_Handled;
-		}
 		return Plugin_Handled;
 	}
-
 	return Plugin_Continue;
 }
 
