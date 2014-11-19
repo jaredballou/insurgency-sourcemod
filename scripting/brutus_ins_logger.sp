@@ -776,7 +776,7 @@ public Action:LogEvent(const String:message[])
 					GetClientName(k, strBuffer, sizeof(strBuffer));
 					if(StrContains(strRegexSuiciderNameFull, strBuffer) > -1)
 					{
-						strWeapName = g_client_last_weaponstring[k];
+						strWeapName = g_client_hurt_weaponstring[k];//g_client_last_weaponstring[k];
 						found_weap = true;
 						break;
 					}
