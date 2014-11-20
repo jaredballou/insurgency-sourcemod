@@ -781,10 +781,16 @@ static NavMeshAreaRemoveFromClosedList(iAreaIndex)
 
 bool:NavMeshLoad(const String:sMapName[])
 {
-	decl String:sNavFilePath[PLATFORM_MAX_PATH];
+	decl String:sOutput[PLATFORM_MAX_PATH], String:sNavFilePath[PLATFORM_MAX_PATH], String:sSeparator[1], String:sContent[1024];
 	Format(sNavFilePath, sizeof(sNavFilePath), "maps\\%s.nav", sMapName);
+	Format(sOutput, sizeof(sOutput), "maps\\%s.sql", sMapName);
 	
 	new Handle:hFile = OpenFile(sNavFilePath, "rb");
+	if (FileExists(sOutput))
+	{
+		DeleteFile(sOutput);
+	}
+	new Handle:hOutput = OpenFile(sOutput, "w");
 	if (hFile == INVALID_HANDLE)
 	{
 		new EngineVersion:iEngineVersion;
@@ -925,9 +931,12 @@ bool:NavMeshLoad(const String:sMapName[])
 	new iPlaceCount;
 	ReadFileCell(hFile, iPlaceCount, UNSIGNED_SHORT_BYTE_SIZE);
 	LogMessage("Place count: %d", iPlaceCount);
-	
+	if (iPlaceCount) {
+		WriteFileString(hOutput,"INSERT INTO ins_navmesh_places (map,placename,placeid)\n  VALUES",false);
+	}
 	// Parse through places.
 	// TF2 doesn't use places, but CS:S does.
+	sSeparator[0] = ' ';
 	for (new iPlaceIndex = 0; iPlaceIndex < iPlaceCount; iPlaceIndex++) 
 	{
 		new iPlaceStringSize;
@@ -937,9 +946,13 @@ bool:NavMeshLoad(const String:sMapName[])
 		ReadFileString(hFile, sPlaceName, sizeof(sPlaceName), iPlaceStringSize);
 		
 		PushArrayString(g_hNavMeshPlaces, sPlaceName);
-		
+		Format(sContent,sizeof(sContent),"%s\n    ('%s','%s','%d')", sSeparator[0], sMapName, sPlaceName, (iPlaceIndex+1));
+		WriteFileString(hOutput,sContent,false);
 		LogMessage("Parsed place \"%s\" [index: %d]", sPlaceName, iPlaceIndex);
+		sSeparator[0] = ',';
 	}
+	WriteFileString(hOutput,"\n  ON DUPLICATE KEY UPDATE map=VALUES(map), placename=VALUES(placename), placeid=VALUES(placeid);\n\n",false);
+	sSeparator[0] = ' ';
 	
 	// Get any unnamed areas.
 	new iNavUnnamedAreas;
@@ -953,7 +966,7 @@ bool:NavMeshLoad(const String:sMapName[])
 	new iAreaCount;
 	ReadFileCell(hFile, iAreaCount, UNSIGNED_INT_BYTE_SIZE);
 	
-	LogMessage("Area count: %d", iAreaCount);
+	//LogMessage("Area count: %d", iAreaCount);
 	
 	new Float:flExtentLow[2] = { 99999999.9, 99999999.9 };
 	new bool:bExtentLowX = false;
@@ -962,6 +975,7 @@ bool:NavMeshLoad(const String:sMapName[])
 	new bool:bExtentHighX = false;
 	new bool:bExtentHighY = false;
 	
+	WriteFileString(hOutput,"INSERT INTO ins_navmesh_areas (map,areaid,placename,placeid,x1,y1,x2,y2)\n  VALUES",false);
 	if (iAreaCount > 0)
 	{
 		// The following are index values that will serve as starting and ending markers for areas
@@ -1231,9 +1245,14 @@ bool:NavMeshLoad(const String:sMapName[])
 			}
 			
 			ReadFileCell(hFile, iPlaceID, UNSIGNED_SHORT_BYTE_SIZE);
-			
-			//LogMessage("Place ID: %d", iPlaceID);
-			
+			if (iPlaceID) {
+				decl String:strPlaceName[32];
+				GetArrayString(g_hNavMeshPlaces, (iPlaceID-1), strPlaceName, sizeof(strPlaceName));
+				Format(sContent,sizeof(sContent),"%s\n    ('%s', '%d', '%s', '%d', '%f', '%f', '%f', '%f')", sSeparator[0], sMapName, iAreaID, strPlaceName, iPlaceID, x1, y1, x2, y2);
+				WriteFileString(hOutput,sContent,false);
+				sSeparator[0] = ',';
+
+			}
 			// Get ladder connections.
 			
 			new iLadderConnectionsStartIndex = -1;
@@ -1323,6 +1342,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			}
 			
 			new iIndex = PushArrayCell(g_hNavMeshAreas, iAreaID);
+			//LogMessage("(%d,%d,%d) (%d,%d,%d)",x1,y1,z1,x2,y2,z2);
 			SetArrayCell(g_hNavMeshAreas, iIndex, iAreaFlags, NavMeshArea_Flags);
 			SetArrayCell(g_hNavMeshAreas, iIndex, iPlaceID, NavMeshArea_PlaceID);
 			SetArrayCell(g_hNavMeshAreas, iIndex, x1, NavMeshArea_X1);
@@ -1369,6 +1389,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshAreas, iIndex, -1, NavMeshArea_NearSearchMarker);
 		}
 	}
+	WriteFileString(hOutput,"\n  ON DUPLICATE KEY UPDATE map=VALUES(map), areaid=VALUES(areaid), placename=VALUES(placename), placeid=VALUES(placeid), x1=VALUES(x1), y1=VALUES(y1), x2=VALUES(x2), y2=VALUES(y2);\n\n",false);
 	
 	// Set up the grid.
 	NavMeshGridAllocate(flExtentLow[0], flExtentHigh[0], flExtentLow[1], flExtentHigh[1]);
@@ -1498,7 +1519,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshLadders, iLadderIndex, FindValueInArray(g_hNavMeshAreas, iBottomAreaID), NavMeshLadder_BottomAreaIndex);
 		}
 	}
-	
+	CloseHandle(hOutput);	
 	return true;
 }
 
