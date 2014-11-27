@@ -4,7 +4,7 @@
 #include <navmesh>
 #include <smlib>
 #include <loghelper>
-
+#pragma unused cvarVersion
 #define PLUGIN_VERSION				"0.0.1"
 #define PLUGIN_DESCRIPTION "Puts navmesh area into chat"
 
@@ -31,8 +31,9 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	//RegConsoleCmd("say_team", Command_SendToTeam);
-	g_hNavMeshPlaces = NavMesh_GetPlaces();
-	OnMapStart();
+	if (!g_bOverviewLoaded) {
+		OnMapStart();
+	}
 	RegConsoleCmd("get_grid", Get_Grid);
 //	RegAdminCmd("sm_get_cplist", Command_CPList, ADMFLAG_GENERIC, "sm_CPList");
 }
@@ -45,23 +46,10 @@ public Action:Get_Grid(client, args)
 	}
 	decl Float:flEyePos[3],String:sGridPos[2];
 	GetClientEyePosition(client, flEyePos);
-	PointToGrid(flEyePos,sGridPos,sizeof(sGridPos));
+	GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 	PrintHintText(client, "You are in grid %s",sGridPos);
 	return Plugin_Handled;
 }
-stock PointToGrid(Float:position[3],String:buffer[], size)
-{
-	decl Float:flMapPos[3],iGridPos[3];
-	new String:sDisplay[512],String:sLetters[27]=".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	flMapPos[0] = FloatAbs(FloatDiv((position[0] - float(g_iOverviewPosX)), g_fOverviewScale));
-	flMapPos[1] = FloatAbs(FloatDiv((position[1] - float(g_iOverviewPosY)), g_fOverviewScale));
-	iGridPos[0] = RoundToFloor(FloatDiv(flMapPos[0], 128.0))+1;
-	iGridPos[1] = RoundToFloor(FloatDiv(flMapPos[1], 128.0))+1;
-	Format(buffer,size, "%c%d",sLetters[iGridPos[0]],iGridPos[1]);
-//	PrintHintText(client, "Raw position is %f,%f calculated to %f,%f grid %c%d",position[0],position[1],flMapPos[0],flMapPos[1],sLetters[iGridPos[0]],iGridPos[1]);
-//	ShowSyncHudText(client, hHudText, "%s",sDisplay);
-//	CloseHandle(hHudText);
-}  
 public Get_ControlPoints()
 {
 	PrintToServer("[NMchat] Running Get_ControlPoints");
@@ -74,10 +62,8 @@ public Get_ControlPoints()
 				decl String:entity_name[128];
 				GetEntPropString(i, Prop_Data, "m_iName", entity_name, sizeof(entity_name));
 				PrintToServer("[NMchat] Found point named %s",entity_name);
-				new Float:pos_min[3],Float:pos_max[3],Float:position[3];
+				new Float:position[3];
 				GetEntPropVector(i, Prop_Send, "m_vecOrigin", position);
-
-
 			}
 		}
 	}
@@ -85,6 +71,7 @@ public Get_ControlPoints()
 }
 public OnMapStart()
 {
+	g_hNavMeshPlaces = NavMesh_GetPlaces();
 	OverviewDestroy();
 	decl String:sMap[256];
 	GetCurrentMap(sMap, sizeof(sMap));
@@ -134,6 +121,23 @@ public Action:Command_SendToTeam(client, args)
 	return Plugin_Handled;
 }
 
+stock GetGridPos(Float:position[3],String:buffer[], size)
+{
+	Format(buffer,size, "XX");
+	if (!NavMesh_Exists()) return -2;
+	decl Float:flMapPos[3],iGridPos[3];
+	new String:sLetters[27]=".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	flMapPos[0] = FloatAbs(FloatDiv((position[0] - float(g_iOverviewPosX)), g_fOverviewScale));
+	flMapPos[1] = FloatAbs(FloatDiv((position[1] - float(g_iOverviewPosY)), g_fOverviewScale));
+	iGridPos[0] = RoundToFloor(FloatDiv(flMapPos[0], 128.0))+1;
+	iGridPos[1] = RoundToFloor(FloatDiv(flMapPos[1], 128.0))+1;
+	Format(buffer,size, "%c%d",sLetters[iGridPos[0]],iGridPos[1]);
+//	PrintHintText(client, "Raw position is %f,%f calculated to %f,%f grid %c%d",position[0],position[1],flMapPos[0],flMapPos[1],sLetters[iGridPos[0]],iGridPos[1]);
+//	ShowSyncHudText(client, hHudText, "%s",sDisplay);
+//	CloseHandle(hHudText);
+	return true;
+}
+
 stock GetPlaceName(Float:position[3], String:buffer[], size)
 {
 	Format(buffer,size, "NoPlace");
@@ -163,17 +167,15 @@ public OnLibraryRemoved(const String:name[])
 public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
 {
 	new index = CHATCOLOR_NOSUBJECT;
-	decl String:sNameBuffer[MAXLENGTH_NAME], String:sTagBuffer[32];
-	Color_StripFromChatText(name, sNameBuffer, MAXLENGTH_NAME);
-		decl Float:flEyePos[3],String:sGridPos[2],String:sPlace[64];
+	decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[2],String:sPlace[64];
         GetClientEyePosition(author, flEyePos);
 	GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
-        PointToGrid(flEyePos,sGridPos,sizeof(sGridPos));
+        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 	Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, sNameBuffer);
 	Color_ChatSetSubject(author);
 	index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
 	Color_ChatClearSubject();
-	author = index;		
+	author = index;
 	return Plugin_Changed;
 }
 
@@ -191,7 +193,7 @@ stock Action:PrintMessageTeam(client)
 	decl Float:flEyePos[3],String:sGridPos[2],String:sPlace[64];
         GetClientEyePosition(client, flEyePos);
 	GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
-        PointToGrid(flEyePos,sGridPos,sizeof(sGridPos));
+        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 
 	/* Get the team */
 	new team = GetClientTeam(client);

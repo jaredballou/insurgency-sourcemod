@@ -7,7 +7,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <navmesh>
-
+#pragma unused cvarVersion
 #define PLUGIN_VERSION "1.0.3"
 #define PLUGIN_DESCRIPTION "A plugin that can read Valve's Navigation Mesh."
 

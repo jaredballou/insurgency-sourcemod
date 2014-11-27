@@ -8,6 +8,7 @@
 #include <sourcemod>
 #include <regex>
 #include <sdktools>
+#pragma unused cvarVersion
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
 #define MAX_CONTROLPOINTS 32

@@ -1,5 +1,6 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
+#pragma unused cvarVersion
 
 #include <sourcemod>
 #include <sdktools>
@@ -13,7 +14,7 @@
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
 new Handle:cvarVersion; // version cvar!
 new Handle:cvarEnabled; // are we enabled?
-new Handle:cvarTimer; // are we enabled?
+new Handle:cvarTimer; // Frequency
 //Plugin Info Block
 public Plugin:myinfo =
 {
@@ -28,12 +29,13 @@ public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_botcount_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botcount_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarTimer = CreateConVar("sm_botcount_timer", "60", "Frequency to show count", FCVAR_NOTIFY | FCVAR_PLUGIN);
 }
 new Handle:PanelTimers[MAXPLAYERS+1];
  
 public OnClientPutInServer(client)
 {
-	PanelTimers[client] = CreateTimer(60.0, RefreshPanel, client, TIMER_REPEAT);
+	PanelTimers[client] = CreateTimer(GetConVarFloat(cvarTimer), RefreshPanel, client, TIMER_REPEAT);
 }
  
 public OnClientDisconnect(client)

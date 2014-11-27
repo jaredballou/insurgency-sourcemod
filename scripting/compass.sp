@@ -1,4 +1,5 @@
 #pragma semicolon 1
+#pragma unused cvarVersion
 
 #include <sourcemod>
 #include <sdktools>

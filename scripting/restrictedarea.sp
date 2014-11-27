@@ -2,7 +2,7 @@
 //Released under GPLv3
 
 #pragma semicolon 1
-
+#pragma unused cvarVersion
 #include <sourcemod>
 #include <sdktools>
 
@@ -56,4 +56,5 @@ public remove_restrictedarea()
 			}
 		}
 	}
+	return true;
 }
