@@ -14,6 +14,8 @@
 #define PREFIX_LEN 7
 
 #define INS
+new Handle:cvarVersion; // version cvar!
+new Handle:cvarEnabled; // are we enabled?
 
 new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][15];
 new Handle:g_weap_array = INVALID_HANDLE;
@@ -40,18 +42,22 @@ new Handle:suicide_regex = INVALID_HANDLE;
 
 
 //============================================================================================================
+#define PLUGIN_VERSION "1.2.0"
+#define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
 
 public Plugin:myinfo =
 {
-	name = "Brutus Insurgency2 Logger",
+	name = "[INS] Logger",
 	author = "FZFalzar",
-	version = "1.1.0",
-	description = "Intercepts and fixes events logged for Insurgency2",
+	version = PLUGIN_VERSION,
+	description = PLUGIN_DESCRIPTION,
 	url = "http://brutus.sg"
 };
 
 public OnPluginStart()
 {
+	cvarVersion = CreateConVar("sm_inslogger_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_inslogger_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[LOGGER] Starting");
 	g_weap_array = LoadValues();
 	
@@ -388,7 +394,15 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 	new squad_slot = GetEventInt( event, "squad_slot" );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	//PrintToServer("[LOGGER] squad: %d squad_slot: %d",squad,squad_slot);
+	ReplaceString(class_template,sizeof(class_template),"template_","",false);
+	ReplaceString(class_template,sizeof(class_template),"_training","",false);
+	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
+	ReplaceString(class_template,sizeof(class_template),"_security","",false);
+	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
+	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
+
+
+	PrintToServer("[LOGGER] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
 
 	if( client == 0)
 		return;

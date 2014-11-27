@@ -199,7 +199,7 @@ public Action:BaseNPC_Think(Handle:timer, any:monsterRef)
 		else
 		{
 			player = BaseNPC_GetTarget(monster);
-			
+
 			if (!player || !BaseNPC_CanSeeEachOther(monster, player))
 			{
 				new owner = BaseNPC_GetOwner(monster);
@@ -222,7 +222,7 @@ public Action:BaseNPC_Think(Handle:timer, any:monsterRef)
 							
 								player = i;
 								break;
-							}
+							}			
 						}
 					}
 				}
@@ -566,14 +566,26 @@ stock bool:BaseNPC_CanSeeEachOther(monster, target, Float:distance = 0.0, Float:
 		{
 			new Handle:trace = TR_TraceRayFilterEx(vMonsterPosition, vTargetPosition, MASK_SOLID_BRUSHONLY, RayType_EndPoint, BaseNPC_TraceFilter);
 
-			if(TR_DidHit(trace))
+			if (TR_DidHit(trace))
 			{
+				#if defined DEBUG
+					TE_SetupBeamPoints(vMonsterPosition, vTargetPosition, gLaser1, 0, 0, 0, 0.25, 1.0, 1.0, 0, 0.1, {255, 125, 0, 255}, 3);
+					TE_SendToAll();
+					
+					TR_GetEndPosition(vTargetPosition, trace);
+					TE_SetupBeamPoints(vMonsterPosition, vTargetPosition, gLaser1, 0, 0, 0, 0.25, 1.0, 1.0, 0, 0.1, {255, 0, 0, 255}, 3);
+					TE_SendToAll();
+				#endif
+				
 				CloseHandle(trace);
 				return (false);
 			}
 			
+			#if defined DEBUG
+				TE_SetupBeamPoints(vMonsterPosition, vTargetPosition, gLaser1, 0, 0, 0, 0.25, 1.0, 1.0, 0, 0.1, {0, 255, 0, 255}, 3);
+				TE_SendToAll();
+			#endif
 			CloseHandle(trace);
-
 			return (true);
 		}
 	}

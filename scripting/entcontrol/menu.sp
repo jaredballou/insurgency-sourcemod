@@ -34,7 +34,8 @@ public BuildMenu()
 	gEntControlSpawnWeaponsMenu	= BuildEntControlSpawnWeaponsMenu();
 	gEntControlRotateMenu		= BuildEntControlRotateMenu();
 	gEntControlHelperMenu		= BuildEntControlHelperMenu();
-	gEntControlWeaponMenu 		= BuildEntControlWeaponMenu();
+	if (gameMod != CSGO)
+		gEntControlWeaponMenu 		= BuildEntControlWeaponMenu();
 	gEntControlWorldMenu 		= BuildEntControlWorldMenu();
 }
 
@@ -64,7 +65,7 @@ public FreeMenu()
 		gEntControlSpawnItemsMenu = INVALID_HANDLE;
 	}
 	
-	if (gEntControlSpawnWeaponsMenu != INVALID_HANDLE)
+	if (gameMod != CSGO && gEntControlSpawnWeaponsMenu != INVALID_HANDLE)
 	{
 		CloseHandle(gEntControlSpawnWeaponsMenu);
 		gEntControlSpawnWeaponsMenu = INVALID_HANDLE;
@@ -117,7 +118,8 @@ stock GenerateMenu_Main(client)
 
 		AddMenuItem(entcontrol, "gEntControlSpawnMenu",  "Spawn >");
 		AddMenuItem(entcontrol, "gEntControlHelperMenu", "Helper >");
-		AddMenuItem(entcontrol, "gEntControlWeaponMenu", "Weapon >");
+		if (gameMod != CSGO)
+			AddMenuItem(entcontrol, "gEntControlWeaponMenu", "Weapon >");
 		AddMenuItem(entcontrol, "gEntControlEditMenu", "Edit >");
 		AddMenuItem(entcontrol, "gEntControlMoveMenu",  "Move >");
 		AddMenuItem(entcontrol, "gEntControlRotateMenu", "Rotate >");
@@ -179,7 +181,7 @@ public Menu_EC_Main(Handle:entcontrol, MenuAction:action, param1, param2)
 		{
 			DisplayMenu(gEntControlHelperMenu, param1, MENU_TIME_FOREVER);
 		}
-		else if (StrEqual(info, "gEntControlWeaponMenu"))
+		else if (gameMod != CSGO && StrEqual(info, "gEntControlWeaponMenu"))
 		{
 			DisplayMenu(gEntControlWeaponMenu, param1, MENU_TIME_FOREVER);
 		}
@@ -514,11 +516,14 @@ Handle:BuildEntControlSpawnMenu()
 
 	AddMenuItem(entcontrol, "gEntControlSpawnPropsMenu", "Spawn Props >");
 	AddMenuItem(entcontrol, "gEntControlSpawnItemsMenu", "Spawn Items >");
-	AddMenuItem(entcontrol, "gEntControlSpawnWeaponsMenu", "Spawn Weapons >");
+	if (gameMod != CSGO)
+		AddMenuItem(entcontrol, "gEntControlSpawnWeaponsMenu", "Spawn Weapons >");
 		
 	if (gameMod == CSS || gameMod == CSGO || gameMod == TF)
 	{
-		AddMenuItem(entcontrol, "gEntControlSpawnNPCsMenu", "Spawn NPCs >");
+		if (gameMod != CSGO)
+			AddMenuItem(entcontrol, "gEntControlSpawnNPCsMenu", "Spawn NPCs >");
+			
 		if (gameMod != TF)
 		{
 			AddMenuItem(entcontrol, "gEntControlSpawnRescue", "Spawn RescueZone");
@@ -608,21 +613,23 @@ Handle:BuildEntControlSpawnPropsMenu()
 {
 	new Handle:entcontrol = CreateMenu(Menu_EntControl_SpawnProps);
 	SetMenuTitle(entcontrol, "Spawn Props:");
-
-	if (KvJumpToKey(kv, "Spawns")  
-		&& KvJumpToKey(kv, "Props") 
-		&& KvJumpToKey(kv, "all")
-		&& KvGotoFirstSubKey(kv, false))
+	if (gameMod != CSGO)
 	{
-			decl String:sectionName[16];
-			do
-			{
-				KvGetSectionName(kv, sectionName, sizeof(sectionName));
+		if (KvJumpToKey(kv, "Spawns")  
+			&& KvJumpToKey(kv, "Props") 
+			&& KvJumpToKey(kv, "all")
+			&& KvGotoFirstSubKey(kv, false))
+		{
+				decl String:sectionName[16];
+				do
+				{
+					KvGetSectionName(kv, sectionName, sizeof(sectionName));
 
-				AddMenuItem(entcontrol, sectionName, sectionName);
-			} while (KvGotoNextKey(kv, false));
+					AddMenuItem(entcontrol, sectionName, sectionName);
+				} while (KvGotoNextKey(kv, false));
+		}
+		KvRewind(kv);
 	}
-	KvRewind(kv);
 
 	if (KvJumpToKey(kv, "Spawns")  
 		&& KvJumpToKey(kv, "Props") 
@@ -1132,7 +1139,8 @@ Handle:BuildEntControlWorldMenu()
 	AddMenuItem(entcontrol, "1Lights", "Turn on (dyn)lights");
 	AddMenuItem(entcontrol, "0Fog", "Disable fog");
 	AddMenuItem(entcontrol, "1Fog", "Enable fog");
-	AddMenuItem(entcontrol, "portal", "Portal");
+	if (gameMod != CSGO)
+		AddMenuItem(entcontrol, "portal", "Portal");
 
 	SetMenuExitButton(entcontrol, true);
 	SetMenuExitBackButton(entcontrol, true); 

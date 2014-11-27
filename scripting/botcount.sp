@@ -10,21 +10,25 @@
 #define TEAM_SECURITY 2
 #define TEAM_INSURGENTS 3
 #define PLUGIN_VERSION "0.0.1"
-
+#define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
+new Handle:cvarVersion; // version cvar!
+new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarTimer; // are we enabled?
 //Plugin Info Block
 public Plugin:myinfo =
 {
-	name = "Insurgency Bot Counter",
+	name = "[INS] Bot Counter",
 	author = "jballou",
-	description = "Shows Bots Left Alive",
+	description = PLUGIN_DESCRIPTION,
 	version = PLUGIN_VERSION,
 	url = "http://jballou.com"
 };
 
-
-
-
-
+public OnPluginStart()
+{
+	cvarVersion = CreateConVar("sm_botcount_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_botcount_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+}
 new Handle:PanelTimers[MAXPLAYERS+1];
  
 public OnClientPutInServer(client)
@@ -43,6 +47,10 @@ public OnClientDisconnect(client)
  
 public Action:RefreshPanel(Handle:timer, any:client)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	if (IsValidPlayer(client))
 	{
 		new myteam = GetClientTeam(client);

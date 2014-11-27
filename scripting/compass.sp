@@ -4,22 +4,31 @@
 #include <sdktools>
 
 #define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_DESCRIPTION "Puts a compass in the game"
 
 public Plugin:myinfo = {
-name= "Compass",
-author  = "Jared Ballou (jballou)",
-description = "Puts a compass in the game",
-version = PLUGIN_VERSION,
-url = "http://jballou.com/"
+	name= "[INS] Compass",
+	author  = "Jared Ballou (jballou)",
+	description = PLUGIN_DESCRIPTION,
+	version = PLUGIN_VERSION,
+	url = "http://jballou.com/"
 };
-
+new Handle:cvarVersion; // version cvar!
+new Handle:cvarEnabled; // are we enabled?
 public OnPluginStart()
 {
+	cvarVersion = CreateConVar("sm_compass_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_compass_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	RegConsoleCmd("check_compass", Check_Compass);
 }
 
 public Action:Check_Compass(client, args)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return true;
+	}
 //	new Handle:hHudText = CreateHudSynchronizer();
 //	SetHudTextParams(-1.0, 0.2, 5.0, 255, 0, 0, 255);
 	decl Float:angle[3];

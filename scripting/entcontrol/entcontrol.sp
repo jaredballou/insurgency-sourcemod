@@ -18,10 +18,9 @@
 #undef REQUIRE_EXTENSIONS
 #include <sdkhooks>
 #include <entcontrol>
-#include <steamtools>
 
 // -- Definitions
-#define PLUGIN_VERSION "0.0.1.8"
+#define PLUGIN_VERSION "0.0.1.81"
 
 #define INVISIBLE 	{255, 255, 255,   0}
 #define VISIBLE   	{255, 255, 255, 255}
@@ -222,9 +221,6 @@ public OnPluginStart()
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
-	// We need to make the SteamTools-Call optional
-	MarkNativeAsOptional("Steam_GetPublicIP");
-
 	RegisterNatives();
 	return (APLRes_Success);
 }
@@ -283,7 +279,7 @@ public OnMapStart()
 	
 	if (GetConVarBool(gAdminShowHud))
 	{
-		if (gameMod == CSS || gameMod == TF || gameMod == CSGO || gameMod == NMRIH)
+		if (gameMod == CSS || gameMod == TF || gameMod == NMRIH)
 			gTimerHudInfo = CreateTimer(1.0, UpdateHudInfoExtended, INVALID_HANDLE, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 		else
 			gTimerHudInfo = CreateTimer(1.0, UpdateHudInfoSimple, INVALID_HANDLE, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
@@ -313,7 +309,9 @@ public OnMapStart()
 		LogError("%s NOT loaded! You NEED that file!", file);
 	}
 	
-	InitWeapons();
+	if (gameMod != CSGO)
+		InitWeapons();
+	
 	InitNPCs();
 	
 	Portal_Init();
@@ -675,7 +673,7 @@ public Action:Command_GrabToggle(client, args)
 public Action:Command_Show_Info(client, args)
 {
 	if (client)
-		ShowMOTDPanel(client, "EntControl-Information", "http://www.exp-clan.com/entcontrol.html", 2);
+		ShowMOTDPanel(client, "EntControl-Information", "http://www.legone.name/entcontrol.html", 2);
 
 	return (Plugin_Handled);
 }
@@ -690,7 +688,7 @@ public Action:Command_Report_Bugs(client, args)
 
  	GetClientAuthString(client, steamID, sizeof(steamID));
 
-	Format(url, sizeof(url), "http://www.exp-clan.com/mantisbt/bug_report_page.php?Server=19&SteamID=%s", steamID);
+	Format(url, sizeof(url), "http://www.legone.name/mantisbt/bug_report_page.php?Server=19&SteamID=%s", steamID);
 
 	ShowMOTDPanel(client, "Bug-Report", url, 2);
 	ShowMOTDPanel(client, "Bug-Report", url, 2);

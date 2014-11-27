@@ -9,11 +9,12 @@
 #define REQUIRE_EXTENSIONS
 
 #define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_DESCRIPTION "Plugin for overriding Insurgency Coop to 16 players"
 
 public Plugin:myinfo = {
-        name        = "Insurgency Coop Lobby Override",
+        name        = "[INS] Coop Lobby Override",
         author      = "Jared Ballou (jballou)",
-        description = "Plugin for overriding Insurgency Coop to 16 players",
+        description = PLUGIN_DESCRIPTION,
         version     = PLUGIN_VERSION,
         url         = "http://jballou.com/"
 };

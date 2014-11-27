@@ -33,7 +33,7 @@ new String:g_sPrefixChat[32];
 
 public Plugin:myinfo = 
 {
-	name = "Hide Name Changes",
+	name = "[INS] Hide Name Changes",
 	author = "Twisted|Panda",
 	description = "Provides support for hiding name changes from chat for all players/specific players/gagged players, as well as reverting name changes for all players or only gagged players.",
 	version = PLUGIN_VERSION,

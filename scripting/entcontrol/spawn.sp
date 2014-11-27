@@ -48,6 +48,8 @@ public Action:Command_Spawn_Prop(client, args)
 		decl String:entityName[32];
 		new height;
 		
+		KvRewind(kv);
+		
 		// Search for the Key
 		if (KvJumpToKey(kv, "Spawns") 
 		&& KvJumpToKey(kv, "Props")
@@ -95,39 +97,41 @@ public Action:Command_Spawn_Prop(client, args)
 				KvRewind(kv);
 			}
 		}
-
+		
 		// Set Height
 		position[2] += height;
 		
 		// PrecacheModel
 		PrecacheModel(modelName, true); // Late ... will lag the server -.-
 
-		new String:sFlag[15];
-		GetConVarString(gPropOverrideEntity, sFlag, sizeof(sFlag));
+		new String:sOverride[15];
+		GetConVarString(gPropOverrideEntity, sOverride, sizeof(sOverride));
 		
 		// Create Entity
 		new ent;
-		if (StrEqual(sFlag, "")) // Do we need to override the Entity ?
-			ent = CreateEntityByName(entityName);
+		if (strlen(sOverride) > 5) // Do we need to override the Entity ?
+			ent = CreateEntityByName(sOverride);
 		else
-			ent = CreateEntityByName(sFlag);
+			ent = CreateEntityByName(entityName);
 		
-		DispatchKeyValue(ent, "physdamagescale", "0.0");
-		DispatchKeyValue(ent, "model", modelName);
-		DispatchSpawn(ent);
+		if (ent != -1)
+		{
+			DispatchKeyValue(ent, "physdamagescale", "0.0");
+			DispatchKeyValue(ent, "model", modelName);
+			DispatchSpawn(ent);
 
-		SetEntityMoveType(ent, MOVETYPE_VPHYSICS);   
-		
-		TeleportEntity(ent, position, NULL_VECTOR, NULL_VECTOR);
-		
-		PrintHintText(client, "%t", "Spawned", name);
+			SetEntityMoveType(ent, MOVETYPE_VPHYSICS);   
+			
+			TeleportEntity(ent, position, NULL_VECTOR, NULL_VECTOR);
+			
+			PrintHintText(client, "%t", "Spawned", name);
+		}
 	}
 	else
 		PrintHintText(client, "%t", "Wrong entity"); 
 	
 	return (Plugin_Handled);
 }
-
 
 /* 
 	------------------------------------------------------------------------------------------
