@@ -315,7 +315,8 @@ public Action:OnSayText2(UserMsg:msg_id, Handle:bf, const clients[], numClients,
 		|| 	StrContains(cpTranslationName, "survivor", false) != -1 
 		||	StrContains(cpTranslationName, "infected", false) != -1
 		||	StrContains(cpTranslationName, "Cstrike_Chat_CT", false) != -1 
-		||	StrContains(cpTranslationName, "Cstrike_Chat_T", false) != -1)
+		||	StrContains(cpTranslationName, "Cstrike_Chat_T", false) != -1
+		||	StrContains(cpTranslationName, "INS_Chat_T", false) != -1)
 		{
 			g_CurrentChatType = g_CurrentChatType | CHATFLAGS_TEAM;
 		}

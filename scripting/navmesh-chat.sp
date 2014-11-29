@@ -30,12 +30,10 @@ public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	//RegConsoleCmd("say_team", Command_SendToTeam);
 	if (!g_bOverviewLoaded) {
 		OnMapStart();
 	}
 	RegConsoleCmd("get_grid", Get_Grid);
-//	RegAdminCmd("sm_get_cplist", Command_CPList, ADMFLAG_GENERIC, "sm_CPList");
 }
 
 public Action:Get_Grid(client, args)
@@ -49,25 +47,6 @@ public Action:Get_Grid(client, args)
 	GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 	PrintHintText(client, "You are in grid %s",sGridPos);
 	return Plugin_Handled;
-}
-public Get_ControlPoints()
-{
-	PrintToServer("[NMchat] Running Get_ControlPoints");
-	new String:name[32];
-	for(new i=0;i<= GetMaxEntities() ;i++){
-		if(!IsValidEntity(i))
-			continue;
-		if(GetEdictClassname(i, name, sizeof(name))){
-			if((StrEqual("point_controlpoint", name,false)) || (StrEqual("obj_weapon_cache", name,false))){
-				decl String:entity_name[128];
-				GetEntPropString(i, Prop_Data, "m_iName", entity_name, sizeof(entity_name));
-				PrintToServer("[NMchat] Found point named %s",entity_name);
-				new Float:position[3];
-				GetEntPropVector(i, Prop_Send, "m_vecOrigin", position);
-			}
-		}
-	}
-
 }
 public OnMapStart()
 {
@@ -106,19 +85,6 @@ bool:OverviewLoad(const String:sMapName[])
  
 	CloseHandle(g_hNavMeshKeyValues);
 	return true;
-/*
-		KvJumpToKey(g_hNavMeshKeyValues, "places", true);
-			KvSetString(g_hNavMeshKeyValues, sBuffer, sPlaceName);
-		KvGoBack(g_hNavMeshKeyValues);
-
-						KvSetNum(g_hNavMeshKeyValues,sBuffer,iDirection);
-*/
-}
-public Action:Command_SendToTeam(client, args)
-{
-	PrintMessageTeam(client);
-
-	return Plugin_Handled;
 }
 
 stock GetGridPos(Float:position[3],String:buffer[], size)
@@ -133,8 +99,6 @@ stock GetGridPos(Float:position[3],String:buffer[], size)
 	iGridPos[1] = RoundToFloor(FloatDiv(flMapPos[1], 128.0))+1;
 	Format(buffer,size, "%c%d",sLetters[iGridPos[0]],iGridPos[1]);
 //	PrintHintText(client, "Raw position is %f,%f calculated to %f,%f grid %c%d",position[0],position[1],flMapPos[0],flMapPos[1],sLetters[iGridPos[0]],iGridPos[1]);
-//	ShowSyncHudText(client, hHudText, "%s",sDisplay);
-//	CloseHandle(hHudText);
 	return true;
 }
 
@@ -168,72 +132,19 @@ public OnLibraryRemoved(const String:name[])
 
 public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
 {
-	new index = CHATCOLOR_NOSUBJECT;
-	decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[16],String:sPlace[64];
-        GetClientEyePosition(author, flEyePos);
-	GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
-        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
-	Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, name);
-	Color_ChatSetSubject(author);
-	index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
-	Color_ChatClearSubject();
-	author = index;
-	return Plugin_Changed;
-}
-
-
-
-
-stock Action:PrintMessageTeam(client)
-{
-	/* Get the name */
-	decl String:sName[MAXLENGTH_NAME];
-//	decl String:sNameBuffer[MAXLENGTH_NAME];
-	GetClientName(client, sName, sizeof(sName));
-	//Color_StripFromChatText(sNameBuffer, sName, MAXLENGTH_NAME);
-
-	decl Float:flEyePos[3],String:sGridPos[2],String:sPlace[64];
-        GetClientEyePosition(client, flEyePos);
-	GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
-        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
-
-	/* Get the team */
-	new team = GetClientTeam(client);
-
-	/* Get the message */
-	decl String:sTextToTeam[1024],String:sMessageBuffer[MAXLENGTH_INPUT],String:sMessage[MAXLENGTH_INPUT];
-//	decl String:sTextBuffer[MAXLENGTH_INPUT];
-	GetCmdArgString(sTextToTeam, sizeof(sTextToTeam));
-	StripQuotes(sTextToTeam);
-
-	LogPlayerEvent(client, "say_team", sTextToTeam);
-
-//	Color_ChatSetSubject(client);
-	Format(sMessageBuffer,sizeof(sMessageBuffer),"{G}(%s)", sPlace);
-	Color_ParseChatText(sMessageBuffer, sMessage, MAXLENGTH_INPUT);
-
-	/* Put parts in one piece */
-	/* Chat trigger */
-	if(IsChatTrigger())
-	{
-		return Plugin_Continue;
+	new chatflags = GetMessageFlags();
+	if (chatflags & CHATFLAGS_TEAM) {
+		new index = CHATCOLOR_NOSUBJECT;
+		decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[16],String:sPlace[64];
+	        GetClientEyePosition(author, flEyePos);
+		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
+	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
+		Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, name);
+		Color_ChatSetSubject(author);
+		index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
+		Color_ChatClearSubject();
+		author = index;
+		return Plugin_Changed;
 	}
-	else
-	{
-		for(new i = 1; i <= MaxClients; i++)
-		{
-			if(IsClientInGame(i))
-			{
-				new PlayersTeam = GetClientTeam(i);
-				if(PlayersTeam & team)
-				{
-					PrintToServer("[Chat] Sending");
-					new clientid[1];
-					clientid[0] = i;
-					Client_PrintToChatEx(clientid,1,true,"(%s) %s %s: %s",sGridPos,sMessage,sName,sTextToTeam);
-				}
-			}
-		}
-	}
-	return Plugin_Stop;
+	return Plugin_Continue;
 }
