@@ -21,6 +21,52 @@ public OnPluginStart()
 	PrintToServer("[TestProp] OnPluginStart");
 	RegConsoleCmd("get_props", Command_GetProps);
 }
+doitnow(weapon_entity_index=-1)
+{
+	new Handle:gameconf; // gamedata config 
+
+    if( (gameconf = LoadGameConfigFile("insurgency.games")) == INVALID_HANDLE ) 
+    { 
+        PrintToServer("LoadGameConfigFile \"insurgency.games\" INVALID_HANDLE"); 
+        return Plugin_Handled; 
+    } 
+
+    if(GameConfGetOffset(gameconf, "GetMaxClip1") == -1) 
+    { 
+        CloseHandle(gameconf); 
+        PrintToServer("GameConfGetOffset \"GetMaxClip1\" -1"); 
+        return Plugin_Handled; 
+    } 
+
+    // CBaseCombatWeapon:: 
+    // First SDKCall parameter, entity index (weapon). 
+    StartPrepSDKCall(SDKCall_Entity); 
+
+    // virtual function index (offset) 
+    //PrepSDKCall_SetVirtual(310); // Use gamedata file instead, OS Win/Linux/Mac 
+    if(!PrepSDKCall_SetFromConf(gameconf, SDKConf_Virtual, "GetMaxClip1")) 
+    { 
+        SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+    } 
+    CloseHandle(gameconf); 
+
+    // GetMaxClip1(void)const 
+    // SDKCall return as integer value. 
+    PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue); 
+
+    new Handle:hCall= EndPrepSDKCall(); 
+
+    if( weapon_entity_index != -1 ) 
+    { 
+        new value; 
+     
+        value = SDKCall(hCall, weapon_entity_index); 
+        PrintToServer("weapon index %i SDKCall GetMaxClip1 return value %i", weapon_entity_index, value); 
+    } 
+
+    CloseHandle(hCall); 
+    return Plugin_Handled; 
+}
 public OnMapStart()
 {
 	PrintToServer("[TestProp] OnMapStart");
@@ -68,6 +114,7 @@ public OnMapStart()
                 m_iAmmo_sec);
 
 		}
+		doitnow(i);
 	}
 	}
 return;

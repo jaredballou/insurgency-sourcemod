@@ -1,0 +1,116 @@
+"Games"
+{
+	"#default"
+	{
+		"#supported"
+		{
+			"game"		"cstrike"
+			"game"		"dod"
+			"game"		"hl2mp"
+		}
+
+		"Offsets"
+		{
+			"GetMaxClip1"
+			{
+				"windows"	"310"
+				"linux"		"311"
+			}
+		}
+	}
+
+	"tf"
+	{
+		"Offsets"
+		{
+			"GetMaxClip1"
+			{
+				"windows"	"319"
+				"linux"		"320"
+			}
+		}
+	}
+	"csgo"
+	{
+		"Offsets"
+		{
+			"GetMaxClip1"
+			{
+				"windows"	"352"
+				"linux"		"354"
+			}
+		}
+	}
+	"insurgency"
+	{
+		"Offsets"
+		{
+			"ShouldBlockPrimaryFire"
+			{
+				"windows"	"279"
+				"linux"		"280"
+			}
+
+			"IsWeaponZoomed"
+			{
+				"windows"	"280"
+				"linux"		"281"
+			}
+
+			"CheckReload"
+			{
+				"windows"	"281"
+				"linux"		"282"
+			}
+
+			"GetFireRate"
+			{
+				"windows"	"296"
+				"linux"		"297"
+			}
+
+			"GetWeight"
+			{
+				"windows"	"327"
+				"linux"		"328"
+			}
+
+			"GetSlot"
+			{
+				"windows"	"331"
+				"linux"		"332"
+			}
+
+			"GetName"
+			{
+				"windows"	"333"
+				"linux"		"334"
+			}
+
+			"GetMaxClip1"
+			{
+				"windows"	"323"
+				"linux"		"324"
+			}
+
+
+			"GetDefaultClip1"
+			{
+				"windows"	"325"
+				"linux"		"326"
+			}
+
+			"GetPrintName"
+			{
+				"windows"	"334"
+				"linux"		"335"
+			}
+
+			"UsesClipsForAmmo1"
+			{
+				"windows"	"337"
+				"linux"		"338"
+			}
+		}
+	}
+}
