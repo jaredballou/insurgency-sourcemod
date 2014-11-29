@@ -1,0 +1,40 @@
+"Phrases"
+{
+	"Prefix_Chat"
+	{
+		"#format"	""
+		"en"		"[SM] "	
+	}
+	//===========================================
+	"Phrase_Missing_Parameters"
+	{
+		"#format"	""
+		"en"		"[SM] sm_hidename <target> <0/1> (0 = Visible, 1 = Hidden)"
+	}
+	"Phrase_Target_Immunity"
+	{
+		"#format"	""
+		"en"		"You cannot target that player!"
+	}
+	"Phrase_Changes_Now_Visible"
+	{
+		"#format"	"{1:N}"
+		"en"		"Set apperance of name changes for {1} to visible!"
+	}
+	"Phrase_Changes_Already_Visible"
+	{
+		"#format"	"{1:N}"
+		"en"		"Name changes for {1} are already visible!"
+	}
+	"Phrase_Changes_Now_Hidden"
+	{
+		"#format"	"{1:N}"
+		"en"		"Set apperance of name changes for {1} to hidden!"
+	}
+	"Phrase_Changes_Already_Hidden"
+	{
+		"#format"	"{1:N}"
+		"en"		"Name changes for {1} are already hidden!"
+	}
+	//===========================================
+}
