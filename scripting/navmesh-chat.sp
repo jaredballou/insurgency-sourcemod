@@ -138,9 +138,9 @@ stock GetGridPos(Float:position[3],String:buffer[], size)
 	return true;
 }
 
-stock GetPlaceName(Float:position[3], String:buffer[], size)
+stock GetPlaceName(Float:position[3], String:buffer[], size, bool:bReturnRaw=false)
 {
-	Format(buffer,size, "NoPlace");
+	Format(buffer,size, "");
 	if (!NavMesh_Exists()) return -2;
 	new iAreaIndex = NavMesh_GetNearestArea(position);
 	if (iAreaIndex != -1)
@@ -150,7 +150,9 @@ stock GetPlaceName(Float:position[3], String:buffer[], size)
 		if (iPlaceID) {
 			GetArrayString(g_hNavMeshPlaces, (iPlaceID-1), buffer, size);
 		} else {
-			Format(buffer,size, "Area%d",iAreaIndex);
+			if (bReturnRaw) {
+				Format(buffer,size, "A[%d]",iAreaIndex);
+			}
 		}
 	}
 	return iAreaIndex;
@@ -167,11 +169,11 @@ public OnLibraryRemoved(const String:name[])
 public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
 {
 	new index = CHATCOLOR_NOSUBJECT;
-	decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[2],String:sPlace[64];
+	decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[16],String:sPlace[64];
         GetClientEyePosition(author, flEyePos);
 	GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
         GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
-	Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, sNameBuffer);
+	Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, name);
 	Color_ChatSetSubject(author);
 	index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
 	Color_ChatClearSubject();

@@ -1,3 +1,68 @@
 "Phrases"
 {
+	"Game_radio"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	" {1} (RADIO): {2}"
+	}
+	"Game_radio_location"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	" {1} (RADIO): {2}"
+	}
+	"INS_Chat_T1_Loc"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Security) {1} : {2}"
+	}
+	"INS_Chat_T1"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Security) {1}: {2}"
+	}
+	"INS_Chat_T2_Loc"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Insurgents) {1}: {2}"
+	}
+	"INS_Chat_T2"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Insurgents) {1}: {2}"
+	}
+	"INS_Chat_T1_Dead"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"*DEAD*(Security) {1}: {2}"
+	}
+	"INS_Chat_T2_Dead"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"*DEAD*(Insurgents) {1} : {2}"
+	}
+	"INS_Chat_Spec"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Spectator) {1} : {2}"
+	}
+	"INS_Chat_All"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	" {1} : {2}"
+	}
+	"INS_Chat_AllDead"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"*DEAD* {1} : {2}"
+	}
+	"INS_Chat_AllSpec"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"*SPEC* {1} : {2}"
+	}
+	"INS_Chat_Party"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"	"(Party) {1}"
+	}
 }
