@@ -14,8 +14,13 @@ new g_iOverviewPosX = 0;
 new g_iOverviewPosY = 0;
 new g_iOverviewRotate = 0;
 new Float:g_fOverviewScale = 1.0;
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion;
+new Handle:cvarEnabled;
+new Handle:cvarTeamOnly;
+new Handle:cvarGrid;
+new Handle:cvarPlace;
+new Handle:cvarDistance;
+new Handle:cvarDirection;
 
 public Plugin:myinfo =
 {
@@ -29,7 +34,12 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarTeamOnly = CreateConVar("sm_navmesh_chat_teamonly", "1", "sets whether to prepend to all messages or just team messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarGrid = CreateConVar("sm_navmesh_chat_grid", "1", "Include grid coordinates", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarPlace = CreateConVar("sm_navmesh_chat_place", "1", "Include place name from navmesh", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDistance = CreateConVar("sm_navmesh_chat_distance", "1", "Include distance to speaker", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDirection = CreateConVar("sm_navmesh_chat_direction", "1", "Include direction to speaker", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	if (!g_bOverviewLoaded) {
 		OnMapStart();
 	}
@@ -132,14 +142,31 @@ public OnLibraryRemoved(const String:name[])
 
 public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	new chatflags = GetMessageFlags();
-	if (chatflags & CHATFLAGS_TEAM) {
+	if ((chatflags & CHATFLAGS_TEAM) || (!GetConVarBool(cvarTeamOnly))) {
 		new index = CHATCOLOR_NOSUBJECT;
 		decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[16],String:sPlace[64];
 	        GetClientEyePosition(author, flEyePos);
 		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
 	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
-		Format(sNameBuffer, sizeof(sNameBuffer), "{G}(%s) %s {T}%s", sGridPos, sPlace, name);
+		Format(sNameBuffer, sizeof(sNameBuffer), "");
+		if (GetConVarBool(cvarGrid)) {
+			Format(sNameBuffer, sizeof(sNameBuffer), "%s{G}(%s) ", sNameBuffer, sGridPos);
+		}
+		if (GetConVarBool(cvarPlace)) {
+			Format(sNameBuffer, sizeof(sNameBuffer), "%s{G}[%s] ", sNameBuffer, sPlace);
+		}
+		//Not yet implemented
+		if (GetConVarBool(cvarDistance)) {
+		}
+		if (GetConVarBool(cvarDirection)) {
+		}
+		Format(sNameBuffer, sizeof(sNameBuffer), "%s{T}%s", sNameBuffer, name);
+
 		Color_ChatSetSubject(author);
 		index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
 		Color_ChatClearSubject();
