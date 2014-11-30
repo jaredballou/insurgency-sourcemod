@@ -287,6 +287,7 @@ native Steam_GetHTTPResponseBodyData(HTTPRequestHandle:HTTPRequest, String:bodyD
 native Steam_WriteHTTPResponseBody(HTTPRequestHandle:HTTPRequest, const String:filePath[]);
 native Steam_ReleaseHTTPRequest(HTTPRequestHandle:HTTPRequest);
 native Float:Steam_GetHTTPDownloadProgressPercent(HTTPRequestHandle:HTTPRequest);
+native bool:Steam_SetHTTPRequestRawPostBody(HTTPRequestHandle:HTTPRequest, const String:data[], dataLength, const String:contentType[]="text/plain");
 
 public Extension:__ext_SteamTools = 
 {
