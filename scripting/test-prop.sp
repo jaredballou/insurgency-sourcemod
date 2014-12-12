@@ -21,6 +21,13 @@ public OnPluginStart()
 	PrintToServer("[TestProp] OnPluginStart");
 	RegConsoleCmd("get_props", Command_GetProps);
 }
+public OnEntityCreated(entity, const String:classname[])
+{
+    if(StrContains(classname, "env_particlesmokegrenade") != -1)
+    {
+        PrintToServer("env_particlesmokegrenade");
+    }
+} 
 doitnow(weapon_entity_index=-1)
 {
 	new Handle:gameconf; // gamedata config 
@@ -80,14 +87,23 @@ public OnMapStart()
 			if(StrContains(weapon, "weapon_") == 0)
 			{
 			PrintToServer("[TestProp] Entity %d classname %s",i,weapon);
-		    new m_iPrimaryAmmoType        = GetEntProp(i, Prop_Send, "m_iPrimaryAmmoType"); // Ammo type
-		    new m_iSecondaryAmmoType    = GetEntProp(i, Prop_Send, "m_iSecondaryAmmoType");
+new m_iPrimaryAmmoType = GetEntProp(i, Prop_Send, "m_iPrimaryAmmoType");
+new m_iState = GetEntProp(i, Prop_Send, "m_iState");
+//new m_iszName = GetEntProp(i, Prop_Send, "m_iszName");
+//new m_fMinRange1 = GetEntProp(i, Prop_Send, "m_fMinRange1");
+//new m_fMinRange2 = GetEntProp(i, Prop_Send, "m_fMinRange2");
+//new m_fMaxRange1 = GetEntProp(i, Prop_Send, "m_fMaxRange1");
+//new m_fMaxRange2 = GetEntProp(i, Prop_Send, "m_fMaxRange2");
+//new m_iClassname = GetEntProp(i, Prop_Send, "m_iClassname");
+//new m_iGlobalname = GetEntProp(i, Prop_Send, "m_iGlobalname");
+//new m_iParent = GetEntProp(i, Prop_Send, "m_iParent");
+//new m_pParent = GetEntProp(i, Prop_Send, "m_pParent");
+new String:m_iName[64];
+
+GetEntPropString(i, Prop_Data, "m_iName", m_iName, sizeof(m_iName));
     new m_iClip1 = -1;
-    new m_iClip2 = -1;
     new m_iAmmo_prim     = -1;
-    new m_iAmmo_sec     = -1;
 	new m_iPrimaryAmmoCount = -1;
-	new m_iSecondaryAmmoCount = -1;
 
 
     // Primary ammo
@@ -95,26 +111,21 @@ public OnMapStart()
     {
         m_iClip1 = GetEntProp(i, Prop_Send, "m_iClip1"); // weapon clip amount bullets
     }
-    if(m_iSecondaryAmmoType != -1)
-    {
-        m_iClip2 = GetEntProp(i, Prop_Send, "m_iClip2");
-    }
 
     // Output
-    PrintToServer("\nIndex %i = classname %s\n- PrimAmmoType %i & m_iClip1 %i & m_iPrimaryAmmoCount %i\n- SecAmmoType %i & m_iClip2 %i & m_iSecondaryAmmoCount %i\n- Player m_iAmmo prim %i & sec %i",
+//m_fMinRange1 %f m_fMinRange2 %f m_fMaxRange1 %f m_fMaxRange2 %f
+// m_iClassname %d m_iGlobalname %d m_iParent %d m_pParent %d ",
+    PrintToServer("Index %i classname %s PrimAmmoType %i m_iClip1 %i m_iPrimaryAmmoCount %i Player m_iAmmo prim %i m_iState %d m_iName %s",
                 i,
                 weapon,
                 m_iPrimaryAmmoType,
                 m_iClip1,
 		m_iPrimaryAmmoCount,
-                m_iSecondaryAmmoType,
-                m_iClip2,
-		m_iSecondaryAmmoCount,
                 m_iAmmo_prim,
-                m_iAmmo_sec);
-
+		m_iState,
+		m_iName
+	);
 		}
-		doitnow(i);
 	}
 	}
 return;

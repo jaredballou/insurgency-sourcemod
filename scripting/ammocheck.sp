@@ -14,7 +14,6 @@ new Handle:cvarVersion; // version cvar!
 new Handle:cvarEnabled; // are we enabled?
 new i_fullmag[MAXPLAYERS+1];
 new Handle:WeaponsTrie;
-new Handle:hReloadTimer[MAXPLAYERS+1];
 
 public Plugin:myinfo = {
 	name= "[INS] Ammo Check",
@@ -51,7 +50,7 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 	{
 		new Float:timedone = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
 		//PrintToServer("[AMMOCHECK] Reload Timer Started with %f time is %f timer is %f!",timedone,GetGameTime(),(timedone-GetGameTime()));
-		hReloadTimer[client] = CreateTimer((timedone-GetGameTime())+0.5, Timer_Check_Ammo, client, TIMER_REPEAT);
+		CreateTimer((timedone-GetGameTime())+0.5, Timer_Check_Ammo, client);
 	}
 	return Plugin_Continue;
 }
@@ -61,15 +60,6 @@ public Action:Timer_Check_Ammo(Handle:event, any:client)
 	//PrintToServer("[AMMOCHECK] Reload timer finished!");
 	Check_Ammo(client,0);
 	return Plugin_Stop;
-}
-
-public OnClientDisconnect(client)
-{
-	if (hReloadTimer[client] != INVALID_HANDLE)
-	{
-		KillTimer(hReloadTimer[client]);
-		hReloadTimer[client] = INVALID_HANDLE;
-	}
 }
 
 public Action:Check_Ammo(client, args)
