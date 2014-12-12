@@ -117,19 +117,14 @@ public Handle:LoadValues()
 	PrintToServer("[LOGGER] starting LoadValues");
 	if(kv)
 		CloseHandle(kv);
-	PrintToServer("[LOGGER] Not closed");
 	kv = CreateKeyValues("weapons");
-	PrintToServer("[LOGGER] ckv");
 
 	decl String:sPath[256];
 	BuildPath(Path_SM, sPath, sizeof(sPath), "configs/brutus_ins_logger_weapons.cfg");
 	if(!FileExists(sPath))
 		SetFailState("File Not Found: %s", sPath);
-	PrintToServer("[LOGGER] exists");
 
 	if (FileToKeyValues(kv, sPath)) {
-		PrintToServer("[LOGGER] ftkv");
-
 		decl String:section[128], String:value[256];
 		do {
 			KvSavePosition(kv);
@@ -429,8 +424,8 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 	//"userid" "short"
 	//"class_template" "string"
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
-	new squad = GetEventInt( event, "squad" );
-	new squad_slot = GetEventInt( event, "squad_slot" );
+	//new squad = GetEventInt( event, "squad" );
+	//new squad_slot = GetEventInt( event, "squad_slot" );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
 	ReplaceString(class_template,sizeof(class_template),"template_","",false);
@@ -441,7 +436,7 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
 
 
-	PrintToServer("[LOGGER] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
+	//PrintToServer("[LOGGER] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
 
 	if( client == 0)
 		return;
