@@ -176,19 +176,23 @@ public RepopulateWeaponTrie()
 
 public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"priority" "short"
 	//"cp" "byte"
 	//"cappers" "string"
 	//"cpname" "string"
 	//"team" "byte"
 	decl String:cappers[64],String:cpname[64];
-	new priority = GetEventInt(event, "priority");
+	//new priority = GetEventInt(event, "priority");
 	new cp = GetEventInt(event, "cp");
 	GetEventString(event, "cappers", cappers, sizeof(cappers));
 	GetEventString(event, "cpname", cpname, sizeof(cpname));
 	new team = GetEventInt(event, "team");
 
-	new capperlen = GetCharBytes(cappers);
+	//new capperlen = GetCharBytes(cappers);
 	//PrintToServer("[LOGGER] Event_ControlPointCaptured priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
 
 	new player_team_index;
@@ -210,43 +214,63 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 			}
 		}
 	}
+	return Plugin_Continue;
 }
 public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"priority" "short"
 	//"cp" "byte"
 	//"cappers" "string"
 	//"cpname" "string"
 	//"team" "byte"
+	return Plugin_Continue;
 }
 public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	new area = GetEventInt(event, "area");
-	new object = GetEventInt(event, "object");
+	//new object = GetEventInt(event, "object");
 	new player = GetEventInt(event, "player");
-	new team = GetEventInt(event, "team");
-	new owner = GetEventInt(event, "owner");
-	new type = GetEventInt(event, "type");
+	//new team = GetEventInt(event, "team");
+	//new owner = GetEventInt(event, "owner");
+	//new type = GetEventInt(event, "type");
 	//PrintToServer("[LOGGER] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,object,player,team,owner,type);
 	g_controlpoint_players[player][area] = 1;
+	return Plugin_Continue;
 }
 public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"owner" "short"
 	//"player" "short"
 	//"team" "short"
 	//"area" "byte"
-	new owner = GetEventInt(event, "owner");
+	//new owner = GetEventInt(event, "owner");
 	new player = GetEventInt(event, "player");
-	new team = GetEventInt(event, "team");
+	//new team = GetEventInt(event, "team");
 	new area = GetEventInt(event, "area");
 
 	//PrintToServer("[LOGGER] Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
 	g_controlpoint_players[player][area] = 0;
+	return Plugin_Continue;
 }
 
 public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"team" "byte"
 	//"attacker" "byte"
 	//"cp" "short"
@@ -256,14 +280,14 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	//"weaponid" "short"
 	//"assister" "byte"
 	//"attackerteam" "byte"
-	new team = GetEventInt(event, "team");
+	//new team = GetEventInt(event, "team");
 	new attacker = GetEventInt(event, "attacker");
-	new cp = GetEventInt(event, "cp");
-	new index = GetEventInt(event, "index");
-	new type = GetEventInt(event, "type");
+	//new cp = GetEventInt(event, "cp");
+	//new index = GetEventInt(event, "index");
+	//new type = GetEventInt(event, "type");
 //weapon
-	new weaponid = GetEventInt(event, "weaponid");
-	new assister = GetEventInt(event, "assister");
+	//new weaponid = GetEventInt(event, "weaponid");
+	//new assister = GetEventInt(event, "assister");
 	new attackerteam = GetEventInt(event, "attackerteam");
 
 	//PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
@@ -277,6 +301,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 //	player_team_index = GetClientTeam(i);
 
 	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, player_userid, player_authid, g_team_list[attackerteam]);
+	return Plugin_Continue;
 }
 /*
 //Not giving whole team credit
@@ -306,6 +331,10 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 */
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"weaponid" "short"
 	//"userid" "short"
 	//"shots" "byte"
@@ -356,6 +385,7 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 		g_client_last_weapon[plrid] = weapon_index;
 		g_client_last_weaponstring[plrid] = shotWeapName;
 	}
+	return Plugin_Continue;
 }
 
 public GetWeaponArrayIndex(String:key[])
@@ -373,6 +403,10 @@ public GetWeaponArrayIndex(String:key[])
 
 public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	OnPlayerDisconnect(client);
 	return Plugin_Continue;
@@ -380,6 +414,10 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 
 public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	LogKillLoc(GetClientOfUserId(GetEventInt(event, "attacker")), GetClientOfUserId(GetEventInt(event, "userid")));
 	return Plugin_Continue;
 }
@@ -539,7 +577,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
 	decl String:weapon[32];
 	GetEventString(event, "weapon", weapon, sizeof(weapon));
-	new weaponid = GetEventInt(event, "weaponid");
+	//new weaponid = GetEventInt(event, "weaponid");
 
 	new assister = GetClientOfUserId(GetEventInt(event, "assister"));
 	if (assister) {
@@ -602,6 +640,10 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	//"userid" "short"
 	//"weapon" "string"
 	//"hitgroup" "short"
@@ -660,10 +702,15 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 			LogPlayerEvent(attacker, "triggered", "headshot");
 		}
 	}
+	return Plugin_Continue;
 }
 
 public Action:LogEvent(const String:message[])
 {
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
 	if(StrContains(message, "killed") > -1 &&
 	StrContains(message, "with") > -1 &&
 	StrContains(message, "at") > -1)
