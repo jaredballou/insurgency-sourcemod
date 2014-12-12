@@ -100,7 +100,7 @@ bool:OverviewLoad(const String:sMapName[])
 stock GetGridPos(Float:position[3],String:buffer[], size)
 {
 	Format(buffer,size, "XX");
-	if (!NavMesh_Exists()) return -2;
+	if (!g_bOverviewLoaded) return -2;
 	decl Float:flMapPos[3],iGridPos[3];
 	new String:sLetters[27]=".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	flMapPos[0] = FloatAbs(FloatDiv((position[0] - float(g_iOverviewPosX)), g_fOverviewScale));
