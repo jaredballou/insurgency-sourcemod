@@ -118,38 +118,6 @@ public Handle:LoadValues()
 {
 	g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
 	PrintToServer("[LOGGER] starting LoadValues");
-
-/*
-	new numWeapons = 0;
-	if(kv)
-		CloseHandle(kv);
-	kv = CreateKeyValues("weapons");
-
-	decl String:sPath[256];
-	BuildPath(Path_SM, sPath, sizeof(sPath), "configs/brutus_ins_logger_weapons.cfg");
-	if(!FileExists(sPath))
-		SetFailState("File Not Found: %s", sPath);
-
-	if (FileToKeyValues(kv, sPath)) {
-		decl String:section[128], String:value[256];
-		do {
-			KvSavePosition(kv);
-			KvGetSectionName(kv, section, sizeof(section)); 
-			PrintToServer("Started looping keys from %s section", section); 
-			if (KvGotoFirstSubKey(kv, false)) {
-				do {
-					KvGetSectionName(kv, section, sizeof(section));
-					KvGetString(kv, NULL_STRING, value, sizeof(value));
-					PrintToServer("--> Key: %s | Value: %s", section, value);
-					PushArrayString(g_weap_array, section);
-					numWeapons++;
-				} while (KvGotoNextKey(kv, false));
-			}
-			KvGoBack(kv);
-		} while (KvGotoNextKey(kv, true));
-		KvRewind(kv);
-	}
-*/
 	new String:name[32];
 	for(new i=0;i<= GetMaxEntities() ;i++){
 		if(!IsValidEntity(i))
@@ -162,14 +130,6 @@ public Handle:LoadValues()
 	}
 
 	PrintToServer("[LOGGER] Weapons found: %d", NumWeaponsDefined);
-/*
-	for(i = 0; i < NumWeaponsDefined; i++)
-	{
-		decl String:strNewBuf[32];
-		GetArrayString(g_weap_array, i, strNewBuf, sizeof(strNewBuf));
-		PrintToServer("[LOGGER] Loaded Weapon (%d): \t%s", i, strNewBuf);
-	}
-*/
 	return g_weap_array;
 }
 
