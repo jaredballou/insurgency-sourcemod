@@ -179,7 +179,7 @@ public Action:Command_Rename_All(args)
 //	Command_Reload(args);
 	for (new i = 1; i <= MaxClients; i++)
 	{
-		if (IsClientInGame(i) && (IsFakeClient(i)) && IsPlayerAlive(i))
+		if (IsClientInGame(i) && IsFakeClient(i))
 		{
 			RenameBot(i);
 		}
@@ -220,7 +220,6 @@ public bool:RenameBot(client)
 	}
 	return true;
 }
-
 // handle "SayText2" usermessages, including name change notifies!
 public Action:UserMessage_SayText2(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
 {
@@ -239,7 +238,6 @@ public Action:UserMessage_SayText2(UserMsg:msg_id, Handle:bf, const players[], p
 	}
 	return Plugin_Continue;
 }
-
 // handle player team change, to supress bot messages
 public Action:Event_PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
 {
