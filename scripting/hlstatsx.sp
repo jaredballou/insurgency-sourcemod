@@ -51,6 +51,7 @@ enum GameType {
 	Game_ND,
 	Game_DDD,
 	Game_CSGO,
+	Game_INSURGENCY,
 };
 
 new GameType:gamemod = Game_Unknown;
@@ -97,7 +98,7 @@ new const String: modnamelist[][] = {
 	"Left 4 Dead (1 or 2)",
 	"Team Fortress 2",
 	"Half-Life 2 Deathmatch",
-	"Insurgency",
+	"Insurgency Mod",
 	"Fortress Forever",
 	"Zombie Panic: Source",
 	"Age of Chivalry",
@@ -107,7 +108,8 @@ new const String: modnamelist[][] = {
 	"CSPromod",
 	"Nuclear Dawn",
 	"Dino D-Day",
-	"Counter-Strike: Global Offensive"
+	"Counter-Strike: Global Offensive",
+	"Insurgency"
 };
 
 new String: message_prefix[32];
@@ -120,6 +122,7 @@ new bool:g_bTeamPlay;
 new bool:g_bLateLoad = false;
 new bool:g_bIgnoreNextTagChange = false;
 new Handle:g_hCustomTags;
+new EngineVersion:g_GameEngine = Engine_Unknown;
 
 #define SVTAGSIZE 128
 
@@ -146,6 +149,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 public OnPluginStart() 
 {
 	get_server_mod();
+	g_GameEngine = GetEngineVersion();
 
 	CreateHLstatsXMenuMain(HLstatsXMenuMain);
 	CreateHLstatsXMenuAuto(HLstatsXMenuAuto);
@@ -179,7 +183,7 @@ public OnPluginStart()
 	
 	switch (gamemod)
 	{
-		case Game_CSS, Game_L4D, Game_TF, Game_HL2MP, Game_AOC, Game_FOF, Game_PVKII, Game_ND, Game_DDD, Game_CSGO:
+		case Game_CSS, Game_L4D, Game_TF, Game_HL2MP, Game_AOC, Game_FOF, Game_PVKII, Game_ND, Game_DDD, Game_CSGO, Game_INSURGENCY:
 		{
 			g_bTrackColors4Chat = true;
 			HookEvent("player_team",  HLstatsX_Event_PlyTeamChange, EventHookMode_Pre);
@@ -188,7 +192,7 @@ public OnPluginStart()
 	
 	switch (gamemod)
 	{
-		case Game_L4D, Game_INSMOD, Game_GES:
+		case Game_L4D, Game_INSMOD, Game_GES, Game_INSURGENCY:
 		{
 			g_bGameCanDoMotd = false;
 		}
@@ -382,7 +386,7 @@ get_server_mod()
 	}
 	else if (StrContains(game_description, "Insurgency", false) != -1)
 	{
-		gamemod = Game_INSMOD;
+		gamemod = Game_INSURGENCY;
 		//psychonic - added detection for more supported games
 	}
 	else if (StrContains(game_description, "Fortress Forever", false) != -1)
@@ -441,7 +445,7 @@ get_server_mod()
 		}
 		else if (StrContains(game_folder, "insurgency", false) != -1)
 		{
-			gamemod = Game_INSMOD;
+			gamemod = Game_INSURGENCY;
 			//psychonic - added detection for more supported games
 		}
 		else if (StrContains(game_folder, "FortressForever", false) != -1)
@@ -1139,7 +1143,7 @@ public Action:hlx_sm_psay(args)
 
 	switch (gamemod)
 	{
-		case Game_CSS, Game_DODS, Game_L4D, Game_TF, Game_HL2MP, Game_ZPS, Game_AOC, Game_FOF, Game_GES, Game_PVKII, Game_CSP, Game_ND, Game_DDD, Game_CSGO:
+		case Game_CSS, Game_DODS, Game_L4D, Game_TF, Game_HL2MP, Game_ZPS, Game_AOC, Game_FOF, Game_GES, Game_PVKII, Game_CSP, Game_ND, Game_DDD, Game_CSGO, Game_INSURGENCY:
 		{
 			if (is_colored > 0)
 			{

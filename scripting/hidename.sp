@@ -140,12 +140,19 @@ public OnClientDisconnect(client)
 
 public Action:Event_OnNameChange(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	PrintToServer("[HIDENAME] Called Event_OnNameChange");
 	if(g_bEnabled)
 	{
+		PrintToServer("[HIDENAME] Enabled");
 		new client = GetClientOfUserId(GetEventInt(event, "userid"));
+		PrintToServer("[HIDENAME] Testing user %d",client);
+
 		if(client <= 0 || !IsClientInGame(client))
 			return Plugin_Continue;
-
+		if (IsFakeClient(client)) {
+			PrintToServer("[HIDENAME] Bot, stop");
+			return Plugin_Stop;
+		}
 		if(g_bRevertAll)
 			return Plugin_Continue;
 		else if(g_bRevertGagged && BaseComm_IsClientGagged(client))
@@ -158,6 +165,7 @@ public Action:Event_OnNameChange(Handle:event, const String:name[], bool:dontBro
 
 		GetEventString(event, "newname", g_sName[client], 32);
 	}
+	PrintToServer("[HIDENAME] Continue");
 
 	return Plugin_Continue;
 }
@@ -217,6 +225,8 @@ public Action:Command_Hide(client, args)
 
 public Action:UserMessageHook(UserMsg:msg_hd, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
 {
+//	PrintToServer("[HIDENAME] Called UserMessageHook");
+
 	if(g_bEnabled)
 	{
 		new bool:_bHideRevert = false;

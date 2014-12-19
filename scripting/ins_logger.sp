@@ -105,6 +105,7 @@ public OnPluginStart()
 	AddGameLogHook(LogEvent);
 	
 	GetTeams(false);
+	LoadTranslations("insurgency.phrases.txt");
 }
 
 public OnMapStart()
@@ -161,18 +162,17 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	//"team" "byte"
 	decl String:cappers[256],String:cpname[64];
 	//new priority = GetEventInt(event, "priority");
-	//new cp = GetEventInt(event, "cp");
+	new cp = GetEventInt(event, "cp");
 	GetEventString(event, "cappers", cappers, sizeof(cappers));
 	GetEventString(event, "cpname", cpname, sizeof(cpname));
-	//new team = GetEventInt(event, "team");
-
-	//new capperlen = GetCharBytes(cappers);
-	//PrintToServer("[LOGGER] Event_ControlPointCaptured priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
+	new team = GetEventInt(event, "team");
+	new capperlen = GetCharBytes(cappers);
+	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d cappers %s capperlen %d cpname %s team %d", cp,cappers,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
-	GetEventString(event, "cappers", cappers, sizeof(cappers));
 	for (new i = 0 ; i < strlen(cappers); i++)
 	{
+		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d",i);
 		new client = cappers[i];
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
@@ -183,7 +183,6 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 			}
 			new player_userid = GetClientUserId(i);
 			new player_team_index = GetClientTeam(i);
-
 			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", i, player_userid, player_authid, g_team_list[player_team_index]);
 		}
 	}

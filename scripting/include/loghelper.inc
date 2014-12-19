@@ -15,37 +15,15 @@ new String:g_team_list[16][64];
 
 stock GetTeams(bool:insmod = false)
 {
-	if (!insmod)
+	new max_teams_count = GetTeamCount();
+	for (new team_index = 0; (team_index < max_teams_count); team_index++)
 	{
-		new max_teams_count = GetTeamCount();
-		for (new team_index = 0; (team_index < max_teams_count); team_index++)
+		decl String: team_name[64];
+		GetTeamName(team_index, team_name, sizeof(team_name));
+		if (strcmp(team_name, "") != 0)
 		{
-			decl String: team_name[64];
-			GetTeamName(team_index, team_name, sizeof(team_name));
-
-			if (strcmp(team_name, "") != 0)
-			{
-				g_team_list[team_index] = team_name;
-			}
+			g_team_list[team_index] = team_name;
 		}
-	}
-	else
-	{
-		// they really need to get their act together... GetTeamName() would be awesome since they can't even keep their team indexes consistent
-		decl String:mapname[64];
-		GetCurrentMap(mapname, sizeof(mapname));
-		if (strcmp(mapname, "ins_karam") == 0 || strcmp(mapname, "ins_baghdad") == 0)
-		{
-			g_team_list[1] = "Iraqi Insurgents";
-			g_team_list[2] = "U.S. Marines";
-		}
-		else
-		{
-			g_team_list[1] = "U.S. Marines";
-			g_team_list[2] = "Iraqi Insurgents";
-		}
-		g_team_list[0] = "Unassigned";
-		g_team_list[3] = "SPECTATOR";
 	}
 }
 

@@ -1,0 +1,2983 @@
+"Phrases"
+{
+	"Banned_For_Killing_Teammates"
+	{
+		"en"	"You are being banned from the server for killing too many teammates."
+	}
+	"CapturePoint_0"
+	{
+		"en"	"ALPHA"
+	}
+	"CapturePoint_1"
+	{
+		"en"	"BRAVO"
+	}
+	"CapturePoint_10"
+	{
+		"en"	"KILO"
+	}
+	"CapturePoint_2"
+	{
+		"en"	"CHARLIE"
+	}
+	"CapturePoint_3"
+	{
+		"en"	"DELTA"
+	}
+	"CapturePoint_4"
+	{
+		"en"	"ECHO"
+	}
+	"CapturePoint_5"
+	{
+		"en"	"FOXTROT"
+	}
+	"CapturePoint_6"
+	{
+		"en"	"GOLF"
+	}
+	"CapturePoint_7"
+	{
+		"en"	"HOTEL"
+	}
+	"CapturePoint_8"
+	{
+		"en"	"INDIA"
+	}
+	"CapturePoint_9"
+	{
+		"en"	"JULIETT"
+	}
+	"Cell_Alpha"
+	{
+		"en"	"[A] Assault Group"
+	}
+	"Cell_Bravo"
+	{
+		"en"	"[B] Scout Cell"
+	}
+	"Cell_Charlie"
+	{
+		"en"	"[C] Support Cell"
+	}
+	"Cell_Delta"
+	{
+		"en"	"[D] Cell"
+	}
+	"Cell_Echo"
+	{
+		"en"	"[E] Cell"
+	}
+	"Chat_GlobalAnnouncement"
+	{
+		"en"	"[Global Announcement] %s1"
+	}
+	"Chat_Prefix_Admin"
+	{
+		"en"	"[Admin] "
+	}
+	"Chat_Prefix_Developer"
+	{
+		"en"	"[Developer] "
+	}
+	"Chat_SquadLeader"
+	{
+		"en"	"LEADER"
+	}
+	"Chat_Subordinate"
+	{
+		"en"	"Subordinate"
+	}
+	"Checkpoint_Hold"
+	{
+		"en"	"Enemy counter-attack incoming!"
+	}
+	"Checkpoint_Objective"
+	{
+		"en"	"Clear each checkpoint and prevent the enemy from counter-attacking!"
+	}
+	"DisconnectReason_DisconnectByUser"
+	{
+		"en"	"Disconnected."
+	}
+	"Firefight_Objective"
+	{
+		"en"	"Secure all enemy objectives!"
+	}
+	"Fireteam_Alpha"
+	{
+		"en"	"[A] Assault Squad"
+	}
+	"Fireteam_Bravo"
+	{
+		"en"	"[B] Recon Team"
+	}
+	"Fireteam_Charlie"
+	{
+		"en"	"[C] Support Team"
+	}
+	"Fireteam_Delta"
+	{
+		"en"	"[D] Team"
+	}
+	"Fireteam_Echo"
+	{
+		"en"	"[E] Team"
+	}
+	"Fireteam_Escort_Group"
+	{
+		"en"
+		{
+			"0"	"[A] Escort Group"
+			"1"	"[A] Escort Group"
+		}
+	}
+	"Fireteam_Heavy_Support"
+	{
+		"en"
+		{
+			"0"	"[C] Heavy Support"
+			"1"	"[C] Heavy Support"
+		}
+	}
+	"Fireteam_Scout_Cover"
+	{
+		"en"
+		{
+			"0"	"[B] Scout and Cover"
+			"1"	"[B] Scout and Cover"
+		}
+	}
+	"Flashpoint_Objective"
+	{
+		"en"	"Protect your cache and secure all of the objectives!"
+	}
+	"Game_idle_kick"
+	{
+		"en"	"%s1 has been idle for too long and has been kicked."
+	}
+	"Game_radio"
+	{
+		"en"	"%s1 (RADIO): %s2"
+	}
+	"Game_radio_location"
+	{
+		"en"	"%s1 @ %s2 (RADIO): %s3"
+	}
+	"Game_teammate_attack"
+	{
+		"en"	"%s1 attacked a teammate (%s2)."
+	}
+	"Game_teammate_kills"
+	{
+		"en"	"Teammate kills: %s1 of 3"
+	}
+	"HL2_Enable_Commentary"
+	{
+		"en"	"Enable commentary track"
+	}
+	"HL2_SetupMicrophone"
+	{
+		"en"	"CONFIGURE ADVANCED MICROPHONE SETTINGS"
+	}
+	"HL2_SetupMicrophoneSteam"
+	{
+		"en"	"Steam Community In-Game is currently disabled.\nPlease, enable Steam Community In-Game or configure voice settings in your Steam client."
+	}
+	"Hint_Attachments"
+	{
+		"en"	"Equip Attachments"
+	}
+	"Hint_C4"
+	{
+		"en"	"Equip C4"
+	}
+	"Hint_Flashlight"
+	{
+		"en"	"Equip Flashlight"
+	}
+	"Hint_Focus"
+	{
+		"en"	"While Aiming: Focus"
+	}
+	"Hint_Frags"
+	{
+		"en"	"Equip Fragmentation Grenades"
+	}
+	"Hint_Offline"
+	{
+		"en"	"Practice (Offline)"
+	}
+	"Hint_Online"
+	{
+		"en"	"Mission (Online)"
+	}
+	"Hint_Plywood"
+	{
+		"en"	"Shoot through the plywood"
+	}
+	"Hint_Primary"
+	{
+		"en"	"Equip Primary Weapon"
+	}
+	"Hint_ProtectVip"
+	{
+		"en"	"Protect the VIP!"
+	}
+	"Hint_Slide"
+	{
+		"en"	"While Sprinting: Slide"
+	}
+	"Hint_ThrowC4"
+	{
+		"en"	"Throw C4"
+	}
+	"Hint_ThrowFrag"
+	{
+		"en"	"Throw Grenade"
+	}
+	"Hint_careful_around_teammates"
+	{
+		"en"	"Careful!"
+	}
+	"Hint_tk_punished"
+	{
+		"en"	"Punished for killing a teammate!"
+	}
+	"Hint_try_not_to_injure_teammates"
+	{
+		"en"	"Try not to injure your teammates."
+	}
+	"Hunt_Objective"
+	{
+		"en"	"Clear all hostile presence in the area!"
+	}
+	"INSLeader_RoleName"
+	{
+		"en"	"Cell Commander"
+	}
+	"INS_Chat_All"
+	{
+		"en"	"%s4%s1 :  %s2"
+	}
+	"INS_Chat_AllDead"
+	{
+		"en"	"*DEAD* %s4%s1 : %s2"
+	}
+	"INS_Chat_AllSpec"
+	{
+		"en"	"*SPEC* %s4%s1 : %s2"
+	}
+	"INS_Chat_Party"
+	{
+		"en"	"(Party) %s1"
+	}
+	"INS_Chat_Spec"
+	{
+		"en"	"(Spectator) %s4%s1 : %s2"
+	}
+	"INS_Chat_T1"
+	{
+		"en"	"(Security) %s4%s1:  %s2"
+	}
+	"INS_Chat_T1_Dead"
+	{
+		"en"	"*DEAD*(Security) %s4%s1 : %s2"
+	}
+	"INS_Chat_T1_Loc"
+	{
+		"en"	"(Security) %s4%s1@ %s3 : %s2"
+	}
+	"INS_Chat_T2"
+	{
+		"en"	"(Insurgents) %s4%s1: %s2"
+	}
+	"INS_Chat_T2_Dead"
+	{
+		"en"	"*DEAD*(Insurgents) %s4%s1 : %s2"
+	}
+	"INS_Chat_T2_Loc"
+	{
+		"en"	"(Insurgents) %s4%s1 @ %s3 : %s2"
+	}
+	"INS_Name_Change"
+	{
+		"en"	"* %s1 changed name to %s2"
+	}
+	"INS_end_round_stat_captures"
+	{
+		"en"	"%s2 captured %s1"
+	}
+	"INS_end_round_stat_deaths"
+	{
+		"en"	"%s2 died %s1"
+	}
+	"INS_end_round_stat_hits"
+	{
+		"en"	"%s2 hit %s1"
+	}
+	"INS_end_round_stat_kills"
+	{
+		"en"	"%s2 killed %s1"
+	}
+	"INS_end_round_stat_shots"
+	{
+		"en"	"%s2 shot %s1"
+	}
+	"Infiltrate_FlagCarrier"
+	{
+		"en"	"Intel Carrier"
+	}
+	"Infiltrate_Objective"
+	{
+		"en"	"Seize the enemy intel and keep them out of our base!"
+	}
+	"Insurgency_Game_connected"
+	{
+		"en"	"%s1 joined the game."
+	}
+	"Insurgency_Game_disconnected"
+	{
+		"en"	"%s1 left the game (%s2)."
+	}
+	"Insurgency_game_player_joined_autoteam"
+	{
+		"en"	"%s1 was automatically assigned to %s2"
+	}
+	"Insurgency_game_player_joined_team"
+	{
+		"en"	"%s1 joined %s2"
+	}
+	"KB_Attack"
+	{
+		"en"	"Attack"
+	}
+	"KB_ChangeInventory"
+	{
+		"en"	"Change Kit"
+	}
+	"KB_ChangeSquad"
+	{
+		"en"	"Change Squad"
+	}
+	"KB_ChangeTeam"
+	{
+		"en"	"Change Team / Toggle Scoreboard"
+	}
+	"KB_Chat"
+	{
+		"en"	"Chat Message"
+	}
+	"KB_Combat"
+	{
+		"en"	"Combat"
+	}
+	"KB_Communications"
+	{
+		"en"	"Communications"
+	}
+	"KB_Console"
+	{
+		"en"	"Toggle Console"
+	}
+	"KB_DisplayScoreBoard"
+	{
+		"en"	"Display Scoreboard"
+	}
+	"KB_DuckHold"
+	{
+		"en"	"Crouch (hold)"
+	}
+	"KB_DuckToggle"
+	{
+		"en"	"Crouch (toggle)"
+	}
+	"KB_Firemode"
+	{
+		"en"	"Cycle Firemode"
+	}
+	"KB_Flashlight"
+	{
+		"en"	"Toggle Flashlight / Laser"
+	}
+	"KB_Focus"
+	{
+		"en"	"Focus"
+	}
+	"KB_Game"
+	{
+		"en"	"Game"
+	}
+	"KB_Inventory"
+	{
+		"en"	"Inventory"
+	}
+	"KB_Ironsights"
+	{
+		"en"	"Iron Sights"
+	}
+	"KB_IronsightsHold"
+	{
+		"en"	"Aim Down Sight (hold)"
+	}
+	"KB_IronsightsToggle"
+	{
+		"en"	"Aim Down Sight (toggle)"
+	}
+	"KB_Jump"
+	{
+		"en"	"Jump"
+	}
+	"KB_LeanLeft"
+	{
+		"en"	"Lean Left"
+	}
+	"KB_LeanRight"
+	{
+		"en"	"Lean Right"
+	}
+	"KB_Microphone"
+	{
+		"en"	"Activate Microphone"
+	}
+	"KB_Misc"
+	{
+		"en"	"Miscellaneous"
+	}
+	"KB_MoveBack"
+	{
+		"en"	"Move Back"
+	}
+	"KB_MoveForward"
+	{
+		"en"	"Move Forward"
+	}
+	"KB_MoveLeft"
+	{
+		"en"	"Move Left (Strafe)"
+	}
+	"KB_MoveRight"
+	{
+		"en"	"Move Right (Strafe)"
+	}
+	"KB_Movement"
+	{
+		"en"	"Movement"
+	}
+	"KB_NextWeapon"
+	{
+		"en"	"Next Weapon"
+	}
+	"KB_PrevWeapon"
+	{
+		"en"	"Previous Weapon"
+	}
+	"KB_Prone"
+	{
+		"en"	"Prone"
+	}
+	"KB_Quit"
+	{
+		"en"	"Quit"
+	}
+	"KB_RadialMenu"
+	{
+		"en"	"Radial Menu"
+	}
+	"KB_Reload"
+	{
+		"en"	"Reload"
+	}
+	"KB_Screenshot"
+	{
+		"en"	"Take Screenshot"
+	}
+	"KB_SecondaryFire"
+	{
+		"en"	"Secondary Fire / Deploy Bipod"
+	}
+	"KB_SelEquipment"
+	{
+		"en"	"Select Equipment"
+	}
+	"KB_SelKnife"
+	{
+		"en"	"Select Knife"
+	}
+	"KB_SelPrimary"
+	{
+		"en"	"Select Primary Weapon"
+	}
+	"KB_SelSecondary"
+	{
+		"en"	"Select Secondary Weapon"
+	}
+	"KB_SelUnderbarrelWeapon"
+	{
+		"en"	"Select Underbarrel Weapon"
+	}
+	"KB_Spray"
+	{
+		"en"	"Spray Logo"
+	}
+	"KB_Sprint"
+	{
+		"en"	"Sprint"
+	}
+	"KB_SprintFocusHold"
+	{
+		"en"	"Sprint (hold) / Focus"
+	}
+	"KB_SprintFocusToggle"
+	{
+		"en"	"Sprint (toggle) / Focus"
+	}
+	"KB_TacticalMap"
+	{
+		"en"	"Tactical Map"
+	}
+	"KB_TeamChat"
+	{
+		"en"	"Team Message"
+	}
+	"KB_ToggleFloating"
+	{
+		"en"	"Toggle Floating HUD"
+	}
+	"KB_Use"
+	{
+		"en"	"Use Item / Pick up weapon"
+	}
+	"KB_UseAccessory"
+	{
+		"en"	"Toggle Player Accessory"
+	}
+	"KB_Walk"
+	{
+		"en"	"Walk"
+	}
+	"KB_WalkHold"
+	{
+		"en"	"Walk (hold)"
+	}
+	"KB_WalkToggle"
+	{
+		"en"	"Walk (toggle)"
+	}
+	"Killed_Teammate"
+	{
+		"en"	"You killed a teammate!"
+	}
+	"Msg_Captured"
+	{
+		"en"	"captured"
+	}
+	"Msg_Dominating"
+	{
+		"en"	"%s1 is DOMINATING"
+	}
+	"Msg_FlagCapturedEnemy"
+	{
+		"en"	"have captured our intel"
+	}
+	"Msg_FlagCapturedFriendly"
+	{
+		"en"	"has captured the enemy intel"
+	}
+	"Msg_FlagDroppedEnemy"
+	{
+		"en"	"have lost the intel"
+	}
+	"Msg_FlagDroppedFriendly"
+	{
+		"en"	"has lost the enemy intel"
+	}
+	"Msg_FlagReturnedEnemy"
+	{
+		"en"	"have returned the intel"
+	}
+	"Msg_FlagReturnedFriendly"
+	{
+		"en"	"has returned our intel"
+	}
+	"Msg_FlagTakenEnemy"
+	{
+		"en"	"has taken the enemy intel"
+	}
+	"Msg_FlagTakenFriendly"
+	{
+		"en"	"have taken our intel"
+	}
+	"Msg_Neutralized"
+	{
+		"en"	"neutralized"
+	}
+	"Msg_ObjectDestroyed"
+	{
+		"en"	"destroyed object"
+	}
+	"Msg_ObjectDestroyedAt"
+	{
+		"en"	"destroyed objective"
+	}
+	"Msg_ObjectiveWeaponCacheDestroyed"
+	{
+		"en"	"destroyed cache"
+	}
+	"Msg_Revenge"
+	{
+		"en"	"%s1 got REVENGE on"
+	}
+	"Occupy_Objective"
+	{
+		"en"	"Control the objective to keep your team reinforced!"
+	}
+	"Push_Attack"
+	{
+		"en"	"Break through the enemy's defenses and push forward!"
+	}
+	"Push_Defend"
+	{
+		"en"	"Hold your ground at all costs!"
+	}
+	"Push_Fallback"
+	{
+		"en"	"Enemy advancing! Fall back and regroup!"
+	}
+	"SCHOOL_CP0_NAME"
+	{
+		"en"	"Schoolyard"
+	}
+	"SECLeader_RoleName"
+	{
+		"en"	"Squad Leader"
+	}
+	"Skirmish_Objective"
+	{
+		"en"	"Protect your cache and secure all of the objectives!"
+	}
+	"Spec_Ambush_Attack"
+	{
+		"en"	"Your team wins by eliminating the enemy high value target."
+	}
+	"Spec_Ambush_Defend"
+	{
+		"en"	"Your team wins by escorting the high value target to safety or eliminating the enemy team."
+	}
+	"Spec_Elimination_No_Respawn"
+	{
+		"en"	"You will respawn at the beginning of the next round."
+	}
+	"Spec_PlayerItem"
+	{
+		"en"	"%s1"
+	}
+	"Spec_PlayerItem_Team"
+	{
+		"en"	"%s1"
+	}
+	"Spec_Reinforcements_Depleted"
+	{
+		"en"	"Your team is out of reinforcement waves."
+	}
+	"Spec_RespawnItem"
+	{
+		"en"	"Reinforcement wave deploying in %s1s"
+	}
+	"Spec_RespawnNeedObjective"
+	{
+		"en"	"Your team will rapidly deploy if an objective is captured."
+	}
+	"Spec_RespawnNeedsObjectives"
+	{
+		"en"	"Your team will rapidly deploy when %s1 objectives are captured."
+	}
+	"Spec_RespawnSearchDestroy"
+	{
+		"en"	"Your team will rapidly deploy if a cache is destroyed."
+	}
+	"Spec_RespawnWaitingForSpawnClear"
+	{
+		"en"	"Reinforcement area overrun by hostiles..."
+	}
+	"Spec_RespawnWaitingForWave"
+	{
+		"en"	"Waiting for reinforcement wave..."
+	}
+	"Spec_Skirmish_LostCache"
+	{
+		"en"	"Your team's cache has been destroyed. Reinforcements have been cut off."
+	}
+	"Spec_Spectating"
+	{
+		"en"	"SPECTATING"
+	}
+	"Spec_Strike_Attack"
+	{
+		"en"	"Your team wins by destroying the enemy cache or eliminating the enemy team."
+	}
+	"Spec_Strike_Defend"
+	{
+		"en"	"Your team wins by eliminating all enemies or protecting the cache until the time runs out."
+	}
+	"Spec_Strike_LastCache"
+	{
+		"en"	"Your team only has one cache. Reinforcements have been cut off."
+	}
+	"Spec_Survival_Eligible"
+	{
+		"en"	"You will reinforce when an alive teammate reaches a safe weapon cache."
+	}
+	"Spec_Survival_Not_Eligible"
+	{
+		"en"	"You will be eligible to spawn in %s1s"
+	}
+	"Spec_Training"
+	{
+		"en"	"Be more careful! Respawning shortly..."
+	}
+	"Spec_Vendetta"
+	{
+		"en"	"Your team wins by capturing the control point or eliminating all enemies in the area."
+	}
+	"Squad_Allies_Officer"
+	{
+		"en"	"Officer [Leader]"
+	}
+	"Squad_Allies_Ranger_Assault"
+	{
+		"en"	"[A] Assault Team - 2nd Ranger Battalion"
+	}
+	"Squad_Allies_Ranger_Support"
+	{
+		"en"	"[B] Support Team - 2nd Ranger Battalion"
+	}
+	"Squad_Allies_Rifleman"
+	{
+		"en"	"Rifleman"
+	}
+	"Squad_Axis_352ID_Assault"
+	{
+		"en"	"[A] Sturmtruppen - Wehrmacht 352nd Infantry"
+	}
+	"Squad_Axis_Officer"
+	{
+		"en"	"Unteroffizier"
+	}
+	"Squad_Axis_Panzergrenadier_Support"
+	{
+		"en"	"[B] Panzergrenadier - 21st Panzer Division"
+	}
+	"Squad_Axis_Rifleman"
+	{
+		"en"	"Schtz"
+	}
+	"Squad_Cell_Bomber"
+	{
+		"en"	"Bomber"
+	}
+	"Squad_Cell_Fighter"
+	{
+		"en"	"Fighter"
+	}
+	"Squad_Cell_Leader_Bomber"
+	{
+		"en"	"Bomber [LEADER]"
+	}
+	"Squad_Cell_Leader_Fighter"
+	{
+		"en"	"Fighter [LEADER]"
+	}
+	"Squad_Cell_Leader_MachineGunner"
+	{
+		"en"	"Machine Gunner [LEADER]"
+	}
+	"Squad_Cell_Leader_Militant"
+	{
+		"en"	"Militant [LEADER]"
+	}
+	"Squad_Cell_Leader_Sapper"
+	{
+		"en"	"Sapper [LEADER]"
+	}
+	"Squad_Cell_Leader_Scout"
+	{
+		"en"	"Scout [LEADER]"
+	}
+	"Squad_Cell_Leader_Sharpshooter"
+	{
+		"en"	"Sharpshooter [LEADER]"
+	}
+	"Squad_Cell_Leader_Sniper"
+	{
+		"en"	"Sniper [CELL LEADER]"
+	}
+	"Squad_Cell_Leader_Specialist"
+	{
+		"en"	"Specialist [LEADER]"
+	}
+	"Squad_Cell_Leader_Striker"
+	{
+		"en"	"Striker [CELL LEADER]"
+	}
+	"Squad_Cell_MachineGunner"
+	{
+		"en"	"Machine Gunner"
+	}
+	"Squad_Cell_Militant"
+	{
+		"en"	"Militant"
+	}
+	"Squad_Cell_Sapper"
+	{
+		"en"	"Sapper"
+	}
+	"Squad_Cell_Scout"
+	{
+		"en"	"Scout"
+	}
+	"Squad_Cell_Sharpshooter"
+	{
+		"en"	"Sharpshooter"
+	}
+	"Squad_Cell_Sniper"
+	{
+		"en"	"Sniper"
+	}
+	"Squad_Cell_Specialist"
+	{
+		"en"	"Specialist"
+	}
+	"Squad_Cell_Striker"
+	{
+		"en"	"Striker"
+	}
+	"Squad_Fireteam_Breacher"
+	{
+		"en"	"Breacher"
+	}
+	"Squad_Fireteam_Demolitions"
+	{
+		"en"	"Demolitions"
+	}
+	"Squad_Fireteam_Designated_Marksman"
+	{
+		"en"	"Designated Marksman"
+	}
+	"Squad_Fireteam_Engineer"
+	{
+		"en"	"Engineer"
+	}
+	"Squad_Fireteam_Escort"
+	{
+		"en"	"Escort"
+	}
+	"Squad_Fireteam_Leader_Breacher"
+	{
+		"en"	"Breacher [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Demolitions"
+	{
+		"en"	"Demolitions [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Designated_Marksman"
+	{
+		"en"	"Desig. Marksman [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Engineer"
+	{
+		"en"	"Engineer [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Escort"
+	{
+		"en"	"Escort [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Recon"
+	{
+		"en"	"Recon [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Rifleman"
+	{
+		"en"	"Rifleman [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Sniper"
+	{
+		"en"	"Sniper [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Specialist"
+	{
+		"en"	"Specialist [LEADER]"
+	}
+	"Squad_Fireteam_Leader_Support"
+	{
+		"en"	"Support [LEADER]"
+	}
+	"Squad_Fireteam_Recon"
+	{
+		"en"	"Recon"
+	}
+	"Squad_Fireteam_Rifleman"
+	{
+		"en"	"Rifleman"
+	}
+	"Squad_Fireteam_Sniper"
+	{
+		"en"	"Sniper"
+	}
+	"Squad_Fireteam_Specialist"
+	{
+		"en"	"Specialist"
+	}
+	"Squad_Fireteam_Support"
+	{
+		"en"	"Support"
+	}
+	"Squad_Training_Backup"
+	{
+		"en"	"Backup"
+	}
+	"Squad_Training_Driver"
+	{
+		"en"	"Driver"
+	}
+	"Squad_Training_Player"
+	{
+		"en"	"Recruit"
+	}
+	"Squad_Training_VIP"
+	{
+		"en"	"Leader"
+	}
+	"Strike_ProtectCache"
+	{
+		"en"	"Protect your weapon cache at all cost!"
+	}
+	"Strike_SeekAndDestroyCache"
+	{
+		"en"	"Locate the enemy cache and destroy it!"
+	}
+	"Team_Allies"
+	{
+		"en"	"Allies"
+	}
+	"Team_Autoassign"
+	{
+		"en"	"Auto-Assign Team"
+	}
+	"Team_Axis"
+	{
+		"en"	"Axis"
+	}
+	"Team_Insurgent"
+	{
+		"en"	"Insurgent Forces"
+	}
+	"Team_Join_Button"
+	{
+		"en"	"Join %s1"
+	}
+	"Team_Sec_NATOForces"
+	{
+		"en"	"NATO Forces"
+	}
+	"Team_Sec_PMC"
+	{
+		"en"	"PMCs"
+	}
+	"Team_Sec_USMarines"
+	{
+		"en"	"US Marines"
+	}
+	"Team_Security"
+	{
+		"en"	"Security Forces"
+	}
+	"Team_Spectators"
+	{
+		"en"	"Spectators"
+	}
+	"Team_Unassigned"
+	{
+		"en"	"Unassigned"
+	}
+	"Team_undefined"
+	{
+		"en"	"Undefined"
+	}
+	"UI_Apply"
+	{
+		"en"	"Apply"
+	}
+	"UI_ChangeInventory"
+	{
+		"en"	"Kit Selection"
+	}
+	"UI_ChangeSquad"
+	{
+		"en"	"Squad Selection"
+	}
+	"UI_ChangeTeam"
+	{
+		"en"	"Team Selection"
+	}
+	"UI_Close"
+	{
+		"en"	"Close"
+	}
+	"UI_Gamemode"
+	{
+		"en"	"GAMEMODE"
+	}
+	"UI_Hostname"
+	{
+		"en"	"SERVER NAME"
+	}
+	"UI_Loadout_Accept"
+	{
+		"en"	"Accept"
+	}
+	"UI_Loadout_Cancel"
+	{
+		"en"	"Cancel Selection"
+	}
+	"UI_Loadout_Change"
+	{
+		"en"	"Change"
+	}
+	"UI_Loadout_RemainingSupply"
+	{
+		"en"	"Remaining Supply"
+	}
+	"UI_Loadout_RemoveAll"
+	{
+		"en"	"Remove All"
+	}
+	"UI_Loadout_Reset"
+	{
+		"en"	"Reset"
+	}
+	"UI_Loadout_Resupply"
+	{
+		"en"	"Re-supply"
+	}
+	"UI_Loadout_Select"
+	{
+		"en"	"Select %s1"
+	}
+	"UI_Map"
+	{
+		"en"	"MAP"
+	}
+	"UI_Overview_PlayerScore"
+	{
+		"en"	"SCORE: %s1"
+	}
+	"UI_PlayerCount"
+	{
+		"en"	"PLAYERS"
+	}
+	"UI_Scoreboard_Attacking"
+	{
+		"en"	"ATTACKING"
+	}
+	"UI_Scoreboard_Defending"
+	{
+		"en"	"DEFENDING"
+	}
+	"UI_Scoreboard_Mute"
+	{
+		"en"	"Mute Player"
+	}
+	"UI_Scoreboard_Score"
+	{
+		"en"	"ROUNDS WON: %s1 / SCORE: %s2"
+	}
+	"UI_Scoreboard_Score_AD"
+	{
+		"en"	"%s1 / ROUNDS WON: %s2 / SCORE: %s3"
+	}
+	"UI_Scoreboard_Unmute"
+	{
+		"en"	"Unmute Player"
+	}
+	"UI_Scoreboard_View_Profile"
+	{
+		"en"	"View Steam Profile"
+	}
+	"UI_Squads_Choose"
+	{
+		"en"	"Choose a Squad"
+	}
+	"UI_Wave"
+	{
+		"en"	"WAVE"
+	}
+	"UI_Waves"
+	{
+		"en"	"WAVES"
+	}
+	"VIP_EscortHint"
+	{
+		"en"	"Escort %s1 to safety!"
+	}
+	"VIP_PreventEscapeHint"
+	{
+		"en"	"Prevent the VIP from escaping!"
+	}
+	"VIP_RoleName"
+	{
+		"en"	"VIP"
+	}
+	"VIP_YouAreVipHint"
+	{
+		"en"	"You are the VIP. Stick with your team!"
+	}
+	"Vendetta_Hint"
+	{
+		"en"	"Secure the control point or eliminate all enemies in the area."
+	}
+	"Vendetta_Objective"
+	{
+		"en"	"Secure the control point or eliminate the enemy!"
+	}
+	"Vendetta_YouAreVipHint"
+	{
+		"en"	"You are the leader. Stay alive and hunt the enemy leader."
+	}
+	"buhriz"
+	{
+		"en"	"Buhriz"
+	}
+	"buhriz_coop"
+	{
+		"en"	"Buhriz (Checkpoint)"
+	}
+	"buhriz_hunt"
+	{
+		"en"	"Buhriz (Hunt)"
+	}
+	"buhriz_night"
+	{
+		"en"	"Buhriz Night"
+	}
+	"chat_filterbutton"
+	{
+		"en"	"Filters"
+	}
+	"chat_say"
+	{
+		"en"	"Say :"
+	}
+	"chat_say_team"
+	{
+		"en"	"Say (TEAM) :"
+	}
+	"contact"
+	{
+		"en"	"Contact"
+	}
+	"contact_coop"
+	{
+		"en"	"Contact (Checkpoint)"
+	}
+	"contact_hunt"
+	{
+		"en"	"Contact (Hunt)"
+	}
+	"death_deathgrenade"
+	{
+		"en"	"DEATH GRENADE"
+	}
+	"death_door"
+	{
+		"en"	"DOOR"
+	}
+	"death_door_rotating"
+	{
+		"en"	"DOOR"
+	}
+	"death_fall"
+	{
+		"en"	"fell to their death"
+	}
+	"death_grenade_c4"
+	{
+		"en"	"C4"
+	}
+	"death_grenade_m18"
+	{
+		"en"	"M18"
+	}
+	"death_grenade_m67"
+	{
+		"en"	"M67"
+	}
+	"death_grenade_m84"
+	{
+		"en"	"M84"
+	}
+	"death_grenadedirect"
+	{
+		"en"	"GRENADE IMPACT"
+	}
+	"death_obj_weapon_cache"
+	{
+		"en"	"CACHE"
+	}
+	"death_prop_physics"
+	{
+		"en"	"PROP"
+	}
+	"death_rocket_rpg7"
+	{
+		"en"	"RPG-7"
+	}
+	"death_suicide"
+	{
+		"en"	"died"
+	}
+	"death_teamkill"
+	{
+		"en"	"(TEAMKILL)"
+	}
+	"death_trigger_hurt"
+	{
+		"en"	"TRIGGER"
+	}
+	"death_world"
+	{
+		"en"	"killed"
+	}
+	"death_world_suicide"
+	{
+		"en"	"died"
+	}
+	"district"
+	{
+		"en"	"District"
+	}
+	"district_coop"
+	{
+		"en"	"District (Checkpoint)"
+	}
+	"district_hunt"
+	{
+		"en"	"District (Hunt)"
+	}
+	"district_night"
+	{
+		"en"	"District Night"
+	}
+	"district_survival"
+	{
+		"en"	"District (Survival)"
+	}
+	"endgamevote_extend"
+	{
+		"en"	"Replay"
+	}
+	"endgamevote_random"
+	{
+		"en"	"Random"
+	}
+	"endgamevote_shuffle"
+	{
+		"en"	"Refresh"
+	}
+	"endgamevote_title"
+	{
+		"en"	"Vote for the next map"
+	}
+	"filter_achievement"
+	{
+		"en"	"Achievement Announce"
+	}
+	"filter_joinleave"
+	{
+		"en"	"Joins/Leaves"
+	}
+	"filter_namechange"
+	{
+		"en"	"Name Changes"
+	}
+	"filter_publicchat"
+	{
+		"en"	"Public Chat"
+	}
+	"filter_servermsg"
+	{
+		"en"	"Server Messages"
+	}
+	"filter_teamchange"
+	{
+		"en"	"Team Changes"
+	}
+	"game_TeamsSwitched"
+	{
+		"en"	"Teams Switched!"
+	}
+	"game_auto_team_balance_in"
+	{
+		"en"	"Teams will be auto-balanced in %s1 seconds."
+	}
+	"game_battle_attack"
+	{
+		"en"	"Attack"
+	}
+	"game_battle_defend"
+	{
+		"en"	"Defend"
+	}
+	"game_begin_shorty"
+	{
+		"en"	"Game will begin shortly"
+	}
+	"game_checkpoint_capture"
+	{
+		"en"	"Capture"
+	}
+	"game_checkpoint_defend"
+	{
+		"en"	"Hold"
+	}
+	"game_checkpoint_destroy"
+	{
+		"en"	"Destroy"
+	}
+	"game_description_ambush"
+	{
+		"en"	"The escorting team must protect their VIP and successfully get him to the extraction point. The ambushing team must locate and eliminate the VIP, who can be identified by his distinct clothing."
+	}
+	"game_description_battle"
+	{
+		"en"	"Both teams are given the objective of pushing through the map. A team wins when all objectives have been captured."
+	}
+	"game_description_checkpoint"
+	{
+		"en"	"In this mission-based Cooperative game mode, you will team up with your friends to take on challenging AI opponents. Move through the enemy occupied territory one objective at a time, clearing each area and defending against possible enemy counter-attacks. Some of the objectives are Insurgent weapon stockpiles which must be destroyed, so make sure at least someone in your squad has explosives!"
+	}
+	"game_description_firefight"
+	{
+		"en"	"There are 3 territorial objectives. To win, your team must capture all 3 of these objectives or eliminate the enemy team.Your team will be reinforced if an objective is captured."
+	}
+	"game_description_flashpoint"
+	{
+		"en"	"Capture the middle objective or destroy an enemy cache to receive reinforcements. Gain control of the entire area or eliminate the enemy to win."
+	}
+	"game_description_hunt"
+	{
+		"en"	"Locate and eliminate all hostiles and weapon caches in the area."
+	}
+	"game_description_infiltrate"
+	{
+		"en"	"Obtain the enemy intel and keep your own base secure from infiltration. Your team will get a reinforcement wave upon taking the enemy's intel or killing an enemy intel carrier. Secure the enemy's intel by bringing it to your base to achieve victory."
+	}
+	"game_description_occupy"
+	{
+		"en"	"Control the middle objective to receive a constant flow of reinforcements. Cut enemy reinforcements off and eliminate their presence in the area to win."
+	}
+	"game_description_outpost"
+	{
+		"en"	"Survive endless waves of insurgents for as long as possible."
+	}
+	"game_description_push"
+	{
+		"en"	"In this classic game mode from the mod, the attackers must capture one point at a time pushing the enemy back as they advance. The defenders must stop the attacking team from advancing. The attackers start out with much fewer waves and not a whole lot of time, but each time they capture they gain an additional 5 waves and a 5 minute time extension."
+	}
+	"game_description_searchdestroy"
+	{
+		"en"	"As attackers, you must destroy the enemy's two weapon caches. HQ provides 3 possible weapon cache locations, so the attacking team must search and discover where the two caches are located.As the defending team, you must prevent the enemy team from destroying all of your weapon caches. Players only respawn when one of the caches are destroyed, and killing all of the enemy team is a sure path to victory."
+	}
+	"game_description_short_ambush"
+	{
+		"en"	"There is a high value target that one team must safely escort to extraction."
+	}
+	"game_description_short_battle"
+	{
+		"en"	"Both teams must push through the map, capture all objectives to achieve victory."
+	}
+	"game_description_short_checkpoint"
+	{
+		"en"	"Move through enemy territory, clear areas and hold out against enemy counter-attacks."
+	}
+	"game_description_short_firefight"
+	{
+		"en"	"Capture all the objectives or eliminate the enemy team, receive reinforcements for capturing objectives."
+	}
+	"game_description_short_flashpoint"
+	{
+		"en"	"Gain control of the area and destroy the enemy's caches."
+	}
+	"game_description_short_hunt"
+	{
+		"en"	"Locate the enemy cache and eliminate all insurgents in the area."
+	}
+	"game_description_short_infiltrate"
+	{
+		"en"	"Capture the flag style game mode where you must seize the enemy's intel while protecting your own base from enemy infiltration."
+	}
+	"game_description_short_occupy"
+	{
+		"en"	"King of the hill style game mode where controlling the area will drain enemy reinforcements."
+	}
+	"game_description_short_outpost"
+	{
+		"en"	"Survive endless waves of insurgents for as long as possible."
+	}
+	"game_description_short_push"
+	{
+		"en"	"Attackers must capture points and push back enemies, gaining time for each point captured. Defenders must stop the attacking push."
+	}
+	"game_description_short_searchdestroy"
+	{
+		"en"	"Destroy the enemy's two weapon caches or prevent the enemy team from destroying all of your weapon caches."
+	}
+	"game_description_short_skirmish"
+	{
+		"en"	"Control all territories and destroy the enemy's cache, or simply eliminate all of the enemy team."
+	}
+	"game_description_short_strike"
+	{
+		"en"	"One team must defend their weapon cache while the other team must locate and destroy it."
+	}
+	"game_description_short_survival"
+	{
+		"en"	"Fight off the enemy occupation and survive for as long as possible in this challenging coop mode."
+	}
+	"game_description_short_vendetta"
+	{
+		"en"	"Secure the control point or eliminate all enemies in the area."
+	}
+	"game_description_skirmish"
+	{
+		"en"	"Control all territories and destroy the enemy's cache, or simply eliminate all of the enemy team. Each objective taken from the enemy will immediately spawn all your dead teammates as well as reward an additional reinforcement wave. Make sure to protect your cache, as once it's destroyed your team is no longer able to gain additional waves from capturing."
+	}
+	"game_description_strike"
+	{
+		"en"	"In this search and destroy game mode, the attacking team must first locate and then subsequently destroy the defending team's weapon cache."
+	}
+	"game_description_survival"
+	{
+		"en"	"Secure active Safehouses to gain supply and reinforce your team.You can resupply at any Safehouse at any time.Survive and fight off the enemy occupation!"
+	}
+	"game_description_training"
+	{
+		"en"	"Welcome to the Insurgency. We are sending you to a remote compound in Iraq for an advanced training assessment. Make sure you follow your instructor's lead and you should be in good shape!"
+	}
+	"game_description_vendetta"
+	{
+		"en"	"Capture the control point or eliminate the enemy team to win."
+	}
+	"game_gm_ambush"
+	{
+		"en"	"Ambush"
+	}
+	"game_gm_battle"
+	{
+		"en"	"Battle"
+	}
+	"game_gm_checkpoint"
+	{
+		"en"	"Checkpoint"
+	}
+	"game_gm_firefight"
+	{
+		"en"	"Firefight"
+	}
+	"game_gm_flashpoint"
+	{
+		"en"	"Flashpoint"
+	}
+	"game_gm_hunt"
+	{
+		"en"	"Hunt"
+	}
+	"game_gm_infiltrate"
+	{
+		"en"	"Infiltrate"
+	}
+	"game_gm_invalid"
+	{
+		"en"	"Unknown"
+	}
+	"game_gm_occupy"
+	{
+		"en"	"Occupy"
+	}
+	"game_gm_outpost"
+	{
+		"en"	"Outpost"
+	}
+	"game_gm_push"
+	{
+		"en"	"Push"
+	}
+	"game_gm_searchdestroy"
+	{
+		"en"	"Search and Destroy"
+	}
+	"game_gm_skirmish"
+	{
+		"en"	"Skirmish"
+	}
+	"game_gm_strike"
+	{
+		"en"	"Strike"
+	}
+	"game_gm_survival"
+	{
+		"en"	"Survival"
+	}
+	"game_gm_training"
+	{
+		"en"	"Training"
+	}
+	"game_gm_vendetta"
+	{
+		"en"	"Vendetta"
+	}
+	"game_gt_invalid"
+	{
+		"en"	"Unknown"
+	}
+	"game_gt_normal"
+	{
+		"en"	"Normal"
+	}
+	"game_gt_realism"
+	{
+		"en"	"Realism"
+	}
+	"game_hunt_cache"
+	{
+		"en"	"Cache"
+	}
+	"game_infiltrate_seize"
+	{
+		"en"	"Seize"
+	}
+	"game_msg_team_captured"
+	{
+		"en"	"Objective %s1 captured"
+	}
+	"game_msg_team_neutralized"
+	{
+		"en"	"Objective %s1 neutralized"
+	}
+	"game_next_round"
+	{
+		"en"	"NEXT ROUND"
+	}
+	"game_player_was_team_balanced"
+	{
+		"en"	"%s1 was moved to the other team for game balance"
+	}
+	"game_push_attack"
+	{
+		"en"	"Attack"
+	}
+	"game_push_attacking"
+	{
+		"en"	"Attacking"
+	}
+	"game_push_defend"
+	{
+		"en"	"Defend"
+	}
+	"game_push_defending"
+	{
+		"en"	"Defending"
+	}
+	"game_respawntime_in_secs"
+	{
+		"en"	"Respawn in %s1"
+	}
+	"game_respawntime_next_round"
+	{
+		"en"	"Wait for next round to respawn"
+	}
+	"game_respawntime_now"
+	{
+		"en"	"Press '%s1' to respawn\nForce respawn in %s2"
+	}
+	"game_restart_in_sec"
+	{
+		"en"	"The game will restart in %s1 second"
+	}
+	"game_restart_in_secs"
+	{
+		"en"	"The game will restart in %s1 seconds"
+	}
+	"game_scramble_in_sec"
+	{
+		"en"	"Scrambling the teams!\nThe game will restart in %s1 second"
+	}
+	"game_scramble_in_secs"
+	{
+		"en"	"Scrambling the teams!\nThe game will restart in %s1 seconds"
+	}
+	"game_scramble_onrestart"
+	{
+		"en"	"Auto scrambling the teams!"
+	}
+	"game_sd_destroy"
+	{
+		"en"	"Destroy"
+	}
+	"game_sd_protect"
+	{
+		"en"	"Protect"
+	}
+	"game_setup_time"
+	{
+		"en"	"SETUP"
+	}
+	"game_survival_cache"
+	{
+		"en"	"Safehouse"
+	}
+	"game_switch_in_sec"
+	{
+		"en"	"Switching teams!\nThe game will restart in %s1 second"
+	}
+	"game_switch_in_secs"
+	{
+		"en"	"Switching teams!\nThe game will restart in %s1 seconds"
+	}
+	"game_team_tie"
+	{
+		"en"	"TIE!"
+	}
+	"game_team_tie_timer"
+	{
+		"en"	"Game timer expired"
+	}
+	"game_team_winner"
+	{
+		"en"	"%s1 are VICTORIOUS!"
+	}
+	"game_team_winner_destroyed_cache"
+	{
+		"en"	"%s1 destroyed the cache"
+	}
+	"game_team_winner_destroyed_caches"
+	{
+		"en"	"%s1 destroyed all the caches"
+	}
+	"game_team_winner_eliminated_checkpoint"
+	{
+		"en"	"%s1 have wiped out your entire team"
+	}
+	"game_team_winner_eliminated_push"
+	{
+		"en"	"%s1 have held their ground"
+	}
+	"game_team_winner_eliminated_vip"
+	{
+		"en"	"%s1 have eliminated the high value target"
+	}
+	"game_team_winner_eliminated_vip_multi"
+	{
+		"en"	"%s1 have eliminated the enemy high value target"
+	}
+	"game_team_winner_elimination"
+	{
+		"en"	"%s1 have gained control of the area"
+	}
+	"game_team_winner_elimination_coop"
+	{
+		"en"	"%s1 have cleared the area of hostile forces"
+	}
+	"game_team_winner_obj_checkpoint"
+	{
+		"en"	"%s1 have cleared all checkpoints in the area"
+	}
+	"game_team_winner_obj_checkpoint_regain"
+	{
+		"en"	"%s1 regained control of the checkpoint"
+	}
+	"game_team_winner_obj_control"
+	{
+		"en"	"%s1 have secured all control points in the area"
+	}
+	"game_team_winner_obj_default"
+	{
+		"en"	"%s1 have completed their objective"
+	}
+	"game_team_winner_obj_infiltrate"
+	{
+		"en"	"%s1 have secured the enemy intel"
+	}
+	"game_team_winner_obj_occupy"
+	{
+		"en"	"%s1 have occupied the area"
+	}
+	"game_team_winner_obj_push"
+	{
+		"en"	"%s1 have gained control of the area"
+	}
+	"game_team_winner_obj_vip"
+	{
+		"en"	"%s1 have escorted their high value target to safety"
+	}
+	"game_team_winner_survival_level"
+	{
+		"en"	"You survived to level %s2"
+	}
+	"game_team_winner_timer"
+	{
+		"en"	"Game timer expired"
+	}
+	"game_team_winner_timer_battle"
+	{
+		"en"	"Time expired. %s1 have majority control"
+	}
+	"game_tip_protect_intel"
+	{
+		"en"	"Prevent the enemy from discovering any sensitive information"
+	}
+	"game_training_move"
+	{
+		"en"	"Move"
+	}
+	"game_vendetta_enemy_spotted"
+	{
+		"en"	"Enemy Last Spotted"
+	}
+	"game_vip_extraction"
+	{
+		"en"	"Extraction"
+	}
+	"game_waiting_for_players"
+	{
+		"en"	"WAITING FOR PLAYERS!"
+	}
+	"game_warning_flag_held"
+	{
+		"en"	"You have obtained valuable intel. Return it to your base."
+	}
+	"game_warning_last_man_standing"
+	{
+		"en"	"WARNING: Last Man Standing"
+	}
+	"game_warning_restricted_area"
+	{
+		"en"	"You have entered a restricted area."
+	}
+	"game_warning_title"
+	{
+		"en"	"WARNING"
+	}
+	"gear_chest_carrier"
+	{
+		"en"	"Chest Carrier"
+	}
+	"gear_chest_carrier_desc"
+	{
+		"en"	"Extra ammo pouches and2 secondary explosives (5.0kg)"
+	}
+	"gear_chest_rig"
+	{
+		"en"	"Chest Rig"
+	}
+	"gear_chest_rig_desc"
+	{
+		"en"	"Extra ammo pouches and1 secondary explosive (2.2kg)"
+	}
+	"gear_heavy_armor"
+	{
+		"en"	"Heavy Armor"
+	}
+	"gear_heavy_armor_desc"
+	{
+		"en"	"A heavy duty Kevlar vest with armor plates (7.5kg)"
+	}
+	"gear_light_armor"
+	{
+		"en"	"Light Armor"
+	}
+	"gear_light_armor_desc"
+	{
+		"en"	"A basic Kevlar vest (2.5kg)"
+	}
+	"gear_nvg"
+	{
+		"en"	"NVG"
+	}
+	"gear_nvg_desc"
+	{
+		"en"	"Night vision goggles assist target acquisition in low light conditions"
+	}
+	"gear_slot_accessory"
+	{
+		"en"	"Accessory"
+	}
+	"gear_slot_armor"
+	{
+		"en"	"Armor"
+	}
+	"gear_slot_vest"
+	{
+		"en"	"Vest"
+	}
+	"heights"
+	{
+		"en"	"Heights"
+	}
+	"heights_coop"
+	{
+		"en"	"Heights (Checkpoint)"
+	}
+	"heights_hunt"
+	{
+		"en"	"Heights (Hunt)"
+	}
+	"heights_night"
+	{
+		"en"	"Heights Night"
+	}
+	"hud_ammo_display"
+	{
+		"en"	"AMMO"
+	}
+	"hud_grenades_display"
+	{
+		"en"	"GRENADES"
+	}
+	"hud_mag_display"
+	{
+		"en"	"MAGS"
+	}
+	"hud_round_display"
+	{
+		"en"	"ROUNDS"
+	}
+	"hud_shell_display"
+	{
+		"en"	"SHELLS"
+	}
+	"ins_instr_explain_ai_difficulty_toohard"
+	{
+		"en"	"Find the AI too challenging? You can call a vote from the main menu to lower the AI difficulty"
+	}
+	"ins_instr_explain_destroy_cache_explosives"
+	{
+		"en"	"Use explosives to destroy the cache"
+	}
+	"ins_instr_explain_inventorymenu"
+	{
+		"en"	"Customize your kit"
+	}
+	"ins_instr_explain_protect_vip"
+	{
+		"en"	"Protect your VIP"
+	}
+	"ins_instr_explain_steal_intel"
+	{
+		"en"	"Take enemy intel"
+	}
+	"ins_instr_explain_weapon_crate"
+	{
+		"en"	"Pick up the primary weapon from this weapon crate"
+	}
+	"ins_name_change"
+	{
+		"en"	" * %s1 changed name to %s2"
+	}
+	"ins_name_change_limit"
+	{
+		"en"	" * Please wait %s1 more seconds before trying to name change."
+	}
+	"ins_token_class_inventory_string"
+	{
+		"en"	"%s1\n%s2 Supply"
+	}
+	"ins_token_class_inventory_string_plural"
+	{
+		"en"	"%s1\n%s2 Supply"
+	}
+	"ins_token_hud_string"
+	{
+		"en"	"%s1 Supply"
+	}
+	"ins_token_hud_string_plural"
+	{
+		"en"	"%s1 Supply"
+	}
+	"inventory_main_category_0"
+	{
+		"en"	"Primary"
+	}
+	"inventory_main_category_1"
+	{
+		"en"	"Secondary"
+	}
+	"inventory_main_category_2"
+	{
+		"en"	"Melee"
+	}
+	"inventory_main_category_3"
+	{
+		"en"	"Explosives"
+	}
+	"inventory_resupply_delay"
+	{
+		"en"	"You may resupply in %s1 second(s)."
+	}
+	"market"
+	{
+		"en"	"Market"
+	}
+	"market_coop"
+	{
+		"en"	"Market (Checkpoint)"
+	}
+	"market_hunt"
+	{
+		"en"	"Market (Hunt)"
+	}
+	"market_night"
+	{
+		"en"	"Market Night"
+	}
+	"market_survival"
+	{
+		"en"	"Market (Survival)"
+	}
+	"ministry"
+	{
+		"en"	"Ministry"
+	}
+	"ministry_coop"
+	{
+		"en"	"Ministry (Checkpoint)"
+	}
+	"ministry_hunt"
+	{
+		"en"	"Ministry (Hunt)"
+	}
+	"ministry_night"
+	{
+		"en"	"Ministry Night"
+	}
+	"panj"
+	{
+		"en"	"Panj"
+	}
+	"panj_hunt"
+	{
+		"en"	"Panj (Hunt)"
+	}
+	"panj_night"
+	{
+		"en"	"Panj Night"
+	}
+	"peak"
+	{
+		"en"	"Peak"
+	}
+	"peak_coop"
+	{
+		"en"	"Peak (Checkpoint)"
+	}
+	"peak_hunt"
+	{
+		"en"	"Peak (Hunt)"
+	}
+	"peak_night"
+	{
+		"en"	"Peak Night"
+	}
+	"playlist_coop"
+	{
+		"en"	"Cooperative"
+	}
+	"playlist_coop_desc"
+	{
+		"en"	"Team up with your friends against AI opponents"
+	}
+	"playlist_custom"
+	{
+		"en"	"Custom Servers"
+	}
+	"playlist_custom_desc"
+	{
+		"en"	"Join a random server running custom content or rules"
+	}
+	"playlist_pvp"
+	{
+		"en"	"Multiplayer"
+	}
+	"playlist_pvp_desc"
+	{
+		"en"	"A mix of all competitive multiplayer gamemodes"
+	}
+	"prlobby_average_life"
+	{
+		"en"	"Average Life-Span"
+	}
+	"prlobby_casualties"
+	{
+		"en"	"Casualties"
+	}
+	"prlobby_class"
+	{
+		"en"	"Class"
+	}
+	"prlobby_enemies_suppressed"
+	{
+		"en"	"Enemies Suppressed"
+	}
+	"prlobby_kd"
+	{
+		"en"	"K:D"
+	}
+	"prlobby_kills"
+	{
+		"en"	"Kills"
+	}
+	"prlobby_location"
+	{
+		"en"	"Location:"
+	}
+	"prlobby_loser_spaced"
+	{
+		"en"	"D e f e a t"
+	}
+	"prlobby_mission"
+	{
+		"en"	"Mission:"
+	}
+	"prlobby_munitions_used"
+	{
+		"en"	"Other Munitions"
+	}
+	"prlobby_mvp"
+	{
+		"en"	"Most Valuable Player"
+	}
+	"prlobby_obj"
+	{
+		"en"	"Obj"
+	}
+	"prlobby_objectives"
+	{
+		"en"	"Objectives"
+	}
+	"prlobby_personal_stats"
+	{
+		"en"	"Personal Match Stats"
+	}
+	"prlobby_preferred_class"
+	{
+		"en"	"Preferred Class"
+	}
+	"prlobby_preferred_class_none"
+	{
+		"en"	"None"
+	}
+	"prlobby_rounds_won"
+	{
+		"en"	"Rounds Won"
+	}
+	"prlobby_roundswon_team1"
+	{
+		"en"	"Security:"
+	}
+	"prlobby_roundswon_team2"
+	{
+		"en"	"Insurgents:"
+	}
+	"prlobby_score"
+	{
+		"en"	"Score"
+	}
+	"prlobby_shots_fired"
+	{
+		"en"	"Shots Fired"
+	}
+	"prlobby_team1_stats"
+	{
+		"en"	"Security"
+	}
+	"prlobby_team2_stats"
+	{
+		"en"	"Insurgents"
+	}
+	"prlobby_tie_spaced"
+	{
+		"en"	"T i e"
+	}
+	"prlobby_weapon_of_choice"
+	{
+		"en"	"Weapon of Choice"
+	}
+	"prlobby_winner_spaced"
+	{
+		"en"	"V i c t o r y"
+	}
+	"prlobby_winner_spectate"
+	{
+		"en"	"%s1 Win"
+	}
+	"radial_affirmative"
+	{
+		"en"	"Affirmative"
+	}
+	"radial_affirmative_subtitle"
+	{
+		"en"	"Affirmative."
+	}
+	"radial_area_clear"
+	{
+		"en"	"Area Clear"
+	}
+	"radial_area_clear_subtitle"
+	{
+		"en"	"Area is clear."
+	}
+	"radial_area_clear_subtitle_cp"
+	{
+		"en"	"%s1 is clear."
+	}
+	"radial_attack_objective_subtitle"
+	{
+		"en"	"Attack %s1!"
+	}
+	"radial_cover_me"
+	{
+		"en"	"Cover Me"
+	}
+	"radial_cover_me_subtitle"
+	{
+		"en"	"Cover me."
+	}
+	"radial_cover_me_subtitle_cp"
+	{
+		"en"	"Cover me at %s1."
+	}
+	"radial_covering_fire"
+	{
+		"en"	"Covering Fire"
+	}
+	"radial_covering_fire_subtitle"
+	{
+		"en"	"I need covering fire!"
+	}
+	"radial_covering_fire_subtitle_cp"
+	{
+		"en"	"I need covering fire at %s1!"
+	}
+	"radial_defend_objective_subtitle"
+	{
+		"en"	"Defend %s1!"
+	}
+	"radial_follow_me"
+	{
+		"en"	"Follow Me"
+	}
+	"radial_follow_me_subtitle"
+	{
+		"en"	"Follow me."
+	}
+	"radial_mark_enemy"
+	{
+		"en"	"Mark Enemy"
+	}
+	"radial_mark_enemy_subtitle"
+	{
+		"en"	"Enemy spotted!"
+	}
+	"radial_mark_objective"
+	{
+		"en"	"Mark Objective"
+	}
+	"radial_mark_position"
+	{
+		"en"	"Mark Position"
+	}
+	"radial_mark_position_subtitle"
+	{
+		"en"	"Move over there."
+	}
+	"radial_moving"
+	{
+		"en"	"Moving"
+	}
+	"radial_moving_to_objective"
+	{
+		"en"	"Moving to Objective"
+	}
+	"radial_moving_to_objective_subtitle"
+	{
+		"en"	"Moving to objective %s1."
+	}
+	"radial_need_backup"
+	{
+		"en"	"Need Backup"
+	}
+	"radial_need_backup_subtitle"
+	{
+		"en"	"Need backup!"
+	}
+	"radial_need_backup_subtitle_cp"
+	{
+		"en"	"Need backup at %s1!"
+	}
+	"radial_negative"
+	{
+		"en"	"Negative"
+	}
+	"radial_negative_subtitle"
+	{
+		"en"	"Negative."
+	}
+	"radial_objective_decoy_subtitle"
+	{
+		"en"	"Nothing found at %s1."
+	}
+	"radial_objective_found_subtitle"
+	{
+		"en"	"There's something at %s1!"
+	}
+	"radial_request_grenade"
+	{
+		"en"	"Request Grenade"
+	}
+	"radial_request_grenade_subtitle"
+	{
+		"en"	"Requesting a grenade."
+	}
+	"radial_request_grenade_subtitle_cp"
+	{
+		"en"	"Requesting a grenade at %s1."
+	}
+	"radial_request_orders"
+	{
+		"en"	"Requesting Orders"
+	}
+	"radial_request_orders_subtitle"
+	{
+		"en"	"Requesting orders."
+	}
+	"radial_request_ordinance"
+	{
+		"en"	"Request Ordnance"
+	}
+	"radial_request_ordinance_subtitle"
+	{
+		"en"	"Requesting ordnance."
+	}
+	"radial_request_ordinance_subtitle_cp"
+	{
+		"en"	"Requesting ordnance at %s1."
+	}
+	"radial_request_smoke"
+	{
+		"en"	"Request Smoke"
+	}
+	"radial_request_smoke_subtitle"
+	{
+		"en"	"Requesting a smoke grenade."
+	}
+	"radial_request_smoke_subtitle_cp"
+	{
+		"en"	"Requesting a smoke grenade at %s1."
+	}
+	"radial_spread_out"
+	{
+		"en"	"Spread Out"
+	}
+	"radial_spread_out_subtitle"
+	{
+		"en"	"Spread out!"
+	}
+	"radial_suppress_target"
+	{
+		"en"	"Suppress Target"
+	}
+	"radial_suppress_target_subtitle"
+	{
+		"en"	"Lay down suppressing fire!"
+	}
+	"radial_suppressing_target"
+	{
+		"en"	"Suppressing Target"
+	}
+	"radial_suppressing_target_subtitle"
+	{
+		"en"	"I'm supressing!"
+	}
+	"radial_waypoint"
+	{
+		"en"	"Set Waypoint"
+	}
+	"radial_waypoint_leader_subtitle"
+	{
+		"en"	"Move out!"
+	}
+	"radial_waypoint_subtitle"
+	{
+		"en"	"Moving."
+	}
+	"range"
+	{
+		"en"	"Firing Range"
+	}
+	"revolt"
+	{
+		"en"	"Revolt"
+	}
+	"revolt_coop"
+	{
+		"en"	"Revolt (Checkpoint)"
+	}
+	"revolt_hunt"
+	{
+		"en"	"Revolt (Hunt)"
+	}
+	"revolt_night"
+	{
+		"en"	"Revolt Night"
+	}
+	"round_restart_in_sec"
+	{
+		"en"	"The round will restart in %s1 second"
+	}
+	"round_restart_in_secs"
+	{
+		"en"	"The round will restart in %s1 seconds"
+	}
+	"scoreboard_category_kd"
+	{
+		"en"	"K:D"
+	}
+	"scoreboard_category_name"
+	{
+		"en"	"PLAYER"
+	}
+	"scoreboard_category_obj"
+	{
+		"en"	"OBJ"
+	}
+	"scoreboard_category_ping"
+	{
+		"en"	"PING"
+	}
+	"scoreboard_category_score"
+	{
+		"en"	"SCORE"
+	}
+	"siege"
+	{
+		"en"	"Siege"
+	}
+	"siege_coop"
+	{
+		"en"	"Siege (Checkpoint)"
+	}
+	"sinjar"
+	{
+		"en"	"Sinjar"
+	}
+	"sinjar_coop"
+	{
+		"en"	"Sinjar (Checkpoint)"
+	}
+	"sinjar_hunt"
+	{
+		"en"	"Sinjar (Hunt)"
+	}
+	"sinjar_night"
+	{
+		"en"	"Sinjar Night"
+	}
+	"training"
+	{
+		"en"	"Training Warehouse"
+	}
+	"upgrade_slot_aesthetic"
+	{
+		"en"	"Aesthetic"
+	}
+	"upgrade_slot_ammo"
+	{
+		"en"	"Ammo"
+	}
+	"upgrade_slot_barrel"
+	{
+		"en"	"Barrel"
+	}
+	"upgrade_slot_misc"
+	{
+		"en"	"Misc."
+	}
+	"upgrade_slot_optics"
+	{
+		"en"	"Optics"
+	}
+	"upgrade_slot_siderail"
+	{
+		"en"	"Siderail"
+	}
+	"upgrade_slot_stock"
+	{
+		"en"	"Stock"
+	}
+	"upgrade_slot_underbarrel"
+	{
+		"en"	"Underbarrel"
+	}
+	"uprising"
+	{
+		"en"	"Uprising"
+	}
+	"uprising_hunt"
+	{
+		"en"	"Uprising (Hunt)"
+	}
+	"uprising_night"
+	{
+		"en"	"Uprising Night"
+	}
+	"verticality"
+	{
+		"en"	"Verticality"
+	}
+	"verticality_hunt"
+	{
+		"en"	"Verticality (Hunt)"
+	}
+	"verticality_night"
+	{
+		"en"	"Verticality Night"
+	}
+	"weapon_ak74"
+	{
+		"en"	"AK-74"
+	}
+	"weapon_ak74_desc"
+	{
+		"en"	"Standard issue assault rifle manufactured in the Soviet Union (3.07kg)"
+	}
+	"weapon_akm"
+	{
+		"en"	"AKM"
+	}
+	"weapon_akm_desc"
+	{
+		"en"	"Standard battle rifle manufactured in the Soviet Union (2.93kg)"
+	}
+	"weapon_aks74u"
+	{
+		"en"	"AKS-74U"
+	}
+	"weapon_aks74u_desc"
+	{
+		"en"	"Fully automatic carbine manufactured in the Soviet Union (2.21kg)"
+	}
+	"weapon_anm14"
+	{
+		"en"	"AN-M14"
+	}
+	"weapon_anm14_desc"
+	{
+		"en"	"Incendiary grenade with thermite payload (0.91kg)"
+	}
+	"weapon_at4"
+	{
+		"en"	"AT4"
+	}
+	"weapon_at4_desc"
+	{
+		"en"	"High explosive, metal piercing rocket launcher manufactured in the United States (6.72kg)"
+	}
+	"weapon_c4"
+	{
+		"en"	"C4"
+	}
+	"weapon_c4_desc"
+	{
+		"en"	"C4 with claymore detonator (1.98kg)"
+	}
+	"weapon_c4_ied"
+	{
+		"en"	"IED"
+	}
+	"weapon_c4_ied_desc"
+	{
+		"en"	"Improvised explosives with cell phone detonator (1.98kg)"
+	}
+	"weapon_f1"
+	{
+		"en"	"F1 Grenade"
+	}
+	"weapon_f1_desc"
+	{
+		"en"	"Soviet fragmentation grenade (0.6kg)"
+	}
+	"weapon_fal"
+	{
+		"en"	"FAL"
+	}
+	"weapon_fal_desc"
+	{
+		"en"	"Fully automatic assault rifle manufactured in Belgium (4.3kg)"
+	}
+	"weapon_firemode_auto"
+	{
+		"en"	"AUTOMATIC"
+	}
+	"weapon_firemode_bolt"
+	{
+		"en"	"BOLT-ACTION"
+	}
+	"weapon_firemode_burst"
+	{
+		"en"	"BURST"
+	}
+	"weapon_firemode_pump"
+	{
+		"en"	"PUMP-ACTION"
+	}
+	"weapon_firemode_semi"
+	{
+		"en"	"SINGLE"
+	}
+	"weapon_flaregun"
+	{
+		"en"	"Flare Gun"
+	}
+	"weapon_flaregun_desc"
+	{
+		"en"	"Fires a temporary flare that disrupts enemy nightvision"
+	}
+	"weapon_garand"
+	{
+		"en"	"M-1 GARAND"
+	}
+	"weapon_garand_desc"
+	{
+		"en"	"Semi-automatic battle rifle manufactured in the United States (2.91kg)"
+	}
+	"weapon_gp25_he"
+	{
+		"en"	"GP-25 HE"
+	}
+	"weapon_gp25_smoke"
+	{
+		"en"	"GP-25 Smoke"
+	}
+	"weapon_inventory"
+	{
+		"en"	"INVENTORY"
+	}
+	"weapon_k98"
+	{
+		"en"	"K-98"
+	}
+	"weapon_k98_desc"
+	{
+		"en"	"Bolt action rifle manufactured in Germany (2.91kg)"
+	}
+	"weapon_kabar"
+	{
+		"en"	"Knife"
+	}
+	"weapon_m14"
+	{
+		"en"	"M14 EBR"
+	}
+	"weapon_m14_desc"
+	{
+		"en"	"Selective fire battle rifle manufactured in the United States (4.1kg)"
+	}
+	"weapon_m16"
+	{
+		"en"	"M16A4"
+	}
+	"weapon_m16_desc"
+	{
+		"en"	"Standard issue assault rifle manufactured in the United States (3.26kg)"
+	}
+	"weapon_m18"
+	{
+		"en"	"M18 Smoke"
+	}
+	"weapon_m18_desc"
+	{
+		"en"	"Standard issue smoke grenade (0.54kg)"
+	}
+	"weapon_m1911"
+	{
+		"en"	"M1911"
+	}
+	"weapon_m1911_desc"
+	{
+		"en"	".45 ACP sidearm manufactured in the United States (1.1 kg)"
+	}
+	"weapon_m1a1"
+	{
+		"en"	"M1A1"
+	}
+	"weapon_m1a1_desc"
+	{
+		"en"	"Light semi-automatic carbine manufactured in the United States during WW2 (2.41kg)"
+	}
+	"weapon_m203_he"
+	{
+		"en"	"M203 HE"
+	}
+	"weapon_m203_he_desc"
+	{
+		"en"	"Grenade launcher with a high explosive round that detonates on impact"
+	}
+	"weapon_m203_smoke"
+	{
+		"en"	"M203 Smoke"
+	}
+	"weapon_m203_smoke_desc"
+	{
+		"en"	"Grenade launcher with a smoke round that creates a smokescreen on impact"
+	}
+	"weapon_m249"
+	{
+		"en"	"M249"
+	}
+	"weapon_m249_desc"
+	{
+		"en"	"Squad automatic weapon manufactured in the United States (7.5kg)"
+	}
+	"weapon_m40a1"
+	{
+		"en"	"M40A1"
+	}
+	"weapon_m40a1_desc"
+	{
+		"en"	"Bolt action sniper rifle manufactured in the United States (6.57kg)"
+	}
+	"weapon_m45"
+	{
+		"en"	"M45A1"
+	}
+	"weapon_m4a1"
+	{
+		"en"	"M4A1"
+	}
+	"weapon_m4a1_desc"
+	{
+		"en"	"Fully automatic assault carbine manufactured in the United States (2.88kg)"
+	}
+	"weapon_m590"
+	{
+		"en"	"M590"
+	}
+	"weapon_m590_desc"
+	{
+		"en"	"Standard 12 gauge pump shotgun manufactured in the United States (2.54kg)"
+	}
+	"weapon_m67"
+	{
+		"en"	"M67 Frag"
+	}
+	"weapon_m67_desc"
+	{
+		"en"	"Standard issue fragmentation grenade (0.41kg)"
+	}
+	"weapon_m84"
+	{
+		"en"	"M84 Flash"
+	}
+	"weapon_m84_desc"
+	{
+		"en"	"Standard issue flash/stun grenade (0.24kg)"
+	}
+	"weapon_m9"
+	{
+		"en"	"M9"
+	}
+	"weapon_m9_desc"
+	{
+		"en"	"Standard issue 9mm sidearm manufactured in Italy (0.95kg)"
+	}
+	"weapon_makarov"
+	{
+		"en"	"Makarov"
+	}
+	"weapon_makarov_desc"
+	{
+		"en"	"Standard issue 9mm sidearm manufactured in the Soviet Union (0.73kg)"
+	}
+	"weapon_mini14"
+	{
+		"en"	"AC-556"
+	}
+	"weapon_mini14_desc"
+	{
+		"en"	"Lightweight carbine manufactured in the United States (2.91kg)"
+	}
+	"weapon_mk18"
+	{
+		"en"	"Mk18"
+	}
+	"weapon_molotov"
+	{
+		"en"	"Molotov"
+	}
+	"weapon_molotov_desc"
+	{
+		"en"	"Primitive incendiary grenade that explodes on impact (0.3kg)"
+	}
+	"weapon_mosin"
+	{
+		"en"	"Mosin"
+	}
+	"weapon_mosin_desc"
+	{
+		"en"	"Bolt action sniper rifle manufactured in the Soviet Union during WW2 (4.11kg)"
+	}
+	"weapon_mp40"
+	{
+		"en"	"MP40"
+	}
+	"weapon_mp40_desc"
+	{
+		"en"	"9mm submachine gun manufactured in Germany during WW2 (4.02kg)"
+	}
+	"weapon_mp5"
+	{
+		"en"	"MP5K"
+	}
+	"weapon_mp5_desc"
+	{
+		"en"	"Compact 9mm submachine gun manufactured in Germany (2.03kg)"
+	}
+	"weapon_rpg7"
+	{
+		"en"	"RPG-7"
+	}
+	"weapon_rpg7_desc"
+	{
+		"en"	"Rocket propelled grenade launcher manufactured in the Soviet Union (7.73kg)"
+	}
+	"weapon_rpk"
+	{
+		"en"	"RPK"
+	}
+	"weapon_rpk_desc"
+	{
+		"en"	"Light drum-fed machine gun manufactured in the Soviet Union (4.83kg)"
+	}
+	"weapon_sks"
+	{
+		"en"	"SKS"
+	}
+	"weapon_sks_desc"
+	{
+		"en"	"Semi-automatic carbine manufactured in the Soviet Union (3.85kg)"
+	}
+	"weapon_slot_explosive"
+	{
+		"en"	"Explosive"
+	}
+	"weapon_slot_explosive_num"
+	{
+		"en"	"Explosive %s1"
+	}
+	"weapon_slot_melee"
+	{
+		"en"	"Melee"
+	}
+	"weapon_slot_melee_num"
+	{
+		"en"	"Melee %s1"
+	}
+	"weapon_slot_primary"
+	{
+		"en"	"Primary"
+	}
+	"weapon_slot_primary_num"
+	{
+		"en"	"Primary %s1"
+	}
+	"weapon_slot_secondary"
+	{
+		"en"	"Secondary"
+	}
+	"weapon_slot_secondary_num"
+	{
+		"en"	"Secondary %s1"
+	}
+	"weapon_toz"
+	{
+		"en"	"TOZ"
+	}
+	"weapon_toz_desc"
+	{
+		"en"	"Pump shotgun manufactured in the Soviet Union (3.82kg)"
+	}
+	"weapon_ump45"
+	{
+		"en"	"UMP-45"
+	}
+	"weapon_ump45_desc"
+	{
+		"en"	".45ACP submachine gun manufactured in Germany (2.53kg)"
+	}
+	"weapon_upgrade_2xaimpoint"
+	{
+		"en"	"2x Red Dot"
+	}
+	"weapon_upgrade_2xaimpoint_desc"
+	{
+		"en"	"Magnified red dot sight for short to mid range engagements"
+	}
+	"weapon_upgrade_4xscope"
+	{
+		"en"	"4x Scope"
+	}
+	"weapon_upgrade_4xscope_desc"
+	{
+		"en"	"Scope for longer range engagements"
+	}
+	"weapon_upgrade_aimpoint"
+	{
+		"en"	"Red Dot"
+	}
+	"weapon_upgrade_aimpoint_desc"
+	{
+		"en"	"Simple red dot sight for quicker target aquisition"
+	}
+	"weapon_upgrade_ap"
+	{
+		"en"	"AP Ammo"
+	}
+	"weapon_upgrade_ap_desc"
+	{
+		"en"	"Highly effective against armored targets"
+	}
+	"weapon_upgrade_bipod"
+	{
+		"en"	"Bipod"
+	}
+	"weapon_upgrade_bipod_desc"
+	{
+		"en"	"Allows you to steady your weapon on a flat surface"
+	}
+	"weapon_upgrade_elcan"
+	{
+		"en"	"C79 Scope"
+	}
+	"weapon_upgrade_elcan_desc"
+	{
+		"en"	"3.4x28 optic attachment for longer range engagements"
+	}
+	"weapon_upgrade_flashlight"
+	{
+		"en"	"Flashlight"
+	}
+	"weapon_upgrade_flashlight_desc"
+	{
+		"en"	"Assists target discovery in darker settings"
+	}
+	"weapon_upgrade_flipsights"
+	{
+		"en"	"Flipsights"
+	}
+	"weapon_upgrade_foregrip"
+	{
+		"en"	"Foregrip"
+	}
+	"weapon_upgrade_foregrip_desc"
+	{
+		"en"	"For increased weapon stability and reduced horizontal and vertical recoil"
+	}
+	"weapon_upgrade_heavybarrel"
+	{
+		"en"	"Heavy Barrel"
+	}
+	"weapon_upgrade_heavybarrel_desc"
+	{
+		"en"	"Weight in the front of the weapon to reduce muzzle climb and increase accuracy"
+	}
+	"weapon_upgrade_holographic"
+	{
+		"en"	"Holographic Sight"
+	}
+	"weapon_upgrade_holographic_desc"
+	{
+		"en"	"Holographic reticle allowing for easier target aquisition and peripheral view"
+	}
+	"weapon_upgrade_hp"
+	{
+		"en"	"HP Ammo"
+	}
+	"weapon_upgrade_hp_desc"
+	{
+		"en"	"Highly effective against flesh targets"
+	}
+	"weapon_upgrade_kobra"
+	{
+		"en"	"Kobra Sight"
+	}
+	"weapon_upgrade_kobra_desc"
+	{
+		"en"	"Standard Soviet issued aim point"
+	}
+	"weapon_upgrade_lasersight"
+	{
+		"en"	"Laser Sight"
+	}
+	"weapon_upgrade_lasersight_desc"
+	{
+		"en"	"Aim assistance for when you are not looking down your sights"
+	}
+	"weapon_upgrade_po4x24"
+	{
+		"en"	"PO 4x24"
+	}
+	"weapon_upgrade_po4x24_desc"
+	{
+		"en"	"Russian 4x optic attachment for longer range engagements"
+	}
+	"weapon_upgrade_scope_m40a1"
+	{
+		"en"	"Mk4 Scope"
+	}
+	"weapon_upgrade_scope_m40a1_desc"
+	{
+		"en"	"8.7x magnification scope for long range engagements"
+	}
+	"weapon_upgrade_scope_mosin"
+	{
+		"en"	"7x Scope"
+	}
+	"weapon_upgrade_scope_mosin_desc"
+	{
+		"en"	"7x magnification scope for long range engagements"
+	}
+	"weapon_upgrade_silencer"
+	{
+		"en"	"Suppressor"
+	}
+	"weapon_upgrade_silencer_desc"
+	{
+		"en"	"Reduce your sound footprint for increased stealth"
+	}
+	"weapon_upgrade_slugs"
+	{
+		"en"	"Slugs"
+	}
+	"weapon_upgrade_slugs_desc"
+	{
+		"en"	"Slug rounds maintain a much tighter radius allowing shotguns to be used in medium to long range engagements"
+	}
+	"weapon_upgrade_tracer"
+	{
+		"en"	"Tracer Ammo"
+	}
+	"weapon_upgrade_tracer_desc"
+	{
+		"en"	"Ammo with periodical tracer rounds that increase in frequency when you are about to run out"
+	}
+}
