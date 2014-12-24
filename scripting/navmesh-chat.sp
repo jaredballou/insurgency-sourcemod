@@ -34,7 +34,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-	LoadTranslations("insurgency.phrases");
+//	LoadTranslations("insurgency.phrases");
 	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarTeamOnly = CreateConVar("sm_navmesh_chat_teamonly", "1", "sets whether to prepend to all messages or just team messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -63,11 +63,11 @@ public Action:VoiceHook(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 	        GetClientEyePosition(clientid, flEyePos);
 		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
 	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
-		Color_ChatSetSubject(clientid);
+		//Color_ChatSetSubject(clientid);
 		Format(sNameBuffer,sizeof(sNameBuffer), "%s%s%s{T}%s", sGridPos, sPlace, sNameBuffer, clientname);
-		Color_ParseChatText(sNameBuffer, clientname, MAXLENGTH_NAME);
+		//Color_ParseChatText(sNameBuffer, clientname, MAXLENGTH_NAME);
 		Format(sTranslated, sizeof(sTranslated), "radial_%s_subtitle", message);
-		StartDataTimer(clientid, String:clientname, String:sTranslated);
+		StartDataTimer(clientid, String:sNameBuffer, String:sTranslated);
 //		return Plugin_Handled;
 	}
 	return Plugin_Continue;
@@ -104,20 +104,19 @@ public Action:SubTitle_Print(Handle:timer, Handle:h_DisplayPrint)
 	GetPlaceName(senderOrigin,sPlace,sizeof(sPlace));
         GetGridPos(senderOrigin,sGridPos,sizeof(sGridPos));
 
-	Color_ChatSetSubject(clientid);
+	//Color_ChatSetSubject(clientid);
 
 	for(new receiver = 1; receiver <= MaxClients; receiver++)
 	{
 		if(IsClientInGame(receiver) && GetClientTeam(clientid) == GetClientTeam(receiver))
 		{
 			GetDistanceDirection(receiver,senderOrigin,sDistance,sizeof(sDistance));
-
 			Format(textToPrint,sizeof(textToPrint),"%s%s%s",sGridPos,sPlace,sDistance);
-			PrintToServer("[NMchat]: Sending message to client %d: %s",receiver,textToPrint);
+			PrintToServer("[NMchat]: Sending message to client %d",receiver);
 			Client_PrintToChat(receiver,true,textToPrint);
 		}
 	}
-	Color_ChatClearSubject();
+	//Color_ChatClearSubject();
 //	return Plugin_Handled;
 	return Plugin_Continue;
 }

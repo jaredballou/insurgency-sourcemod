@@ -105,7 +105,7 @@ public OnPluginStart()
 	AddGameLogHook(LogEvent);
 	
 	GetTeams(false);
-	LoadTranslations("insurgency.phrases.txt");
+//	LoadTranslations("insurgency.phrases.txt");
 }
 
 public OnMapStart()
