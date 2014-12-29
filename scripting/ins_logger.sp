@@ -125,7 +125,7 @@ public Handle:LoadValues()
 			continue;
 		if(GetEdictClassname(i, name, sizeof(name))){
 			if (StrContains(name,"weapon_") > -1) {
-				GetWeaponArrayIndex(name);
+				GetWeaponIndex(name);
 			}
 		}
 	}
@@ -322,7 +322,7 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	new String:shotWeapName[32];
 	GetClientWeapon(plrid, shotWeapName, sizeof(shotWeapName));
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
-	new weapon_index = GetWeaponArrayIndex(shotWeapName);
+	new weapon_index = GetWeaponIndex(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
 	//PrintToServer("WeaponIndex: %d - %s", weapon_index, shotWeapName);
 	
@@ -335,19 +335,19 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	return Plugin_Continue;
 }
 
-public GetWeaponArrayIndex(String:key[])
+public GetWeaponIndex(String:weapon_name[])
 {
 	decl String:strBuf[32];
 	
 	for(new i = 0; i < NumWeaponsDefined; i++)
 	{
 		GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
-		if(StrEqual(key, strBuf)) return i;
+		if(StrEqual(weapon_name, strBuf)) return i;
 	}
 	//jballou: Adding weapon to trie if it's not here
-	PushArrayString(g_weap_array, key);
+	PushArrayString(g_weap_array, weapon_name);
 	NumWeaponsDefined++;
-	PrintToServer("[LOGGER] Weapons %s not in trie, added as index %d", key,NumWeaponsDefined);
+	PrintToServer("[LOGGER] Weapons %s not in trie, added as index %d", weapon_name,NumWeaponsDefined);
 	return (NumWeaponsDefined-1);
 }
 
@@ -466,7 +466,6 @@ public Event_RoundLevelAdvanced( Handle:event, const String:name[], bool:dontBro
 			LogToGame("\"%N<%d><%s><%s>\" triggered \"round_level_advanced\"", client, player_userid, player_authid, g_team_list[player_team_index]);
 		}
 	}
-
 }
 public Event_GameEnd( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -476,7 +475,7 @@ public Event_GameEnd( Handle:event, const String:name[], bool:dontBroadcast )
 	new winner = GetEventInt( event, "winner");
 	new team1_score = GetEventInt( event, "team1_score");
 	new team2_score = GetEventInt( event, "team2_score");
-	LogToGame("World triggered game_end winner:%d team1_score:%d team2_score: %d", winner,team1_score,team2_score);
+	LogToGame("World triggered \"Game_End\" (winner \"%d\") (team1_score \"%d\") (team2_score \"%d\")", winner,team1_score,team2_score);
 }
 public Event_RoundStart( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -488,7 +487,7 @@ public Event_RoundStart( Handle:event, const String:name[], bool:dontBroadcast )
 	new timelimit = GetEventInt( event, "timelimit");
 	new lives = GetEventInt( event, "lives");
 	new gametype = GetEventInt( event, "gametype");
-	LogToGame("World triggered round_start priority:%d timelimit:%d lives:%d gametype:%d",priority,timelimit,lives,gametype);
+	LogToGame("World triggered \"Round_Start\" (priority \"%d) (timelimit \"%d\") (lives \"%d\") (gametype \"%d\")",priority,timelimit,lives,gametype);
 }
 public Event_RoundBegin( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -500,7 +499,7 @@ public Event_RoundBegin( Handle:event, const String:name[], bool:dontBroadcast )
 	new timelimit = GetEventInt( event, "timelimit");
 	new lives = GetEventInt( event, "lives");
 	new gametype = GetEventInt( event, "gametype");
-	LogToGame("World triggered round_begin priority:%d timelimit:%d lives:%d gametype:%d",priority,timelimit,lives,gametype);
+	LogToGame("World triggered \"Round_Begin\" (priority \"%d\") (timelimit \"%d\") (lives \"%d\") (gametype \"%d\")",priority,timelimit,lives,gametype);
 }
 public Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -513,7 +512,7 @@ public Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
 	decl String:message[255],String:message_string[255];
 	GetEventString(event, "message",message,sizeof(message));
 	GetEventString(event, "message_string",message_string,sizeof(message_string));
-	LogToGame("World triggered round_end winner:%d reason:%d message:\"%s\" message_string:\"%s\"",winner,reason,message,message_string);
+	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
 	WstatsDumpAll();
 }
 public Event_MissileLaunched( Handle:event, const String:name[], bool:dontBroadcast )
@@ -656,9 +655,9 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		GetClientName(attacker, clientname, sizeof(clientname));
 		
 
-		//new weapon_index = get_weapon_index(weapon, -1 ,false);
+		//new weapon_index = GetWeaponIndex(weapon, -1 ,false);
 		//PrintToChatAll("idx: %d - weapon: %s", weapon_index, weapon);
-		new weapon_index = get_weapon_index(weapon);
+		new weapon_index = GetWeaponIndex(weapon);
 
 		if (weapon_index > -1)  {
 			g_weapon_stats[attacker][weapon_index][LOG_HIT_HITS]++;

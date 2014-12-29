@@ -31,7 +31,8 @@ public OnPluginStart()
 	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
-	remove_fog();
+	dump_map_data();
+	PrintToChatAll ("\x01 1 .. \x02 2 .. \x03 3 .. \x04 4 .. \x05 5 .. \x06 6 .. \x07 7 .. \x08 8 .. \x09 9 ..");  
 }
 public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -43,12 +44,13 @@ public dump_map_data()
 	{
 		return true;
 	}
+	return true;
 	new String:classname[32],String:targetname[32],String:controlpoint[32],teamnum,Float:origin[3];
 decl String:sMap[256];
 GetCurrentMap(sMap, sizeof(sMap));
 decl String:sOutput[PLATFORM_MAX_PATH], String:sSeparator[1], String:sContent[1024],String:sBuffer[1024];
-new Handle:g_hNavMeshKeyValues = CreateKeyValues(sMapName);
-Format(sOutput, sizeof(sOutput), "maps\\navmesh\\%s.txt", sMapName);
+new Handle:g_hNavMeshKeyValues = CreateKeyValues(sMap);
+Format(sOutput, sizeof(sOutput), "maps\\navmesh\\%s.txt", sMap);
 	for(new i=0;i<= GetMaxEntities() ;i++){
 		if(!IsValidEntity(i))
 			continue;
@@ -66,7 +68,7 @@ Format(sOutput, sizeof(sOutput), "maps\\navmesh\\%s.txt", sMapName);
 				GetEntPropString(i, Prop_Data, "controlpoint", controlpoint, sizeof(controlpoint));
 				GetEntPropString(i, Prop_Data, "targetname", targetname, sizeof(targetname));
 				GetEntPropVector(i, Prop_Send, "m_vecOrigin", origin);
-	       	PrintToServer("[TestProp] Entity %d classname %s",i,weapon);
+	       	PrintToServer("[TestProp] Entity %d classname %s",i,classname);
 			}
 		}
 	}
