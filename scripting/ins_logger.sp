@@ -108,7 +108,10 @@ public OnPluginStart()
 	GetTeams(false);
 //	LoadTranslations("insurgency.phrases.txt");
 }
-
+public OnPluginEnd()
+{
+	WstatsDumpAll();
+}
 public OnMapStart()
 {
 	GetTeams(false);
