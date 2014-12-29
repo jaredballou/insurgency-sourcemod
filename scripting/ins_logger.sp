@@ -87,6 +87,7 @@ public OnPluginStart()
 	HookEvent("grenade_thrown", Event_GrenadeThrown);
 	HookEvent("grenade_detonate", Event_GrenadeDetonate);
 	HookEvent("game_end", Event_GameEnd);
+	HookEvent("game_newmap", Event_GameNewMap);
 	HookEvent("game_start", Event_GameStart);
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_end", Event_RoundEnd);
@@ -443,14 +444,20 @@ public Event_GrenadeDetonate( Handle:event, const String:name[], bool:dontBroadc
 public Event_GameStart( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	//"priority" "short"
+	new priority = GetEventInt( event, "priority");
+	LogToGame("World triggered \"Game_Start\" (priority \"%d\")",priority);
 }
 public Event_GameNewMap( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	//"mapname" "string"
+	decl String:mapname[255];
+	GetEventString(event, "mapname",mapname,sizeof(mapname));
+	LogToGame("World triggered \"Game_NewMap\" (mapname \"%s\")",mapname);
 }
 public Event_RoundLevelAdvanced( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	//"level" "short"
+	new level = GetEventInt( event, "level");
 	for (new client=1; client<=MaxClients; client++)
 	{
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
@@ -463,9 +470,10 @@ public Event_RoundLevelAdvanced( Handle:event, const String:name[], bool:dontBro
 			new player_userid = GetClientUserId(client);
 			new player_team_index = GetClientTeam(client);
 
-			LogToGame("\"%N<%d><%s><%s>\" triggered \"round_level_advanced\"", client, player_userid, player_authid, g_team_list[player_team_index]);
+			LogToGame("\"%N<%d><%s><%s>\" triggered \"round_level_advanced\" (level \"%d\")", client, player_userid, player_authid, g_team_list[player_team_index],level);
 		}
 	}
+	LogToGame("World triggered \"Round_LevelAdvanced\" (level \"%d\")",level);
 }
 public Event_GameEnd( Handle:event, const String:name[], bool:dontBroadcast )
 {
