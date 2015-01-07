@@ -108,12 +108,13 @@ public Action:SubTitle_Print(Handle:timer, Handle:h_DisplayPrint)
 
 	for(new receiver = 1; receiver <= MaxClients; receiver++)
 	{
-		if(IsClientInGame(receiver) && GetClientTeam(clientid) == GetClientTeam(receiver))
+		if ((IsClientInGame(receiver) && GetClientTeam(clientid) == GetClientTeam(receiver)) && (clientid != receiver))
 		{
 			GetDistanceDirection(receiver,senderOrigin,sDistance,sizeof(sDistance));
 			Format(textToPrint,sizeof(textToPrint),"%s%s%s",sGridPos,sPlace,sDistance);
 			PrintToServer("[NMchat]: Sending message to client %d",receiver);
 			Client_PrintToChat(receiver,true,textToPrint);
+//			PrintToChat(receiver,textToPrint);
 		}
 	}
 	//Color_ChatClearSubject();
@@ -150,10 +151,7 @@ bool:OverviewLoad(const String:sMapName[])
 {
 	PrintToServer("[NMchat]: start OverviewLoad");
 	decl String:sOverviewFilePath[PLATFORM_MAX_PATH];
-	Format(sOverviewFilePath, sizeof(sOverviewFilePath), "maps\\overviews\\%s.txt", sMapName);
-	if (!FileExists(sOverviewFilePath)) {
-		Format(sOverviewFilePath, sizeof(sOverviewFilePath), "resource\\overviews\\%s.txt", sMapName);
-	}
+	Format(sOverviewFilePath, sizeof(sOverviewFilePath), "insurgency-data\\resource\\overviews\\%s.txt", sMapName);
 	if (!FileExists(sOverviewFilePath)) {
 		PrintToServer("[NMchat]: OverviewLoad cannot find suitable overview file!");
 		return false;
@@ -209,47 +207,47 @@ stock GetDistanceDirection(client,Float:endpos[3],String:buffer[], size)
 	// Up
 	if (diff >= -22.5 && diff < 22.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x91");
+		Format(directionString, sizeof(directionString), "FWD");//"\xe2\x86\x91");
 	}
 	// right up
 	else if (diff >= 22.5 && diff < 67.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x97");
+		Format(directionString, sizeof(directionString), "FWD-RIGHT");//"\xe2\x86\x97");
 	}
 	// right
 	else if (diff >= 67.5 && diff < 112.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x92");
+		Format(directionString, sizeof(directionString), "RIGHT");//"\xe2\x86\x92");
 	}
 
 	// right down
 	else if (diff >= 112.5 && diff < 157.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x98");
+		Format(directionString, sizeof(directionString), "BACK-RIGHT");//"\xe2\x86\x98");
 	}
 	// down
 	else if (diff >= 157.5 || diff < -157.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x93");
+		Format(directionString, sizeof(directionString), "BACK");//"\xe2\x86\x93");
 	}
 
 					// down left
 	else if (diff >= -157.5 && diff < -112.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x99");
+		Format(directionString, sizeof(directionString), "BACK-LEFT");//"\xe2\x86\x99");
 	}
 
 	// left
 	else if (diff >= -112.5 && diff < -67.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x90");
+		Format(directionString, sizeof(directionString), "LEFT");//"\xe2\x86\x90");
 	}
 	// left up
 	else if (diff >= -67.5 && diff < -22.5)
 	{
-		Format(directionString, sizeof(directionString), "\xe2\x86\x96");
+		Format(directionString, sizeof(directionString), "FWD-LEFT");//"\xe2\x86\x96");
 	}
-	Format(buffer, size, "{G}(%.0fm %s) ",dist,directionString);
+	Format(buffer, size, "(%.0fm %s) ",dist,directionString);
 	return dist;
 }
 
@@ -320,7 +318,7 @@ public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:me
 		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
 	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 		Format(sNameBuffer, sizeof(sNameBuffer), "%s%s{T}%s", sGridPos, sPlace, name);
-		PrintToServer("[NMChat] Name changed from '%s' to '%s'",name,sNameBuffer);
+		PrintToServer("[NMChat] NameBuffer changed from '%s' to '%s'",name,sNameBuffer);
 		Color_ChatSetSubject(author);
 		index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
 		Color_ChatClearSubject();
