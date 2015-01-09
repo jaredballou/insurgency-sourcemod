@@ -5,6 +5,7 @@
 #pragma unused cvarVersion
 #include <sourcemod>
 #include <sdktools>
+#include <sdkhooks>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
@@ -17,6 +18,7 @@ new Handle:cvarVersion; // version cvar!
 new Handle:cvarEnabled; // are we enabled?
 
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
+	
 
 
 public Plugin:myinfo = {
@@ -30,72 +32,97 @@ public Plugin:myinfo = {
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "1", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	HookEvent("player_hurt", Event_player_hurt, EventHookMode_Pre);
+	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
+	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
-	PrecacheSound( "weapons/ied/ied_detonate_01.wav", true);
-	PrecacheSound( "weapons/ied/ied_detonate_02.wav", true);
-	PrecacheSound( "weapons/ied/ied_detonate_03.wav", true);
 }
 public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
-	{
-		return true;
-	}
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	if( client == 0)
-		return;
-	g_client_last_classstring[client] = class_template;
+	if( client) {
+		g_client_last_classstring[client] = class_template;
+	}
+	return;
 }
-public Action:Event_player_hurt(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	return Plugin_Continue;
+}
+public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
 	{
-		return true;
+		return Plugin_Continue;
 	}
-	new victimId = GetEventInt(event, "userid");
-	new attackerId = GetEventInt(event, "attacker");
-	if ((victimId != 0) && (attackerId != 0))
+	new victimId = GetEventInt(event, "victim");
+	if (victimId > 0)
 	{
 		new victim = GetClientOfUserId(victimId);
-		//new attacker = GetClientOfUserId(attackerId);
-		if (IsClientInGame(victim))
-		{
-			if (StrContains(g_client_last_classstring[victim], "suicide") > -1)
-			{
-				PrintToServer("[SUICIDE] Blowing Up %N with class %s!",victim,g_client_last_classstring[victim]);
-				explode(victim);
-			}
-		}
+		CheckExplode(victim);
 	}
 	return Plugin_Continue;
 }
-stock explode(client)
-{
+public CheckExplode(client) {
+	PrintToServer("[SUICIDE] Running CheckExplode");
 	if (!GetConVarBool(cvarEnabled))
 	{
-		return true;
+		return;
 	}
-	new explosion = CreateEntityByName("env_explosion");
-	if (explosion != -1)
+	if (!IsClientInGame(client) || !IsPlayerAlive(client))
 	{
-		decl Float:vector[3];
-		new damage = 500;
-		new radius = 128;
-		new team = GetEntProp(client, Prop_Send, "m_iTeamNum");
-		GetClientEyePosition(client, vector);
-		SetEntProp(explosion, Prop_Send, "m_iTeamNum", team);
-		SetEntProp(explosion, Prop_Data, "m_spawnflags", 264);
-		SetEntProp(explosion, Prop_Data, "m_iMagnitude", damage);
-		SetEntProp(explosion, Prop_Data, "m_iRadiusOverride", radius);
-		DispatchKeyValue(explosion, "rendermode", "5");
-		DispatchSpawn(explosion);
-		ActivateEntity(explosion);
-		TeleportEntity(explosion, vector, NULL_VECTOR, NULL_VECTOR);
-		EmitSoundToAll("weapons/ied/ied_detonate_01.wav", explosion, 1, 90);
-		AcceptEntityInput(explosion, "Explode");
+		return;
+	}		
+	if ((!(StrContains(g_client_last_classstring[client], "bomber") > -1)) && (!(StrContains(g_client_last_classstring[client], "suicide") > -1)))
+	{
+		return;
+	}		
+	PrintToServer("[SUICIDE] Blowing Up %N with class %s!",client,g_client_last_classstring[client]);
+	new Float:vecOrigin[3],Float:vecAngles[3];
+	GetClientEyePosition(client, vecOrigin);
+
+	new ent = CreateEntityByName("grenade_ied");
+	if(IsValidEntity(ent))
+	{
+		PrintToServer("[SUICIDE] Created IED entity");
+		vecAngles[0] = vecAngles[1] = vecAngles[2] = 0.0;
+		TeleportEntity(ent, vecOrigin, vecAngles, vecAngles);
+		SetEntPropEnt(ent, Prop_Data, "m_hOwnerEntity", client);
+		SetEntProp(ent, Prop_Data, "m_nNextThinkTick", 1); //for smoke
+		SetEntProp(ent, Prop_Data, "m_takedamage", 2);
+		SetEntProp(ent, Prop_Data, "m_iHealth", 1);
+		if (DispatchSpawn(ent)) {
+			PrintToServer("[SUICIDE] Detonating IED entity");
+			DealDamage(ent,1000,client,DMG_BLAST,"weapon_ied");
+		}
+	}
+}
+DealDamage(victim,damage,attacker=0,dmg_type=DMG_GENERIC,String:weapon[]="")
+{
+	if(victim>0 && IsValidEdict(victim) && IsClientInGame(victim) && IsPlayerAlive(victim) && damage>0)
+	{
+		new String:dmg_str[16];
+		IntToString(damage,dmg_str,16);
+		new String:dmg_type_str[32];
+		IntToString(dmg_type,dmg_type_str,32);
+		new pointHurt=CreateEntityByName("point_hurt");
+		if(pointHurt)
+		{
+			DispatchKeyValue(victim,"targetname","war3_hurtme");
+			DispatchKeyValue(pointHurt,"DamageTarget","war3_hurtme");
+			DispatchKeyValue(pointHurt,"Damage",dmg_str);
+			DispatchKeyValue(pointHurt,"DamageType",dmg_type_str);
+			if(!StrEqual(weapon,""))
+			{
+				DispatchKeyValue(pointHurt,"classname",weapon);
+			}
+			DispatchSpawn(pointHurt);
+			AcceptEntityInput(pointHurt,"Hurt",(attacker>0)?attacker:-1);
+			DispatchKeyValue(pointHurt,"classname","point_hurt");
+			DispatchKeyValue(victim,"targetname","war3_donthurtme");
+			RemoveEdict(pointHurt);
+		}
 	}
 }

@@ -14,7 +14,8 @@ new Handle:cvarVersion; // version cvar!
 new Handle:cvarEnabled; // are we enabled?
 new i_fullmag[MAXPLAYERS+1];
 new Handle:WeaponsTrie;
-
+new Handle:h_AmmoTimers[MAXPLAYERS+1];
+new i_TimerWeapon[MAXPLAYERS+1];
 public Plugin:myinfo = {
 	name= "[INS] Ammo Check",
 	author  = "Jared Ballou (jballou)",
@@ -31,12 +32,44 @@ public OnPluginStart()
 	HookEvent("weapon_reload", Event_WeaponEventMagUpdate,  EventHookMode_Post);
 	HookEvent("weapon_fire", Event_WeaponEventMagUpdate,  EventHookMode_Pre);
 	WeaponsTrie = CreateTrie();
+	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	PrintToServer("[AMMOCHECK] Started!");
 }
-
+public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new victimId = GetEventInt(event, "victim");
+	if (victimId > 0)
+	{
+		new victim = GetClientOfUserId(victimId);
+		KillAmmoTimer(victim);
+	}
+	return Plugin_Continue;
+}
 public OnMapStart()
 {
 	ClearTrie(WeaponsTrie);
+}
+public OnClientDisconnect(client)
+{
+	KillAmmoTimer(client);
+}
+public KillAmmoTimer(client)
+{
+	if (h_AmmoTimers[client] != INVALID_HANDLE)
+	{
+		KillTimer(h_AmmoTimers[client]);
+		h_AmmoTimers[client] = INVALID_HANDLE;
+		i_TimerWeapon[client] = -1;
+	}
+}
+		
+public CreateAmmoTimer(client,ActiveWeapon)
+{
+	KillAmmoTimer(client);
+	i_TimerWeapon[client] = ActiveWeapon;
+	new Float:timedone = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
+	//PrintToServer("[AMMOCHECK] Reload Timer Started with %f time is %f timer is %f!",timedone,GetGameTime(),(timedone-GetGameTime()));
+	h_AmmoTimers[client] = CreateTimer((timedone-GetGameTime())+0.5, Timer_Check_Ammo, client);
 }
 public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -45,12 +78,12 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 	if(!IsClientInGame(client))
 		return Plugin_Handled;
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+	if (ActiveWeapon < 0)
+		return Plugin_Handled;
 	Update_Magazine(client,ActiveWeapon);
 	if(StrEqual(name, "weapon_reload"))
-	{
-		new Float:timedone = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
-		//PrintToServer("[AMMOCHECK] Reload Timer Started with %f time is %f timer is %f!",timedone,GetGameTime(),(timedone-GetGameTime()));
-		CreateTimer((timedone-GetGameTime())+0.5, Timer_Check_Ammo, client);
+	{		
+		CreateAmmoTimer(client,ActiveWeapon);
 	}
 	return Plugin_Continue;
 }
@@ -59,11 +92,13 @@ public Action:Timer_Check_Ammo(Handle:event, any:client)
 {
 	//PrintToServer("[AMMOCHECK] Reload timer finished!");
 	Check_Ammo(client,0);
+//h_AmmoTimers[client] = INVALID_HANDLE;
 	return Plugin_Stop;
 }
 
 public Action:Check_Ammo(client, args)
 {
+	KillAmmoTimer(client);
 	//PrintToServer("[AMMOCHECK] Check_Ammo!");
 	if (!GetConVarBool(cvarEnabled))
 	{
@@ -75,6 +110,10 @@ public Action:Check_Ammo(client, args)
 		return Plugin_Handled;
 	}
 	Update_Magazine(client,ActiveWeapon);
+	if (i_TimerWeapon[client] != ActiveWeapon)
+	{
+		return Plugin_Handled;
+	}
 	decl String:sWeapon[32];
 	new maxammo;
 	GetEdictClassname(ActiveWeapon, sWeapon, sizeof(sWeapon));

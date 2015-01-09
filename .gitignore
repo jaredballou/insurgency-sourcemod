@@ -2,3 +2,4 @@
 /configs/advertisements.txt
 /logs/*
 /gamedata/*
+data/sqlite/sourcebans-queue.sq3

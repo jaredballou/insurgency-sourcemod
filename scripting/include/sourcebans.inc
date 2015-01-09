@@ -5,7 +5,7 @@
 
 public SharedPlugin:__pl_sourcebans = 
 {
-	name = "SourceBans",
+	name = "sourcebans",
 	file = "sourcebans.smx",
 #if defined REQUIRE_PLUGIN
     required = 1

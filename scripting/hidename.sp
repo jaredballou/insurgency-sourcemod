@@ -8,6 +8,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <basecomm>
+#include <scp>
 
 #define PLUGIN_VERSION "1.1.7"
 
@@ -28,7 +29,7 @@ new Handle:g_hRevertGagged = INVALID_HANDLE;
 new Handle:g_hHideFlag = INVALID_HANDLE;
 
 new bool:g_bLateLoad, bool:g_bEnabled, bool:g_bHideAll, bool:g_bRevertAll, bool:g_bHideGagged, bool:g_bRevertGagged;
-new g_iFlag, UserMsg:g_umSayText2;
+new g_iFlag;
 new String:g_sPrefixChat[32];
 
 public Plugin:myinfo = 
@@ -48,6 +49,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {	
+	PrintToServer("[HIDENAME] starting");
 	LoadTranslations("common.phrases");
 	LoadTranslations("sm_hidename.phrases");
 
@@ -70,10 +72,14 @@ public OnPluginStart()
 	HookEvent("player_changename", Event_OnNameChange);
 	RegAdminCmd("sm_hidename", Command_Hide, ADMFLAG_KICK);
 
-	g_umSayText2 = GetUserMessageId("SayText2");
-	HookUserMessage(g_umSayText2, UserMessageHook, true);
+	HookUserMessage(GetUserMessageId("SayText"), UserMessageHook, true);
+	HookUserMessage(GetUserMessageId("SayText2"), UserMessageHook, true);
+	HookUserMessage(GetUserMessageId("HintText"), UserMessageHook, true);
+	HookUserMessage(GetUserMessageId("TextMsg"), UserMessageHook, true);
+	HookUserMessage(GetUserMessageId("GameMessage"), UserMessageHook, true);
 
 	Void_SetDefaults();
+	PrintToServer("[HIDENAME] Initialized");
 }
 
 public OnConfigsExecuted()
@@ -140,17 +146,17 @@ public OnClientDisconnect(client)
 
 public Action:Event_OnNameChange(Handle:event, const String:name[], bool:dontBroadcast)
 {
-//	PrintToServer("[HIDENAME] Called Event_OnNameChange");
+	PrintToServer("[HIDENAME] Called Event_OnNameChange");
 	if(g_bEnabled)
 	{
-//		PrintToServer("[HIDENAME] Enabled");
+		PrintToServer("[HIDENAME] Enabled");
 		new client = GetClientOfUserId(GetEventInt(event, "userid"));
-//		PrintToServer("[HIDENAME] Testing user %d",client);
+		PrintToServer("[HIDENAME] Testing user %d",client);
 
 		if(client <= 0 || !IsClientInGame(client))
 			return Plugin_Continue;
 		if (IsFakeClient(client)) {
-//			PrintToServer("[HIDENAME] Bot, stop");
+			PrintToServer("[HIDENAME] Bot, stop");
 			return Plugin_Handled;
 		}
 		if(g_bRevertAll)
@@ -165,7 +171,7 @@ public Action:Event_OnNameChange(Handle:event, const String:name[], bool:dontBro
 
 		GetEventString(event, "newname", g_sName[client], 32);
 	}
-//	PrintToServer("[HIDENAME] Continue");
+	PrintToServer("[HIDENAME] Continue");
 
 	return Plugin_Continue;
 }
@@ -232,11 +238,14 @@ public Action:UserMessageHook(UserMsg:msg_hd, Handle:bf, const players[], player
 		new bool:_bHideRevert = false;
 		decl String:_sMessage[96];
 		BfReadString(bf, _sMessage, sizeof(_sMessage));
+		PrintToServer("[HIDENAME] 1 sMessage is %s",_sMessage);
 		BfReadString(bf, _sMessage, sizeof(_sMessage));
-
+		PrintToServer("[HIDENAME] 2 sMessage is %s",_sMessage);
+		
 		if(StrContains(_sMessage, "Name_Change") != -1)
 		{
 			BfReadString(bf, _sMessage, sizeof(_sMessage));
+			PrintToServer("[HIDENAME] 3 sMessage is %s",_sMessage);
 	
 			for(new i = 1; i <= MaxClients; i++)
 			{
@@ -301,4 +310,37 @@ public OnSettingsChange(Handle:cvar, const String:oldvalue[], const String:newva
 		g_bHideGagged = StringToInt(newvalue) ? true : false;
 	else if(cvar == g_hRevertGagged)
 		g_bRevertGagged = StringToInt(newvalue) ? true : false;
+}
+public OnLibraryRemoved(const String:name[])
+{
+	if (StrEqual(name, "scp"))
+	{
+		SetFailState("Simple Chat Processor Unloaded.  Plugin Disabled.");
+	}
+}
+
+public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:message[])
+{
+	if (!g_hEnabled)
+	{
+		return Plugin_Continue;
+	}
+	new chatflags = GetMessageFlags();
+	PrintToServer("[NMChat] author %d name %s message %s flags %d",author,name,message,chatflags);
+/*	
+	if ((chatflags & CHATFLAGS_TEAM) || (!GetConVarBool(cvarTeamOnly))) {
+		new index = CHATCOLOR_NOSUBJECT;
+		decl String:sNameBuffer[MAXLENGTH_NAME],Float:flEyePos[3],String:sGridPos[16],String:sPlace[64],sDistance[64];
+	        GetClientEyePosition(author, flEyePos);
+		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
+	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
+		Format(sNameBuffer, sizeof(sNameBuffer), "%s%s{T}%s", sGridPos, sPlace, name);
+		Color_ChatSetSubject(author);
+		index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
+		Color_ChatClearSubject();
+		author = index;
+		return Plugin_Changed;
+	}
+*/
+	return Plugin_Continue;
 }

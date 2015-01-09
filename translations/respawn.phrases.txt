@@ -1,0 +1,20 @@
+"Phrases"
+{
+	"Toggled respawn on target"
+	{
+		"#format"		"{1:t}"
+		"en"			"Respawned {1}."
+	}
+	"Client not on active team"
+	{
+    "en"  "You can not respawn spectators."
+  }
+  "Player no longer available"
+  {
+    "en"  "Player no longer available."
+  }
+  "Unable to target"
+  {
+    "en"  "Unable to target."
+  }
+}
