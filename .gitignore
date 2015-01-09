@@ -1,4 +1,3 @@
-/configs/admins_simple.ini
-/configs/advertisements.txt
+/configs/*
 /logs/*
 /gamedata/*
