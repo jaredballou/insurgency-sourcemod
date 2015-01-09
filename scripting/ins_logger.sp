@@ -174,14 +174,14 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d cappers %s capperlen %d cpname %s team %d", cp,cappers,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
-	for (new i = 0 ; i < strlen(cappers); i++)
+	for (new i = 0; i < strlen(cappers); i++)
 	{
 		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d",i);
 		new client = cappers[i];
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
@@ -221,7 +221,7 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
