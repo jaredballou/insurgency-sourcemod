@@ -1,3 +1,4 @@
 /configs/*
 /logs/*
 /gamedata/*
+data/sqlite/sourcebans-queue.sq3

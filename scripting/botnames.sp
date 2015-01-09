@@ -152,6 +152,7 @@ public OnPluginStart()
 	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
 
 	// trickier... name changes are user messages, so...
+	HookUserMessage(GetUserMessageId("SayText"), UserMessage_SayText2, true);
 	HookUserMessage(GetUserMessageId("SayText2"), UserMessage_SayText2, true);
 
 	// register our commands
@@ -231,7 +232,9 @@ public Action:UserMessage_SayText2(UserMsg:msg_id, Handle:bf, const players[], p
 */
 	decl String:message[256];
 	BfReadString(bf, message, sizeof(message));
+	PrintToServer("[BOTNAMES] 1 message %s",message);
 	BfReadString(bf, message, sizeof(message));
+	PrintToServer("[BOTNAMES] 2 message %s",message);
 	if (StrContains(message, "Name_Change") != -1)
 	{
 		return Plugin_Handled;

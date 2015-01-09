@@ -174,20 +174,20 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d cappers %s capperlen %d cpname %s team %d", cp,cappers,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
-	for (new i = 0 ; i < strlen(cappers); i++)
+	for (new i = 0; i < strlen(cappers); i++)
 	{
 		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d",i);
 		new client = cappers[i];
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
-			new player_userid = GetClientUserId(i);
-			new player_team_index = GetClientTeam(i);
-			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", i, player_userid, player_authid, g_team_list[player_team_index]);
+			new player_userid = GetClientUserId(client);
+			new player_team_index = GetClientTeam(client);
+			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", client, player_userid, player_authid, g_team_list[player_team_index]);
 		}
 	}
 	return Plugin_Continue;
@@ -221,14 +221,14 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(i, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
-			new player_userid = GetClientUserId(i);
-			new player_team_index = GetClientTeam(i);
+			new player_userid = GetClientUserId(client);
+			new player_team_index = GetClientTeam(client);
 
-			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_neutralized\"", i, player_userid, player_authid, g_team_list[player_team_index]);
+			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_neutralized\"", client, player_userid, player_authid, g_team_list[player_team_index]);
 		}
 	}
 	return Plugin_Continue;
@@ -302,7 +302,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	new player_userid = GetClientUserId(attacker);
 
 	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, player_userid, player_authid, g_team_list[attackerteam]);
-	if (assister) {
+	if (assister > -1) {
 		if (!GetClientAuthString(assister, player_authid, sizeof(player_authid)))
 		{
 			strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
@@ -322,9 +322,9 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	//"weaponid" "short"
 	//"userid" "short"
 	//"shots" "byte"
-	new plrid = GetClientOfUserId(GetEventInt(event, "userid"));
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	new String:shotWeapName[32];
-	GetClientWeapon(plrid, shotWeapName, sizeof(shotWeapName));
+	GetClientWeapon(client, shotWeapName, sizeof(shotWeapName));
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
 	new weapon_index = GetWeaponIndex(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
@@ -332,9 +332,9 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	
 	if (weapon_index > -1)
 	{
-		g_weapon_stats[plrid][weapon_index][LOG_HIT_SHOTS]++;
-		g_client_last_weapon[plrid] = weapon_index;
-		g_client_last_weaponstring[plrid] = shotWeapName;
+		g_weapon_stats[client][weapon_index][LOG_HIT_SHOTS]++;
+		g_client_last_weapon[client] = weapon_index;
+		g_client_last_weaponstring[client] = shotWeapName;
 	}
 	return Plugin_Continue;
 }
@@ -581,6 +581,10 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	}
 
 	new weapon_index = g_client_last_weapon[attacker];
+	if (weapon_index < 0)
+	{
+		return;
+	}
 	decl String:strLastWeapon[32];
 	GetArrayString(g_weap_array, weapon_index, strLastWeapon, sizeof(strLastWeapon));
 	//PrintToServer("[LOGGER] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
@@ -610,18 +614,15 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	PrintToChatAll("RLeg: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_RIGHTLEG]);
 	*/
 	
-	if (weapon_index > -1)
+	g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]++;
+	g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
+	if (GetClientTeam(attacker) == GetClientTeam(victim))
 	{
-		g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]++;
-		g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
-		if (GetClientTeam(attacker) == GetClientTeam(victim))
-		{
-			g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]++;
-		}
-	
-		//PrintToChat(attacker, "Kills: %d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);
-		dump_player_stats(victim);
+		g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]++;
 	}
+	
+	//PrintToChat(attacker, "Kills: %d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);
+	dump_player_stats(victim);
 }
 
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
