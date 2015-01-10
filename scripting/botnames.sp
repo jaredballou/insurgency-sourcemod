@@ -152,8 +152,8 @@ public OnPluginStart()
 	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
 
 	// trickier... name changes are user messages, so...
-	HookUserMessage(GetUserMessageId("SayText"), UserMessage_SayText2, true);
-	HookUserMessage(GetUserMessageId("SayText2"), UserMessage_SayText2, true);
+	//HookUserMessage(GetUserMessageId("SayText"), UserMessage_SayText2, true);
+	//HookUserMessage(GetUserMessageId("SayText2"), UserMessage_SayText2, true);
 
 	// register our commands
 	RegServerCmd("sm_botnames_reload", Command_Reload);
