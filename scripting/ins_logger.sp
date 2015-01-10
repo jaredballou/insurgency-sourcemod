@@ -294,15 +294,18 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	new assister_userid = GetEventInt(event, "assister");
 	new assister = -1;
 	new assisterteam = -1;
-	if (assister_userid > -1)
+	if (assister_userid)
 	{
 		assister = GetClientOfUserId(assister_userid);
-		assisterteam = GetClientTeam(assister);
-		if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
+		if (assister)
 		{
-			strcopy(assister_authid, sizeof(assister_authid), "UNKNOWN");
+			assisterteam = GetClientTeam(assister);
+			if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
+			{
+				strcopy(assister_authid, sizeof(assister_authid), "UNKNOWN");
+			}
+			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
 		}
-		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
 	}
 
 	//PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
