@@ -14,12 +14,11 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
-	
-
+new bool:bEnabled = false;
 
 public Plugin:myinfo = {
 	name= "[INS] Suicide Bombers",
@@ -31,14 +30,22 @@ public Plugin:myinfo = {
 
 public OnPluginStart()
 {
+	PrintToServer("[SUICIDE] Starting");
 	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	HookConVarChange(cvarEnabled,ConVarChanged);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 }
+public ConVarChanged(Handle:cvar, const String:oldVal[], const String:newVal[])
+{
+	if(cvar == cvarEnabled)
+		bEnabled = bool:StringToInt(newVal);
+}
 public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	PrintToServer("[SUICIDE] Running Event_PlayerPickSquad");
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
@@ -53,11 +60,13 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	PrintToServer("[SUICIDE] Running Event_PlayerDeath");
+	if (!bEnabled)
 	{
 		return Plugin_Continue;
 	}
-	new victimId = GetEventInt(event, "victim");
+	new victimId = GetEventInt(event, "userid");
+	PrintToServer("[SUICIDE] Victim ID is %d",victimId);
 	if (victimId > 0)
 	{
 		new victim = GetClientOfUserId(victimId);
@@ -66,8 +75,10 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	return Plugin_Continue;
 }
 public CheckExplode(client) {
-	PrintToServer("[SUICIDE] Running CheckExplode");
-	if (!GetConVarBool(cvarEnabled))
+	new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
+	new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
+	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N squad %d squadslot %d",client,client,m_iSquad,m_iSquadSlot);
+	if (!bEnabled)
 	{
 		return;
 	}
@@ -101,7 +112,7 @@ public CheckExplode(client) {
 }
 DealDamage(victim,damage,attacker=0,dmg_type=DMG_GENERIC,String:weapon[]="")
 {
-	if(victim>0 && IsValidEdict(victim) && IsClientInGame(victim) && IsPlayerAlive(victim) && damage>0)
+	if(victim>0 && IsValidEdict(victim) && damage>0)
 	{
 		new String:dmg_str[16];
 		IntToString(damage,dmg_str,16);
@@ -110,8 +121,8 @@ DealDamage(victim,damage,attacker=0,dmg_type=DMG_GENERIC,String:weapon[]="")
 		new pointHurt=CreateEntityByName("point_hurt");
 		if(pointHurt)
 		{
-			DispatchKeyValue(victim,"targetname","war3_hurtme");
-			DispatchKeyValue(pointHurt,"DamageTarget","war3_hurtme");
+			DispatchKeyValue(victim,"targetname","hurtme");
+			DispatchKeyValue(pointHurt,"DamageTarget","hurtme");
 			DispatchKeyValue(pointHurt,"Damage",dmg_str);
 			DispatchKeyValue(pointHurt,"DamageType",dmg_type_str);
 			if(!StrEqual(weapon,""))
@@ -121,7 +132,7 @@ DealDamage(victim,damage,attacker=0,dmg_type=DMG_GENERIC,String:weapon[]="")
 			DispatchSpawn(pointHurt);
 			AcceptEntityInput(pointHurt,"Hurt",(attacker>0)?attacker:-1);
 			DispatchKeyValue(pointHurt,"classname","point_hurt");
-			DispatchKeyValue(victim,"targetname","war3_donthurtme");
+			DispatchKeyValue(victim,"targetname","donthurtme");
 			RemoveEdict(pointHurt);
 		}
 	}

@@ -12,8 +12,8 @@
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Plugin for removing Restricted Areas"
 
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public Plugin:myinfo = {
 	name= "[INS] Restricted Area Removal",
 	author  = "Jared Ballou (jballou)",

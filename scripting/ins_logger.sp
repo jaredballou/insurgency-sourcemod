@@ -16,8 +16,8 @@
 #define PREFIX_LEN 7
 
 #define INS
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][15];
 new Handle:g_weap_array = INVALID_HANDLE;
@@ -171,13 +171,13 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	GetEventString(event, "cpname", cpname, sizeof(cpname));
 	new team = GetEventInt(event, "team");
 	new capperlen = GetCharBytes(cappers);
-	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d cappers %s capperlen %d cpname %s team %d", cp,cappers,capperlen,cpname,team);
+	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
 	for (new i = 0; i < strlen(cappers); i++)
 	{
-		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d",i);
 		new client = cappers[i];
+		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
@@ -273,6 +273,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	{
 		return Plugin_Continue;
 	}
+	decl String:attacker_authid[64],String:assister_authid[64];
 	//"team" "byte"
 	//"attacker" "byte"
 	//"cp" "short"
@@ -283,34 +284,35 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	//"assister" "byte"
 	//"attackerteam" "byte"
 	//new team = GetEventInt(event, "team");
-	new attacker = GetEventInt(event, "attacker");
+	new attacker_userid = GetEventInt(event, "attacker");
+	new attacker = GetClientOfUserId(attacker_userid);
+	new attackerteam = GetEventInt(event, "attackerteam");
 	//new cp = GetEventInt(event, "cp");
 	//new index = GetEventInt(event, "index");
 	//new type = GetEventInt(event, "type");
-//weapon
 	//new weaponid = GetEventInt(event, "weaponid");
-	new assister = GetEventInt(event, "assister");
-	new attackerteam = GetEventInt(event, "attackerteam");
+	new assister_userid = GetEventInt(event, "assister");
+	new assister = -1;
+	new assisterteam = -1;
+	if (assister_userid > -1)
+	{
+		assister = GetClientOfUserId(assister_userid);
+		assisterteam = GetClientTeam(assister);
+		if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
+		{
+			strcopy(assister_authid, sizeof(assister_authid), "UNKNOWN");
+		}
+		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
+	}
 
 	//PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
 
-	decl String: player_authid[64];
-	if (!GetClientAuthString(attacker, player_authid, sizeof(player_authid)))
+	if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
 	{
-		strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
+		strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
 	}
-	new player_userid = GetClientUserId(attacker);
 
-	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, player_userid, player_authid, g_team_list[attackerteam]);
-	if (assister > -1) {
-		if (!GetClientAuthString(assister, player_authid, sizeof(player_authid)))
-		{
-			strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
-		}
-		player_userid = GetClientUserId(assister);
-		new player_team_index = GetClientTeam(assister);
-		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, player_userid, player_authid, g_team_list[player_team_index]);
-	}
+	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
 	return Plugin_Continue;
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)

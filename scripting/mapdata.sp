@@ -11,8 +11,8 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Creates files with map overlay data for parsing by the Web interface"
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 public Plugin:myinfo = {
 	name= "[INS] Map Data Exporter",

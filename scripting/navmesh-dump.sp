@@ -51,8 +51,8 @@ new Float:g_flNavMeshMinY;
 new g_iNavMeshGridSizeX;
 new g_iNavMeshGridSizeY;
 
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 new bool:g_bNavMeshBuilt = false;
 

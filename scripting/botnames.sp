@@ -22,12 +22,12 @@ new Handle:name_redirects;
 new next_index;
 
 // various convars
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
-new Handle:cvarPrefix; // bot name prefix
-new Handle:cvarRandom; // use random-order names?
-new Handle:cvarAnnounce; // announce new bots?
-new Handle:cvarSuppress; // supress join/team/namechange messages?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
+new Handle:cvarPrefix = INVALID_HANDLE; // bot name prefix
+new Handle:cvarRandom = INVALID_HANDLE; // use random-order names?
+new Handle:cvarAnnounce = INVALID_HANDLE; // announce new bots?
+new Handle:cvarSuppress = INVALID_HANDLE; // supress join/team/namechange messages?
 
 public Plugin:myinfo =
 {

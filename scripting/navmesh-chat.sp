@@ -15,13 +15,13 @@ new g_iOverviewPosY = 0;
 new g_iOverviewRotate = 0;
 new Handle:h_DisplayPrint;
 new Float:g_fOverviewScale = 1.0;
-new Handle:cvarVersion;
-new Handle:cvarEnabled;
-new Handle:cvarTeamOnly;
-new Handle:cvarGrid;
-new Handle:cvarPlace;
-new Handle:cvarDistance;
-new Handle:cvarDirection;
+new Handle:cvarVersion = INVALID_HANDLE;
+new Handle:cvarEnabled = INVALID_HANDLE;
+new Handle:cvarTeamOnly = INVALID_HANDLE;
+new Handle:cvarGrid = INVALID_HANDLE;
+new Handle:cvarPlace = INVALID_HANDLE;
+new Handle:cvarDistance = INVALID_HANDLE;
+new Handle:cvarDirection = INVALID_HANDLE;
 
 public Plugin:myinfo =
 {

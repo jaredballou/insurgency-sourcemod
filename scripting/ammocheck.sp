@@ -10,8 +10,8 @@
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new i_fullmag[MAXPLAYERS+1];
 new Handle:WeaponsTrie;
 new Handle:h_AmmoTimers[MAXPLAYERS+1];

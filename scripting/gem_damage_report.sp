@@ -92,11 +92,11 @@ new g_defaultPropShortLong = DrLong;
 new bool:g_lateLoaded;
 
 // History stats
-new String:g_HistDamageDone[MAXPLAYERS+1][512];
-new String:g_HistDamageDoneLong[MAXPLAYERS+1][512];
+new String:g_HistDamageDone[MAXPLAYERS+1][2048];
+new String:g_HistDamageDoneLong[MAXPLAYERS+1][2048];
 new g_HistTotalDamageDone[MAXPLAYERS+1];
-new String:g_HistDamageTaken[MAXPLAYERS+1][512];
-new String:g_HistDamageTakenLong[MAXPLAYERS+1][512];
+new String:g_HistDamageTaken[MAXPLAYERS+1][2048];
+new String:g_HistDamageTakenLong[MAXPLAYERS+1][2048];
 new g_HistTotalDamageTaken[MAXPLAYERS+1];
 
 
@@ -331,12 +331,12 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 // Local Function where we loop through all attackers and victims for a client.
 // if any damage is taken or done a timer is called that will display a Panel with the info.
 BuildDamageString (in_victim, in_attacker) {
-  new String:damageReport[512];
-  new String:damageReportLong[600];
-  new String:damageDone[512];
-  new String:damageTaken[512];
-  new String:damageDoneLong[512];
-  new String:damageTakenLong[512];
+  new String:damageReport[2048];
+  new String:damageReportLong[2048];
+  new String:damageDone[2048];
+  new String:damageTaken[2048];
+  new String:damageDoneLong[2048];
+  new String:damageTakenLong[2048];
   new String:killer[10];
   new String:xkiller[10];
   new String:killed[10];
@@ -425,14 +425,14 @@ BuildDamageString (in_victim, in_attacker) {
   }
 }
 
-DisplayDamageReport(in_victim, String:damageDone[512] ,String:damageDoneLong[512] ,String:damageTaken[512], String:damageTakenLong[512], totalDmgDone, totalDmgTaken) {
+DisplayDamageReport(in_victim, String:damageDone[2048] ,String:damageDoneLong[2048] ,String:damageTaken[2048], String:damageTakenLong[2048], totalDmgDone, totalDmgTaken) {
   if (g_PlayerDROption[in_victim][propPopChat] == DrPop) {
     // Display damage report to the dead vicitm
     new Handle:pack;
     CreateDataTimer(1.0,DisplayDamageReportMenu, pack, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
     WritePackCell(pack, in_victim);
     //LogToGame("%s", damageReport);
-    if (strlen(damageTakenLong)+strlen(damageDoneLong)<512-30 && (g_PlayerDROption[in_victim][propShortLong] == DrLong)) {
+    if (strlen(damageTakenLong)+strlen(damageDoneLong)<2048-30 && (g_PlayerDROption[in_victim][propShortLong] == DrLong)) {
       WritePackString(pack, damageDoneLong);
       WritePackString(pack, damageTakenLong);
       WritePackCell(pack, totalDmgDone);
@@ -461,8 +461,8 @@ DisplayDamageReport(in_victim, String:damageDone[512] ,String:damageDoneLong[512
 // It checks if a menu/panel already is displayed ... if so
 // let the timer try again after the delay, hoping the menu is closed
 public Action:DisplayDamageReportMenu(Handle:timer, Handle:pack) {
-  new String:p_damageDone[512];
-  new String:p_damageTaken[512];
+  new String:p_damageDone[2048];
+  new String:p_damageTaken[2048];
   new String:victimItem[100];
   new String:attackerItem[100];
   new p_victim;

@@ -14,8 +14,8 @@ public Plugin:myinfo = {
 	version = PLUGIN_VERSION,
 	url = "http://jballou.com/"
 };
-new Handle:cvarVersion; // version cvar!
-new Handle:cvarEnabled; // are we enabled?
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_compass_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
