@@ -283,14 +283,14 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	//"weaponid" "short"
 	//"assister" "byte"
 	//"attackerteam" "byte"
-	//new team = GetEventInt(event, "team");
+	new team = GetEventInt(event, "team");
 	new attacker_userid = GetEventInt(event, "attacker");
 	new attacker = GetClientOfUserId(attacker_userid);
 	new attackerteam = GetEventInt(event, "attackerteam");
-	//new cp = GetEventInt(event, "cp");
-	//new index = GetEventInt(event, "index");
-	//new type = GetEventInt(event, "type");
-	//new weaponid = GetEventInt(event, "weaponid");
+	new cp = GetEventInt(event, "cp");
+	new index = GetEventInt(event, "index");
+	new type = GetEventInt(event, "type");
+	new weaponid = GetEventInt(event, "weaponid");
 	new assister_userid = GetEventInt(event, "assister");
 	new assister = -1;
 	new assisterteam = -1;
@@ -308,14 +308,16 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 		}
 	}
 
-	//PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
-
-	if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
+	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
+	if (attacker)
 	{
-		strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
-	}
+		if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
+		{
+			strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
+		}
 
-	LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
+		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
+	}
 	return Plugin_Continue;
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
