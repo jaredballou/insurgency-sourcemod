@@ -273,7 +273,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	{
 		return Plugin_Continue;
 	}
-	decl String:attacker_authid[64],String:assister_authid[64];
+	decl String:attacker_authid[64],String:assister_authid[64],String:classname[64];
 	//"team" "byte"
 	//"attacker" "byte"
 	//"cp" "short"
@@ -284,20 +284,24 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	//"assister" "byte"
 	//"attackerteam" "byte"
 	new team = GetEventInt(event, "team");
-	new attacker_userid = GetEventInt(event, "attacker");
-	new attacker = GetClientOfUserId(attacker_userid);
+	new attacker = GetEventInt(event, "attacker");
 	new attackerteam = GetEventInt(event, "attackerteam");
 	new cp = GetEventInt(event, "cp");
 	new index = GetEventInt(event, "index");
 	new type = GetEventInt(event, "type");
 	new weaponid = GetEventInt(event, "weaponid");
-	new assister_userid = GetEventInt(event, "assister");
-	new assister = -1;
+	new assister = GetEventInt(event, "assister");
+	new assister_userid = -1;
+	new attacker_userid = -1;
 	new assisterteam = -1;
-	if (assister_userid)
+	if (index)
 	{
-		assister = GetClientOfUserId(assister_userid);
-		if (assister)
+		GetEdictClassname(index, classname, sizeof(classname));
+	}
+	if ((assister) && (assister != attacker))
+	{
+		assister_userid = GetClientUserId(assister);
+		if (assister_userid)
 		{
 			assisterteam = GetClientTeam(assister);
 			if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
@@ -308,16 +312,16 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 		}
 	}
 
-	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d cp %d index %d type %d weaponid %d assister %d attackerteam %d",team,attacker,cp,index,type,weaponid,assister,attackerteam);
 	if (attacker)
 	{
+		attacker_userid = GetClientUserId(attacker);
 		if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
 		{
 			strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
 		}
-
 		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
 	}
+	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
 	return Plugin_Continue;
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
