@@ -72,6 +72,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 	CreateNative("NavMesh_GetPlaces", Native_NavMeshGetPlaces);
 	CreateNative("NavMesh_GetAreas", Native_NavMeshGetAreas);
 	CreateNative("NavMesh_GetLadders", Native_NavMeshGetLadders);
+	CreateNative("NavMesh_GetHidingSpots", Native_NavMeshGetHidingSpots);
 	
 	CreateNative("NavMesh_CollectSurroundingAreas", Native_NavMeshCollectSurroundingAreas);
 	CreateNative("NavMesh_BuildPath", Native_NavMeshBuildPath);
@@ -2679,6 +2680,17 @@ public Native_NavMeshGetLadders(Handle:plugin, numParams)
 	}
 	
 	return _:g_hNavMeshLadders;
+}
+
+public Native_NavMeshGetHidingSpots(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaHidingSpots;
 }
 
 public Native_NavMeshCollectSurroundingAreas(Handle:plugin, numParams)
