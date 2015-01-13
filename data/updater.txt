@@ -1,0 +1,12 @@
+<html>
+  <head><title>Found</title></head>
+  <body>
+    <h1>Found</h1>
+    <p>The resource was found at <a href="https://dl.dropboxusercontent.com/u/83581539/ChatProcessor/updater.txt">https://dl.dropboxusercontent.com/u/83581539/ChatProcessor/updater.txt</a>;
+you should be redirected automatically.
+
+<!--  --></p>
+    <hr noshade>
+    <div align="right">WSGI Server</div>
+  </body>
+</html>

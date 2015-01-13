@@ -204,7 +204,7 @@ public RespawnPlayer(client, target)
 	GetGameFolderName(game, sizeof(game));
 	LogAction(client, target, "\"%L\" respawned \"%L\"", client, target);
 
-	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
+	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo") || StrEqual(game, "insurgency"))
 	{
 		CS_RespawnPlayer(target);
 	}
@@ -223,7 +223,7 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
 
-	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
+	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo") || StrEqual(game, "insurgency"))
 	{
 		CS_RespawnPlayer(client);
 	}
