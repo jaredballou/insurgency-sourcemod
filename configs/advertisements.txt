@@ -28,4 +28,14 @@
 		"text"		"Next map is {SM_NEXTMAP} in {TIMELEFT} minutes."
 		"flags"		"cft"
 	}
+        "2"
+        {
+                "type"          "S"
+                "text"          "Bind a key to check_compass to use the compass"
+        }
+        "3"
+        {
+                "type"          "S"
+                "text"          "Bind a key to check_ammo to check your ammo"
+        }
 }
