@@ -135,6 +135,25 @@ public OnPluginStart()
 	g_hNavMeshGridLists = CreateArray(NavMeshGridList_MaxStats);
 	
 	HookEvent("nav_blocked", Event_NavAreaBlocked);
+	RegConsoleCmd("sm_navmesh_parsefile", Command_ParseFile);
+}
+
+public Action:Command_ParseFile(client, args)
+{
+	if (!NavMesh_Exists()) return Plugin_Handled;
+	
+	if (args < 2)
+	{	
+		ReplyToCommand(client, "Usage: sm_navmesh_parsefile <file> [mapname]");
+		return Plugin_Handled;
+	}
+	
+	decl String:sMapName[64];
+	GetCmdArg(1, sMapName, sizeof(sMapName));
+	decl String:sNavFile[64];
+	GetCmdArg(2, sNavFile, sizeof(sNavFile));
+	NavMeshLoad(sMapName,sNavFile,true);
+	return Plugin_Handled;
 }
 
 public OnMapStart()
@@ -143,7 +162,6 @@ public OnMapStart()
 
 	decl String:sMap[256];
 	GetCurrentMap(sMap, sizeof(sMap));
-	
 	g_bNavMeshBuilt = NavMeshLoad(sMap);
 }
 
@@ -779,13 +797,22 @@ static NavMeshAreaRemoveFromClosedList(iAreaIndex)
 }
 */
 
-bool:NavMeshLoad(const String:sMapName[])
+bool:NavMeshLoad(const String:sMapName[],const String:sNavFile[]="",const bool:bExport=false)
 {
 	decl String:sNavFilePath[PLATFORM_MAX_PATH];
-	Format(sNavFilePath, sizeof(sNavFilePath), "maps\\%s.nav", sMapName);
-	
-	new Handle:hFile = OpenFile(sNavFilePath, "rb");
-	if (hFile == INVALID_HANDLE)
+	if (FileExists(sNavFile)) {
+		Format(sNavFilePath, sizeof(sNavFilePath), "%s", sNavFile);
+	} else {
+		if (FileExists(sMapName)) {
+			Format(sNavFilePath, sizeof(sNavFilePath), "%s", sMapName);
+		} else {
+			Format(sNavFilePath, sizeof(sNavFilePath), "maps\\navmesh\\%s.nav", sMapName);
+			if (!FileExists(sNavFilePath)) {
+				Format(sNavFilePath, sizeof(sNavFilePath), "maps\\%s.nav", sMapName);
+			}
+		}
+	}
+	if (!FileExists(sNavFilePath))
 	{
 		new EngineVersion:iEngineVersion;
 		new bool:bFound = false;
@@ -811,8 +838,7 @@ bool:NavMeshLoad(const String:sMapName[])
 							if (iFileType == FileType_Directory)
 							{
 								Format(sNavFilePath, sizeof(sNavFilePath), "addons\\%s\\maps\\%s.nav", sFolderName, sMapName);
-								hFile = OpenFile(sNavFilePath, "rb");
-								if (hFile != INVALID_HANDLE)
+								if (FileExists(sNavFilePath))
 								{
 									bFound = true;
 									break;
@@ -838,8 +864,7 @@ bool:NavMeshLoad(const String:sMapName[])
 							if (iFileType == FileType_Directory)
 							{
 								Format(sNavFilePath, sizeof(sNavFilePath), "custom\\%s\\maps\\%s.nav", sFolderName, sMapName);
-								hFile = OpenFile(sNavFilePath, "rb");
-								if (hFile != INVALID_HANDLE)
+								if (FileExists(sNavFilePath))
 								{
 									bFound = true;
 									break;
@@ -858,6 +883,23 @@ bool:NavMeshLoad(const String:sMapName[])
 			LogMessage(".NAV file for %s could not be found", sMapName);
 			return false;
 		}
+	}
+	decl String:sOutput[PLATFORM_MAX_PATH], String:sSeparator[1], String:sContent[1024],String:sBuffer[1024];
+	new Handle:g_hNavMeshKeyValues = CreateKeyValues(sMapName);
+
+	Format(sOutput, sizeof(sOutput), "maps\\navmesh\\%s.txt", sMapName);
+	
+	new Handle:hFile = OpenFile(sNavFilePath, "rb");
+/*	if (FileExists(sOutput))
+	{
+		DeleteFile(sOutput);
+	}
+	new Handle:hOutput = OpenFile(sOutput, "w");
+*/
+	if (hFile == INVALID_HANDLE)
+	{
+		LogMessage(".NAV file for %s could not be found", sMapName);
+		return false;
 	}
 	
 	LogMessage("Found .NAV file in %s", sNavFilePath);
@@ -925,21 +967,31 @@ bool:NavMeshLoad(const String:sMapName[])
 	new iPlaceCount;
 	ReadFileCell(hFile, iPlaceCount, UNSIGNED_SHORT_BYTE_SIZE);
 	LogMessage("Place count: %d", iPlaceCount);
-	
-	// Parse through places.
-	// TF2 doesn't use places, but CS:S does.
-	for (new iPlaceIndex = 0; iPlaceIndex < iPlaceCount; iPlaceIndex++) 
-	{
-		new iPlaceStringSize;
-		ReadFileCell(hFile, iPlaceStringSize, UNSIGNED_SHORT_BYTE_SIZE);
+	if (iPlaceCount) {
+		KvJumpToKey(g_hNavMeshKeyValues, "places", true);
+//		WriteFileString(hOutput,"INSERT INTO ins_navmesh_places (map,placename,placeid)\n  VALUES",false);
+		// Parse through places.
+		// TF2 doesn't use places, but CS:S does.
+		sSeparator[0] = ' ';
+		for (new iPlaceIndex = 1; iPlaceIndex <= iPlaceCount; iPlaceIndex++) 
+		{
+			new iPlaceStringSize;
+			ReadFileCell(hFile, iPlaceStringSize, UNSIGNED_SHORT_BYTE_SIZE);
 		
-		new String:sPlaceName[256];
-		ReadFileString(hFile, sPlaceName, sizeof(sPlaceName), iPlaceStringSize);
-		
-		PushArrayString(g_hNavMeshPlaces, sPlaceName);
-		
-		//LogMessage("Parsed place \"%s\" [index: %d]", sPlaceName, iPlaceIndex);
+			new String:sPlaceName[256];
+			ReadFileString(hFile, sPlaceName, sizeof(sPlaceName), iPlaceStringSize);
+			Format(sBuffer,sizeof(sBuffer),"%d",iPlaceIndex);
+			KvSetString(g_hNavMeshKeyValues, sBuffer, sPlaceName);
+			PushArrayString(g_hNavMeshPlaces, sPlaceName);
+//			Format(sContent,sizeof(sContent),"%c\n    ('%s','%s','%d')", sSeparator[0], sMapName, sPlaceName, (iPlaceIndex+1));
+//			WriteFileString(hOutput,sContent,false);
+			LogMessage("Parsed place \"%s\" [index: %d]", sPlaceName, iPlaceIndex);
+			sSeparator[0] = ',';
+		}
+		KvGoBack(g_hNavMeshKeyValues);
+//		WriteFileString(hOutput,"\n  ON DUPLICATE KEY UPDATE map=VALUES(map), placename=VALUES(placename), placeid=VALUES(placeid);\n\n",false);
 	}
+	sSeparator[0] = ' ';
 	
 	// Get any unnamed areas.
 	new iNavUnnamedAreas;
@@ -953,7 +1005,7 @@ bool:NavMeshLoad(const String:sMapName[])
 	new iAreaCount;
 	ReadFileCell(hFile, iAreaCount, UNSIGNED_INT_BYTE_SIZE);
 	
-	LogMessage("Area count: %d", iAreaCount);
+	//LogMessage("Area count: %d", iAreaCount);
 	
 	new Float:flExtentLow[2] = { 99999999.9, 99999999.9 };
 	new bool:bExtentLowX = false;
@@ -964,6 +1016,8 @@ bool:NavMeshLoad(const String:sMapName[])
 	
 	if (iAreaCount > 0)
 	{
+		KvJumpToKey(g_hNavMeshKeyValues, "areas", true);
+//		WriteFileString(hOutput,"INSERT INTO ins_navmesh_areas (map,areaid,placename,placeid,x1,y1,x2,y2)\n  VALUES",false);
 		// The following are index values that will serve as starting and ending markers for areas
 		// to determine what is theirs.
 		
@@ -992,6 +1046,8 @@ bool:NavMeshLoad(const String:sMapName[])
 			new unk01;
 			
 			ReadFileCell(hFile, iAreaID, UNSIGNED_INT_BYTE_SIZE);
+			Format(sBuffer,sizeof(sBuffer),"%d",iAreaID);
+			KvJumpToKey(g_hNavMeshKeyValues, sBuffer, true);
 			
 			//LogMessage("Area ID: %d", iAreaID);
 			
@@ -1067,6 +1123,8 @@ bool:NavMeshLoad(const String:sMapName[])
 			new iConnectionsEndIndex = -1;
 			
 			// Find connections.
+			KvJumpToKey(g_hNavMeshKeyValues, "connections", true);
+
 			for (new iDirection = 0; iDirection < NAV_DIR_COUNT; iDirection++)
 			{
 				new iConnectionCount;
@@ -1084,15 +1142,18 @@ bool:NavMeshLoad(const String:sMapName[])
 					
 						new iConnectingAreaID;
 						ReadFileCell(hFile, iConnectingAreaID, UNSIGNED_INT_BYTE_SIZE);
-						
 						new iIndex = PushArrayCell(g_hNavMeshAreaConnections, iConnectingAreaID);
 						SetArrayCell(g_hNavMeshAreaConnections, iIndex, iDirection, NavMeshConnection_Direction);
-						
+						Format(sBuffer,sizeof(sBuffer),"%d",iConnectingAreaID);
+//						KvJumpToKey(g_hNavMeshKeyValues,sBuffer,true);
+						KvSetNum(g_hNavMeshKeyValues,sBuffer,iDirection);
+//						KvGoBack(g_hNavMeshKeyValues);
 						iGlobalConnectionsStartIndex++;
 					}
 				}
 			}
-			
+			KvGoBack(g_hNavMeshKeyValues);
+
 			// Get hiding spots.
 			ReadFileCell(hFile, iHidingSpotCount, UNSIGNED_CHAR_BYTE_SIZE);
 			
@@ -1103,6 +1164,8 @@ bool:NavMeshLoad(const String:sMapName[])
 			
 			if (iHidingSpotCount > 0)
 			{
+				KvJumpToKey(g_hNavMeshKeyValues, "hidingspots", true);
+
 				iHidingSpotsStartIndex = iGlobalHidingSpotsStartIndex;
 				
 				for (new iHidingSpotIndex = 0; iHidingSpotIndex < iHidingSpotCount; iHidingSpotIndex++)
@@ -1111,7 +1174,9 @@ bool:NavMeshLoad(const String:sMapName[])
 				
 					new iHidingSpotID;
 					ReadFileCell(hFile, iHidingSpotID, UNSIGNED_INT_BYTE_SIZE);
-					
+
+					Format(sBuffer,sizeof(sBuffer),"%d",iHidingSpotID);
+					KvJumpToKey(g_hNavMeshKeyValues, sBuffer, true);
 					new Float:flHidingSpotX, Float:flHidingSpotY, Float:flHidingSpotZ;
 					ReadFileCell(hFile, _:flHidingSpotX, FLOAT_BYTE_SIZE);
 					ReadFileCell(hFile, _:flHidingSpotY, FLOAT_BYTE_SIZE);
@@ -1125,11 +1190,16 @@ bool:NavMeshLoad(const String:sMapName[])
 					SetArrayCell(g_hNavMeshAreaHidingSpots, iIndex, flHidingSpotY, NavMeshHidingSpot_Y);
 					SetArrayCell(g_hNavMeshAreaHidingSpots, iIndex, flHidingSpotZ, NavMeshHidingSpot_Z);
 					SetArrayCell(g_hNavMeshAreaHidingSpots, iIndex, iHidingSpotFlags, NavMeshHidingSpot_Flags);
-					
+					KvSetNum(g_hNavMeshKeyValues, "flags",iHidingSpotFlags);
+					KvSetFloat(g_hNavMeshKeyValues, "x",flHidingSpotX);
+					KvSetFloat(g_hNavMeshKeyValues, "y",flHidingSpotY);
+					KvSetFloat(g_hNavMeshKeyValues, "z",flHidingSpotZ);
 					iGlobalHidingSpotsStartIndex++;
 					
 					//LogMessage("Parsed hiding spot (%f, %f, %f) with ID [%d] and flags [%d]", flHidingSpotX, flHidingSpotY, flHidingSpotZ, iHidingSpotID, iHidingSpotFlags);
+					KvGoBack(g_hNavMeshKeyValues);
 				}
+				KvGoBack(g_hNavMeshKeyValues);
 			}
 			
 			// Get approach areas (old version, only used to read data)
@@ -1168,6 +1238,8 @@ bool:NavMeshLoad(const String:sMapName[])
 			
 			if (iEncounterPathCount > 0)
 			{
+				KvJumpToKey(g_hNavMeshKeyValues, "encounterpaths", true);
+
 				iEncounterPathsStartIndex = iGlobalEncounterPathsStartIndex;
 			
 				for (new iEncounterPathIndex = 0; iEncounterPathIndex < iEncounterPathCount; iEncounterPathIndex++)
@@ -1193,10 +1265,13 @@ bool:NavMeshLoad(const String:sMapName[])
 					
 					new iEncounterSpotsStartIndex = -1;
 					new iEncounterSpotsEndIndex = -1;
+					Format(sBuffer,sizeof(sBuffer),"%d",iEncounterFromID);
+					KvJumpToKey(g_hNavMeshKeyValues, sBuffer, true);
 					
 					if (iEncounterSpotCount > 0)
 					{
 						iEncounterSpotsStartIndex = iGlobalEncounterSpotsStartIndex;
+						KvJumpToKey(g_hNavMeshKeyValues, "encounterspots", true);
 					
 						for (new iEncounterSpotIndex = 0; iEncounterSpotIndex < iEncounterSpotCount; iEncounterSpotIndex++)
 						{
@@ -1209,6 +1284,8 @@ bool:NavMeshLoad(const String:sMapName[])
 							ReadFileCell(hFile, iEncounterSpotT, UNSIGNED_CHAR_BYTE_SIZE);
 							
 							new Float:flEncounterSpotParametricDistance = float(iEncounterSpotT) / 255.0;
+							Format(sBuffer,sizeof(sBuffer),"%d",iEncounterSpotOrderID);
+							KvSetFloat(g_hNavMeshKeyValues, sBuffer, flEncounterSpotParametricDistance);
 							
 							new iIndex = PushArrayCell(g_hNavMeshAreaEncounterSpots, iEncounterSpotOrderID);
 							SetArrayCell(g_hNavMeshAreaEncounterSpots, iIndex, flEncounterSpotParametricDistance, NavMeshEncounterSpot_ParametricDistance);
@@ -1217,6 +1294,7 @@ bool:NavMeshLoad(const String:sMapName[])
 							
 							//LogMessage("Encounter spot [order id %d] and [T %d]", iEncounterSpotOrderID, iEncounterSpotT);
 						}
+						KvGoBack(g_hNavMeshKeyValues);
 					}
 					
 					new iIndex = PushArrayCell(g_hNavMeshAreaEncounterPaths, iEncounterFromID);
@@ -1225,20 +1303,29 @@ bool:NavMeshLoad(const String:sMapName[])
 					SetArrayCell(g_hNavMeshAreaEncounterPaths, iIndex, iEncounterToDirection, NavMeshEncounterPath_ToDirection);
 					SetArrayCell(g_hNavMeshAreaEncounterPaths, iIndex, iEncounterSpotsStartIndex, NavMeshEncounterPath_SpotsStartIndex);
 					SetArrayCell(g_hNavMeshAreaEncounterPaths, iIndex, iEncounterSpotsEndIndex, NavMeshEncounterPath_SpotsEndIndex);
+					KvSetNum(g_hNavMeshKeyValues, "fromdir", iEncounterFromDirection);
+					KvSetNum(g_hNavMeshKeyValues, "todir", iEncounterToDirection);
+					KvSetNum(g_hNavMeshKeyValues, "toid", iEncounterToID);
 					
 					iGlobalEncounterPathsStartIndex++;
+					KvGoBack(g_hNavMeshKeyValues);
 				}
+				KvGoBack(g_hNavMeshKeyValues);
 			}
 			
 			ReadFileCell(hFile, iPlaceID, UNSIGNED_SHORT_BYTE_SIZE);
-			
-			//LogMessage("Place ID: %d", iPlaceID);
-			
+			decl String:strPlaceName[32];
+			if (iPlaceID) {
+				GetArrayString(g_hNavMeshPlaces, (iPlaceID-1), strPlaceName, sizeof(strPlaceName));
+			} else {
+				strcopy(strPlaceName,sizeof(strPlaceName),"");
+			}
 			// Get ladder connections.
 			
 			new iLadderConnectionsStartIndex = -1;
 			new iLadderConnectionsEndIndex = -1;
 			
+			KvJumpToKey(g_hNavMeshKeyValues, "ladders", true);
 			for (new iLadderDirection = 0; iLadderDirection < NAV_LADDER_DIR_COUNT; iLadderDirection++)
 			{
 				new iLadderConnectionCount;
@@ -1261,11 +1348,15 @@ bool:NavMeshLoad(const String:sMapName[])
 						SetArrayCell(g_hNavMeshAreaLadderConnections, iIndex, iLadderDirection, NavMeshLadderConnection_Direction);
 						
 						iGlobalLadderConnectionsStartIndex++;
-						
+						Format(sBuffer,sizeof(sBuffer),"%d",iLadderConnectionID);
+						KvJumpToKey(g_hNavMeshKeyValues, sBuffer, true);
+						KvSetNum(g_hNavMeshKeyValues,"direction",iLadderDirection);
+						KvGoBack(g_hNavMeshKeyValues);
 						//LogMessage("Parsed ladder connect [ID %d]\n", iLadderConnectionID);
 					}
 				}
 			}
+			KvGoBack(g_hNavMeshKeyValues);
 			
 			ReadFileCell(hFile, _:flEarliestOccupyTimeFirstTeam, FLOAT_BYTE_SIZE);
 			ReadFileCell(hFile, _:flEarliestOccupyTimeSecondTeam, FLOAT_BYTE_SIZE);
@@ -1323,6 +1414,10 @@ bool:NavMeshLoad(const String:sMapName[])
 			}
 			
 			new iIndex = PushArrayCell(g_hNavMeshAreas, iAreaID);
+			//LogMessage("(%d,%d,%d) (%d,%d,%d)",x1,y1,z1,x2,y2,z2);
+			Format(sContent,sizeof(sContent),"%c\n    ('%s', '%d', '%s', '%d', '%f', '%f', '%f', '%f')", sSeparator[0], sMapName, iAreaID, strPlaceName, iPlaceID, x1, y1, x2, y2);
+//			WriteFileString(hOutput,sContent,false);
+			sSeparator[0] = ',';
 			SetArrayCell(g_hNavMeshAreas, iIndex, iAreaFlags, NavMeshArea_Flags);
 			SetArrayCell(g_hNavMeshAreas, iIndex, iPlaceID, NavMeshArea_PlaceID);
 			SetArrayCell(g_hNavMeshAreas, iIndex, x1, NavMeshArea_X1);
@@ -1367,8 +1462,23 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshAreas, iIndex, 0.0, NavMeshArea_PathLengthSoFar);
 			SetArrayCell(g_hNavMeshAreas, iIndex, false, NavMeshArea_Blocked);
 			SetArrayCell(g_hNavMeshAreas, iIndex, -1, NavMeshArea_NearSearchMarker);
+
+			KvSetNum(g_hNavMeshKeyValues, "flags",iAreaFlags);
+			KvSetNum(g_hNavMeshKeyValues, "placeid",iPlaceID);
+			KvSetString(g_hNavMeshKeyValues, "placename",strPlaceName);
+			KvSetFloat(g_hNavMeshKeyValues, "x1", x1);
+			KvSetFloat(g_hNavMeshKeyValues, "y1", y1);
+			KvSetFloat(g_hNavMeshKeyValues, "z1", z1);
+			KvSetFloat(g_hNavMeshKeyValues, "x2", x2);
+			KvSetFloat(g_hNavMeshKeyValues, "y2", y2);
+			KvSetFloat(g_hNavMeshKeyValues, "z2", z2);
+			KvSetVector(g_hNavMeshKeyValues, "center", flAreaCenter);
+			KvGoBack(g_hNavMeshKeyValues);
 		}
+		KvGoBack(g_hNavMeshKeyValues);
 	}
+	KvGoBack(g_hNavMeshKeyValues);
+//	WriteFileString(hOutput,"\n  ON DUPLICATE KEY UPDATE map=VALUES(map), areaid=VALUES(areaid), placename=VALUES(placename), placeid=VALUES(placeid), x1=VALUES(x1), y1=VALUES(y1), x2=VALUES(x2), y2=VALUES(y2);\n\n",false);
 	
 	// Set up the grid.
 	NavMeshGridAllocate(flExtentLow[0], flExtentHigh[0], flExtentLow[1], flExtentHigh[1]);
@@ -1385,21 +1495,23 @@ bool:NavMeshLoad(const String:sMapName[])
 	
 	if (iLadderCount > 0)
 	{
+		KvJumpToKey(g_hNavMeshKeyValues, "ladders", true);
 		for (new iLadderIndex; iLadderIndex < iLadderCount; iLadderIndex++)
 		{
 			new iLadderID;
 			ReadFileCell(hFile, iLadderID, UNSIGNED_INT_BYTE_SIZE);
-			
+			Format(sBuffer,sizeof(sBuffer),"%d",iLadderID);
+			KvJumpToKey(g_hNavMeshKeyValues, sBuffer, true);
 			new Float:flLadderWidth;
 			ReadFileCell(hFile, _:flLadderWidth, FLOAT_BYTE_SIZE);
 			
-			new Float:flLadderTopX, Float:flLadderTopY, Float:flLadderTopZ, Float:flLadderBottomX, Float:flLadderBottomY, Float:flLadderBottomZ;
-			ReadFileCell(hFile, _:flLadderTopX, FLOAT_BYTE_SIZE);
-			ReadFileCell(hFile, _:flLadderTopY, FLOAT_BYTE_SIZE);
-			ReadFileCell(hFile, _:flLadderTopZ, FLOAT_BYTE_SIZE);
-			ReadFileCell(hFile, _:flLadderBottomX, FLOAT_BYTE_SIZE);
-			ReadFileCell(hFile, _:flLadderBottomY, FLOAT_BYTE_SIZE);
-			ReadFileCell(hFile, _:flLadderBottomZ, FLOAT_BYTE_SIZE);
+			new Float:flLadderTop[3], Float:flLadderBottom[3];
+			ReadFileCell(hFile, _:flLadderTop[0], FLOAT_BYTE_SIZE);
+			ReadFileCell(hFile, _:flLadderTop[1], FLOAT_BYTE_SIZE);
+			ReadFileCell(hFile, _:flLadderTop[2], FLOAT_BYTE_SIZE);
+			ReadFileCell(hFile, _:flLadderBottom[0], FLOAT_BYTE_SIZE);
+			ReadFileCell(hFile, _:flLadderBottom[1], FLOAT_BYTE_SIZE);
+			ReadFileCell(hFile, _:flLadderBottom[2], FLOAT_BYTE_SIZE);
 			
 			new Float:flLadderLength;
 			ReadFileCell(hFile, _:flLadderLength, FLOAT_BYTE_SIZE);
@@ -1425,19 +1537,31 @@ bool:NavMeshLoad(const String:sMapName[])
 			new iIndex = PushArrayCell(g_hNavMeshLadders, iLadderID);
 			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderWidth, NavMeshLadder_Width);
 			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderLength, NavMeshLadder_Length);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTopX, NavMeshLadder_TopX);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTopY, NavMeshLadder_TopY);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTopZ, NavMeshLadder_TopZ);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottomX, NavMeshLadder_BottomX);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottomY, NavMeshLadder_BottomY);
-			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottomZ, NavMeshLadder_BottomZ);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTop[0], NavMeshLadder_TopX);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTop[1], NavMeshLadder_TopY);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderTop[2], NavMeshLadder_TopZ);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottom[0], NavMeshLadder_BottomX);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottom[1], NavMeshLadder_BottomY);
+			SetArrayCell(g_hNavMeshLadders, iIndex, flLadderBottom[2], NavMeshLadder_BottomZ);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderDirection, NavMeshLadder_Direction);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderTopForwardAreaID, NavMeshLadder_TopForwardAreaIndex);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderTopLeftAreaID, NavMeshLadder_TopLeftAreaIndex);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderTopRightAreaID, NavMeshLadder_TopRightAreaIndex);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderTopBehindAreaID, NavMeshLadder_TopBehindAreaIndex);
 			SetArrayCell(g_hNavMeshLadders, iIndex, iLadderBottomAreaID, NavMeshLadder_BottomAreaIndex);
+			KvSetFloat(g_hNavMeshKeyValues,"width",flLadderWidth);
+			KvSetFloat(g_hNavMeshKeyValues,"length",flLadderLength);
+			KvSetVector(g_hNavMeshKeyValues,"top",flLadderTop);
+			KvSetVector(g_hNavMeshKeyValues,"botom",flLadderBottom);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderDirection", iLadderDirection);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderTopForwardAreaID", iLadderTopForwardAreaID);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderTopLeftAreaID", iLadderTopLeftAreaID);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderTopRightAreaID", iLadderTopRightAreaID);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderTopBehindAreaID", iLadderTopBehindAreaID);
+			KvSetNum(g_hNavMeshKeyValues,"iLadderBottomAreaID", iLadderBottomAreaID);
+			KvGoBack(g_hNavMeshKeyValues);
 		}
+		KvGoBack(g_hNavMeshKeyValues);
 	}
 	
 	g_iNavMeshMagicNumber = iNavMagicNumber;
@@ -1498,7 +1622,14 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshLadders, iLadderIndex, FindValueInArray(g_hNavMeshAreas, iBottomAreaID), NavMeshLadder_BottomAreaIndex);
 		}
 	}
-	
+	KvRewind(g_hNavMeshKeyValues);
+	if (bExport) {
+		LogMessage("Dumping keyvalues to %s",sOutput);
+		KeyValuesToFile(g_hNavMeshKeyValues, sOutput);
+		LogMessage("Done");
+	}
+	CloseHandle(g_hNavMeshKeyValues);
+//	CloseHandle(hOutput);
 	return true;
 }
 
@@ -1610,8 +1741,8 @@ NavMeshGridFinalize()
 // The following functions should ONLY be called during NavMeshLoad(), due to displacement of
 // array indexes!
 
-// Some things to take into account: because we're adding things into the
-// array, it's inevitable that the indexes will change over time. Therefore,
+// Some things to take into account: because we"re adding things into the
+// array, it"s inevitable that the indexes will change over time. Therefore,
 // we can't assign array indexes while this function is running, since it
 // will shift preceding array indexes.
 
