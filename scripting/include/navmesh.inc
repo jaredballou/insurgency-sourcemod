@@ -230,6 +230,8 @@ native Handle:NavMesh_GetAreas();
 
 native Handle:NavMesh_GetLadders();
 
+native Handle:NavMesh_GetHidingSpots();
+
 
 native NavMesh_CollectSurroundingAreas(Handle:hStack, iStartAreaIndex, Float:flTravelDistanceLimit=1500.0, Float:flMaxStepUpLimit=StepHeight, Float:flMaxDropDownLimit=100.0);
 
