@@ -98,20 +98,22 @@ public Action:Timer_Check_Ammo(Handle:event, any:client)
 
 public Action:Check_Ammo(client, args)
 {
-	KillAmmoTimer(client);
 	//PrintToServer("[AMMOCHECK] Check_Ammo!");
 	if (!GetConVarBool(cvarEnabled))
 	{
+		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0)
 	{
+		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
 	Update_Magazine(client,ActiveWeapon);
-	if (i_TimerWeapon[client] != ActiveWeapon)
+	if ((i_TimerWeapon[client]) && (i_TimerWeapon[client] != ActiveWeapon))
 	{
+		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
 	decl String:sWeapon[32];
@@ -134,6 +136,7 @@ public Action:Check_Ammo(client, args)
 	} else {
 		PrintHintText(client, "Mag feels empty");
 	}
+	KillAmmoTimer(client);
 	return Plugin_Handled;
 }
 
