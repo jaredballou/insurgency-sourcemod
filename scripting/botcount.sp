@@ -28,7 +28,7 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_botcount_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_botcount_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_botcount_enabled", "0", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarTimer = CreateConVar("sm_botcount_timer", "60", "Frequency to show count", FCVAR_NOTIFY | FCVAR_PLUGIN);
 }
 new Handle:PanelTimers[MAXPLAYERS+1];
