@@ -55,6 +55,14 @@ public Plugin:myinfo =
 	url = "http://jballou.com"
 };
 
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
+{
+	RegPluginLibrary("insurgency");
+	
+//	CreateNative("Insurgency_", Native_NavMeshExists);
+}
+
+
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_inslogger_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);

@@ -16,6 +16,7 @@ new i_fullmag[MAXPLAYERS+1];
 new Handle:WeaponsTrie;
 new Handle:h_AmmoTimers[MAXPLAYERS+1];
 new i_TimerWeapon[MAXPLAYERS+1];
+
 public Plugin:myinfo = {
 	name= "[INS] Ammo Check",
 	author  = "Jared Ballou (jballou)",
@@ -31,6 +32,8 @@ public OnPluginStart()
 	RegConsoleCmd("check_ammo", Check_Ammo);
 	HookEvent("weapon_reload", Event_WeaponEventMagUpdate,  EventHookMode_Post);
 	HookEvent("weapon_fire", Event_WeaponEventMagUpdate,  EventHookMode_Pre);
+	HookEvent("weapon_pickup", Event_WeaponEventMagUpdate);
+	HookEvent("weapon_deploy", Event_WeaponEventMagUpdate);
 	WeaponsTrie = CreateTrie();
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	PrintToServer("[AMMOCHECK] Started!");
@@ -75,6 +78,7 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 {
 	//PrintToServer("[AMMOCHECK] Event_WeaponMagUpdate! name %s",name);
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	new weaponid = GetEventInt(event, "weaponid");
 	if(!IsClientInGame(client))
 		return Plugin_Handled;
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
@@ -85,6 +89,14 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 	{		
 		CreateAmmoTimer(client,ActiveWeapon);
 	}
+/*
+	if (weaponid)
+	{
+		decl String:sWeapon[32];
+		GetEdictClassname(ActiveWeapon, sWeapon, sizeof(sWeapon));
+		PrintToServer("[AMMOCHECK] Client %N ActiveWeapon %d sWeapon %s weaponid %d",client,ActiveWeapon,sWeapon,weaponid);
+	}
+*/
 	return Plugin_Continue;
 }
 
@@ -120,6 +132,10 @@ public Action:Check_Ammo(client, args)
 	GetEdictClassname(ActiveWeapon, sWeapon, sizeof(sWeapon));
 	GetTrieValue(WeaponsTrie, sWeapon, maxammo);
 	new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
+	new m_bChamberedRound = GetEntData(ActiveWeapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+	//Add one to count if we have one piped
+	if (m_bChamberedRound)
+		ammo++;
 	//PrintHintText(client, "sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
 	//PrintToServer("[AMMOCHECK] sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
 	if (ammo >= maxammo) {
@@ -158,6 +174,9 @@ public Update_Magazine(client,weapon)
 		decl String:sWeapon[32];
 		GetEdictClassname(weapon, sWeapon, sizeof(sWeapon));
 		new ammo = GetEntProp(weapon, Prop_Data, "m_iClip1");
+		new m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+		if (m_bChamberedRound)
+			ammo++;
 		new maxammo;
 		GetTrieValue(WeaponsTrie, sWeapon, maxammo);
 		if (maxammo < ammo)
