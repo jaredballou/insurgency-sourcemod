@@ -43,7 +43,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.2.0"
+#define PLUGIN_VERSION "1.2.1"
 #define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
 
 public Plugin:myinfo =

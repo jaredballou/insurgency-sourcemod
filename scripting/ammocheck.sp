@@ -7,7 +7,7 @@
 #include <sdktools>
 #include <sdkhooks>
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -91,8 +91,7 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 public Action:Timer_Check_Ammo(Handle:event, any:client)
 {
 	//PrintToServer("[AMMOCHECK] Reload timer finished!");
-	Check_Ammo(client,0);
-//h_AmmoTimers[client] = INVALID_HANDLE;
+	Check_Ammo(client, GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon"));
 	return Plugin_Stop;
 }
 
@@ -148,7 +147,7 @@ public OnClientPutInServer(client)
 public Action:Weapon_Equip(client, weapon)
 {
 	//PrintToServer("[AMMOCHECK] Weapon_Equip!");
-	Check_Ammo(client,0);
+	Check_Ammo(client, GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon"));
 //	return Plugin_Handled;
 }
 public Update_Magazine(client,weapon)
