@@ -1,0 +1,15 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.2"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/ammocheck.smx"		
+		"Source"	"Path_SM/scripting/ammocheck.sp"
+	}
+}
