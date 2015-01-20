@@ -48,7 +48,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //============================================================================================================
 #define PLUGIN_VERSION "1.2.1"
 #define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-ins_logger.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ins_logger.txt"
 
 public Plugin:myinfo =
 {

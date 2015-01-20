@@ -6,6 +6,8 @@
 		{
 			"Latest"	"1.0.1"
 		}
+		"Notes"		"Name: MyPlugin"
+		"Notes"		"Description: MyPlugin Description"
 	}	
 	"Files"
 	{

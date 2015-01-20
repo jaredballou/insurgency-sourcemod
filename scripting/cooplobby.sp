@@ -12,7 +12,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Plugin for overriding Insurgency Coop to 16 players"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-cooplobby.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-cooplobby.txt"
 
 public Plugin:myinfo = {
         name        = "[INS] Coop Lobby Override",

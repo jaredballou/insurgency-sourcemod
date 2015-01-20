@@ -6,6 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
+		"Notes"		"Name: [INS] Backblast"
+		"Notes"		"Description: Adds backblast to rocket based weapons"
 	}	
 	"Files"
 	{

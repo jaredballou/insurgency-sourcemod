@@ -6,6 +6,8 @@
 		{
 			"Latest"	"1.2.1"
 		}
+		"Notes"		"Name: [INS] Logger"
+		"Notes"		"Description: Intercepts and fixes events logged for Insurgency2"
 	}	
 	"Files"
 	{

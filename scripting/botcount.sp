@@ -14,7 +14,7 @@
 #define TEAM_INSURGENTS 3
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-botcount.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botcount.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

@@ -6,6 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
+		"Notes"		"Name: [INS] Restricted Area Removal"
+		"Notes"		"Description: Plugin for removing Restricted Areas"
 	}	
 	"Files"
 	{

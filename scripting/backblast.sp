@@ -13,7 +13,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Adds backblast to rocket based weapons"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-backblast.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-backblast.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

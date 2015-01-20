@@ -13,7 +13,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Plugin for removing Restricted Areas"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-restrictedarea.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-restrictedarea.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

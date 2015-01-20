@@ -25,7 +25,7 @@ new m_iNumControlPoints, m_nActivePushPointIndex, m_nTeamOneActiveBattleAttackPo
 //============================================================================================================
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-insurgency.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 public Plugin:myinfo =
 {

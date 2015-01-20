@@ -6,6 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
+		"Notes"		"Name: [INS] Damage Modifier"
+		"Notes"		"Description: Modifies all damage applied"
 	}	
 	"Files"
 	{

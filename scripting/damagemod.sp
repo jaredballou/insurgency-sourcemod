@@ -12,7 +12,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Modifies all damage applied"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-damagemod.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-damagemod.txt"
 
 public Plugin:myinfo =
 {

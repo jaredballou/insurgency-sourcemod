@@ -13,7 +13,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Removes fog"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-nofog.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-nofog.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

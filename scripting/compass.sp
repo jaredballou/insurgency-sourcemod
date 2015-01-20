@@ -8,7 +8,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Puts a compass in the game"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-compass.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-compass.txt"
 
 public Plugin:myinfo = {
 	name= "[INS] Compass",

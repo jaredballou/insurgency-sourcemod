@@ -10,7 +10,7 @@
 #pragma unused cvarVersion
 #define PLUGIN_VERSION				"0.0.1"
 #define PLUGIN_DESCRIPTION "Puts navmesh area into chat"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-navmesh-chat.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-navmesh-chat.txt"
 
 new Handle:g_hNavMeshPlaces;
 new bool:g_bOverviewLoaded = false;

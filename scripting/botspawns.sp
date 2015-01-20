@@ -14,7 +14,7 @@
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Bot spawns"
-#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-botspawns.txt"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
