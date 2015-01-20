@@ -3,9 +3,12 @@
 
 #include <sourcemod>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Puts a compass in the game"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-compass.txt"
 
 public Plugin:myinfo = {
 	name= "[INS] Compass",
@@ -22,6 +25,18 @@ public OnPluginStart()
 	cvarEnabled = CreateConVar("sm_compass_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	RegConsoleCmd("check_compass", Check_Compass);
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 
 public Action:Check_Compass(client, args)

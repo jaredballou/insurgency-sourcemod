@@ -6,12 +6,16 @@
 #pragma unused cvarRemove
 #include <sourcemod>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Removes all objectives"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-noobj.txt"
+
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarCacheDestroy = INVALID_HANDLE;
@@ -46,6 +50,18 @@ public OnPluginStart()
 	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
 
 	remove_obj();
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {

@@ -9,6 +9,9 @@
 #include <sourcemod>
 #include <regex>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
+
 #pragma unused cvarVersion
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
@@ -45,6 +48,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //============================================================================================================
 #define PLUGIN_VERSION "1.2.1"
 #define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-ins_logger.txt"
 
 public Plugin:myinfo =
 {
@@ -115,6 +119,18 @@ public OnPluginStart()
 	
 	GetTeams(false);
 //	LoadTranslations("insurgency.phrases.txt");
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public OnPluginEnd()
 {

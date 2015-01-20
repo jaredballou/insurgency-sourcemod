@@ -6,9 +6,12 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-ammocheck.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
@@ -37,6 +40,18 @@ public OnPluginStart()
 	WeaponsTrie = CreateTrie();
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	PrintToServer("[AMMOCHECK] Started!");
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {

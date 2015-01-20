@@ -5,12 +5,15 @@
 #pragma unused cvarVersion
 #include <sourcemod>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Plugin for removing Restricted Areas"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-restrictedarea.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
@@ -31,6 +34,18 @@ public OnPluginStart()
 	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 	remove_restrictedarea();
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {

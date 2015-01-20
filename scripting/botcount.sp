@@ -4,6 +4,8 @@
 
 #include <sourcemod>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 
 //Define CVARS
@@ -12,6 +14,8 @@
 #define TEAM_INSURGENTS 3
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-botcount.txt"
+
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarTimer = INVALID_HANDLE; // Frequency
@@ -30,6 +34,18 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_botcount_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botcount_enabled", "0", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarTimer = CreateConVar("sm_botcount_timer", "60", "Frequency to show count", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 new Handle:PanelTimers[MAXPLAYERS+1];
  

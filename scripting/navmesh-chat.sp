@@ -4,9 +4,13 @@
 #include <navmesh>
 #include <smlib>
 #include <loghelper>
+#undef REQUIRE_PLUGIN
+#include <updater>
+
 #pragma unused cvarVersion
 #define PLUGIN_VERSION				"0.0.1"
 #define PLUGIN_DESCRIPTION "Puts navmesh area into chat"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-navmesh-chat.txt"
 
 new Handle:g_hNavMeshPlaces;
 new bool:g_bOverviewLoaded = false;
@@ -47,6 +51,18 @@ public OnPluginStart()
 		OnMapStart();
 	}
 	RegConsoleCmd("get_grid", Get_Grid);
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Action:VoiceHook(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
 {

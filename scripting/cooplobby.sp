@@ -4,12 +4,15 @@
 #pragma semicolon 1
 
 #include <sourcemod>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Plugin for overriding Insurgency Coop to 16 players"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-cooplobby.txt"
 
 public Plugin:myinfo = {
         name        = "[INS] Coop Lobby Override",
@@ -31,6 +34,18 @@ public OnPluginStart()
                 HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 		set_lobbysize();
        	}
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {

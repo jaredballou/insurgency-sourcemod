@@ -2,11 +2,10 @@
 #include <regex>
 #include <sdktools>
 #include <insurgency>
-#pragma unused cvarVersion
-
 #undef REQUIRE_PLUGIN
-//#include <updater>
-//#define UPDATE_URL "http://dl.dropboxusercontent.com/u/83581539/ChatProcessor/updater.txt"
+#include <updater>
+
+#pragma unused cvarVersion
 
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
@@ -26,6 +25,7 @@ new m_iNumControlPoints, m_nActivePushPointIndex, m_nTeamOneActiveBattleAttackPo
 //============================================================================================================
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-insurgency.txt"
 
 public Plugin:myinfo =
 {
@@ -72,6 +72,18 @@ public OnPluginStart()
 	g_iObjectType = FindSendPropOffs("CINSObjectiveResource", "m_iObjectType");
 	g_nReinforcementWavesRemaining = FindSendPropOffs("CINSObjectiveResource", "m_nReinforcementWavesRemaining");
 	g_nRequiredPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nRequiredPointIndex");
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 
 //jballou - LogRole support

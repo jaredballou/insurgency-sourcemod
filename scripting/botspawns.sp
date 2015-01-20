@@ -6,12 +6,16 @@
 #include <sourcemod>
 #include <sdktools>
 #include <navmesh>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Bot spawns"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-botspawns.txt"
+
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:g_hHidingSpots = INVALID_HANDLE;
@@ -51,6 +55,18 @@ public OnPluginStart()
 
 	OnMapStart();
 	HookEvent("player_spawn", Event_Spawn);
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public OnMapStart()
 {

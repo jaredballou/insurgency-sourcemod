@@ -1,6 +1,8 @@
 #include <sourcemod>
 #include <regex>
 #include <sdktools>
+#undef REQUIRE_PLUGIN
+#include <updater>
 #pragma unused cvarVersion
 #define INS
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -10,6 +12,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Modifies all damage applied"
+#define UPDATE_URL    "http://jballou.com/insurgency/sourcemod/update-damagemod.txt"
 
 public Plugin:myinfo =
 {
@@ -30,6 +33,18 @@ public OnPluginStart()
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("player_suppressed", Event_PlayerSuppressed);
+	if (LibraryExists("updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
+}
+
+public OnLibraryAdded(const String:name[])
+{
+	if (StrEqual(name, "updater"))
+	{
+		Updater_AddPlugin(UPDATE_URL);
+	}
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
 {
