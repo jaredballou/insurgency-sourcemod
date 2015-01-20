@@ -2,3 +2,4 @@
 /logs/*
 /gamedata/*
 data/sqlite/sourcebans-queue.sq3
+data/updater.txt
