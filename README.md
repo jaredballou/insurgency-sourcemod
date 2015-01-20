@@ -11,7 +11,7 @@
 * [HLStatsX](plugins/hlstatsx.smx?raw=true): Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 * [Coop Lobby Size](plugins/cooplobby.smx?raw=true): Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
-## Ideas to develop
+### Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
 * [ ] Use navmesh to find hiding spots, rather than spawn all bots in one wave, in midair; have them appear at a hiding place instead of the usual wave method. The spot would be checked to be far enough away from players to keep a 360 degree theat area, and keep them far enough away that we dont start spawning bots in the middle of fireteams. Navmesh is already parsed, just need to figure out how to find the location of the team, determine fudge factors (like difficulty, number of players, and distance between players), and loop hiding spots to do the spawn. 
 * [ ] Remove counterattack capture ability in checkpoint coop mode via a cvar. Having to capture a building and then stand inside it while it gets assaulted instead of choosing good firing positions outside makes the game switch from tight, careful action to Call of Duty twitch shooter.
