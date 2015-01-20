@@ -1,0 +1,15 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/botcount.smx"		
+		"Source"	"Path_SM/scripting/botcount.sp"
+	}
+}

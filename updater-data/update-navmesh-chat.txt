@@ -1,0 +1,18 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/navmesh-chat.smx"		
+		"Source"	"Path_SM/scripting/navmesh-chat.sp"
+		"Source"	"Path_SM/scripting/include/scp.inc"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/navmesh.inc"
+	}
+}

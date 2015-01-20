@@ -1,0 +1,19 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"1.2.1"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/ins_logger.smx"	
+		"Source"	"Path_SM/scripting/ins_logger.sp"
+		"Source"	"Path_SM/scripting/include/loghelper.inc"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/wstatshelper.inc"
+
+	}
+}

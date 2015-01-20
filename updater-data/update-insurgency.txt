@@ -1,0 +1,16 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/insurgency.smx"		
+		"Source"	"Path_SM/scripting/insurgency.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+	}
+}

@@ -1,0 +1,15 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/backblast.smx"		
+		"Source"	"Path_SM/scripting/backblast.sp"
+	}
+}
