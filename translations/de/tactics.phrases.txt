@@ -1,0 +1,238 @@
+"Phrases"
+{
+	"Added new waypoint"
+	{
+		"de"	"Neuen Wegpunkt hinzugefügt."
+	}
+	
+	"Tactics"
+	{
+		"de"	"Taktiken"
+	}
+	
+	"Overview"
+	{
+		"de"	"Übersicht"
+	}
+	
+	"Add new tactic"
+	{
+		"de"	"Neue Taktik anlegen"
+	}
+	
+	"Manage positions"
+	{
+		"de"	"Positionen verwalten"
+	}
+	
+	"Present tactics"
+	{
+		"de"	"Vorhandene Taktiken"
+	}
+	
+	"Show all ways"
+	{
+		"de"	"Alle Wege anzeigen"
+	}
+	
+	"Hide all ways"
+	{
+		"de"	"Alle Wege ausblenden"
+	}
+	
+	"Rename tactic"
+	{
+		"de"	"Taktik umbennenen"
+	}
+	
+	"Delete tactic"
+	{
+		"de"	"Taktik löschen"
+	}
+	
+	"Platin"
+	{
+		"de"	"Platin"
+	}
+	
+	"Red"
+	{
+		"de"	"Rot"
+	}
+	
+	"Blue"
+	{
+		"de"	"Blau"
+	}
+	
+	"Yellow"
+	{
+		"de"	"Gelb"
+	}
+	
+	"Green"
+	{
+		"de"	"Grün"
+	}
+	
+	"Purple"
+	{
+		"de"	"Lila"
+	}
+	
+	"Orange"
+	{
+		"de"	"Orange"
+	}
+	
+	"White"
+	{
+		"de"	"Weiss"
+	}
+	
+	"Add point at position"
+	{
+		"de"	"Punkt an meiner Position setzen"
+	}
+	
+	"Teleport to last point"
+	{
+		"de"	"Zu letztem Punkt teleportieren"
+	}
+	
+	"Delete last waypoint"
+	{
+		"de"	"Letzten Wegpunkt löschen"
+	}
+	
+	"Add new part"
+	{
+		"de"	"Neuen Teilweg hinzufügen"
+	}
+	
+	"Previous part"
+	{
+		"de"	"Vorheriger Teilweg"
+	}
+	
+	"Next part"
+	{
+		"de"	"Nächster Teilweg"
+	}
+	
+	"Show waypoints"
+	{
+		"de"	"Wegpunkte anzeigen"
+	}
+	
+	"Enlarge laserwidth"
+	{
+		"de"	"Laserbreite vergrößern"
+	}
+	
+	"Smaller laserwidth"
+	{
+		"de"	"Laserbreite verkleinern"
+	}
+	
+	"Delete this part"
+	{
+		"de"	"Diesen Teilweg löschen"
+	}
+	
+	"Manage positions"
+	{
+		"de"	"Positionen verwalten (e zum löschen)"
+	}
+	
+	"Type name of new tactic"
+	{
+		"de"	"Tipp den Namen der neuen Taktik in den Chat. Schreibe {default}!stop{green} um abzubrechen."
+	}
+	
+	"Showed all ways"
+	{
+		// 1: Tactic name
+		"de"	"Zeige alle Wege von {default}{1}{green}."
+	}
+	
+	"Hidden all ways"
+	{
+		// 1: Tactic name
+		"de"	"Blende alle Wege von {default}{1}{green} aus."
+	}
+	
+	"Rename tactic instruction"
+	{
+		// 1: Current tactic name
+		"de"	"Tippe einen neuen Namen für die Taktik {default}{1}{green} in den Chat. Schreibe {default}!stop{green} zum abbrechen."
+	}
+	
+	"Confirm tactic delete"
+	{
+		// 1: Tactic name
+		"de"	"Willst du die Taktik \"{1}\" wirklich löschen?"
+	}
+	
+	"Confirm part delete"
+	{
+		// 1: Part number
+		"de"	"Willst du den Teilweg {1} wirklich löschen?"
+	}
+	
+	"Enlarged laser"
+	{
+		// 1: New laser width
+		"de"	"Laserbreite auf {1} vergrößert."
+	}
+	
+	"Smallered laser"
+	{
+		"de"	"Laserbreite auf {1} verkleinert."
+	}
+	
+	"Adding stopped"
+	{
+		"de"	"Taktik anlegen {red}abgebrochen{green}."
+	}
+	
+	"Renaming stopped"
+	{
+		"de"	"Taktik umbennenen {red}abgebrochen{green}."
+	}
+	
+	"Renamed tactic"
+	{
+		"de"	"Taktik umbenannt."
+	}
+	
+	"Platin way"
+	{
+		"de"	"Platin Weg"
+	}
+	
+	"Red way"
+	{
+		"de"	"Roter Weg"
+	}
+	
+	"Blue way"
+	{
+		"de"	"Blauer Weg"
+	}
+	
+	"Yellow way"
+	{
+		"de"	"Gelber Weg"
+	}
+	
+	"Green way"
+	{
+		"de"	"Grüner Weg"
+	}
+	
+	"Purple way"
+	{
+		"de"	"Lila Weg"
+	}
+}

@@ -1,0 +1,107 @@
+"Phrases"
+{
+	"name"
+	{
+		"de"		"Killer Info Anzeige"
+	}
+
+	"chat_basic"
+	{
+		"de"		"{T}{1} {N}hat dich{2}{3}{olive} getötet und hat noch {T}{4} {N}hp{5} übrig"
+	}
+
+	"chat_weapon"
+	{
+		"de"		"mit {T}{1}{N}"
+	}
+
+	"chat_distance"
+	{
+		"de"		"über eine Distanz von {T}{1} {N}{2}"
+	}
+
+	"chat_armor"
+	{
+		"de"		"and {T}{1} {N}{2}"
+	}
+
+	"panel_killer"
+	{
+		"de"		"{1} hat dich getötet"
+	}
+
+	"panel_weapon"
+	{
+		"de"		"Waffe:    {1}"
+	}
+
+	"panel_health"
+	{
+		"de"		"Gesundheit:  {1}hp"
+	}
+
+	"panel_armor"
+	{
+		"de"		"{1}:    {2}"
+	}
+
+	"panel_distance"
+	{
+		"de"		"Entfernung:    {1} {2}"
+	}
+
+	"armor"
+	{
+		"de"		"Armierung"
+	}
+
+	"suitpower"
+	{
+		"de"		"Anzugsenergie"
+	}
+
+	"dominated"
+	{
+		"de"		"{T}{1} {G}dominiert !"
+	}
+
+	"revenge"
+	{
+		"de"		"{T}{1} {G}hat Rache geübt !"
+	}
+
+	"meters"
+	{
+		"de"		"Meter"
+	}
+
+	"feet"
+	{
+		"de"		"Fuss"
+	}
+
+	"announcement"
+	{
+		"de"		"{OG}Schreibe {T}!settings {OG}in den Chat um das Optionsmenü zu öffnen oder {T}!killerinfo {OG}um die Killer Info Anzeige ein/aus - zuschalten."
+	}
+
+	"kid_enabled"
+	{
+		"de"		"Du hast die Killer Info Anzeige aktiviert."
+	}
+
+	"kid_disabled"
+	{
+		"de"		"Du hast die Killer Info Anzeige deaktiviert."
+	}
+
+	"enabled"
+	{
+		"de"		"Aktiviert    "
+	}
+
+	"disabled"
+	{
+		"de"		"Deaktiviert"
+	}
+}

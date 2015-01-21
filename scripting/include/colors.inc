@@ -1,11 +1,10 @@
 /**************************************************************************
  *                                                                        *
  *                       Colored Chat Functions                           *
- *                   Author: exvel, Editor: Popoklopsi, Powerlord, Bara   *
- *                           Version: 1.1.3	                              *
+ *                            Author: exvel                               *
+ *                           Version: 1.0.5                               *
  *                                                                        *
  **************************************************************************/
- 
 
 #if defined _colors_included
  #endinput
@@ -13,7 +12,7 @@
 #define _colors_included
  
 #define MAX_MESSAGE_LENGTH 250
-#define MAX_COLORS 12
+#define MAX_COLORS 6
 
 #define SERVER_INDEX 0
 #define NO_INDEX -1
@@ -22,29 +21,23 @@
 enum Colors
 {
  	Color_Default = 0,
-	Color_Darkred,
 	Color_Green,
 	Color_Lightgreen,
 	Color_Red,
 	Color_Blue,
-	Color_Olive,
-	Color_Lime,
-	Color_Lightred,
-	Color_Purple,
-	Color_Grey,
-	Color_Orange
+	Color_Olive
 }
 
 /* Colors' properties */
-new String:CTag[][] = {"{default}", "{darkred}", "{green}", "{lightgreen}", "{red}", "{blue}", "{olive}", "{lime}", "{lightred}", "{purple}", "{grey}", "{orange}"};
-new String:CTagCode[][] = {"\x01", "\x02", "\x04", "\x03", "\x03", "\x03", "\x05", "\x06", "\x07", "\x03", "\x08", "\x09"};
-new bool:CTagReqSayText2[] = {false, false, false, true, true, true, false, false, false, false, false, false};
+new String:CTag[][] = {"{default}", "{green}", "{lightgreen}", "{red}", "{blue}", "{olive}"};
+new String:CTagCode[][] = {"\x01", "\x04", "\x03", "\x03", "\x03", "\x05"};
+new bool:CTagReqSayText2[] = {false, false, true, true, true, false};
 new bool:CEventIsHooked = false;
 new bool:CSkipList[MAXPLAYERS+1] = {false,...};
 
 /* Game default profile */
-new bool:CProfile_Colors[] = {true, false, true, false, false, false, false, false, false, false, false, false};
-new CProfile_TeamIndex[] = {NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX};
+new bool:CProfile_Colors[] = {true, true, false, false, false, false};
+new CProfile_TeamIndex[] = {NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX};
 new bool:CProfile_SayText2 = false;
 
 /**
@@ -67,42 +60,20 @@ stock CPrintToChat(client, const String:szMessage[], any:...)
 	
 	decl String:szBuffer[MAX_MESSAGE_LENGTH];
 	decl String:szCMessage[MAX_MESSAGE_LENGTH];
-
 	SetGlobalTransTarget(client);
-	
 	Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
 	VFormat(szCMessage, sizeof(szCMessage), szBuffer, 3);
 	
 	new index = CFormat(szCMessage, sizeof(szCMessage));
-	
 	if (index == NO_INDEX)
-		PrintToChat(client, "%s", szCMessage);
+	{
+		PrintToChat(client, szCMessage);
+	}
 	else
+	{
 		CSayText2(client, index, szCMessage);
-}
-
-stock CReplyToCommand(client, const String:szMessage[], any:...)
-{
-	
-	decl String:szCMessage[MAX_MESSAGE_LENGTH];
-	VFormat(szCMessage, sizeof(szCMessage), szMessage, 3);
-	
-	if (client == 0)
-	{
-		CRemoveTags(szCMessage, sizeof(szCMessage));
-		PrintToServer("%s", szCMessage);
-	}
-	else if (GetCmdReplySource() == SM_REPLY_TO_CONSOLE)
-	{
-		CRemoveTags(szCMessage, sizeof(szCMessage));
-		PrintToConsole(client, "%s", szCMessage);
-	}
-	else
-	{
-		CPrintToChat(client, "%s", szCMessage);
 	}
 }
-
 
 /**
  * Prints a message to all clients in the chat area.
@@ -122,8 +93,7 @@ stock CPrintToChatAll(const String:szMessage[], any:...)
 		{
 			SetGlobalTransTarget(i);
 			VFormat(szBuffer, sizeof(szBuffer), szMessage, 2);
-			
-			CPrintToChat(i, "%s", szBuffer);
+			CPrintToChat(i, szBuffer);
 		}
 		
 		CSkipList[i] = false;
@@ -154,18 +124,19 @@ stock CPrintToChatEx(client, author, const String:szMessage[], any:...)
 	
 	decl String:szBuffer[MAX_MESSAGE_LENGTH];
 	decl String:szCMessage[MAX_MESSAGE_LENGTH];
-
 	SetGlobalTransTarget(client);
-	
 	Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
 	VFormat(szCMessage, sizeof(szCMessage), szBuffer, 4);
 	
 	new index = CFormat(szCMessage, sizeof(szCMessage), author);
-	
 	if (index == NO_INDEX)
-		PrintToChat(client, "%s", szCMessage);
+	{
+		PrintToChat(client, szCMessage);
+	}
 	else
+	{
 		CSayText2(client, author, szCMessage);
+	}
 }
 
 /**
@@ -194,8 +165,7 @@ stock CPrintToChatAllEx(author, const String:szMessage[], any:...)
 		{
 			SetGlobalTransTarget(i);
 			VFormat(szBuffer, sizeof(szBuffer), szMessage, 3);
-			
-			CPrintToChatEx(i, author, "%s", szBuffer);
+			CPrintToChatEx(i, author, szBuffer);
 		}
 		
 		CSkipList[i] = false;
@@ -211,51 +181,11 @@ stock CPrintToChatAllEx(author, const String:szMessage[], any:...)
 stock CRemoveTags(String:szMessage[], maxlength)
 {
 	for (new i = 0; i < MAX_COLORS; i++)
-		ReplaceString(szMessage, maxlength, CTag[i], "", false);
-	
-	ReplaceString(szMessage, maxlength, "{teamcolor}", "", false);
-}
-
-/**
- * Checks whether a color is allowed or not
- *
- * @param tag   		Color Tag.
- * @return			 	True when color is supported, otherwise false
- */
-stock CColorAllowed(Colors:color)
-{
-	if (!CEventIsHooked)
 	{
-		CSetupProfile();
-		
-		CEventIsHooked = true;
+		ReplaceString(szMessage, maxlength, CTag[i], "");
 	}
 	
-	return CProfile_Colors[color];
-}
-
-/**
- * Replace the color with another color
- * Handle with care!
- *
- * @param color   			color to replace.
- * @param newColor   		color to replace with.
- * @noreturn
- */
-stock CReplaceColor(Colors:color, Colors:newColor)
-{
-	if (!CEventIsHooked)
-	{
-		CSetupProfile();
-		
-		CEventIsHooked = true;
-	}
-	
-	CProfile_Colors[color] = CProfile_Colors[newColor];
-	CProfile_TeamIndex[color] = CProfile_TeamIndex[newColor];
-	
-	CTagReqSayText2[color] = CTagReqSayText2[newColor];
-	Format(CTagCode[color], sizeof(CTagCode[]), CTagCode[newColor])
+	ReplaceString(szMessage, maxlength, "{teamcolor}", "");
 }
 
 /**
@@ -287,63 +217,61 @@ stock CSkipNextClient(client)
  */
 stock CFormat(String:szMessage[], maxlength, author=NO_INDEX)
 {
-	decl String:szGameName[30];
-	
-	GetGameFolderName(szGameName, sizeof(szGameName));
-	
 	/* Hook event for auto profile setup on map start */
 	if (!CEventIsHooked)
 	{
 		CSetupProfile();
 		HookEvent("server_spawn", CEvent_MapStart, EventHookMode_PostNoCopy);
-		
 		CEventIsHooked = true;
 	}
 	
 	new iRandomPlayer = NO_INDEX;
-	
-	// On CS:GO set invisible precolor
-	if (StrEqual(szGameName, "csgo", false)) 
-		Format(szMessage, maxlength, " \x01\x0B\x01%s", szMessage);
 	
 	/* If author was specified replace {teamcolor} tag */
 	if (author != NO_INDEX)
 	{
 		if (CProfile_SayText2)
 		{
-			ReplaceString(szMessage, maxlength, "{teamcolor}", "\x03", false);
-			
+			ReplaceString(szMessage, maxlength, "{teamcolor}", "\x03");
 			iRandomPlayer = author;
 		}
 		/* If saytext2 is not supported by game replace {teamcolor} with green tag  */
 		else
-			ReplaceString(szMessage, maxlength, "{teamcolor}", CTagCode[Color_Green], false);
+		{
+			ReplaceString(szMessage, maxlength, "{teamcolor}", CTagCode[Color_Green]);
+		}
 	}
 	else
-		ReplaceString(szMessage, maxlength, "{teamcolor}", "", false);
+	{
+		ReplaceString(szMessage, maxlength, "{teamcolor}", "");
+	}
 	
 	/* For other color tags we need a loop */
 	for (new i = 0; i < MAX_COLORS; i++)
 	{
 		/* If tag not found - skip */
-		if (StrContains(szMessage, CTag[i], false) == -1)
+		if (StrContains(szMessage, CTag[i]) == -1)
+		{
 			continue;
-			
+		}
 		/* If tag is not supported by game replace it with green tag */
 		else if (!CProfile_Colors[i])
-			ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green], false);
-		
+		{
+			ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green]);
+		}
 		/* If tag doesn't need saytext2 simply replace */
 		else if (!CTagReqSayText2[i])
-			ReplaceString(szMessage, maxlength, CTag[i], CTagCode[i], false);
-
+		{
+			ReplaceString(szMessage, maxlength, CTag[i], CTagCode[i]);
+		}
 		/* Tag needs saytext2 */
 		else
 		{
 			/* If saytext2 is not supported by game replace tag with green tag */
 			if (!CProfile_SayText2)
-				ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green], false);
-				
+			{
+				ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green]);
+			}
 			/* Game supports saytext2 */
 			else 
 			{
@@ -355,11 +283,14 @@ stock CFormat(String:szMessage[], maxlength, author=NO_INDEX)
 					
 					/* If player not found replace tag with green color tag */
 					if (iRandomPlayer == NO_PLAYER)
-						ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green], false);
-
+					{
+						ReplaceString(szMessage, maxlength, CTag[i], CTagCode[Color_Green]);
+					}
 					/* If player was found simply replace */
 					else
-						ReplaceString(szMessage, maxlength, CTag[i], CTagCode[i], false);
+					{
+						ReplaceString(szMessage, maxlength, CTag[i], CTagCode[i]);
+					}
 					
 				}
 				/* If found another team color tag throw error */
@@ -385,13 +316,17 @@ stock CFormat(String:szMessage[], maxlength, author=NO_INDEX)
 stock CFindRandomPlayerByTeam(color_team)
 {
 	if (color_team == SERVER_INDEX)
+	{
 		return 0;
+	}
 	else
 	{
 		for (new i = 1; i <= MaxClients; i++)
 		{
 			if (IsClientInGame(i) && GetClientTeam(i) == color_team)
+			{
 				return i;
+			}
 		}	
 	}
 
@@ -408,25 +343,10 @@ stock CFindRandomPlayerByTeam(color_team)
  */
 stock CSayText2(client, author, const String:szMessage[])
 {
-	new Handle:hBuffer = StartMessageOne("SayText2", client, USERMSG_RELIABLE|USERMSG_BLOCKHOOKS);
-	
-	if(GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available && GetUserMessageType() == UM_Protobuf) 
-	{
-		PbSetInt(hBuffer, "ent_idx", author);
-		PbSetBool(hBuffer, "chat", true);
-		PbSetString(hBuffer, "msg_name", szMessage);
-		PbAddString(hBuffer, "params", "");
-		PbAddString(hBuffer, "params", "");
-		PbAddString(hBuffer, "params", "");
-		PbAddString(hBuffer, "params", "");
-	}
-	else
-	{
-		BfWriteByte(hBuffer, author);
-		BfWriteByte(hBuffer, true);
-		BfWriteString(hBuffer, szMessage);
-	}
-	
+	new Handle:hBuffer = StartMessageOne("SayText2", client);
+	BfWriteByte(hBuffer, author);
+	BfWriteByte(hBuffer, true);
+	BfWriteString(hBuffer, szMessage);
 	EndMessage();
 }
 
@@ -452,27 +372,12 @@ stock CSetupProfile()
 		CProfile_TeamIndex[Color_Blue] = 3;
 		CProfile_SayText2 = true;
 	}
-	else if (StrEqual(szGameName, "csgo", false))
-	{
-		CProfile_Colors[Color_Red] = true;
-		CProfile_Colors[Color_Blue] = true;
-		CProfile_Colors[Color_Olive] = true;
-		CProfile_Colors[Color_Darkred] = true;
-		CProfile_Colors[Color_Lime] = true;
-		CProfile_Colors[Color_Lightred] = true;
-		CProfile_Colors[Color_Purple] = true;
-		CProfile_Colors[Color_Grey] = true;
-		CProfile_Colors[Color_Orange] = true;
-		CProfile_TeamIndex[Color_Red] = 2;
-		CProfile_TeamIndex[Color_Blue] = 3;
-		CProfile_SayText2 = true;
-	}
 	else if (StrEqual(szGameName, "tf", false))
 	{
 		CProfile_Colors[Color_Lightgreen] = true;
 		CProfile_Colors[Color_Red] = true;
 		CProfile_Colors[Color_Blue] = true;
-		CProfile_Colors[Color_Olive] = true;
+		CProfile_Colors[Color_Olive] = true;		
 		CProfile_TeamIndex[Color_Lightgreen] = SERVER_INDEX;
 		CProfile_TeamIndex[Color_Red] = 2;
 		CProfile_TeamIndex[Color_Blue] = 3;
@@ -535,5 +440,7 @@ public Action:CEvent_MapStart(Handle:event, const String:name[], bool:dontBroadc
 	CSetupProfile();
 	
 	for (new i = 1; i <= MaxClients; i++)
+	{
 		CSkipList[i] = false;
+	}
 }

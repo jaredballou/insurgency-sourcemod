@@ -1,0 +1,246 @@
+"Phrases"
+{
+	"Added new waypoint"
+	{
+		"en"	"Added new waypoint."
+	}
+	
+	"Tactics"
+	{
+		"en"	"Tactics"
+	}
+	
+	"Overview"
+	{
+		"en"	"Overview"
+	}
+	
+	"Add new tactic"
+	{
+		"en"	"Add new tactic"
+	}
+	
+	"Manage positions"
+	{
+		"en"	"Manage positions"
+	}
+	
+	"Present tactics"
+	{
+		"en"	"Present tactics"
+	}
+	
+	"Show all ways"
+	{
+		"en"	"Show all ways"
+	}
+	
+	"Hide all ways"
+	{
+		"en"	"Hide all ways"
+	}
+	
+	"Rename tactic"
+	{
+		"en"	"Rename tactic"
+	}
+	
+	"Delete tactic"
+	{
+		"en"	"Delete tactic"
+	}
+	
+	"Platin"
+	{
+		"en"	"Platin"
+	}
+	
+	"Red"
+	{
+		"en"	"Red"
+	}
+	
+	"Blue"
+	{
+		"en"	"Blue"
+	}
+	
+	"Yellow"
+	{
+		"en"	"Yellow"
+	}
+	
+	"Green"
+	{
+		"en"	"Green"
+	}
+	
+	"Purple"
+	{
+		"en"	"Purple"
+	}
+	
+	"Orange"
+	{
+		"en"	"Orange"
+	}
+	
+	"White"
+	{
+		"en"	"White"
+	}
+	
+	"Add point at position"
+	{
+		"en"	"Add a point at my position"
+	}
+	
+	"Teleport to last point"
+	{
+		"en"	"Teleport to the last point"
+	}
+	
+	"Delete last waypoint"
+	{
+		"en"	"Delete the last waypoint"
+	}
+	
+	"Add new part"
+	{
+		"en"	"Add a new part"
+	}
+	
+	"Previous part"
+	{
+		"en"	"Previous part"
+	}
+	
+	"Next part"
+	{
+		"en"	"Next part"
+	}
+	
+	"Show waypoints"
+	{
+		"en"	"Show waypoints"
+	}
+	
+	"Enlarge laserwidth"
+	{
+		"en"	"Enlarge laser width"
+	}
+	
+	"Smaller laserwidth"
+	{
+		"en"	"Smaller laser width"
+	}
+	
+	"Delete this part"
+	{
+		"en"	"Delete this part"
+	}
+	
+	"Manage positions"
+	{
+		"en"	"Manage positions (press e to delete)"
+	}
+	
+	"Type name of new tactic"
+	{
+		"en"	"Type the name of the new tactic in chat. Type {default}!stop{green} to cancel."
+	}
+	
+	"Showed all ways"
+	{
+		// 1: Tactic name
+		"#format"	"{1:s}"
+		"en"		"Show all ways of {default}{1}{green}."
+	}
+	
+	"Hidden all ways"
+	{
+		// 1: Tactic name
+		"#format"	"{1:s}"
+		"en"		"Hide all ways of {default}{1}{green}."
+	}
+	
+	"Rename tactic instruction"
+	{
+		// 1: Current tactic name
+		"#format"	"{1:s}"
+		"en"		"Type the new name for the tactic {default}{1}{green} in chat. Type {default}!stop{green} to cancel."
+	}
+	
+	"Confirm tactic delete"
+	{
+		// 1: Tactic name
+		"#format"	"{1:s}"
+		"en"		"Do you really want to delete the tactic \"{1}\"?"
+	}
+	
+	"Confirm part delete"
+	{
+		// 1: Part number
+		"#format"	"{1:d}"
+		"en"		"Do you really want to delete part {1}?"
+	}
+	
+	"Enlarged laser"
+	{
+		// 1: New laser width
+		"#format"	"{1:d}"
+		"en"		"Enlarged laser width to {1}."
+	}
+	
+	"Smallered laser"
+	{
+		// 1: New laser width
+		"#format"	"{1:d}"
+		"en"		"Smallered laser width to {1}."
+	}
+	
+	"Adding stopped"
+	{
+		"en"	"{red}Cancelled{green} tactic adding."
+	}
+	
+	"Renaming stopped"
+	{
+		"en"	"{red}Cancelled{green} tactic renaming."
+	}
+	
+	"Renamed tactic"
+	{
+		"en"	"Tactic renamed."
+	}
+	
+	"Platin way"
+	{
+		"en"	"Platin way"
+	}
+	
+	"Red way"
+	{
+		"en"	"Red way"
+	}
+	
+	"Blue way"
+	{
+		"en"	"Blue way"
+	}
+	
+	"Yellow way"
+	{
+		"en"	"Yellow way"
+	}
+	
+	"Green way"
+	{
+		"en"	"Green way"
+	}
+	
+	"Purple way"
+	{
+		"en"	"Purple way"
+	}
+}

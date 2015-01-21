@@ -1,0 +1,118 @@
+"Phrases"
+{
+	"name"
+	{
+		"en"		"Killer Info Display"
+	}
+
+	"chat_basic"
+	{
+		"#format"	"{1:N},{2:s},{3:s},{4:d},{5:s}"
+		"en"		"{T}{1} {N}killed you{2}{3} and has {T}{4} {N}health{5} left"
+	}
+
+	"chat_weapon"
+	{
+		"#format"	"{1:s}"
+		"en"		"with {T}{1}{N}"
+	}
+
+	"chat_distance"
+	{
+		"#format"	"{1:.1f},{2:s}"
+		"en"		"at a distance of {T}{1} {N}{2}"
+	}
+
+	"chat_armor"
+	{
+		"#format"	"{1:d},{2:t}"
+		"en"		"and {T}{1} {N}{2}"
+	}
+
+	"panel_killer"
+	{
+		"#format"	"{1:N}"
+		"en"		"{1} killed you"
+	}
+
+	"panel_weapon"
+	{
+		"#format"	"{1:s}"
+		"en"		"Weapon:    {1}"
+	}
+
+	"panel_health"
+	{
+		"#format"	"{1:d}"
+		"en"		"Health:    {1} left"
+	}
+
+	"panel_armor"
+	{
+		"#format"	"{1:t},{2:d}"
+		"en"		"{1}:    {2} left"
+	}
+
+	"panel_distance"
+	{
+		"#format"	"{1:.1f},{2:s}"
+		"en"		"Distance:    {1} {2}"
+	}
+
+	"armor"
+	{
+		"en"		"Armor"
+	}
+
+	"suitpower"
+	{
+		"en"		"Suitpower"
+	}
+
+	"dominated"
+	{
+		"#format"	"{1:N}"
+		"en"		"{T}{1} {G}dominated !"
+	}
+
+	"revenge"
+	{
+		"#format"	"{1:N}"
+		"en"		"{T}{1} {G}got revenge !"
+	}
+
+	"meters"
+	{
+		"en"		"meters"
+	}
+
+	"feet"
+	{
+		"en"		"feet"
+	}
+
+	"announcement"
+	{
+		"en"		"{OG}Type {T}!settings {OG}in chat to open the settings menu or {T}!killerinfo {OG}to enable/disable Killer Info Display."
+	}
+
+	"kid_enabled"
+	{
+		"en"		"Enabled showing information about your killer after death."
+	}
+
+	"kid_disabled"
+	{
+		"en"		"Disabled showing information about your killer after death."
+	}
+
+	"enabled"
+	{
+		"en"		"Enabled "
+	}
+
+	"disabled"
+	{
+		"en"		"Disabled"
+	}
+}
