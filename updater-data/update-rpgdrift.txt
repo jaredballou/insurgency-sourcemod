@@ -1,0 +1,17 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"Name: [INS] RPG Adjustments"
+		"Notes"		"Description: Adjusts behavior of RPG rounds"
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/rpgdrift.smx"		
+		"Source"	"Path_SM/scripting/rpgdrift.sp"
+	}
+}

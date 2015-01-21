@@ -1,0 +1,17 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"Name: [INS] 40mm Adjustments"
+		"Notes"		"Description: Adjusts behavior of 40mm grenade rounds"
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/40mm.smx"		
+		"Source"	"Path_SM/scripting/40mm.sp"
+	}
+}
