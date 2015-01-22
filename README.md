@@ -14,6 +14,10 @@ These plugins are generally stable and functional. Unless noted, they can simply
 
 ### Plugins In Progress
 These are plugins that still are not ready for general use, these will be very buggy.
+* [RPG rockets drift off course](scripting/rpgdrift.sp). Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs.
+  * [X] Nudge rocket in flight
+  * [ ] Randomized chance of happening, default 10% for players?
+  * [ ] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 * [Suicide Bombs](scripting/suicide_bomb.sp): Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
   * [ ] Add bot targeting and behavior to make them seek players
   * [ ] Add functionality to have bots blow themselves up when they run into a group of players
@@ -54,5 +58,4 @@ This is a sort of scratchpad and todo list for things that I think of or people 
 * [ ] Look at ability to modify game rules via tricky Sourcemod magic, like passing off spawning additional waves, spawning in staggered groups, and other fun things we need to do.
 * [ ] Ability to loot ammo from dead bodies and have them added to the player's inventory properly. Needs to be sorted out how player inventory is handled, with the array method where each magazine's capacity is tracked and retained, and make sure we only pick up the right ammo for the primary weapon. The system needs to inform player "picked up one full AK74 magazine" or "picked up one nearly empty M16 magazine". Should loot from most full to least full, loot one mag per run of the command, and say how many mags still available to be looted. Add cvar-controlled timer to delay next loot/shoot/reload/switch for half a second or so to balance it. Add support for shared magazines, namely AKS74U/AK74 and M16/M4A1/MK18.
 * [ ] Decouple flashbang visual impairment and audio impairment. The goal is to slightly increase flashed vision loss time, but greatly increase efefct and duration of audio impairment.
-* [ ] RPG rockets drift off course. Randomized, maybe 1 in 10 start to curve. CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 * [ ] 40mm direct hit does kinetic damage. Seems to be in the main game now, but in case it's not add it in.
