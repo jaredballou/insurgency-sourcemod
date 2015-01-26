@@ -14,12 +14,14 @@
 
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
+new Handle:cvarExplodeArmed = INVALID_HANDLE;
+new Handle:cvarDeathChance = INVALID_HANDLE;
 
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
 new bool:bEnabled = false;
@@ -37,6 +39,9 @@ public OnPluginStart()
 	PrintToServer("[SUICIDE] Starting");
 	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvarExplodeArmed = CreateConVar("sm_suicidebomb_explode_armed", "0", "Explode when killed if C4 or IED is in hand", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvarDeathChance = CreateConVar("sm_suicidebomb_death_chance", "0.1", "Chance as a fraction of 1 that a bomber will explode when killed", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+
 	HookConVarChange(cvarEnabled,ConVarChanged);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
@@ -76,7 +81,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[SUICIDE] Running Event_PlayerDeath");
+	//PrintToServer("[SUICIDE] Running Event_PlayerDeath");
 	if (!bEnabled)
 	{
 		return Plugin_Continue;
@@ -93,6 +98,9 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 public CheckExplode(client) {
 	new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
 	new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
+	new bool:bExplodeArmed = GetConVarBool(cvarExplodeArmed);
+	new Float:fDeathChance = GetConVarFloat(cvarDeathChance);
+
 	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N squad %d squadslot %d",client,client,m_iSquad,m_iSquadSlot);
 	if (!bEnabled)
 	{
@@ -101,11 +109,26 @@ public CheckExplode(client) {
 	if (!IsClientInGame(client) || !IsPlayerAlive(client))
 	{
 		return;
-	}		
+	}
 	if ((!(StrContains(g_client_last_classstring[client], "bomber") > -1)) && (!(StrContains(g_client_last_classstring[client], "suicide") > -1)))
 	{
 		return;
-	}		
+	}
+	//Assign random variable first
+	new Float:fRandom = GetRandomFloat(0.0, 1.0);
+	new String:shotWeapName[32];
+	GetClientWeapon(client, shotWeapName, sizeof(shotWeapName));
+	if (
+		((StrContains(shotWeapName,"weapon_ied") > -1)
+		|| (StrContains(shotWeapName,"weapon_c4") > -1))
+		&& bExplodeArmed
+	) {
+		fRandom = 0.0;
+	}
+	if (fRandom > fDeathChance)
+	{
+		return;
+	}
 	PrintToServer("[SUICIDE] Blowing Up %N with class %s!",client,g_client_last_classstring[client]);
 	new Float:vecOrigin[3],Float:vecAngles[3];
 	GetClientEyePosition(client, vecOrigin);

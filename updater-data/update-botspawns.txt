@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"	"0.0.2"
 		}
 		"Notes"		"Name: [INS] Bot spawns"
 		"Notes"		"Description: Bot spawns"

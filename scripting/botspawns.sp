@@ -12,7 +12,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
@@ -20,7 +20,6 @@ new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:g_hHidingSpots = INVALID_HANDLE;
 new g_iHidingSpotCount;
-new g_iNumControlPoints, g_nActivePushPointIndex, g_nTeamOneActiveBattleAttackPointIndex, g_nTeamOneActiveBattleDefendPointIndex, g_nTeamTwoActiveBattleAttackPointIndex, g_nTeamTwoActiveBattleDefendPointIndex, g_iCappingTeam, g_iOwningTeam, g_nInsurgentCount, g_nSecurityCount, g_vCPPositions, g_bSecurityLocked, g_bInsurgentsLocked, g_iObjectType, g_nReinforcementWavesRemaining, g_nRequiredPointIndex;
 
 
 public Plugin:myinfo = {
@@ -36,22 +35,6 @@ public OnPluginStart()
 	PrintToServer("[BOTSPAWNS] Starting up");
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botspawns_enabled", "1", "sets whether objective removal is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	g_nActivePushPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nActivePushPointIndex");
-	g_nTeamOneActiveBattleAttackPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nTeamOneActiveBattleAttackPointIndex");
-	g_nTeamOneActiveBattleDefendPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nTeamOneActiveBattleDefendPointIndex");
-	g_nTeamTwoActiveBattleAttackPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nTeamTwoActiveBattleAttackPointIndex");
-	g_nTeamTwoActiveBattleDefendPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nTeamTwoActiveBattleDefendPointIndex");
-	g_iCappingTeam = FindSendPropOffs("CINSObjectiveResource", "m_iCappingTeam");
-	g_iOwningTeam = FindSendPropOffs("CINSObjectiveResource", "m_iOwningTeam");
-	g_nInsurgentCount = FindSendPropOffs("CINSObjectiveResource", "m_nInsurgentCount");
-	g_nSecurityCount = FindSendPropOffs("CINSObjectiveResource", "m_nSecurityCount");
-	g_vCPPositions = FindSendPropOffs("CINSObjectiveResource", "m_vCPPositions[0]");
-	g_bSecurityLocked = FindSendPropOffs("CINSObjectiveResource", "m_bSecurityLocked");
-	g_bInsurgentsLocked = FindSendPropOffs("CINSObjectiveResource", "m_bInsurgentsLocked");
-	g_iObjectType = FindSendPropOffs("CINSObjectiveResource", "m_iObjectType");
-	g_nReinforcementWavesRemaining = FindSendPropOffs("CINSObjectiveResource", "m_nReinforcementWavesRemaining");
-	g_nRequiredPointIndex = FindSendPropOffs("CINSObjectiveResource", "m_nRequiredPointIndex");
-
 
 	OnMapStart();
 	HookEvent("player_spawn", Event_Spawn);
@@ -70,13 +53,19 @@ public OnLibraryAdded(const String:name[])
 }
 public OnMapStart()
 {
-	new ent = -1;
+	new String:sGameMode[32],String:sLogicEnt[64];
+	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+	Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
+	PrintToServer("[BOTSPAWNS] gamemode %s logicent %s",sGameMode,sLogicEnt);
+	if (!StrEqual(sGameMode,"checkpoint")) return;
+	if (!NavMesh_Exists()) return;
+	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
+	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
+	return;
+}
+/*
 	new m_iNumControlPoints, m_nActivePushPointIndex, m_nTeamOneActiveBattleAttackPointIndex, m_nTeamOneActiveBattleDefendPointIndex, m_nTeamTwoActiveBattleAttackPointIndex, m_nTeamTwoActiveBattleDefendPointIndex, m_iCappingTeam[16], m_iOwningTeam[16], m_nInsurgentCount[16], m_nSecurityCount[16], m_vCPPositions[16][3], m_bSecurityLocked[16], m_bInsurgentsLocked[16], m_iObjectType[16], m_nReinforcementWavesRemaining[2], m_nRequiredPointIndex[16];
-	ent = FindEntityByClassname(ent,"logic_checkpoint");
-	if (ent)
-	{
-	}
-	ent = FindEntityByClassname(ent,"ins_objective_resource");
+	new ent = FindEntityByClassname(0,sLogicEnt);
 	if (ent)
 	{
 		m_iNumControlPoints = GetEntData(ent, g_iNumControlPoints);
@@ -85,6 +74,7 @@ public OnMapStart()
 		m_nTeamOneActiveBattleDefendPointIndex = GetEntData(ent, g_nTeamOneActiveBattleDefendPointIndex);
 		m_nTeamTwoActiveBattleAttackPointIndex = GetEntData(ent, g_nTeamTwoActiveBattleAttackPointIndex);
 		m_nTeamTwoActiveBattleDefendPointIndex = GetEntData(ent, g_nTeamTwoActiveBattleDefendPointIndex);
+		PrintToServer("[BOTSPAWNS] m_iNumControlPoints %d m_nActivePushPointIndex %d m_nTeamOneActiveBattleAttackPointIndex %d m_nTeamOneActiveBattleDefendPointIndex %d m_nTeamTwoActiveBattleAttackPointIndex %d m_nTeamTwoActiveBattleDefendPointIndex %d",m_iNumControlPoints,m_nActivePushPointIndex,m_nTeamOneActiveBattleAttackPointIndex,m_nTeamOneActiveBattleDefendPointIndex,m_nTeamTwoActiveBattleAttackPointIndex,m_nTeamTwoActiveBattleDefendPointIndex);
 		for (new i=0;i<16;i++)
 		{
 			m_iCappingTeam[i] = GetEntData(ent, g_iCappingTeam+(i*4));
@@ -101,27 +91,8 @@ public OnMapStart()
 			}
 			m_nRequiredPointIndex[i] = GetEntData(ent, g_nRequiredPointIndex+(i*4));
 		}
-
 	}
-	if (!NavMesh_Exists()) return;
-	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
-	if (g_hHidingSpots == INVALID_HANDLE) return;
-	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
-	if (g_iHidingSpotCount)
-	{
-		for (new iIndex = 0, iSize = g_iHidingSpotCount; iIndex < iSize; iIndex++)
-		{
-			new Float:flHidingSpotX, Float:flHidingSpotY, Float:flHidingSpotZ,iHidingSpotFlags;
-			flHidingSpotX = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_X);
-			flHidingSpotY = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Y);
-			flHidingSpotZ = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Z);
-			iHidingSpotFlags = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Flags);
-			PrintToServer("[BOTSPAWNS] Found hiding spot %d at %f,%f,%f flags %d",iIndex,flHidingSpotX,flHidingSpotY,flHidingSpotZ,iHidingSpotFlags);
-		}
-	}
-	return;
 }
-/*
 	GetEntPropString(i, Prop_Data, "m_iClassname", m_iClassname, sizeof(m_iClassname));
 	GetEntPropString(i, Prop_Data, "m_iGlobalname", m_iGlobalname, sizeof(m_iGlobalname));
 	GetEntPropString(i, Prop_Data, "m_iName", m_iName, sizeof(m_iName));
@@ -168,10 +139,25 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 	{
 		CreateTimer(0.1, Timer_Spawn, client);
 	}
+	return Plugin_Continue;
 }
 
 public Action:Timer_Spawn(Handle:timer, any:client)
 {
-	
-	//TeleportEntity(client, pSpawn[client], NULL_VECTOR, NULL_VECTOR);
+	if (g_hHidingSpots == INVALID_HANDLE) return;
+	if (g_iHidingSpotCount)
+	{
+/*
+		for (new iIndex = 0, iSize = g_iHidingSpotCount; iIndex < iSize; iIndex++)
+		{
+			new Float:flHidingSpot[3];//, iHidingSpotFlags;
+			flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_X);
+			flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Y);
+			flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Z);
+			iHidingSpotFlags = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Flags);
+			PrintToServer("[BOTSPAWNS] Found hiding spot %d at %f,%f,%f flags %d",iIndex,flHidingSpot[0],flHidingSpotY,flHidingSpotZ,iHidingSpotFlags);
+		}
+*/
+	}
+//	TeleportEntity(client, flHidingSpot, NULL_VECTOR, NULL_VECTOR);
 }
