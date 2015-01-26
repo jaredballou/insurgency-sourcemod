@@ -44,8 +44,8 @@ These are plugins that still are not ready for general use, these will be very b
 * [Backblast](scripting/backblast.sp): Adds backblast to AT4 and RPG. Still in progress.
   * [X] Add CVARs to control cone angle, kill range, and total effect range
   * [ ] Use flashbang effect as standin for non-lethal backblast
-  * [ ] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
-  * [ ] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
+  * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
+  * [X] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
 
 ### Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
@@ -58,6 +58,5 @@ This is a sort of scratchpad and todo list for things that I think of or people 
 * [ ] Look at ability to modify game rules via tricky Sourcemod magic, like passing off spawning additional waves, spawning in staggered groups, and other fun things we need to do.
 * [ ] Ability to loot ammo from dead bodies and have them added to the player's inventory properly. Needs to be sorted out how player inventory is handled, with the array method where each magazine's capacity is tracked and retained, and make sure we only pick up the right ammo for the primary weapon. The system needs to inform player "picked up one full AK74 magazine" or "picked up one nearly empty M16 magazine". Should loot from most full to least full, loot one mag per run of the command, and say how many mags still available to be looted. Add cvar-controlled timer to delay next loot/shoot/reload/switch for half a second or so to balance it. Add support for shared magazines, namely AKS74U/AK74 and M16/M4A1/MK18.
 * [ ] Decouple flashbang visual impairment and audio impairment. The goal is to slightly increase flashed vision loss time, but greatly increase efefct and duration of audio impairment.
-* [ ] 40mm direct hit does kinetic damage. Seems to be in the main game now, but in case it's not add it in.
 * [ ] Add controls to disable bot shooting while sliding.
 * [ ] Add controls to disable firing for slight delay after jumping or falling.
