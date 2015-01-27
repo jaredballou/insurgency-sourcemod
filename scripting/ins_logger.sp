@@ -46,7 +46,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.2.1"
+#define PLUGIN_VERSION "1.2.2"
 #define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ins_logger.txt"
 
@@ -425,6 +425,7 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 	ReplaceString(class_template,sizeof(class_template),"template_","",false);
 	ReplaceString(class_template,sizeof(class_template),"_training","",false);
 	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
+	ReplaceString(class_template,sizeof(class_template),"coop_","",false);
 	ReplaceString(class_template,sizeof(class_template),"_security","",false);
 	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);

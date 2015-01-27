@@ -14,7 +14,7 @@
 
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
 
@@ -110,7 +110,7 @@ public CheckExplode(client) {
 	{
 		return;
 	}
-	if ((!(StrContains(g_client_last_classstring[client], "bomber") > -1)) && (!(StrContains(g_client_last_classstring[client], "suicide") > -1)))
+	if ((!(StrContains(g_client_last_classstring[client], "bomber") > -1)) && (!(StrContains(g_client_last_classstring[client], "sapper") > -1)) && (!(StrContains(g_client_last_classstring[client], "suicide") > -1)))
 	{
 		return;
 	}

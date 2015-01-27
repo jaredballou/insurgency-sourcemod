@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.2.1"
+			"Latest"	"1.2.2"
 		}
 		"Notes"		"Name: [INS] Logger"
 		"Notes"		"Description: Intercepts and fixes events logged for Insurgency2"
