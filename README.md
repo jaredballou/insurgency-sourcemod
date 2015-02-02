@@ -20,14 +20,25 @@ These plugins are generally stable and functional. Unless noted, they can simply
   * [X] Use flashbang effect as standin for non-lethal backblast
   * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
   * [X] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
+* [Suicide Bombs](plugins/suicide_bomb.smx?raw=true): Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
+  * [ ] Add bot targeting and behavior to make them seek players
+  * [ ] Add functionality to have bots blow themselves up when they run into a group of players
+  * [X] Create CVAR to enable random suicide bomb detonation based on role
+  * [X] Create CVAR to enable suicide bomb when IED phone is out
+  * [ ] Create CVAR to allow dropping of TIMED bomb. Some sort of warning, or maybe a disarm feature?
+  * [ ] Sound effect before detonation, obvious choice is Aloha Snackbar.
+  * [ ] Add logic to not detonate when in a group, unless killed by headshot? Figure out the best way to balance gameplay.
+  * [ ] Work on PVP mode and figuring out how to balance when a player is using the suicide bomb rather than a bot.
+* [Insurgency Library](scripting/insurgency.sp): This is a new project where I am trying to build data structures and natives to support other Insurgency functionality in SourceMod.
+  * [ ] Weapon lookup by index/name
+  * [ ] Role (template/class) lookup by index/name/player
+  * [ ] Game rules lookup (control points, status, waves, etc)
+  * [ ] Precache models based upon manifests.
+  * [ ] Investigate adding feature to read mp_theater_override variable, parse that theater, and add any materials/models/sounds to the list?
+  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
 
 ### Plugins In Progress
 These are plugins that still are not ready for general use, these will be very buggy.
-* [Suicide Bombs](scripting/suicide_bomb.sp): Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
-  * [ ] Add bot targeting and behavior to make them seek players
-  * [ ] Add functionality to have bots blow themselves up when they run into a group of players
-  * [ ] Create CVAR to enable random suicide bomb detonation based on role
-  * [ ] Create CVAR to enable suicide bomb when IED phone is out
 * [Chat improvements](scripting/navmesh-chat.sp): Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
   * [ ] Get grid/overlay data from engine directly
   * [X] Create CVARs to decide if prefix is attached to all chat, team only, or just admins
@@ -36,16 +47,13 @@ These are plugins that still are not ready for general use, these will be very b
   * [ ] Add in-game markers for wider array of tasks
   * [ ] Add support for commands that target location other than player's current position (i.e. "grenade over there")
   * [ ] Replace spotting box with callout of distance/direction, add map marker
-* [Insurgency Library](scripting/insurgency.sp): This is a new project where I am trying to build data structures and natives to support other Insurgency functionality in SourceMod.
-  * [ ] Weapon lookup by index/name
-  * [ ] Role (template/class) lookup by index/name/player
-  * [ ] Game rules lookup (control points, status, waves, etc)
 * [Bot Spawns](scripting/botspawns.sp): Adjust bot spawning and rules to increase game control.
   * [ ] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
   * [ ] Find path between current and next point, add bots around that axis
+  * [ ] Add option for minimum spawn distance to keep bots from spawning on top of players
   * [ ] Create variables for how far off the path to spawn
-  * [ ] Create timers to allow spawning small numbers of bots at different times to keep up the action
-  * [ ] Create functionality to respawn bots a set number of times per round to simulate more bots than game can support
+  * [ ] Create option to either spawn and keep X number of bots in game, or simply spawn on random timer (also an option)
+  * [ ] Create functionality to respawn bots to simulate more bots than game can support
 
 ### Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
