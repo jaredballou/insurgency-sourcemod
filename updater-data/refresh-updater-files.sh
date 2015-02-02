@@ -29,23 +29,20 @@ do
 	NEWURL="$URLBASE/update-$PLUGIN.txt"
 
 	#Get name from script and update file
-	CURNAME=$(grep -i '"Notes".*"Name:' $FILE | cut -d'"' -f4)
+	CURTITLE=$(grep -m1 -i '"Notes".*"' $FILE | cut -d'"' -f4|sed -e 's/[]\/$*.^|[]/\\&/g')
 	NEWNAME=$(grep -i '^#define.*PLUGIN_NAME' $SCRIPT | cut -d'"' -f2)
 	if [ "$NEWNAME" == "" ]
 	then
 		NEWNAME=$(grep -m1 -P '^[\s]*name[\s]*=.*"' $SCRIPT | cut -d'"' -f2)
 	fi
-	NEWNAME="Name: $NEWNAME"
 
 	#Get description from script and update file
-	CURDESC=$(grep -i '"Notes".*"Description:' $FILE | cut -d'"' -f4)
 	NEWDESC=$(grep -i '^#define.*PLUGIN_DESCRIPTION' $SCRIPT | cut -d'"' -f2)
 	if [ "$NEWDESC" == "" ]
 	then
 		NEWDESC=$(grep -m1 -P '^[\s]*description[\s]*=.*"' $SCRIPT | cut -d'"' -f2)
 	fi
-	NEWDESC="Description: $NEWDESC"
-
+	NEWTITLE=$(echo "$NEWNAME - $NEWDESC" | sed -e 's/[]\/$*.^|[]/\\&/g')
 	#Update URL in script if needed
 	if [ "$CURURL" != "$NEWURL" ]
 	then
@@ -54,17 +51,10 @@ do
 	fi
 
 	#Update Name in update file
-	if [ "$CURNAME" != "$NEWNAME" ]
+	if [ "$CURTITLE" != "$NEWTITLE" ]
 	then
-		echo "Changing $PLUGIN Name from \"$CURNAME\" to \"$NEWNAME\""
-		sed -e "s\`$CURNAME\`$NEWNAME\`" -i $FILE
-	fi
-
-	#Update Description in update file
-	if [ "$CURDESC" != "$NEWDESC" ]
-	then
-		echo "Changing $PLUGIN Description from \"$CURDESC\" to \"$NEWDESC\""
-		sed -e "s\`$CURDESC\`$NEWDESC\`" -i $FILE
+		echo "Changing $PLUGIN Title Note from \"$CURTITLE\" to \"$NEWTITLE\""
+		sed -e "s\`$CURTITLE\`$NEWTITLE\`" -i $FILE
 	fi
 
 	#Update Version in update file

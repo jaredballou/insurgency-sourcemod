@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"Name: [INS] Bot Counter"
-		"Notes"		"Description: Shows Bots Left Alive"
+		"Notes"		"[INS] Bot Counter - Shows Bots Left Alive"
+
 	}	
 	"Files"
 	{

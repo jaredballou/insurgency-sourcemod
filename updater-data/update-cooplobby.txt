@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"Name: [INS] Coop Lobby Override"
-		"Notes"		"Description: Plugin for overriding Insurgency Coop to 16 players"
+		"Notes"		"[INS] Coop Lobby Override - Plugin for overriding Insurgency Coop to 16 players"
+
 	}	
 	"Files"
 	{

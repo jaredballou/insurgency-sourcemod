@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"Name: [INS] 40mm Adjustments"
-		"Notes"		"Description: Adjusts behavior of 40mm grenade rounds"
+		"Notes"		"[INS] 40mm Adjustments - Adjusts behavior of 40mm grenade rounds"
+
 	}	
 	"Files"
 	{

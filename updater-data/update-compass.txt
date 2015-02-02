@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.2"
 		}
-		"Notes"		"Name: [INS] Compass"
-		"Notes"		"Description: Puts a compass in the game"
+		"Notes"		"[INS] Compass - Puts a compass in the game"
+
 	}	
 	"Files"
 	{

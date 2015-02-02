@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"Name: [INS] No Objectives"
-		"Notes"		"Description: Removes all objectives"
+		"Notes"		"[INS] No Objectives - Removes all objectives"
+
 	}	
 	"Files"
 	{

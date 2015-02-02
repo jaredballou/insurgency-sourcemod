@@ -1,0 +1,16 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"[INS] Looting - Adds ability to loot items from dead bodies"
+	}	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/looting.smx"		
+		"Source"	"Path_SM/scripting/looting.sp"
+	}
+}

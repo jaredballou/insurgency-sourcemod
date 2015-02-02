@@ -6,8 +6,8 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"Name: [INS] Insurgency Support Library"
-		"Notes"		"Description: Provides functions to support Insurgency"
+		"Notes"		"[INS] Insurgency Support Library - Provides functions to support Insurgency"
+
 	}	
 	"Files"
 	{

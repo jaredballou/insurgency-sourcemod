@@ -38,6 +38,7 @@ public OnPluginStart()
 	cvarAmount = CreateConVar("sm_rpgdrift_amount", "1.0", "Sets RPG drift max change per tick", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarChance = CreateConVar("sm_rpgdrift_chance", "0.25", "Chance as a fraction of 1 that a player-fired rocket will be affected", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarAlwaysBots = CreateConVar("sm_rpgdrift_always_bots", "1", "Always affect bot-fired rockets", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	HookEvent("missile_launched", Event_MissileLaunched);
 	
 	if (LibraryExists("updater"))
 	{
@@ -52,16 +53,20 @@ public OnLibraryAdded(const String:name[])
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
-public OnEntityCreated(entity, const String:classname[])
+public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return;
 	}
+	//PrintToServer("[RPGDRIFT] Event_MissileLaunched!");
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	new entity = GetEventInt(event, "entityid");
+	new String:classname[32];
+	GetEdictClassname(entity,classname,sizeof(classname));
 	if(StrEqual(classname, "rocket_rpg7"))
 	{
 		new Float:fRandom = GetRandomFloat(0.0,1.0);
-		new client = Entity_GetOwner(entity);
 		if (GetConVarBool(cvarAlwaysBots) && IsFakeClient(client))
 		{
 			fRandom = 0.0;
