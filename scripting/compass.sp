@@ -7,7 +7,7 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_DESCRIPTION "Puts a compass in the game"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-compass.txt"
 
@@ -23,6 +23,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarDirection = INVALID_HANDLE;
 new Handle:cvarBearing = INVALID_HANDLE;
 new Handle:cvarTimer = INVALID_HANDLE;
+
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_compass_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
@@ -52,9 +53,22 @@ public Action:Check_Compass(client, args)
 	{
 		return Plugin_Handled;
 	}
-	decl Float:angle[3];
+	decl Float:angle[3],Float:bearing;
 	new String:sDisplay[512];
 	GetClientEyeAngles(client, angle);
+//E -1 to 0
+//N 90
+//W -180 to 180
+//S -90
+	if (angle[1] >= 90.0) { // W to N
+		bearing = 270.0 + (180.0 - angle[1]);
+	} else if (angle[1]) { //W to N
+		bearing = 90.0 - angle[1];
+	} else if (angle[1] >= -90) {
+		bearing = 90.0 + (0.0 - angle[1]);
+	} else {
+		bearing = 180.0 - (angle[1] + 90.0);
+	}
 	if (GetConVarBool(cvarDirection))
 	{
 		if ((angle[1] < -158)  || (angle[1] > 158)) {
@@ -86,9 +100,8 @@ public Action:Check_Compass(client, args)
 	}
 	if (GetConVarBool(cvarBearing))
 	{
-		Format(sDisplay,sizeof(sDisplay),"%sBearing: %0.1f\xc2\xb0",sDisplay,angle[1]);
-		
+		Format(sDisplay,sizeof(sDisplay),"%sBearing: %0.1f\xc2\xb0",sDisplay,bearing);
 	}
 	PrintHintText(client, "%s",sDisplay);
 	return Plugin_Handled;
-}  
+}

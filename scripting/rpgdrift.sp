@@ -75,7 +75,7 @@ public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dont
 		{
 			return;
 		}
-		PrintToServer("[RPGDRIFT] Rocket entity %d owner %N fRandom %f",entity,client,fRandom);
+		PrintToServer("[RPGDRIFT] Rocket entity %d owner %N fRandom %f applying RocketThinkHook",entity,client,fRandom);
 		SDKHook(entity, SDKHook_Think, RocketThinkHook);
 	}
 }
@@ -90,9 +90,9 @@ public RocketThinkHook(entity)
 	new Float:fAmountDelta = GetConVarFloat(cvarAmount);
 	GetEntPropVector(entity, Prop_Send, "m_angRotation", m_angRotation);
 //	PrintToServer("[RPGDRIFT] Rocket entity %d m_angRotation %f %f %f",entity,m_angRotation[0],m_angRotation[1],m_angRotation[2]);
-	m_angRotation[0]+= GetRandomFloat((0-fAmountDelta), fAmountDelta);
-	m_angRotation[1]+= GetRandomFloat((0-fAmountDelta), fAmountDelta);
-	m_angRotation[2]+= GetRandomFloat((0-fAmountDelta), fAmountDelta);
+	m_angRotation[0]+= GetRandomFloat((0.0-fAmountDelta), fAmountDelta);
+	m_angRotation[1]+= GetRandomFloat((0.0-fAmountDelta), fAmountDelta);
+	m_angRotation[2]+= GetRandomFloat((0.0-fAmountDelta), fAmountDelta);
 //	PrintToServer("[RPGDRIFT] Rocket entity %d m_angRotation %f %f %f",entity,m_angRotation[0],m_angRotation[1],m_angRotation[2]);
 
 	TeleportEntity(entity, NULL_VECTOR, m_angRotation, NULL_VECTOR);
