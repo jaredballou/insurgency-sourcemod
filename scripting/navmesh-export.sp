@@ -14,6 +14,9 @@
 
 new Handle:g_hNavMeshPlaces;
 new Handle:g_hNavMeshAreas;
+new Handle:g_hNavMeshLadders;
+new Handle:g_hNavMeshHidingSpots;
+
 new Handle:cvarVersion = INVALID_HANDLE;
 new Handle:cvarEnabled = INVALID_HANDLE;
 new bool:g_bOverviewLoaded = false;
@@ -56,6 +59,9 @@ public OnMapStart()
 {
 	g_hNavMeshPlaces = NavMesh_GetPlaces();
 	g_hNavMeshAreas = NavMesh_GetAreas();
+	g_hNavMeshLadders = NavMesh_GetLadders();
+	g_hNavMeshHidingSpots = NavMesh_GetHidingSpots();
+
 	OverviewDestroy();
 	decl String:sMap[256];
 	GetCurrentMap(sMap, sizeof(sMap));
@@ -100,6 +106,7 @@ public DoExport()
 	decl String:sOutput[PLATFORM_MAX_PATH];
 	decl String:sMap[256];
 	decl String:buffer[256];
+	new posx[2], posy[2], pos_x, pos_y, pos_width, pos_height;
 
 	if (!NavMesh_Exists()) return -2;
 
@@ -119,19 +126,44 @@ public DoExport()
 			GetArrayString(g_hNavMeshPlaces, (PlaceID-1), buffer, sizeof(buffer));
 			KvSetString(kv, "pos_name", buffer);
 		}
+		posx[0] = RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_X1) - float(g_iOverviewPosX)), g_fOverviewScale)));
+		posy[0] = RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_Y1) - float(g_iOverviewPosY)), g_fOverviewScale)));
+		posx[1] = RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_X2) - float(g_iOverviewPosX)), g_fOverviewScale)));
+		posy[1] = RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_Y2) - float(g_iOverviewPosY)), g_fOverviewScale)));
+		if (posx[0] < posx[1])
+		{
+			pos_x = posx[0];
+			pos_width = (posx[1] - posx[0]);
+		}
 		else
 		{
-			KvSetNum(kv, "pos_name", ID);
+			pos_x = posx[1];
+			pos_width = (posx[0] - posx[1]);
 		}
-		new Float:posx[3], Float:posy[3];
-		posx[0] = FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_X1) - float(g_iOverviewPosX)), g_fOverviewScale));
-		posy[0] = FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_Y1) - float(g_iOverviewPosY)), g_fOverviewScale));
-		posx[1] = FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_X2) - float(g_iOverviewPosX)), g_fOverviewScale));
-		posy[1] = FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_Y2) - float(g_iOverviewPosY)), g_fOverviewScale));
-		KvSetNum(kv, "pos_x", RoundToFloor((posx[0] > posx[1]) ? posx[0] : posx[1]));
-		KvSetNum(kv, "pos_y", RoundToFloor((posy[0] > posy[1]) ? posy[0] : posy[1]));
-		KvSetNum(kv, "pos_width", RoundToFloor(FloatAbs(posy[0] - posy[1]))+1);
-		KvSetNum(kv, "pos_height", RoundToFloor(FloatAbs(posx[0] - posx[1]))+1);
+
+		if (posy[0] < posy[1])
+		{
+			pos_y = posy[0];
+			pos_height = (posy[1] - posy[0]);
+		}
+		else
+		{
+			pos_y = posy[1];
+			pos_height = (posy[0] - posy[1]);
+		}
+		if (pos_width < 0)
+		{
+			pos_width = (0 - pos_width);
+		}
+		if (pos_height < 0)
+		{
+			pos_height = (0 - pos_height);
+		}
+		KvSetNum(kv, "pos_x", pos_x);
+		KvSetNum(kv, "pos_width", pos_width+1);
+		KvSetNum(kv, "pos_y", pos_y);
+		KvSetNum(kv, "pos_height", pos_height+1);
+//RoundToFloor(FloatAbs(posx[0] - posx[1]))+1);
 
 /*
 		KvSetFloat(kv, "X1", Float:GetArrayCell(g_hNavMeshAreas, iIndex, NavMeshArea_X1));
@@ -179,6 +211,51 @@ public DoExport()
 		KvGoBack(kv);
 	}
 	KvGoBack(kv);
+
+	KvJumpToKey(kv, "HidingSpots", true);
+	for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshHidingSpots); iIndex < iSize; iIndex++)
+	{
+		new ID = GetArrayCell(g_hNavMeshHidingSpots, iIndex, NavMeshHidingSpot_ID);
+		Format(buffer, sizeof(buffer), "%d", ID);
+		KvJumpToKey(kv, buffer, true);
+		KvSetNum(kv, "pos_x", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshHidingSpots, iIndex, NavMeshHidingSpot_X) - float(g_iOverviewPosX)), g_fOverviewScale))));
+		KvSetNum(kv, "pos_y", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshHidingSpots, iIndex, NavMeshHidingSpot_Y) - float(g_iOverviewPosY)), g_fOverviewScale))));
+		KvSetNum(kv, "pos_z", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshHidingSpots, iIndex, NavMeshHidingSpot_Z)), g_fOverviewScale))));
+		KvGoBack(kv);
+	}
+	KvGoBack(kv);
+
+	KvJumpToKey(kv, "Ladders", true);
+	for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshLadders); iIndex < iSize; iIndex++)
+	{
+		new ID = GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_ID);
+		Format(buffer, sizeof(buffer), "%d", ID);
+		KvJumpToKey(kv, buffer, true);
+		KvSetNum(kv, "pos_x", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopX) - float(g_iOverviewPosX)), g_fOverviewScale))));
+		KvSetNum(kv, "pos_y", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopY) - float(g_iOverviewPosY)), g_fOverviewScale))));
+		KvSetNum(kv, "pos_z", RoundToFloor(FloatAbs(FloatDiv((Float:GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopZ)), g_fOverviewScale))));
+		KvSetNum(kv, "pos_direction", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_Direction));
+		KvSetNum(kv, "pos_width", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_Width));
+		KvSetNum(kv, "pos_height", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_Length));
+		KvSetNum(kv, "pos_area_top_forward", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopForwardAreaIndex));
+		KvSetNum(kv, "pos_area_top_left", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopLeftAreaIndex));
+		KvSetNum(kv, "pos_area_top_right", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopRightAreaIndex));
+		KvSetNum(kv, "pos_area_top_behind", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_TopBehindAreaIndex));
+		KvSetNum(kv, "pos_area_bottom", GetArrayCell(g_hNavMeshLadders, iIndex, NavMeshLadder_BottomAreaIndex));
+		KvGoBack(kv);
+	}
+	KvGoBack(kv);
+
+	KvJumpToKey(kv, "Places", true);
+	for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshPlaces); iIndex < iSize; iIndex++)
+	{
+		GetArrayString(g_hNavMeshPlaces, iIndex,buffer,sizeof(buffer));
+		new String:ID[8];
+		Format(ID,sizeof(ID),"%d",iIndex);
+		KvSetString(kv, ID, buffer);
+	}
+	KvGoBack(kv);
+
 /*
 	KvJumpToKey(kv, "Places", true);
 	KvJumpToKey(kv, "HidingSpots", true);
