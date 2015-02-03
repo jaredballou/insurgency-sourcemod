@@ -59,7 +59,7 @@ public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dont
 	{
 		return;
 	}
-	//PrintToServer("[RPGDRIFT] Event_MissileLaunched!");
+	PrintToServer("[RPGDRIFT] Event_MissileLaunched!");
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	new entity = GetEventInt(event, "entityid");
 	new String:classname[32];
@@ -81,6 +81,11 @@ public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dont
 }
 public RocketThinkHook(entity)
 {
+	if (Entity_HasEFlags(entity,EFL_IN_SKYBOX))
+	{
+		PrintToServer("[RPGDRIFT] Rocket entity %d touched skybox, removing!",entity);
+		RemoveEdict(entity);
+	}
 	decl Float:m_angRotation[3];
 	new Float:fAmountDelta = GetConVarFloat(cvarAmount);
 	GetEntPropVector(entity, Prop_Send, "m_angRotation", m_angRotation);

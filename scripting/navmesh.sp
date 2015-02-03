@@ -1473,7 +1473,7 @@ bool:NavMeshLoad(const String:sMapName[])
 		}
 	}
 	LogMessage("g_hNavMeshAreaConnections Done!");
-	
+	/*
 	if (GetArraySize(g_hNavMeshAreaVisibleAreas) > 0)
 	{
 		for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshAreaVisibleAreas); iIndex < iSize; iIndex++)
@@ -1483,7 +1483,7 @@ bool:NavMeshLoad(const String:sMapName[])
 		}
 	}
 	LogMessage("g_hNavMeshAreaVisibleAreas Done!");
-	
+	*/
 	if (GetArraySize(g_hNavMeshAreaLadderConnections) > 0)
 	{
 		for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshAreaLadderConnections); iIndex < iSize; iIndex++)

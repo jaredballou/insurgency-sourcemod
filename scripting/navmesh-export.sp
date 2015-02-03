@@ -9,7 +9,7 @@
 
 #pragma unused cvarVersion
 #pragma unused g_hNavMeshVisibleAreas
-#define PLUGIN_VERSION				"0.0.2"
+#define PLUGIN_VERSION				"0.0.3"
 #define PLUGIN_DESCRIPTION "Exports navmesh data in JSON format"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-navmesh-export.txt"
 
@@ -44,7 +44,7 @@ public OnPluginStart()
 {
 	PrintToServer("[NMExport] Starting");
 	cvarVersion = CreateConVar("sm_navmesh_export_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_navmesh_export_enabled", "1", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_navmesh_export_enabled", "0", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);

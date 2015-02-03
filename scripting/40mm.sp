@@ -8,11 +8,12 @@
 #include <sdkhooks>
 #undef REQUIRE_PLUGIN
 #include <updater>
+#include <smlib>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Adjusts behavior of 40mm grenade rounds"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-40mm.txt"
 
@@ -35,8 +36,79 @@ public OnPluginStart()
 	{
 		Updater_AddPlugin(UPDATE_URL);
 	}
+//	HookEvent("missile_launched", Event_MissileLaunched);
+	HookEvent("grenade_detonate", Event_GrenadeDetonate, EventHookMode_Pre);
+	HookEvent("missile_detonate", Event_MissileDetonate, EventHookMode_Pre);
 }
-
+public Event_GrenadeDetonate( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	PrintToServer("[40MM] Called Event_GrenadeDetonate");
+	//"userid" "short"
+	//"effectedEnemies" "short"
+	//"y" "float"
+	//"x" "float"
+	//"entityid" "long"
+	//"z" "float"
+	//"id" "short"
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	new entity = GetEventInt(event, "entityid");
+	if (Entity_HasEFlags(entity,EFL_IN_SKYBOX))
+	{
+		PrintToServer("[40MM] Grenade entity %d touched skybox, removing!",entity);
+		RemoveEdict(entity);
+	}
+	return Plugin_Continue;
+}
+public Event_MissileDetonate( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	PrintToServer("[40MM] Called Event_MissileDetonate");
+	//"userid" "short"
+	//"y" "float"
+	//"x" "float"
+	//"entityid" "long"
+	//"z" "float"
+	//"id" "short"
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	new entity = GetEventInt(event, "entityid");
+	if (Entity_HasEFlags(entity,EFL_IN_SKYBOX))
+	{
+		PrintToServer("[40MM] Grenade entity %d touched skybox, removing!",entity);
+		RemoveEdict(entity);
+	}
+	return Plugin_Continue;
+}
+/*
+public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return;
+	}
+	PrintToServer("[40MM] Event_MissileLaunched!");
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	new entity = GetEventInt(event, "entityid");
+	new String:classname[32];
+	GetEdictClassname(entity,classname,sizeof(classname));
+	if(StrContains(classname, "grenade_m203") > -1 || StrContains(classname, "grenade_m203") > -1) {
+		PrintToServer("[40MM] entity %d owner %N",entity,client);
+		SDKHook(entity, SDKHook_Think, GrenadeThinkHook);
+	}
+}
+public GrenadeThinkHook(entity)
+{
+	if (Entity_HasEFlags(entity,EFL_IN_SKYBOX))
+	{
+		PrintToServer("[40MM] Grenade entity %d touched skybox, removing!",entity);
+		RemoveEdict(entity);
+	}
+}
+*/
 public OnLibraryAdded(const String:name[])
 {
 	if (StrEqual(name, "updater"))
@@ -44,6 +116,7 @@ public OnLibraryAdded(const String:name[])
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
+/*
 public OnEntityCreated(entity, const String:classname[])
 {
 	if (!GetConVarBool(cvarEnabled))
@@ -58,7 +131,6 @@ public OnEntityCreated(entity, const String:classname[])
 		PrintToServer("[40MM] Added SDK hook to entity %d classname %s szClassname %s",entity,classname,szClassname);
 	}
 }
-
 public Action:OnStartTouch(entity, other)
 {
 	PrintToServer("[40MM] Called OnStartTouch with entity %d and other %d",entity,other);
@@ -83,3 +155,4 @@ public Action:OnTouch(entity, other)
 	SDKUnhook(entity, SDKHook_Touch, OnTouch);
 	return Plugin_Handled;
 }
+*/
