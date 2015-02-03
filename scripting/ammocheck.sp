@@ -9,7 +9,7 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
 
@@ -34,7 +34,7 @@ public OnPluginStart()
 	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	RegConsoleCmd("check_ammo", Check_Ammo);
 	HookEvent("weapon_reload", Event_WeaponEventMagUpdate,  EventHookMode_Post);
-	HookEvent("weapon_fire", Event_WeaponEventMagUpdate,  EventHookMode_Pre);
+//	HookEvent("weapon_fire", Event_WeaponEventMagUpdate,  EventHookMode_Pre);
 	HookEvent("weapon_pickup", Event_WeaponEventMagUpdate);
 	HookEvent("weapon_deploy", Event_WeaponEventMagUpdate);
 	WeaponsTrie = CreateTrie();
@@ -93,7 +93,7 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 {
 	//PrintToServer("[AMMOCHECK] Event_WeaponMagUpdate! name %s",name);
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	new weaponid = GetEventInt(event, "weaponid");
+	//new weaponid = GetEventInt(event, "weaponid");
 	if(!IsClientInGame(client))
 		return Plugin_Handled;
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
@@ -147,10 +147,18 @@ public Action:Check_Ammo(client, args)
 	GetEdictClassname(ActiveWeapon, sWeapon, sizeof(sWeapon));
 	GetTrieValue(WeaponsTrie, sWeapon, maxammo);
 	new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
+	if (maxammo <= 2) //Don't do it if we have a small magazine, usually means single shot weapon
+	{
+		KillAmmoTimer(client);
+		return Plugin_Handled;
+	}
+//Removing this for right now, makes the single shot weapons say half full...
+/*
 	new m_bChamberedRound = GetEntData(ActiveWeapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
 	//Add one to count if we have one piped
 	if (m_bChamberedRound)
 		ammo++;
+*/
 	//PrintHintText(client, "sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
 	//PrintToServer("[AMMOCHECK] sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
 	if (ammo >= maxammo) {
@@ -181,7 +189,7 @@ public Action:Weapon_Equip(client, weapon)
 	Check_Ammo(client, GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon"));
 //	return Plugin_Handled;
 }
-public Update_Magazine(client,weapon)
+Update_Magazine(client,weapon,dochamber=0)
 {
 	//PrintToServer("[AMMOCHECK] Update_Magazine!");
 	if(IsClientInGame(client) && IsValidEntity(weapon))
@@ -189,9 +197,12 @@ public Update_Magazine(client,weapon)
 		decl String:sWeapon[32];
 		GetEdictClassname(weapon, sWeapon, sizeof(sWeapon));
 		new ammo = GetEntProp(weapon, Prop_Data, "m_iClip1");
-		new m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
-		if (m_bChamberedRound)
-			ammo++;
+		if (dochamber)
+		{
+			new m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+			if (m_bChamberedRound)
+				ammo++;
+		}
 		new maxammo;
 		GetTrieValue(WeaponsTrie, sWeapon, maxammo);
 		if (maxammo < ammo)
