@@ -72,7 +72,16 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 	CreateNative("NavMesh_GetPlaces", Native_NavMeshGetPlaces);
 	CreateNative("NavMesh_GetAreas", Native_NavMeshGetAreas);
 	CreateNative("NavMesh_GetLadders", Native_NavMeshGetLadders);
+
+	//Added by Jared Ballou
 	CreateNative("NavMesh_GetHidingSpots", Native_NavMeshGetHidingSpots);
+	CreateNative("NavMesh_GetConnections", Native_NavMeshGetConnections);
+	CreateNative("NavMesh_GetEncounterPaths", Native_NavMeshGetEncounterPaths);
+	CreateNative("NavMesh_GetEncounterSpots", Native_NavMeshGetEncounterSpots);
+	CreateNative("NavMesh_GetLadderConnections", Native_NavMeshGetLadderConnections);
+	CreateNative("NavMesh_GetVisibleAreas", Native_NavMeshGetVisibleAreas);
+	//End new additions
+
 	
 	CreateNative("NavMesh_CollectSurroundingAreas", Native_NavMeshCollectSurroundingAreas);
 	CreateNative("NavMesh_BuildPath", Native_NavMeshBuildPath);
@@ -1454,7 +1463,6 @@ bool:NavMeshLoad(const String:sMapName[])
 	
 	// File parsing is all done. Convert IDs to array indexes for faster performance and 
 	// lesser lookup time.
-/*
 	LogMessage("Index cleanup starting...");
 	if (GetArraySize(g_hNavMeshAreaConnections) > 0)
 	{
@@ -1507,7 +1515,6 @@ bool:NavMeshLoad(const String:sMapName[])
 		}
 	}
 	LogMessage("g_hNavMeshLadders Done!");
-*/	
 	LogMessage("Index cleanup complete.");
 	return true;
 }
@@ -2691,6 +2698,7 @@ public Native_NavMeshGetLadders(Handle:plugin, numParams)
 	return _:g_hNavMeshLadders;
 }
 
+//Added by Jared Ballou
 public Native_NavMeshGetHidingSpots(Handle:plugin, numParams)
 {
 	if (!g_bNavMeshBuilt)
@@ -2701,6 +2709,59 @@ public Native_NavMeshGetHidingSpots(Handle:plugin, numParams)
 	
 	return _:g_hNavMeshAreaHidingSpots;
 }
+
+public Native_NavMeshGetConnections(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaConnections;
+}
+public Native_NavMeshGetEncounterPaths(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaEncounterPaths;
+}
+public Native_NavMeshGetEncounterSpots(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaEncounterSpots;
+}
+public Native_NavMeshGetLadderConnections(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaLadderConnections;
+}
+public Native_NavMeshGetVisibleAreas(Handle:plugin, numParams)
+{
+	if (!g_bNavMeshBuilt)
+	{
+		LogError("Could not retrieve hiding spot list because the nav mesh doesn't exist!");
+		return _:INVALID_HANDLE;
+	}
+	
+	return _:g_hNavMeshAreaVisibleAreas;
+}
+
+//End new additions
 
 public Native_NavMeshCollectSurroundingAreas(Handle:plugin, numParams)
 {
