@@ -46,7 +46,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.2.2"
+#define PLUGIN_VERSION "1.2.3"
 #define PLUGIN_DESCRIPTION "Intercepts and fixes events logged for Insurgency2"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ins_logger.txt"
 
@@ -684,6 +684,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	} else {
 		if(StrContains(weapon, "grenade_") > -1 || StrContains(weapon, "rocket_") > -1) {
 			ReplaceString(weapon, sizeof(weapon), "grenade_c4", "weapon_c4_clicker", false);
+			ReplaceString(weapon, sizeof(weapon), "grenade_ied", "weapon_c4_ied", false);
 			ReplaceString(weapon, sizeof(weapon), "grenade_", "weapon_", false);
 			ReplaceString(weapon, sizeof(weapon), "rocket_", "weapon_", false);
 		}

@@ -14,7 +14,7 @@
 
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_VERSION "0.0.4"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
 
@@ -118,12 +118,10 @@ public CheckExplode(client) {
 	new Float:fRandom = GetRandomFloat(0.0, 1.0);
 	new String:shotWeapName[32];
 	GetClientWeapon(client, shotWeapName, sizeof(shotWeapName));
-	if (
-		((StrContains(shotWeapName,"weapon_ied") > -1)
-		|| (StrContains(shotWeapName,"weapon_c4") > -1))
-		&& bExplodeArmed
-	) {
-		fRandom = 0.0;
+	// Only need this check since _ied and _clicker will both trigger
+	if ((StrContains(shotWeapName,"weapon_c4") > -1) && (bExplodeArmed)) {
+
+		fRandom = -1.0; //Set to -1, this means the check will always succeed
 	}
 	if (fRandom > fDeathChance)
 	{

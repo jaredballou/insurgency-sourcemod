@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.3"
+			"Latest"	"0.0.4"
 		}
 		"Notes"		"[INS] Suicide Bombers - Adds suicide bomb for bots"
 
