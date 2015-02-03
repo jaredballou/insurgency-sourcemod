@@ -15,6 +15,7 @@
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
+new Handle:cvarMode = INVALID_HANDLE;
 
 public Plugin:myinfo = {
 	name= "[INS] Looting",
@@ -27,7 +28,8 @@ public Plugin:myinfo = {
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_looting_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_looting_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_looting_enabled", "1", "sets whether looting is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarMode = CreateConVar("sm_looting_mode", "1", "sets looting mode - 0: Loot per mag, 1: Loot all ammo", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	RegConsoleCmd("loot", Loot_Body);
 	HookEvent("weapon_pickup", Event_WeaponPickup);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
@@ -47,7 +49,46 @@ public OnLibraryAdded(const String:name[])
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-//	new victimId = GetEventInt(event, "victim");
+	PrintToServer("[LOOTING] Event_PlayerDeath starting");
+	new victim   = GetClientOfUserId(GetEventInt(event, "userid"));
+	//new victim = GetEventInt(event, "victim");
+	//new ammo = GetEntProp(victim, Prop_Send, "m_iAmmo");
+	new ragdoll = GetEntDataEnt2(victim, FindSendPropInfo("CINSPlayer", "m_hRagdoll"));
+	PrintToServer("[LOOTING] victim %N (%d) ragdoll %d",victim,victim,ragdoll);
+	//new m_iAmmo = FindSendPropInfo("CINSPlayer", "m_iAmmo");
+	new ammo = -1;
+	new max = GetEntPropArraySize(victim, Prop_Send, "m_iAmmo");
+	for (new i = 0; i < max; i++)
+	{
+		if ((ammo = GetEntProp(victim, Prop_Send, "m_iAmmo", _, i)) > 0)
+			PrintToServer("[LOOTING]Slot %d, Ammo %d", i, ammo);
+	}
+
+/*
+	new ammo[256];
+	for (new i=0;i<256;i++)
+	{
+		ammo[i] = GetEntProp(victim, Prop_Send, "m_iAmmo", _, i); // Player ammunition for this weapon ammo type
+		if (ammo[i])
+		{
+			PrintToServer("[LOOTING] victim ammo index %d is %d",i,ammo[i]);
+		}
+	}
+	//new weapon = GetEntDataEnt2(victim, FindSendPropInfo("CINSPlayer", "m_hActiveWeapon"));
+	//new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType"); // Ammo type
+	//new m_iSecondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSecondaryAmmoType");
+
+	if(m_iPrimaryAmmoType != -1)
+	{
+		m_iClip1 = GetEntProp(weapon, Prop_Send, "m_iClip1"); // weapon clip amount bullets
+		m_iAmmo_prim = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+	}
+	if(m_iSecondaryAmmoType != -1)
+	{
+		m_iClip2 = GetEntProp(weapon, Prop_Send, "m_iClip2");
+		m_iAmmo_sec = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iSecondaryAmmoType);
+	}
+*/
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return Plugin_Continue;
@@ -57,6 +98,10 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 public Action:Event_WeaponPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	if (!GetConVarInt(cvarMode))
 	{
 		return Plugin_Continue;
 	}

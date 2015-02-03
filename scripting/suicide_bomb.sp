@@ -66,7 +66,7 @@ public ConVarChanged(Handle:cvar, const String:oldVal[], const String:newVal[])
 }
 public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[SUICIDE] Running Event_PlayerPickSquad");
+	//PrintToServer("[SUICIDE] Running Event_PlayerPickSquad");
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
@@ -87,7 +87,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 		return Plugin_Continue;
 	}
 	new victimId = GetEventInt(event, "userid");
-	PrintToServer("[SUICIDE] Victim ID is %d",victimId);
+	//PrintToServer("[SUICIDE] Victim ID is %d",victimId);
 	if (victimId > 0)
 	{
 		new victim = GetClientOfUserId(victimId);
@@ -96,12 +96,12 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	return Plugin_Continue;
 }
 public CheckExplode(client) {
-	new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
-	new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
+	//new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
+	//new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
 	new bool:bExplodeArmed = GetConVarBool(cvarExplodeArmed);
 	new Float:fDeathChance = GetConVarFloat(cvarDeathChance);
 
-	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N squad %d squadslot %d",client,client,m_iSquad,m_iSquadSlot);
+	//PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N squad %d squadslot %d",client,client,m_iSquad,m_iSquadSlot);
 	if (!bEnabled)
 	{
 		return;
@@ -134,7 +134,7 @@ public CheckExplode(client) {
 	new ent = CreateEntityByName("grenade_ied");
 	if(IsValidEntity(ent))
 	{
-		PrintToServer("[SUICIDE] Created IED entity");
+		//PrintToServer("[SUICIDE] Created IED entity");
 		vecAngles[0] = vecAngles[1] = vecAngles[2] = 0.0;
 		TeleportEntity(ent, vecOrigin, vecAngles, vecAngles);
 		SetEntPropEnt(ent, Prop_Data, "m_hOwnerEntity", client);
@@ -142,7 +142,7 @@ public CheckExplode(client) {
 		SetEntProp(ent, Prop_Data, "m_takedamage", 2);
 		SetEntProp(ent, Prop_Data, "m_iHealth", 1);
 		if (DispatchSpawn(ent)) {
-			PrintToServer("[SUICIDE] Detonating IED entity");
+			//PrintToServer("[SUICIDE] Detonating IED entity");
 			DealDamage(ent,1000,client,DMG_BLAST,"weapon_c4_ied");
 		}
 	}

@@ -59,7 +59,7 @@ public OnPluginStart()
 
 	HookEvent("player_blind", Event_PreFlashPlayer, EventHookMode_Pre);
 	HookEvent("player_blind", Event_OnFlashPlayer, EventHookMode_Post);
-	HookEvent("grenade_detonate", Event_OnFlashExplode, EventHookMode_Post);
+//	HookEvent("grenade_detonate", Event_OnFlashExplode, EventHookMode_Post);
 	HookEvent("player_team", Event_OnPlayerTeam);
 	HookEvent("player_spawn", Event_OnPlayerSpawn);
 	HookEvent("player_death", Event_OnPlayerDeath);

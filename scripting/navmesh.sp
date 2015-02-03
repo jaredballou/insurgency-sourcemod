@@ -1380,6 +1380,7 @@ bool:NavMeshLoad(const String:sMapName[])
 	}
 	
 	NavMeshGridFinalize();
+	LogMessage("Loading ladders....");
 	
 	new iLadderCount;
 	ReadFileCell(hFile, iLadderCount, UNSIGNED_INT_BYTE_SIZE);
@@ -1447,11 +1448,14 @@ bool:NavMeshLoad(const String:sMapName[])
 	g_iNavMeshSaveBSPSize = iNavSaveBspSize;
 	g_bNavMeshAnalyzed = bool:iNavMeshAnalyzed;
 	
+	LogMessage("Done loading ladders.");
 	CloseHandle(hFile);
+	LogMessage("Navmesh file closed");
 	
 	// File parsing is all done. Convert IDs to array indexes for faster performance and 
 	// lesser lookup time.
-	
+/*
+	LogMessage("Index cleanup starting...");
 	if (GetArraySize(g_hNavMeshAreaConnections) > 0)
 	{
 		for (new iIndex = 0, iSize = GetArraySize(g_hNavMeshAreaConnections); iIndex < iSize; iIndex++)
@@ -1460,6 +1464,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshAreaConnections, iIndex, FindValueInArray(g_hNavMeshAreas, iConnectedAreaID), NavMeshConnection_AreaIndex);
 		}
 	}
+	LogMessage("g_hNavMeshAreaConnections Done!");
 	
 	if (GetArraySize(g_hNavMeshAreaVisibleAreas) > 0)
 	{
@@ -1469,6 +1474,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshAreaVisibleAreas, iIndex, FindValueInArray(g_hNavMeshAreas, iVisibleAreaID), NavMeshVisibleArea_Index);
 		}
 	}
+	LogMessage("g_hNavMeshAreaVisibleAreas Done!");
 	
 	if (GetArraySize(g_hNavMeshAreaLadderConnections) > 0)
 	{
@@ -1478,6 +1484,7 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshAreaLadderConnections, iIndex, FindValueInArray(g_hNavMeshLadders, iLadderID), NavMeshLadderConnection_LadderIndex);
 		}
 	}
+	LogMessage("g_hNavMeshAreaLadderConnections Done!");
 	
 	if (GetArraySize(g_hNavMeshLadders) > 0)
 	{
@@ -1499,7 +1506,9 @@ bool:NavMeshLoad(const String:sMapName[])
 			SetArrayCell(g_hNavMeshLadders, iLadderIndex, FindValueInArray(g_hNavMeshAreas, iBottomAreaID), NavMeshLadder_BottomAreaIndex);
 		}
 	}
-	
+	LogMessage("g_hNavMeshLadders Done!");
+*/	
+	LogMessage("Index cleanup complete.");
 	return true;
 }
 
