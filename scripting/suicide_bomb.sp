@@ -143,7 +143,7 @@ public CheckExplode(client) {
 		SetEntProp(ent, Prop_Data, "m_iHealth", 1);
 		if (DispatchSpawn(ent)) {
 			PrintToServer("[SUICIDE] Detonating IED entity");
-			DealDamage(ent,1000,client,DMG_BLAST,"weapon_ied");
+			DealDamage(ent,1000,client,DMG_BLAST,"weapon_c4_ied");
 		}
 	}
 }
