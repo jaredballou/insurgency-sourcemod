@@ -31,6 +31,6 @@ public __pl_sourcebans_SetNTVOptional()
  * @param reason	The reason to ban the player from the server
  * @noreturn		
  *********************************************************/
-native SBBanPlayer(client, target, time, String:reason[]);
+native SBBanPlayer(client, target, time, const String:reason[]);
 
 //Yarr!

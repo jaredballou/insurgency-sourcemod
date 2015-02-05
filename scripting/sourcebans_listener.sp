@@ -41,9 +41,11 @@ public OnLibraryRemoved(const String:name[])
 }
 
 public Action:OnBanClient(client, time, flags, const String:reason[], const String:kick_message[], const String:command[], any:source) {
+/*
 	if(StrEqual(command, "banid")) {
 		return Plugin_Continue;
 	}
+*/
 	if(source < 0 || source > MaxClients) {
 		return Plugin_Continue;
 	}
@@ -52,7 +54,7 @@ public Action:OnBanClient(client, time, flags, const String:reason[], const Stri
 	}
 	if (g_bSBAvailable)
 	{
-		SBBanPlayer(source, client, time, "Imported");
+		SBBanPlayer(source, client, time, reason);
 	}
 	else
 	{
