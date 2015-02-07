@@ -95,10 +95,10 @@ public Action:Event_WeaponEventMagUpdate(Handle:event, const String:name[], bool
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	//new weaponid = GetEventInt(event, "weaponid");
 	if(!IsClientInGame(client))
-		return Plugin_Handled;
+		return Plugin_Continue;
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0)
-		return Plugin_Handled;
+		return Plugin_Continue;
 	Update_Magazine(client,ActiveWeapon);
 	if(StrEqual(name, "weapon_reload"))
 	{		

@@ -41,11 +41,9 @@ public OnLibraryRemoved(const String:name[])
 }
 
 public Action:OnBanClient(client, time, flags, const String:reason[], const String:kick_message[], const String:command[], any:source) {
-/*
 	if(StrEqual(command, "banid")) {
 		return Plugin_Continue;
 	}
-*/
 	if(source < 0 || source > MaxClients) {
 		return Plugin_Continue;
 	}
