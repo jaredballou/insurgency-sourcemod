@@ -15,6 +15,10 @@ These plugins are generally stable and functional. Unless noted, they can simply
   * [X] Nudge rocket in flight
   * [ ] Randomized chance of happening, default 10% for players?
   * [ ] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
+
+
+### Plugins In Progress
+These are plugins that still are not ready for general use, these will be very buggy.
 * [Backblast](plugins/backblast.smx?raw=true): Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
   * [X] Add CVARs to control cone angle, kill range, and total effect range
   * [X] Use flashbang effect as standin for non-lethal backblast
@@ -36,9 +40,6 @@ These plugins are generally stable and functional. Unless noted, they can simply
   * [ ] Precache models based upon manifests.
   * [ ] Investigate adding feature to read mp_theater_override variable, parse that theater, and add any materials/models/sounds to the list?
   * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
-
-### Plugins In Progress
-These are plugins that still are not ready for general use, these will be very buggy.
 * [Chat improvements](scripting/navmesh-chat.sp): Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
   * [ ] Get grid/overlay data from engine directly
   * [X] Create CVARs to decide if prefix is attached to all chat, team only, or just admins
