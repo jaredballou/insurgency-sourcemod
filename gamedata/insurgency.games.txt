@@ -43,6 +43,41 @@
 	}
 	"insurgency"
 	{
+		"Signatures"
+		{
+			"Spawn"
+			{
+				"linux"		"@_ZN10CINSPlayer5SpawnEv"
+			}
+			"ForceRespawn"
+			{
+				"linux"		"@_ZN10CINSPlayer12ForceRespawnEv"
+			}
+			"Resupply"
+			{
+				"linux"		"@_ZN10CINSPlayer8ResupplyEv"
+			}
+			"AddMags"
+			{
+				"linux"		"@_ZN19CINSWeaponMagazines7AddMagsEi"
+			}
+			"RoundCount"
+			{
+				"linux"		"@_ZN19CINSWeaponMagazines10RoundCountEv"
+			}
+			"Deafen"
+			{
+				"linux"		"@_ZN10CINSPlayer6DeafenEf"
+			}
+			"ForceChangeTeam"
+			{
+				"linux"		"@_ZN10CINSPlayer15ForceChangeTeamEi"
+			}
+			"GetMagazines"
+			{
+				"linux"		"@_ZN10CINSPlayer12GetMagazinesEi"
+			}
+		}
 		"Offsets"
 		{
 			"ShouldBlockPrimaryFire"
