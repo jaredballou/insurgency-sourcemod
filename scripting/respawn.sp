@@ -62,7 +62,7 @@ public OnPluginStart()
 
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
-	if (StrEqual(game, "dod"))
+	if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
 		// Next 14 lines of text are taken from Andersso's DoDs respawn plugin. Thanks :)
 		g_hGameConfig = LoadGameConfigFile("plugin.respawn");
@@ -73,12 +73,19 @@ public OnPluginStart()
 		}
 
 		StartPrepSDKCall(SDKCall_Player);
-		PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "DODRespawn");
+		if (StrEqual(game, "dod"))
+		{
+			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "DODRespawn");
+		}
+		if (StrEqual(game, "insurgency"))
+		{
+			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "ForceRespawn");
+		}
 		g_hPlayerRespawn = EndPrepSDKCall();
 
 		if (g_hPlayerRespawn == INVALID_HANDLE)
 		{
-			SetFailState("Fatal Error: Unable to find signature for \"CDODPlayer::DODRespawn(void)\"!");
+			SetFailState("Fatal Error: Unable to find signature for \"Respawn\"!");
 		}
 	}
 
@@ -204,7 +211,7 @@ public RespawnPlayer(client, target)
 	GetGameFolderName(game, sizeof(game));
 	LogAction(client, target, "\"%L\" respawned \"%L\"", client, target);
 
-	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo") || StrEqual(game, "insurgency"))
+	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
 	{
 		CS_RespawnPlayer(target);
 	}
@@ -212,7 +219,7 @@ public RespawnPlayer(client, target)
 	{
 		TF2_RespawnPlayer(target);
 	}
-	else if (StrEqual(game, "dod"))
+	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
 		SDKCall(g_hPlayerRespawn, target);
 	}
@@ -223,7 +230,7 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
 
-	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo") || StrEqual(game, "insurgency"))
+	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
 	{
 		CS_RespawnPlayer(client);
 	}
@@ -231,7 +238,7 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	{
 		TF2_RespawnPlayer(client);
 	}
-	else if (StrEqual(game, "dod"))
+	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
 		SDKCall(g_hPlayerRespawn, client);
 	}

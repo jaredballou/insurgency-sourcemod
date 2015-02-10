@@ -1,0 +1,33 @@
+"Games"
+{
+	"dod"
+	{
+		"Signatures"
+		{
+			"DODRespawn"
+			{
+				"library"	"server"
+				"windows"	"\x56\x8B\xF1\x8B\x06\x8B\x90\x2A\x2A\x2A\x2A\xFF\xD2\x84\xC0\x74\x2A\x80\xBE"
+				"linux"		"@_ZN10CDODPlayer10DODRespawnEv"
+			}
+		}
+	}
+        "insurgency"
+        {
+                "Signatures"
+                {
+                        "Spawn"
+                        {
+                                "linux"         "@_ZN10CINSPlayer5SpawnEv"
+                        }
+                        "ForceRespawn"
+                        {
+                                "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
+                        }
+                        "Resupply"
+                        {
+                                "linux"         "@_ZN10CINSPlayer8ResupplyEv"
+                        }
+		}
+	}
+}
