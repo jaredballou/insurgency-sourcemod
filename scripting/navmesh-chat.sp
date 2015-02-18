@@ -69,7 +69,7 @@ public Action:VoiceHook(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 	new clientid = BfReadByte(bf);
 	decl String:message[256];
 	BfReadString(bf, message, sizeof(message));
-	PrintToServer("[NMchat]: VoiceHook called for %N clientid: %d, message: %s",clientid,clientid,message);
+	//PrintToServer("[NMchat]: VoiceHook called for %N clientid: %d, message: %s",clientid,clientid,message);
 	if(IsPlayerAlive(clientid) && IsClientInGame(clientid) && GetConVarBool(cvarEnabled))
 	{
 		new String:clientname[64];
@@ -90,7 +90,7 @@ public Action:VoiceHook(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 }
 public StartDataTimer(clientid, String:clientname[], String:message[])
 {
-	PrintToServer("[NMchat]: StartDataTimer(clientid=%d, String:clientname[]=%s, String:message[]=%s)",clientid,clientname,message);
+	//PrintToServer("[NMchat]: StartDataTimer(clientid=%d, String:clientname[]=%s, String:message[]=%s)",clientid,clientname,message);
 	CreateDataTimer(0.1, SubTitle_Print, h_DisplayPrint);
 	WritePackCell(h_DisplayPrint, clientid);
 	WritePackString(h_DisplayPrint, clientname);
@@ -98,7 +98,7 @@ public StartDataTimer(clientid, String:clientname[], String:message[])
 }
 public Action:SubTitle_Print(Handle:timer, Handle:h_DisplayPrint)
 {
-	PrintToServer("[NMchat]: Called SubTitle_Print");
+	//PrintToServer("[NMchat]: Called SubTitle_Print");
 	new String:clientname[64];
 	new String:message[256];
 	new Float:senderOrigin[3];
@@ -128,7 +128,7 @@ public Action:SubTitle_Print(Handle:timer, Handle:h_DisplayPrint)
 		{
 			GetDistanceDirection(receiver,senderOrigin,sDistance,sizeof(sDistance));
 			Format(textToPrint,sizeof(textToPrint),"%s%s%s",sGridPos,sPlace,sDistance);
-			PrintToServer("[NMchat]: Sending message to client %d",receiver);
+			//PrintToServer("[NMchat]: Sending message to client %d",receiver);
 			Client_PrintToChat(receiver,true,textToPrint);
 //			PrintToChat(receiver,textToPrint);
 		}
@@ -165,21 +165,21 @@ OverviewDestroy()
 
 bool:OverviewLoad(const String:sMapName[])
 {
-	PrintToServer("[NMchat]: start OverviewLoad");
+	//PrintToServer("[NMchat]: start OverviewLoad");
 	decl String:sOverviewFilePath[PLATFORM_MAX_PATH];
 	Format(sOverviewFilePath, sizeof(sOverviewFilePath), "insurgency-data\\resource\\overviews\\%s.txt", sMapName);
 	if (!FileExists(sOverviewFilePath)) {
-		PrintToServer("[NMchat]: OverviewLoad cannot find suitable overview file!");
+		//PrintToServer("[NMchat]: OverviewLoad cannot find suitable overview file!");
 		return false;
 	}
-	PrintToServer("[NMchat]: OverviewLoad sOverviewFilePath is %s",sOverviewFilePath);
+	//PrintToServer("[NMchat]: OverviewLoad sOverviewFilePath is %s",sOverviewFilePath);
 	new Handle:g_hNavMeshKeyValues = CreateKeyValues(sMapName);
 	FileToKeyValues(g_hNavMeshKeyValues,sOverviewFilePath);
 	g_iOverviewPosX = KvGetNum(g_hNavMeshKeyValues, "pos_x", 0);
 	g_iOverviewPosY = KvGetNum(g_hNavMeshKeyValues, "pos_y", 0);
 	g_iOverviewRotate = KvGetNum(g_hNavMeshKeyValues, "rotate", 0);
 	g_fOverviewScale = KvGetFloat(g_hNavMeshKeyValues, "scale", 1.0);
-	PrintToServer("[NMchat]: OverviewLoad KeyValues parsed: pos_x %d pos_y %d rotate %d scale %f", g_iOverviewPosX, g_iOverviewPosY, g_iOverviewRotate, g_fOverviewScale);
+	//PrintToServer("[NMchat]: OverviewLoad KeyValues parsed: pos_x %d pos_y %d rotate %d scale %f", g_iOverviewPosX, g_iOverviewPosY, g_iOverviewRotate, g_fOverviewScale);
  
 	CloseHandle(g_hNavMeshKeyValues);
 	return true;
@@ -334,7 +334,7 @@ public Action:OnChatMessage(&author, Handle:recipients, String:name[], String:me
 		GetPlaceName(flEyePos,sPlace,sizeof(sPlace));
 	        GetGridPos(flEyePos,sGridPos,sizeof(sGridPos));
 		Format(sNameBuffer, sizeof(sNameBuffer), "%s%s{T}%s", sGridPos, sPlace, name);
-		PrintToServer("[NMChat] NameBuffer changed from '%s' to '%s'",name,sNameBuffer);
+		//PrintToServer("[NMChat] NameBuffer changed from '%s' to '%s'",name,sNameBuffer);
 		Color_ChatSetSubject(author);
 		index = Color_ParseChatText(sNameBuffer, name, MAXLENGTH_NAME);
 		Color_ChatClearSubject();

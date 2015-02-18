@@ -151,9 +151,9 @@ public OnMapStart()
 //This should be executed every time a point is taken, round starts, or any time a wave would be spawned.
 RestartBotQueue()
 {
-	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue");
 	//TODO: Kill all bots at this time?
-	g_iBotsToSpawn = RoundToFloor(Float:Team_CountPlayers(bot_team) * GetConVarFloat(cvarTotalSpawnFrac));
+	g_iBotsToSpawn = RoundToFloor(Team_CountPlayers(bot_team) * GetConVarFloat(cvarTotalSpawnFrac));
+	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),GetConVarFloat(cvarTotalSpawnFrac),g_iBotsToSpawn);
 }
 
 //Move a bot to the queue. This will silently kill them and remove ragdoll.
@@ -163,10 +163,11 @@ public JoinQueue(client)
 	{
 		return;
 	}
+	PrintToServer("[BOTSPAWNS] called JoinQueue for %d",client);
 	g_iInQueue[client] = 1;
 	if (IsPlayerAlive(client))
 	{
-		AcceptEntityInput(client, "Kill");
+		ForcePlayerSuicide(client);
 	}
 }
 //Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
@@ -176,8 +177,13 @@ PreSpawn(client,tokens=0)
 	{
 		return;
 	}
+	PrintToServer("[BOTSPAWNS] called PreSpawn for %d",client);
 	g_iSpawnTokens[client]+=tokens;
 	g_iNumReady++;
+	if (g_iBotsToSpawn)
+	{
+		g_iBotsToSpawn--;
+	}
 	new Float:fSpawnDelay = GetRandomFloat(GetConVarFloat(cvarMinSpawnDelay),GetConVarFloat(cvarMaxSpawnDelay));
 	if (fSpawnDelay < 0.1)
 	{
@@ -199,12 +205,15 @@ public Action:Timer_ProcessQueue(Handle:timer)
 //	new iBotCountMin = RoundToFloor(Float:g_iBotsTotal * GetConVarFloat(cvarMinFracInGame));
 	new iBotCountMax = RoundToFloor(Float:g_iBotsTotal * GetConVarFloat(cvarMaxFracInGame));
 	//If we need to spawn bots, hand out tokens
-	for (new i = 1; i <= MaxClients; i++) {
-		if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) || g_iBotsToSpawn)
-		{
-			if (IsValidClient(i) && GetClientTeam(i) == bot_team && IsFakeClient(i) && (!IsPlayerAlive(i)))
+	if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
+	{
+		for (new i = 1; i <= MaxClients; i++) {
+			if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
 			{
-				PreSpawn(i,1);
+				if ((IsValidClient(i)) && (GetClientTeam(i) == bot_team) && (IsFakeClient(i)) && (!IsPlayerAlive(i)))
+				{
+					PreSpawn(i,1);
+				}
 			}
 		}
 	}
@@ -217,7 +226,6 @@ public Action:Timer_Spawn(Handle:timer, any:client)
 	SDKCall(g_hPlayerRespawn, client); //Perform respawn
 	g_hRespawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client); //Do the post-spawn stuff like moving to final "spawnpoint" selected
 	g_iInQueue[client] = 0; //No longer queued
-	g_iBotsToSpawn--; //Reduce the total number of bots to spawn this wave
 }
 
 //Handle any work that needs to happen after the client is in the game
@@ -292,14 +300,15 @@ stock Team_CountAlivePlayers(team) {
  }
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[BOTSPAWNS] Event_Spawn called");
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	g_iInQueue[client] = 0;
+	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return Plugin_Continue;
 	}
 	if (GetConVarFloat(cvarSpawnMode))
 	{
-		new client = GetClientOfUserId(GetEventInt(event, "userid"));
 		if (IsFakeClient(client))
 		{
 			if (g_iSpawnTokens[client])
@@ -390,16 +399,16 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	{
 		return Plugin_Continue;
 	}
+	//PrintToServer("[BOTSPAWNS] Calling Event_PlayerDeathPre");
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if(!client || !IsClientInGame(client))
-		return Plugin_Continue;
 	//If this client is in the queue (being killed so that they can wait for a 'proper' spawn), remove ragdoll and do not print death message.
 	if (g_iInQueue[client])
 	{
 		new _iEntity = GetEntPropEnt(client, Prop_Send, "m_hRagdoll");
 		if(_iEntity > 0 && IsValidEdict(_iEntity))
 		{
-			CreateTimer(0.1, Timer_RemoveRagdoll, _iEntity);
+			//CreateTimer(0.1, Timer_RemoveRagdoll, _iEntity);
+			RemoveEdict(_iEntity);
 		}
 		return Plugin_Stop;
 	}
@@ -417,6 +426,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	{
 		return true;
 	}
+	//PrintToServer("[BOTSPAWNS] Calling Event_PlayerDeath");
 	//"deathflags" "short"
 	//"attacker" "short"
 	//"customkill" "short"
@@ -440,6 +450,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	{
 		return Plugin_Continue;
 	}
+	PrintToServer("[BOTSPAWNS] Calling Event_ObjectDestroyed");
 	RestartBotQueue();
 /*
 	decl String:attacker_authid[64],String:assister_authid[64],String:classname[64];
