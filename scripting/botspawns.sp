@@ -12,7 +12,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.1.0"
+#define PLUGIN_VERSION "0.1.1"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
@@ -65,6 +65,18 @@ new g_iHidingSpotCount;
 new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS];
 new bot_team = 3;
 
+enum SpawnModes {
+        SpawnMode_Normal = 0,
+	SpawnMode_HidingSpots,
+	SpawnMode_SpawnPoints,
+};
+enum RepawnModes {
+        RepawnMode_None = 0,
+        RepawnMode_Counter,
+        RepawnMode_WhenKilled,
+        RepawnMode_Fireteams,
+};
+
 public Plugin:myinfo = {
 	name= "[INS] Bot spawns",
 	author  = "Jared Ballou (jballou)",
@@ -78,7 +90,8 @@ public OnPluginStart()
 	PrintToServer("[BOTSPAWNS] Starting up");
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botspawns_enabled", "0", "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "1", "Spawn in hiding spots (1), any spawnpoints that meets criteria (2), or only at normal spawnpoints at next objective (0, standard spawning, default setting)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "0", "Spawn in hiding spots (1), any spawnpoints that meets criteria (2), or only at normal spawnpoints at next objective (0, standard spawning, default setting)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarRespawnMode = CreateConVar("sm_botspawns_respawn_mode", "0", "Do not respawn (0) Respawn fixed count (1) Respawn killed bots only when all bots die (2) Respawn fireteams once the number drops enough to spawn a team (3)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCounterattackMode = CreateConVar("sm_botspawns_counterattack_mode", "1", "Use standard spawning for final counterattack waves (0), hiding spots (1) or any spawnpoint (2)?", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCounterattackFrac = CreateConVar("sm_botspawns_counterattack_frac", "0.5", "Multiplier to total bots for spawning in counterattack wave", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMinSpawnDelay = CreateConVar("sm_botspawns_min_spawn_delay", "1", "Min delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -94,7 +107,6 @@ public OnPluginStart()
 	cvarTotalSpawnFrac = CreateConVar("sm_botspawns_total_spawn_frac", "1.75", "Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard, values less than 1 are not supported.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMinFireteamSize = CreateConVar("sm_botspawns_min_fireteam_size", "3", "Min number of bots to spawn per fireteam. Default 3", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxFireteamSize = CreateConVar("sm_botspawns_max_fireteam_size", "5", "Max number of bots to spawn per fireteam. Default 5", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarRespawnMode = CreateConVar("sm_botspawns_respawn_mode", "1", "Respawn killed bots only when all bots die (0) or respawn fireteams once the number drops enough to spawn a team (1)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarStopSpawningAtObjective = CreateConVar("sm_botspawns_stop_spawning_at_objective", "1", "Stop spawning new bots when near next objective (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarRemoveUnseenWhenCapping = CreateConVar("sm_botspawns_remove_unseen_when_capping", "1", "Silently kill off all unseen bots when capping next point (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSpawnSnipersAlone = CreateConVar("sm_botspawns_spawn_snipers_alone", "1", "Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -145,6 +157,7 @@ public OnMapStart()
 	if (!NavMesh_Exists()) return;
 	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
 	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
+	RestartBotQueue();
 	return;
 }
 
@@ -152,7 +165,7 @@ public OnMapStart()
 RestartBotQueue()
 {
 	//TODO: Kill all bots at this time?
-	g_iBotsToSpawn = RoundToFloor(Team_CountPlayers(bot_team) * GetConVarFloat(cvarTotalSpawnFrac));
+	g_iBotsToSpawn = RoundToFloor(Float:Team_CountPlayers(bot_team) * GetConVarFloat(cvarTotalSpawnFrac));
 	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),GetConVarFloat(cvarTotalSpawnFrac),g_iBotsToSpawn);
 }
 
@@ -163,12 +176,20 @@ public JoinQueue(client)
 	{
 		return;
 	}
-	PrintToServer("[BOTSPAWNS] called JoinQueue for %d",client);
+	PrintToServer("[BOTSPAWNS] called JoinQueue for %d g_iBotsToSpawn %d",client,g_iBotsToSpawn);
 	g_iInQueue[client] = 1;
 	if (IsPlayerAlive(client))
 	{
 		ForcePlayerSuicide(client);
 	}
+	if (GetConVarInt(cvarRespawnMode) == _:RepawnMode_Counter)
+	{
+		if (g_iBotsToSpawn)
+		{
+			PreSpawn(client,1);
+		}
+	}
+
 }
 //Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
 PreSpawn(client,tokens=0)
@@ -177,7 +198,6 @@ PreSpawn(client,tokens=0)
 	{
 		return;
 	}
-	PrintToServer("[BOTSPAWNS] called PreSpawn for %d",client);
 	g_iSpawnTokens[client]+=tokens;
 	g_iNumReady++;
 	if (g_iBotsToSpawn)
@@ -189,7 +209,8 @@ PreSpawn(client,tokens=0)
 	{
 		fSpawnDelay = 0.1;
 	}
-	g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_Spawn, client);
+	PrintToServer("[BOTSPAWNS] called PreSpawn for %d fSpawnDelay %0.2f g_iBotsToSpawn %d g_iSpawnTokens %d",client,fSpawnDelay,g_iBotsToSpawn,g_iSpawnTokens[client]);
+	g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_Spawn, client, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 //Loop every second, this keeps track of the bots and adds/removes them as needed.
@@ -222,9 +243,10 @@ public Action:Timer_ProcessQueue(Handle:timer)
 //This timer actually spawns the bot
 public Action:Timer_Spawn(Handle:timer, any:client)
 {
+	PrintToServer("[BOTSPAWNS] called Timer_Spawn for %d",client);
 	g_iSpawnTokens[client]--; //Remove one token
 	SDKCall(g_hPlayerRespawn, client); //Perform respawn
-	g_hRespawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client); //Do the post-spawn stuff like moving to final "spawnpoint" selected
+	g_hRespawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE); //Do the post-spawn stuff like moving to final "spawnpoint" selected
 	g_iInQueue[client] = 0; //No longer queued
 }
 
@@ -307,7 +329,7 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 	{
 		return Plugin_Continue;
 	}
-	if (GetConVarFloat(cvarSpawnMode))
+	if (GetConVarInt(cvarSpawnMode))
 	{
 		if (IsFakeClient(client))
 		{
@@ -407,7 +429,7 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 		new _iEntity = GetEntPropEnt(client, Prop_Send, "m_hRagdoll");
 		if(_iEntity > 0 && IsValidEdict(_iEntity))
 		{
-			//CreateTimer(0.1, Timer_RemoveRagdoll, _iEntity);
+			//CreateTimer(0.1, Timer_RemoveRagdoll, _iEntity, TIMER_FLAG_NO_MAPCHANGE);
 			RemoveEdict(_iEntity);
 		}
 		return Plugin_Stop;

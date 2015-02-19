@@ -124,10 +124,13 @@ public OnMapStart()
 }
 public UpdateGameRules()
 {
+	PrintToServer("[INSURGENCY] UpdateGameRules");
 	new ent = -1;
 	ent = FindEntityByClassname(ent,"ins_objective_resource");
 	if (ent > 0)
 	{
+		PrintToServer("[INSURGENCY] ins_objective_resource index %d",ent);
+
 		m_iNumControlPoints = GetEntData(ent, g_iNumControlPoints);
 		m_nActivePushPointIndex = GetEntData(ent, g_nActivePushPointIndex);
 		m_nTeamOneActiveBattleAttackPointIndex = GetEntData(ent, g_nTeamOneActiveBattleAttackPointIndex);

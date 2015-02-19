@@ -35,7 +35,7 @@ public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_rpgdrift_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_rpgdrift_enabled", "1", "Sets whether RPG drifting is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarAmount = CreateConVar("sm_rpgdrift_amount", "1.0", "Sets RPG drift max change per tick", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarAmount = CreateConVar("sm_rpgdrift_amount", "2.0", "Sets RPG drift max change per tick", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarChance = CreateConVar("sm_rpgdrift_chance", "0.25", "Chance as a fraction of 1 that a player-fired rocket will be affected", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarAlwaysBots = CreateConVar("sm_rpgdrift_always_bots", "1", "Always affect bot-fired rockets", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	HookEvent("missile_launched", Event_MissileLaunched);

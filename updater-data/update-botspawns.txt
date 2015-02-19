@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.1.0"
+			"Latest"	"0.1.1"
 		}
 		"Notes"		"[INS] Bot spawns - Adds a number of options and ways to handle bot spawns"
 
