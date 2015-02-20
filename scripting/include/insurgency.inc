@@ -40,3 +40,5 @@ stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
 	}
 	return;
 }
+native Insurgency_GetObjectiveResource();
+native Insurgency_InCounterAttack();
