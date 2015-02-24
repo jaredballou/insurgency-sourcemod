@@ -22,6 +22,7 @@ new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:g_role_array = INVALID_HANDLE;
 new g_iNumControlPoints, g_nActivePushPointIndex, g_nTeamOneActiveBattleAttackPointIndex, g_nTeamOneActiveBattleDefendPointIndex, g_nTeamTwoActiveBattleAttackPointIndex, g_nTeamTwoActiveBattleDefendPointIndex, g_iCappingTeam, g_iOwningTeam, g_nInsurgentCount, g_nSecurityCount, g_vCPPositions, g_bSecurityLocked, g_bInsurgentsLocked, g_iObjectType, g_nReinforcementWavesRemaining, g_nRequiredPointIndex, g_bCounterAttack;
 new m_iNumControlPoints, m_nActivePushPointIndex, m_nTeamOneActiveBattleAttackPointIndex, m_nTeamOneActiveBattleDefendPointIndex, m_nTeamTwoActiveBattleAttackPointIndex, m_nTeamTwoActiveBattleDefendPointIndex, m_iCappingTeam[16], m_iOwningTeam[16], m_nInsurgentCount[16], m_nSecurityCount[16], Float:m_vCPPositions[16][3], m_bSecurityLocked[16], m_bInsurgentsLocked[16], m_iObjectType[16], m_nReinforcementWavesRemaining[2], m_nRequiredPointIndex[16], bool:m_bCounterAttack;
+/*
 enum {
 	m_iNumControlPoints = 0,
 	m_nActivePushPointIndex,
@@ -41,7 +42,7 @@ enum {
 	m_nRequiredPointIndex,
 	m_bCounterAttack,
 }
-
+*/
 //============================================================================================================
 #define PLUGIN_VERSION "0.0.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
@@ -377,8 +378,11 @@ public UpdateGameRules()
 	ent = FindEntityByClassname(ent,sLogicEnt);
 	if (ent > 0)
 	{
-		m_bCounterAttack = GetEntData(ent, g_bCounterAttack);
-		PrintToServer("[INSURGENCY] m_bCounterAttack %b",m_bCounterAttack);
+		if (m_bCounterAttack != GetEntData(ent, g_bCounterAttack))
+		{
+			m_bCounterAttack = GetEntData(ent, g_bCounterAttack);
+			PrintToServer("[INSURGENCY] m_bCounterAttack %b",m_bCounterAttack);
+		}
 	}
 }
 public PopulateWeaponNames()

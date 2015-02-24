@@ -1,8 +1,6 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
-test -e compiled || mkdir compiled
-
 if [[ $# -ne 0 ]]; then
 	for i in "$@"; 
 	do

@@ -5,6 +5,7 @@
 #undef REQUIRE_EXTENSIONS
 #include <cstrike>
 #include <tf2>
+#include <insurgency>
 #include <tf2_stocks>
 #define REQUIRE_EXTENSIONS
 
@@ -26,6 +27,7 @@ new bool:TF2 = false;
 new Handle:sm_respawn_enabled = INVALID_HANDLE;
 new Handle:sm_respawn_delay = INVALID_HANDLE;
 new Handle:sm_respawn_count = INVALID_HANDLE;
+new Handle:sm_respawn_counterattack = INVALID_HANDLE;
 new Handle:sm_respawn_count_team2 = INVALID_HANDLE;
 new Handle:sm_respawn_count_team3 = INVALID_HANDLE;
 new Handle:sm_respawn_reset_each_round = INVALID_HANDLE;
@@ -42,7 +44,6 @@ public Plugin:myinfo =
 	version = "1.6.1",
 	url = "http://forums.alliedmods.net/showthread.php?p=984087"
 }
-
 public OnPluginStart()
 {
 	decl String:gamemod[40];
@@ -56,6 +57,7 @@ public OnPluginStart()
 	CreateConVar("sm_respawn_version", "1.6", "Player Respawn Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
 	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");
+	sm_respawn_counterattack = CreateConVar("sm_respawn_counterattack", "0", "Respawn during counterattack?");
 	sm_respawn_count = CreateConVar("sm_respawn_count", "0", "Respawn all players this many times");
 	sm_respawn_count_team2 = CreateConVar("sm_respawn_count_team2", "-1", "Respawn all Team 2 players this many times");
 	sm_respawn_count_team3 = CreateConVar("sm_respawn_count_team3", "-1", "Respawn all Team 3 players this many times");
@@ -289,6 +291,11 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 				{
 					return;
 				}
+			}
+			if (Insurgency_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
+			{
+				PrintToServer("[RESPAWN] Not respawning %N due to counterattack",client);
+				return;
 			}
 			if (g_iSpawnTokens[client] > 0)
 			{
