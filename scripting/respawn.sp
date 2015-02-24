@@ -73,11 +73,11 @@ public OnPluginStart()
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
 
 	HookConVarChange(sm_respawn_enabled, EnableChanged);
-	HookConVarChange(sm_respawn_count, UpdateRespawnCount);
-	HookConVarChange(sm_respawn_count_team2, UpdateRespawnCount);
-	HookConVarChange(sm_respawn_count_team3, UpdateRespawnCount);
-	HookConVarChange(sm_respawn_reset_each_round, UpdateRespawnCount);
-	HookConVarChange(sm_respawn_reset_each_objective, UpdateRespawnCount);
+	HookConVarChange(sm_respawn_count, UpdateRespawnCountConVar);
+	HookConVarChange(sm_respawn_count_team2, UpdateRespawnCountConVar);
+	HookConVarChange(sm_respawn_count_team3, UpdateRespawnCountConVar);
+	HookConVarChange(sm_respawn_reset_each_round, UpdateRespawnCountConVar);
+	HookConVarChange(sm_respawn_reset_each_objective, UpdateRespawnCountConVar);
 	HookConVarChange(FindConVar("sv_tags"), TagsChanged);
 
 	new Handle:topmenu;
@@ -122,7 +122,9 @@ public OnPluginStart()
 
 public OnMapStart()
 {
+	UpdateRespawnCount();
 	TF2_IsArenaMap(true);
+	SetPlayerSpawns();
 }
 
 public OnConfigsExecuted()
@@ -288,7 +290,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 					return;
 				}
 			}
-			if (g_iSpawnTokens[client])
+			if (g_iSpawnTokens[client] > 0)
 			{
 				CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
 			}
@@ -457,9 +459,13 @@ public EnableChanged(Handle:convar, const String:oldValue[], const String:newVal
 		UnhookEvent("player_death", Event_PlayerDeath);
 	}
 }
-public UpdateRespawnCount(Handle:convar, const String:oldValue[], const String:newValue[])
+public UpdateRespawnCountConVar(Handle:convar, const String:oldValue[], const String:newValue[])
 {
-
+	UpdateRespawnCount();
+}
+public UpdateRespawnCount()
+{
+	
 	new ism_respawn_count = GetConVarInt(sm_respawn_count);
 	new ism_respawn_count_team2 = GetConVarInt(sm_respawn_count_team2);
 	new ism_respawn_count_team3 = GetConVarInt(sm_respawn_count_team3);
