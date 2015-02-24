@@ -16,22 +16,30 @@ new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
 
 // This will be used for checking which team the player is on before repsawning them
-#define SPECTATOR_TEAM 0
+#define SPECTATOR_TEAM	0
 #define TEAM_SPEC 	1
-#define TEAM_1			2
-#define TEAM_2			3
+#define TEAM_1		2
+#define TEAM_2		3
 
 new bool:TF2 = false;
 
-new Handle:sm_auto_respawn = INVALID_HANDLE;
-new Handle:sm_auto_respawn_time = INVALID_HANDLE;
+new Handle:sm_respawn_enabled = INVALID_HANDLE;
+new Handle:sm_respawn_delay = INVALID_HANDLE;
+new Handle:sm_respawn_count = INVALID_HANDLE;
+new Handle:sm_respawn_count_team2 = INVALID_HANDLE;
+new Handle:sm_respawn_count_team3 = INVALID_HANDLE;
+new Handle:sm_respawn_reset_each_round = INVALID_HANDLE;
+new Handle:sm_respawn_reset_each_objective = INVALID_HANDLE;
+
+new g_iSpawnTokens[MAXPLAYERS];
+new g_iRespawnCount[4];
 
 public Plugin:myinfo =
 {
-	name = "Player Respawn",
-	author = "Rogue",
+	name = "[INS] Player Respawn",
+	author = "Rogue and jballou",
 	description = "Respawn dead players",
-	version = "1.6",
+	version = "1.6.1",
 	url = "http://forums.alliedmods.net/showthread.php?p=984087"
 }
 
@@ -46,12 +54,30 @@ public OnPluginStart()
 	}
 
 	CreateConVar("sm_respawn_version", "1.6", "Player Respawn Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
-	sm_auto_respawn = CreateConVar("sm_auto_respawn", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
-	sm_auto_respawn_time = CreateConVar("sm_auto_respawn_time", "0.0", "How many seconds to delay the respawn");
+	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
+	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");
+	sm_respawn_count = CreateConVar("sm_respawn_count", "0", "Respawn all players this many times");
+	sm_respawn_count_team2 = CreateConVar("sm_respawn_count_team2", "-1", "Respawn all Team 2 players this many times");
+	sm_respawn_count_team3 = CreateConVar("sm_respawn_count_team3", "-1", "Respawn all Team 3 players this many times");
+	sm_respawn_reset_each_round = CreateConVar("sm_respawn_reset_each_round", "1", "Reset player respawn counts each round");
+	sm_respawn_reset_each_objective = CreateConVar("sm_respawn_reset_each_objective", "1", "Reset player respawn counts each objective");
 	RegAdminCmd("sm_respawn", Command_Respawn, ADMFLAG_SLAY, "sm_respawn <#userid|name>");
 
 	HookEvent("player_death", Event_PlayerDeath);
-	HookConVarChange(sm_auto_respawn, EnableChanged);
+	HookEvent("round_start", Event_RoundStart);
+
+	HookEvent("player_first_spawn", Event_PlayerFirstSpawn);
+	//HookEvent("player_spawn", Event_PlayerSpawn);
+
+	HookEvent("object_destroyed", Event_ObjectDestroyed);
+	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
+
+	HookConVarChange(sm_respawn_enabled, EnableChanged);
+	HookConVarChange(sm_respawn_count, UpdateRespawnCount);
+	HookConVarChange(sm_respawn_count_team2, UpdateRespawnCount);
+	HookConVarChange(sm_respawn_count_team3, UpdateRespawnCount);
+	HookConVarChange(sm_respawn_reset_each_round, UpdateRespawnCount);
+	HookConVarChange(sm_respawn_reset_each_objective, UpdateRespawnCount);
 	HookConVarChange(FindConVar("sv_tags"), TagsChanged);
 
 	new Handle:topmenu;
@@ -101,11 +127,12 @@ public OnMapStart()
 
 public OnConfigsExecuted()
 {
-	if (GetConVarBool(sm_auto_respawn))
+	if (GetConVarBool(sm_respawn_enabled))
 		TagsCheck("respawntimes");
 	else
 		TagsCheck("respawntimes", true);
 }
+
 
 public Action:Command_Respawn(client, args)
 {
@@ -177,13 +204,74 @@ public Action:Command_Respawn(client, args)
 
 	return Plugin_Handled;
 }
+public Action:Event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (GetConVarInt(sm_respawn_reset_each_round))
+	{
+		SetPlayerSpawns();
+	}
+	return Plugin_Continue;
+}
+public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (GetConVarInt(sm_respawn_reset_each_objective))
+	{
+		SetPlayerSpawns();
+	}
+	return Plugin_Continue;
+}
+public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (GetConVarInt(sm_respawn_reset_each_objective))
+	{
+		SetPlayerSpawns();
+	}
+	return Plugin_Continue;
+}
+
+//Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
+SetPlayerSpawns(client=-1)
+{
+	new mc = MaxClients;
+	new iTeam;
+	if (!GetConVarBool(sm_respawn_enabled))
+	{
+		return;
+	}
+	if (client == -1)
+	{
+		client = 1;
+	}
+	else
+	{
+		mc = client;
+	}
+	PrintToServer("[RESPAWNS] Called SetPlayerSpawns with client %d mc %d",client,mc);
+	for (; client<=mc; client++)
+	{
+		if(client > 0 && client <= MaxClients && IsClientInGame(client))
+		{
+			iTeam = GetClientTeam(client);
+			PrintToServer("[RESPAWNS] Setting client %N on team %d g_iSpawnTokens to %d",client,iTeam,g_iRespawnCount[iTeam]);
+			g_iSpawnTokens[client] = g_iRespawnCount[iTeam];
+		}
+	}
+}
+
+public Event_PlayerFirstSpawn( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	if( client == 0 || !IsClientInGame(client) )
+		return;	
+	SetPlayerSpawns( client );
+}
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	new team = GetClientTeam(client);
 
-	if (GetConVarInt(sm_auto_respawn) == 1)
+	if (GetConVarInt(sm_respawn_enabled) == 1)
 	{
 		if (IsClientInGame(client) && (team == TEAM_1 || team == TEAM_2))
 		{
@@ -200,7 +288,10 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 					return;
 				}
 			}
-			CreateTimer(GetConVarFloat(sm_auto_respawn_time), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
+			if (g_iSpawnTokens[client])
+			{
+				CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
+			}
 		}
 	}
 }
@@ -229,7 +320,8 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 {
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
-
+	g_iSpawnTokens[client]--;
+	PrintToServer("[RESPAWN] Respawning client %N who has %d lives remaining", client, g_iSpawnTokens[client]);
 	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
 	{
 		CS_RespawnPlayer(client);
@@ -365,10 +457,34 @@ public EnableChanged(Handle:convar, const String:oldValue[], const String:newVal
 		UnhookEvent("player_death", Event_PlayerDeath);
 	}
 }
+public UpdateRespawnCount(Handle:convar, const String:oldValue[], const String:newValue[])
+{
+
+	new ism_respawn_count = GetConVarInt(sm_respawn_count);
+	new ism_respawn_count_team2 = GetConVarInt(sm_respawn_count_team2);
+	new ism_respawn_count_team3 = GetConVarInt(sm_respawn_count_team3);
+	//new ism_respawn_reset_each_round = GetConVarInt(sm_respawn_reset_each_round);
+	if (ism_respawn_count_team2 > -1)
+	{
+		g_iRespawnCount[2] = ism_respawn_count_team2;
+	}
+	else
+	{
+		g_iRespawnCount[2] = ism_respawn_count;
+	}
+	if (ism_respawn_count_team3 > -1)
+	{
+		g_iRespawnCount[3] = ism_respawn_count_team3;
+	}
+	else
+	{
+		g_iRespawnCount[3] = ism_respawn_count;
+	}
+}
 
 public TagsChanged(Handle:convar, const String:oldValue[], const String:newValue[])
 {
-	if (GetConVarBool(sm_auto_respawn))
+	if (GetConVarBool(sm_respawn_enabled))
 		TagsCheck("respawntimes");
 	else
 		TagsCheck("respawntimes", true);
