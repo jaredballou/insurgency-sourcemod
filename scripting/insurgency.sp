@@ -316,18 +316,18 @@ public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dont
 }
 public UpdateRoleName(squad,squad_slot,String:class_template[])
 {
+/*
 	if (g_role_array == INVALID_HANDLE)
 		g_role_array = CreateArray(MAX_SQUADS*SQUAD_SIZE);
-/*
 	ReplaceString(class_template,sizeof(class_template),"template_","",false);
 	ReplaceString(class_template,sizeof(class_template),"_training","",false);
 	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
 	ReplaceString(class_template,sizeof(class_template),"_security","",false);
 	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
-*/
 	new idx=(squad*SQUAD_SIZE)+squad_slot;
 	SetArrayString(g_role_array,idx,class_template);
+*/
 }
 public OnMapStart()
 {
@@ -388,6 +388,7 @@ public UpdateGameRules()
 public PopulateWeaponNames()
 {
 	PrintToServer("[INSURGENCY] starting PopulateWeaponNames");
+/*
 	if (g_weap_array == INVALID_HANDLE)
 		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
 	new String:name[32];
@@ -406,6 +407,7 @@ public PopulateWeaponNames()
 		}
 	}
 	PrintToServer("[INSURGENCY] Weapons found: %d", NumWeaponsDefined);
+*/
 }
 /*
 public Native_GetClientRole(Handle:plugin, numParams)
