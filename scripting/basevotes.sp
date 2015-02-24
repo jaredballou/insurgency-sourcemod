@@ -49,9 +49,9 @@ public Plugin:myinfo =
 #define VOTE_NO "###no###"
 #define VOTE_YES "###yes###"
 
-new Handle:g_hVoteMenu = INVALID_HANDLE;
+Menu g_hVoteMenu = null;
 
-new Handle:g_Cvar_Limits[3] = {INVALID_HANDLE, ...};
+ConVar g_Cvar_Limits[3] = {null, ...};
 //new Handle:g_Cvar_VoteSay = INVALID_HANDLE;
 
 enum voteType
@@ -79,7 +79,7 @@ new String:g_voteInfo[3][65];	/* Holds the target's name, authid, and IP */
 new String:g_voteArg[256];	/* Used to hold ban/kick reasons or vote questions */
 
 
-new Handle:hTopMenu = INVALID_HANDLE;
+TopMenu hTopMenu;
 
 #include "basevotes/votekick.sp"
 #include "basevotes/voteban.sp"
@@ -99,7 +99,7 @@ public OnPluginStart()
 
 	/*
 	g_Cvar_Show = FindConVar("sm_vote_show");
-	if (g_Cvar_Show == INVALID_HANDLE)
+	if (g_Cvar_Show == null)
 	{
 		g_Cvar_Show = CreateConVar("sm_vote_show", "1", "Show player's votes? Default on.", 0, true, 0.0, true, 1.0);
 	}
@@ -110,8 +110,8 @@ public OnPluginStart()
 	g_Cvar_Limits[2] = CreateConVar("sm_vote_ban", "0.60", "percent required for successful ban vote.", 0, true, 0.05, true, 1.0);		
 	
 	/* Account for late loading */
-	new Handle:topmenu;
-	if (LibraryExists("adminmenu") && ((topmenu = GetAdminTopMenu()) != INVALID_HANDLE))
+	TopMenu topmenu;
+	if (LibraryExists("adminmenu") && ((topmenu = GetAdminTopMenu()) != null))
 	{
 		OnAdminMenuReady(topmenu);
 	}
@@ -119,8 +119,8 @@ public OnPluginStart()
 	g_SelectedMaps = CreateArray(33);
 	
 	g_MapList = CreateMenu(MenuHandler_Map, MenuAction_DrawItem|MenuAction_Display);
-	SetMenuTitle(g_MapList, "%T", "Please select a map", LANG_SERVER);
-	SetMenuExitBackButton(g_MapList, true);
+	g_MapList.SetTitle("%T", "Please select a map", LANG_SERVER);
+	g_MapList.ExitBackButton = true;
 	
 	decl String:mapListPath[PLATFORM_MAX_PATH];
 	BuildPath(Path_SM, mapListPath, sizeof(mapListPath), "configs/adminmenu_maplist.ini");
@@ -132,8 +132,10 @@ public OnConfigsExecuted()
 	g_mapCount = LoadMapList(g_MapList);
 }
 
-public OnAdminMenuReady(Handle:topmenu)
+public OnAdminMenuReady(Handle aTopMenu)
 {
+	TopMenu topmenu = TopMenu.FromHandle(aTopMenu);
+
 	/* Block us from being called twice */
 	if (topmenu == hTopMenu)
 	{
@@ -144,33 +146,13 @@ public OnAdminMenuReady(Handle:topmenu)
 	hTopMenu = topmenu;
 	
 	/* Build the "Voting Commands" category */
-	new TopMenuObject:voting_commands = FindTopMenuCategory(hTopMenu, ADMINMENU_VOTINGCOMMANDS);
+	new TopMenuObject:voting_commands = hTopMenu.FindCategory(ADMINMENU_VOTINGCOMMANDS);
 
 	if (voting_commands != INVALID_TOPMENUOBJECT)
 	{
-		AddToTopMenu(hTopMenu,
-			"sm_votekick",
-			TopMenuObject_Item,
-			AdminMenu_VoteKick,
-			voting_commands,
-			"sm_votekick",
-			ADMFLAG_VOTE|ADMFLAG_KICK);
-			
-		AddToTopMenu(hTopMenu,
-			"sm_voteban",
-			TopMenuObject_Item,
-			AdminMenu_VoteBan,
-			voting_commands,
-			"sm_voteban",
-			ADMFLAG_VOTE|ADMFLAG_BAN);
-			
-		AddToTopMenu(hTopMenu,
-			"sm_votemap",
-			TopMenuObject_Item,
-			AdminMenu_VoteMap,
-			voting_commands,
-			"sm_votemap",
-			ADMFLAG_VOTE|ADMFLAG_CHANGEMAP);
+		hTopMenu.AddItem("sm_votekick", AdminMenu_VoteKick, voting_commands, "sm_votekick", ADMFLAG_VOTE|ADMFLAG_KICK);
+		hTopMenu.AddItem("sm_voteban", AdminMenu_VoteBan, voting_commands, "sm_voteban", ADMFLAG_VOTE|ADMFLAG_BAN);
+		hTopMenu.AddItem("sm_votemap", AdminMenu_VoteMap, voting_commands, "sm_votemap", ADMFLAG_VOTE|ADMFLAG_CHANGEMAP);
 	}
 }
 
@@ -218,28 +200,28 @@ public Action:Command_Vote(client, args)
 	g_voteType = voteType:question;
 	
 	g_hVoteMenu = CreateMenu(Handler_VoteCallback, MenuAction:MENU_ACTIONS_ALL);
-	SetMenuTitle(g_hVoteMenu, "%s?", g_voteArg);
+	g_hVoteMenu.SetTitle("%s?", g_voteArg);
 	
 	if (answerCount < 2)
 	{
-		AddMenuItem(g_hVoteMenu, VOTE_YES, "Yes");
-		AddMenuItem(g_hVoteMenu, VOTE_NO, "No");
+		g_hVoteMenu.AddItem(VOTE_YES, "Yes");
+		g_hVoteMenu.AddItem(VOTE_NO, "No");
 	}
 	else
 	{
 		for (new i = 0; i < answerCount; i++)
 		{
-			AddMenuItem(g_hVoteMenu, answers[i], answers[i]);
+			g_hVoteMenu.AddItem(answers[i], answers[i]);
 		}	
 	}
 	
-	SetMenuExitButton(g_hVoteMenu, false);
-	VoteMenuToAll(g_hVoteMenu, 20);		
+	g_hVoteMenu.ExitButton = false;
+	g_hVoteMenu.DisplayVoteToAll(20);		
 	
 	return Plugin_Handled;	
 }
 
-public Handler_VoteCallback(Handle:menu, MenuAction:action, param1, param2)
+public Handler_VoteCallback(Menu menu, MenuAction action, param1, param2)
 {
 	if (action == MenuAction_End)
 	{
@@ -249,20 +231,20 @@ public Handler_VoteCallback(Handle:menu, MenuAction:action, param1, param2)
 	{
 	 	if (g_voteType != voteType:question)
 	 	{
-			decl String:title[64];
-			GetMenuTitle(menu, title, sizeof(title));
+			char title[64];
+			menu.GetTitle(title, sizeof(title));
 			
-	 		decl String:buffer[255];
+	 		char buffer[255];
 			Format(buffer, sizeof(buffer), "%T", title, param1, g_voteInfo[VOTE_NAME]);
 
-			new Handle:panel = Handle:param2;
-			SetPanelTitle(panel, buffer);
+			Panel panel = Panel:param2;
+			panel.SetTitle(buffer);
 		}
 	}
 	else if (action == MenuAction_DisplayItem)
 	{
 		decl String:display[64];
-		GetMenuItem(menu, param2, "", 0, _, display, sizeof(display));
+		menu.GetItem(param2, "", 0, _, display, sizeof(display));
 	 
 	 	if (strcmp(display, "No") == 0 || strcmp(display, "Yes") == 0)
 	 	{
@@ -282,11 +264,12 @@ public Handler_VoteCallback(Handle:menu, MenuAction:action, param1, param2)
 	}	
 	else if (action == MenuAction_VoteEnd)
 	{
-		decl String:item[64], String:display[64];
-		new Float:percent, Float:limit, votes, totalVotes;
+		char item[64], display[64];
+		float percent, limit;
+		int votes, totalVotes;
 
 		GetMenuVoteInfo(param2, votes, totalVotes);
-		GetMenuItem(menu, param1, item, sizeof(item), _, display, sizeof(display));
+		menu.GetItem(param1, item, sizeof(item), _, display, sizeof(display));
 		
 		if (strcmp(item, VOTE_NO) == 0 && param1 == 1)
 		{
@@ -297,7 +280,7 @@ public Handler_VoteCallback(Handle:menu, MenuAction:action, param1, param2)
 		
 		if (g_voteType != voteType:question)
 		{
-			limit = GetConVarFloat(g_Cvar_Limits[g_voteType]);
+			limit = g_Cvar_Limits[g_voteType].FloatValue;
 		}
 		
 		/* :TODO: g_voteClient[userid] needs to be checked */
@@ -379,7 +362,7 @@ VoteSelect(Handle:menu, param1, param2 = 0)
 	{
 		decl String:voter[64], String:junk[64], String:choice[64];
 		GetClientName(param1, voter, sizeof(voter));
-		GetMenuItem(menu, param2, junk, sizeof(junk), _, choice, sizeof(choice));
+		menu.GetItem(param2, junk, sizeof(junk), _, choice, sizeof(choice));
 		PrintToChatAll("[SM] %T", "Vote Select", LANG_SERVER, voter, choice);
 	}
 }
@@ -387,8 +370,8 @@ VoteSelect(Handle:menu, param1, param2 = 0)
 
 VoteMenuClose()
 {
-	CloseHandle(g_hVoteMenu);
-	g_hVoteMenu = INVALID_HANDLE;
+	delete g_hVoteMenu;
+	g_hVoteMenu = null;
 }
 
 Float:GetVotePercent(votes, totalVotes)

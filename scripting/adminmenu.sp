@@ -46,16 +46,16 @@ public Plugin:myinfo =
 };
 
 /* Forwards */
-new Handle:hOnAdminMenuReady = INVALID_HANDLE;
-new Handle:hOnAdminMenuCreated = INVALID_HANDLE;
+new Handle:hOnAdminMenuReady = null;
+new Handle:hOnAdminMenuCreated = null;
 
 /* Menus */
-new Handle:hAdminMenu = INVALID_HANDLE;
+TopMenu hAdminMenu;
 
 /* Top menu objects */
-new TopMenuObject:obj_playercmds = INVALID_TOPMENUOBJECT;
-new TopMenuObject:obj_servercmds = INVALID_TOPMENUOBJECT;
-new TopMenuObject:obj_votingcmds = INVALID_TOPMENUOBJECT;
+TopMenuObject obj_playercmds = INVALID_TOPMENUOBJECT;
+TopMenuObject obj_servercmds = INVALID_TOPMENUOBJECT;
+TopMenuObject obj_votingcmds = INVALID_TOPMENUOBJECT;
 
 #include "adminmenu/dynamicmenu.sp"
 
@@ -86,7 +86,7 @@ public OnConfigsExecuted()
 	
 	BuildPath(Path_SM, path, sizeof(path), "configs/adminmenu_sorting.txt");
 	
-	if (!LoadTopMenuConfig(hAdminMenu, path, error, sizeof(error)))
+	if (!hAdminMenu.LoadConfig(path, error, sizeof(error)))
 	{
 		LogError("Could not load admin menu config (file \"%s\": %s)", path, error);
 		return;
@@ -100,25 +100,11 @@ public OnMapStart()
 
 public OnAllPluginsLoaded()
 {
-	hAdminMenu = CreateTopMenu(DefaultCategoryHandler);
+	hAdminMenu = new TopMenu(DefaultCategoryHandler);
 	
-	obj_playercmds = AddToTopMenu(hAdminMenu, 
-		"PlayerCommands",
-		TopMenuObject_Category,
-		DefaultCategoryHandler,
-		INVALID_TOPMENUOBJECT);
-
-	obj_servercmds = AddToTopMenu(hAdminMenu,
-		"ServerCommands",
-		TopMenuObject_Category,
-		DefaultCategoryHandler,
-		INVALID_TOPMENUOBJECT);
-
-	obj_votingcmds = AddToTopMenu(hAdminMenu,
-		"VotingCommands",
-		TopMenuObject_Category,
-		DefaultCategoryHandler,
-		INVALID_TOPMENUOBJECT);
+	obj_playercmds = hAdminMenu.AddCategory("PlayerCommands", DefaultCategoryHandler);
+	obj_servercmds = hAdminMenu.AddCategory("ServerCommands", DefaultCategoryHandler);
+	obj_votingcmds = hAdminMenu.AddCategory("VotingCommands", DefaultCategoryHandler);
 		
 	BuildDynamicMenu();
 	
@@ -196,7 +182,7 @@ public __AddTargetsToMenu2(Handle:plugin, numParams)
 	return UTIL_AddTargetsToMenu2(GetNativeCell(1), GetNativeCell(2), GetNativeCell(3));
 }
 
-public Action:Command_DisplayMenu(client, args)
+public Action:Command_DisplayMenu(int client, int args)
 {
 	if (client == 0)
 	{
@@ -204,16 +190,15 @@ public Action:Command_DisplayMenu(client, args)
 		return Plugin_Handled;
 	}
 	
-	DisplayTopMenu(hAdminMenu, client, TopMenuPosition_Start);
-	
+	hAdminMenu.Display(client, TopMenuPosition_Start);
 	return Plugin_Handled;
 }
 
-stock UTIL_AddTargetsToMenu2(Handle:menu, source_client, flags)
+stock int UTIL_AddTargetsToMenu2(Menu menu, source_client, flags)
 {
-	decl String:user_id[12];
-	decl String:name[MAX_NAME_LENGTH];
-	decl String:display[MAX_NAME_LENGTH+12];
+	char user_id[12];
+	char name[MAX_NAME_LENGTH];
+	char display[MAX_NAME_LENGTH+12];
 	
 	new num_clients;
 	
@@ -257,14 +242,14 @@ stock UTIL_AddTargetsToMenu2(Handle:menu, source_client, flags)
 		IntToString(GetClientUserId(i), user_id, sizeof(user_id));
 		GetClientName(i, name, sizeof(name));
 		Format(display, sizeof(display), "%s (%s)", name, user_id);
-		AddMenuItem(menu, user_id, display);
+		menu.AddItem(user_id, display);
 		num_clients++;
 	}
 	
 	return num_clients;
 }
 
-stock UTIL_AddTargetsToMenu(Handle:menu, source_client, bool:in_game_only, bool:alive_only)
+stock UTIL_AddTargetsToMenu(Menu menu, source_client, bool:in_game_only, bool:alive_only)
 {
 	new flags = 0;
 	

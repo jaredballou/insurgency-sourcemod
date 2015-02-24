@@ -357,7 +357,7 @@ native Call_Cancel();
  * @param numParams			Number of parameters passed to the native.
  * @return 					Value for the native call to return.
  */
-functag public NativeCall(Handle:plugin, numParams);
+typedef NativeCall = function int (Handle plugin, int numParams);
 
 /**
  * Creates a dynamic native.  This should only be called in AskPluginLoad(), or 
@@ -427,6 +427,15 @@ native SetNativeString(param, const String:source[], maxlength, bool:utf8=true, 
  * @error					Invalid parameter number or calling from a non-native function.
  */
 native any:GetNativeCell(param);
+
+/**
+ * Gets a function pointer from a native parameter.
+ *
+ * @param param             Parameter number, starting from 1.
+ * @return                  Function pointer at the given parameter number.
+ * @error                   Invalid parameter number, or calling from a non-native function.
+ */
+native Function GetNativeFunction(param);
 
 /**
  * Gets a cell from a native parameter, by reference.
@@ -499,7 +508,7 @@ native FormatNativeString(out_param,
  * @param data			Data passed to the RequestFrame native.
  * @noreturn
  */
-functag public RequestFrameCallback(any:data);
+typedef RequestFrameCallback = function void (any data);
 
 /**
  * Creates a single use Next Frame hook.

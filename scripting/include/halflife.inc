@@ -568,15 +568,15 @@ native ShowHudText(client, channel, const String:message[], any:...);
  */
 stock ShowMOTDPanel(client, const String:title[], const String:msg[], type=MOTDPANEL_TYPE_INDEX)
 {
-	decl String:num[3];
-	new Handle:Kv = CreateKeyValues("data");
+	char num[3];
 	IntToString(type, num, sizeof(num));
 
-	KvSetString(Kv, "title", title);
-	KvSetString(Kv, "type", num);
-	KvSetString(Kv, "msg", msg);
-	ShowVGUIPanel(client, "info", Kv);
-	CloseHandle(Kv);
+	KeyValues kv = new KeyValues("data");
+	kv.SetString("title", title);
+	kv.SetString("type", num);
+	kv.SetString("msg", msg);
+	ShowVGUIPanel(client, "info", kv);
+	delete kv;
 }
 
 /**
@@ -590,13 +590,14 @@ stock ShowMOTDPanel(client, const String:title[], const String:msg[], type=MOTDP
  */
 stock DisplayAskConnectBox(client, Float:time, const String:ip[], const String:password[] = "")
 {
-	decl String:destination[288];
+	char destination[288];
 	FormatEx(destination, sizeof(destination), "%s/%s", ip, password);
-	new Handle:Kv = CreateKeyValues("data");
-	KvSetFloat(Kv, "time", time);
-	KvSetString(Kv, "title", destination);
-	CreateDialog(client, Kv, DialogType_AskConnect);
-	CloseHandle(Kv);
+
+	KeyValues kv = new KeyValues("data");
+	kv.SetFloat("time", time);
+	kv.SetString("title", destination);
+	CreateDialog(client, kv, DialogType_AskConnect);
+	delete kv;
 }
 
 /**
@@ -622,4 +623,22 @@ native EntRefToEntIndex(ref);
  * @return				Bcompat reference.
  */
 native MakeCompatEntRef(ref);
+
+
+enum ClientRangeType
+{
+	RangeType_Visibility = 0,
+	RangeType_Audibility,
+}
+
+/**
+ * Find clients that are potentially in range of a position.
+ *
+ * @param origin		Coordinates from which to test range.
+ * @param rangeType		Range type to use for filtering clients.
+ * @param clients		Array to which found client indexes will be written.
+ * @param size			Maximum size of clients array.
+ * @return				Number of client indexes written to clients array.
+ */
+native int GetClientsInRange(float origin[3], ClientRangeType rangeType, int[] clients, int size);
 

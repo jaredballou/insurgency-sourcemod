@@ -45,7 +45,7 @@
 /**
  * Any of the following prototypes will work for a timed function.
  */
-funcenum Timer
+typeset Timer
 {
 	/**
  	 * Called when the timer interval has elapsed.
@@ -55,7 +55,7 @@ funcenum Timer
  	 * @return				Plugin_Stop to stop a repeating timer, any other value for
  	 *						default behavior.
  	 */
-	Action:public(Handle:timer, Handle:hndl),
+	function Action(Handle timer, Handle hndl);
 	
 	/**
  	 * Called when the timer interval has elapsed.
@@ -65,7 +65,7 @@ funcenum Timer
  	 * @return				Plugin_Stop to stop a repeating timer, any other value for
  	 *						default behavior.
  	 */
-	Action:public(Handle:timer, any:data),
+	function Action(Handle timer, any data);
 	
 	/**
  	 * Called when the timer interval has elapsed.
@@ -74,7 +74,7 @@ funcenum Timer
  	 * @return				Plugin_Stop to stop a repeating timer, any other value for
  	 *						default behavior.
  	 */
-	Action:public(Handle:timer),
+	function Action(Handle timer);
 };
 
 /**
@@ -177,7 +177,7 @@ native Float:GetTickInterval();
  * the map yet), then this will be called once the server begins ticking, even 
  * if there is no time limit set.
  */
-forward OnMapTimeLeftChanged();
+forward void OnMapTimeLeftChanged();
 
 /**
  * Returns whether or not the server is processing frames or not.  

@@ -40,11 +40,11 @@
  */
 struct Plugin
 {
-   const String:name[],			/**< Plugin Name */
-   const String:description[],	/**< Plugin Description */
-   const String:author[],		/**< Plugin Author */
-   const String:version[],		/**< Plugin Version */
-   const String:url[],			/**< Plugin URL */
+   public const char[] name;		/**< Plugin Name */
+   public const char[] description;	/**< Plugin Description */
+   public const char[] author;		/**< Plugin Author */
+   public const char[] version;		/**< Plugin Version */
+   public const char[] url;			/**< Plugin URL */
 };
 
 #include <core>
@@ -64,6 +64,7 @@ struct Plugin
 #include <textparse>
 #include <clients>
 #include <console>
+#include <convars>
 #include <events>
 #include <bitbuffer>
 #include <protobuf>
@@ -74,6 +75,7 @@ struct Plugin
 #include <banning>
 #include <commandfilters>
 #include <nextmap>
+#include <commandline>
 
 enum APLRes
 {
@@ -82,18 +84,6 @@ enum APLRes
 	APLRes_SilentFailure	/**< Plugin shouldn't load but do so silently */
 };
 
-/**
- * Declare this as a struct in your plugin to expose its information.
- * Example:
- *
- * public Plugin:myinfo =
- * {
- *    name = "My Plugin",
- *    //etc
- * };
- */
-public Plugin:myinfo;
- 
 /**
  * Called when the plugin is fully initialized and all known external references 
  * are resolved. This is only called once in the lifetime of the plugin, and is 
@@ -108,7 +98,7 @@ public Plugin:myinfo;
  *
  * @noreturn
  */
-forward OnPluginStart();
+forward void OnPluginStart();
 
 /**
  * @deprecated Use AskPluginLoad2() instead.
@@ -144,7 +134,7 @@ forward APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
  *
  * @noreturn
  */
-forward OnPluginEnd();
+forward void OnPluginEnd();
 
 /**
  * Called when the plugin's pause status is changing.
@@ -152,14 +142,14 @@ forward OnPluginEnd();
  * @param pause			True if the plugin is being paused, false otherwise.
  * @noreturn
  */
-forward OnPluginPauseChange(bool:pause);
+forward void OnPluginPauseChange(bool:pause);
 
 /**
  * Called before every server frame.  Note that you should avoid
  * doing expensive computations here, and you should declare large
  * local arrays using 'decl' instead of 'new'.
  */
-forward OnGameFrame();
+forward void OnGameFrame();
 
 /**
  * Called when the map is loaded.
@@ -167,12 +157,12 @@ forward OnGameFrame();
  * @note This used to be OnServerLoad(), which is now deprecated.
  * Plugins still using the old forward will work.
  */
-forward OnMapStart();
+forward void OnMapStart();
 
 /**
  * Called right before a map ends.
  */
-forward OnMapEnd();
+forward void OnMapEnd();
 
 /**
  * Called when the map has loaded, servercfgfile (server.cfg) has been 
@@ -184,7 +174,7 @@ forward OnMapEnd();
  *
  * @noreturn
  */
-forward OnConfigsExecuted();
+forward void OnConfigsExecuted();
 
 /**
  * This is called once, right after OnMapStart() but any time before 
@@ -201,20 +191,20 @@ forward OnConfigsExecuted();
  *
  * @noreturn
  */
-forward OnAutoConfigsBuffered();
+forward void OnAutoConfigsBuffered();
 
 /**
  * @deprecated Use OnConfigsExecuted() instead.
  */
 #pragma deprecated Use OnConfigsExecuted() instead
-forward OnServerCfg();
+forward void OnServerCfg();
 
 /**
  * Called after all plugins have been loaded.  This is called once for 
  * every plugin.  If a plugin late loads, it will be called immediately 
  * after OnPluginStart().
  */
-forward OnAllPluginsLoaded();
+forward void OnAllPluginsLoaded();
 
 /**
  * Returns the calling plugin's Handle.
@@ -461,7 +451,7 @@ native GetExtensionFileStatus(const String:name[], String:error[]="", maxlength=
  *
  * @param name			Library name.
  */
-forward OnLibraryAdded(const String:name[]);
+forward void OnLibraryAdded(const String:name[]);
 
 /**
  * Called right before a library is removed that the current plugin references 
@@ -470,7 +460,7 @@ forward OnLibraryAdded(const String:name[]);
  *
  * @param name			Library name.
  */
-forward OnLibraryRemoved(const String:name[]);
+forward void OnLibraryRemoved(const String:name[]);
 
 #define MAPLIST_FLAG_MAPSFOLDER		(1<<0)		/**< On failure, use all maps in the maps folder. */
 #define MAPLIST_FLAG_CLEARARRAY		(1<<1)		/**< If an input array is specified, clear it before adding. */
@@ -564,7 +554,7 @@ forward bool:OnClientFloodCheck(client);
  * @param blocked		True if client flooded last "say", false otherwise.
  * @noreturn
  */
-forward OnClientFloodResult(client, bool:blocked);
+forward void OnClientFloodResult(client, bool:blocked);
 
 /**
  * Feature types.

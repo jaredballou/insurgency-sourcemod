@@ -84,6 +84,11 @@
 	
 	"#default"
 	{
+		"Keys"
+		{
+			"UseInvalidUniverseInSteam2IDs"		"1"
+		}
+		
 		"Offsets"
 		{
 			"EntInfo"

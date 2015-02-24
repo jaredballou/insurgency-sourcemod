@@ -165,9 +165,16 @@ forward OnClientCookiesCached(client);
  * @param action		CookieMenuAction being performed.
  * @param info			Info data passed.
  * @param buffer		Outbut buffer.
- * @param maxlen		Max length of the output buffer.			
+ * @param maxlen		Max length of the output buffer.
+ * @noreturn			
  */
-functag public CookieMenuHandler(client, CookieMenuAction:action, any:info, String:buffer[], maxlen);
+typedef CookieMenuHandler = function void (
+  int client,
+  CookieMenuAction action,
+  any info,
+  char[] buffer,
+  int maxlen
+);
 
 /**
  * Add a new prefab item to the client cookie settings menu.
@@ -182,7 +189,7 @@ functag public CookieMenuHandler(client, CookieMenuAction:action, any:info, Stri
  * @noreturn
  * @error				Invalid cookie handle.
  */
-native SetCookiePrefabMenu(Handle:cookie, CookieMenu:type, const String:display[], CookieMenuHandler:handler=CookieMenuHandler:-1, info=0);
+native SetCookiePrefabMenu(Handle:cookie, CookieMenu:type, const String:display[], CookieMenuHandler:handler=INVALID_FUNCTION, info=0);
 
 /**
  * Adds a new item to the client cookie settings menu.

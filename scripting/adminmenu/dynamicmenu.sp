@@ -13,7 +13,7 @@ enum GroupCommands
 new g_groupList[GroupCommands];
 new g_groupCount;
 
-new Handle:g_configParser = INVALID_HANDLE;
+SMCParser g_configParser;
 
 enum Places
 {
@@ -74,16 +74,15 @@ new Handle:g_DataArray;
 
 BuildDynamicMenu()
 {
-	new itemInput[Item];
+	int itemInput[Item];
 	g_DataArray = CreateArray(sizeof(itemInput));
 	
-	new String:executeBuffer[32];
+	char executeBuffer[32];
 	
-	new Handle:kvMenu;
-	kvMenu = CreateKeyValues("Commands");
-	KvSetEscapeSequences(kvMenu, true); 
+	KeyValues kvMenu = new KeyValues("Commands");
+	kvMenu.SetEscapeSequences(true); 
 	
-	new String:file[256];
+	char file[256];
 	
 	/* As a compatibility shim, we use the old file if it exists. */
 	BuildPath(Path_SM, file, 255, "configs/dynamicmenu/menu.ini");
@@ -102,10 +101,8 @@ BuildDynamicMenu()
 	new String:name[NAME_LENGTH];
 	new String:buffer[NAME_LENGTH];
 		
-	if (!KvGotoFirstSubKey(kvMenu))
-	{
+	if (!kvMenu.GotoFirstSubKey())
 		return;
-	}
 	
 	decl String:admin[30];
 	
@@ -113,17 +110,14 @@ BuildDynamicMenu()
 	
 	do
 	{		
-		KvGetSectionName(kvMenu, buffer, sizeof(buffer));
+		kvMenu.GetSectionName(buffer, sizeof(buffer));
 
-		KvGetString(kvMenu, "admin", admin, sizeof(admin),"sm_admin");
+		kvMenu.GetString("admin", admin, sizeof(admin),"sm_admin");
 				
-		if ((categoryId =FindTopMenuCategory(hAdminMenu, buffer)) == INVALID_TOPMENUOBJECT)
+		if ((categoryId = hAdminMenu.FindCategory(buffer)) == INVALID_TOPMENUOBJECT)
 		{
-			categoryId = AddToTopMenu(hAdminMenu,
-							buffer,
-							TopMenuObject_Category,
+			categoryId = hAdminMenu.AddCategory(buffer,
 							DynamicMenuCategoryHandler,
-							INVALID_TOPMENUOBJECT,
 							admin,
 							ADMFLAG_GENERIC,
 							name);
@@ -133,16 +127,16 @@ BuildDynamicMenu()
 		decl String:category_name[NAME_LENGTH];
 		strcopy(category_name, sizeof(category_name), buffer);
 		
-		if (!KvGotoFirstSubKey(kvMenu))
+		if (!kvMenu.GotoFirstSubKey())
 		{
 			return;
 		}
 		
 		do
 		{		
-			KvGetSectionName(kvMenu, buffer, sizeof(buffer));
+			kvMenu.GetSectionName(buffer, sizeof(buffer));
 			
-			KvGetString(kvMenu, "admin", admin, sizeof(admin),"");
+			kvMenu.GetString("admin", admin, sizeof(admin),"");
 			
 			if (admin[0] == '\0')
 			{
@@ -150,14 +144,14 @@ BuildDynamicMenu()
 				//Use the first argument of the 'cmd' string instead
 				
 				decl String:temp[64];
-				KvGetString(kvMenu, "cmd", temp, sizeof(temp),"");
+				kvMenu.GetString("cmd", temp, sizeof(temp),"");
 				
 				BreakString(temp, admin, sizeof(admin));
 			}
 			
 			
-			KvGetString(kvMenu, "cmd", itemInput[Item_cmd], sizeof(itemInput[Item_cmd]));	
-			KvGetString(kvMenu, "execute", executeBuffer, sizeof(executeBuffer));
+			kvMenu.GetString("cmd", itemInput[Item_cmd], sizeof(itemInput[Item_cmd]));	
+			kvMenu.GetString("execute", executeBuffer, sizeof(executeBuffer));
 			
 			if (StrEqual(executeBuffer, "server"))
 			{
@@ -175,7 +169,7 @@ BuildDynamicMenu()
   			
   			decl String:inputBuffer[48];
   			
-  			while (KvJumpToKey(kvMenu, countBuffer))
+  			while (kvMenu.JumpToKey(countBuffer))
   			{
 	  			new submenuInput[Submenu];
 	  			
@@ -184,7 +178,7 @@ BuildDynamicMenu()
 		  			itemInput[Item_submenus] = CreateArray(sizeof(submenuInput));	
 	  			}
 	  			
-	  			KvGetString(kvMenu, "type", inputBuffer, sizeof(inputBuffer));
+	  			kvMenu.GetString("type", inputBuffer, sizeof(inputBuffer));
 	  			
 	  			if (strncmp(inputBuffer,"group",5)==0)
 				{	
@@ -201,7 +195,7 @@ BuildDynamicMenu()
 				{
 					submenuInput[Submenu_type] = SubMenu_MapCycle;
 					
-					KvGetString(kvMenu, "path", inputBuffer, sizeof(inputBuffer),"mapcycle.txt");
+					kvMenu.GetString("path", inputBuffer, sizeof(inputBuffer),"mapcycle.txt");
 					
 					submenuInput[Submenu_listdata] = CreateDataPack();
 					WritePackString(submenuInput[Submenu_listdata], inputBuffer);
@@ -233,13 +227,13 @@ BuildDynamicMenu()
 					do
 					{
 						Format(temp,3,"%i",i);
-						KvGetString(kvMenu, temp, value, sizeof(value), "");
+						kvMenu.GetString(temp, value, sizeof(value), "");
 						
 						Format(temp,5,"%i.",i);
-						KvGetString(kvMenu, temp, text, sizeof(text), value);
+						kvMenu.GetString(temp, text, sizeof(text), value);
 						
 						Format(temp,5,"%i*",i);
-						KvGetString(kvMenu, temp, subadm, sizeof(subadm),"");	
+						kvMenu.GetString(temp, subadm, sizeof(subadm),"");	
 						
 						if (value[0]=='\0')
 						{
@@ -263,7 +257,7 @@ BuildDynamicMenu()
 				
 				if ((submenuInput[Submenu_type] == SubMenu_Player) || (submenuInput[Submenu_type] == SubMenu_GroupPlayer))
 				{
-					KvGetString(kvMenu, "method", inputBuffer, sizeof(inputBuffer));
+					kvMenu.GetString("method", inputBuffer, sizeof(inputBuffer));
 					
 					if (StrEqual(inputBuffer, "clientid"))
 					{
@@ -291,7 +285,7 @@ BuildDynamicMenu()
 					}				
 				}
 				
-				KvGetString(kvMenu, "title", inputBuffer, sizeof(inputBuffer));
+				kvMenu.GetString("title", inputBuffer, sizeof(inputBuffer));
 				strcopy(submenuInput[Submenu_title], sizeof(submenuInput[Submenu_title]), inputBuffer);
 	  			
 	  			count++;
@@ -299,7 +293,7 @@ BuildDynamicMenu()
 	  			
 	  			PushArrayArray(itemInput[Item_submenus], submenuInput[0]);
 	  		
-	  			KvGoBack(kvMenu);	
+	  			kvMenu.GoBack();	
   			}
   			
   			/* Save this entire item into the global items array and add it to the menu */
@@ -309,9 +303,7 @@ BuildDynamicMenu()
 			decl String:locString[10];
 			IntToString(location, locString, sizeof(locString));
 
-			if (AddToTopMenu(hAdminMenu,
-				buffer,
-				TopMenuObject_Item,
+			if (hAdminMenu.AddItem(buffer,
 				DynamicMenuItemHandler,
   				categoryId,
   				admin,
@@ -321,30 +313,30 @@ BuildDynamicMenu()
 				LogError("Duplicate command name \"%s\" in adminmenu_custom.txt category \"%s\"", buffer, category_name);
 			}
 		
-		} while (KvGotoNextKey(kvMenu));
+		} while (kvMenu.GotoNextKey());
 		
-		KvGoBack(kvMenu);
+		kvMenu.GoBack();
 		
-	} while (KvGotoNextKey(kvMenu));
+	} while (kvMenu.GotoNextKey());
 	
-	CloseHandle(kvMenu);
+	delete kvMenu;
 }
 
 ParseConfigs()
 {
-	if (g_configParser == INVALID_HANDLE)
-	{
-		g_configParser = SMC_CreateParser();
-	}
+	if (!g_configParser)
+		g_configParser = new SMCParser();
 	
-	SMC_SetReaders(g_configParser, NewSection, KeyValue, EndSection);
+        g_configParser.OnEnterSection = NewSection;
+        g_configParser.OnKeyValue = KeyValue;
+        g_configParser.OnLeaveSection = EndSection;
 	
 	if (g_groupList[groupListName] != INVALID_HANDLE)
 	{
 		CloseHandle(g_groupList[groupListName]);
 	}
 	
-	if (g_groupList[groupListCommand] != INVALID_HANDLE)
+	if (g_groupList[groupListCommand] != null)
 	{
 		CloseHandle(g_groupList[groupListCommand]);
 	}
@@ -371,8 +363,8 @@ ParseConfigs()
 		return;		
 	}
 	
-	new line;
-	new SMCError:err = SMC_ParseFile(g_configParser, configPath, line);
+	int line;
+	SMCError err = g_configParser.ParseFile(configPath, line);
 	if (err != SMCError_Okay)
 	{
 		decl String:error[256];
@@ -384,18 +376,18 @@ ParseConfigs()
 	return;
 }
 
-public SMCResult:NewSection(Handle:smc, const String:name[], bool:opt_quotes)
+public SMCResult NewSection(SMCParser smc, const char[] name, bool opt_quotes)
 {
 
 }
 
-public SMCResult:KeyValue(Handle:smc, const String:key[], const String:value[], bool:key_quotes, bool:value_quotes)
+public SMCResult KeyValue(SMCParser smc, const char[] key, const char[] value, bool key_quotes, bool value_quotes)
 {
 	PushArrayString(g_groupList[groupListName], key);
 	PushArrayString(g_groupList[groupListCommand], value);
 }
 
-public SMCResult:EndSection(Handle:smc)
+public SMCResult EndSection(SMCParser smc)
 {
 	g_groupCount = GetArraySize(g_groupList[groupListName]);
 }
@@ -465,8 +457,8 @@ public ParamCheck(client)
 	{
 		GetArrayArray(outputItem[Item_submenus], g_currentPlace[client][Place_ReplaceNum] - 1, outputSubmenu[0]);
 		
-		new Handle:itemMenu = CreateMenu(Menu_Selection);
-		SetMenuExitBackButton(itemMenu, true);
+		Menu itemMenu = CreateMenu(Menu_Selection);
+		itemMenu.ExitBackButton = true;
 			
 		if ((outputSubmenu[Submenu_type] == SubMenu_Group) || (outputSubmenu[Submenu_type] == SubMenu_GroupPlayer))
 		{	
@@ -477,7 +469,7 @@ public ParamCheck(client)
 			{			
 				GetArrayString(g_groupList[groupListName], i, nameBuffer, sizeof(nameBuffer));
 				GetArrayString(g_groupList[groupListCommand], i, commandBuffer, sizeof(commandBuffer));
-				AddMenuItem(itemMenu, commandBuffer, nameBuffer);
+				itemMenu.AddItem(commandBuffer, nameBuffer);
 			}
 		}
 		
@@ -487,18 +479,18 @@ public ParamCheck(client)
 			ReadPackString(outputSubmenu[Submenu_listdata], path, sizeof(path));
 			ResetPack(outputSubmenu[Submenu_listdata]);
 		
-			new Handle:file = OpenFile(path, "rt");
-			new String:readData[128];
+			File file = OpenFile(path, "rt");
+			char readData[128];
 			
-			if(file != INVALID_HANDLE)
+			if (file)
 			{
-				while(!IsEndOfFile(file) && ReadFileLine(file, readData, sizeof(readData)))
+				while (!file.EndOfFile() && file.ReadLine(readData, sizeof(readData)))
 				{
 					TrimString(readData);
 					
 					if (IsMapValid(readData))
 					{
-						AddMenuItem(itemMenu, readData, readData);
+						itemMenu.AddItem(readData, readData);
 					}
 				}
 			}
@@ -524,32 +516,32 @@ public ParamCheck(client)
 						{
 							new userid = GetClientUserId(i);
 							Format(infoBuffer, sizeof(infoBuffer), "#%i", userid);
-							AddMenuItem(itemMenu, infoBuffer, nameBuffer);	
+							itemMenu.AddItem(infoBuffer, nameBuffer);	
 						}
 						case UserId2:
 						{
 							new userid = GetClientUserId(i);
 							Format(infoBuffer, sizeof(infoBuffer), "%i", userid);
-							AddMenuItem(itemMenu, infoBuffer, nameBuffer);							
+							itemMenu.AddItem(infoBuffer, nameBuffer);							
 						}
 						case SteamId:
 						{
-							if (GetClientAuthString(i, infoBuffer, sizeof(infoBuffer)))
-								AddMenuItem(itemMenu, infoBuffer, nameBuffer);
+							if (GetClientAuthId(i, AuthId_Steam2, infoBuffer, sizeof(infoBuffer)))
+								itemMenu.AddItem(infoBuffer, nameBuffer);
 						}	
 						case IpAddress:
 						{
 							GetClientIP(i, infoBuffer, sizeof(infoBuffer));
-							AddMenuItem(itemMenu, infoBuffer, nameBuffer);							
+							itemMenu.AddItem(infoBuffer, nameBuffer);							
 						}
 						case Name:
 						{
-							AddMenuItem(itemMenu, nameBuffer, nameBuffer);
+							itemMenu.AddItem(nameBuffer, nameBuffer);
 						}	
 						default: //assume client id
 						{
 							Format(temp,3,"%i",i);
-							AddMenuItem(itemMenu, temp, nameBuffer);						
+							itemMenu.AddItem(temp, nameBuffer);						
 						}								
 					}
 				}
@@ -557,8 +549,8 @@ public ParamCheck(client)
 		}
 		else if (outputSubmenu[Submenu_type] == SubMenu_OnOff)
 		{
-			AddMenuItem(itemMenu, "1", "On");
-			AddMenuItem(itemMenu, "0", "Off");
+			itemMenu.AddItem("1", "On");
+			itemMenu.AddItem("0", "Off");
 		}		
 		else
 		{
@@ -575,22 +567,22 @@ public ParamCheck(client)
 				
 				if (CheckCommandAccess(client, admin, 0))
 				{
-					AddMenuItem(itemMenu, value, text);
+					itemMenu.AddItem(value, text);
 				}
 			}
 			
 			ResetPack(outputSubmenu[Submenu_listdata]);	
 		}
 		
-		SetMenuTitle(itemMenu, outputSubmenu[Submenu_title]);
+		itemMenu.SetTitle(outputSubmenu[Submenu_title]);
 		
-		DisplayMenu(itemMenu, client, MENU_TIME_FOREVER);
+		itemMenu.Display(client, MENU_TIME_FOREVER);
 	}
 	else
 	{	
 		//nothing else need to be done. Run teh command.
 		
-		DisplayTopMenu(hAdminMenu, client, TopMenuPosition_LastCategory);
+		hAdminMenu.Display(client, TopMenuPosition_LastCategory);
 		
 		decl String:unquotedCommand[CMD_LENGTH];
 		UnQuoteString(g_command[client], unquotedCommand, sizeof(unquotedCommand), "#@");
@@ -610,11 +602,11 @@ public ParamCheck(client)
 	}
 }
 
-public Menu_Selection(Handle:menu, MenuAction:action, param1, param2)
+public Menu_Selection(Menu menu, MenuAction action, int param1, int param2)
 {
 	if (action == MenuAction_End)
 	{
-		CloseHandle(menu);
+		delete menu;
 	}
 	
 	if (action == MenuAction_Select)
@@ -622,7 +614,7 @@ public Menu_Selection(Handle:menu, MenuAction:action, param1, param2)
 		new String:unquotedinfo[NAME_LENGTH];
  
 		/* Get item info */
-		new bool:found = GetMenuItem(menu, param2, unquotedinfo, sizeof(unquotedinfo));
+		new bool:found = menu.GetItem(param2, unquotedinfo, sizeof(unquotedinfo));
 		
 		if (!found)
 		{
@@ -654,7 +646,7 @@ public Menu_Selection(Handle:menu, MenuAction:action, param1, param2)
 	if (action == MenuAction_Cancel && param2 == MenuCancel_ExitBack)
 	{
 		//client exited we should go back to submenu i think
-		DisplayTopMenu(hAdminMenu, param1, TopMenuPosition_LastCategory);
+		hAdminMenu.Display(param1, TopMenuPosition_LastCategory);
 	}
 }
 

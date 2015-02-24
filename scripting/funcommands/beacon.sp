@@ -33,7 +33,7 @@
 
 new g_BeaconSerial[MAXPLAYERS+1] = { 0, ... };
 
-new Handle:g_Cvar_BeaconRadius = INVALID_HANDLE;
+ConVar g_Cvar_BeaconRadius;
 
 CreateBeacon(client)
 {
@@ -86,28 +86,28 @@ public Action:Timer_Beacon(Handle:timer, any:value)
 		return Plugin_Stop;
 	}
 	
-	new team = GetClientTeam(client);
+	int team = GetClientTeam(client);
 
-	new Float:vec[3];
+	float vec[3];
 	GetClientAbsOrigin(client, vec);
 	vec[2] += 10;
 	
 	if (g_BeamSprite > -1 && g_HaloSprite > -1)
 	{
-		TE_SetupBeamRingPoint(vec, 10.0, GetConVarFloat(g_Cvar_BeaconRadius), g_BeamSprite, g_HaloSprite, 0, 15, 0.5, 5.0, 0.0, greyColor, 10, 0);
+		TE_SetupBeamRingPoint(vec, 10.0, g_Cvar_BeaconRadius.FloatValue, g_BeamSprite, g_HaloSprite, 0, 15, 0.5, 5.0, 0.0, greyColor, 10, 0);
 		TE_SendToAll();
 		
 		if (team == 2)
 		{
-			TE_SetupBeamRingPoint(vec, 10.0, GetConVarFloat(g_Cvar_BeaconRadius), g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, redColor, 10, 0);
+			TE_SetupBeamRingPoint(vec, 10.0, g_Cvar_BeaconRadius.FloatValue, g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, redColor, 10, 0);
 		}
 		else if (team == 3)
 		{
-			TE_SetupBeamRingPoint(vec, 10.0, GetConVarFloat(g_Cvar_BeaconRadius), g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, blueColor, 10, 0);
+			TE_SetupBeamRingPoint(vec, 10.0, g_Cvar_BeaconRadius.FloatValue, g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, blueColor, 10, 0);
 		}
 		else
 		{
-			TE_SetupBeamRingPoint(vec, 10.0, GetConVarFloat(g_Cvar_BeaconRadius), g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, greenColor, 10, 0);
+			TE_SetupBeamRingPoint(vec, 10.0, g_Cvar_BeaconRadius.FloatValue, g_BeamSprite, g_HaloSprite, 0, 10, 0.6, 10.0, 0.5, greenColor, 10, 0);
 		}
 		
 		TE_SendToAll();
@@ -141,29 +141,29 @@ public AdminMenu_Beacon(Handle:topmenu,
 
 DisplayBeaconMenu(client)
 {
-	new Handle:menu = CreateMenu(MenuHandler_Beacon);
+	Menu menu = CreateMenu(MenuHandler_Beacon);
 	
 	decl String:title[100];
 	Format(title, sizeof(title), "%T:", "Beacon player", client);
-	SetMenuTitle(menu, title);
-	SetMenuExitBackButton(menu, true);
+	menu.SetTitle(title);
+	menu.ExitBackButton = true;
 	
 	AddTargetsToMenu(menu, client, true, true);
 	
-	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	menu.Display(client, MENU_TIME_FOREVER);
 }
 
-public MenuHandler_Beacon(Handle:menu, MenuAction:action, param1, param2)
+public MenuHandler_Beacon(Menu menu, MenuAction action, int param1, int param2)
 {
 	if (action == MenuAction_End)
 	{
-		CloseHandle(menu);
+		delete menu;
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack && hTopMenu != INVALID_HANDLE)
+		if (param2 == MenuCancel_ExitBack && hTopMenu)
 		{
-			DisplayTopMenu(hTopMenu, param1, TopMenuPosition_LastCategory);
+			hTopMenu.Display(param1, TopMenuPosition_LastCategory);
 		}
 	}
 	else if (action == MenuAction_Select)
@@ -171,7 +171,7 @@ public MenuHandler_Beacon(Handle:menu, MenuAction:action, param1, param2)
 		decl String:info[32];
 		new userid, target;
 		
-		GetMenuItem(menu, param2, info, sizeof(info));
+		menu.GetItem(param2, info, sizeof(info));
 		userid = StringToInt(info);
 
 		if ((target = GetClientOfUserId(userid)) == 0)

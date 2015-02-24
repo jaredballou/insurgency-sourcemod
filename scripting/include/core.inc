@@ -42,18 +42,10 @@
 
 struct PlVers
 {
-	version,
-	String:filevers[],
-	String:date[],
-	String:time[]
-};
-
-/**
- * Function helper values.
- */
-enum Function
-{
-     INVALID_FUNCTION = -1,
+	public int version;
+	public const char[] filevers;
+	public const char[] date;
+	public const char[] time;
 };
 
 /**
@@ -103,7 +95,19 @@ enum PluginStatus
 };
 
 /**
- * Plugin information properties.
+ * Plugin information properties. Plugins can declare a global variable with
+ * their info. Example,
+ *
+ *   public Plugin:myinfo = {
+ *   	name = "Admin Help",
+ *   	author = "AlliedModders LLC",
+ *   	description = "Display command information",
+ *   	version = "1.0",
+ *   	url = "http://www.sourcemod.net/"
+ *   };
+ *
+ * SourceMod will display this information when a user inspects plugins in the
+ * console.
  */
 enum PluginInfo
 {
@@ -119,10 +123,10 @@ enum PluginInfo
  */
 struct Extension
 {
-	const String:name[],	/**< Short name */
-	const String:file[],	/**< Default file name */
-	bool:autoload,			/**< Whether or not to auto-load */
-	bool:required,			/**< Whether or not to require */
+	public const char[] name;	/**< Short name */
+	public const char[] file;	/**< Default file name */
+	public bool autoload;		/**< Whether or not to auto-load */
+	public bool required;		/**< Whether or not to require */
 };
 
 /**
@@ -130,9 +134,9 @@ struct Extension
  */
 struct SharedPlugin
 {
-	const String:name[],	/**< Short name */
-	const String:file[],	/**< File name */
-	bool:required,			/**< Whether or not to require */
+	public const char[] name;	/**< Short name */
+	public const char[] file;	/**< File name */
+	public bool required;		/**< Whether or not to require */
 };
 
 public Float:NULL_VECTOR[3];		/**< Pass this into certain functions to act as a C++ NULL */
@@ -197,6 +201,36 @@ public __ext_core_SetNTVOptional()
 	MarkNativeAsOptional("BfReadVecNormal");
 	MarkNativeAsOptional("BfReadAngles");
 	MarkNativeAsOptional("BfGetNumBytesLeft");
+
+	MarkNativeAsOptional("BfWrite.WriteBool");
+	MarkNativeAsOptional("BfWrite.WriteByte");
+	MarkNativeAsOptional("BfWrite.WriteChar");
+	MarkNativeAsOptional("BfWrite.WriteShort");
+	MarkNativeAsOptional("BfWrite.WriteWord");
+	MarkNativeAsOptional("BfWrite.WriteNum");
+	MarkNativeAsOptional("BfWrite.WriteFloat");
+	MarkNativeAsOptional("BfWrite.WriteString");
+	MarkNativeAsOptional("BfWrite.WriteEntity");
+	MarkNativeAsOptional("BfWrite.WriteAngle");
+	MarkNativeAsOptional("BfWrite.WriteCoord");
+	MarkNativeAsOptional("BfWrite.WriteVecCoord");
+	MarkNativeAsOptional("BfWrite.WriteVecNormal");
+	MarkNativeAsOptional("BfWrite.WriteAngles");
+	MarkNativeAsOptional("BfRead.ReadBool");
+	MarkNativeAsOptional("BfRead.ReadByte");
+	MarkNativeAsOptional("BfRead.ReadChar");
+	MarkNativeAsOptional("BfRead.ReadShort");
+	MarkNativeAsOptional("BfRead.ReadWord");
+	MarkNativeAsOptional("BfRead.ReadNum");
+	MarkNativeAsOptional("BfRead.ReadFloat");
+	MarkNativeAsOptional("BfRead.ReadString");
+	MarkNativeAsOptional("BfRead.ReadEntity");
+	MarkNativeAsOptional("BfRead.ReadAngle");
+	MarkNativeAsOptional("BfRead.ReadCoord");
+	MarkNativeAsOptional("BfRead.ReadVecCoord");
+	MarkNativeAsOptional("BfRead.ReadVecNormal");
+	MarkNativeAsOptional("BfRead.ReadAngles");
+	MarkNativeAsOptional("BfRead.GetNumBytesLeft");
 	
 	MarkNativeAsOptional("PbReadInt");
 	MarkNativeAsOptional("PbReadFloat");
@@ -227,6 +261,36 @@ public __ext_core_SetNTVOptional()
 	MarkNativeAsOptional("PbReadMessage");
 	MarkNativeAsOptional("PbReadRepeatedMessage");
 	MarkNativeAsOptional("PbAddMessage");
+
+	MarkNativeAsOptional("Protobuf.ReadInt");
+	MarkNativeAsOptional("Protobuf.ReadFloat");
+	MarkNativeAsOptional("Protobuf.ReadBool");
+	MarkNativeAsOptional("Protobuf.ReadString");
+	MarkNativeAsOptional("Protobuf.ReadColor");
+	MarkNativeAsOptional("Protobuf.ReadAngle");
+	MarkNativeAsOptional("Protobuf.ReadVector");
+	MarkNativeAsOptional("Protobuf.ReadVector2D");
+	MarkNativeAsOptional("Protobuf.GetRepeatedFieldCount");
+	MarkNativeAsOptional("Protobuf.SetInt");
+	MarkNativeAsOptional("Protobuf.SetFloat");
+	MarkNativeAsOptional("Protobuf.SetBool");
+	MarkNativeAsOptional("Protobuf.SetString");
+	MarkNativeAsOptional("Protobuf.SetColor");
+	MarkNativeAsOptional("Protobuf.SetAngle");
+	MarkNativeAsOptional("Protobuf.SetVector");
+	MarkNativeAsOptional("Protobuf.SetVector2D");
+	MarkNativeAsOptional("Protobuf.AddInt");
+	MarkNativeAsOptional("Protobuf.AddFloat");
+	MarkNativeAsOptional("Protobuf.AddBool");
+	MarkNativeAsOptional("Protobuf.AddString");
+	MarkNativeAsOptional("Protobuf.AddColor");
+	MarkNativeAsOptional("Protobuf.AddAngle");
+	MarkNativeAsOptional("Protobuf.AddVector");
+	MarkNativeAsOptional("Protobuf.AddVector2D");
+	MarkNativeAsOptional("Protobuf.RemoveRepeatedFieldValue");
+	MarkNativeAsOptional("Protobuf.ReadMessage");
+	MarkNativeAsOptional("Protobuf.ReadRepeatedMessage");
+	MarkNativeAsOptional("Protobuf.AddMessage");
 	
 	VerifyCoreVersion();
 }

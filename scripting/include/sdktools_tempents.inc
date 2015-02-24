@@ -44,7 +44,7 @@
  * @param delay		Delay in seconds to send the TE.
  * @return		Plugin_Continue to allow the transmission of the TE, Plugin_Stop to block it.
  */
-functag public Action:TEHook(const String:te_name[], const Players[], numClients, Float:delay);
+typedef TEHook = function Action (const char[] te_name, const int[] Players, int numClients, float delay);
 
 /**
  * Hooks a temp entity.
@@ -171,7 +171,7 @@ native TE_WriteFloatArray(const String:prop[], const Float:array[], arraySize);
  * @noreturn
  * @error		Invalid client index or client not in game.
  */
-native TE_Send(clients[], numClients, Float:delay=0.0);
+native TE_Send(const clients[], numClients, Float:delay=0.0);
 
 /**
  * Sets an encoded entity index in the current temp entity.

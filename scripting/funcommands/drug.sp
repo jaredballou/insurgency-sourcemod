@@ -58,24 +58,25 @@ KillDrug(client)
 	new flags = (0x0001 | 0x0010);
 	new color[4] = { 0, 0, 0, 0 };
 
-	new Handle:message = StartMessageEx(g_FadeUserMsgId, clients, 1);
-
+	Handle message = StartMessageEx(g_FadeUserMsgId, clients, 1);
 	if (GetUserMessageType() == UM_Protobuf)
 	{
-		PbSetInt(message, "duration", duration);
-		PbSetInt(message, "hold_time", holdtime);
-		PbSetInt(message, "flags", flags);
-		PbSetColor(message, "clr", color);
+		Protobuf pb = UserMessageToProtobuf(message);
+		pb.SetInt("duration", duration);
+		pb.SetInt("hold_time", holdtime);
+		pb.SetInt("flags", flags);
+		pb.SetColor("clr", color);
 	}
 	else
 	{	
-		BfWriteShort(message, duration);
-		BfWriteShort(message, holdtime);
-		BfWriteShort(message, flags);
-		BfWriteByte(message, color[0]);
-		BfWriteByte(message, color[1]);
-		BfWriteByte(message, color[2]);
-		BfWriteByte(message, color[3]);
+		BfWrite bf = UserMessageToBfWrite(message);
+		bf.WriteShort(duration);
+		bf.WriteShort(holdtime);
+		bf.WriteShort(flags);
+		bf.WriteByte(color[0]);
+		bf.WriteByte(color[1]);
+		bf.WriteByte(color[2]);
+		bf.WriteByte(color[3]);
 	}
 	
 	EndMessage();
@@ -84,14 +85,14 @@ KillDrug(client)
 KillDrugTimer(client)
 {
 	KillTimer(g_DrugTimers[client]);
-	g_DrugTimers[client] = INVALID_HANDLE;	
+	g_DrugTimers[client] = null;	
 }
 
 KillAllDrugs()
 {
 	for (new i = 1; i <= MaxClients; i++)
 	{
-		if (g_DrugTimers[i] != INVALID_HANDLE)
+		if (g_DrugTimers[i] != null)
 		{
 			if(IsClientInGame(i))
 			{
@@ -111,7 +112,7 @@ PerformDrug(client, target, toggle)
 	{
 		case (2):
 		{
-			if (g_DrugTimers[target] == INVALID_HANDLE)
+			if (g_DrugTimers[target] == null)
 			{
 				CreateDrug(target);
 				LogAction(client, target, "\"%L\" drugged \"%L\"", client, target);
@@ -125,7 +126,7 @@ PerformDrug(client, target, toggle)
 
 		case (1):
 		{
-			if (g_DrugTimers[target] == INVALID_HANDLE)
+			if (g_DrugTimers[target] == null)
 			{
 				CreateDrug(target);
 				LogAction(client, target, "\"%L\" drugged \"%L\"", client, target);
@@ -134,7 +135,7 @@ PerformDrug(client, target, toggle)
 		
 		case (0):
 		{
-			if (g_DrugTimers[target] != INVALID_HANDLE)
+			if (g_DrugTimers[target] != null)
 			{
 				KillDrug(target);
 				LogAction(client, target, "\"%L\" undrugged \"%L\"", client, target);
@@ -177,14 +178,14 @@ public Action:Timer_Drug(Handle:timer, any:client)
 	color[1] = GetRandomInt(0,255);
 	color[2] = GetRandomInt(0,255);
 
-	new Handle:message = StartMessageEx(g_FadeUserMsgId, clients, 1);
-	
+	Handle message = StartMessageEx(g_FadeUserMsgId, clients, 1);
 	if (GetUserMessageType() == UM_Protobuf)
 	{
-		PbSetInt(message, "duration", duration);
-		PbSetInt(message, "hold_time", holdtime);
-		PbSetInt(message, "flags", flags);
-		PbSetColor(message, "clr", color);
+		Protobuf pb = UserMessageToProtobuf(message);
+		pb.SetInt("duration", duration);
+		pb.SetInt("hold_time", holdtime);
+		pb.SetInt("flags", flags);
+		pb.SetColor("clr", color);
 	}
 	else
 	{
@@ -221,29 +222,29 @@ public AdminMenu_Drug(Handle:topmenu,
 
 DisplayDrugMenu(client)
 {
-	new Handle:menu = CreateMenu(MenuHandler_Drug);
+	Menu menu = CreateMenu(MenuHandler_Drug);
 	
 	decl String:title[100];
 	Format(title, sizeof(title), "%T:", "Drug player", client);
-	SetMenuTitle(menu, title);
-	SetMenuExitBackButton(menu, true);
+	menu.SetTitle(title);
+	menu.ExitBackButton = true;
 	
 	AddTargetsToMenu(menu, client, true, true);
 	
-	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	menu.Display(client, MENU_TIME_FOREVER);
 }
 
-public MenuHandler_Drug(Handle:menu, MenuAction:action, param1, param2)
+public MenuHandler_Drug(Menu menu, MenuAction action, int param1, int param2)
 {
 	if (action == MenuAction_End)
 	{
-		CloseHandle(menu);
+		delete menu;
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack && hTopMenu != INVALID_HANDLE)
+		if (param2 == MenuCancel_ExitBack && hTopMenu)
 		{
-			DisplayTopMenu(hTopMenu, param1, TopMenuPosition_LastCategory);
+			hTopMenu.Display(param1, TopMenuPosition_LastCategory);
 		}
 	}
 	else if (action == MenuAction_Select)
@@ -251,7 +252,7 @@ public MenuHandler_Drug(Handle:menu, MenuAction:action, param1, param2)
 		decl String:info[32];
 		new userid, target;
 		
-		GetMenuItem(menu, param2, info, sizeof(info));
+		menu.GetItem(param2, info, sizeof(info));
 		userid = StringToInt(info);
 
 		if ((target = GetClientOfUserId(userid)) == 0)

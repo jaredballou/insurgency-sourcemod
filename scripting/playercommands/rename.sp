@@ -73,31 +73,31 @@ public AdminMenu_Rename(Handle:topmenu,
 	}
 }
 
-DisplayRenameTargetMenu(client)
+DisplayRenameTargetMenu(int client)
 {
-	new Handle:menu = CreateMenu(MenuHandler_Rename);
+	Menu menu = CreateMenu(MenuHandler_Rename);
 	
-	decl String:title[100];
+	char title[100];
 	Format(title, sizeof(title), "%T:", "Rename player", client);
-	SetMenuTitle(menu, title);
-	SetMenuExitBackButton(menu, true);
+	menu.SetTitle(title);
+	menu.ExitBackButton = true;
 	
 	AddTargetsToMenu(menu, client, true);
 	
-	DisplayMenu(menu, client, MENU_TIME_FOREVER);
+	menu.Display(client, MENU_TIME_FOREVER);
 }
 
-public MenuHandler_Rename(Handle:menu, MenuAction:action, param1, param2)
+public MenuHandler_Rename(Menu menu, MenuAction action, int param1, int param2)
 {
 	if (action == MenuAction_End)
 	{
-		CloseHandle(menu);
+		delete menu;
 	}
 	else if (action == MenuAction_Cancel)
 	{
-		if (param2 == MenuCancel_ExitBack && hTopMenu != INVALID_HANDLE)
+		if (param2 == MenuCancel_ExitBack && hTopMenu)
 		{
-			DisplayTopMenu(hTopMenu, param1, TopMenuPosition_LastCategory);
+			hTopMenu.Display(param1, TopMenuPosition_LastCategory);
 		}
 	}
 	else if (action == MenuAction_Select)
@@ -105,7 +105,7 @@ public MenuHandler_Rename(Handle:menu, MenuAction:action, param1, param2)
 		decl String:info[32];
 		new userid, target;
 		
-		GetMenuItem(menu, param2, info, sizeof(info));
+		menu.GetItem(param2, info, sizeof(info));
 		userid = StringToInt(info);
 
 		if ((target = GetClientOfUserId(userid)) == 0)
