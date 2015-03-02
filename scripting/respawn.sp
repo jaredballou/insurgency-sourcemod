@@ -285,20 +285,24 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			{
 				if ((GetEventInt(event, "death_flags") & TF_DEATHFLAG_DEADRINGER) == TF_DEATHFLAG_DEADRINGER)
 					return;
-
 				new RoundState:iRoundState = GameRules_GetRoundState();
 				new bool:NoRespawn = (TF2_IsSuddenDeath() || TF2_IsArenaMap() || iRoundState == RoundState_GameOver || iRoundState == RoundState_TeamWin);
-
 				if(NoRespawn)
 				{
 					return;
 				}
 			}
-
 			new ncp = Ins_ObjectiveResource_GetProp("m_iNumControlPoints");
 			new acp = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
-//sm_respawn_final_counterattack
-			if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
+			if (Ins_InCounterAttack() && ((acp+1) == ncp) && (GetConVarInt(sm_respawn_final_counterattack)))
+			{
+				if ((g_iSpawnTokens[client] < 1) && (GetConVarInt(sm_respawn_final_counterattack)))
+				{
+					PrintToServer("[RESPAWN] Respawning %N with extra token due to FINAL counterattack infinity! ncp %d acp %d",client,ncp,acp);
+					g_iSpawnTokens[client] = 1;
+				}
+			}
+			else if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
 			{
 				PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
