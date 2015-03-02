@@ -237,7 +237,7 @@ GetLogicEnt() {
 }
 public Native_InCounterAttack(Handle:plugin, numParams) {
 	GetLogicEnt();
-	new retval = -1;
+	new bool:retval;
 	if (g_iLogicEntity > 0)
 	{
 		retval = GetEntData(g_iLogicEntity, FindSendPropOffs("CLogicCheckpoint", "m_bCounterAttack"));

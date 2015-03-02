@@ -28,6 +28,7 @@ new Handle:sm_respawn_enabled = INVALID_HANDLE;
 new Handle:sm_respawn_delay = INVALID_HANDLE;
 new Handle:sm_respawn_count = INVALID_HANDLE;
 new Handle:sm_respawn_counterattack = INVALID_HANDLE;
+new Handle:sm_respawn_final_counterattack = INVALID_HANDLE;
 new Handle:sm_respawn_count_team2 = INVALID_HANDLE;
 new Handle:sm_respawn_count_team3 = INVALID_HANDLE;
 new Handle:sm_respawn_reset_each_round = INVALID_HANDLE;
@@ -57,7 +58,8 @@ public OnPluginStart()
 	CreateConVar("sm_respawn_version", "1.6", "Player Respawn Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
 	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");
-	sm_respawn_counterattack = CreateConVar("sm_respawn_counterattack", "0", "Respawn during counterattack?");
+	sm_respawn_counterattack = CreateConVar("sm_respawn_counterattack", "0", "Respawn during counterattack? (0: no, 1: yes, 2: infinite)");
+	sm_respawn_final_counterattack = CreateConVar("sm_respawn_final_counterattack", "0", "Respawn during final counterattack? (0: no, 1: yes, 2: infinite)");
 	sm_respawn_count = CreateConVar("sm_respawn_count", "0", "Respawn all players this many times");
 	sm_respawn_count_team2 = CreateConVar("sm_respawn_count_team2", "-1", "Respawn all Team 2 players this many times");
 	sm_respawn_count_team3 = CreateConVar("sm_respawn_count_team3", "-1", "Respawn all Team 3 players this many times");
@@ -292,9 +294,13 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 					return;
 				}
 			}
-			if (Insurgency_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
+
+			new ncp = Ins_ObjectiveResource_GetProp("m_iNumControlPoints");
+			new acp = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
+//sm_respawn_final_counterattack
+			if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
 			{
-				PrintToServer("[RESPAWN] Not respawning %N due to counterattack",client);
+				PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
 			}
 			if (g_iSpawnTokens[client] > 0)
