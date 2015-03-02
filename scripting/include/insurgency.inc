@@ -40,5 +40,10 @@ stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
 	}
 	return;
 }
-native Insurgency_GetObjectiveResource();
-native Insurgency_InCounterAttack();
+native ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
+native Float:ObjectiveResource_GetPropFloat(const String:prop[], size=4, element=0);
+native ObjectiveResource_GetPropEnt(const String:prop[], element=0);
+native bool:ObjectiveResource_GetPropBool(const String:prop[], element=0);
+native ObjectiveResource_GetPropVector(const String:prop[], Float:vec[3], element=0);
+native ObjectiveResource_GetPropString(const String:prop[], String:buffer[], maxlen);
+//native GameLogic_();
