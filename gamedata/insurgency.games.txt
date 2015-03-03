@@ -45,37 +45,56 @@
 	{
 		"Signatures"
 		{
-			"Spawn"
-			{
-				"linux"		"@_ZN10CINSPlayer5SpawnEv"
-			}
-			"ForceRespawn"
-			{
-				"linux"		"@_ZN10CINSPlayer12ForceRespawnEv"
-			}
-			"Resupply"
-			{
-				"linux"		"@_ZN10CINSPlayer8ResupplyEv"
-			}
+                        "Spawn"
+                        {
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x40\x53\x8B\xD9\x56\x80\xBB\xDE\x19\x00\x00\x00"
+                                "linux"         "@_ZN10CINSPlayer5SpawnEv"
+                        }
+                        "ForceRespawn"
+                        {
+				"library"	"server"
+				"windows"	"\x56\x8B\xF1\xE8\x2A\x2A\x2A\x2A\x84\xC0\x74\x2A\x8B\xCE\xE8\x2A\x2A\x2A\x2A\x85\xC0\x74\x2A\x8B\x10\x8B\xC8\x6A\x01"
+                                "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
+                        }
+                        "Resupply"
+                        {
+				"library"	"server"
+				"windows"	"\x55\x8b\xEC\x51\x56\x8B\xF1\x8B\x06\x8B\x2A\x2A\x2A\x2A\x2A\xFF\xD0\x84\xC0\x0F\x84\x2A\x2A\x2A\x2A\x80"
+                                "linux"         "@_ZN10CINSPlayer8ResupplyEv"
+                        }
 			"AddMags"
 			{
+				"library"	"server"
 				"linux"		"@_ZN19CINSWeaponMagazines7AddMagsEi"
 			}
 			"RoundCount"
 			{
+				"library"	"server"
 				"linux"		"@_ZN19CINSWeaponMagazines10RoundCountEv"
 			}
 			"Deafen"
 			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x20\x56\x8B\xF1\x8B\x06\xFF\x90\x6C\x06\x00\x00"
 				"linux"		"@_ZN10CINSPlayer6DeafenEf"
 			}
 			"ForceChangeTeam"
 			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x51\x53\x56\x8B\x75\x08\x8B\xDE\x57\x8B\xF9"
 				"linux"		"@_ZN10CINSPlayer15ForceChangeTeamEi"
 			}
 			"GetMagazines"
 			{
+				"library"	"server"
 				"linux"		"@_ZN10CINSPlayer12GetMagazinesEi"
+			}
+			"GetPrintName"
+			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x08\xA1\x2A\x2A\x2A\x2A\x56\x8B\xF1\x57\x8B\x78\x14\x8B\x86\x84\x05\x00\x00\x89\x45\xF8\x8D\x45\xF8\x50\x8D\x4F\x04\xE8\x2A\x2A\x2A\x2A\x83\xF8\xFF\x74\x2A\x8D\x0C\x40\x8B\x47\x08\x83\x7C\xC8\x14\x00"
+				"linux"		"@_ZNK10CINSWeapon12GetPrintNameEv"
 			}
 		}
 		"Offsets"

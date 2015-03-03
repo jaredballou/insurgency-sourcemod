@@ -18,14 +18,20 @@
                 {
                         "Spawn"
                         {
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x40\x53\x8B\xD9\x56\x80\xBB\xDE\x19\x00\x00\x00"
                                 "linux"         "@_ZN10CINSPlayer5SpawnEv"
                         }
                         "ForceRespawn"
                         {
+				"library"	"server"
+				"windows"	"\x56\x8B\xF1\xE8\x2A\x2A\x2A\x2A\x84\xC0\x74\x2A\x8B\xCE\xE8\x2A\x2A\x2A\x2A\x85\xC0\x74\x2A\x8B\x10\x8B\xC8\x6A\x01"
                                 "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
                         }
                         "Resupply"
                         {
+				"library"	"server"
+				"windows"	"\x55\x8b\xEC\x51\x56\x8B\xF1\x8B\x06\x8B\x2A\x2A\x2A\x2A\x2A\xFF\xD0\x84\xC0\x0F\x84\x2A\x2A\x2A\x2A\x80"
                                 "linux"         "@_ZN10CINSPlayer8ResupplyEv"
                         }
 		}
