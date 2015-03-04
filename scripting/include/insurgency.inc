@@ -1,4 +1,6 @@
-#define LOGHELPER_VERSION 4
+#define TEAM_SPECTATORS 1
+#define TEAM_SECURITY 2
+#define TEAM_INSURGENTS 3
 #include <sourcemod>
 #include <sdktools>
 
@@ -41,6 +43,7 @@ stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
 	return;
 }
 native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
+native Ins_GetWeaponGetMaxClip1(weapon);
 native Float:Ins_ObjectiveResource_GetPropFloat(const String:prop[], size=4, element=0);
 native Ins_ObjectiveResource_GetPropEnt(const String:prop[], element=0);
 native bool:Ins_ObjectiveResource_GetPropBool(const String:prop[], element=0);

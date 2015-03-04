@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.3"
+			"Latest"	"0.0.4"
 		}
 		"Notes"		"[INS] Ammo Check - Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 

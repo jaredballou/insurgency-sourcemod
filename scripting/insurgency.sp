@@ -20,9 +20,10 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new NumWeaponsDefined = 0;
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:g_role_array = INVALID_HANDLE;
+new Handle:hGameConf = INVALID_HANDLE;
 new g_iObjResEntity, g_iLogicEntity;
 //============================================================================================================
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -39,6 +40,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
 	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponIndex", Native_GetWeaponIndex);
+	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
         CreateNative("Ins_ObjectiveResource_GetProp", Native_ObjectiveResource_GetProp);
         CreateNative("Ins_ObjectiveResource_GetPropFloat", Native_ObjectiveResource_GetPropFloat);
         CreateNative("Ins_ObjectiveResource_GetPropEnt", Native_ObjectiveResource_GetPropEnt);
@@ -78,6 +80,21 @@ public OnPluginStart()
 	HookEvent("controlpoint_neutralized", Event_ControlPointNeutralized);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
 	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
+	hGameConf = LoadGameConfigFile("insurgency.games");
+}
+public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
+{
+	new weapon = GetNativeCell(1);
+	StartPrepSDKCall(SDKCall_Entity);
+	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetMaxClip1")) 
+	{
+		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+	}
+	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
+	new Handle:hCall = EndPrepSDKCall();
+	new value = SDKCall(hCall, weapon);
+	CloseHandle(hCall);
+	return value;
 }
 public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 {
@@ -227,13 +244,14 @@ g_iNumControlPoints);
 }
 */
 GetLogicEnt() {
-	if (g_iLogicEntity > 0)
-		return;
-	new String:sGameMode[32],String:sLogicEnt[64];
-	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
-	Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
-	if (!StrEqual(sGameMode,"checkpoint")) return;
-	g_iLogicEntity = FindEntityByClassname(0,sLogicEnt);
+	if ((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity))
+	{
+		new String:sGameMode[32],String:sLogicEnt[64];
+		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
+		if (!StrEqual(sGameMode,"checkpoint")) return;
+		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
+	}
 }
 public Native_InCounterAttack(Handle:plugin, numParams) {
 	GetLogicEnt();
@@ -458,7 +476,7 @@ public OnMapStart()
 }
 public GetObjRes()
 {
-	if (g_iObjResEntity < 1)
+	if ((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity))
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
 	}

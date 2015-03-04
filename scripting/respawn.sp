@@ -5,9 +5,10 @@
 #undef REQUIRE_EXTENSIONS
 #include <cstrike>
 #include <tf2>
-#include <insurgency>
 #include <tf2_stocks>
 #define REQUIRE_EXTENSIONS
+
+#include <insurgency>
 
 #undef REQUIRE_PLUGIN
 #include <adminmenu>
@@ -15,6 +16,8 @@
 new Handle:hAdminMenu = INVALID_HANDLE;
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
+new Handle:h_RespawnTimers[MAXPLAYERS+1];
+
 
 // This will be used for checking which team the player is on before repsawning them
 #define SPECTATOR_TEAM	0
@@ -42,7 +45,7 @@ public Plugin:myinfo =
 	name = "[INS] Player Respawn",
 	author = "Rogue and jballou",
 	description = "Respawn dead players",
-	version = "1.6.1",
+	version = "1.6.2",
 	url = "http://forums.alliedmods.net/showthread.php?p=984087"
 }
 public OnPluginStart()
@@ -70,11 +73,12 @@ public OnPluginStart()
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("round_start", Event_RoundStart);
 
-	HookEvent("player_first_spawn", Event_PlayerFirstSpawn);
+	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 	//HookEvent("player_spawn", Event_PlayerSpawn);
 
 	HookEvent("object_destroyed", Event_ObjectDestroyed);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
+	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 
 	HookConVarChange(sm_respawn_enabled, EnableChanged);
 	HookConVarChange(sm_respawn_count, UpdateRespawnCountConVar);
@@ -138,7 +142,22 @@ public OnConfigsExecuted()
 	else
 		TagsCheck("respawntimes", true);
 }
+public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(client > 0 && IsClientInGame(client))
+	{
+		KillRespawnTimer(client);
+	}	
+	return Plugin_Continue;
+}
 
+public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	KillRespawnTimer(client);
+	return Plugin_Continue;
+}
 
 public Action:Command_Respawn(client, args)
 {
@@ -264,8 +283,12 @@ SetPlayerSpawns(client=-1)
 	}
 }
 
-public Event_PlayerFirstSpawn( Handle:event, const String:name[], bool:dontBroadcast )
+public Event_PlayerPickSquad( Handle:event, const String:name[], bool:dontBroadcast )
 {
+	//"squad_slot" "byte"
+	//"squad" "byte"
+	//"userid" "short"
+	//"class_template" "string"
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
 		return;	
@@ -296,23 +319,37 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			new acp = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
 			if (Ins_InCounterAttack() && ((acp+1) == ncp) && (GetConVarInt(sm_respawn_final_counterattack)))
 			{
-				if ((g_iSpawnTokens[client] < 1) && (GetConVarInt(sm_respawn_final_counterattack)))
+				if ((g_iSpawnTokens[client] < 1) && (GetConVarInt(sm_respawn_final_counterattack)) && (IsFakeClient(client)))
 				{
 					PrintToServer("[RESPAWN] Respawning %N with extra token due to FINAL counterattack infinity! ncp %d acp %d",client,ncp,acp);
 					g_iSpawnTokens[client] = 1;
 				}
 			}
-			else if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)))
+			else if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)) && (IsFakeClient(client)))
 			{
 				PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
 			}
 			if (g_iSpawnTokens[client] > 0)
 			{
-				CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
+				CreateRespawnTimer(client);
 			}
 		}
 	}
+}
+public KillRespawnTimer(client)
+{
+	if (h_RespawnTimers[client] != INVALID_HANDLE)
+	{
+		KillTimer(h_RespawnTimers[client]);
+		h_RespawnTimers[client] = INVALID_HANDLE;
+	}
+}
+
+public CreateRespawnTimer(client)
+{
+	KillRespawnTimer(client);
+	h_RespawnTimers[client] = CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public RespawnPlayer(client, target)
