@@ -13,7 +13,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
 new g_iObjResEntity, g_iLogicEntity, g_iPlayerManagerEntity;
-new String:g_classes[MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
+new String:g_classes[Teams][MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
 new g_round_stats[MAXPLAYERS+1][RoundStatFields];
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
@@ -156,7 +156,7 @@ hook_wstats()
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
 
-public UpdateClassName(squad,squad_slot,String:raw_class_template[])
+public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 {
 	decl String:class_template[MAX_CLASS_LEN];
 	Format(class_template,MAX_CLASS_LEN,"%s",raw_class_template);
@@ -166,10 +166,10 @@ public UpdateClassName(squad,squad_slot,String:raw_class_template[])
 	ReplaceString(class_template,sizeof(class_template),"_security","",false);
 	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
-	if(!StrEqual(g_classes[squad][squad_slot],class_template))
+	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
 	{
-		PrintToServer("[INSLIB] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
-		Format(g_classes[squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
+		PrintToServer("[INSLIB] team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
+		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
 public GetObjResEnt()
@@ -905,7 +905,6 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 	}
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	OnPlayerDisconnect(client);
-	reset_round_stats(client);
 	return Plugin_Continue;
 }
 
@@ -1370,6 +1369,7 @@ public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dont
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	new squad = GetEventInt( event, "squad" );
 	new squad_slot = GetEventInt( event, "squad_slot" );
+	new team = GetClientTeam(client);
 	decl String:class_template[MAX_CLASS_LEN];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
 	ReplaceString(class_template,sizeof(class_template),"template_","",false);
@@ -1379,7 +1379,7 @@ public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dont
 	ReplaceString(class_template,sizeof(class_template),"_security","",false);
 	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
-	UpdateClassName(squad,squad_slot,class_template);
+	UpdateClassName(team,squad,squad_slot,class_template);
 
 	if( client == 0)
 		return Plugin_Continue;

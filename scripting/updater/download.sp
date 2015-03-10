@@ -4,7 +4,6 @@
 #include "updater/download_curl.sp"
 #include "updater/download_socket.sp"
 #include "updater/download_steamtools.sp"
-#include "updater/download_steamworks.sp"
 
 static QueuePack_URL = 0;
 
@@ -67,7 +66,7 @@ ProcessDownloadQueue(bool:force=false)
 	ReadPackString(hQueuePack, url, sizeof(url));
 	ReadPackString(hQueuePack, dest, sizeof(dest));
 	
-	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE() && !STEAMWORKS_AVAILABLE())
+	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE())
 	{
 		SetFailState(EXTENSION_ERROR);
 	}
@@ -80,18 +79,7 @@ ProcessDownloadQueue(bool:force=false)
 	
 	g_bDownloading = true;
 	
-	if (STEAMWORKS_AVAILABLE())
-	{
-		if (SteamWorks_IsLoaded())
-		{
-			Download_SteamWorks(url, dest);
-		}
-		else
-		{
-			CreateTimer(10.0, Timer_RetryQueue);
-		}
-	}
-	else if (STEAMTOOLS_AVAILABLE())
+	if (STEAMTOOLS_AVAILABLE())
 	{
 		if (g_bSteamLoaded)
 		{
