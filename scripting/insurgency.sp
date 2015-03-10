@@ -27,8 +27,8 @@ new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
 //============================================================================================================
-#define PLUGIN_VERSION "0.0.2"
-#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
+#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 public Plugin:myinfo =
@@ -44,17 +44,20 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
 	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
+        CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
+        CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
+
         CreateNative("Ins_ObjectiveResource_GetProp", Native_ObjectiveResource_GetProp);
         CreateNative("Ins_ObjectiveResource_GetPropFloat", Native_ObjectiveResource_GetPropFloat);
         CreateNative("Ins_ObjectiveResource_GetPropEnt", Native_ObjectiveResource_GetPropEnt);
         CreateNative("Ins_ObjectiveResource_GetPropBool", Native_ObjectiveResource_GetPropBool);
         CreateNative("Ins_ObjectiveResource_GetPropVector", Native_ObjectiveResource_GetPropVector);
         CreateNative("Ins_ObjectiveResource_GetPropString", Native_ObjectiveResource_GetPropString);
+
         CreateNative("Ins_InCounterAttack", Native_InCounterAttack);
+
         CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
         CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
-        CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
-        CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
 	return APLRes_Success;
 }
 
@@ -121,8 +124,8 @@ public OnPluginEnd()
 }
 public OnMapStart()
 {
-	GetObjRes();
-	LoadWeaponData();
+	GetObjResEnt();
+	GetWeaponData();
 	GetTeams(false);
 }
 
@@ -169,13 +172,52 @@ public UpdateClassName(squad,squad_slot,String:raw_class_template[])
 		Format(g_classes[squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
-public GetObjRes()
+public GetObjResEnt()
 {
 	if ((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity))
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
 	}
 }
+GetLogicEnt() {
+	if ((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity))
+	{
+		new String:sGameMode[32],String:sLogicEnt[64];
+		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
+		if (!StrEqual(sGameMode,"checkpoint")) return;
+		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
+	}
+}
+public GetWeaponData()
+{
+	if (g_weap_array == INVALID_HANDLE)
+	{
+		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
+		for (new i;i<MAX_DEFINABLE_WEAPONS;i++)
+		{
+			PushArrayString(g_weap_array, "");
+		}
+		PrintToServer("[LOGGER] starting LoadValues");
+		new String:name[32];
+		for(new i=0;i<= GetMaxEntities() ;i++){
+			if(!IsValidEntity(i))
+				continue;
+			if(GetEdictClassname(i, name, sizeof(name))){
+				if (StrContains(name,"weapon_") == 0) {
+					GetWeaponId(i);
+				}
+			}
+		}
+	}
+}
+GetPlayerManagerEnt() {
+	if ((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity))
+	{
+		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
+	}
+}
+
 reset_round_stats(client)
 {
 	if (IsValidClient(client))
@@ -239,28 +281,6 @@ stock bool:IsValidClient(client) {
 
 
 
-public LoadWeaponData()
-{
-	if (g_weap_array == INVALID_HANDLE)
-	{
-		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
-		for (new i;i<MAX_DEFINABLE_WEAPONS;i++)
-		{
-			PushArrayString(g_weap_array, "");
-		}
-		PrintToServer("[LOGGER] starting LoadValues");
-		new String:name[32];
-		for(new i=0;i<= GetMaxEntities() ;i++){
-			if(!IsValidEntity(i))
-				continue;
-			if(GetEdictClassname(i, name, sizeof(name))){
-				if (StrContains(name,"weapon_") == 0) {
-					GetWeaponId(i);
-				}
-			}
-		}
-	}
-}
 GetWeaponId(i)
 {
 	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
@@ -276,22 +296,6 @@ GetWeaponId(i)
 	return m_hWeaponDefinitionHandle;
 }
 
-GetLogicEnt() {
-	if ((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity))
-	{
-		new String:sGameMode[32],String:sLogicEnt[64];
-		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
-		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
-		if (!StrEqual(sGameMode,"checkpoint")) return;
-		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
-	}
-}
-GetPlayerManagerEnt() {
-	if ((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity))
-	{
-		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
-	}
-}
 dump_player_stats(client)
 {
 	if (IsClientInGame(client) && IsClientConnected(client))
@@ -511,7 +515,7 @@ public Native_Weapon_GetWeaponId(Handle:plugin, numParams)
 	new String:weapon_name[len+1];
 	decl String:strBuf[32];
 	GetNativeString(1, weapon_name, len+1);
-	LoadWeaponData();
+	GetWeaponData();
 	new iEntity = FindEntityByClassname(-1,weapon_name);
 	if (iEntity)
 	{
@@ -531,7 +535,7 @@ public Native_Weapon_GetWeaponName(Handle:plugin, numParams)
 {
 	new weaponid = GetNativeCell(1);
 	decl String:strBuf[32];
-	LoadWeaponData();
+	GetWeaponData();
 	GetArrayString(g_weap_array, weaponid, strBuf, sizeof(strBuf));
 	new maxlen = GetNativeCell(3);
 	SetNativeString(2, strBuf, maxlen+1);
@@ -563,7 +567,7 @@ public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 	new size = GetNativeCell(2);
 	new element = GetNativeCell(3);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		retval = GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element));
@@ -582,7 +586,7 @@ public Native_ObjectiveResource_GetPropFloat(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 	new size = GetNativeCell(2);
 	new element = GetNativeCell(3);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		retval = Float:GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element));
@@ -600,7 +604,7 @@ public Native_ObjectiveResource_GetPropEnt(Handle:plugin, numParams)
 	new String:prop[len+1],retval=-1;
 	GetNativeString(1, prop, len+1);
 	new element = GetNativeCell(2);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		retval = GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (4 * element));
@@ -618,7 +622,7 @@ public Native_ObjectiveResource_GetPropBool(Handle:plugin, numParams)
 	new String:prop[len+1],retval=-1;
 	GetNativeString(1, prop, len+1);
 	new element = GetNativeCell(2);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		retval = bool:GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (element));
@@ -637,7 +641,7 @@ public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 	new size = GetNativeCell(2);
 	new element = GetNativeCell(3);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		new Float:result[3];
@@ -658,7 +662,7 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 /*
 	new maxlen = GetNativeCell(3);
-	GetObjRes();
+	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
 		//SetNativeString(2, buffer, maxlen+1);
@@ -924,6 +928,7 @@ public Action:Event_PlayerSuppressed( Handle:event, const String:name[], bool:do
 	{
 		return Plugin_Continue;
 	}
+	g_round_stats[attacker][STAT_SUPPRESSIONS]++;
 	LogPlyrPlyrEvent(attacker, victim, "triggered", "suppressed");
 	return Plugin_Continue;
 }
@@ -937,7 +942,6 @@ public Action:Event_PlayerAvengedTeammate( Handle:event, const String:name[], bo
 		return Plugin_Continue;
 	}
 	LogPlayerEvent(attacker, "triggered", "avenged");
-//	LogPlyrPlyrEvent(attacker, avenged_player, "triggered", "suppressed");
 	return Plugin_Continue;
 }
 public Action:Event_GrenadeThrown( Handle:event, const String:name[], bool:dontBroadcast )
@@ -945,6 +949,8 @@ public Action:Event_GrenadeThrown( Handle:event, const String:name[], bool:dontB
 	//"entityid" "long"
 	//"userid" "short"
 	//"id" "short"
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	g_round_stats[client][STAT_GRENADES]++;
 	return Plugin_Continue;
 }
 public Action:Event_GrenadeDetonate( Handle:event, const String:name[], bool:dontBroadcast )
@@ -1100,28 +1106,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	if (attacker == 0 || victim == 0 || attacker == victim)
 	{
 		return Plugin_Continue;
-	}
-
-	/*
-	PrintToChatAll("======WEAPON (%s)======", g_client_last_weaponstring[attacker]);
-	PrintToChatAll("Shots: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_SHOTS]);
-	PrintToChatAll("Hits: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_HITS]);
-	PrintToChatAll("Kills: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);
-	PrintToChatAll("HS: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_HEADSHOTS]);
-	PrintToChatAll("TK: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]);
-	PrintToChatAll("Dmg: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_DAMAGE]);
-	PrintToChatAll("Deaths: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_DEATHS]);
-	PrintToChatAll("-------HIT STATS-------");
-	PrintToChatAll("General: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_GENERIC]);
-	PrintToChatAll("Head: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_HEAD]);
-	PrintToChatAll("UTorso: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_CHEST]);
-	PrintToChatAll("LTorso: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_STOMACH]);
-	PrintToChatAll("LArm: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_LEFTARM]);
-	PrintToChatAll("RArm: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_RIGHTARM]);
-	PrintToChatAll("LLeg: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_LEFTLEG]);
-	PrintToChatAll("RLeg: \t%d", g_weapon_stats[attacker][weapon_index][LOG_HIT_RIGHTLEG]);
-	*/
-	
+	}	
 	g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]++;
 	g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
 	g_round_stats[attacker][STAT_KILLS]++;
@@ -1357,21 +1342,6 @@ public Action:LogEvent(const String:message[])
 	return Plugin_Continue;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//	GetObjRes();
 public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	//"reason" "byte"
@@ -1386,7 +1356,7 @@ public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadc
 	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
 	DoRoundAwards();
 	WstatsDumpAll();
-	GetObjRes();
+	GetObjResEnt();
 	return Plugin_Continue;
 }
 

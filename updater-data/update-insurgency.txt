@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.2"
+			"Latest"	"1.0.0"
 		}
-		"Notes"		"[INS] Insurgency Support Library - Provides functions to support Insurgency"
+		"Notes"		"[INS] Insurgency Support Library - Provides functions to support Insurgency and fixes logging"
 
 	}	
 	"Files"

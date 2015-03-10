@@ -12,7 +12,7 @@ public Plugin:myinfo =
 	name = "SourceBans Listener",
 	author = "Jared Ballou",
 	description = "Listens for player bans and converts them to SourceBans",
-	version = "0.0.1",
+	version = "0.0.2",
 	url = "http://github.com/jaredballou/insurgency-sourcemod"
 };
 

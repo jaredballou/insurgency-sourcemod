@@ -10,7 +10,7 @@
 #include <updater>
 #include <insurgency>
 
-#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_VERSION "0.0.5"
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
 
