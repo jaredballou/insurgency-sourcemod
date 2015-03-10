@@ -271,13 +271,13 @@ SetPlayerSpawns(client=-1)
 	{
 		mc = client;
 	}
-	PrintToServer("[RESPAWNS] Called SetPlayerSpawns with client %d mc %d",client,mc);
+	//PrintToServer("[RESPAWNS] Called SetPlayerSpawns with client %d mc %d",client,mc);
 	for (; client<=mc; client++)
 	{
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			iTeam = GetClientTeam(client);
-			PrintToServer("[RESPAWNS] Setting client %N on team %d g_iSpawnTokens to %d",client,iTeam,g_iRespawnCount[iTeam]);
+			//PrintToServer("[RESPAWNS] Setting client %N on team %d g_iSpawnTokens to %d",client,iTeam,g_iRespawnCount[iTeam]);
 			g_iSpawnTokens[client] = g_iRespawnCount[iTeam];
 		}
 	}
@@ -321,13 +321,13 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			{
 				if ((g_iSpawnTokens[client] < 1) && (GetConVarInt(sm_respawn_final_counterattack)) && (IsFakeClient(client)))
 				{
-					PrintToServer("[RESPAWN] Respawning %N with extra token due to FINAL counterattack infinity! ncp %d acp %d",client,ncp,acp);
+					//PrintToServer("[RESPAWN] Respawning %N with extra token due to FINAL counterattack infinity! ncp %d acp %d",client,ncp,acp);
 					g_iSpawnTokens[client] = 1;
 				}
 			}
 			else if (Ins_InCounterAttack() && (!GetConVarInt(sm_respawn_counterattack)) && (IsFakeClient(client)))
 			{
-				PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
+				//PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
 			}
 			if (g_iSpawnTokens[client] > 0)
@@ -377,7 +377,7 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
 	g_iSpawnTokens[client]--;
-	PrintToServer("[RESPAWN] Respawning client %N who has %d lives remaining", client, g_iSpawnTokens[client]);
+	//PrintToServer("[RESPAWN] Respawning client %N who has %d lives remaining", client, g_iSpawnTokens[client]);
 	if (StrEqual(game, "cstrike") || StrEqual(game, "csgo"))
 	{
 		CS_RespawnPlayer(client);

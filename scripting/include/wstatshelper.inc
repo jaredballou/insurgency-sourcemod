@@ -46,7 +46,7 @@ CreatePopulateWeaponTrie()
 	//for (new i = 0; i < MAX_LOG_WEAPONS; i++)
 	
 	//for (new i = 0; i < GetArraySize(g_weap_array); i++)
-	for (new i = 0; i < NumWeaponsDefined; i++)
+	for (new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
 	{
 		GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
 		SetTrieValue(g_weapon_trie, strBuf, i);
@@ -58,7 +58,7 @@ dump_player_stats(client)
 	if (IsClientInGame(client) && IsClientConnected(client))
 	{
 		decl String: player_authid[64];
-		if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
+		if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid)))
 		{
 			strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 		}
@@ -69,7 +69,7 @@ dump_player_stats(client)
 		//for (new i = 0; (i < MAX_LOG_WEAPONS); i++)
 		//DYNAMIC POPULATE
 		//for (new i = 0; i < GetArraySize(g_weap_array); i++)
-		for (new i = 0; i < NumWeaponsDefined; i++)
+		for (new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
 		{
 			decl String:strBuf[32];
 			GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
@@ -180,7 +180,7 @@ reset_player_stats(client)
 	//for (new i = 0; (i < MAX_LOG_WEAPONS); i++)
 	//DYNAMIC POPULATE
 	//for( new i = 0; i < GetArraySize(g_weap_array); i++)
-	for( new i = 0; i < NumWeaponsDefined; i++)
+	for( new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
 	{
 		g_weapon_stats[client][i][LOG_HIT_SHOTS]     = 0;
 		g_weapon_stats[client][i][LOG_HIT_HITS]      = 0;
@@ -215,7 +215,6 @@ stock get_weapon_index(const String:weapon_name[])
 	//GetTrieValue(g_weapon_trie, weapon_name, index);*/
 	return index;
 }
-
 
 WstatsDumpAll()
 {

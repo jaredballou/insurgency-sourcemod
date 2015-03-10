@@ -11,20 +11,14 @@
 #include <sdktools>
 #undef REQUIRE_PLUGIN
 #include <updater>
+#include <insurgency>
 
 #pragma unused cvarVersion
-#define MAX_DEFINABLE_WEAPONS 100
-#define MAX_WEAPON_LEN 32
-#define MAX_CONTROLPOINTS 32
-#define PREFIX_LEN 7
 
-#define INS
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
-new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][15];
 new Handle:g_weap_array = INVALID_HANDLE;
-new NumWeaponsDefined = 0;
 //new Handle:kv  = INVALID_HANDLE;
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 
@@ -35,7 +29,6 @@ new String:g_client_last_classstring[MAXPLAYERS+1][64];
 
 
 //============================================================================================================
-#include <loghelper>
 #include <wstatshelper>
 
 #define KILL_REGEX_PATTERN "^\"(.+(?:<[^>]*>))\" killed \"(.+(?:<[^>]*>))\" with \"([^\"]*)\" at (.*)"
@@ -72,15 +65,7 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_inslogger_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_inslogger_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[LOGGER] Starting");
-	g_weap_array = LoadValues();
 	
-	if(g_weap_array == INVALID_HANDLE)
-	{
-		SetFailState("[LOGGER] Failed to load weapon configuration into array!");
-	}
-
-	CreatePopulateWeaponTrie();
-
 	kill_regex = CompileRegex(KILL_REGEX_PATTERN);
 	suicide_regex = CompileRegex(SUICIDE_REGEX_PATTERN);
 	
@@ -139,28 +124,8 @@ public OnPluginEnd()
 public OnMapStart()
 {
 	GetTeams(false);
-	RepopulateWeaponTrie();
-	PrintToServer("[LOGGER] Weapon Trie Reset!");
 }
 
-public Handle:LoadValues()
-{
-	g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
-	PrintToServer("[LOGGER] starting LoadValues");
-	new String:name[32];
-	for(new i=0;i<= GetMaxEntities() ;i++){
-		if(!IsValidEntity(i))
-			continue;
-		if(GetEdictClassname(i, name, sizeof(name))){
-			if (StrContains(name,"weapon_") > -1) {
-				GetWeaponIndex(name);
-			}
-		}
-	}
-
-	PrintToServer("[LOGGER] Weapons found: %d", NumWeaponsDefined);
-	return g_weap_array;
-}
 
 //=====================================================================================================
 hook_wstats()
@@ -171,11 +136,6 @@ hook_wstats()
 }
 //=====================================================================================================
 
-public RepopulateWeaponTrie()
-{
-	ClearTrie(g_weapon_trie);
-	CreatePopulateWeaponTrie();
-}
 
 public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -205,12 +165,13 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
 			new player_userid = GetClientUserId(client);
 			new player_team_index = GetClientTeam(client);
+			g_round_stats[client][STAT_CAPTURES]++;
 			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", client, player_userid, player_authid, g_team_list[player_team_index]);
 		}
 	}
@@ -245,7 +206,7 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
@@ -328,10 +289,12 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 		if (assister_userid)
 		{
 			assisterteam = GetClientTeam(assister);
-			if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
+			if (!GetClientAuthId(assister, AuthId_Steam2, assister_authid, sizeof(assister_authid)))
 			{
 				strcopy(assister_authid, sizeof(assister_authid), "UNKNOWN");
 			}
+			g_round_stats[assister][STAT_CACHES]++;
+
 			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
 		}
 	}
@@ -339,10 +302,11 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	if (attacker)
 	{
 		attacker_userid = GetClientUserId(attacker);
-		if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
+		if (!GetClientAuthId(attacker, AuthId_Steam2, attacker_authid, sizeof(attacker_authid)))
 		{
 			strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
 		}
+		g_round_stats[attacker][STAT_CACHES]++;
 		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
 	}
 	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
@@ -361,33 +325,18 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 	new String:shotWeapName[32];
 	GetClientWeapon(client, shotWeapName, sizeof(shotWeapName));
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
-	new weapon_index = GetWeaponIndex(shotWeapName);
+	new weapon_index = Ins_GetWeaponId(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
 	//PrintToServer("WeaponIndex: %d - %s", weapon_index, shotWeapName);
 	
 	if (weapon_index > -1)
 	{
 		g_weapon_stats[client][weapon_index][LOG_HIT_SHOTS]++;
+		g_round_stats[client][STAT_SHOTS]++;
 		g_client_last_weapon[client] = weapon_index;
 		g_client_last_weaponstring[client] = shotWeapName;
 	}
 	return Plugin_Continue;
-}
-
-public GetWeaponIndex(String:weapon_name[])
-{
-	decl String:strBuf[32];
-	
-	for(new i = 0; i < NumWeaponsDefined; i++)
-	{
-		GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
-		if(StrEqual(weapon_name, strBuf)) return i;
-	}
-	//jballou: Adding weapon to trie if it's not here
-	PushArrayString(g_weap_array, weapon_name);
-	NumWeaponsDefined++;
-	PrintToServer("[LOGGER] Weapons %s not in trie, added as index %d", weapon_name,NumWeaponsDefined);
-	return (NumWeaponsDefined-1);
 }
 
 public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast)
@@ -398,6 +347,7 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 	}
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	OnPlayerDisconnect(client);
+	reset_round_stats(client);
 	return Plugin_Continue;
 }
 
@@ -502,7 +452,7 @@ public Event_RoundLevelAdvanced( Handle:event, const String:name[], bool:dontBro
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
-			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
+			if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid)))
 			{
 				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 			}
@@ -560,6 +510,7 @@ public Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
 	GetEventString(event, "message",message,sizeof(message));
 	GetEventString(event, "message_string",message_string,sizeof(message_string));
 	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
+	DoRoundAwards();
 	WstatsDumpAll();
 }
 public Event_MissileLaunched( Handle:event, const String:name[], bool:dontBroadcast )
@@ -584,7 +535,8 @@ public Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast 
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
 		return;	
-	reset_player_stats( client );	
+	reset_player_stats(client);
+	//reset_round_stats(client);
 }
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
@@ -621,8 +573,6 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	{
 		return;
 	}
-	decl String:strLastWeapon[32];
-	GetArrayString(g_weap_array, weapon_index, strLastWeapon, sizeof(strLastWeapon));
 	//PrintToServer("[LOGGER] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
 	
 	if (attacker == 0 || victim == 0 || attacker == victim)
@@ -652,9 +602,12 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	
 	g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]++;
 	g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
+	g_round_stats[attacker][STAT_KILLS]++;
+	g_round_stats[victim][STAT_DEATHS]++;
 	if (GetClientTeam(attacker) == GetClientTeam(victim))
 	{
 		g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]++;
+		g_round_stats[attacker][STAT_TEAMKILLS]++;
 	}
 	
 	//PrintToChat(attacker, "Kills: %d", g_weapon_stats[attacker][weapon_index][LOG_HIT_KILLS]);
@@ -704,13 +657,16 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		GetClientName(attacker, clientname, sizeof(clientname));
 		
 
-		//new weapon_index = GetWeaponIndex(weapon, -1 ,false);
+		//new weapon_index = Ins_GetWeaponId(weapon, -1 ,false);
 		//PrintToChatAll("idx: %d - weapon: %s", weapon_index, weapon);
-		new weapon_index = GetWeaponIndex(weapon);
+		new weapon_index = Ins_GetWeaponId(weapon);
 
 		if (weapon_index > -1)  {
 			g_weapon_stats[attacker][weapon_index][LOG_HIT_HITS]++;
-			g_weapon_stats[attacker][weapon_index][LOG_HIT_DAMAGE]  += GetEventInt(event, "dmg_health");
+			g_round_stats[attacker][STAT_HITS]++;
+			g_round_stats[attacker][STAT_DMG_GIVEN] += GetEventInt(event, "dmg_health");
+			g_round_stats[victim][STAT_DMG_TAKEN] += GetEventInt(event, "dmg_health");
+			g_weapon_stats[attacker][weapon_index][LOG_HIT_DAMAGE] += GetEventInt(event, "dmg_health");
 			g_weapon_stats[attacker][weapon_index][hitgroup]++;
 			
 			if (hitgroup == (HITGROUP_HEAD+LOG_HIT_OFFSET))

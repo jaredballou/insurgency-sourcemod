@@ -41,6 +41,7 @@ public OnLibraryRemoved(const String:name[])
 }
 
 public Action:OnBanClient(client, time, flags, const String:reason[], const String:kick_message[], const String:command[], any:source) {
+	PrintToServer("[SBLISTEN] Running OnBanClient client %d time %d flags %b reason %s kick_message %s command %s",client,time,flags,reason,kick_message,command);
 	if(StrEqual(command, "banid")) {
 		return Plugin_Continue;
 	}

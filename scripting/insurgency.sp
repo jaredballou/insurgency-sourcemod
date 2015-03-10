@@ -21,7 +21,7 @@ new NumWeaponsDefined = 0;
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:g_role_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
-new g_iObjResEntity, g_iLogicEntity;
+new g_iObjResEntity, g_iLogicEntity, g_iPlayerManagerEntity;
 //============================================================================================================
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency"
@@ -39,7 +39,6 @@ public Plugin:myinfo =
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
 	RegPluginLibrary("insurgency");	
-	CreateNative("Ins_GetWeaponIndex", Native_GetWeaponIndex);
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
         CreateNative("Ins_ObjectiveResource_GetProp", Native_ObjectiveResource_GetProp);
         CreateNative("Ins_ObjectiveResource_GetPropFloat", Native_ObjectiveResource_GetPropFloat);
@@ -48,6 +47,9 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
         CreateNative("Ins_ObjectiveResource_GetPropVector", Native_ObjectiveResource_GetPropVector);
         CreateNative("Ins_ObjectiveResource_GetPropString", Native_ObjectiveResource_GetPropString);
         CreateNative("Ins_InCounterAttack", Native_InCounterAttack);
+        CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
+        CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
+        CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
 	return APLRes_Success;
 }
 
@@ -82,6 +84,81 @@ public OnPluginStart()
 	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
 	hGameConf = LoadGameConfigFile("insurgency.games");
 }
+
+public LoadWeaponData()
+{
+	if (g_weap_array == INVALID_HANDLE)
+	{
+		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
+		for (new i;i<MAX_DEFINABLE_WEAPONS;i++)
+		{
+			PushArrayString(g_weap_array, "");
+		}
+		PrintToServer("[LOGGER] starting LoadValues");
+		new String:name[32];
+		decl String:strBuf[32];
+		for(new i=0;i<= GetMaxEntities() ;i++){
+			if(!IsValidEntity(i))
+				continue;
+			if(GetEdictClassname(i, name, sizeof(name))){
+				if (StrContains(name,"weapon_") == 0) {
+					GetWeaponId(i);
+				}
+			}
+		}
+	}
+}
+GetWeaponId(i)
+{
+	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
+	new String:name[32];
+	GetEdictClassname(i, name, sizeof(name));
+	decl String:strBuf[32];
+	GetArrayString(g_weap_array, m_hWeaponDefinitionHandle, strBuf, sizeof(strBuf));
+	if(!StrEqual(name, strBuf))
+	{
+		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, name);
+		PrintToServer("[INSLIB] Weapons %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
+	}
+	return m_hWeaponDefinitionHandle;
+}
+public Native_Weapon_GetWeaponId(Handle:plugin, numParams)
+{
+	new len;
+	GetNativeStringLength(1, len);
+	if (len <= 0)
+	{
+	  return false;
+	}
+	new String:weapon_name[len+1];
+	decl String:strBuf[32];
+	GetNativeString(1, weapon_name, len+1);
+	LoadWeaponData();
+	new iEntity = FindEntityByClassname(-1,weapon_name);
+	if (iEntity)
+	{
+		return GetWeaponId(iEntity);
+	}
+	else
+	{
+		for(new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
+		{
+			GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
+			if(StrEqual(weapon_name, strBuf)) return i;
+		}
+	}
+	return -1;
+}
+public Native_Weapon_GetWeaponName(Handle:plugin, numParams)
+{
+	new weaponid = GetNativeCell(1);
+	decl String:strBuf[32];
+	LoadWeaponData();
+	GetArrayString(g_weap_array, weaponid, strBuf, sizeof(strBuf));
+	new maxlen = GetNativeCell(3);
+	SetNativeString(2, strBuf, maxlen+1);
+}
+
 public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
 {
 	new weapon = GetNativeCell(1);
@@ -253,7 +330,26 @@ GetLogicEnt() {
 		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
 	}
 }
-public Native_InCounterAttack(Handle:plugin, numParams) {
+GetPlayerManagerEnt() {
+	if ((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity))
+	{
+		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
+	}
+}
+public Native_GetPlayerScore(Handle:plugin, numParams)
+{
+	GetPlayerManagerEnt();
+	new client = GetNativeCell(1);
+	new retval = -1;
+	if ((IsValidClient(client)) && (g_iPlayerManagerEntity > 0))
+	{
+		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropOffs("CINSPlayerResource", "m_iPlayerScore") + (4 * client));
+		//PrintToServer("[INSLIB] Client %N m_iPlayerScore %d",client,retval);
+	}
+	return retval;
+}
+public Native_InCounterAttack(Handle:plugin, numParams)
+{
 	GetLogicEnt();
 	new bool:retval;
 	if (g_iLogicEntity > 0)
@@ -470,8 +566,8 @@ public UpdateRoleName(squad,squad_slot,String:class_template[])
 }
 public OnMapStart()
 {
-	PopulateWeaponNames();
 	GetObjRes();
+	LoadWeaponData();
 //	GetTeams();
 }
 public GetObjRes()
@@ -481,30 +577,6 @@ public GetObjRes()
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
 	}
 }
-public PopulateWeaponNames()
-{
-	PrintToServer("[INSURGENCY] starting PopulateWeaponNames");
-/*
-	if (g_weap_array == INVALID_HANDLE)
-		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
-	new String:name[32];
-	for(new i=0;i<= GetMaxEntities() ;i++)
-	{
-		if(!IsValidEntity(i))
-		{
-			continue;
-		}
-		if(GetEdictClassname(i, name, sizeof(name)))
-		{
-			if (StrContains(name,"weapon_") > -1)
-			{
-				GetWeaponIndex(name);
-			}
-		}
-	}
-	PrintToServer("[INSURGENCY] Weapons found: %d", NumWeaponsDefined);
-*/
-}
 /*
 public Native_GetClientRole(Handle:plugin, numParams)
 {
@@ -512,28 +584,3 @@ public Native_GetClientRole(Handle:plugin, numParams)
 	//m_iSquadSlot
 }
 */
-public Native_GetWeaponIndex(Handle:plugin, numParams)
-{
-	new len;
-	GetNativeStringLength(1, len);
-	if (len <= 0)
-		return -1;
-	new String:str[len + 1];
-	GetNativeString(1, str, len + 1);
-	return GetWeaponIndex(str);
-}
-
-public GetWeaponIndex(String:weapon_name[])
-{
-	decl String:strBuf[32];
-	for(new i = 0; i < NumWeaponsDefined; i++)
-	{
-		GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
-		if(StrEqual(weapon_name, strBuf)) return i;
-	}
-	//jballou: Adding weapon to trie if it's not here
-	PushArrayString(g_weap_array, weapon_name);
-	NumWeaponsDefined++;
-	PrintToServer("[INSURGENCY] Weapons %s not in trie, added as index %d", weapon_name,NumWeaponsDefined);
-	return (NumWeaponsDefined-1);
-}
