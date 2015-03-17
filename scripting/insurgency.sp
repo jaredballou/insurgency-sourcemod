@@ -10,6 +10,8 @@
 #define INS
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
+new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
+new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
 new g_iObjResEntity, g_iLogicEntity, g_iPlayerManagerEntity;
@@ -65,6 +67,8 @@ public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_inslogger_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[INSLIB] Starting");
 /*
 	AddFolderToDownloadTable("materials/overviews");
@@ -198,7 +202,7 @@ public GetWeaponData()
 		{
 			PushArrayString(g_weap_array, "");
 		}
-		PrintToServer("[LOGGER] starting LoadValues");
+		PrintToServer("[INSLIB] starting LoadValues");
 		new String:name[32];
 		for(new i=0;i<= GetMaxEntities() ;i++){
 			if(!IsValidEntity(i))
@@ -260,7 +264,7 @@ DoRoundAwards()
 	}
 	LogPlayerEvent(iHighPlayer[STAT_SCORE], "triggered", "round_mvp");
 	LogPlayerEvent(iHighPlayer[STAT_KILLS], "triggered", "round_kills");
-	LogPlayerEvent(iHighPlayer[STAT_DEATHS], "triggered", "round_deaths");
+	LogPlayerEvent(iLowPlayer[STAT_DEATHS], "triggered", "round_deaths");
 	LogPlayerEvent(iHighPlayer[STAT_SHOTS], "triggered", "round_shots");
 	LogPlayerEvent(iHighPlayer[STAT_HITS], "triggered", "round_hits");
 	LogPlayerEvent(iHighPlayer[STAT_ACCURACY], "triggered", "round_accuracy");
@@ -268,7 +272,7 @@ DoRoundAwards()
 	LogPlayerEvent(iHighPlayer[STAT_CAPTURES], "triggered", "round_captures");
 	LogPlayerEvent(iHighPlayer[STAT_CACHES], "triggered", "round_caches");
 	LogPlayerEvent(iHighPlayer[STAT_DMG_GIVEN], "triggered", "round_dmg_given");
-	LogPlayerEvent(iHighPlayer[STAT_DMG_TAKEN], "triggered", "round_dmg_taken");
+	LogPlayerEvent(iLowPlayer[STAT_DMG_TAKEN], "triggered", "round_dmg_taken");
 	LogPlayerEvent(iHighPlayer[STAT_SUPPRESSIONS], "triggered", "round_suppressions");
 }
 stock bool:IsValidClient(client) {
@@ -713,13 +717,13 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	GetEventString(event, "cpname", cpname, sizeof(cpname));
 	new team = GetEventInt(event, "team");
 	new capperlen = GetCharBytes(cappers);
-	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
+	PrintToServer("[INSLIB] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
 	for (new i = 0; i < strlen(cappers); i++)
 	{
 		new client = cappers[i];
-		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
+		PrintToServer("[INSLIB] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
@@ -754,7 +758,7 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 	//new team = GetEventInt(event, "team");
 
 	//new capperlen = GetCharBytes(cappers);
-	//PrintToServer("[LOGGER] Event_ControlPointNeutralized priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
+	//PrintToServer("[INSLIB] Event_ControlPointNeutralized priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
 	GetEventString(event, "cappers", cappers, sizeof(cappers));
@@ -782,13 +786,13 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 	{
 		return Plugin_Continue;
 	}
-	//new area = GetEventInt(event, "area");
-	//new object = GetEventInt(event, "object");
-	//new player = GetEventInt(event, "player");
-	//new team = GetEventInt(event, "team");
-	//new owner = GetEventInt(event, "owner");
-	//new type = GetEventInt(event, "type");
-	//PrintToServer("[LOGGER] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,object,player,team,owner,type);
+	new area = GetEventInt(event, "area");
+	new m_iObject = GetEventInt(event, "object");
+	new player = GetEventInt(event, "player");
+	new team = GetEventInt(event, "team");
+	new owner = GetEventInt(event, "owner");
+	new type = GetEventInt(event, "type");
+	PrintToServer("[INSLIB] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,m_iObject,player,team,owner,type);
 	return Plugin_Continue;
 }
 public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool:dontBroadcast)
@@ -806,7 +810,7 @@ public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool
 	//new team = GetEventInt(event, "team");
 	//new area = GetEventInt(event, "area");
 
-	//PrintToServer("[LOGGER] Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
+	//PrintToServer("[INSLIB] Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
 	return Plugin_Continue;
 }
 
@@ -867,7 +871,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 		g_round_stats[attacker][STAT_CACHES]++;
 		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
 	}
-	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
+	PrintToServer("[INSLIB] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
 	return Plugin_Continue;
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
@@ -1100,7 +1104,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		return Plugin_Continue;
 	}
-	//PrintToServer("[LOGGER] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
+	//PrintToServer("[INSLIB] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
 	
 	if (attacker == 0 || victim == 0 || attacker == victim)
 	{
@@ -1150,7 +1154,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		}
 		g_client_hurt_weaponstring[victim] = weapon;
 	}
-	//PrintToServer("[LOGGER] PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
+	//PrintToServer("[INSLIB] PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
 	if (attacker > 0 && attacker != victim)
 	{
 		new hitgroup  = GetEventInt(event, "hitgroup");
@@ -1277,7 +1281,7 @@ public Action:LogEvent(const String:message[])
 		}
 		else
 		{
-			PrintToChatAll("[LOGGER] Regex Pattern Failure!");
+			PrintToChatAll("[INSLIB] Regex Pattern Failure!");
 		}
 	}
 	else if(StrContains(message, "committed suicide") > -1)
@@ -1332,7 +1336,7 @@ public Action:LogEvent(const String:message[])
 		}
 		else
 		{
-			PrintToChatAll("[LOGGER] Regex Pattern Failure");
+			PrintToChatAll("[INSLIB] Regex Pattern Failure");
 		}
 	}
 	else if(StrContains(message, "obj_captured") > -1) return Plugin_Handled;
