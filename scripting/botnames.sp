@@ -6,7 +6,7 @@
 
 #define PLUGIN_VERSION "1.0"
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
-#define BOT_NAME_FILE "configs/botnames.txt"
+#define BOT_NAME_PATH "configs/botnames"
 
 // this array will store the names loaded
 new Handle:bot_names;
@@ -26,6 +26,7 @@ new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarPrefix = INVALID_HANDLE; // bot name prefix
 new Handle:cvarRandom = INVALID_HANDLE; // use random-order names?
+new Handle:cvarNameList = INVALID_HANDLE; // list to use
 new Handle:cvarAnnounce = INVALID_HANDLE; // announce new bots?
 new Handle:cvarSuppress = INVALID_HANDLE; // supress join/team/namechange messages?
 
@@ -72,8 +73,14 @@ GenerateRedirects()
 ReloadNames()
 {
 	next_index = 0;
-	decl String:path[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, path, sizeof(path), BOT_NAME_FILE);
+	decl String:path[PLATFORM_MAX_PATH],String:basepath[PLATFORM_MAX_PATH],String:filename[32];
+	GetConVarString(cvarNameList,filename,sizeof(filename));
+	BuildPath(Path_SM, basepath, sizeof(basepath), BOT_NAME_PATH);
+	Format(path, sizeof(path), "%s/%s.txt", basepath, filename);
+	if (!FileExists(path)) {
+		PrintToServer("[BOTNAMES]: Cannot find %s, using default!",path);
+		Format(path, sizeof(path), "%s/%s.txt", basepath, "default");
+	}
 	
 	if (bot_names != INVALID_HANDLE)
 	{
@@ -85,7 +92,7 @@ ReloadNames()
 	new Handle:file = OpenFile(path, "r");
 	if (file == INVALID_HANDLE)
 	{
-		//PrintToServer("bot name file unopened");
+		PrintToServer("[BOTNAMES] Cannot open %s",path);
 		return;
 	}
 	
@@ -143,10 +150,11 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_botnames_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botnames_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarPrefix = CreateConVar("sm_botnames_prefix", "", "sets a prefix for bot names (include a trailing space, if needed!)", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarRandom = CreateConVar("sm_botnames_random", "0", "sets whether to randomize names used", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarRandom = CreateConVar("sm_botnames_random", "1", "sets whether to randomize names used", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarAnnounce = CreateConVar("sm_botnames_announce", "0", "sets whether to announce bots when added", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSuppress = CreateConVar("sm_botnames_suppress", "1", "sets whether to supress join/team change/name change bot messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	
+	cvarNameList = CreateConVar("sm_botnames_list", "default", "Set list to use for bots", FCVAR_NOTIFY | FCVAR_PLUGIN);	
+
 	// hook team change, connect to supress messages
 	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
 	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
