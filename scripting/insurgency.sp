@@ -2,6 +2,7 @@
 #include <regex>
 #include <sdktools>
 #include <insurgency>
+#include <loghelper>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
@@ -14,7 +15,7 @@ new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
 new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
-new g_iObjResEntity, g_iLogicEntity, g_iPlayerManagerEntity;
+new g_iObjResEntity, String:g_iObjResEntityNetClass[32], g_iLogicEntity, String:g_iLogicEntityNetClass[32], g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
 new String:g_classes[Teams][MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
 new g_round_stats[MAXPLAYERS+1][RoundStatFields];
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
@@ -29,7 +30,7 @@ new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -92,11 +93,13 @@ public OnPluginStart()
 	HookEvent("grenade_thrown", Event_GrenadeThrown);
 	HookEvent("grenade_detonate", Event_GrenadeDetonate);
 	HookEvent("game_end", Event_GameEnd);
+	HookEvent("game_end", Event_GameEndPre, EventHookMode_Pre);
 	HookEvent("game_newmap", Event_GameNewMap);
 	HookEvent("game_start", Event_GameStart);
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_begin", Event_RoundBegin);
 	HookEvent("round_end", Event_RoundEnd);
+	HookEvent("round_end", Event_RoundEndPre, EventHookMode_Pre);
 	HookEvent("round_level_advanced", Event_RoundLevelAdvanced);
 
 	HookEvent("missile_launched", Event_MissileLaunched);
@@ -104,7 +107,9 @@ public OnPluginStart()
 
 	HookEvent("object_destroyed", Event_ObjectDestroyed);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
+	HookEvent("controlpoint_captured", Event_ControlPointCapturedPre, EventHookMode_Pre);
 	HookEvent("controlpoint_neutralized", Event_ControlPointNeutralized);
+	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouchPre, EventHookMode_Pre);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
 	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
@@ -113,7 +118,6 @@ public OnPluginStart()
 	//Begin Engine LogHooks
 	AddGameLogHook(LogEvent);
 	
-	GetTeams(false);
 //	LoadTranslations("insurgency.phrases.txt");
 
 	if (LibraryExists("updater"))
@@ -125,10 +129,15 @@ public OnPluginEnd()
 {
 	WstatsDumpAll();
 	g_weap_array = INVALID_HANDLE;
+	g_iLogicEntity = -1;
+	g_iObjResEntity = -1;
+	g_iPlayerManagerEntity = -1;
 }
 public OnMapStart()
 {
-	GetObjResEnt();
+	GetObjResEnt(1);
+	GetLogicEnt(1);
+	GetPlayerManagerEnt(1);
 	GetWeaponData();
 	GetTeams(false);
 }
@@ -176,21 +185,33 @@ public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
-public GetObjResEnt()
+GetObjResEnt(always=0)
 {
-	if ((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity))
+	if (((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity)) || (always))
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
+		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
+		PrintToServer("[INSLIB] g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
 	}
 }
-GetLogicEnt() {
-	if ((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity))
+GetLogicEnt(always=0) {
+	if (((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity)) || (always))
 	{
 		new String:sGameMode[32],String:sLogicEnt[64];
 		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
 		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
 		if (!StrEqual(sGameMode,"checkpoint")) return;
 		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
+		GetEntityNetClass(g_iLogicEntity, g_iLogicEntityNetClass, sizeof(g_iLogicEntityNetClass));
+		PrintToServer("[INSLIB] g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
+	}
+}
+GetPlayerManagerEnt(always=0) {
+	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
+	{
+		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
+		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
+		PrintToServer("[INSLIB] g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
 	}
 }
 public GetWeaponData()
@@ -213,12 +234,6 @@ public GetWeaponData()
 				}
 			}
 		}
-	}
-}
-GetPlayerManagerEnt() {
-	if ((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity))
-	{
-		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
 	}
 }
 
@@ -274,13 +289,6 @@ DoRoundAwards()
 	LogPlayerEvent(iHighPlayer[STAT_DMG_GIVEN], "triggered", "round_dmg_given");
 	LogPlayerEvent(iLowPlayer[STAT_DMG_TAKEN], "triggered", "round_dmg_taken");
 	LogPlayerEvent(iHighPlayer[STAT_SUPPRESSIONS], "triggered", "round_suppressions");
-}
-stock bool:IsValidClient(client) {
-
-  return (client > 0 && client <= MaxClients &&
-    IsClientConnected(client) && IsClientInGame(client) &&
-    !IsClientReplay(client) && !IsClientSourceTV(client));
-
 }
 
 
@@ -475,17 +483,22 @@ WstatsDumpAll()
 
 
 //=====================================================================================================
-public Native_GetPlayerScore(Handle:plugin, numParams)
+
+GetPlayerScore(client)
 {
 	GetPlayerManagerEnt();
-	new client = GetNativeCell(1);
 	new retval = -1;
 	if ((IsValidClient(client)) && (g_iPlayerManagerEntity > 0))
 	{
-		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropOffs("CINSPlayerResource", "m_iPlayerScore") + (4 * client));
+		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropOffs(g_iPlayerManagerEntityNetClass, "m_iPlayerScore") + (4 * client));
 		//PrintToServer("[INSLIB] Client %N m_iPlayerScore %d",client,retval);
 	}
 	return retval;
+}
+public Native_GetPlayerScore(Handle:plugin, numParams)
+{
+	new client = GetNativeCell(1);
+	return GetPlayerScore(client);
 }
 public Native_GetPlayerClass(Handle:plugin, numParams)
 {
@@ -497,15 +510,19 @@ public Native_GetPlayerClass(Handle:plugin, numParams)
 	}
 	return;
 }
-public Native_InCounterAttack(Handle:plugin, numParams)
+bool:InCounterAttack()
 {
 	GetLogicEnt();
 	new bool:retval;
 	if (g_iLogicEntity > 0)
 	{
-		retval = bool:GetEntData(g_iLogicEntity, FindSendPropOffs("CLogicCheckpoint", "m_bCounterAttack"));
+		retval = bool:GetEntData(g_iLogicEntity, FindSendPropOffs(g_iLogicEntityNetClass, "m_bCounterAttack"));
 	}
-	return _:retval;
+	return retval;
+}
+public Native_InCounterAttack(Handle:plugin, numParams)
+{
+	return InCounterAttack();
 }
 
 public Native_Weapon_GetWeaponId(Handle:plugin, numParams)
@@ -545,9 +562,8 @@ public Native_Weapon_GetWeaponName(Handle:plugin, numParams)
 	SetNativeString(2, strBuf, maxlen+1);
 }
 
-public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
+Weapon_GetMaxClip1(weapon)
 {
-	new weapon = GetNativeCell(1);
 	StartPrepSDKCall(SDKCall_Entity);
 	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetMaxClip1")) 
 	{
@@ -558,6 +574,11 @@ public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
 	new value = SDKCall(hCall, weapon);
 	CloseHandle(hCall);
 	return value;
+}
+public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
+{
+	new weapon = GetNativeCell(1);
+	return Weapon_GetMaxClip1(weapon);
 }
 public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 {
@@ -574,7 +595,7 @@ public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element));
+		retval = GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 	return retval;
 }
@@ -593,7 +614,7 @@ public Native_ObjectiveResource_GetPropFloat(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = Float:GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element));
+		retval = Float:GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 	return _:retval;
 }
@@ -611,7 +632,7 @@ public Native_ObjectiveResource_GetPropEnt(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (4 * element));
+		retval = GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (4 * element));
 	}
 	return retval;
 }
@@ -629,7 +650,7 @@ public Native_ObjectiveResource_GetPropBool(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = bool:GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (element));
+		retval = bool:GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (element));
 	}
 	return _:retval;
 }
@@ -649,7 +670,7 @@ public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams)
 	if (g_iObjResEntity > 0)
 	{
 		new Float:result[3];
-		retval = GetEntDataVector(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element), result);
+		retval = GetEntDataVector(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element), result);
 		SetNativeArray(2, result, 3);
 	}
 	return retval;
@@ -670,7 +691,7 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 	if (g_iObjResEntity > 0)
 	{
 		//SetNativeString(2, buffer, maxlen+1);
-		//GetEntData(g_iObjResEntity, FindSendPropOffs("CINSObjectiveResource", prop) + (size * element));
+		//GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 */
 	return retval;
@@ -699,6 +720,38 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 
 
 //=====================================================================================================
+public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	//"priority" "short"
+	//"cp" "byte"
+	//"cappers" "string"
+	//"cpname" "string"
+	//"team" "byte"
+	decl String:cappers[256];
+	//new priority = GetEventInt(event, "priority");
+	GetEventString(event, "cappers", cappers, sizeof(cappers));
+	new team = GetEventInt(event, "team");
+	new capperlen = GetCharBytes(cappers);
+
+	if ((InCounterAttack()) && (team == 3) && (!GetConVarBool(cvarCheckpointCounterattackCapture)))
+	{
+		PrintToServer("[INSLIB] Event_ControlPointCaptured: Blocking CounterAttack Capture!");
+		//return Plugin_Stop;
+	}
+	new Float:ratio = (Float:capperlen / Float:Team_CountAlivePlayers(team));
+	new Float:goalratio = GetConVarFloat(cvarCheckpointCapturePlayerRatio);
+	PrintToServer("[INSLIB] Event_ControlPointCaptured ratio %0.2f (%d of %d) goalratio %0.2f",ratio,capperlen,Team_CountAlivePlayers(team),goalratio);
+	if (ratio < goalratio)
+	{
+		PrintToServer("[INSLIB] Event_ControlPointCaptured Blocking due to insufficient friendly players!");
+		//return Plugin_Stop;
+	}
+	return Plugin_Continue;
+}
 public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
@@ -718,7 +771,6 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	new team = GetEventInt(event, "team");
 	new capperlen = GetCharBytes(cappers);
 	PrintToServer("[INSLIB] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
-
 	//"cp" "byte" - for naming, currently not needed
 	for (new i = 0; i < strlen(cappers); i++)
 	{
@@ -780,11 +832,26 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 	}
 	return Plugin_Continue;
 }
+public Action:Event_ControlPointStartTouchPre(Handle:event, const String:name[], bool:dontBroadcast)
+{
+}
 public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return Plugin_Continue;
+	}
+	new String:sGameMode[32];
+	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+	if (!StrEqual(sGameMode,"checkpoint")) return Plugin_Continue;
+	for (new i = 0; i < 16; i++)
+	{
+		new m_nSecurityCount = Ins_ObjectiveResource_GetProp("m_nSecurityCount",4,i);
+		new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,i);
+		if (m_nSecurityCount || m_nInsurgentCount)
+		{
+			PrintToServer("[INSLIB] Area %d m_nSecurityCount %d m_nInsurgentCount %d",i,m_nSecurityCount,m_nInsurgentCount);
+		}
 	}
 	new area = GetEventInt(event, "area");
 	new m_iObject = GetEventInt(event, "object");
@@ -792,7 +859,17 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 	new team = GetEventInt(event, "team");
 	new owner = GetEventInt(event, "owner");
 	new type = GetEventInt(event, "type");
-	PrintToServer("[INSLIB] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,m_iObject,player,team,owner,type);
+	new Float:m_flCaptureTime = Ins_ObjectiveResource_GetPropFloat("m_flCaptureTime",4,area);
+	new Float:m_flDeteriorateTime = Ins_ObjectiveResource_GetPropFloat("m_flDeteriorateTime",4,area);
+	new Float:m_flLazyCapPerc = Ins_ObjectiveResource_GetPropFloat("m_flLazyCapPerc",4,area);
+	new m_nTeamBlocking = Ins_ObjectiveResource_GetProp("m_nTeamBlocking",4,area);
+	new Float:m_flCapPercentages = 0.0;//Ins_ObjectiveResource_GetPropFloat("m_flCapPercentages",4,area);
+	new bool:m_bSecurityLocked = Ins_ObjectiveResource_GetPropBool("m_bSecurityLocked",area);
+	new bool:m_bInsurgentsLocked = Ins_ObjectiveResource_GetPropBool("m_bInsurgentsLocked",area);
+	new m_nSecurityCount = Ins_ObjectiveResource_GetProp("m_nSecurityCount",4,area);
+	new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,area);
+	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
+	PrintToServer("[INSLIB] Event_ControlPointStartTouch: player %N area %d m_nActivePushPointIndex %d m_nSecurityCount %d m_nInsurgentCount %d m_flCaptureTime %f m_flDeteriorateTime %f m_flLazyCapPerc %f m_nTeamBlocking %d m_flCapPercentages %f m_bSecurityLocked %b m_bInsurgentsLocked %b object %d player %d team %d owner %d type %d", player, area, m_nActivePushPointIndex, m_nSecurityCount, m_nInsurgentCount, m_flCaptureTime, m_flDeteriorateTime, m_flLazyCapPerc, m_nTeamBlocking, m_flCapPercentages, m_bSecurityLocked, m_bInsurgentsLocked, m_iObject, player, team, owner, type);
 	return Plugin_Continue;
 }
 public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool:dontBroadcast)
@@ -1013,6 +1090,17 @@ public Action:Event_GameEnd( Handle:event, const String:name[], bool:dontBroadca
 	new team1_score = GetEventInt( event, "team1_score");
 	new team2_score = GetEventInt( event, "team2_score");
 	LogToGame("World triggered \"Game_End\" (winner \"%d\") (team1_score \"%d\") (team2_score \"%d\")", winner,team1_score,team2_score);
+	return Plugin_Continue;
+}
+public Action:Event_GameEndPre( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"team2_score" "short"
+	//"winner" "byte"
+	//"team1_score" "short"
+	//new winner = GetEventInt( event, "winner");
+	//new team1_score = GetEventInt( event, "team1_score");
+	//new team2_score = GetEventInt( event, "team2_score");
+	//LogToGame("World triggered \"Game_End\" (winner \"%d\") (team1_score \"%d\") (team2_score \"%d\")", winner,team1_score,team2_score);
 	return Plugin_Continue;
 }
 public Action:Event_RoundStart( Handle:event, const String:name[], bool:dontBroadcast )
@@ -1345,6 +1433,24 @@ public Action:LogEvent(const String:message[])
 	return Plugin_Continue;
 }
 
+public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"reason" "byte"
+	//"winner" "byte"
+	//"message" "string"
+	//"message_string" "string"
+	decl String:message[255];
+	GetEventString(event, "message",message,sizeof(message));
+	if (StrEqual(message,"#game_team_winner_obj_checkpoint_regain"))
+	{
+		if (!GetConVarBool(cvarCheckpointCounterattackCapture))
+		{
+			PrintToServer("[INSLIB] Event_RoundEnd: Blocking due to checkpoint recapture disabled!");
+			//return Plugin_Stop;
+		}
+	}
+	return Plugin_Continue;
+}
 public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
 {
 	//"reason" "byte"

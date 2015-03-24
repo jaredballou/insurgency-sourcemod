@@ -13,7 +13,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_DESCRIPTION "Adjusts behavior of RPG rounds"
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-rpgdrift.txt"
 
@@ -59,7 +59,7 @@ public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dont
 	{
 		return;
 	}
-	PrintToServer("[RPGDRIFT] Event_MissileLaunched!");
+	//PrintToServer("[RPGDRIFT] Event_MissileLaunched!");
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	new entity = GetEventInt(event, "entityid");
 	new String:classname[32];

@@ -1,6 +1,11 @@
-#include <sourcemod>
-#include <sdktools>
-#include <loghelper>
+#if defined _insurgency_included
+  #endinput
+#endif
+#define _insurgency_included
+
+//#include <sourcemod>
+//#include <sdktools>
+//#include <loghelper>
 
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
@@ -10,6 +15,24 @@
 #define PREFIX_LEN 7
 #define MAX_SQUADS 8
 #define SQUAD_SIZE 8
+
+native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
+native Ins_GetWeaponGetMaxClip1(weapon);
+native Float:Ins_ObjectiveResource_GetPropFloat(const String:prop[], size=4, element=0);
+native Ins_ObjectiveResource_GetPropEnt(const String:prop[], element=0);
+native bool:Ins_ObjectiveResource_GetPropBool(const String:prop[], element=0);
+native Ins_ObjectiveResource_GetPropVector(const String:prop[], Float:vec[3], element=0);
+native Ins_ObjectiveResource_GetPropString(const String:prop[], String:buffer[], maxlen);
+
+native bool:Ins_InCounterAttack();
+
+native Ins_GetPlayerScore(client);
+native Ins_GetPlayerClass(client, String:buffer[], maxlen);
+native Ins_GetClassName(squad,squad_slot);
+//native GameLogic_();
+
+native Ins_GetWeaponName(weaponid, String:buffer[], maxlen);
+native Ins_GetWeaponId(String:weapon_name[]);
 
 enum Teams
 {
@@ -86,20 +109,69 @@ stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
 	return;
 }
 
-native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
-native Ins_GetWeaponGetMaxClip1(weapon);
-native Float:Ins_ObjectiveResource_GetPropFloat(const String:prop[], size=4, element=0);
-native Ins_ObjectiveResource_GetPropEnt(const String:prop[], element=0);
-native bool:Ins_ObjectiveResource_GetPropBool(const String:prop[], element=0);
-native Ins_ObjectiveResource_GetPropVector(const String:prop[], Float:vec[3], element=0);
-native Ins_ObjectiveResource_GetPropString(const String:prop[], String:buffer[], maxlen);
+/* Returns True if the client is an ingame player, False otherwise.
+ * Checks are performed in the order least likely to spew an error.
+ *
+ * @return                  If the client is a valid client.
+ */
+stock bool:IsValidClient(client) {
 
-native bool:Ins_InCounterAttack();
+  return (client > 0 && client <= MaxClients &&
+    IsClientConnected(client) && IsClientInGame(client) &&
+    !IsClientReplay(client) && !IsClientSourceTV(client));
 
-native Ins_GetPlayerScore(client);
-native Ins_GetPlayerClass(client, String:buffer[], maxlen);
-native Ins_GetClassName(squad,squad_slot);
-//native GameLogic_();
+}
 
-native Ins_GetWeaponName(weaponid, String:buffer[], maxlen);
-native Ins_GetWeaponId(String:weapon_name[]);
+/**
+ * Counts the players in a team, alive or dead.
+ *
+ * @param team             Team index.
+ * @return                 Number of players.
+ */
+stock Team_CountPlayers(team) {
+
+  new count = 0;
+  for (new i = 1; i <= MaxClients; i++) {
+    if (IsValidClient(i) && GetClientTeam(i) == team) {
+      count++;
+    }
+  }
+  return count;
+
+}
+
+/**
+ * Counts the number of living players in a team.
+ *
+ * @param team             Team index.
+ * @return                 Number of living players.
+ */
+stock Team_CountAlivePlayers(team) {
+
+   new count = 0;
+   for (new i = 1; i <= MaxClients; i++) {
+     if (IsValidClient(i) && GetClientTeam(i) == team && IsPlayerAlive(i)) {
+       count++;
+     }
+   }
+   return count;
+
+ }
+/*
+stock Client_IsValid(client, bool:checkConnected)
+{
+	if (client > 4096) {
+		client = EntRefToEntIndex(client);
+	}
+
+	if (client < 1 || client > MaxClients) {
+		return false;
+	}
+
+	if (checkConnected && !IsClientConnected(client)) {
+		return false;
+	}
+	
+	return true;
+}
+*/

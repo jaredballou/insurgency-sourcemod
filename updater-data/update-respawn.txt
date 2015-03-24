@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"1.7.0"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"[INS] Player Respawn - Respawn dead players via admincommand or by queues"
 
 	}	
 	"Files"

@@ -8,6 +8,7 @@
 #include <navmesh>
 #undef REQUIRE_PLUGIN
 #include <updater>
+#include <insurgency>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
@@ -272,54 +273,6 @@ public Action:Timer_PostSpawn(Handle:timer, any:client)
 	g_hRespawnTimer[client] = INVALID_HANDLE;
 }
 
-/* Returns True if the client is an ingame player, False otherwise.
- * Checks are performed in the order least likely to spew an error.
- *
- * @return                  If the client is a valid client.
- */
-stock bool:IsValidClient(client) {
-
-  return (client > 0 && client <= MaxClients &&
-    IsClientConnected(client) && IsClientInGame(client) &&
-    !IsClientReplay(client) && !IsClientSourceTV(client));
-
-}
-
-/**
- * Counts the players in a team, alive or dead.
- *
- * @param team             Team index.
- * @return                 Number of players.
- */
-stock Team_CountPlayers(team) {
-
-  new count = 0;
-  for (new i = 1; i <= MaxClients; i++) {
-    if (IsValidClient(i) && GetClientTeam(i) == team) {
-      count++;
-    }
-  }
-  return count;
-
-}
-
-/**
- * Counts the number of living players in a team.
- *
- * @param team             Team index.
- * @return                 Number of living players.
- */
-stock Team_CountAlivePlayers(team) {
-
-   new count = 0;
-   for (new i = 1; i <= MaxClients; i++) {
-     if (IsValidClient(i) && GetClientTeam(i) == team && IsPlayerAlive(i)) {
-       count++;
-     }
-   }
-   return count;
-
- }
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));

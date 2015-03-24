@@ -44,6 +44,15 @@
  * @param 2		CLIENTFILTER_ flags to check.
  */
 #define LOOP_CLIENTS(%1,%2) for (new %1=Client_GetNext(%2); %1 >= 1 && %1 <= MaxClients; %1=Client_GetNext(%2, ++%1))
+	
+/**
+ * Macro for iterating trough all observers of a player.
+ *
+ * @param 1		Client Index for who to get the observers.
+ * @param 2		Name of the observer client index variable (will be only valid in the loop).
+ * @param 3		CLIENTFILTER_ flags to check.
+ */
+#define LOOP_OBSERVERS(%1,%2,%3) for (new %2=Client_GetNextObserver(%1, 1, %3); %2 >= 1 && %2 <= MaxClients; %2=Client_GetNextObserver(%1, ++%2, %3))
 
 /**
  * Very useful macro to iterate all weapons of a client.
@@ -171,7 +180,7 @@ stock Client_FindBySteamId(const String:auth[])
 */
 stock Client_FindByName(const String:name[], bool:partOfName=true, bool:caseSensitive=false)
 {
-	new String:clientName[MAX_STEAMAUTH_LENGTH];
+	new String:clientName[MAX_NAME_LENGTH];
 	for (new client=1; client <= MaxClients; client++) {
 		if (!IsClientAuthorized(client)) {
 			continue;
@@ -305,9 +314,9 @@ stock bool:Client_SetObserverMode(client, Obs_Mode:mode, bool:updateMoveType=tru
  * @param client		Client Index.
  * @return				Last Observer mode
  */
-stock Obs_mode:Client_GetObserverLastMode(client)
+stock Obs_Mode:Client_GetObserverLastMode(client)
 {
-	return Obs_mode:GetEntProp(client, Prop_Data, "m_iObserverLastMode");
+	return Obs_Mode:GetEntProp(client, Prop_Data, "m_iObserverLastMode");
 }
 
 /**
@@ -487,13 +496,29 @@ stock bool:Client_ScreenFade(client, duration, mode, holdtime=-1, r=0, g=0, b=0,
 		return false;
 	}
 
-	BfWriteShort(userMessage,	duration);	// Fade duration
-	BfWriteShort(userMessage,	holdtime);	// Fade hold time
-	BfWriteShort(userMessage,	mode);		// What to do
-	BfWriteByte(userMessage,	r);			// Color R
-	BfWriteByte(userMessage,	g);			// Color G
-	BfWriteByte(userMessage,	b);			// Color B
-	BfWriteByte(userMessage,	a);			// Color Alpha
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available &&
+		GetUserMessageType() == UM_Protobuf) {
+
+		new color[4];
+		color[0] = r;
+		color[1] = g;
+		color[2] = b;
+		color[3] = a;
+
+		PbSetInt(userMessage,   "duration",   duration);
+		PbSetInt(userMessage,   "hold_time",  holdtime);
+		PbSetInt(userMessage,   "flags",      mode);
+		PbSetColor(userMessage, "clr",        color);
+	}
+	else {
+		BfWriteShort(userMessage,	duration);	// Fade duration
+		BfWriteShort(userMessage,	holdtime);	// Fade hold time
+		BfWriteShort(userMessage,	mode);		// What to do
+		BfWriteByte(userMessage,	r);			// Color R
+		BfWriteByte(userMessage,	g);			// Color G
+		BfWriteByte(userMessage,	b);			// Color B
+		BfWriteByte(userMessage,	a);			// Color Alpha
+	}
 	EndMessage();
 	
 	return true;
@@ -626,9 +651,9 @@ stock Client_GetCount(bool:countInGameOnly=true, bool:countFakeClients=true)
  * The Scoreboard uses the goldSource corrected Ping, the net_graph doesn't
  * For Fake Clients 0 is returned.
  *
- * @param inGameOnly	Wether players not ingame yet are also counted
- * @param countBots		If true bots will be counted too.
- * @return				Client's ping or 0 for fake clients
+ * @param client		Client index
+ * @param goldSource	If true, get the ping as displayed in the player's scoreboard, false returns the net_graph variant.
+ * @return				Client's fake ping or 0 for fake clients
  */
 stock Client_GetFakePing(client, bool:goldSource=true)
 {
@@ -890,10 +915,20 @@ stock bool:Client_RawAudio(client, const emitter, const String:soundfile[], Floa
 		return false;
 	}
 
-	BfWriteByte(message,	pitch);
-	BfWriteByte(message,	emitter);
-	BfWriteFloat(message,	length);
-	BfWriteString(message,	soundfile);
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetInt(message,    "pitch",          pitch);
+		PbSetInt(message,    "entidx",         emitter);
+		PbSetFloat(message,  "duration",       length );
+		PbSetString(message, "voice_filename", soundfile);
+	}
+	else {
+		BfWriteByte(message,	pitch);
+		BfWriteByte(message,	emitter);
+		BfWriteFloat(message,	length);
+		BfWriteString(message,	soundfile);
+	}
 	EndMessage();
 
 	return true;
@@ -918,10 +953,20 @@ stock bool:Client_RawAudioToAll(const emitter, const String:soundfile[], Float:l
 		return false;
 	}
 
-	BfWriteByte(message,	pitch);
-	BfWriteByte(message,	emitter);
-	BfWriteFloat(message,	length);
-	BfWriteString(message,	soundfile);
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetInt(message, "pitch", pitch);
+		PbSetInt(message, "entidx", emitter);
+		PbSetFloat(message, "duration", length);
+		PbSetString(message, "voice_filename", soundfile);
+	}
+	else {
+		BfWriteByte(message,	pitch);
+		BfWriteByte(message,	emitter);
+		BfWriteFloat(message,	length);
+		BfWriteString(message,	soundfile);
+	}
 	EndMessage();
 
 	return true;
@@ -1323,11 +1368,11 @@ stock Client_HasWeapon(client, const String:className[])
 stock Client_GetWeapon(client, const String:className[])
 {
 	new offset = Client_GetWeaponsOffset(client) - 4;
-
+	new weapon = INVALID_ENT_REFERENCE;
 	for (new i=0; i < MAX_WEAPONS; i++) {
 		offset += 4;
-
-		new weapon = GetEntDataEnt2(client, offset);
+		
+		weapon = GetEntDataEnt2(client, offset);
 		
 		if (!Weapon_IsValid(weapon)) {
 			continue;
@@ -1337,7 +1382,7 @@ stock Client_GetWeapon(client, const String:className[])
 			return weapon;
 		}
 	}
-	
+
 	return INVALID_ENT_REFERENCE;
 }
 
@@ -1522,6 +1567,30 @@ stock bool:Client_GetWeaponPlayerAmmo(client, const String:className[], &primary
 }
 
 /**
+ * Gets the primary and secondary ammo the player carries for a specific weapon index.
+ *
+ * @param client		Client Index.
+ * @param weapon		Weapon Entity Index.
+ * @param primaryAmmo	Primary ammo stock value from the client, if -1 the value is untouched.
+ * @param secondaryAmmo	Secondary ammo stock value from the client, if -1 the value is untouched.
+ * @noreturn
+ */
+stock Client_GetWeaponPlayerAmmoEx(client, weapon, &primaryAmmo=-1, &secondaryAmmo=-1)
+{	
+	new offset_ammo = FindDataMapOffs(client, "m_iAmmo");
+	
+	if (primaryAmmo != -1) {
+		new offset = offset_ammo + (Weapon_GetPrimaryAmmoType(weapon) * 4);
+		primaryAmmo = GetEntData(client, offset);
+	}
+	
+	if (secondaryAmmo != -1) {
+		new offset = offset_ammo + (Weapon_GetSecondaryAmmoType(weapon) * 4);
+		secondaryAmmo = GetEntData(client, offset);
+	}
+}
+
+/**
  * Sets the primary and secondary ammo the player carries for a specific weapon classname.
  *
  * @param client		Client Index.
@@ -1586,7 +1655,12 @@ stock Client_SetWeaponAmmo(client, const String:className[], primaryAmmo=-1, sec
 		return false;
 	}
 	
-	Weapon_SetClips(weapon, primaryClip, secondaryClip);
+	if (primaryClip != -1) {
+		Weapon_SetPrimaryClip(weapon, primaryClip);
+	}
+	if (secondaryClip != -1) {
+		Weapon_SetSecondaryClip(weapon, secondaryClip);
+	}
 	Client_SetWeaponPlayerAmmoEx(client, weapon, primaryAmmo, secondaryAmmo);
 	
 	return true;
@@ -1642,8 +1716,16 @@ stock bool:Client_PrintHintText(client, const String:format[], any:...)
 	SetGlobalTransTarget(client);
 	VFormat(buffer, sizeof(buffer), format, 3);
 
-	BfWriteByte(userMessage, 1); 
-	BfWriteString(userMessage, buffer); 
+	
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetString(userMessage, "text", format);
+	}
+	else {
+		BfWriteByte(userMessage, 1); 
+		BfWriteString(userMessage, buffer); 
+	}
 
 	EndMessage();
 	
@@ -1698,8 +1780,15 @@ stock bool:Client_PrintKeyHintText(client, const String:format[], any:...)
 	SetGlobalTransTarget(client);
 	VFormat(buffer, sizeof(buffer), format, 3);
 
-	BfWriteByte(userMessage, 1); 
-	BfWriteString(userMessage, buffer); 
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetString(userMessage, "hints", buffer);
+	}
+	else {
+		BfWriteByte(userMessage, 1); 
+		BfWriteString(userMessage, buffer); 
+	}
 
 	EndMessage();
 	
@@ -1767,17 +1856,43 @@ stock Client_PrintToChatRaw(client, const String:message[], subject=0, bool:isCh
 	if (sayText2_supported) {
 		userMessage = StartMessageOne("SayText2", client, USERMSG_RELIABLE);
 		
-		BfWriteByte(userMessage		, subject);
-		BfWriteByte(userMessage		, isChat);
-		BfWriteString(userMessage	, message);
+		if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+			&& GetUserMessageType() == UM_Protobuf) {
+
+			PbSetInt(userMessage,    "ent_idx",  subject);
+			PbSetBool(userMessage,   "chat",     isChat);
+			PbSetString(userMessage, "msg_name", message);
+
+			// psychonic: Furthermore, some usermessages with repeated field,
+			// such as the commonly-used SayText2, expected an undocumented
+			// specific number of values added, else the client will crash when receiving.
+			PbAddString(userMessage, "params", "");
+			PbAddString(userMessage, "params", "");
+			PbAddString(userMessage, "params", "");
+			PbAddString(userMessage, "params", "");
+		}
+		else {
+			BfWriteByte(userMessage		, subject);
+			BfWriteByte(userMessage		, isChat);
+			BfWriteString(userMessage	, message);
+		}
 	}
 	else {
 		userMessage = StartMessageOne("SayText", client, USERMSG_RELIABLE);
 
-		BfWriteByte(userMessage		, subject);
-		BfWriteString(userMessage	, message);
-		// For DoD:S nickname coloring
-		BfWriteByte(userMessage		, -1);
+		if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+			&& GetUserMessageType() == UM_Protobuf) {
+
+			PbSetInt(userMessage, "ent_idx", subject);
+			PbSetString(userMessage, "text", message);
+			PbSetBool(userMessage, "chat", isChat);
+		}
+		else {
+			BfWriteByte(userMessage		, subject);
+			BfWriteString(userMessage	, message);
+			// For DoD:S nickname coloring
+			BfWriteByte(userMessage		, -1);
+		}
 	}
 
 	EndMessage();
@@ -1975,12 +2090,13 @@ stock Client_Print(client, ClientHudPrint:destination, const String:format[], an
 		return;
 	}
 
+	new EngineVersion:engineVersion = GetEngineVersion();
 	if (client == 0 ||
-		(destination != ClientHudPrint_Console) ||
-		(destination == ClientHudPrint_Console && GuessSDKVersion() < SOURCE_SDK_LEFT4DEAD))
+		destination != ClientHudPrint_Console ||
+		(destination == ClientHudPrint_Console
+			&& engineVersion != Engine_Left4Dead && engineVersion != Engine_Left4Dead2))
 	{
-		Color_StripFromChatText(buffer, buffer2, sizeof(buffer2));
-		strcopy(buffer, sizeof(buffer), buffer2);
+		Color_StripFromChatText(buffer2, buffer2, sizeof(buffer2));
 
 		if (client == 0) {
 			PrintToServer(buffer2);
@@ -1991,8 +2107,20 @@ stock Client_Print(client, ClientHudPrint:destination, const String:format[], an
 	new Handle:userMessage = INVALID_HANDLE;
 	userMessage = StartMessageOne("TextMsg", client, USERMSG_RELIABLE);
 
-	BfWriteByte(userMessage		, _:ClientHudPrint_Console);
-	BfWriteString(userMessage	, buffer);
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetInt(userMessage,    "msg_dst", _:destination);
+		PbAddString(userMessage, "params",  buffer2);
+		PbAddString(userMessage, "params",  "");
+		PbAddString(userMessage, "params",  "");
+		PbAddString(userMessage, "params",  "");
+		PbAddString(userMessage, "params",  "");
+	}
+	else {
+		BfWriteByte(userMessage		, _:destination);
+		BfWriteString(userMessage	, buffer2);
+	}
 
 	EndMessage();
 }
@@ -2043,12 +2171,6 @@ stock Client_Reply(client, const String:format[], any:...)
  */
 stock bool:Client_Shake(client, command=SHAKE_START, Float:amplitude=50.0, Float:frequency=150.0, Float:duration=3.0)
 {
-	new Handle:userMessage = StartMessageOne("Shake", client);
-	
-	if (userMessage == INVALID_HANDLE) {
-		return false;
-	}
-	
 	if (command == SHAKE_STOP) {
 		amplitude = 0.0;
 	}
@@ -2056,10 +2178,27 @@ stock bool:Client_Shake(client, command=SHAKE_START, Float:amplitude=50.0, Float
 		return false;
 	}
 	
-	BfWriteByte(userMessage,	command);	// Shake Command
-	BfWriteFloat(userMessage,	amplitude);	// shake magnitude/amplitude
-	BfWriteFloat(userMessage,	frequency);	// shake noise frequency
-	BfWriteFloat(userMessage,	duration);	// shake lasts this long
+	new Handle:userMessage = StartMessageOne("Shake", client);
+	
+	if (userMessage == INVALID_HANDLE) {
+		return false;
+	}
+	
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available
+		&& GetUserMessageType() == UM_Protobuf) {
+
+		PbSetInt(userMessage,   "command",         command);
+		PbSetFloat(userMessage, "local_amplitude", amplitude);
+		PbSetFloat(userMessage, "frequency",       frequency);
+		PbSetFloat(userMessage, "duration",        duration);
+	}
+	else {
+		BfWriteByte(userMessage,	command);	// Shake Command
+		BfWriteFloat(userMessage,	amplitude);	// shake magnitude/amplitude
+		BfWriteFloat(userMessage,	frequency);	// shake noise frequency
+		BfWriteFloat(userMessage,	duration);	// shake lasts this long
+	}
+
 	EndMessage();
 
 	return true;
@@ -2172,7 +2311,7 @@ stock bool:Client_IsLookingAtWall(client, Float:distance=40.0) {
 
 		TR_GetEndPosition(posEnd, trace);
 		
-		if (GetVectorDistance(posEye, posEnd) <= distance) {
+		if (GetVectorDistance(posEye, posEnd, true) <= (distance * distance)) {
 			isClientLookingAtWall = true;
 		}
 	}
@@ -2197,8 +2336,8 @@ public bool:_smlib_TraceEntityFilter(entity, contentsMask)
  */
 stock Client_GetClass(client)
 {
-	if (GuessSDKVersion() == SOURCE_SDK_DARKMESSIAH) {
-		GetEntProp(client, Prop_Send, "m_iPlayerClass");
+	if (GetEngineVersion() == Engine_DarkMessiah) {
+		return GetEntProp(client, Prop_Send, "m_iPlayerClass");
 	}
 
 	return GetEntProp(client, Prop_Send, "m_iClass");
@@ -2210,19 +2349,19 @@ stock Client_GetClass(client)
  * Other games maybe work too, but are not tested.
  * 
  * @param client		Client Index.
+ * @param playerClass	The class number to set the player to. Depends on game.
  * @param persistant	If true changes the players desired class so the change stays after death (probably TF2 only).
  * @return				Class Index.
  */
-stock Client_SetClass(client, class, bool:persistant=false)
+stock Client_SetClass(client, playerClass, bool:persistant=false)
 {
-	if (GuessSDKVersion() == SOURCE_SDK_DARKMESSIAH) {
-		GetEntProp(client, Prop_Send, "m_iPlayerClass");
-	}
-	else {
-		SetEntProp(client, Prop_Send, "m_iClass", class);
+	if (GetEngineVersion() == Engine_DarkMessiah) {
+		SetEntProp(client, Prop_Send, "m_iPlayerClass", playerClass);
+	} else {
+		SetEntProp(client, Prop_Send, "m_iClass", playerClass);
 		
 		if (persistant) {
-			SetEntProp(client, Prop_Send, "m_iDesiredPlayerClass", class);
+			SetEntProp(client, Prop_Send, "m_iDesiredPlayerClass", playerClass);
 		}
 	}
 }
@@ -2526,7 +2665,7 @@ stock bool:Client_MatchesFilter(client, flags)
 /**
  * Gets all clients matching the specified flags filter.
  *
- * @param Client		Client Array, size should be MaxClients or MAXPLAYERS
+ * @param client		Client Array, size should be MaxClients or MAXPLAYERS
  * @param flags			Client Filter Flags (Use the CLIENTFILTER_ constants).
  * @return				The number of clients stored in the array
  */
@@ -2599,4 +2738,384 @@ stock Float:Client_GetMapTime(client)
 	new Float:fGameTime = GetGameTime();
 
 	return (fClientTime < fGameTime) ? fClientTime : fGameTime;
+}
+
+/**
+ * Gets client money value (for games like Counter-Strike:Source).
+ *
+ * @param client		Client Index.
+ * @return				Money value from the client.
+ */
+stock Client_GetMoney(client)
+{
+	return GetEntProp(client, Prop_Send, "m_iAccount");
+}
+
+/**
+ * Sets client money value (for games like Counter-Strike:Source).
+ *
+ * @param client		Client Index.
+ * @param value			Money value to set.
+ * @noreturn
+ */
+stock Client_SetMoney(client, value)
+{
+	SetEntProp(client, Prop_Send, "m_iAccount", value);
+}
+
+/**
+ * Gets a client's observers.
+ *
+ * @param client		Client Index.
+ * @param observers		Array with size of MaxClients or MAXPLAYERS.
+ * @param flags			Client Filter Flags (Use the CLIENTFILTER_ constants).
+ * @return				Number of observers found.
+ */
+stock Client_GetObservers(client, observers[], flags=CLIENTFILTER_ALL)
+{
+	new count = 0;
+
+	LOOP_CLIENTS(player, CLIENTFILTER_OBSERVERS | flags) {
+
+		if (Client_GetObserverTarget(player) == client) {
+			observers[count++] = player;
+		}
+	}
+
+	return count;
+}
+
+static Float:getPlayersInRadius_distances[MAXPLAYERS+1];
+
+/**
+ * Gets all players near a player in a certain radius and
+ * orders the players by distance (optional).
+ *
+ * @param client			Client Index.
+ * @param clients			Array with size of MaxClients or MAXPLAYERS.
+ * @param radius			radius Float (max distance)
+ * @param orderByDistance	Set to true to order the clients by distance, false otherwise.
+ * @return					Number of clients found.
+ */
+stock Client_GetPlayersInRadius(client, clients[], Float:radius, bool:orderByDistance=true)
+{
+	decl Float:origin_client[3];
+	new
+		Float:distance,
+		count=0;
+
+	Entity_GetAbsOrigin(client, origin_client);
+
+	LOOP_CLIENTS(player, CLIENTFILTER_INGAME) {
+
+		if (player == client) {
+			continue;
+		}
+
+		distance = Entity_GetDistanceOrigin(player, origin_client);
+
+		if (distance <= radius) {
+			clients[count++] = player;
+
+			if (orderByDistance) {
+				getPlayersInRadius_distances[player] = distance;
+			}
+		}
+	}
+
+	if (orderByDistance) {
+		SortCustom1D(clients, count, __smlib_GetPlayersInRadius_Sort);
+	}
+
+	return count;
+}
+
+public __smlib_GetPlayersInRadius_Sort(player1, player2, const clients[], Handle:hndl)
+{
+	return FloatCompare(getPlayersInRadius_distances[player1], getPlayersInRadius_distances[player2]);
+}
+
+/**
+ * Gets the next player observing client starting at start.
+ *
+ * @param client		Client Index (Observer Target)
+ * @param start			Start Index.
+ * @param flags			Client Filter Flags (Use the CLIENTFILTER_ constants).
+ * @return				Client Index or -1 if no client was found
+ */
+stock Client_GetNextObserver(client, start=1, flags=CLIENTFILTER_ALL)
+{
+	for (new player=start; player <= MaxClients; player++) {
+
+		if (Client_MatchesFilter(player, CLIENTFILTER_OBSERVERS | flags)) {
+
+			if (Client_GetObserverTarget(player) == client) {
+				return player;
+			}
+		}
+	}
+
+	return -1;
+}
+
+/**
+ * Searchs and returns the game's player_manager entity.
+ * This should be called on every map start.
+ *
+ * @return				player_manager entity or INVALID_ENT_REFERENCE if not found.
+ */
+stock Client_GetPlayerManager()
+{
+	static player_manager = INVALID_ENT_REFERENCE;
+
+	if (player_manager != INVALID_ENT_REFERENCE) {
+
+		if (Entity_IsValid(player_manager)) {
+			return player_manager;
+		}
+		else {
+			player_manager = INVALID_ENT_REFERENCE;
+		}
+	}
+
+	new maxEntities = GetMaxEntities();
+
+	for (new entity=0; entity < maxEntities; entity++) {
+
+		if (!Entity_IsValid(entity)) {
+			continue;
+		}
+
+		if (Entity_ClassNameMatches(entity, "player_manager", true)) {
+			player_manager = EntIndexToEntRef(entity);
+
+			return player_manager;
+		}
+	}
+
+	return INVALID_ENT_REFERENCE;
+}
+
+/**
+ * Sets the client's ping as displayed in the scoreboards.
+ * Should be called OnGameFrame.
+ *
+ * @param client		Client Index
+ * @param start			New ping value.
+ * @return				True on sucess, false otherwise.
+ */
+stock Client_SetPing(client, value)
+{
+	new player_manager = Client_GetPlayerManager();
+
+	static offset = -1;
+	
+	if (offset== -1) {
+		offset = GetEntSendPropOffs(player_manager, "m_iPing", true);
+		
+		if (offset == -1) {
+			return false;
+		}
+	}
+
+	SetEntData(player_manager, offset + (client * 4), value, 4, true);
+
+	return true;
+}
+
+static printToTop_excludeclient = -1;
+
+/**
+ * Exclude a client from the next call to a Client_PrintToTop function.
+ * 
+ * @param client		Client Index.
+ * @noreturn
+ */
+stock Client_PrintToTopExclude(client)
+{
+	printToTop_excludeclient = client;
+}
+
+/**
+ * Prints colored text to the top left of the screen
+ * for one client. Does not work in all games.
+ * Line Breaks can't be done.
+ * 
+ * @param client		Client Index.
+ * @param r				Red amount.
+ * @param g				Green amount.
+ * @param b				Blue amount.
+ * @param a				Transparency.
+ * @param duration		Duration in seconds the text stays (min 10 - max 200 seconds).
+ * @param text			Text to print to.
+ * @return				True on success, false if the key value for the dialog couldn't be created or closed.
+ */
+stock bool:Client_PrintToTopRaw(client, r=255, g=255, b=255, a=255, Float:duration=10.0, const String:text[])
+{
+	//message line max 50
+	//overline: 	39*_ 
+	//underline: 	44*T
+	new Handle:keyValue = CreateKeyValues("Stuff", "title", text);
+	
+	if (keyValue == INVALID_HANDLE) {
+		return false;
+	}
+	
+	KvSetColor(keyValue, "color", r, g, b, a);
+	KvSetNum(keyValue, "level", 1);
+	KvSetNum(keyValue, "time", RoundToFloor(duration));
+	
+	CreateDialog(client, keyValue, DialogType_Msg);
+	
+	if (!CloseHandle(keyValue)) {
+		return false;
+	}
+	return true;
+}
+
+/**
+ * Prints colored text to the top left of the screen
+ * for one client. Does not work in all games.
+ * Line Breaks can't be done.
+ * 
+ * @param client		Client Index.
+ * @param r				Red amount.
+ * @param g				Green amount.
+ * @param b				Blue amount.
+ * @param a				Transparency.
+ * @param duration		Duration in seconds the text stays (min 10 - max 200 seconds).
+ * @param format		Formatting rules.
+ * @param ...			Variable number of format parameters.
+ * @return				True on success, false if the key value for the dialog couldn't be created or closed.
+ */
+stock bool:Client_PrintToTop(client, r=255, g=255, b=255, a=255, Float:duration=10.0, const String:format[], any:...)
+{
+	new String:buffer[150];
+	SetGlobalTransTarget(client);
+	VFormat(buffer, sizeof(buffer), format, 8);	
+	
+	return Client_PrintToTopRaw(client, r, g, b, a, duration, buffer);
+}
+
+/**
+ * Prints colored text to the top left of the screen
+ * to all clients. Does not work in all games.
+ * Line Breaks can't be done.
+ * 
+ * @param r				Red amount.
+ * @param g				Green amount.
+ * @param b				Blue amount.
+ * @param a				Transparency.
+ * @param duration		Duration in seconds the text stays (min 10 - max 200 seconds).
+ * @param format		Formatting rules.
+ * @param ...			Variable number of format parameters.
+ * @noreturn
+ */
+stock Client_PrintToTopAll(r=255, g=255, b=255, a=255, Float:duration=10.0, const String:format[], any:...)
+{
+	decl
+		String:buffer[150];
+	new
+		language,
+		lastLanguage = -1;
+	
+	for (new client=1; client <= MaxClients; client++) {
+		
+		if (!IsClientInGame(client)) {
+			continue;
+		}
+		
+		if (client == printToTop_excludeclient) {
+			printToTop_excludeclient = -1;
+			continue;
+		}
+		
+		language = GetClientLanguage(client);
+		
+		if (language != lastLanguage) {
+			SetGlobalTransTarget(client);
+			VFormat(buffer, sizeof(buffer), format, 7);
+			
+			lastLanguage = language;
+		}
+		
+		Client_PrintToTopRaw(client, r, g, b, a, duration, buffer);
+	}
+}
+
+/**
+ * Prints colored text to the top left of the screen
+ * to specified clients. Does not work in all games.
+ * Line Breaks can't be done.
+ * 
+ * @param clients		Client Array.
+ * @param numClients	Number of clients in the clients array.
+ * @param r				Red amount.
+ * @param g				Green amount.
+ * @param b				Blue amount.
+ * @param a				Transparency.
+ * @param duration		Duration in seconds the text stays (min 10 - max 200 seconds).
+ * @param format		Formatting rules.
+ * @param ...			Variable number of format parameters.
+ * @noreturn
+ */
+stock Client_PrintToTopEx(clients[], numClients, r=255, g=255, b=255, a=255, Float:duration=10.0, const String:format[], any:...)
+{
+	decl
+		String:buffer[150];
+	new
+		client,
+		language,
+		lastLanguage = -1;
+
+	for (new i=0; i < numClients; i++) {
+
+		client = clients[i];
+
+		if (!IsClientInGame(client)) {
+			continue;
+		}
+
+		if (client == printToTop_excludeclient) {
+			printToTop_excludeclient = -1;
+			continue;
+		}
+
+		language = GetClientLanguage(client);
+		
+		if (language != lastLanguage) {
+			SetGlobalTransTarget(client);
+			VFormat(buffer, sizeof(buffer), format, 9);
+			
+			lastLanguage = language;
+		}
+		
+		Client_PrintToTopRaw(client, r, g, b, a, duration, buffer);
+	}
+}
+
+/**
+ * Opens the scoreboard for a specific client
+ * 
+ * @tested csgo
+ * @param client	Client index
+ * @noreturn
+ */
+stock Client_ShowScoreboard(client, flags=USERMSG_RELIABLE | USERMSG_BLOCKHOOKS)
+{
+	new Handle:handle = StartMessageOne("VGUIMenu", client, flags);
+
+	if (GetFeatureStatus(FeatureType_Native, "GetUserMessageType") == FeatureStatus_Available &&
+			GetUserMessageType() == UM_Protobuf) {
+
+		PbSetString(handle, "name", "scores");
+		PbSetBool(handle, "show", true);	
+	}
+	else {
+		BfWriteString(handle, "scores");
+		BfWriteByte(handle, 1); // Show
+		BfWriteByte(handle, 0); // subkeys count
+	}
+
+	EndMessage();
 }

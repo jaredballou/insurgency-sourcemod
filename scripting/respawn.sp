@@ -39,15 +39,19 @@ new Handle:sm_respawn_reset_each_objective = INVALID_HANDLE;
 
 new g_iSpawnTokens[MAXPLAYERS];
 new g_iRespawnCount[4];
+#define PLUGIN_VERSION "1.7.0"
+#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
 
 public Plugin:myinfo =
 {
 	name = "[INS] Player Respawn",
-	author = "Rogue and jballou",
-	description = "Respawn dead players",
-	version = "1.6.2",
-	url = "http://forums.alliedmods.net/showthread.php?p=984087"
-}
+	author = "Jared Ballou",
+	version = PLUGIN_VERSION,
+	description = PLUGIN_DESCRIPTION,
+	url = "http://jballou.com"
+};
+
 public OnPluginStart()
 {
 	decl String:gamemod[40];
@@ -58,7 +62,7 @@ public OnPluginStart()
 		TF2 = true;
 	}
 
-	CreateConVar("sm_respawn_version", "1.6", "Player Respawn Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+	CreateConVar("sm_respawn_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
 	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");
 	sm_respawn_counterattack = CreateConVar("sm_respawn_counterattack", "0", "Respawn during counterattack? (0: no, 1: yes, 2: infinite)");

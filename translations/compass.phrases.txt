@@ -1,0 +1,67 @@
+"Phrases"
+{
+	"name"
+	{
+		"en"		"Compass"
+	}
+
+	"meters"
+	{
+		"en"		"meters"
+	}
+
+	"feet"
+	{
+		"en"		"feet"
+	}
+
+	"enabled"
+	{
+		"en"		"Enabled"
+	}
+
+	"disabled"
+	{
+		"en"		"Disabled"
+	}
+	"distance"
+	{
+		"en"		"Distance"
+	}
+	"direction"
+	{
+		"en"		"Direction"
+	}
+	"bearing"
+	{
+		"en"		"Bearing"
+	}
+	"timer"
+	{
+		"en"		"Timer"
+	}
+	"display"
+	{
+		"en"		"Display"
+	}
+	"seconds"
+	{
+		"en"		"seconds"
+	}
+	"display0"
+	{
+		"en"		"Chat Box"
+	}
+	"display1"
+	{
+		"en"		"Top Center"
+	}
+	"display2"
+	{
+		"en"		"Bottom Center"
+	}
+	"display3"
+	{
+		"en"		"Side Menu"
+	}
+}

@@ -108,14 +108,9 @@ stock String_ToLower(const String:input[], String:output[], size)
 	size--;
 
 	new x=0;
-	while (input[x] != '\0' || x < size) {
+	while (input[x] != '\0' && x < size) {
 		
-		if (IsCharUpper(input[x])) {
-			output[x] = CharToLower(input[x]);
-		}
-		else {
-			output[x] = input[x];
-		}
+		output[x] = CharToLower(input[x]);
 		
 		x++;
 	}
@@ -138,15 +133,10 @@ stock String_ToUpper(const String:input[], String:output[], size)
 	size--;
 
 	new x=0;
-	while (input[x] != '\0') {
+	while (input[x] != '\0' && x < size) {
 		
-		if (IsCharLower(input[x])) {
-			output[x] = CharToUpper(input[x]);
-		}
-		else {
-			output[x] = input[x];
-		}
-
+		output[x] = CharToUpper(input[x]);
+		
 		x++;
 	}
 
@@ -190,4 +180,50 @@ stock String_GetRandom(String:buffer[], size, length=32, const String:chrs[]="ab
 	}
 
 	buffer[length] = '\0';
+}
+
+/**
+ * Checks if string str starts with subString.
+ * 
+ *
+ * @param str				String to check
+ * @param subString			Sub-String to check in str
+ * @return					True if str starts with subString, false otherwise.
+ */
+stock bool:String_StartsWith(const String:str[], const String:subString[])
+{
+	new n = 0;
+	while (str[n] != '\0' && subString[n] != '\0') {
+
+		if (str[n] != subString[n]) {
+			return false;
+		}
+
+		n++;
+	}
+
+	return true;
+}
+
+/**
+ * Checks if string str ends with subString.
+ * 
+ *
+ * @param str				String to check
+ * @param subString			Sub-String to check in str
+ * @return					True if str ends with subString, false otherwise.
+ */
+stock bool:String_EndsWith(const String:str[], const String:subString[])
+{
+	new n_str = strlen(str) - 1;
+	new n_subString = strlen(subString) - 1;
+
+	while (n_str != 0 && n_subString != 0) {
+
+		if (str[n_str--] != subString[n_subString--]) {
+			return false;
+		}
+	}
+
+	return true;
 }
