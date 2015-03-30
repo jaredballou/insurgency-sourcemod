@@ -3,7 +3,14 @@ This repository has a complete installation of SourceMod, including all my plugi
 
 ### Plugins Ready to Use
 These plugins are generally stable and functional. Unless noted, they can simply be downloaded and installed without dependencies.
-* [Insurgency Logger](plugins/ins_logger.smx?raw=true): Creates hooks and events for Insurgency-specific stat logging. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. This is generally stable, I look at it as a beta release candidate right now.
+* [Insurgency Library](plugins/insurgency.smx?raw=true): Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
+  * [ ] Weapon lookup by index/name
+  * [ ] Role (template/class) lookup by index/name/player
+  * [ ] Game rules lookup (control points, status, waves, etc)
+  * [ ] Precache models based upon manifests.
+  * [ ] Investigate adding feature to read mp_theater_override variable, parse that theater, and add any materials/models/sounds to the list?
+  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
+
 * [HLStatsX](plugins/hlstatsx.smx?raw=true): Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 * [Coop Lobby Size](plugins/cooplobby.smx?raw=true): Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 * [Compass](plugins/compass.smx?raw=true): Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
@@ -13,8 +20,8 @@ These plugins are generally stable and functional. Unless noted, they can simply
 * [Ammo check](plugins/ammocheck.smx?raw=true): Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. Future features I'd like to do are to show a reload animation partially to animate the check, and have the check command delay the next weapon attack to simulate removing and checking the magazine. Due to the way the theater system works, it's not practical to hard-code weapon data like magazine capacity in the plugin as similar CS and TF2 plugins do, so I have a hacky method that checks the 'm_iClip' variable and uses that to perform the math. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 * [RPG rockets drift off course](plugins/rpgdrift.smx?raw=true). Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
   * [X] Nudge rocket in flight
-  * [ ] Randomized chance of happening, default 10% for players?
-  * [ ] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
+  * [X] Randomized chance of happening, default 10% for players?
+  * [X] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 * [Backblast](plugins/backblast.smx?raw=true): Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
   * [X] Add CVARs to control cone angle, kill range, and total effect range
   * [X] Use flashbang effect as standin for non-lethal backblast
@@ -29,13 +36,16 @@ These plugins are generally stable and functional. Unless noted, they can simply
   * [ ] Sound effect before detonation, obvious choice is Aloha Snackbar.
   * [ ] Add logic to not detonate when in a group, unless killed by headshot? Figure out the best way to balance gameplay.
   * [ ] Work on PVP mode and figuring out how to balance when a player is using the suicide bomb rather than a bot.
-* [Insurgency Library](scripting/insurgency.sp): This is a new project where I am trying to build data structures and natives to support other Insurgency functionality in SourceMod.
-  * [ ] Weapon lookup by index/name
-  * [ ] Role (template/class) lookup by index/name/player
-  * [ ] Game rules lookup (control points, status, waves, etc)
-  * [ ] Precache models based upon manifests.
-  * [ ] Investigate adding feature to read mp_theater_override variable, parse that theater, and add any materials/models/sounds to the list?
-  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
+* [Bot Spawns](plugins/botspawns.smx?raw=true): Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
+  * [X] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
+  * [X] Find path between current and next point, add bots around that axis
+  * [X] Add option for minimum spawn distance to keep bots from spawning on top of players
+  * [X] Create variables for how far off the path to spawn
+  * [X] Create option to either spawn and keep X number of bots in game, or simply spawn on random timer (also an option)
+  * [X] Create functionality to respawn bots to simulate more bots than game can support
+* [Respawn](plugins/respawn.smx?raw=true): Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
+* [Botnames](plugins/botnames.smx?raw=true): Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
+  * [ ] Add per-team CVARs to use different lists
 
 ### Plugins In Progress
 These are plugins that still are not ready for general use, these will be very buggy.
@@ -47,13 +57,6 @@ These are plugins that still are not ready for general use, these will be very b
   * [ ] Add in-game markers for wider array of tasks
   * [ ] Add support for commands that target location other than player's current position (i.e. "grenade over there")
   * [ ] Replace spotting box with callout of distance/direction, add map marker
-* [Bot Spawns](scripting/botspawns.sp): Adjust bot spawning and rules to increase game control.
-  * [ ] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
-  * [ ] Find path between current and next point, add bots around that axis
-  * [ ] Add option for minimum spawn distance to keep bots from spawning on top of players
-  * [ ] Create variables for how far off the path to spawn
-  * [ ] Create option to either spawn and keep X number of bots in game, or simply spawn on random timer (also an option)
-  * [ ] Create functionality to respawn bots to simulate more bots than game can support
 
 ### Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
