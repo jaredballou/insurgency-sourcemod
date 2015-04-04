@@ -30,7 +30,7 @@ new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.0.1"
+#define PLUGIN_VERSION "1.0.2"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -181,7 +181,7 @@ public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
 	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
 	{
-		PrintToServer("[INSLIB] team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
+		//PrintToServer("[INSLIB] team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
 		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
@@ -191,7 +191,7 @@ GetObjResEnt(always=0)
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
 		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
-		PrintToServer("[INSLIB] g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
+		//PrintToServer("[INSLIB] g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
 	}
 }
 GetLogicEnt(always=0) {
@@ -203,7 +203,7 @@ GetLogicEnt(always=0) {
 		if (!StrEqual(sGameMode,"checkpoint")) return;
 		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
 		GetEntityNetClass(g_iLogicEntity, g_iLogicEntityNetClass, sizeof(g_iLogicEntityNetClass));
-		PrintToServer("[INSLIB] g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
+		//PrintToServer("[INSLIB] g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
 	}
 }
 GetPlayerManagerEnt(always=0) {
@@ -211,7 +211,7 @@ GetPlayerManagerEnt(always=0) {
 	{
 		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
 		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
-		PrintToServer("[INSLIB] g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
+		//PrintToServer("[INSLIB] g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
 	}
 }
 public GetWeaponData()
@@ -223,7 +223,7 @@ public GetWeaponData()
 		{
 			PushArrayString(g_weap_array, "");
 		}
-		PrintToServer("[INSLIB] starting LoadValues");
+		//PrintToServer("[INSLIB] starting LoadValues");
 		new String:name[32];
 		for(new i=0;i<= GetMaxEntities() ;i++){
 			if(!IsValidEntity(i))
@@ -241,7 +241,7 @@ reset_round_stats(client)
 {
 	if (IsValidClient(client))
 	{
-		PrintToServer("[INSLIB] Running reset_round_stats for %N",client);
+		//PrintToServer("[INSLIB] Running reset_round_stats for %N",client);
 	}
 	for (new i = 1; i < 13; i++)
 	{
@@ -273,7 +273,7 @@ DoRoundAwards()
 					iLowScore[s] = g_round_stats[i][s];
 				}
 			}
-			PrintToServer("[INSLIB] Client %N KILLS %d, DEATHS %d, SHOTS %d, HITS %d, GRENADES %d, CAPTURES %d, CACHES %d, DMG_GIVEN %d, DMG_TAKEN %d, TEAMKILLS %d SCORE %d (total %d) SUPPRESSIONS %d",i,g_round_stats[i][STAT_KILLS],g_round_stats[i][STAT_DEATHS],g_round_stats[i][STAT_SHOTS],g_round_stats[i][STAT_HITS],g_round_stats[i][STAT_GRENADES],g_round_stats[i][STAT_CAPTURES],g_round_stats[i][STAT_CACHES],g_round_stats[i][STAT_DMG_GIVEN],g_round_stats[i][STAT_DMG_TAKEN],g_round_stats[i][STAT_TEAMKILLS],g_round_stats[i][STAT_SCORE],m_iPlayerScore,g_round_stats[i][STAT_SUPPRESSIONS]);
+			//PrintToServer("[INSLIB] Client %N KILLS %d, DEATHS %d, SHOTS %d, HITS %d, GRENADES %d, CAPTURES %d, CACHES %d, DMG_GIVEN %d, DMG_TAKEN %d, TEAMKILLS %d SCORE %d (total %d) SUPPRESSIONS %d",i,g_round_stats[i][STAT_KILLS],g_round_stats[i][STAT_DEATHS],g_round_stats[i][STAT_SHOTS],g_round_stats[i][STAT_HITS],g_round_stats[i][STAT_GRENADES],g_round_stats[i][STAT_CAPTURES],g_round_stats[i][STAT_CACHES],g_round_stats[i][STAT_DMG_GIVEN],g_round_stats[i][STAT_DMG_TAKEN],g_round_stats[i][STAT_TEAMKILLS],g_round_stats[i][STAT_SCORE],m_iPlayerScore,g_round_stats[i][STAT_SUPPRESSIONS]);
 		}
 		reset_round_stats(i);
 	}
@@ -664,7 +664,7 @@ public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams)
 	}
 	new String:prop[len+1],retval=-1;
 	GetNativeString(1, prop, len+1);
-	new size = GetNativeCell(2);
+	new size = 12;
 	new element = GetNativeCell(3);
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
@@ -739,12 +739,12 @@ public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], b
 
 	if ((InCounterAttack()) && (team == 3) && (!GetConVarBool(cvarCheckpointCounterattackCapture)))
 	{
-		PrintToServer("[INSLIB] Event_ControlPointCaptured: Blocking CounterAttack Capture!");
+		PrintToServer("[INSLIB] Event_ControlPointCaptured: Want to block CounterAttack Capture!");
 		//return Plugin_Stop;
 	}
 	new Float:ratio = (Float:capperlen / Float:Team_CountAlivePlayers(team));
 	new Float:goalratio = GetConVarFloat(cvarCheckpointCapturePlayerRatio);
-	PrintToServer("[INSLIB] Event_ControlPointCaptured ratio %0.2f (%d of %d) goalratio %0.2f",ratio,capperlen,Team_CountAlivePlayers(team),goalratio);
+	//PrintToServer("[INSLIB] Event_ControlPointCaptured ratio %0.2f (%d of %d) goalratio %0.2f",ratio,capperlen,Team_CountAlivePlayers(team),goalratio);
 	if (ratio < goalratio)
 	{
 		PrintToServer("[INSLIB] Event_ControlPointCaptured Blocking due to insufficient friendly players!");
@@ -775,7 +775,7 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	for (new i = 0; i < strlen(cappers); i++)
 	{
 		new client = cappers[i];
-		PrintToServer("[INSLIB] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
+		//PrintToServer("[INSLIB] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
@@ -850,9 +850,10 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 		new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,i);
 		if (m_nSecurityCount || m_nInsurgentCount)
 		{
-			PrintToServer("[INSLIB] Area %d m_nSecurityCount %d m_nInsurgentCount %d",i,m_nSecurityCount,m_nInsurgentCount);
+			//PrintToServer("[INSLIB] Area %d m_nSecurityCount %d m_nInsurgentCount %d",i,m_nSecurityCount,m_nInsurgentCount);
 		}
 	}
+/*
 	new area = GetEventInt(event, "area");
 	new m_iObject = GetEventInt(event, "object");
 	new player = GetEventInt(event, "player");
@@ -870,6 +871,7 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 	new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,area);
 	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
 	PrintToServer("[INSLIB] Event_ControlPointStartTouch: player %N area %d m_nActivePushPointIndex %d m_nSecurityCount %d m_nInsurgentCount %d m_flCaptureTime %f m_flDeteriorateTime %f m_flLazyCapPerc %f m_nTeamBlocking %d m_flCapPercentages %f m_bSecurityLocked %b m_bInsurgentsLocked %b object %d player %d team %d owner %d type %d", player, area, m_nActivePushPointIndex, m_nSecurityCount, m_nInsurgentCount, m_flCaptureTime, m_flDeteriorateTime, m_flLazyCapPerc, m_nTeamBlocking, m_flCapPercentages, m_bSecurityLocked, m_bInsurgentsLocked, m_iObject, player, team, owner, type);
+*/
 	return Plugin_Continue;
 }
 public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool:dontBroadcast)

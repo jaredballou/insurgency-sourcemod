@@ -175,3 +175,96 @@ stock Client_IsValid(client, bool:checkConnected)
 	return true;
 }
 */
+
+stock bool:ClientCanSeeClient(client, target, Float:distance = 0.0, Float:height = 50.0) 
+{
+	new Float:vTargetPosition[3];
+	GetEntPropVector(target, Prop_Send, "m_vecOrigin", vTargetPosition);
+	return ClientCanSeeVector(client,targetpos,distance,height);
+}
+stock bool:ClientCanSeeVector(client, Float:vTargetPosition[3], Float:distance = 0.0, Float:height = 50.0) 
+{ 
+
+        new Float:vClientPosition[3];
+         
+        GetEntPropVector(client, Prop_Send, "m_vecOrigin", vClientPosition); 
+        vClientPosition[2] += height; 
+         
+        if (distance == 0.0 || GetVectorDistance(vClientPosition, vTargetPosition, false) < distance) 
+        { 
+            new Handle:trace = TR_TraceRayFilterEx(vClientPosition, vTargetPosition, MASK_SOLID_BRUSHONLY, RayType_EndPoint, Base_TraceFilter); 
+
+            if(TR_DidHit(trace)) 
+            { 
+                CloseHandle(trace); 
+                return (false); 
+            } 
+             
+            CloseHandle(trace); 
+
+            return (true); 
+        } 
+        return false; 
+} 
+
+public bool:Base_TraceFilter(entity, contentsMask, any:data) 
+{ 
+    if(entity != data) 
+        return (false); 
+
+    return (true); 
+}  
+
+
+
+
+stock bool:IsClientInSightRange(client, target, Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false)
+{
+	new Float:targetpos[3];
+//	if(!isClientConnectedIngameAlive(target))
+//		ThrowError("Target is not Alive.");
+	GetClientAbsOrigin(target, targetpos);
+	return IsVectorInSightRange(client,targetpos,angle,distance,heightcheck,negativeangle);
+}
+stock bool:IsVectorInSightRange(client, Float:targetpos[3], Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false)
+{
+	if(angle > 360.0 || angle < 0.0)
+		ThrowError("Angle Max : 360 & Min : 0. %d isn't proper angle.", angle);
+//	if(!isClientConnectedIngameAlive(client))
+//		ThrowError("Client is not Alive.");
+		
+	decl Float:clientpos[3], Float:anglevector[3], Float:targetvector[3], Float:resultangle, Float:resultdistance;
+	
+	GetClientEyeAngles(client, anglevector);
+	anglevector[0] = anglevector[2] = 0.0;
+	GetAngleVectors(anglevector, anglevector, NULL_VECTOR, NULL_VECTOR);
+	NormalizeVector(anglevector, anglevector);
+	if(negativeangle)
+		NegateVector(anglevector);
+
+	GetClientAbsOrigin(client, clientpos);
+	if(heightcheck && distance > 0)
+		resultdistance = GetVectorDistance(clientpos, targetpos);
+	clientpos[2] = targetpos[2] = 0.0;
+	MakeVectorFromPoints(clientpos, targetpos, targetvector);
+	NormalizeVector(targetvector, targetvector);
+	
+	resultangle = RadToDeg(ArcCosine(GetVectorDotProduct(targetvector, anglevector)));
+	
+	if(resultangle <= angle/2)	
+	{
+		if(distance > 0)
+		{
+			if(!heightcheck)
+				resultdistance = GetVectorDistance(clientpos, targetpos);
+			if(distance >= resultdistance)
+				return true;
+			else
+				return false;
+		}
+		else
+			return true;
+	}
+	else
+		return false;
+}

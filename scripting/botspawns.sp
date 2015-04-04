@@ -13,7 +13,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.1.1"
+#define PLUGIN_VERSION "0.2.0"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
@@ -30,6 +30,7 @@ new Handle:cvarSpawnRear = INVALID_HANDLE; //Spawn bots to the rear of pthe play
 new Handle:cvarMinPlayerDistance = INVALID_HANDLE; //Min/max distance from players to spawn
 new Handle:cvarMaxPlayerDistance = INVALID_HANDLE; //Min/max distance from players to spawn
 new Handle:cvarMinObjectiveDistance = INVALID_HANDLE; //Min/max distance from next objective to spawn
+new Handle:cvarMinCounterattackDistance = INVALID_HANDLE; //Min distance from counterattack objective to spawn
 new Handle:cvarMaxObjectiveDistance = INVALID_HANDLE; //Min/max distance from next objective to spawn
 new Handle:cvarMinFracInGame = INVALID_HANDLE; //Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
 new Handle:cvarMaxFracInGame = INVALID_HANDLE; //Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
@@ -40,31 +41,39 @@ new Handle:cvarRespawnMode = INVALID_HANDLE; //Respawn killed bots only when all
 new Handle:cvarStopSpawningAtObjective = INVALID_HANDLE; //Stop spawning new bots when near next objective (1, default)
 new Handle:cvarRemoveUnseenWhenCapping = INVALID_HANDLE; //Silently kill off all unseen bots when capping next point (1, default)
 new Handle:cvarSpawnSnipersAlone = INVALID_HANDLE; //Spawn snipers alone, maybe further out (1)?
-
+new bool:g_bEnabled, g_iSpawnMode, g_iRespawnMode, g_iCounterattackMode, Float:g_flCounterattackFrac, Float:g_flMinSpawnDelay, Float:g_flMaxSpawnDelay, bool:g_bSpawnSides, bool:g_bSpawnRear, Float:g_flMinPlayerDistance, Float:g_flMaxPlayerDistance, Float:g_flMinObjectiveDistance, Float:g_flMaxObjectiveDistance, Float:g_flMinFracInGame, Float:g_flMaxFracInGame, Float:g_flTotalSpawnFrac, g_iMinFireteamSize, g_iMaxFireteamSize, bool:g_bStopSpawningAtObjective, bool:g_bRemoveUnseenWhenCapping, bool:g_bSpawnSnipersAlone, Float:g_flMinCounterattackDistance;
 //Until I add functionality
-#pragma unused cvarCounterattackFrac
-#pragma unused cvarCounterattackMode
-#pragma unused cvarMaxFireteamSize
-#pragma unused cvarMaxObjectiveDistance
-#pragma unused cvarMaxPlayerDistance
-#pragma unused cvarMinFireteamSize
-#pragma unused cvarMinFracInGame
-#pragma unused cvarMinObjectiveDistance
-#pragma unused cvarMinPlayerDistance
-#pragma unused cvarRemoveUnseenWhenCapping
-#pragma unused cvarRespawnMode
-#pragma unused cvarSpawnRear
-#pragma unused cvarSpawnSides
-#pragma unused cvarSpawnSnipersAlone
-#pragma unused cvarStopSpawningAtObjective
+
 
 new Handle:g_hHidingSpots = INVALID_HANDLE;
+#define MAX_OBJECTIVES 13
+#define MAX_HIDING_SPOTS 2048
+#define MIN_PLAYER_DISTANCE 128.0
+new g_iCPHidingSpots[MAX_OBJECTIVES][MAX_HIDING_SPOTS];
+new g_iCPHidingSpotCount[MAX_OBJECTIVES];
+new g_iCPLastHidingSpot[MAX_OBJECTIVES];
+new Float:m_vCPPositions[MAX_OBJECTIVES][3],m_iNumControlPoints;
+
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
-new Handle:g_hRespawnTimer[MAXPLAYERS];
+new Handle:g_hRespawnTimer[MAXPLAYERS+1];
 new g_iHidingSpotCount;
-new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS];
+new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS+1], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS+1],g_iSpawning[MAXPLAYERS+1],Float:g_vecOrigin[MAXPLAYERS+1][3];
 new bot_team = 3;
+
+#pragma unused g_bRemoveUnseenWhenCapping
+#pragma unused g_bSpawnRear
+#pragma unused g_bSpawnSides
+#pragma unused g_bSpawnSnipersAlone
+#pragma unused g_bStopSpawningAtObjective
+#pragma unused g_flCounterattackFrac
+#pragma unused g_flMaxObjectiveDistance
+#pragma unused g_flMinFracInGame
+#pragma unused g_flMinObjectiveDistance
+#pragma unused g_iCounterattackMode
+#pragma unused g_iMaxFireteamSize
+#pragma unused g_iMinFireteamSize
+#pragma unused g_iRespawnMode
 
 enum SpawnModes {
         SpawnMode_Normal = 0,
@@ -99,9 +108,10 @@ public OnPluginStart()
 	cvarMaxSpawnDelay = CreateConVar("sm_botspawns_max_spawn_delay", "15", "Max delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSpawnSides = CreateConVar("sm_botspawns_spawn_sides", "1", "Spawn bots to the sides of the players when facing the next objective?", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSpawnRear = CreateConVar("sm_botspawns_spawn_rear", "1", "Spawn bots to the rear of pthe players when facing the next objective?", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMinPlayerDistance = CreateConVar("sm_botspawns_min_player_distance", "360", "Min distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarMinPlayerDistance = CreateConVar("sm_botspawns_min_player_distance", "1200", "Min distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxPlayerDistance = CreateConVar("sm_botspawns_max_player_distance", "16000", "Max distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMinObjectiveDistance = CreateConVar("sm_botspawns_min_objective_distance", "1", "Min distance from next objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarMinCounterattackDistance = CreateConVar("sm_botspawns_min_counterattack_distance", "3600", "Min distance from counterattack objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxObjectiveDistance = CreateConVar("sm_botspawns_max_objective_distance", "12000", "Max distance from next objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMinFracInGame = CreateConVar("sm_botspawns_min_frac_in_game", "0.75", "Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxFracInGame = CreateConVar("sm_botspawns_max_frac_in_game", "1", "Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -111,6 +121,30 @@ public OnPluginStart()
 	cvarStopSpawningAtObjective = CreateConVar("sm_botspawns_stop_spawning_at_objective", "1", "Stop spawning new bots when near next objective (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarRemoveUnseenWhenCapping = CreateConVar("sm_botspawns_remove_unseen_when_capping", "1", "Silently kill off all unseen bots when capping next point (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSpawnSnipersAlone = CreateConVar("sm_botspawns_spawn_snipers_alone", "1", "Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	HookConVarChange(cvarVersion,CvarChange);
+	HookConVarChange(cvarEnabled,CvarChange);
+	HookConVarChange(cvarSpawnMode,CvarChange);
+	HookConVarChange(cvarRespawnMode,CvarChange);
+	HookConVarChange(cvarCounterattackMode,CvarChange);
+	HookConVarChange(cvarCounterattackFrac,CvarChange);
+	HookConVarChange(cvarMinSpawnDelay,CvarChange);
+	HookConVarChange(cvarMaxSpawnDelay,CvarChange);
+	HookConVarChange(cvarSpawnSides,CvarChange);
+	HookConVarChange(cvarSpawnRear,CvarChange);
+	HookConVarChange(cvarMinPlayerDistance,CvarChange);
+	HookConVarChange(cvarMaxPlayerDistance,CvarChange);
+	HookConVarChange(cvarMinObjectiveDistance,CvarChange);
+	HookConVarChange(cvarMaxObjectiveDistance,CvarChange);
+	HookConVarChange(cvarMinFracInGame,CvarChange);
+	HookConVarChange(cvarMaxFracInGame,CvarChange);
+	HookConVarChange(cvarTotalSpawnFrac,CvarChange);
+	HookConVarChange(cvarMinFireteamSize,CvarChange);
+	HookConVarChange(cvarMaxFireteamSize,CvarChange);
+	HookConVarChange(cvarStopSpawningAtObjective,CvarChange);
+	HookConVarChange(cvarRemoveUnseenWhenCapping,CvarChange);
+	HookConVarChange(cvarSpawnSnipersAlone,CvarChange);
+	UpdateCvars();
 
 	g_hGameConfig = LoadGameConfigFile("insurgency.games");
 	if (g_hGameConfig == INVALID_HANDLE)
@@ -124,7 +158,6 @@ public OnPluginStart()
 	{
 		SetFailState("Fatal Error: Unable to find signature for \"Respawn\"!");
 	}
-	OnMapStart();
 	HookEvent("player_spawn", Event_Spawn);
 	HookEvent("round_begin", Event_RoundBegin);
 	if (LibraryExists("updater"))
@@ -137,8 +170,39 @@ public OnPluginStart()
 	HookEvent("object_destroyed", Event_ObjectDestroyed);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
-	
 	CreateTimer(1.0, Timer_ProcessQueue, _, TIMER_REPEAT);
+}
+
+public CvarChange(Handle:cvar, const String:oldvalue[], const String:newvalue[])
+{
+	UpdateCvars();
+}
+public UpdateCvars()
+{
+	g_iSpawnMode = GetConVarInt(cvarSpawnMode);
+	g_iRespawnMode = GetConVarInt(cvarRespawnMode);
+	g_iCounterattackMode = GetConVarInt(cvarCounterattackMode);
+	g_iMinFireteamSize = GetConVarInt(cvarMinFireteamSize);
+	g_iMaxFireteamSize = GetConVarInt(cvarMaxFireteamSize);
+
+	g_flCounterattackFrac = GetConVarFloat(cvarCounterattackFrac);
+	g_flMinSpawnDelay = GetConVarFloat(cvarMinSpawnDelay);
+	g_flMaxSpawnDelay = GetConVarFloat(cvarMaxSpawnDelay);
+	g_flMinPlayerDistance = GetConVarFloat(cvarMinPlayerDistance);
+	g_flMaxPlayerDistance = GetConVarFloat(cvarMaxPlayerDistance);
+	g_flMinObjectiveDistance = GetConVarFloat(cvarMinObjectiveDistance);
+	g_flMaxObjectiveDistance = GetConVarFloat(cvarMaxObjectiveDistance);
+	g_flMinFracInGame = GetConVarFloat(cvarMinFracInGame);
+	g_flMaxFracInGame = GetConVarFloat(cvarMaxFracInGame);
+	g_flTotalSpawnFrac = GetConVarFloat(cvarTotalSpawnFrac);
+	g_flMinCounterattackDistance = GetConVarFloat(cvarMinCounterattackDistance);
+
+	g_bEnabled = GetConVarBool(cvarEnabled);
+	g_bStopSpawningAtObjective = GetConVarBool(cvarStopSpawningAtObjective);
+	g_bRemoveUnseenWhenCapping = GetConVarBool(cvarRemoveUnseenWhenCapping);
+	g_bSpawnSnipersAlone = GetConVarBool(cvarSpawnSnipersAlone);
+	g_bSpawnSides = GetConVarBool(cvarSpawnSides);
+	g_bSpawnRear = GetConVarBool(cvarSpawnRear);
 }
 
 public OnLibraryAdded(const String:name[])
@@ -150,6 +214,7 @@ public OnLibraryAdded(const String:name[])
 }
 public OnMapStart()
 {
+	UpdateCvars();
 	new String:sGameMode[32],String:sLogicEnt[64];
 	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
 	Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
@@ -158,142 +223,269 @@ public OnMapStart()
 	if (!NavMesh_Exists()) return;
 	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
 	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
-	RestartBotQueue();
-	return;
-}
 
-//This should be executed every time a point is taken, round starts, or any time a wave would be spawned.
-RestartBotQueue()
-{
-	//TODO: Kill all bots at this time?
-	g_iBotsToSpawn = RoundToFloor(Float:Team_CountPlayers(bot_team) * GetConVarFloat(cvarTotalSpawnFrac));
-	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),GetConVarFloat(cvarTotalSpawnFrac),g_iBotsToSpawn);
-}
-
-//Move a bot to the queue. This will silently kill them and remove ragdoll.
-public JoinQueue(client)
-{
-	if (!GetConVarBool(cvarEnabled))
+	m_iNumControlPoints = Ins_ObjectiveResource_GetProp("m_iNumControlPoints");
+	PrintToServer("[BOTSPAWNS] m_iNumControlPoints %d",m_iNumControlPoints);
+	for (new i = 0; i < m_iNumControlPoints; i++)
 	{
-		return;
+		Ins_ObjectiveResource_GetPropVector("m_vCPPositions",m_vCPPositions[i],i);
+		PrintToServer("[BOTSPAWNS] i %d (%f,%f,%f)",i,m_vCPPositions[i][0],m_vCPPositions[i][1],m_vCPPositions[i][2]);
 	}
-	PrintToServer("[BOTSPAWNS] called JoinQueue for %d g_iBotsToSpawn %d",client,g_iBotsToSpawn);
-	g_iInQueue[client] = 1;
-	if (IsPlayerAlive(client))
+	for (new iCP = 0; iCP < m_iNumControlPoints; iCP++)
 	{
-		ForcePlayerSuicide(client);
+		g_iCPLastHidingSpot[iCP] = 0;
 	}
-	if (GetConVarInt(cvarRespawnMode) == _:RepawnMode_Counter)
-	{
-		if (g_iBotsToSpawn)
-		{
-			PreSpawn(client,1);
-		}
-	}
-
-}
-//Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
-PreSpawn(client,tokens=0)
-{
-	if (!GetConVarBool(cvarEnabled))
-	{
-		return;
-	}
-	g_iSpawnTokens[client]+=tokens;
-	g_iNumReady++;
-	if (g_iBotsToSpawn)
-	{
-		g_iBotsToSpawn--;
-	}
-	new Float:fSpawnDelay = GetRandomFloat(GetConVarFloat(cvarMinSpawnDelay),GetConVarFloat(cvarMaxSpawnDelay));
-	if (fSpawnDelay < 0.1)
-	{
-		fSpawnDelay = 0.1;
-	}
-	PrintToServer("[BOTSPAWNS] called PreSpawn for %d fSpawnDelay %0.2f g_iBotsToSpawn %d g_iSpawnTokens %d",client,fSpawnDelay,g_iBotsToSpawn,g_iSpawnTokens[client]);
-	g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_Spawn, client, TIMER_FLAG_NO_MAPCHANGE);
-}
-
-//Loop every second, this keeps track of the bots and adds/removes them as needed.
-public Action:Timer_ProcessQueue(Handle:timer)
-{
-	if (!GetConVarBool(cvarEnabled))
-	{
-		return;
-	}
-	g_iBotsAlive = Team_CountAlivePlayers(bot_team);
-	g_iBotsTotal = Team_CountPlayers(bot_team);
-//	new iStart = RoundToFloor(GetRandomFloat(0.0,1.0) * 64);
-//	new iBotCountMin = RoundToFloor(Float:g_iBotsTotal * GetConVarFloat(cvarMinFracInGame));
-	new iBotCountMax = RoundToFloor(Float:g_iBotsTotal * GetConVarFloat(cvarMaxFracInGame));
-	//If we need to spawn bots, hand out tokens
-	if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
-	{
-		for (new i = 1; i <= MaxClients; i++) {
-			if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
-			{
-				if ((IsValidClient(i)) && (GetClientTeam(i) == bot_team) && (IsFakeClient(i)) && (!IsPlayerAlive(i)))
-				{
-					PreSpawn(i,1);
-				}
-			}
-		}
-	}
-}
-
-//This timer actually spawns the bot
-public Action:Timer_Spawn(Handle:timer, any:client)
-{
-	PrintToServer("[BOTSPAWNS] called Timer_Spawn for %d",client);
-	g_iSpawnTokens[client]--; //Remove one token
-	SDKCall(g_hPlayerRespawn, client); //Perform respawn
-	g_hRespawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE); //Do the post-spawn stuff like moving to final "spawnpoint" selected
-	g_iInQueue[client] = 0; //No longer queued
-}
-
-//Handle any work that needs to happen after the client is in the game
-public Action:Timer_PostSpawn(Handle:timer, any:client)
-{
-	if (g_hHidingSpots == INVALID_HANDLE) return;
 	if (g_iHidingSpotCount)
 	{
-/*
 		for (new iIndex = 0, iSize = g_iHidingSpotCount; iIndex < iSize; iIndex++)
 		{
 			new Float:flHidingSpot[3];//, iHidingSpotFlags;
 			flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_X);
 			flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Y);
 			flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Z);
-			iHidingSpotFlags = GetArrayCell(g_hHidingSpots, iIndex, NavMeshHidingSpot_Flags);
-			PrintToServer("[BOTSPAWNS] Found hiding spot %d at %f,%f,%f flags %d",iIndex,flHidingSpot[0],flHidingSpotY,flHidingSpotZ,iHidingSpotFlags);
+			new Float:dist,Float:closest = -1.0,pointidx=-1;
+			for (new i = 0; i < m_iNumControlPoints; i++)
+			{
+				dist = GetVectorDistance(flHidingSpot,m_vCPPositions[i]);
+				if ((dist < closest) || (closest == -1.0))
+				{
+					closest = dist;
+					pointidx = i;
+				}
+			}
+			if (pointidx > -1)
+			{
+				g_iCPHidingSpots[pointidx][g_iCPHidingSpotCount[pointidx]] = iIndex;
+				g_iCPHidingSpotCount[pointidx]++;
+			}
 		}
-*/
+		PrintToServer("[BOTSPAWNS] Found hiding count: a %d b %d c %d d %d e %d f %d g %d h %d i %d j %d k %d l %d m %d",g_iCPHidingSpotCount[0],g_iCPHidingSpotCount[1],g_iCPHidingSpotCount[2],g_iCPHidingSpotCount[3],g_iCPHidingSpotCount[4],g_iCPHidingSpotCount[5],g_iCPHidingSpotCount[6],g_iCPHidingSpotCount[7],g_iCPHidingSpotCount[8],g_iCPHidingSpotCount[9],g_iCPHidingSpotCount[10],g_iCPHidingSpotCount[11],g_iCPHidingSpotCount[12]);
 	}
-//	TeleportEntity(client, flHidingSpot, NULL_VECTOR, NULL_VECTOR);
+	RestartBotQueue();
+	return;
+}
+GetBestHidingSpot(client,iteration=0)
+{
+	UpdatePlayerOrigins();
+	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
+//	if (Ins_InCounterAttack())
+//		m_nActivePushPointIndex--;
+	new m_iTeam = GetClientTeam(client);
+	new Float:vecOrigin[3];
+
+	GetClientAbsOrigin(client,vecOrigin);
+	new minidx = (iteration) ? 0 : g_iCPLastHidingSpot[m_nActivePushPointIndex];
+	new maxidx = (iteration) ? g_iCPLastHidingSpot[m_nActivePushPointIndex] : g_iCPHidingSpotCount[m_nActivePushPointIndex];
+	for (new iCPHIndex = minidx; iCPHIndex < maxidx; iCPHIndex++)
+	{
+		new pointok = 1;
+		new iSpot = g_iCPHidingSpots[m_nActivePushPointIndex][iCPHIndex];
+		new Float:distance,Float:furthest,Float:closest,Float:flHidingSpot[3];
+		flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
+		flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
+		flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+		for (new iTarget = 1; iTarget < MaxClients; iTarget++)
+		{
+			if (IsValidClient(iTarget))
+			{
+				distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
+				if (distance > furthest)
+					furthest = distance;
+				if (distance < closest)
+					closest = distance;
+				//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
+				if (GetClientTeam(iTarget) != m_iTeam)
+				{
+					if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
+					{
+						pointok = 0;
+						break;
+					}
+					
+				}
+				if (distance < MIN_PLAYER_DISTANCE)
+				{
+					pointok = 0;
+					break;
+				}
+			}
+		}
+		if (closest > g_flMaxPlayerDistance)
+		{
+			pointok = 0;
+			continue;
+		}
+		if (Ins_InCounterAttack())
+		{
+			distance = GetVectorDistance(flHidingSpot,m_vCPPositions[m_nActivePushPointIndex]);
+			if (distance < g_flMinCounterattackDistance)
+			{
+				pointok = 0;
+				continue;
+			}
+		}
+		if (pointok)
+		{
+			PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d",client,iCPHIndex,iSpot);
+			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
+			return iSpot;
+		}
+	}
+	if (iteration)
+		return -1;
+	return GetBestHidingSpot(client,1);
+}
+public UpdatePlayerOrigins()
+{
+	for (new i = 1; i < MaxClients; i++)
+	{
+		if (IsValidClient(i))
+		{
+			GetClientAbsOrigin(i,g_vecOrigin[i]);
+		}
+	}
+}
+//This should be executed every time a point is taken, round starts, or any time a wave would be spawned.
+RestartBotQueue()
+{
+	//TODO: Kill all bots at this time?
+	g_iBotsToSpawn = RoundToFloor(Float:Team_CountPlayers(bot_team) * g_flTotalSpawnFrac);
+	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),g_flTotalSpawnFrac,g_iBotsToSpawn);
+}
+
+//Move a bot to the queue. This will silently kill them and remove ragdoll.
+public JoinQueue(client,bool:spawning)
+{
+	if (!g_bEnabled)
+	{
+		return;
+	}
+	if ((g_iInQueue[client]) || (g_iSpawning[client]))
+		return;
+	PrintToServer("[BOTSPAWNS] called JoinQueue for %N (%d) g_iBotsToSpawn %d spawning %b",client,client,g_iBotsToSpawn,spawning);
+	g_iInQueue[client] = 1;
+	if (!spawning)
+	{
+		if (IsPlayerAlive(client))
+		{
+			ForcePlayerSuicide(client);
+		}
+	}
+}
+//Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
+PreSpawn(client,tokens=0,instant=0)
+{
+	if (!g_bEnabled)
+	{
+		return;
+	}
+	g_iSpawnTokens[client]+=tokens;
+	g_iNumReady++;
+	g_iSpawning[client] = 1;
+	g_iInQueue[client] = 0;
+
+	if (g_iBotsToSpawn)
+	{
+		g_iBotsToSpawn--;
+	}
+	new Float:fSpawnDelay = (instant) ? 0.1 : GetRandomFloat(g_flMinSpawnDelay,g_flMaxSpawnDelay);
+	if (fSpawnDelay < 0.1)
+	{
+		fSpawnDelay = 0.1;
+	}
+	PrintToServer("[BOTSPAWNS] called PreSpawn for %d fSpawnDelay %0.2f g_iBotsToSpawn %d g_iSpawnTokens %d",client,fSpawnDelay,g_iBotsToSpawn,g_iSpawnTokens[client]);
+	if (!IsPlayerAlive(client))
+		g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_Spawn, client, TIMER_FLAG_NO_MAPCHANGE);
+	else
+		g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE);
+}
+
+//Loop every second, this keeps track of the bots and adds/removes them as needed.
+public Action:Timer_ProcessQueue(Handle:timer)
+{
+	if (!g_bEnabled)
+	{
+		return;
+	}
+	g_iBotsAlive = Team_CountAlivePlayers(bot_team);
+	g_iBotsTotal = Team_CountPlayers(bot_team);
+
+//	new iStart = RoundToFloor(GetRandomFloat(0.0,1.0) * 64);
+//	new iBotCountMin = RoundToFloor(Float:g_iBotsTotal * g_flMinFracInGame);
+	new iBotCountMax = RoundToFloor(Float:g_iBotsTotal * g_flMaxFracInGame);
+	//If we need to spawn bots, hand out tokens
+	if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
+	{
+		for (new i = 1; i <= MaxClients; i++) {
+			if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
+			{
+				if ((IsValidClient(i)) && (GetClientTeam(i) == bot_team) && (IsFakeClient(i)) && (!IsPlayerAlive(i)) && (g_iInQueue[i]) && (!g_iSpawning[i]))
+				{
+					PreSpawn(i,1);
+				}
+			}
+		}
+	}
+	
+}
+
+//This timer actually spawns the bot
+public Action:Timer_Spawn(Handle:timer, any:client)
+{
+	PrintToServer("[BOTSPAWNS] called Timer_Spawn for client %N (%d)",client,client);
+	g_iSpawnTokens[client]--; //Remove one token
+	SDKCall(g_hPlayerRespawn, client); //Perform respawn
+	g_hRespawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE); //Do the post-spawn stuff like moving to final "spawnpoint" selected
+}
+
+//Handle any work that needs to happen after the client is in the game
+public Action:Timer_PostSpawn(Handle:timer, any:client)
+{
+	PrintToServer("[BOTSPAWNS] called Timer_PostSpawn for client %N (%d)",client,client);
+	g_iSpawning[client] = 0;
+	if (g_iHidingSpotCount)
+	{
+		new Float:flHidingSpot[3],Float:vecOrigin[3];
+		new iSpot = GetBestHidingSpot(client);
+		if (iSpot > -1)
+		{
+			flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
+			flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
+			flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+			GetClientAbsOrigin(client,vecOrigin);
+			new Float:distance = GetVectorDistance(flHidingSpot,vecOrigin);
+
+			PrintToServer("[BOTSPAWNS] Teleporting %N to hiding spot %d at %f,%f,%f distance %f",client,iSpot,flHidingSpot[0],flHidingSpot[1],flHidingSpot[2],distance);
+			TeleportEntity(client, flHidingSpot, NULL_VECTOR, NULL_VECTOR);
+		}
+	}
 	g_hRespawnTimer[client] = INVALID_HANDLE;
 }
 
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	g_iInQueue[client] = 0;
 	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return Plugin_Continue;
 	}
-	if (GetConVarInt(cvarSpawnMode))
+	if (g_iSpawnMode)
 	{
 		if (IsFakeClient(client))
 		{
+			if (!g_iInQueue[client])
+				PreSpawn(client,1,1);
+/*
 			if (g_iSpawnTokens[client])
 			{
 				PreSpawn(client);
 			}
 			else
 			{
-				JoinQueue(client);
+				JoinQueue(client,1);
 			}
+*/
 		}
 	}
 	return Plugin_Continue;
@@ -307,7 +499,7 @@ public Action:Event_RoundBegin(Handle:event, const String:name[], bool:dontBroad
 }
 public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return Plugin_Continue;
 	}
@@ -349,7 +541,7 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 }
 public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return Plugin_Continue;
 	}
@@ -370,7 +562,7 @@ public Action:Timer_RemoveRagdoll(Handle:timer, any:_iEntity)
 }
 public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return Plugin_Continue;
 	}
@@ -390,14 +582,14 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	//Join queue
 	if (IsFakeClient(client))
 	{
-		JoinQueue(client);
+		JoinQueue(client,false);
 	}
 	return Plugin_Continue;
 }
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return true;
 	}
@@ -421,7 +613,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 }
 public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	if (!GetConVarBool(cvarEnabled))
+	if (!g_bEnabled)
 	{
 		return Plugin_Continue;
 	}
