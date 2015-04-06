@@ -53,7 +53,7 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 
 #### CVAR List
  * "sm_botnames_enabled" "1" //sets whether bot naming is enabled
- * "sm_botnames_prefix" "sets" //a prefix for bot names
+ * "sm_botnames_prefix" "" //sets a prefix for bot names
  * "sm_botnames_random" "1" //sets whether to randomize names used
  * "sm_botnames_announce" "0" //sets whether to announce bots when added
  * "sm_botnames_suppress" "1" //sets whether to supress join/team change/name change bot messages
@@ -152,8 +152,8 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 #### CVAR List
  * "hlxce_webpage" "http://www.hlxcommunity.com" //http://www.hlxcommunity.com
  * "hlx_block_commands" "1" //If activated HLstatsX commands are blocked from the chat area
- * "hlx_message_prefix" "Define" //the prefix displayed on every HLstatsX ingame message
- * "hlx_protect_address" "Address" //to be protected for logging/forwarding
+ * "hlx_message_prefix" "" //Define the prefix displayed on every HLstatsX ingame message
+ * "hlx_protect_address" "" //Address to be protected for logging/forwarding
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
 
 ### Insurgency Support Library (version 1.0.2)
