@@ -20,7 +20,7 @@ do
 	if [ ! -e plugins/description/$PLUGIN.md ]; then touch plugins/description/$PLUGIN.md; fi
 	if [ ! -e plugins/todo/$PLUGIN.md ]; then touch plugins/todo/$PLUGIN.md; fi
 
-	grep CreateConVar $SCRIPT | grep -v '_version"' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | awk -F',' '{print " * \""$1"\" \""$2"\" //"$3}' |sed -e 's/"//g' -e 's/;;/,/g' > plugins/cvar/$PLUGIN.md
+	grep CreateConVar $SCRIPT | grep -v '_version"' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | sed -e 's/"//g' | awk -F',' '{print " * \""$1"\" \""$2"\" //"$3}' | sed -e 's/;;/,/g' > plugins/cvar/$PLUGIN.md
 
 	echo -ne > plugins/dependencies/$PLUGIN.md
 	for CFGFILE in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' $SCRIPT | cut -d'"' -f2)

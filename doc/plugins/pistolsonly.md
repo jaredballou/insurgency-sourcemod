@@ -6,5 +6,5 @@ Adds a game modifier that only allows pistols
 Disables all primary weapons, enables only pistols. Not yet functional.
 
 #### CVAR List
- * sm_pistolsonly_enabled  0 // sets whether ammo check is enabled
+ * "sm_pistolsonly_enabled" " 0" // sets whether ammo check is enabled
 
