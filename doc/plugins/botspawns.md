@@ -1,8 +1,13 @@
 ### Bot spawns (version 0.2.0)
 Adds a number of options and ways to handle bot spawns
+
 [Plugin](plugins/botspawns.smx?raw=true) - [Source](scripting/botspawns.sp)
+
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
+
 #### Dependencies
+ * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt&raw=true)
+
 #### CVAR List
  * sm_botspawns_enabled: Enable enhanced bot spawning features (default: 0)
  * sm_botspawns_spawn_mode: Spawn in hiding spots  (default: 0)
@@ -26,11 +31,13 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
  * sm_botspawns_stop_spawning_at_objective: Stop spawning new bots when near next objective  (default: 1)
  * sm_botspawns_remove_unseen_when_capping: Silently kill off all unseen bots when capping next point  (default: 1)
  * sm_botspawns_spawn_snipers_alone: Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled? (default: 1)
+
 #### Todo
-[X] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
-[X] Find path between current and next point, add bots around that axis
-[X] Add option for minimum spawn distance to keep bots from spawning on top of players
-[X] Create variables for how far off the path to spawn
-[X] Create option to either spawn and keep X number of bots in game, or simply spawn on random timer (also an option)
-[X] Create functionality to respawn bots to simulate more bots than game can support
+ * [X] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
+ * [X] Find path between current and next point, add bots around that axis
+ * [X] Add option for minimum spawn distance to keep bots from spawning on top of players
+ * [X] Create variables for how far off the path to spawn
+ * [X] Create option to either spawn and keep X number of bots in game, or simply spawn on random timer (also an option)
+ * [X] Create functionality to respawn bots to simulate more bots than game can support
+
 

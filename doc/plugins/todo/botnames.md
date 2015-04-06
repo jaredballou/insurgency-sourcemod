@@ -1,1 +1,1 @@
-[ ] Add per-team CVARs to use different lists
+ * [ ] Add per-team CVARs to use different lists
