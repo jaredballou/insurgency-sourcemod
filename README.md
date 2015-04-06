@@ -10,7 +10,7 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. Future features I'd like to do are to show a reload animation partially to animate the check, and have the check command delay the next weapon attack to simulate removing and checking the magazine. Due to the way the theater system works, it's not practical to hard-code weapon data like magazine capacity in the plugin as similar CS and TF2 plugins do, so I have a hacky method that checks the 'm_iClip' variable and uses that to perform the math. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 
 #### CVAR List
- * sm_ammocheck_enabled: sets whether ammo check is enabled (default: 1)
+ * sm_ammocheck_enabled  1 // sets whether ammo check is enabled
 
 ### Backblast (version 0.0.2)
 Adds backblast to rocket based weapons
@@ -20,12 +20,12 @@ Adds backblast to rocket based weapons
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 
 #### CVAR List
- * sm_backblast_enabled: sets whether bot naming is enabled (default: 1)
- * sm_backblast_damage: Max damage from backblast (default: 80)
- * sm_backblast_damage_range: Distance in meters from firing to hurt players in backblast (default: 15)
- * sm_backblast_max_range: Max range for backblast to affect players visually (default: 25)
- * sm_backblast_cone_angle: Angle behind firing to include in backblast effect (default: 90)
- * sm_backblast_wall_distance: Distance in meters to wall where player firing will hurt himself (default: 5)
+ * sm_backblast_enabled  1 // sets whether bot naming is enabled
+ * sm_backblast_damage  80 // Max damage from backblast
+ * sm_backblast_damage_range  15 // Distance in meters from firing to hurt players in backblast
+ * sm_backblast_max_range  25 // Max range for backblast to affect players visually
+ * sm_backblast_cone_angle  90 // Angle behind firing to include in backblast effect
+ * sm_backblast_wall_distance  5 // Distance in meters to wall where player firing will hurt himself
 
 #### Todo
  * [X] Add CVARs to control cone angle, kill range, and total effect range
@@ -41,8 +41,8 @@ Shows Bots Left Alive
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
 #### CVAR List
- * sm_botcount_enabled: sets whether bot naming is enabled (default: 0)
- * sm_botcount_timer: Frequency to show count (default: 60)
+ * sm_botcount_enabled  0 // sets whether bot naming is enabled
+ * sm_botcount_timer  60 // Frequency to show count
 
 ### Bot Names (version 1.0)
 Gives automatic names to bots on creation.
@@ -52,17 +52,17 @@ Gives automatic names to bots on creation.
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 
 #### CVAR List
- * sm_botnames_enabled: sets whether bot naming is enabled (default: 1)
- * sm_botnames_prefix: sets a prefix for bot names  (default: )
- * sm_botnames_random: sets whether to randomize names used (default: 1)
- * sm_botnames_announce: sets whether to announce bots when added (default: 0)
- * sm_botnames_suppress: sets whether to supress join/team change/name change bot messages (default: 1)
- * sm_botnames_list: Set list to use for bots (default: default)
+ * sm_botnames_enabled  1 // sets whether bot naming is enabled
+ * sm_botnames_prefix   // sets a prefix for bot names 
+ * sm_botnames_random  1 // sets whether to randomize names used
+ * sm_botnames_announce  0 // sets whether to announce bots when added
+ * sm_botnames_suppress  1 // sets whether to supress join/team change/name change bot messages
+ * sm_botnames_list  default // Set list to use for bots
 
 #### Todo
  * [ ] Add per-team CVARs to use different lists
 
-### Bot spawns (version 0.2.0)
+### Bot spawns (version 0.2.5)
 Adds a number of options and ways to handle bot spawns
 
 [Plugin](plugins/botspawns.smx?raw=true) - [Source](scripting/botspawns.sp)
@@ -70,31 +70,30 @@ Adds a number of options and ways to handle bot spawns
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
- * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt&raw=true)
+ * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
 
 #### CVAR List
- * sm_botspawns_enabled: Enable enhanced bot spawning features (default: 0)
- * sm_botspawns_spawn_mode: Spawn in hiding spots  (default: 0)
- * sm_botspawns_respawn_mode: Do not respawn  (default: 0)
- * sm_botspawns_counterattack_mode: Use standard spawning for final counterattack waves  (default: 1)
- * sm_botspawns_counterattack_frac: Multiplier to total bots for spawning in counterattack wave (default: 0.5)
- * sm_botspawns_min_spawn_delay: Min delay in seconds for spawning. Set to 0 for instant. (default: 1)
- * sm_botspawns_max_spawn_delay: Max delay in seconds for spawning. Set to 0 for instant. (default: 15)
- * sm_botspawns_spawn_sides: Spawn bots to the sides of the players when facing the next objective? (default: 1)
- * sm_botspawns_spawn_rear: Spawn bots to the rear of pthe players when facing the next objective? (default: 1)
- * sm_botspawns_min_player_distance: Min distance from players to spawn (default: 1200)
- * sm_botspawns_max_player_distance: Max distance from players to spawn (default: 16000)
- * sm_botspawns_min_objective_distance: Min distance from next objective to spawn (default: 1)
- * sm_botspawns_min_counterattack_distance: Min distance from counterattack objective to spawn (default: 3600)
- * sm_botspawns_max_objective_distance: Max distance from next objective to spawn (default: 12000)
- * sm_botspawns_min_frac_in_game: Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning. (default: 0.75)
- * sm_botspawns_max_frac_in_game: Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning. (default: 1)
- * sm_botspawns_total_spawn_frac: Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard, values less than 1 are not supported. (default: 1.75)
- * sm_botspawns_min_fireteam_size: Min number of bots to spawn per fireteam. Default 3 (default: 3)
- * sm_botspawns_max_fireteam_size: Max number of bots to spawn per fireteam. Default 5 (default: 5)
- * sm_botspawns_stop_spawning_at_objective: Stop spawning new bots when near next objective  (default: 1)
- * sm_botspawns_remove_unseen_when_capping: Silently kill off all unseen bots when capping next point  (default: 1)
- * sm_botspawns_spawn_snipers_alone: Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled? (default: 1)
+ * sm_botspawns_enabled  0 // Enable enhanced bot spawning features
+ * sm_botspawns_spawn_mode  1 // Only normal spawnpoints at the objective, the old way 
+ * sm_botspawns_respawn_mode  0 // Do not respawn 
+ * sm_botspawns_counterattack_mode  0 // Do not alter default game spawning during counterattacks 
+ * sm_botspawns_counterattack_finale_infinite  0 // Obey sm_botspawns_counterattack_respawn_mode 
+ * sm_botspawns_counterattack_frac  0.5 // Multiplier to total bots for spawning in counterattack wave
+ * sm_botspawns_min_counterattack_distance  3600 // Min distance from counterattack objective to spawn
+ * sm_botspawns_min_spawn_delay  1 // Min delay in seconds for spawning. Set to 0 for instant.
+ * sm_botspawns_max_spawn_delay  15 // Max delay in seconds for spawning. Set to 0 for instant.
+ * sm_botspawns_min_player_distance  1200 // Min distance from players to spawn
+ * sm_botspawns_max_player_distance  16000 // Max distance from players to spawn
+ * sm_botspawns_min_objective_distance  1 // Min distance from next objective to spawn
+ * sm_botspawns_max_objective_distance  12000 // Max distance from next objective to spawn
+ * sm_botspawns_min_frac_in_game  0.75 // Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
+ * sm_botspawns_max_frac_in_game  1 // Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
+ * sm_botspawns_total_spawn_frac  1.75 // Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard, values less than 1 are not supported.
+ * sm_botspawns_min_fireteam_size  3 // Min number of bots to spawn per fireteam. Default 3
+ * sm_botspawns_max_fireteam_size  5 // Max number of bots to spawn per fireteam. Default 5
+ * sm_botspawns_stop_spawning_at_objective  1 // Stop spawning new bots when near next objective 
+ * sm_botspawns_remove_unseen_when_capping  1 // Silently kill off all unseen bots when capping next point 
+ * sm_botspawns_spawn_snipers_alone  1 // Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?
 
 #### Todo
  * [X] Instead of spawning all bots in one spot, spawn them at hiding spots in the navmesh
@@ -113,18 +112,18 @@ Puts a compass in the game
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
- * [translations/compass.phrases.txt](translations/compass.phrases.txt&raw=true)
+ * [translations/compass.phrases.txt](translations/compass.phrases.txt)
 
 #### CVAR List
- * sm_compass_enabled: Enables compass (default: 1)
- * sm_compass_direction: Display direction in ordinal directions (default: 1)
- * sm_compass_bearing: Display bearing in degrees (default: 1)
- * sm_compass_timer: If greater than 0, display compass to players every X seconds. (default: 0)
- * sm_compass_default_enabled:		Default compass (default:		1)
- * sm_compass_default_timer:		Default compass (default:		60)
- * sm_compass_default_display:		Default compass (default:		1)
- * sm_compass_default_direction:		Default compass (default:		1)
- * sm_compass_default_bearing:		Default compass (default:		1)
+ * sm_compass_enabled  1 // Enables compass
+ * sm_compass_direction  1 // Display direction in ordinal directions
+ * sm_compass_bearing  1 // Display bearing in degrees
+ * sm_compass_timer  0 // If greater than 0, display compass to players every X seconds.
+ * sm_compass_default_enabled 		1 //		Default compass
+ * sm_compass_default_timer 		60 //		Default compass
+ * sm_compass_default_display 		1 //		Default compass
+ * sm_compass_default_direction 		1 //		Default compass
+ * sm_compass_default_bearing 		1 //		Default compass
 
 ### Coop Lobby Override (version 0.0.1)
 Plugin for overriding Insurgency Coop to 16 players
@@ -141,7 +140,7 @@ Modifies all damage applied
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
 #### CVAR List
- * sm_damagemod_enabled: sets whether log fixing is enabled (default: 0)
+ * sm_damagemod_enabled  0 // sets whether log fixing is enabled
 
 ### HLstatsX CE Ingame Plugin (version )
 Provides ingame functionality for interaction from an HLstatsX CE installation
@@ -151,11 +150,11 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 
 #### CVAR List
- * hlxce_webpage: http://www.hlxcommunity.com (default: http://www.hlxcommunity.com)
- * hlx_block_commands: If activated HLstatsX commands are blocked from the chat area (default: 1)
- * hlx_message_prefix: Define the prefix displayed on every HLstatsX ingame message (default: )
- * hlx_protect_address: Address to be protected for logging/forwarding (default: )
- * hlx_server_tag: If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled  (default: 1)
+ * hlxce_webpage  http://www.hlxcommunity.com // http://www.hlxcommunity.com
+ * hlx_block_commands  1 // If activated HLstatsX commands are blocked from the chat area
+ * hlx_message_prefix   // Define the prefix displayed on every HLstatsX ingame message
+ * hlx_protect_address   // Address to be protected for logging/forwarding
+ * hlx_server_tag  1 // If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled 
 
 ### Insurgency Support Library (version 1.0.2)
 Provides functions to support Insurgency and fixes logging
@@ -165,13 +164,13 @@ Provides functions to support Insurgency and fixes logging
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
 #### Dependencies
- * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt&raw=true)
- * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt&raw=true)
+ * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
+ * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt)
 
 #### CVAR List
- * sm_inslogger_enabled: sets whether log fixing is enabled (default: 1)
- * sm_insurgency_checkpoint_capture_player_ratio: Fraction of living players required to capture in Checkpoint (default: 0.5)
- * sm_insurgency_checkpoint_counterattack_capture: Enable counterattack by bots to capture points in Checkpoint (default: 0)
+ * sm_inslogger_enabled  1 // sets whether log fixing is enabled
+ * sm_insurgency_checkpoint_capture_player_ratio  0.5 // Fraction of living players required to capture in Checkpoint
+ * sm_insurgency_checkpoint_counterattack_capture  0 // Enable counterattack by bots to capture points in Checkpoint
 
 #### Todo
  * [ ] Weapon lookup by index/name
@@ -190,8 +189,8 @@ Adds ability to loot items from dead bodies
 Allows looting bodies for ammo. Not yet functional.
 
 #### CVAR List
- * sm_looting_enabled: sets whether looting is enabled (default: 1)
- * sm_looting_mode: sets looting mode - 0: Loot per mag, 1: Loot all ammo (default: 1)
+ * sm_looting_enabled  1 // sets whether looting is enabled
+ * sm_looting_mode  1 // sets looting mode - 0: Loot per mag, 1: Loot all ammo
 
 ### Navmesh Chat (version 0.0.1)
 Puts navmesh area into chat
@@ -201,15 +200,15 @@ Puts navmesh area into chat
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
 #### Dependencies
- * [translations/insurgency.phrases.txt](translations/insurgency.phrases.txt&raw=true)
+ * [translations/insurgency.phrases.txt](translations/insurgency.phrases.txt)
 
 #### CVAR List
- * sm_navmesh_chat_enabled: sets whether this plugin is enabled (default: 1)
- * sm_navmesh_chat_teamonly: sets whether to prepend to all messages or just team messages (default: 1)
- * sm_navmesh_chat_grid: Include grid coordinates (default: 1)
- * sm_navmesh_chat_place: Include place name from navmesh (default: 1)
- * sm_navmesh_chat_distance: Include distance to speaker (default: 1)
- * sm_navmesh_chat_direction: Include direction to speaker (default: 1)
+ * sm_navmesh_chat_enabled  1 // sets whether this plugin is enabled
+ * sm_navmesh_chat_teamonly  1 // sets whether to prepend to all messages or just team messages
+ * sm_navmesh_chat_grid  1 // Include grid coordinates
+ * sm_navmesh_chat_place  1 // Include place name from navmesh
+ * sm_navmesh_chat_distance  1 // Include distance to speaker
+ * sm_navmesh_chat_direction  1 // Include direction to speaker
 
 #### Todo
  * [ ] Get grid/overlay data from engine directly
@@ -229,7 +228,7 @@ Exports navmesh data in JSON format
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
 #### CVAR List
- * sm_navmesh_export_enabled: sets whether this plugin is enabled (default: 0)
+ * sm_navmesh_export_enabled  0 // sets whether this plugin is enabled
 
 ### SourcePawn Navigation Mesh Parser (version 1.0.3)
 A plugin that can read Valve's Navigation Mesh.
@@ -252,7 +251,7 @@ Removes fog
 Removes all fog on the map. Release ready, no known bugs.
 
 #### CVAR List
- * sm_nofog_enabled: sets whether bot naming is enabled (default: 1)
+ * sm_nofog_enabled  1 // sets whether bot naming is enabled
 
 ### No Objectives (version 0.0.1)
 Removes all objectives
@@ -262,10 +261,10 @@ Removes all objectives
 Removes objectives, not yet functional.
 
 #### CVAR List
- * sm_noobj_enabled: sets whether objective removal is enabled (default: 0)
- * sm_noobj_cache_destroy: Can caches be destroyed? (default: 1)
- * sm_noobj_capture: Can points be captured? (default: 1)
- * sm_noobj_remove: Remove all points? (default: 0)
+ * sm_noobj_enabled  0 // sets whether objective removal is enabled
+ * sm_noobj_cache_destroy  1 // Can caches be destroyed?
+ * sm_noobj_capture  1 // Can points be captured?
+ * sm_noobj_remove  0 // Remove all points?
 
 ### Pistols Only (version 0.0.3)
 Adds a game modifier that only allows pistols
@@ -275,7 +274,7 @@ Adds a game modifier that only allows pistols
 Disables all primary weapons, enables only pistols. Not yet functional.
 
 #### CVAR List
- * sm_pistolsonly_enabled: sets whether ammo check is enabled (default: 0)
+ * sm_pistolsonly_enabled  0 // sets whether ammo check is enabled
 
 ### Prop Removal (version 0.0.1)
 Plugin for removing Restricted Areas
@@ -285,7 +284,7 @@ Plugin for removing Restricted Areas
 Removes all prop_dynamic entities.
 
 #### CVAR List
- * sm_prop_dynamic_enabled: sets whether bot naming is enabled (default: 1)
+ * sm_prop_dynamic_enabled  1 // sets whether bot naming is enabled
 
 ### Player Respawn (version 1.7.0)
 Respawn dead players via admincommand or by queues
@@ -295,20 +294,20 @@ Respawn dead players via admincommand or by queues
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
- * [gamedata/plugin.respawn.txt](gamedata/plugin.respawn.txt&raw=true)
- * [translations/common.phrases.txt](translations/common.phrases.txt&raw=true)
- * [translations/respawn.phrases.txt](translations/respawn.phrases.txt&raw=true)
+ * [gamedata/plugin.respawn.txt](gamedata/plugin.respawn.txt)
+ * [translations/common.phrases.txt](translations/common.phrases.txt)
+ * [translations/respawn.phrases.txt](translations/respawn.phrases.txt)
 
 #### CVAR List
- * sm_respawn_enabled: Automatically respawn players when they die; 0 - disabled, 1 - enabled); (default: 0)
- * sm_respawn_delay: How many seconds to delay the respawn); (default: 1.0)
- * sm_respawn_counterattack: Respawn during counterattack?  (default: 0)
- * sm_respawn_final_counterattack: Respawn during final counterattack?  (default: 0)
- * sm_respawn_count: Respawn all players this many times); (default: 0)
- * sm_respawn_count_team2: Respawn all Team 2 players this many times); (default: -1)
- * sm_respawn_count_team3: Respawn all Team 3 players this many times); (default: -1)
- * sm_respawn_reset_each_round: Reset player respawn counts each round); (default: 1)
- * sm_respawn_reset_each_objective: Reset player respawn counts each objective); (default: 1)
+ * sm_respawn_enabled  0 // Automatically respawn players when they die; 0 - disabled, 1 - enabled);
+ * sm_respawn_delay  1.0 // How many seconds to delay the respawn);
+ * sm_respawn_counterattack  0 // Respawn during counterattack? 
+ * sm_respawn_final_counterattack  0 // Respawn during final counterattack? 
+ * sm_respawn_count  0 // Respawn all players this many times);
+ * sm_respawn_count_team2  -1 // Respawn all Team 2 players this many times);
+ * sm_respawn_count_team3  -1 // Respawn all Team 3 players this many times);
+ * sm_respawn_reset_each_round  1 // Reset player respawn counts each round);
+ * sm_respawn_reset_each_objective  1 // Reset player respawn counts each objective);
 
 ### Restricted Area Removal (version 0.0.1)
 Plugin for removing Restricted Areas
@@ -318,7 +317,7 @@ Plugin for removing Restricted Areas
 Removes all restricted areas on the map. Release ready, no known bugs.
 
 #### CVAR List
- * sm_restrictedarea_enabled: sets whether bot naming is enabled (default: 1)
+ * sm_restrictedarea_enabled  1 // sets whether bot naming is enabled
 
 ### RPG Adjustments (version 0.0.3)
 Adjusts behavior of RPG rounds
@@ -328,10 +327,10 @@ Adjusts behavior of RPG rounds
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
 
 #### CVAR List
- * sm_rpgdrift_enabled: Sets whether RPG drifting is enabled (default: 1)
- * sm_rpgdrift_amount: Sets RPG drift max change per tick (default: 2.0)
- * sm_rpgdrift_chance: Chance as a fraction of 1 that a player-fired rocket will be affected (default: 0.25)
- * sm_rpgdrift_always_bots: Always affect bot-fired rockets (default: 1)
+ * sm_rpgdrift_enabled  1 // Sets whether RPG drifting is enabled
+ * sm_rpgdrift_amount  2.0 // Sets RPG drift max change per tick
+ * sm_rpgdrift_chance  0.25 // Chance as a fraction of 1 that a player-fired rocket will be affected
+ * sm_rpgdrift_always_bots  1 // Always affect bot-fired rockets
 
 #### Todo
  * [X] Nudge rocket in flight
@@ -347,9 +346,9 @@ Adds suicide bomb for bots
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
 
 #### CVAR List
- * sm_suicidebomb_enabled: sets whether suicide bombs are enabled (default: 0)
- * sm_suicidebomb_explode_armed: Explode when killed if C4 or IED is in hand (default: 0)
- * sm_suicidebomb_death_chance: Chance as a fraction of 1 that a bomber will explode when killed (default: 0.1)
+ * sm_suicidebomb_enabled  0 // sets whether suicide bombs are enabled
+ * sm_suicidebomb_explode_armed  0 // Explode when killed if C4 or IED is in hand
+ * sm_suicidebomb_death_chance  0.1 // Chance as a fraction of 1 that a bomber will explode when killed
 
 #### Todo
  * [ ] Add bot targeting and behavior to make them seek players

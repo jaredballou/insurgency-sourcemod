@@ -6,15 +6,15 @@ Puts navmesh area into chat
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
 #### Dependencies
- * [translations/insurgency.phrases.txt](translations/insurgency.phrases.txt&raw=true)
+ * [translations/insurgency.phrases.txt](translations/insurgency.phrases.txt)
 
 #### CVAR List
- * sm_navmesh_chat_enabled: sets whether this plugin is enabled (default: 1)
- * sm_navmesh_chat_teamonly: sets whether to prepend to all messages or just team messages (default: 1)
- * sm_navmesh_chat_grid: Include grid coordinates (default: 1)
- * sm_navmesh_chat_place: Include place name from navmesh (default: 1)
- * sm_navmesh_chat_distance: Include distance to speaker (default: 1)
- * sm_navmesh_chat_direction: Include direction to speaker (default: 1)
+ * sm_navmesh_chat_enabled  1 // sets whether this plugin is enabled
+ * sm_navmesh_chat_teamonly  1 // sets whether to prepend to all messages or just team messages
+ * sm_navmesh_chat_grid  1 // Include grid coordinates
+ * sm_navmesh_chat_place  1 // Include place name from navmesh
+ * sm_navmesh_chat_distance  1 // Include distance to speaker
+ * sm_navmesh_chat_direction  1 // Include direction to speaker
 
 #### Todo
  * [ ] Get grid/overlay data from engine directly

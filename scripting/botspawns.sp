@@ -283,40 +283,42 @@ GetBestHidingSpot(client,iteration=0)
 	{
 		new pointok = 1;
 		new iSpot = g_iCPHidingSpots[m_nActivePushPointIndex][iCPHIndex];
-		new Float:distance,Float:furthest,Float:closest,Float:flHidingSpot[3];
+		new Float:distance,Float:furthest,Float:closest=-1.0,Float:flHidingSpot[3];
 		flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
 		flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
 		flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
 		for (new iTarget = 1; iTarget < MaxClients; iTarget++)
 		{
-			if (IsValidClient(iTarget))
+			if (!IsValidClient(iTarget))
+				continue;
+			if (!IsClientInGame(iTarget))
+				continue;
+			distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
+			//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
+			if (GetClientTeam(iTarget) != m_iTeam)
 			{
-				distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
 				if (distance > furthest)
 					furthest = distance;
-				if (distance < closest)
+				if ((distance < closest) || (closest < 0))
 					closest = distance;
-				//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
-				if (GetClientTeam(iTarget) != m_iTeam)
+				if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
 				{
-					if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
-					{
-						PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d iCPHIndex %d since it is in sight of %N",client,iSpot,iCPHIndex,iTarget);
-						pointok = 0;
-						break;
-					}
-					
-				}
-				if (distance < MIN_PLAYER_DISTANCE)
-				{
-					PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
+					PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d iCPHIndex %d since it is in sight of %N",client,iSpot,iCPHIndex,iTarget);
 					pointok = 0;
 					break;
 				}
+				
+			}
+			if (distance < MIN_PLAYER_DISTANCE)
+			{
+				PrintToServer("[BOTSPAWNS] Distance too small from %N to iSpot %d iCPHIndex %d distance %f",iTarget,iSpot,iCPHIndex,distance);
+				pointok = 0;
+				break;
 			}
 		}
 		if (closest > g_flMaxPlayerDistance)
 		{
+			PrintToServer("[BOTSPAWNS] iSpot %d iCPHIndex %d is too far from nearest player distance %f",iSpot,iCPHIndex,closest);
 			pointok = 0;
 			continue;
 		}
@@ -325,13 +327,15 @@ GetBestHidingSpot(client,iteration=0)
 			distance = GetVectorDistance(flHidingSpot,m_vCPPositions[m_nActivePushPointIndex]);
 			if (distance < g_flMinCounterattackDistance)
 			{
+				PrintToServer("[BOTSPAWNS] iSpot %d iCPHIndex %d is too close counterattack point distance %f",iSpot,iCPHIndex,distance);
 				pointok = 0;
 				continue;
 			}
 		}
 		if (pointok)
 		{
-			PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d",client,iCPHIndex,iSpot);
+			distance = GetVectorDistance(flHidingSpot,vecOrigin);
+			PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d distance %f",client,iCPHIndex,iSpot,distance);
 			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
 			return iSpot;
 		}

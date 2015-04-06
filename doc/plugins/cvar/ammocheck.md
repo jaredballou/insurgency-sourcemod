@@ -1,1 +1,1 @@
- * sm_ammocheck_enabled: sets whether ammo check is enabled (default: 1)
+ * sm_ammocheck_enabled  1 // sets whether ammo check is enabled

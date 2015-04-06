@@ -1,1 +1,1 @@
- * sm_pistolsonly_enabled: sets whether ammo check is enabled (default: 0)
+ * sm_pistolsonly_enabled  0 // sets whether ammo check is enabled

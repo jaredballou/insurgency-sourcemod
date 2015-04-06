@@ -1,4 +1,4 @@
- * sm_noobj_enabled: sets whether objective removal is enabled (default: 0)
- * sm_noobj_cache_destroy: Can caches be destroyed? (default: 1)
- * sm_noobj_capture: Can points be captured? (default: 1)
- * sm_noobj_remove: Remove all points? (default: 0)
+ * sm_noobj_enabled  0 // sets whether objective removal is enabled
+ * sm_noobj_cache_destroy  1 // Can caches be destroyed?
+ * sm_noobj_capture  1 // Can points be captured?
+ * sm_noobj_remove  0 // Remove all points?

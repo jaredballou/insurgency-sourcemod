@@ -6,13 +6,13 @@ Provides functions to support Insurgency and fixes logging
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
 #### Dependencies
- * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt&raw=true)
- * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt&raw=true)
+ * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
+ * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt)
 
 #### CVAR List
- * sm_inslogger_enabled: sets whether log fixing is enabled (default: 1)
- * sm_insurgency_checkpoint_capture_player_ratio: Fraction of living players required to capture in Checkpoint (default: 0.5)
- * sm_insurgency_checkpoint_counterattack_capture: Enable counterattack by bots to capture points in Checkpoint (default: 0)
+ * sm_inslogger_enabled  1 // sets whether log fixing is enabled
+ * sm_insurgency_checkpoint_capture_player_ratio  0.5 // Fraction of living players required to capture in Checkpoint
+ * sm_insurgency_checkpoint_counterattack_capture  0 // Enable counterattack by bots to capture points in Checkpoint
 
 #### Todo
  * [ ] Weapon lookup by index/name

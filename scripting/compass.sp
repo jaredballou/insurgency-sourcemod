@@ -200,6 +200,19 @@ public Action:TimerCompass(Handle:timer)
 }
 public Action:Check_Compass(client, args)
 {
+/*
+	new Float:distance,Float:vecOrigin[3],Float:vecTarget[3];
+	GetClientAbsOrigin(client,vecOrigin);
+	for (new iTarget = 1; iTarget < MaxClients; iTarget++)
+	{
+		if (IsValidClient(iTarget))
+		{
+			GetClientAbsOrigin(iTarget,vecTarget);
+			distance = GetVectorDistance(vecTarget,vecOrigin);
+			PrintToServer("[BOTSPAWNS] Distance from %N to %N is %f",client,iTarget,distance);
+		}
+	}
+*/	
 	if (GetConVarBool(cvarEnabled))
 	{
 		Display_Compass(client);

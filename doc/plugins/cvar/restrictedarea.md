@@ -1,1 +1,1 @@
- * sm_restrictedarea_enabled: sets whether bot naming is enabled (default: 1)
+ * sm_restrictedarea_enabled  1 // sets whether bot naming is enabled

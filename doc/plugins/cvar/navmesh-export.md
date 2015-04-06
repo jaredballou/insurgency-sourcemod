@@ -1,1 +1,1 @@
- * sm_navmesh_export_enabled: sets whether this plugin is enabled (default: 0)
+ * sm_navmesh_export_enabled  0 // sets whether this plugin is enabled

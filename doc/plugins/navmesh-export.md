@@ -6,5 +6,5 @@ Exports navmesh data in JSON format
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
 #### CVAR List
- * sm_navmesh_export_enabled: sets whether this plugin is enabled (default: 0)
+ * sm_navmesh_export_enabled  0 // sets whether this plugin is enabled
 
