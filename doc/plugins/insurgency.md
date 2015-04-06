@@ -10,9 +10,9 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt)
 
 #### CVAR List
- * "sm_inslogger_enabled" " 1" // sets whether log fixing is enabled
- * "sm_insurgency_checkpoint_capture_player_ratio" " 0.5" // Fraction of living players required to capture in Checkpoint
- * "sm_insurgency_checkpoint_counterattack_capture" " 0" // Enable counterattack by bots to capture points in Checkpoint
+ * "sm_inslogger_enabled" "1" //sets whether log fixing is enabled
+ * "sm_insurgency_checkpoint_capture_player_ratio" "0.5" //Fraction of living players required to capture in Checkpoint
+ * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
 
 #### Todo
  * [ ] Weapon lookup by index/name

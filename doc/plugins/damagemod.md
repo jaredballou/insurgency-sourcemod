@@ -6,5 +6,5 @@ Modifies all damage applied
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
 #### CVAR List
- * "sm_damagemod_enabled" " 0" // sets whether log fixing is enabled
+ * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
 
