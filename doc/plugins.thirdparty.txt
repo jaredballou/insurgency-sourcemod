@@ -1,0 +1,11 @@
+advertisements
+afk_manager
+clientprefs
+gem_damage_report
+killer_info_display
+serverhop
+smtactics
+sourcebans_listener
+sourcebans
+updater
+webshortcuts
