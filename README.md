@@ -9,12 +9,8 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. Future features I'd like to do are to show a reload animation partially to animate the check, and have the check command delay the next weapon attack to simulate removing and checking the magazine. Due to the way the theater system works, it's not practical to hard-code weapon data like magazine capacity in the plugin as similar CS and TF2 plugins do, so I have a hacky method that checks the 'm_iClip' variable and uses that to perform the math. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 
-#### Dependencies
-
 #### CVAR List
  * sm_ammocheck_enabled: sets whether ammo check is enabled (default: 1)
-
-#### Todo
 
 ### Backblast (version 0.0.2)
 Adds backblast to rocket based weapons
@@ -22,8 +18,6 @@ Adds backblast to rocket based weapons
 [Plugin](plugins/backblast.smx?raw=true) - [Source](scripting/backblast.sp)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
-
-#### Dependencies
 
 #### CVAR List
  * sm_backblast_enabled: sets whether bot naming is enabled (default: 1)
@@ -46,13 +40,9 @@ Shows Bots Left Alive
 
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
-#### Dependencies
-
 #### CVAR List
  * sm_botcount_enabled: sets whether bot naming is enabled (default: 0)
  * sm_botcount_timer: Frequency to show count (default: 60)
-
-#### Todo
 
 ### Bot Names (version 1.0)
 Gives automatic names to bots on creation.
@@ -60,8 +50,6 @@ Gives automatic names to bots on creation.
 [Plugin](plugins/botnames.smx?raw=true) - [Source](scripting/botnames.sp)
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
-
-#### Dependencies
 
 #### CVAR List
  * sm_botnames_enabled: sets whether bot naming is enabled (default: 1)
@@ -138,20 +126,12 @@ Adds a check_compass command that clients can use and get their ordinal directio
  * sm_compass_default_direction:		Default compass (default:		1)
  * sm_compass_default_bearing:		Default compass (default:		1)
 
-#### Todo
-
 ### Coop Lobby Override (version 0.0.1)
 Plugin for overriding Insurgency Coop to 16 players
 
 [Plugin](plugins/cooplobby.smx?raw=true) - [Source](scripting/cooplobby.sp)
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
-
-#### Dependencies
-
-#### CVAR List
-
-#### Todo
 
 ### Damage Modifier (version 0.0.1)
 Modifies all damage applied
@@ -160,12 +140,8 @@ Modifies all damage applied
 
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
-#### Dependencies
-
 #### CVAR List
  * sm_damagemod_enabled: sets whether log fixing is enabled (default: 0)
-
-#### Todo
 
 ### HLstatsX CE Ingame Plugin (version )
 Provides ingame functionality for interaction from an HLstatsX CE installation
@@ -174,16 +150,12 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 
-#### Dependencies
-
 #### CVAR List
  * hlxce_webpage: http://www.hlxcommunity.com (default: http://www.hlxcommunity.com)
  * hlx_block_commands: If activated HLstatsX commands are blocked from the chat area (default: 1)
  * hlx_message_prefix: Define the prefix displayed on every HLstatsX ingame message (default: )
  * hlx_protect_address: Address to be protected for logging/forwarding (default: )
  * hlx_server_tag: If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled  (default: 1)
-
-#### Todo
 
 ### Insurgency Support Library (version 1.0.2)
 Provides functions to support Insurgency and fixes logging
@@ -217,13 +189,9 @@ Adds ability to loot items from dead bodies
 
 Allows looting bodies for ammo. Not yet functional.
 
-#### Dependencies
-
 #### CVAR List
  * sm_looting_enabled: sets whether looting is enabled (default: 1)
  * sm_looting_mode: sets looting mode - 0: Loot per mag, 1: Loot all ammo (default: 1)
-
-#### Todo
 
 ### Navmesh Chat (version 0.0.1)
 Puts navmesh area into chat
@@ -260,12 +228,8 @@ Exports navmesh data in JSON format
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
-#### Dependencies
-
 #### CVAR List
  * sm_navmesh_export_enabled: sets whether this plugin is enabled (default: 0)
-
-#### Todo
 
 ### SourcePawn Navigation Mesh Parser (version 1.0.3)
 A plugin that can read Valve's Navigation Mesh.
@@ -274,23 +238,11 @@ A plugin that can read Valve's Navigation Mesh.
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
-#### Dependencies
-
-#### CVAR List
-
-#### Todo
-
 ### SP-Readable Navigation Mesh Test (version 1.0.1)
 Testing plugin of the SP-Readable Navigation Mesh plugin.
 
 [Plugin](plugins/navmesh-test.smx?raw=true) - [Source](scripting/navmesh-test.sp)
 
-
-#### Dependencies
-
-#### CVAR List
-
-#### Todo
 
 ### No Fog (version 0.0.1)
 Removes fog
@@ -299,12 +251,8 @@ Removes fog
 
 Removes all fog on the map. Release ready, no known bugs.
 
-#### Dependencies
-
 #### CVAR List
  * sm_nofog_enabled: sets whether bot naming is enabled (default: 1)
-
-#### Todo
 
 ### No Objectives (version 0.0.1)
 Removes all objectives
@@ -313,15 +261,11 @@ Removes all objectives
 
 Removes objectives, not yet functional.
 
-#### Dependencies
-
 #### CVAR List
  * sm_noobj_enabled: sets whether objective removal is enabled (default: 0)
  * sm_noobj_cache_destroy: Can caches be destroyed? (default: 1)
  * sm_noobj_capture: Can points be captured? (default: 1)
  * sm_noobj_remove: Remove all points? (default: 0)
-
-#### Todo
 
 ### Pistols Only (version 0.0.3)
 Adds a game modifier that only allows pistols
@@ -330,12 +274,8 @@ Adds a game modifier that only allows pistols
 
 Disables all primary weapons, enables only pistols. Not yet functional.
 
-#### Dependencies
-
 #### CVAR List
  * sm_pistolsonly_enabled: sets whether ammo check is enabled (default: 0)
-
-#### Todo
 
 ### Prop Removal (version 0.0.1)
 Plugin for removing Restricted Areas
@@ -344,12 +284,8 @@ Plugin for removing Restricted Areas
 
 Removes all prop_dynamic entities.
 
-#### Dependencies
-
 #### CVAR List
  * sm_prop_dynamic_enabled: sets whether bot naming is enabled (default: 1)
-
-#### Todo
 
 ### Player Respawn (version 1.7.0)
 Respawn dead players via admincommand or by queues
@@ -374,8 +310,6 @@ Allows respawning of players or bots. Support for some customization of per roun
  * sm_respawn_reset_each_round: Reset player respawn counts each round); (default: 1)
  * sm_respawn_reset_each_objective: Reset player respawn counts each objective); (default: 1)
 
-#### Todo
-
 ### Restricted Area Removal (version 0.0.1)
 Plugin for removing Restricted Areas
 
@@ -383,12 +317,8 @@ Plugin for removing Restricted Areas
 
 Removes all restricted areas on the map. Release ready, no known bugs.
 
-#### Dependencies
-
 #### CVAR List
  * sm_restrictedarea_enabled: sets whether bot naming is enabled (default: 1)
-
-#### Todo
 
 ### RPG Adjustments (version 0.0.3)
 Adjusts behavior of RPG rounds
@@ -396,8 +326,6 @@ Adjusts behavior of RPG rounds
 [Plugin](plugins/rpgdrift.smx?raw=true) - [Source](scripting/rpgdrift.sp)
 
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
-
-#### Dependencies
 
 #### CVAR List
  * sm_rpgdrift_enabled: Sets whether RPG drifting is enabled (default: 1)
@@ -411,26 +339,12 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
  * [X] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 
 
-### Simple Chat Processor (Redux) - Process chat and allows other plugins to manipulate chat\. (version 2.0.3)
-[Plugin](plugins/simple-chatprocessor.smx?raw=true) - [Source](scripting/simple-chatprocessor.sp)
-Simple Chat Processor, updated to support Insurgency.
-#### CVAR List
- * sm_scp_autoupdate: Is auto-update enabled?); (default: 1)
-### SM File\/Folder Downloader and Precacher - Downloads and Precaches Files (version 1.4)
-[Plugin](plugins/sm_downloader.smx?raw=true) - [Source](scripting/sm_downloader.sp)
-SM Downloader, being modified to support theater downloads and parsing of theaters to add custom downloads.
-#### CVAR List
- * sm_downloader_simple: (default:1);)
- * sm_downloader_normal: (default:1);)
- * sm_downloader_enabled: (default:1);)
 ### Suicide Bombers (version 0.0.4)
 Adds suicide bomb for bots
 
 [Plugin](plugins/suicide_bomb.smx?raw=true) - [Source](scripting/suicide_bomb.sp)
 
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
-
-#### Dependencies
 
 #### CVAR List
  * sm_suicidebomb_enabled: sets whether suicide bombs are enabled (default: 0)

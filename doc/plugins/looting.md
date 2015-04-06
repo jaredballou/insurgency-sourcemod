@@ -5,11 +5,7 @@ Adds ability to loot items from dead bodies
 
 Allows looting bodies for ammo. Not yet functional.
 
-#### Dependencies
-
 #### CVAR List
  * sm_looting_enabled: sets whether looting is enabled (default: 1)
  * sm_looting_mode: sets looting mode - 0: Loot per mag, 1: Loot all ammo (default: 1)
-
-#### Todo
 

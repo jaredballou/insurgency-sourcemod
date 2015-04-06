@@ -19,5 +19,3 @@ Adds a check_compass command that clients can use and get their ordinal directio
  * sm_compass_default_direction:		Default compass (default:		1)
  * sm_compass_default_bearing:		Default compass (default:		1)
 
-#### Todo
-

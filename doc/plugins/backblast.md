@@ -5,8 +5,6 @@ Adds backblast to rocket based weapons
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 
-#### Dependencies
-
 #### CVAR List
  * sm_backblast_enabled: sets whether bot naming is enabled (default: 1)
  * sm_backblast_damage: Max damage from backblast (default: 80)

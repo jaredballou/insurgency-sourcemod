@@ -5,9 +5,3 @@ A plugin that can read Valve's Navigation Mesh.
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
-#### Dependencies
-
-#### CVAR List
-
-#### Todo
-

@@ -5,8 +5,6 @@ Gives automatic names to bots on creation.
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 
-#### Dependencies
-
 #### CVAR List
  * sm_botnames_enabled: sets whether bot naming is enabled (default: 1)
  * sm_botnames_prefix: sets a prefix for bot names  (default: )

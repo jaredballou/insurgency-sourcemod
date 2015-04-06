@@ -5,10 +5,6 @@ Plugin for removing Restricted Areas
 
 Removes all prop_dynamic entities.
 
-#### Dependencies
-
 #### CVAR List
  * sm_prop_dynamic_enabled: sets whether bot naming is enabled (default: 1)
-
-#### Todo
 

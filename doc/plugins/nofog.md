@@ -5,10 +5,6 @@ Removes fog
 
 Removes all fog on the map. Release ready, no known bugs.
 
-#### Dependencies
-
 #### CVAR List
  * sm_nofog_enabled: sets whether bot naming is enabled (default: 1)
-
-#### Todo
 

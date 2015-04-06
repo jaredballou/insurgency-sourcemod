@@ -5,8 +5,6 @@ Adjusts behavior of RPG rounds
 
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
 
-#### Dependencies
-
 #### CVAR List
  * sm_rpgdrift_enabled: Sets whether RPG drifting is enabled (default: 1)
  * sm_rpgdrift_amount: Sets RPG drift max change per tick (default: 2.0)

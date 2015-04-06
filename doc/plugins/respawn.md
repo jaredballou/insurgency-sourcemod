@@ -21,5 +21,3 @@ Allows respawning of players or bots. Support for some customization of per roun
  * sm_respawn_reset_each_round: Reset player respawn counts each round); (default: 1)
  * sm_respawn_reset_each_objective: Reset player respawn counts each objective); (default: 1)
 
-#### Todo
-

@@ -5,8 +5,6 @@ Adds suicide bomb for bots
 
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
 
-#### Dependencies
-
 #### CVAR List
  * sm_suicidebomb_enabled: sets whether suicide bombs are enabled (default: 0)
  * sm_suicidebomb_explode_armed: Explode when killed if C4 or IED is in hand (default: 0)

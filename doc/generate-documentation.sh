@@ -52,15 +52,24 @@ do
 	echo "" >> plugins/$PLUGIN.md
 	cat plugins/description/$PLUGIN.md >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
-	echo "#### Dependencies" >> plugins/$PLUGIN.md
-	cat plugins/dependencies/$PLUGIN.md >> plugins/$PLUGIN.md
-	echo "" >> plugins/$PLUGIN.md
-	echo "#### CVAR List" >> plugins/$PLUGIN.md
-	cat plugins/cvar/$PLUGIN.md >> plugins/$PLUGIN.md
-	echo "" >> plugins/$PLUGIN.md
-	echo "#### Todo" >> plugins/$PLUGIN.md
-	cat plugins/todo/$PLUGIN.md >> plugins/$PLUGIN.md
-	echo "" >> plugins/$PLUGIN.md
+	if [ $(wc plugins/dependencies/$PLUGIN.md | awk '{print $2}') -gt 0 ]
+	then
+		echo "#### Dependencies" >> plugins/$PLUGIN.md
+		cat plugins/dependencies/$PLUGIN.md >> plugins/$PLUGIN.md
+		echo "" >> plugins/$PLUGIN.md
+	fi
+	if [ $(wc plugins/cvar/$PLUGIN.md | awk '{print $2}') -gt 0 ]
+	then
+		echo "#### CVAR List" >> plugins/$PLUGIN.md
+		cat plugins/cvar/$PLUGIN.md >> plugins/$PLUGIN.md
+		echo "" >> plugins/$PLUGIN.md
+	fi
+	if [ $(wc plugins/todo/$PLUGIN.md | awk '{print $2}') -gt 0 ]
+	then
+		echo "#### Todo" >> plugins/$PLUGIN.md
+		cat plugins/todo/$PLUGIN.md >> plugins/$PLUGIN.md
+		echo "" >> plugins/$PLUGIN.md
+	fi
 done
 cat include/HEADER.md plugins/*.md include/FOOTER.md > ../README.md
 
