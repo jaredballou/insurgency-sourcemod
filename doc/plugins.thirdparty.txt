@@ -4,6 +4,8 @@ clientprefs
 gem_damage_report
 killer_info_display
 serverhop
+simple-chatprocessor
+sm_downloader
 smtactics
 sourcebans_listener
 sourcebans

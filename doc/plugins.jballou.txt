@@ -20,6 +20,4 @@ prop_dynamic
 respawn
 restrictedarea
 rpgdrift
-simple-chatprocessor
-sm_downloader
 suicide_bomb

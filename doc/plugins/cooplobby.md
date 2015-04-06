@@ -1,0 +1,7 @@
+### Coop Lobby Override (version 0.0.1)
+Plugin for overriding Insurgency Coop to 16 players
+[Plugin](plugins/cooplobby.smx?raw=true) - [Source](scripting/cooplobby.sp)
+Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
+#### Dependencies
+#### CVAR List
+#### Todo
