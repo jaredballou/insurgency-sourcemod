@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"0.0.3"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"[INS] Navmesh Export - Exports navmesh data in JSON format"
 
 	}	
 	"Files"

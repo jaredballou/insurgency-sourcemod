@@ -52,7 +52,7 @@ $Copyright: (c) Simple Plugins 2008-2009$
 
 #define ADDSTRING(%1) SetTrieValue(g_hChatFormats, %1, 1)
 
-#define UPDATE_URL "http://dl.dropboxusercontent.com/u/83581539/ChatProcessor/updater.txt"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-simple-chatprocessor.txt"
 
 enum eMods
 {

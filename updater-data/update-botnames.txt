@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"1.0"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"Bot Names - Gives automatic names to bots on creation."
 
 	}	
 	"Files"

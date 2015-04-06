@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"0.0.1"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"[INS] Prop Removal - Plugin for removing Restricted Areas"
 
 	}	
 	"Files"

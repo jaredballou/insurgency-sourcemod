@@ -31,6 +31,7 @@
 #include <clientprefs>
  
 #define VERSION "1.6.19"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-hlstatsx.txt"
 #define HLXTAG "HLstatsX:CE"
 
 enum GameType {
@@ -1301,13 +1302,13 @@ public Action:hlx_sm_psay2(args)
 	new j = 0;
 	for (new i = 0; i < sizeof(client_message); i++)
 	{
-		new char = client_message[i];
-		if (char < 5 && char > 0)
+		new charcode = client_message[i];
+		if (charcode < 5 && charcode > 0)
 		{
 			continue;
 		}
 		buffer_message[j] = client_message[i];
-		if (char == 0)
+		if (charcode == 0)
 		{
 			break;
 		}

@@ -13,7 +13,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.2.0"
+#define PLUGIN_VERSION "0.2.5"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
@@ -22,15 +22,14 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 new Handle:cvarSpawnMode = INVALID_HANDLE; //Spawn in hiding spots (1), any spawnpoints that meets criteria (2), or only at normal spawnpoints at next objective (0, standard spawning, default setting)
 new Handle:cvarCounterattackMode = INVALID_HANDLE; //Use standard spawning for counterattack waves? Same values and default as above.
+new Handle:cvarCounterattackFinaleInfinite = INVALID_HANDLE; //Infinite finale?
 new Handle:cvarCounterattackFrac = INVALID_HANDLE; //Multiplier to total bots to take part in counterattack
+new Handle:cvarMinCounterattackDistance = INVALID_HANDLE; //Min distance from counterattack objective to spawn
 new Handle:cvarMinSpawnDelay = INVALID_HANDLE; //Min delay for spawning. Set to 0 for instant.
 new Handle:cvarMaxSpawnDelay = INVALID_HANDLE; //Max delay for spawning. Set to 0 for instant.
-new Handle:cvarSpawnSides = INVALID_HANDLE; //Spawn bots to the sides of the players when facing the next objective?
-new Handle:cvarSpawnRear = INVALID_HANDLE; //Spawn bots to the rear of pthe players when facing the next objective?
 new Handle:cvarMinPlayerDistance = INVALID_HANDLE; //Min/max distance from players to spawn
 new Handle:cvarMaxPlayerDistance = INVALID_HANDLE; //Min/max distance from players to spawn
 new Handle:cvarMinObjectiveDistance = INVALID_HANDLE; //Min/max distance from next objective to spawn
-new Handle:cvarMinCounterattackDistance = INVALID_HANDLE; //Min distance from counterattack objective to spawn
 new Handle:cvarMaxObjectiveDistance = INVALID_HANDLE; //Min/max distance from next objective to spawn
 new Handle:cvarMinFracInGame = INVALID_HANDLE; //Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
 new Handle:cvarMaxFracInGame = INVALID_HANDLE; //Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
@@ -41,7 +40,7 @@ new Handle:cvarRespawnMode = INVALID_HANDLE; //Respawn killed bots only when all
 new Handle:cvarStopSpawningAtObjective = INVALID_HANDLE; //Stop spawning new bots when near next objective (1, default)
 new Handle:cvarRemoveUnseenWhenCapping = INVALID_HANDLE; //Silently kill off all unseen bots when capping next point (1, default)
 new Handle:cvarSpawnSnipersAlone = INVALID_HANDLE; //Spawn snipers alone, maybe further out (1)?
-new bool:g_bEnabled, g_iSpawnMode, g_iRespawnMode, g_iCounterattackMode, Float:g_flCounterattackFrac, Float:g_flMinSpawnDelay, Float:g_flMaxSpawnDelay, bool:g_bSpawnSides, bool:g_bSpawnRear, Float:g_flMinPlayerDistance, Float:g_flMaxPlayerDistance, Float:g_flMinObjectiveDistance, Float:g_flMaxObjectiveDistance, Float:g_flMinFracInGame, Float:g_flMaxFracInGame, Float:g_flTotalSpawnFrac, g_iMinFireteamSize, g_iMaxFireteamSize, bool:g_bStopSpawningAtObjective, bool:g_bRemoveUnseenWhenCapping, bool:g_bSpawnSnipersAlone, Float:g_flMinCounterattackDistance;
+new bool:g_bEnabled, g_iSpawnMode, g_iRespawnMode, g_iCounterattackMode, g_iCounterattackFinaleInfinite, Float:g_flCounterattackFrac, Float:g_flMinSpawnDelay, Float:g_flMaxSpawnDelay, Float:g_flMinPlayerDistance, Float:g_flMaxPlayerDistance, Float:g_flMinObjectiveDistance, Float:g_flMaxObjectiveDistance, Float:g_flMinFracInGame, Float:g_flMaxFracInGame, Float:g_flTotalSpawnFrac, g_iMinFireteamSize, g_iMaxFireteamSize, bool:g_bStopSpawningAtObjective, bool:g_bRemoveUnseenWhenCapping, bool:g_bSpawnSnipersAlone, Float:g_flMinCounterattackDistance;
 //Until I add functionality
 
 
@@ -62,8 +61,6 @@ new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS+1], g_iNumReady, g_iBotsAlive,g_iB
 new bot_team = 3;
 
 #pragma unused g_bRemoveUnseenWhenCapping
-#pragma unused g_bSpawnRear
-#pragma unused g_bSpawnSides
 #pragma unused g_bSpawnSnipersAlone
 #pragma unused g_bStopSpawningAtObjective
 #pragma unused g_flCounterattackFrac
@@ -71,6 +68,7 @@ new bot_team = 3;
 #pragma unused g_flMinFracInGame
 #pragma unused g_flMinObjectiveDistance
 #pragma unused g_iCounterattackMode
+#pragma unused g_iCounterattackFinaleInfinite
 #pragma unused g_iMaxFireteamSize
 #pragma unused g_iMinFireteamSize
 #pragma unused g_iRespawnMode
@@ -82,17 +80,16 @@ enum SpawnModes {
 };
 enum RepawnModes {
         RepawnMode_None = 0,
-        RepawnMode_Counter,
-        RepawnMode_WhenKilled,
+        RepawnMode_Immediate,
+        RepawnMode_Waves,
         RepawnMode_Fireteams,
 };
-
 public Plugin:myinfo = {
-	name= "[INS] Bot spawns",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
+	name		= "[INS] Bot spawns",
+	author  	= "Jared Ballou (jballou)",
+	description 	= PLUGIN_DESCRIPTION,
+	version 	= PLUGIN_VERSION,
+	url 		= "http://jballou.com/"
 };
 
 public OnPluginStart()
@@ -100,24 +97,32 @@ public OnPluginStart()
 	PrintToServer("[BOTSPAWNS] Starting up");
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botspawns_enabled", "0", "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "0", "Spawn in hiding spots (1), any spawnpoints that meets criteria (2), or only at normal spawnpoints at next objective (0, standard spawning, default setting)", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarRespawnMode = CreateConVar("sm_botspawns_respawn_mode", "0", "Do not respawn (0) Respawn fixed count (1) Respawn killed bots only when all bots die (2) Respawn fireteams once the number drops enough to spawn a team (3)", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarCounterattackMode = CreateConVar("sm_botspawns_counterattack_mode", "1", "Use standard spawning for final counterattack waves (0), hiding spots (1) or any spawnpoint (2)?", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "1", "Only normal spawnpoints at the objective, the old way (0), spawn in hiding spots following rules (1), spawnpoints that meet rules (2)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarRespawnMode = CreateConVar("sm_botspawns_respawn_mode", "0", "Do not respawn (0), Respawn immediately as killed (1), Respawn killed bots as waves only when all bots are dead (2), Respawn fireteams once the number drops enough to spawn a team (3)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	cvarCounterattackMode = CreateConVar("sm_botspawns_counterattack_mode", "0", "Do not alter default game spawning during counterattacks (0), Respawn using new rules during counterattack by following sm_botspawns_respawn_mode (1)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarCounterattackFinaleInfinite = CreateConVar("sm_botspawns_counterattack_finale_infinite", "0", "Obey sm_botspawns_counterattack_respawn_mode (0), use rules and do infinite respawns (1)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCounterattackFrac = CreateConVar("sm_botspawns_counterattack_frac", "0.5", "Multiplier to total bots for spawning in counterattack wave", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	cvarMinCounterattackDistance = CreateConVar("sm_botspawns_min_counterattack_distance", "3600", "Min distance from counterattack objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarMinSpawnDelay = CreateConVar("sm_botspawns_min_spawn_delay", "1", "Min delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxSpawnDelay = CreateConVar("sm_botspawns_max_spawn_delay", "15", "Max delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarSpawnSides = CreateConVar("sm_botspawns_spawn_sides", "1", "Spawn bots to the sides of the players when facing the next objective?", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarSpawnRear = CreateConVar("sm_botspawns_spawn_rear", "1", "Spawn bots to the rear of pthe players when facing the next objective?", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarMinPlayerDistance = CreateConVar("sm_botspawns_min_player_distance", "1200", "Min distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxPlayerDistance = CreateConVar("sm_botspawns_max_player_distance", "16000", "Max distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarMinObjectiveDistance = CreateConVar("sm_botspawns_min_objective_distance", "1", "Min distance from next objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMinCounterattackDistance = CreateConVar("sm_botspawns_min_counterattack_distance", "3600", "Min distance from counterattack objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxObjectiveDistance = CreateConVar("sm_botspawns_max_objective_distance", "12000", "Max distance from next objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarMinFracInGame = CreateConVar("sm_botspawns_min_frac_in_game", "0.75", "Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxFracInGame = CreateConVar("sm_botspawns_max_frac_in_game", "1", "Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarTotalSpawnFrac = CreateConVar("sm_botspawns_total_spawn_frac", "1.75", "Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard, values less than 1 are not supported.", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarMinFireteamSize = CreateConVar("sm_botspawns_min_fireteam_size", "3", "Min number of bots to spawn per fireteam. Default 3", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxFireteamSize = CreateConVar("sm_botspawns_max_fireteam_size", "5", "Max number of bots to spawn per fireteam. Default 5", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarStopSpawningAtObjective = CreateConVar("sm_botspawns_stop_spawning_at_objective", "1", "Stop spawning new bots when near next objective (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarRemoveUnseenWhenCapping = CreateConVar("sm_botspawns_remove_unseen_when_capping", "1", "Silently kill off all unseen bots when capping next point (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarSpawnSnipersAlone = CreateConVar("sm_botspawns_spawn_snipers_alone", "1", "Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -126,12 +131,11 @@ public OnPluginStart()
 	HookConVarChange(cvarEnabled,CvarChange);
 	HookConVarChange(cvarSpawnMode,CvarChange);
 	HookConVarChange(cvarRespawnMode,CvarChange);
+	HookConVarChange(cvarCounterattackFinaleInfinite,CvarChange);
 	HookConVarChange(cvarCounterattackMode,CvarChange);
 	HookConVarChange(cvarCounterattackFrac,CvarChange);
 	HookConVarChange(cvarMinSpawnDelay,CvarChange);
 	HookConVarChange(cvarMaxSpawnDelay,CvarChange);
-	HookConVarChange(cvarSpawnSides,CvarChange);
-	HookConVarChange(cvarSpawnRear,CvarChange);
 	HookConVarChange(cvarMinPlayerDistance,CvarChange);
 	HookConVarChange(cvarMaxPlayerDistance,CvarChange);
 	HookConVarChange(cvarMinObjectiveDistance,CvarChange);
@@ -181,11 +185,13 @@ public UpdateCvars()
 {
 	g_iSpawnMode = GetConVarInt(cvarSpawnMode);
 	g_iRespawnMode = GetConVarInt(cvarRespawnMode);
+	g_iCounterattackFinaleInfinite = GetConVarInt(cvarCounterattackFinaleInfinite);
 	g_iCounterattackMode = GetConVarInt(cvarCounterattackMode);
 	g_iMinFireteamSize = GetConVarInt(cvarMinFireteamSize);
 	g_iMaxFireteamSize = GetConVarInt(cvarMaxFireteamSize);
 
 	g_flCounterattackFrac = GetConVarFloat(cvarCounterattackFrac);
+	g_flMinCounterattackDistance = GetConVarFloat(cvarMinCounterattackDistance);
 	g_flMinSpawnDelay = GetConVarFloat(cvarMinSpawnDelay);
 	g_flMaxSpawnDelay = GetConVarFloat(cvarMaxSpawnDelay);
 	g_flMinPlayerDistance = GetConVarFloat(cvarMinPlayerDistance);
@@ -195,14 +201,11 @@ public UpdateCvars()
 	g_flMinFracInGame = GetConVarFloat(cvarMinFracInGame);
 	g_flMaxFracInGame = GetConVarFloat(cvarMaxFracInGame);
 	g_flTotalSpawnFrac = GetConVarFloat(cvarTotalSpawnFrac);
-	g_flMinCounterattackDistance = GetConVarFloat(cvarMinCounterattackDistance);
 
 	g_bEnabled = GetConVarBool(cvarEnabled);
 	g_bStopSpawningAtObjective = GetConVarBool(cvarStopSpawningAtObjective);
 	g_bRemoveUnseenWhenCapping = GetConVarBool(cvarRemoveUnseenWhenCapping);
 	g_bSpawnSnipersAlone = GetConVarBool(cvarSpawnSnipersAlone);
-	g_bSpawnSides = GetConVarBool(cvarSpawnSides);
-	g_bSpawnRear = GetConVarBool(cvarSpawnRear);
 }
 
 public OnLibraryAdded(const String:name[])
@@ -298,6 +301,7 @@ GetBestHidingSpot(client,iteration=0)
 				{
 					if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
 					{
+						PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d iCPHIndex %d since it is in sight of %N",client,iSpot,iCPHIndex,iTarget);
 						pointok = 0;
 						break;
 					}
@@ -305,6 +309,7 @@ GetBestHidingSpot(client,iteration=0)
 				}
 				if (distance < MIN_PLAYER_DISTANCE)
 				{
+					PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
 					pointok = 0;
 					break;
 				}
@@ -414,7 +419,12 @@ public Action:Timer_ProcessQueue(Handle:timer)
 //	new iBotCountMin = RoundToFloor(Float:g_iBotsTotal * g_flMinFracInGame);
 	new iBotCountMax = RoundToFloor(Float:g_iBotsTotal * g_flMaxFracInGame);
 	//If we need to spawn bots, hand out tokens
-	if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
+	//new g_iBotsToSpawn
+	if (
+		((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && 
+		((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && 
+		((g_iBotsToSpawn) || (g_iBotsToSpawn < 0))
+	)
 	{
 		for (new i = 1; i <= MaxClients; i++) {
 			if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
@@ -443,7 +453,7 @@ public Action:Timer_PostSpawn(Handle:timer, any:client)
 {
 	PrintToServer("[BOTSPAWNS] called Timer_PostSpawn for client %N (%d)",client,client);
 	g_iSpawning[client] = 0;
-	if (g_iHidingSpotCount)
+	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots))
 	{
 		new Float:flHidingSpot[3],Float:vecOrigin[3];
 		new iSpot = GetBestHidingSpot(client);
@@ -587,11 +597,11 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	return Plugin_Continue;
 }
 
-public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!g_bEnabled)
 	{
-		return true;
+		return Plugin_Continue;
 	}
 	//PrintToServer("[BOTSPAWNS] Calling Event_PlayerDeath");
 	//"deathflags" "short"
@@ -609,7 +619,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	//"x" "float"
 	//"z" "float"
 	//"assister" "short"
-	return true;
+	return Plugin_Continue;
 }
 public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -673,7 +683,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	return Plugin_Continue;
 }
 
-public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
 /*
 	//"squad_slot" "byte"
@@ -703,5 +713,5 @@ public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadca
 		g_client_last_classstring[client] = class_template;
 	}
 */
-	return true;
+	return Plugin_Continue;
 }

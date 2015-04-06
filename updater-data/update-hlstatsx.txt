@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	""
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"HLstatsX CE Ingame Plugin - Provides ingame functionality for interaction from an HLstatsX CE installation"
 
 	}	
 	"Files"

@@ -9,6 +9,7 @@
 #include <navmesh>
 
 #define PLUGIN_VERSION "1.0.3"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-navmesh.txt"
 
 public Plugin:myinfo = 
 {

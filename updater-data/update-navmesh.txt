@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"1.0.3"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"SourcePawn Navigation Mesh Parser - A plugin that can read Valve's Navigation Mesh."
 
 	}	
 	"Files"

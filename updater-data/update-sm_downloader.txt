@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.1"
+			"Latest"	"1.4"
 		}
-		"Notes"		"MyPlugin"
+		"Notes"		"SM File/Folder Downloader and Precacher - Downloads and Precaches Files"
 
 	}	
 	"Files"

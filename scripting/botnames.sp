@@ -6,6 +6,7 @@
 
 #define PLUGIN_VERSION "1.0"
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botnames.txt"
 #define BOT_NAME_PATH "configs/botnames"
 
 // this array will store the names loaded
