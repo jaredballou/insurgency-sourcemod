@@ -227,7 +227,7 @@ native Handle:curl_easy_init();
  * @ param String		buffer	The value to set the option to.
  * @ return bool				1 on success. 0 = The option not accept string or unsupport.
  */
-native bool:curl_easy_setopt_string(Handle:hndl, CURLoption:opt, const any:buffer[]);
+native bool:curl_easy_setopt_string(Handle:hndl, CURLoption:opt, const char[] buffer);
 
 /**
  * Set a curl option for CURLOPTTYPE_LONG type

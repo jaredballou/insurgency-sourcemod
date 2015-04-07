@@ -18,10 +18,16 @@ Download_cURL(const String:url[], const String:dest[])
 	
 	new CURL_Default_opt[][2] = {
 		{_:CURLOPT_NOSIGNAL,		1},
+		{_:CURLOPT_FOLLOWLOCATION,	1},
+		{_:CURLOPT_AUTOREFERER,		1},
+		{_:CURLOPT_MAXREDIRS,		1},
+		{_:CURLOPT_MAXREDIRS,		1},
+		{_:CURLOPT_SSL_VERIFYPEER, 	0},
+		{_:CURLOPT_SSL_VERIFYHOST,	0},
 		{_:CURLOPT_NOPROGRESS,		1},
-		{_:CURLOPT_TIMEOUT,			30},
+		{_:CURLOPT_TIMEOUT,		30},
 		{_:CURLOPT_CONNECTTIMEOUT,	60},
-		{_:CURLOPT_VERBOSE,			0}
+		{_:CURLOPT_VERBOSE,		0}
 	};
 	
 	new Handle:headers = curl_slist();
@@ -35,7 +41,9 @@ Download_cURL(const String:url[], const String:dest[])
 	new Handle:curl = curl_easy_init();
 	curl_easy_setopt_int_array(curl, CURL_Default_opt, sizeof(CURL_Default_opt));
 	curl_easy_setopt_handle(curl, CURLOPT_WRITEDATA, hFile);
-	curl_easy_setopt_string(curl, CURLOPT_URL, url);
+//	new String:url[512];
+//	Format(class_template,MAX_CLASS_LEN,"%s",url);
+	curl_easy_setopt_string(curl, CURLOPT_URL, sURL);
 	curl_easy_setopt_handle(curl, CURLOPT_HTTPHEADER, headers);
 	curl_easy_perform_thread(curl, OnCurlComplete, hDLPack);
 }
