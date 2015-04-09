@@ -591,7 +591,7 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 			//CreateTimer(0.1, Timer_RemoveRagdoll, _iEntity, TIMER_FLAG_NO_MAPCHANGE);
 			RemoveEdict(_iEntity);
 		}
-		return Plugin_Stop;
+		return Plugin_Continue;
 	}
 	//Join queue
 	if (IsFakeClient(client))
@@ -711,7 +711,7 @@ public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dont
 	//PrintToServer("[LOGGER] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
 
 	if( client == 0)
-		return;
+		return Plugin_Continue;
 	if(!StrEqual(g_client_last_classstring[client],class_template)) {
 		LogRoleChange( client, class_template );
 		g_client_last_classstring[client] = class_template;

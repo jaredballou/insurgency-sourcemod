@@ -16,7 +16,7 @@
 new Handle:hAdminMenu = INVALID_HANDLE;
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
-new Handle:h_RespawnTimers[MAXPLAYERS+1];
+new Handle:h_RespawnTimers[MAXPLAYERS+1] = INVALID_HANDLE;
 
 
 // This will be used for checking which team the player is on before repsawning them

@@ -17,8 +17,11 @@ new bool:g_bOverviewLoaded = false;
 new g_iOverviewPosX = 0;
 new g_iOverviewPosY = 0;
 new g_iOverviewRotate = 0;
-new Handle:h_DisplayPrint;
+new Float:g_flOverviewGridDivisions = 8.0;
 new Float:g_fOverviewScale = 1.0;
+
+new Handle:h_DisplayPrint;
+
 new Handle:cvarVersion = INVALID_HANDLE;
 new Handle:cvarEnabled = INVALID_HANDLE;
 new Handle:cvarTeamOnly = INVALID_HANDLE;
@@ -179,7 +182,8 @@ bool:OverviewLoad(const String:sMapName[])
 	g_iOverviewPosY = KvGetNum(g_hNavMeshKeyValues, "pos_y", 0);
 	g_iOverviewRotate = KvGetNum(g_hNavMeshKeyValues, "rotate", 0);
 	g_fOverviewScale = KvGetFloat(g_hNavMeshKeyValues, "scale", 1.0);
-	//PrintToServer("[NMchat]: OverviewLoad KeyValues parsed: pos_x %d pos_y %d rotate %d scale %f", g_iOverviewPosX, g_iOverviewPosY, g_iOverviewRotate, g_fOverviewScale);
+	g_flOverviewGridDivisions = KvGetFloat(g_hNavMeshKeyValues, "grid_divisions", 8.0);
+	PrintToServer("[NMchat]: OverviewLoad KeyValues parsed: pos_x %d pos_y %d rotate %d scale %f grid_divisions %f", g_iOverviewPosX, g_iOverviewPosY, g_iOverviewRotate, g_fOverviewScale,g_flOverviewGridDivisions);
  
 	CloseHandle(g_hNavMeshKeyValues);
 	return true;
@@ -278,10 +282,11 @@ stock GetGridPos(Float:position[3],String:buffer[], size)
 	new String:sLetters[27]=".ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	flMapPos[0] = FloatAbs(FloatDiv((position[0] - float(g_iOverviewPosX)), g_fOverviewScale));
 	flMapPos[1] = FloatAbs(FloatDiv((position[1] - float(g_iOverviewPosY)), g_fOverviewScale));
-	iGridPos[0] = RoundToFloor(FloatDiv(flMapPos[0], 128.0))+1;
-	iGridPos[1] = RoundToFloor(FloatDiv(flMapPos[1], 128.0))+1;
+	new Float:flGridSize = FloatDiv(1024.0,g_flOverviewGridDivisions);
+	iGridPos[0] = RoundToFloor(FloatDiv(flMapPos[0], flGridSize))+1;
+	iGridPos[1] = RoundToFloor(FloatDiv(flMapPos[1], flGridSize))+1;
+	//PrintToServer("[NMCHAT] Raw position is %f,%f calculated to %f,%f flGridSize %f grid %c, %d",position[0],position[1],flMapPos[0],flMapPos[1],flGridSize,sLetters[iGridPos[0]],iGridPos[1]);
 	Format(buffer,size, "{G}[%c%d] ",sLetters[iGridPos[0]],iGridPos[1]);
-//	PrintHintText(client, "Raw position is %f,%f calculated to %f,%f grid %c%d",position[0],position[1],flMapPos[0],flMapPos[1],sLetters[iGridPos[0]],iGridPos[1]);
 	return true;
 }
 
