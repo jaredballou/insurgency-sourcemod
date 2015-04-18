@@ -77,6 +77,7 @@ do
 		echo "" >> plugins/$PLUGIN.md
 	fi
 done
+echo >> $TOC
 cat include/HEADER.md include/TOC.md plugins/*.md include/FOOTER.md > ../README.md
 
 git add *

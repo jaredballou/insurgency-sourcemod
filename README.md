@@ -26,6 +26,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#restricted-area-removal-version-001'>Restricted Area Removal 0.0.1</a>
  * <a href='#rpg-adjustments-version-003'>RPG Adjustments 0.0.3</a>
  * <a href='#suicide-bombers-version-004'>Suicide Bombers 0.0.4</a>
+
 ---
 ### Ammo Check (version 0.0.6)
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
@@ -33,13 +34,15 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
  * [Source - ammocheck.sp](scripting/ammocheck.sp)
 
-Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. Future features I'd like to do are to show a reload animation partially to animate the check, and have the check command delay the next weapon attack to simulate removing and checking the magazine. Due to the way the theater system works, it's not practical to hard-code weapon data like magazine capacity in the plugin as similar CS and TF2 plugins do, so I have a hacky method that checks the 'm_iClip' variable and uses that to perform the math. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
+Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
 
 #### Todo
  * [ ] Add client-side config on enable, display location, and to show after mag change
+ * [ ] Show a reload animation partially to animate the check
+ * [ ] Have the check command delay the next weapon attack to simulate removing and checking the magazine.
 
 ---
 ### Backblast (version 0.0.2)
