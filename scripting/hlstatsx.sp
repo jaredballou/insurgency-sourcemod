@@ -30,7 +30,8 @@
 #include <cstrike>
 #include <clientprefs>
  
-#define VERSION "1.6.19"
+#define PLUGIN_VERSION "1.6.19"
+#define PLUGIN_DESCRIPTION "Provides ingame functionality for interaction from an HLstatsX CE installation"
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-hlstatsx.txt"
 #define HLXTAG "HLstatsX:CE"
 
@@ -130,8 +131,8 @@ new EngineVersion:g_GameEngine = Engine_Unknown;
 public Plugin:myinfo = {
 	name = "HLstatsX CE Ingame Plugin",
 	author = "psychonic",
-	description = "Provides ingame functionality for interaction from an HLstatsX CE installation",
-	version = VERSION,
+	description = PLUGIN_DESCRIPTION,
+	version = PLUGIN_VERSION,
 	url = "http://www.hlxcommunity.com"
 };
 
@@ -209,7 +210,7 @@ public OnPluginStart()
 		}
 	}
 	
-	CreateConVar("hlxce_plugin_version", VERSION, "HLstatsX:CE Ingame Plugin", FCVAR_PLUGIN|FCVAR_NOTIFY);
+	CreateConVar("hlxce_plugin_version", PLUGIN_VERSION, "HLstatsX:CE Ingame Plugin", FCVAR_PLUGIN|FCVAR_NOTIFY);
 	CreateConVar("hlxce_version", "", "HLstatsX:CE", FCVAR_PLUGIN|FCVAR_NOTIFY);
 	CreateConVar("hlxce_webpage", "http://www.hlxcommunity.com", "http://www.hlxcommunity.com", FCVAR_PLUGIN|FCVAR_NOTIFY);
 	

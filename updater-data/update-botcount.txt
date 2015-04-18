@@ -8,10 +8,11 @@
 		}
 		"Notes"		"[INS] Bot Counter - Shows Bots Left Alive"
 
-	}	
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/botcount.smx"		
+		"Plugin"	"Path_SM/plugins/botcount.smx"
+
 		"Source"	"Path_SM/scripting/botcount.sp"
 	}
 }

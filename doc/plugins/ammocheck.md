@@ -8,3 +8,6 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
 
+#### Todo
+ * [ ] Add client-side config on enable, display location, and to show after mag change
+

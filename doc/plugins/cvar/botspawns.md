@@ -1,12 +1,12 @@
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features
- * "sm_botspawns_spawn_mode" "1" //Only normal spawnpoints at the objective, the old way
+ * "sm_botspawns_spawn_mode" "0" //Only normal spawnpoints at the objective, the old way
  * "sm_botspawns_respawn_mode" "0" //Do not respawn
  * "sm_botspawns_counterattack_mode" "0" //Do not alter default game spawning during counterattacks
  * "sm_botspawns_counterattack_finale_infinite" "0" //Obey sm_botspawns_counterattack_respawn_mode
  * "sm_botspawns_counterattack_frac" "0.5" //Multiplier to total bots for spawning in counterattack wave
  * "sm_botspawns_min_counterattack_distance" "3600" //Min distance from counterattack objective to spawn
  * "sm_botspawns_min_spawn_delay" "1" //Min delay in seconds for spawning. Set to 0 for instant.
- * "sm_botspawns_max_spawn_delay" "15" //Max delay in seconds for spawning. Set to 0 for instant.
+ * "sm_botspawns_max_spawn_delay" "30" //Max delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_player_distance" "1200" //Min distance from players to spawn
  * "sm_botspawns_max_player_distance" "16000" //Max distance from players to spawn
  * "sm_botspawns_min_objective_distance" "1" //Min distance from next objective to spawn

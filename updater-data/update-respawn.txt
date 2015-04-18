@@ -11,7 +11,11 @@
 	}	
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"		
-		"Source"	"Path_SM/scripting/myplugin.sp"
+		"Plugin"	"Path_SM/plugins/respawn.smx"
+
+		"Plugin"	"Path_SM/gamedata/plugin.respawn.txt"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+		"Plugin"	"Path_SM/translations/respawn.phrases.txt"
+		"Source"	"Path_SM/scripting/respawn.sp"
 	}
 }

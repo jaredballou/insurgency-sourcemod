@@ -4,14 +4,14 @@
 	{
 		"Version"
 		{
-			"Latest"	""
+			"Latest"	"1.6.19"
 		}
 		"Notes"		"HLstatsX CE Ingame Plugin - Provides ingame functionality for interaction from an HLstatsX CE installation"
 
 	}	
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"		
-		"Source"	"Path_SM/scripting/myplugin.sp"
+		"Plugin"	"Path_SM/plugins/hlstatsx.smx"		
+		"Source"	"Path_SM/scripting/hlstatsx.sp"
 	}
 }

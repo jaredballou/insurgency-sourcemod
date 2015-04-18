@@ -1,4 +1,4 @@
-### HLstatsX CE Ingame Plugin (version )
+### HLstatsX CE Ingame Plugin (version 1.6.19)
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
 [Plugin](plugins/hlstatsx.smx?raw=true) - [Source](scripting/hlstatsx.sp)

@@ -8,10 +8,10 @@
 		}
 		"Notes"		"[INS] Backblast - Adds backblast to rocket based weapons"
 
-	}	
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/backblast.smx"		
+		"Plugin"	"Path_SM/plugins/backblast.smx"
 		"Source"	"Path_SM/scripting/backblast.sp"
 	}
 }

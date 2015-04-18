@@ -7,11 +7,11 @@
 			"Latest"	"1.0.1"
 		}
 		"Notes"		"MyPlugin"
-
-	}	
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"		
+		"Plugin"	"Path_SM/plugins/myplugin.smx"
+
 		"Source"	"Path_SM/scripting/myplugin.sp"
 	}
 }

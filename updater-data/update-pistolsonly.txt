@@ -11,7 +11,7 @@
 	}	
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"		
-		"Source"	"Path_SM/scripting/myplugin.sp"
+		"Plugin"	"Path_SM/plugins/pistolsonly.smx"		
+		"Source"	"Path_SM/scripting/pistolsonly.sp"
 	}
 }

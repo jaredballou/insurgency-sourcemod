@@ -8,10 +8,10 @@
 		}
 		"Notes"		"Bot Names - Gives automatic names to bots on creation."
 
-	}	
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"		
-		"Source"	"Path_SM/scripting/myplugin.sp"
+		"Plugin"	"Path_SM/plugins/botnames.smx"
+		"Source"	"Path_SM/scripting/botnames.sp"
 	}
 }

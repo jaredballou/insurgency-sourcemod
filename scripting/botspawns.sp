@@ -13,7 +13,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.2.5"
+#define PLUGIN_VERSION "0.2.6"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
@@ -98,7 +98,7 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botspawns_enabled", "0", "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
-	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "1", "Only normal spawnpoints at the objective, the old way (0), spawn in hiding spots following rules (1), spawnpoints that meet rules (2)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "0", "Only normal spawnpoints at the objective, the old way (0), spawn in hiding spots following rules (1), spawnpoints that meet rules (2)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarRespawnMode = CreateConVar("sm_botspawns_respawn_mode", "0", "Do not respawn (0), Respawn immediately as killed (1), Respawn killed bots as waves only when all bots are dead (2), Respawn fireteams once the number drops enough to spawn a team (3)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarCounterattackMode = CreateConVar("sm_botspawns_counterattack_mode", "0", "Do not alter default game spawning during counterattacks (0), Respawn using new rules during counterattack by following sm_botspawns_respawn_mode (1)", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -108,7 +108,7 @@ public OnPluginStart()
 	cvarMinCounterattackDistance = CreateConVar("sm_botspawns_min_counterattack_distance", "3600", "Min distance from counterattack objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarMinSpawnDelay = CreateConVar("sm_botspawns_min_spawn_delay", "1", "Min delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMaxSpawnDelay = CreateConVar("sm_botspawns_max_spawn_delay", "15", "Max delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarMaxSpawnDelay = CreateConVar("sm_botspawns_max_spawn_delay", "30", "Max delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarMinPlayerDistance = CreateConVar("sm_botspawns_min_player_distance", "1200", "Min distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxPlayerDistance = CreateConVar("sm_botspawns_max_player_distance", "16000", "Max distance from players to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -125,6 +125,7 @@ public OnPluginStart()
 
 	cvarStopSpawningAtObjective = CreateConVar("sm_botspawns_stop_spawning_at_objective", "1", "Stop spawning new bots when near next objective (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarRemoveUnseenWhenCapping = CreateConVar("sm_botspawns_remove_unseen_when_capping", "1", "Silently kill off all unseen bots when capping next point (1, default)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
 	cvarSpawnSnipersAlone = CreateConVar("sm_botspawns_spawn_snipers_alone", "1", "Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	HookConVarChange(cvarVersion,CvarChange);
@@ -267,75 +268,74 @@ public OnMapStart()
 	RestartBotQueue();
 	return;
 }
+CheckHidingSpotRules(m_nActivePushPointIndex,iCPHIndex,iSpot,client)
+{
+	new m_iTeam = GetClientTeam(client);
+	new Float:distance,Float:furthest,Float:closest=-1.0,Float:flHidingSpot[3];
+	new Float:vecOrigin[3];
+
+	GetClientAbsOrigin(client,vecOrigin);
+	flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
+	flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
+	flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+	for (new iTarget = 1; iTarget < MaxClients; iTarget++)
+	{
+		if (!IsValidClient(iTarget))
+			continue;
+		if (!IsClientInGame(iTarget))
+			continue;
+		distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
+		//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d is %f",iTarget,iSpot,distance);
+		if (GetClientTeam(iTarget) != m_iTeam)
+		{
+			if (distance > furthest)
+				furthest = distance;
+			if ((distance < closest) || (closest < 0))
+				closest = distance;
+			if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
+			{
+				PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d since it is in sight of %N",client,iSpot,iTarget);
+				return 0;
+			}
+		}
+		if (distance < MIN_PLAYER_DISTANCE)
+		{
+			PrintToServer("[BOTSPAWNS] Distance too small from %N to iSpot %d distance %f",iTarget,iSpot,distance);
+			return 0;
+		}
+	}
+	if (closest > g_flMaxPlayerDistance)
+	{
+		PrintToServer("[BOTSPAWNS] iSpot %d is too far from nearest player distance %f",iSpot,closest);
+		return 0;
+	}
+	if (Ins_InCounterAttack())
+	{
+		distance = GetVectorDistance(flHidingSpot,m_vCPPositions[m_nActivePushPointIndex]);
+		if (distance < g_flMinCounterattackDistance)
+		{
+			PrintToServer("[BOTSPAWNS] iSpot %d is too close counterattack point distance %f",iSpot,distance);
+			return 0;
+		}
+	}
+	distance = GetVectorDistance(flHidingSpot,vecOrigin);
+	PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d distance %f",client,iCPHIndex,iSpot,distance);
+	return 1;
+}
 GetBestHidingSpot(client,iteration=0)
 {
 	UpdatePlayerOrigins();
 	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
 //	if (Ins_InCounterAttack())
 //		m_nActivePushPointIndex--;
-	new m_iTeam = GetClientTeam(client);
-	new Float:vecOrigin[3];
 
-	GetClientAbsOrigin(client,vecOrigin);
 	new minidx = (iteration) ? 0 : g_iCPLastHidingSpot[m_nActivePushPointIndex];
 	new maxidx = (iteration) ? g_iCPLastHidingSpot[m_nActivePushPointIndex] : g_iCPHidingSpotCount[m_nActivePushPointIndex];
 	for (new iCPHIndex = minidx; iCPHIndex < maxidx; iCPHIndex++)
 	{
-		new pointok = 1;
 		new iSpot = g_iCPHidingSpots[m_nActivePushPointIndex][iCPHIndex];
-		new Float:distance,Float:furthest,Float:closest=-1.0,Float:flHidingSpot[3];
-		flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
-		flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
-		flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
-		for (new iTarget = 1; iTarget < MaxClients; iTarget++)
+		if (CheckHidingSpotRules(m_nActivePushPointIndex,iCPHIndex,iSpot,client))
 		{
-			if (!IsValidClient(iTarget))
-				continue;
-			if (!IsClientInGame(iTarget))
-				continue;
-			distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
-			//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d iCPHIndex %d is %f",iTarget,iSpot,iCPHIndex,distance);
-			if (GetClientTeam(iTarget) != m_iTeam)
-			{
-				if (distance > furthest)
-					furthest = distance;
-				if ((distance < closest) || (closest < 0))
-					closest = distance;
-				if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
-				{
-					PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d iCPHIndex %d since it is in sight of %N",client,iSpot,iCPHIndex,iTarget);
-					pointok = 0;
-					break;
-				}
-				
-			}
-			if (distance < MIN_PLAYER_DISTANCE)
-			{
-				PrintToServer("[BOTSPAWNS] Distance too small from %N to iSpot %d iCPHIndex %d distance %f",iTarget,iSpot,iCPHIndex,distance);
-				pointok = 0;
-				break;
-			}
-		}
-		if (closest > g_flMaxPlayerDistance)
-		{
-			PrintToServer("[BOTSPAWNS] iSpot %d iCPHIndex %d is too far from nearest player distance %f",iSpot,iCPHIndex,closest);
-			pointok = 0;
-			continue;
-		}
-		if (Ins_InCounterAttack())
-		{
-			distance = GetVectorDistance(flHidingSpot,m_vCPPositions[m_nActivePushPointIndex]);
-			if (distance < g_flMinCounterattackDistance)
-			{
-				PrintToServer("[BOTSPAWNS] iSpot %d iCPHIndex %d is too close counterattack point distance %f",iSpot,iCPHIndex,distance);
-				pointok = 0;
-				continue;
-			}
-		}
-		if (pointok)
-		{
-			distance = GetVectorDistance(flHidingSpot,vecOrigin);
-			PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d distance %f",client,iCPHIndex,iSpot,distance);
 			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
 			return iSpot;
 		}

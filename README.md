@@ -12,6 +12,9 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
 
+#### Todo
+ * [ ] Add client-side config on enable, display location, and to show after mag change
+
 ### Backblast (version 0.0.2)
 Adds backblast to rocket based weapons
 
@@ -62,7 +65,7 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 #### Todo
  * [ ] Add per-team CVARs to use different lists
 
-### Bot spawns (version 0.2.5)
+### Bot spawns (version 0.2.6)
 Adds a number of options and ways to handle bot spawns
 
 [Plugin](plugins/botspawns.smx?raw=true) - [Source](scripting/botspawns.sp)
@@ -74,14 +77,14 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
 
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features
- * "sm_botspawns_spawn_mode" "1" //Only normal spawnpoints at the objective, the old way
+ * "sm_botspawns_spawn_mode" "0" //Only normal spawnpoints at the objective, the old way
  * "sm_botspawns_respawn_mode" "0" //Do not respawn
  * "sm_botspawns_counterattack_mode" "0" //Do not alter default game spawning during counterattacks
  * "sm_botspawns_counterattack_finale_infinite" "0" //Obey sm_botspawns_counterattack_respawn_mode
  * "sm_botspawns_counterattack_frac" "0.5" //Multiplier to total bots for spawning in counterattack wave
  * "sm_botspawns_min_counterattack_distance" "3600" //Min distance from counterattack objective to spawn
  * "sm_botspawns_min_spawn_delay" "1" //Min delay in seconds for spawning. Set to 0 for instant.
- * "sm_botspawns_max_spawn_delay" "15" //Max delay in seconds for spawning. Set to 0 for instant.
+ * "sm_botspawns_max_spawn_delay" "30" //Max delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_player_distance" "1200" //Min distance from players to spawn
  * "sm_botspawns_max_player_distance" "16000" //Max distance from players to spawn
  * "sm_botspawns_min_objective_distance" "1" //Min distance from next objective to spawn
@@ -142,7 +145,7 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 #### CVAR List
  * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
 
-### HLstatsX CE Ingame Plugin (version )
+### HLstatsX CE Ingame Plugin (version 1.6.19)
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
 [Plugin](plugins/hlstatsx.smx?raw=true) - [Source](scripting/hlstatsx.sp)
