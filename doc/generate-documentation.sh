@@ -49,7 +49,7 @@ do
         NEWTITLE="$NEWNAME (version $NEWVER)"
         NEWHREF=$(echo $NEWTITLE | sed -e 's/ /-/g' -e 's/[^a-zA-Z0-9-]//g')
 
-	echo -e " * <a href='#${NEWHREF,,}'>$NEWNAME $NEWVER</a>" >> $TOC
+	echo -e " * <a href='#user-content-${NEWHREF,,}'>$NEWNAME $NEWVER</a>" >> $TOC
 	echo -e "---\n### $NEWTITLE" > plugins/$PLUGIN.md
 	echo "$NEWDESC" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
