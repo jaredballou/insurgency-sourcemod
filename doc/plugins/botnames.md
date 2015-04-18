@@ -1,5 +1,5 @@
 ---
-### <a name='Bot Names'>Bot Names (version 1.0)</a>
+### Bot Names (version 1.0)
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)

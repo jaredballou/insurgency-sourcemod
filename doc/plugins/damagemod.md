@@ -1,5 +1,5 @@
 ---
-### <a name='Damage Modifier'>Damage Modifier (version 0.0.1)</a>
+### Damage Modifier (version 0.0.1)
 Modifies all damage applied
 
  * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)

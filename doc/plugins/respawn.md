@@ -1,5 +1,5 @@
 ---
-### <a name='Player Respawn'>Player Respawn (version 1.7.0)</a>
+### Player Respawn (version 1.7.0)
 Respawn dead players via admincommand or by queues
 
  * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)

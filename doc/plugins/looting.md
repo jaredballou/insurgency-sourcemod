@@ -1,5 +1,5 @@
 ---
-### <a name='Looting'>Looting (version 0.0.1)</a>
+### Looting (version 0.0.1)
 Adds ability to loot items from dead bodies
 
  * [Plugin - looting.smx](plugins/looting.smx?raw=true)

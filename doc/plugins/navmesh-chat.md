@@ -1,5 +1,5 @@
 ---
-### <a name='Navmesh Chat'>Navmesh Chat (version 0.0.1)</a>
+### Navmesh Chat (version 0.0.1)
 Puts navmesh area into chat
 
  * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
