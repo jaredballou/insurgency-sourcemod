@@ -1,7 +1,8 @@
 ### RPG Adjustments (version 0.0.3)
 Adjusts behavior of RPG rounds
 
-[Plugin](plugins/rpgdrift.smx?raw=true) - [Source](scripting/rpgdrift.sp)
+ * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
+ * [Source - rpgdrift.sp](scripting/rpgdrift.sp)
 
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
 

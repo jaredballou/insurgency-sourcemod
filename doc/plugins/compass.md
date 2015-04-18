@@ -1,7 +1,8 @@
 ### Compass (version 0.0.5)
 Puts a compass in the game
 
-[Plugin](plugins/compass.smx?raw=true) - [Source](scripting/compass.sp)
+ * [Plugin - compass.smx](plugins/compass.smx?raw=true)
+ * [Source - compass.sp](scripting/compass.sp)
 
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 

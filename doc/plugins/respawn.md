@@ -1,7 +1,8 @@
 ### Player Respawn (version 1.7.0)
 Respawn dead players via admincommand or by queues
 
-[Plugin](plugins/respawn.smx?raw=true) - [Source](scripting/respawn.sp)
+ * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
+ * [Source - respawn.sp](scripting/respawn.sp)
 
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 

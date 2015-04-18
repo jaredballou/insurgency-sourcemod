@@ -1,7 +1,8 @@
 ### Prop Removal (version 0.0.1)
 Plugin for removing Restricted Areas
 
-[Plugin](plugins/prop_dynamic.smx?raw=true) - [Source](scripting/prop_dynamic.sp)
+ * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
+ * [Source - prop_dynamic.sp](scripting/prop_dynamic.sp)
 
 Removes all prop_dynamic entities.
 

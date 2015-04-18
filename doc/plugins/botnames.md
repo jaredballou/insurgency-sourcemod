@@ -1,7 +1,8 @@
 ### Bot Names (version 1.0)
 Gives automatic names to bots on creation.
 
-[Plugin](plugins/botnames.smx?raw=true) - [Source](scripting/botnames.sp)
+ * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
+ * [Source - botnames.sp](scripting/botnames.sp)
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 

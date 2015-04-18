@@ -1,7 +1,8 @@
 ### Navmesh Chat (version 0.0.1)
 Puts navmesh area into chat
 
-[Plugin](plugins/navmesh-chat.smx?raw=true) - [Source](scripting/navmesh-chat.sp)
+ * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
+ * [Source - navmesh-chat.sp](scripting/navmesh-chat.sp)
 
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 

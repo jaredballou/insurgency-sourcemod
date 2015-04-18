@@ -48,7 +48,8 @@ do
 	echo "### $NEWNAME (version $NEWVER)" > plugins/$PLUGIN.md
 	echo "$NEWDESC" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
-	echo "[Plugin](plugins/$PLUGIN.smx?raw=true) - [Source](scripting/$PLUGIN.sp)" >> plugins/$PLUGIN.md
+	echo " * [Plugin - $PLUGIN.smx](plugins/$PLUGIN.smx?raw=true)" >> plugins/$PLUGIN.md
+	echo " * [Source - $PLUGIN.sp](scripting/$PLUGIN.sp)" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
 	cat plugins/description/$PLUGIN.md >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md

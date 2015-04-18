@@ -1,7 +1,8 @@
 ### Bot spawns (version 0.2.6)
 Adds a number of options and ways to handle bot spawns
 
-[Plugin](plugins/botspawns.smx?raw=true) - [Source](scripting/botspawns.sp)
+ * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
+ * [Source - botspawns.sp](scripting/botspawns.sp)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 

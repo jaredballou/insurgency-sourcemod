@@ -1,7 +1,8 @@
 ### Restricted Area Removal (version 0.0.1)
 Plugin for removing Restricted Areas
 
-[Plugin](plugins/restrictedarea.smx?raw=true) - [Source](scripting/restrictedarea.sp)
+ * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
+ * [Source - restrictedarea.sp](scripting/restrictedarea.sp)
 
 Removes all restricted areas on the map. Release ready, no known bugs.
 

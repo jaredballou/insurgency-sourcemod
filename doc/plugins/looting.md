@@ -1,7 +1,8 @@
 ### Looting (version 0.0.1)
 Adds ability to loot items from dead bodies
 
-[Plugin](plugins/looting.smx?raw=true) - [Source](scripting/looting.sp)
+ * [Plugin - looting.smx](plugins/looting.smx?raw=true)
+ * [Source - looting.sp](scripting/looting.sp)
 
 Allows looting bodies for ammo. Not yet functional.
 

@@ -1,7 +1,8 @@
 ### No Objectives (version 0.0.1)
 Removes all objectives
 
-[Plugin](plugins/noobj.smx?raw=true) - [Source](scripting/noobj.sp)
+ * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
+ * [Source - noobj.sp](scripting/noobj.sp)
 
 Removes objectives, not yet functional.
 

@@ -1,7 +1,8 @@
 ### HLstatsX CE Ingame Plugin (version 1.6.19)
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
-[Plugin](plugins/hlstatsx.smx?raw=true) - [Source](scripting/hlstatsx.sp)
+ * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
+ * [Source - hlstatsx.sp](scripting/hlstatsx.sp)
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 

@@ -5,7 +5,8 @@ These plugins are all provided as-is, I do my best to document and describe them
 ### Ammo Check (version 0.0.6)
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
-[Plugin](plugins/ammocheck.smx?raw=true) - [Source](scripting/ammocheck.sp)
+ * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
+ * [Source - ammocheck.sp](scripting/ammocheck.sp)
 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. Future features I'd like to do are to show a reload animation partially to animate the check, and have the check command delay the next weapon attack to simulate removing and checking the magazine. Due to the way the theater system works, it's not practical to hard-code weapon data like magazine capacity in the plugin as similar CS and TF2 plugins do, so I have a hacky method that checks the 'm_iClip' variable and uses that to perform the math. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 
@@ -18,7 +19,8 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 ### Backblast (version 0.0.2)
 Adds backblast to rocket based weapons
 
-[Plugin](plugins/backblast.smx?raw=true) - [Source](scripting/backblast.sp)
+ * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
+ * [Source - backblast.sp](scripting/backblast.sp)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 
@@ -39,7 +41,8 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
 ### Bot Counter (version 0.0.1)
 Shows Bots Left Alive
 
-[Plugin](plugins/botcount.smx?raw=true) - [Source](scripting/botcount.sp)
+ * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
+ * [Source - botcount.sp](scripting/botcount.sp)
 
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
@@ -50,7 +53,8 @@ Displays a popup to players every 60 seconds by default identifying remaining en
 ### Bot Names (version 1.0)
 Gives automatic names to bots on creation.
 
-[Plugin](plugins/botnames.smx?raw=true) - [Source](scripting/botnames.sp)
+ * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
+ * [Source - botnames.sp](scripting/botnames.sp)
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 
@@ -68,7 +72,8 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 ### Bot spawns (version 0.2.6)
 Adds a number of options and ways to handle bot spawns
 
-[Plugin](plugins/botspawns.smx?raw=true) - [Source](scripting/botspawns.sp)
+ * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
+ * [Source - botspawns.sp](scripting/botspawns.sp)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
@@ -110,7 +115,8 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
 ### Compass (version 0.0.5)
 Puts a compass in the game
 
-[Plugin](plugins/compass.smx?raw=true) - [Source](scripting/compass.sp)
+ * [Plugin - compass.smx](plugins/compass.smx?raw=true)
+ * [Source - compass.sp](scripting/compass.sp)
 
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
@@ -131,14 +137,16 @@ Adds a check_compass command that clients can use and get their ordinal directio
 ### Coop Lobby Override (version 0.0.1)
 Plugin for overriding Insurgency Coop to 16 players
 
-[Plugin](plugins/cooplobby.smx?raw=true) - [Source](scripting/cooplobby.sp)
+ * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)
+ * [Source - cooplobby.sp](scripting/cooplobby.sp)
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
 ### Damage Modifier (version 0.0.1)
 Modifies all damage applied
 
-[Plugin](plugins/damagemod.smx?raw=true) - [Source](scripting/damagemod.sp)
+ * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
+ * [Source - damagemod.sp](scripting/damagemod.sp)
 
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
@@ -148,7 +156,8 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 ### HLstatsX CE Ingame Plugin (version 1.6.19)
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
-[Plugin](plugins/hlstatsx.smx?raw=true) - [Source](scripting/hlstatsx.sp)
+ * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
+ * [Source - hlstatsx.sp](scripting/hlstatsx.sp)
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 
@@ -162,7 +171,8 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 ### Insurgency Support Library (version 1.0.2)
 Provides functions to support Insurgency and fixes logging
 
-[Plugin](plugins/insurgency.smx?raw=true) - [Source](scripting/insurgency.sp)
+ * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
+ * [Source - insurgency.sp](scripting/insurgency.sp)
 
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
@@ -187,7 +197,8 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
 ### Looting (version 0.0.1)
 Adds ability to loot items from dead bodies
 
-[Plugin](plugins/looting.smx?raw=true) - [Source](scripting/looting.sp)
+ * [Plugin - looting.smx](plugins/looting.smx?raw=true)
+ * [Source - looting.sp](scripting/looting.sp)
 
 Allows looting bodies for ammo. Not yet functional.
 
@@ -198,7 +209,8 @@ Allows looting bodies for ammo. Not yet functional.
 ### Navmesh Chat (version 0.0.1)
 Puts navmesh area into chat
 
-[Plugin](plugins/navmesh-chat.smx?raw=true) - [Source](scripting/navmesh-chat.sp)
+ * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
+ * [Source - navmesh-chat.sp](scripting/navmesh-chat.sp)
 
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
@@ -226,7 +238,8 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
 ### Navmesh Export (version 0.0.3)
 Exports navmesh data in JSON format
 
-[Plugin](plugins/navmesh-export.smx?raw=true) - [Source](scripting/navmesh-export.sp)
+ * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
+ * [Source - navmesh-export.sp](scripting/navmesh-export.sp)
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
@@ -236,20 +249,23 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 ### SourcePawn Navigation Mesh Parser (version 1.0.3)
 A plugin that can read Valve's Navigation Mesh.
 
-[Plugin](plugins/navmesh.smx?raw=true) - [Source](scripting/navmesh.sp)
+ * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)
+ * [Source - navmesh.sp](scripting/navmesh.sp)
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
 ### SP-Readable Navigation Mesh Test (version 1.0.1)
 Testing plugin of the SP-Readable Navigation Mesh plugin.
 
-[Plugin](plugins/navmesh-test.smx?raw=true) - [Source](scripting/navmesh-test.sp)
+ * [Plugin - navmesh-test.smx](plugins/navmesh-test.smx?raw=true)
+ * [Source - navmesh-test.sp](scripting/navmesh-test.sp)
 
 
 ### No Fog (version 0.0.1)
 Removes fog
 
-[Plugin](plugins/nofog.smx?raw=true) - [Source](scripting/nofog.sp)
+ * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
+ * [Source - nofog.sp](scripting/nofog.sp)
 
 Removes all fog on the map. Release ready, no known bugs.
 
@@ -259,7 +275,8 @@ Removes all fog on the map. Release ready, no known bugs.
 ### No Objectives (version 0.0.1)
 Removes all objectives
 
-[Plugin](plugins/noobj.smx?raw=true) - [Source](scripting/noobj.sp)
+ * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
+ * [Source - noobj.sp](scripting/noobj.sp)
 
 Removes objectives, not yet functional.
 
@@ -272,7 +289,8 @@ Removes objectives, not yet functional.
 ### Pistols Only (version 0.0.3)
 Adds a game modifier that only allows pistols
 
-[Plugin](plugins/pistolsonly.smx?raw=true) - [Source](scripting/pistolsonly.sp)
+ * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
+ * [Source - pistolsonly.sp](scripting/pistolsonly.sp)
 
 Disables all primary weapons, enables only pistols. Not yet functional.
 
@@ -282,7 +300,8 @@ Disables all primary weapons, enables only pistols. Not yet functional.
 ### Prop Removal (version 0.0.1)
 Plugin for removing Restricted Areas
 
-[Plugin](plugins/prop_dynamic.smx?raw=true) - [Source](scripting/prop_dynamic.sp)
+ * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
+ * [Source - prop_dynamic.sp](scripting/prop_dynamic.sp)
 
 Removes all prop_dynamic entities.
 
@@ -292,7 +311,8 @@ Removes all prop_dynamic entities.
 ### Player Respawn (version 1.7.0)
 Respawn dead players via admincommand or by queues
 
-[Plugin](plugins/respawn.smx?raw=true) - [Source](scripting/respawn.sp)
+ * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
+ * [Source - respawn.sp](scripting/respawn.sp)
 
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
@@ -315,7 +335,8 @@ Allows respawning of players or bots. Support for some customization of per roun
 ### Restricted Area Removal (version 0.0.1)
 Plugin for removing Restricted Areas
 
-[Plugin](plugins/restrictedarea.smx?raw=true) - [Source](scripting/restrictedarea.sp)
+ * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
+ * [Source - restrictedarea.sp](scripting/restrictedarea.sp)
 
 Removes all restricted areas on the map. Release ready, no known bugs.
 
@@ -325,7 +346,8 @@ Removes all restricted areas on the map. Release ready, no known bugs.
 ### RPG Adjustments (version 0.0.3)
 Adjusts behavior of RPG rounds
 
-[Plugin](plugins/rpgdrift.smx?raw=true) - [Source](scripting/rpgdrift.sp)
+ * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
+ * [Source - rpgdrift.sp](scripting/rpgdrift.sp)
 
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
 
@@ -344,7 +366,8 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
 ### Suicide Bombers (version 0.0.4)
 Adds suicide bomb for bots
 
-[Plugin](plugins/suicide_bomb.smx?raw=true) - [Source](scripting/suicide_bomb.sp)
+ * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)
+ * [Source - suicide_bomb.sp](scripting/suicide_bomb.sp)
 
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
 

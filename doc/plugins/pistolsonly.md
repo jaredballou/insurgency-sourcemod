@@ -1,7 +1,8 @@
 ### Pistols Only (version 0.0.3)
 Adds a game modifier that only allows pistols
 
-[Plugin](plugins/pistolsonly.smx?raw=true) - [Source](scripting/pistolsonly.sp)
+ * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
+ * [Source - pistolsonly.sp](scripting/pistolsonly.sp)
 
 Disables all primary weapons, enables only pistols. Not yet functional.
 

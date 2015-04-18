@@ -1,7 +1,8 @@
 ### Backblast (version 0.0.2)
 Adds backblast to rocket based weapons
 
-[Plugin](plugins/backblast.smx?raw=true) - [Source](scripting/backblast.sp)
+ * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
+ * [Source - backblast.sp](scripting/backblast.sp)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 

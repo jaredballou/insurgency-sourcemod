@@ -1,7 +1,8 @@
 ### No Fog (version 0.0.1)
 Removes fog
 
-[Plugin](plugins/nofog.smx?raw=true) - [Source](scripting/nofog.sp)
+ * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
+ * [Source - nofog.sp](scripting/nofog.sp)
 
 Removes all fog on the map. Release ready, no known bugs.
 
