@@ -3,29 +3,29 @@ This repository has a complete installation of SourceMod, including all my plugi
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
- * <a href='Ammo Check'>Ammo Check (version 0.0.6)</a>
- * <a href='Backblast'>Backblast (version 0.0.2)</a>
- * <a href='Bot Counter'>Bot Counter (version 0.0.1)</a>
- * <a href='Bot Names'>Bot Names (version 1.0)</a>
- * <a href='Bot spawns'>Bot spawns (version 0.2.6)</a>
- * <a href='Compass'>Compass (version 0.0.5)</a>
- * <a href='Coop Lobby Override'>Coop Lobby Override (version 0.0.1)</a>
- * <a href='Damage Modifier'>Damage Modifier (version 0.0.1)</a>
- * <a href='HLstatsX CE Ingame Plugin'>HLstatsX CE Ingame Plugin (version 1.6.19)</a>
- * <a href='Insurgency Support Library'>Insurgency Support Library (version 1.0.2)</a>
- * <a href='SourcePawn Navigation Mesh Parser'>SourcePawn Navigation Mesh Parser (version 1.0.3)</a>
- * <a href='SP-Readable Navigation Mesh Test'>SP-Readable Navigation Mesh Test (version 1.0.1)</a>
- * <a href='Navmesh Chat'>Navmesh Chat (version 0.0.1)</a>
- * <a href='Navmesh Export'>Navmesh Export (version 0.0.3)</a>
- * <a href='Looting'>Looting (version 0.0.1)</a>
- * <a href='No Fog'>No Fog (version 0.0.1)</a>
- * <a href='No Objectives'>No Objectives (version 0.0.1)</a>
- * <a href='Pistols Only'>Pistols Only (version 0.0.3)</a>
- * <a href='Prop Removal'>Prop Removal (version 0.0.1)</a>
- * <a href='Player Respawn'>Player Respawn (version 1.7.0)</a>
- * <a href='Restricted Area Removal'>Restricted Area Removal (version 0.0.1)</a>
- * <a href='RPG Adjustments'>RPG Adjustments (version 0.0.3)</a>
- * <a href='Suicide Bombers'>Suicide Bombers (version 0.0.4)</a>
+ * <a href='#Ammo Check'>Ammo Check (version 0.0.6)</a>
+ * <a href='#Backblast'>Backblast (version 0.0.2)</a>
+ * <a href='#Bot Counter'>Bot Counter (version 0.0.1)</a>
+ * <a href='#Bot Names'>Bot Names (version 1.0)</a>
+ * <a href='#Bot spawns'>Bot spawns (version 0.2.6)</a>
+ * <a href='#Compass'>Compass (version 0.0.5)</a>
+ * <a href='#Coop Lobby Override'>Coop Lobby Override (version 0.0.1)</a>
+ * <a href='#Damage Modifier'>Damage Modifier (version 0.0.1)</a>
+ * <a href='#HLstatsX CE Ingame Plugin'>HLstatsX CE Ingame Plugin (version 1.6.19)</a>
+ * <a href='#Insurgency Support Library'>Insurgency Support Library (version 1.0.2)</a>
+ * <a href='#SourcePawn Navigation Mesh Parser'>SourcePawn Navigation Mesh Parser (version 1.0.3)</a>
+ * <a href='#SP-Readable Navigation Mesh Test'>SP-Readable Navigation Mesh Test (version 1.0.1)</a>
+ * <a href='#Navmesh Chat'>Navmesh Chat (version 0.0.1)</a>
+ * <a href='#Navmesh Export'>Navmesh Export (version 0.0.3)</a>
+ * <a href='#Looting'>Looting (version 0.0.1)</a>
+ * <a href='#No Fog'>No Fog (version 0.0.1)</a>
+ * <a href='#No Objectives'>No Objectives (version 0.0.1)</a>
+ * <a href='#Pistols Only'>Pistols Only (version 0.0.3)</a>
+ * <a href='#Prop Removal'>Prop Removal (version 0.0.1)</a>
+ * <a href='#Player Respawn'>Player Respawn (version 1.7.0)</a>
+ * <a href='#Restricted Area Removal'>Restricted Area Removal (version 0.0.1)</a>
+ * <a href='#RPG Adjustments'>RPG Adjustments (version 0.0.3)</a>
+ * <a href='#Suicide Bombers'>Suicide Bombers (version 0.0.4)</a>
 ---
 ### <a name='Ammo Check'>Ammo Check (version 0.0.6)</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine

@@ -47,7 +47,7 @@ do
                 NEWDESC=$(grep -m1 -P '^[\s]*description[\s]*=.*"' $SCRIPT | cut -d'"' -f2)
         fi
         NEWTITLE=$(echo "$NEWNAME - $NEWDESC" | sed -e 's/[]\/$*.^|[]/\\&/g')
-	echo -e " * <a href='$NEWNAME'>$NEWNAME (version $NEWVER)</a>" >> $TOC
+	echo -e " * <a href='#$NEWNAME'>$NEWNAME (version $NEWVER)</a>" >> $TOC
 	echo -e "---\n### <a name='$NEWNAME'>$NEWNAME (version $NEWVER)</a>" > plugins/$PLUGIN.md
 	echo "$NEWDESC" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
