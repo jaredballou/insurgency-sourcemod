@@ -1,4 +1,5 @@
-### Compass (version 0.0.5)
+---
+### <a name='Compass'>Compass (version 0.0.5)</a>
 Puts a compass in the game
 
  * [Plugin - compass.smx](plugins/compass.smx?raw=true)

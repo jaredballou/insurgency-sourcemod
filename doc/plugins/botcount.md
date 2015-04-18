@@ -1,4 +1,5 @@
-### Bot Counter (version 0.0.1)
+---
+### <a name='Bot Counter'>Bot Counter (version 0.0.1)</a>
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)

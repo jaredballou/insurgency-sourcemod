@@ -2,7 +2,32 @@
 This repository has a complete installation of SourceMod, including all my plugins and source files. It's updated regularly, kept in sync with upstream, and includes a ton of stuff. It's still very much a development branch, so be aware that almost all the plugins I am working on are still pretty new and could be buggy.
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
-### Ammo Check (version 0.0.6)
+
+ * <a href='Ammo Check'>Ammo Check (version 0.0.6)</a>
+ * <a href='Backblast'>Backblast (version 0.0.2)</a>
+ * <a href='Bot Counter'>Bot Counter (version 0.0.1)</a>
+ * <a href='Bot Names'>Bot Names (version 1.0)</a>
+ * <a href='Bot spawns'>Bot spawns (version 0.2.6)</a>
+ * <a href='Compass'>Compass (version 0.0.5)</a>
+ * <a href='Coop Lobby Override'>Coop Lobby Override (version 0.0.1)</a>
+ * <a href='Damage Modifier'>Damage Modifier (version 0.0.1)</a>
+ * <a href='HLstatsX CE Ingame Plugin'>HLstatsX CE Ingame Plugin (version 1.6.19)</a>
+ * <a href='Insurgency Support Library'>Insurgency Support Library (version 1.0.2)</a>
+ * <a href='SourcePawn Navigation Mesh Parser'>SourcePawn Navigation Mesh Parser (version 1.0.3)</a>
+ * <a href='SP-Readable Navigation Mesh Test'>SP-Readable Navigation Mesh Test (version 1.0.1)</a>
+ * <a href='Navmesh Chat'>Navmesh Chat (version 0.0.1)</a>
+ * <a href='Navmesh Export'>Navmesh Export (version 0.0.3)</a>
+ * <a href='Looting'>Looting (version 0.0.1)</a>
+ * <a href='No Fog'>No Fog (version 0.0.1)</a>
+ * <a href='No Objectives'>No Objectives (version 0.0.1)</a>
+ * <a href='Pistols Only'>Pistols Only (version 0.0.3)</a>
+ * <a href='Prop Removal'>Prop Removal (version 0.0.1)</a>
+ * <a href='Player Respawn'>Player Respawn (version 1.7.0)</a>
+ * <a href='Restricted Area Removal'>Restricted Area Removal (version 0.0.1)</a>
+ * <a href='RPG Adjustments'>RPG Adjustments (version 0.0.3)</a>
+ * <a href='Suicide Bombers'>Suicide Bombers (version 0.0.4)</a>
+---
+### <a name='Ammo Check'>Ammo Check (version 0.0.6)</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
@@ -16,7 +41,8 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 #### Todo
  * [ ] Add client-side config on enable, display location, and to show after mag change
 
-### Backblast (version 0.0.2)
+---
+### <a name='Backblast'>Backblast (version 0.0.2)</a>
 Adds backblast to rocket based weapons
 
  * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
@@ -38,7 +64,8 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
  * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
  * [X] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
 
-### Bot Counter (version 0.0.1)
+---
+### <a name='Bot Counter'>Bot Counter (version 0.0.1)</a>
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
@@ -50,7 +77,8 @@ Displays a popup to players every 60 seconds by default identifying remaining en
  * "sm_botcount_enabled" "0" //sets whether bot naming is enabled
  * "sm_botcount_timer" "60" //Frequency to show count
 
-### Bot Names (version 1.0)
+---
+### <a name='Bot Names'>Bot Names (version 1.0)</a>
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
@@ -69,7 +97,8 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 #### Todo
  * [ ] Add per-team CVARs to use different lists
 
-### Bot spawns (version 0.2.6)
+---
+### <a name='Bot spawns'>Bot spawns (version 0.2.6)</a>
 Adds a number of options and ways to handle bot spawns
 
  * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
@@ -112,7 +141,8 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
  * [X] Create functionality to respawn bots to simulate more bots than game can support
 
 
-### Compass (version 0.0.5)
+---
+### <a name='Compass'>Compass (version 0.0.5)</a>
 Puts a compass in the game
 
  * [Plugin - compass.smx](plugins/compass.smx?raw=true)
@@ -134,7 +164,8 @@ Adds a check_compass command that clients can use and get their ordinal directio
  * "sm_compass_default_direction" "1" //Default compass
  * "sm_compass_default_bearing" "1" //Default compass
 
-### Coop Lobby Override (version 0.0.1)
+---
+### <a name='Coop Lobby Override'>Coop Lobby Override (version 0.0.1)</a>
 Plugin for overriding Insurgency Coop to 16 players
 
  * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)
@@ -142,7 +173,8 @@ Plugin for overriding Insurgency Coop to 16 players
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
-### Damage Modifier (version 0.0.1)
+---
+### <a name='Damage Modifier'>Damage Modifier (version 0.0.1)</a>
 Modifies all damage applied
 
  * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
@@ -153,7 +185,8 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 #### CVAR List
  * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
 
-### HLstatsX CE Ingame Plugin (version 1.6.19)
+---
+### <a name='HLstatsX CE Ingame Plugin'>HLstatsX CE Ingame Plugin (version 1.6.19)</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
@@ -168,7 +201,8 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
  * "hlx_protect_address" "" //Address to be protected for logging/forwarding
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
 
-### Insurgency Support Library (version 1.0.2)
+---
+### <a name='Insurgency Support Library'>Insurgency Support Library (version 1.0.2)</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
@@ -194,7 +228,8 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
 
 
-### Looting (version 0.0.1)
+---
+### <a name='Looting'>Looting (version 0.0.1)</a>
 Adds ability to loot items from dead bodies
 
  * [Plugin - looting.smx](plugins/looting.smx?raw=true)
@@ -206,7 +241,8 @@ Allows looting bodies for ammo. Not yet functional.
  * "sm_looting_enabled" "1" //sets whether looting is enabled
  * "sm_looting_mode" "1" //sets looting mode - 0: Loot per mag, 1: Loot all ammo
 
-### Navmesh Chat (version 0.0.1)
+---
+### <a name='Navmesh Chat'>Navmesh Chat (version 0.0.1)</a>
 Puts navmesh area into chat
 
  * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
@@ -235,7 +271,8 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
  * [ ] Replace spotting box with callout of distance/direction, add map marker
 
 
-### Navmesh Export (version 0.0.3)
+---
+### <a name='Navmesh Export'>Navmesh Export (version 0.0.3)</a>
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
@@ -246,7 +283,8 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 #### CVAR List
  * "sm_navmesh_export_enabled" "0" //sets whether this plugin is enabled
 
-### SourcePawn Navigation Mesh Parser (version 1.0.3)
+---
+### <a name='SourcePawn Navigation Mesh Parser'>SourcePawn Navigation Mesh Parser (version 1.0.3)</a>
 A plugin that can read Valve's Navigation Mesh.
 
  * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)
@@ -254,14 +292,16 @@ A plugin that can read Valve's Navigation Mesh.
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
-### SP-Readable Navigation Mesh Test (version 1.0.1)
+---
+### <a name='SP-Readable Navigation Mesh Test'>SP-Readable Navigation Mesh Test (version 1.0.1)</a>
 Testing plugin of the SP-Readable Navigation Mesh plugin.
 
  * [Plugin - navmesh-test.smx](plugins/navmesh-test.smx?raw=true)
  * [Source - navmesh-test.sp](scripting/navmesh-test.sp)
 
 
-### No Fog (version 0.0.1)
+---
+### <a name='No Fog'>No Fog (version 0.0.1)</a>
 Removes fog
 
  * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
@@ -272,7 +312,8 @@ Removes all fog on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_nofog_enabled" "1" //sets whether bot naming is enabled
 
-### No Objectives (version 0.0.1)
+---
+### <a name='No Objectives'>No Objectives (version 0.0.1)</a>
 Removes all objectives
 
  * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
@@ -286,7 +327,8 @@ Removes objectives, not yet functional.
  * "sm_noobj_capture" "1" //Can points be captured?
  * "sm_noobj_remove" "0" //Remove all points?
 
-### Pistols Only (version 0.0.3)
+---
+### <a name='Pistols Only'>Pistols Only (version 0.0.3)</a>
 Adds a game modifier that only allows pistols
 
  * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
@@ -297,7 +339,8 @@ Disables all primary weapons, enables only pistols. Not yet functional.
 #### CVAR List
  * "sm_pistolsonly_enabled" "0" //sets whether ammo check is enabled
 
-### Prop Removal (version 0.0.1)
+---
+### <a name='Prop Removal'>Prop Removal (version 0.0.1)</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
@@ -308,7 +351,8 @@ Removes all prop_dynamic entities.
 #### CVAR List
  * "sm_prop_dynamic_enabled" "1" //sets whether bot naming is enabled
 
-### Player Respawn (version 1.7.0)
+---
+### <a name='Player Respawn'>Player Respawn (version 1.7.0)</a>
 Respawn dead players via admincommand or by queues
 
  * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
@@ -332,7 +376,8 @@ Allows respawning of players or bots. Support for some customization of per roun
  * "sm_respawn_reset_each_round" "1" //Reset player respawn counts each round);
  * "sm_respawn_reset_each_objective" "1" //Reset player respawn counts each objective);
 
-### Restricted Area Removal (version 0.0.1)
+---
+### <a name='Restricted Area Removal'>Restricted Area Removal (version 0.0.1)</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
@@ -343,7 +388,8 @@ Removes all restricted areas on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_restrictedarea_enabled" "1" //sets whether bot naming is enabled
 
-### RPG Adjustments (version 0.0.3)
+---
+### <a name='RPG Adjustments'>RPG Adjustments (version 0.0.3)</a>
 Adjusts behavior of RPG rounds
 
  * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
@@ -363,7 +409,8 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
  * [X] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 
 
-### Suicide Bombers (version 0.0.4)
+---
+### <a name='Suicide Bombers'>Suicide Bombers (version 0.0.4)</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)

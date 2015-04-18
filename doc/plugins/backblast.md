@@ -1,4 +1,5 @@
-### Backblast (version 0.0.2)
+---
+### <a name='Backblast'>Backblast (version 0.0.2)</a>
 Adds backblast to rocket based weapons
 
  * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)

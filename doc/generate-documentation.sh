@@ -10,7 +10,9 @@
 
 #Files to update
 PLUGINS=$(cat plugins.jballou.txt)
+TOC=include/TOC.md
 #Loop through all files
+echo > $TOC
 for PLUGIN in $PLUGINS
 do
 	echo "Processing $PLUGIN"
@@ -45,7 +47,8 @@ do
                 NEWDESC=$(grep -m1 -P '^[\s]*description[\s]*=.*"' $SCRIPT | cut -d'"' -f2)
         fi
         NEWTITLE=$(echo "$NEWNAME - $NEWDESC" | sed -e 's/[]\/$*.^|[]/\\&/g')
-	echo "### $NEWNAME (version $NEWVER)" > plugins/$PLUGIN.md
+	echo -e " * <a href='$NEWNAME'>$NEWNAME (version $NEWVER)</a>" >> $TOC
+	echo -e "---\n### <a name='$NEWNAME'>$NEWNAME (version $NEWVER)</a>" > plugins/$PLUGIN.md
 	echo "$NEWDESC" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
 	echo " * [Plugin - $PLUGIN.smx](plugins/$PLUGIN.smx?raw=true)" >> plugins/$PLUGIN.md
@@ -72,6 +75,6 @@ do
 		echo "" >> plugins/$PLUGIN.md
 	fi
 done
-cat include/HEADER.md plugins/*.md include/FOOTER.md > ../README.md
+cat include/HEADER.md include/TOC.md plugins/*.md include/FOOTER.md > ../README.md
 
 git add *

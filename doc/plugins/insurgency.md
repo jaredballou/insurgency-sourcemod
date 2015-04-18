@@ -1,4 +1,5 @@
-### Insurgency Support Library (version 1.0.2)
+---
+### <a name='Insurgency Support Library'>Insurgency Support Library (version 1.0.2)</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)

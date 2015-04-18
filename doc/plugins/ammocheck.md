@@ -1,4 +1,5 @@
-### Ammo Check (version 0.0.6)
+---
+### <a name='Ammo Check'>Ammo Check (version 0.0.6)</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
