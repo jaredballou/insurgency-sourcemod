@@ -118,7 +118,7 @@ public OnPluginStart()
 	//Begin Engine LogHooks
 	AddGameLogHook(LogEvent);
 	
-//	LoadTranslations("insurgency.phrases.txt");
+//	LoadTranslations("insurgency.phrases");
 
 	if (LibraryExists("updater"))
 	{

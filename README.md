@@ -215,7 +215,7 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
 
 #### Dependencies
  * [gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
- * [translations/insurgency.phrases.txt.txt](translations/insurgency.phrases.txt.txt)
+ * [translations/insurgency.phrases.txt](translations/insurgency.phrases.txt)
 
 #### CVAR List
  * "sm_inslogger_enabled" "1" //sets whether log fixing is enabled
