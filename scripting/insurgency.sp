@@ -5,7 +5,7 @@
 #include <loghelper>
 #undef REQUIRE_PLUGIN
 #include <updater>
-
+//Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
 #define INS
@@ -13,6 +13,9 @@ new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
 new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
+new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs reloads)
+new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
+
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
 new g_iObjResEntity, String:g_iObjResEntityNetClass[32], g_iLogicEntity, String:g_iLogicEntityNetClass[32], g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
@@ -30,7 +33,7 @@ new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.0.2"
+#define PLUGIN_VERSION "1.0.3"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -70,6 +73,8 @@ public OnPluginStart()
 	cvarEnabled = CreateConVar("sm_inslogger_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[INSLIB] Starting");
 /*
 	AddFolderToDownloadTable("materials/overviews");
@@ -83,6 +88,8 @@ public OnPluginStart()
 	hook_wstats();
 	HookEvent("player_hurt", Event_PlayerHurt);
 	HookEvent("weapon_fire", Event_WeaponFired);
+	HookEvent("weapon_reload", Event_WeaponReload);
+	HookEvent("weapon_deploy", Event_WeaponDeploy);
 	
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
@@ -706,6 +713,27 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 
 
 
+public CheckInfiniteAmmo(client)
+{
+	if (GetConVarBool(cvarInfiniteAmmo))
+	{
+		new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+		new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+		new m_iClip1 = GetEntProp(weapon, Prop_Send, "m_iClip1"); // weapon clip amount bullets
+		new m_iAmmo_prim = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+		new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoCount");
+		PrintToServer("[INSLIB] weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo_prim %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo_prim,m_iPrimaryAmmoCount);
+		SetEntProp(client, Prop_Send, "m_iAmmo", 99, _, m_iPrimaryAmmoType); // Set player ammunition of this weapon primary ammo type
+
+		//new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
+	}
+	if (GetConVarBool(cvarInfiniteMagazine))
+	{
+		new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+		new maxammo = Ins_GetWeaponGetMaxClip1(ActiveWeapon);
+		SetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", maxammo);
+	}
+}
 
 
 
@@ -976,6 +1004,47 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 		g_round_stats[client][STAT_SHOTS]++;
 		g_client_last_weapon[client] = weapon_index;
 		g_client_last_weaponstring[client] = shotWeapName;
+	}
+	CheckInfiniteAmmo(client);
+	return Plugin_Continue;
+}
+public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	//"weaponid" "short"
+	//"userid" "short"
+	//"shots" "byte"
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	new String:shotWeapName[32];
+	GetClientWeapon(client, shotWeapName, sizeof(shotWeapName));
+	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
+	new weapon_index = Ins_GetWeaponId(shotWeapName);
+	//PrintToChatAll("WeapFired: %s", shotWeapName);
+	//PrintToServer("WeaponIndex: %d - %s", weapon_index, shotWeapName);
+	
+	if (weapon_index > -1)
+	{
+		g_weapon_stats[client][weapon_index][LOG_HIT_SHOTS]++;
+		g_round_stats[client][STAT_SHOTS]++;
+		g_client_last_weapon[client] = weapon_index;
+		g_client_last_weaponstring[client] = shotWeapName;
+	}
+	CheckInfiniteAmmo(client);
+	return Plugin_Continue;
+}
+public Action:Event_WeaponDeploy(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new userId = GetEventInt(event, "userid");
+	if (userId > 0)
+	{
+		new user = GetClientOfUserId(userId);
+		if (user)
+		{
+			CheckInfiniteAmmo(user);
+		}
 	}
 	return Plugin_Continue;
 }
