@@ -1,5 +1,5 @@
 ---
-### Insurgency Support Library (version 1.0.2)
+### Insurgency Support Library (version 1.0.3)
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
