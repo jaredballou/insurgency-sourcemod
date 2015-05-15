@@ -3,7 +3,7 @@
 Removes fog
 
  * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
- * [Source - nofog.sp](scripting/nofog.sp)
+ * [Source - nofog.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/nofog.sp)
 
 Removes all fog on the map. Release ready, no known bugs.
 

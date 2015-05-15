@@ -3,7 +3,7 @@
 Adds backblast to rocket based weapons
 
  * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
- * [Source - backblast.sp](scripting/backblast.sp)
+ * [Source - backblast.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/backblast.sp)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 
@@ -17,7 +17,7 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
 
 #### Todo
  * [X] Add CVARs to control cone angle, kill range, and total effect range
- * [X] Use flashbang effect as standin for non-lethal backblast
+ * [ ] Use flashbang effect as standin for non-lethal backblast
  * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
- * [X] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
+ * [ ] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
 

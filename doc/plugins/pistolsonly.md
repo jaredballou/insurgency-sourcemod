@@ -3,7 +3,7 @@
 Adds a game modifier that only allows pistols
 
  * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
- * [Source - pistolsonly.sp](scripting/pistolsonly.sp)
+ * [Source - pistolsonly.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/pistolsonly.sp)
 
 Disables all primary weapons, enables only pistols. Not yet functional.
 

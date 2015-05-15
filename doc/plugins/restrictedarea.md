@@ -3,7 +3,7 @@
 Plugin for removing Restricted Areas
 
  * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
- * [Source - restrictedarea.sp](scripting/restrictedarea.sp)
+ * [Source - restrictedarea.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/restrictedarea.sp)
 
 Removes all restricted areas on the map. Release ready, no known bugs.
 

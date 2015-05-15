@@ -9,6 +9,8 @@
 ################################################################################
 
 #Files to update
+GITHUB_URL="https://github.com/jaredballou/insurgency-sourcemod/blob/master"
+GITHUB_RAW_URL="https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master"
 PLUGINS=$(cat plugins.jballou.txt)
 TOC=include/TOC.md
 #Loop through all files
@@ -27,11 +29,11 @@ do
 	echo -ne > plugins/dependencies/$PLUGIN.md
 	for CFGFILE in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' $SCRIPT | cut -d'"' -f2)
 	do
-		echo " * [gamedata/$CFGFILE.txt](gamedata/$CFGFILE.txt)" >> plugins/dependencies/$PLUGIN.md
+		echo " * [$GITHUB_RAW_URL/gamedata/$CFGFILE.txt](gamedata/$CFGFILE.txt)" >> plugins/dependencies/$PLUGIN.md
 	done
 	for TRANSFILE in $(grep -Po 'LoadTranslations\([^\)]+\)' $SCRIPT | cut -d'"' -f2)
 	do
-		echo " * [translations/$TRANSFILE.txt](translations/$TRANSFILE.txt)" >> plugins/dependencies/$PLUGIN.md
+		echo " * [$GITHUB_RAW_URL/translations/$TRANSFILE.txt](translations/$TRANSFILE.txt)" >> plugins/dependencies/$PLUGIN.md
 	done
 
         NEWVER=$(grep -i '^#define.*_version' $SCRIPT | cut -d'"' -f2)
@@ -54,7 +56,7 @@ do
 	echo "$NEWDESC" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
 	echo " * [Plugin - $PLUGIN.smx](plugins/$PLUGIN.smx?raw=true)" >> plugins/$PLUGIN.md
-	echo " * [Source - $PLUGIN.sp](scripting/$PLUGIN.sp)" >> plugins/$PLUGIN.md
+	echo " * [Source - $PLUGIN.sp]($GITHUB_RAW_URL/scripting/$PLUGIN.sp)" >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md
 	cat plugins/description/$PLUGIN.md >> plugins/$PLUGIN.md
 	echo "" >> plugins/$PLUGIN.md

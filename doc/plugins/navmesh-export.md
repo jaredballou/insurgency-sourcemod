@@ -3,7 +3,7 @@
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
- * [Source - navmesh-export.sp](scripting/navmesh-export.sp)
+ * [Source - navmesh-export.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/navmesh-export.sp)
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 

@@ -3,7 +3,7 @@
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
- * [Source - ammocheck.sp](scripting/ammocheck.sp)
+ * [Source - ammocheck.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/ammocheck.sp)
 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 

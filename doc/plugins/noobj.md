@@ -3,7 +3,7 @@
 Removes all objectives
 
  * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
- * [Source - noobj.sp](scripting/noobj.sp)
+ * [Source - noobj.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/noobj.sp)
 
 Removes objectives, not yet functional.
 

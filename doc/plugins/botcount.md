@@ -3,7 +3,7 @@
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
- * [Source - botcount.sp](scripting/botcount.sp)
+ * [Source - botcount.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botcount.sp)
 
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
