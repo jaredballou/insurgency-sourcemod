@@ -29,11 +29,11 @@ do
 	echo -ne > plugins/dependencies/$PLUGIN.md
 	for CFGFILE in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' $SCRIPT | cut -d'"' -f2)
 	do
-		echo " * [$GITHUB_RAW_URL/gamedata/$CFGFILE.txt](gamedata/$CFGFILE.txt)" >> plugins/dependencies/$PLUGIN.md
+		echo " * [gamedata/$CFGFILE.txt]($GITHUB_RAW_URL/gamedata/$CFGFILE.txt)" >> plugins/dependencies/$PLUGIN.md
 	done
 	for TRANSFILE in $(grep -Po 'LoadTranslations\([^\)]+\)' $SCRIPT | cut -d'"' -f2)
 	do
-		echo " * [$GITHUB_RAW_URL/translations/$TRANSFILE.txt](translations/$TRANSFILE.txt)" >> plugins/dependencies/$PLUGIN.md
+		echo " * [translations/$TRANSFILE.txt]($GITHUB_RAW_URL/translations/$TRANSFILE.txt)" >> plugins/dependencies/$PLUGIN.md
 	done
 
         NEWVER=$(grep -i '^#define.*_version' $SCRIPT | cut -d'"' -f2)

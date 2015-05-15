@@ -8,7 +8,7 @@ Adds a number of options and ways to handle bot spawns
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
+ * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
 
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features

@@ -110,7 +110,7 @@ Adds a number of options and ways to handle bot spawns
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
+ * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
 
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features
@@ -154,7 +154,7 @@ Puts a compass in the game
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt](translations/compass.phrases.txt)
+ * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
 
 #### CVAR List
  * "sm_compass_enabled" "1" //Enables compass
@@ -214,8 +214,8 @@ Provides functions to support Insurgency and fixes logging
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt](gamedata/insurgency.games.txt)
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt](translations/insurgency.phrases.txt)
+ * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
+ * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
 
 #### CVAR List
  * "sm_inslogger_enabled" "1" //sets whether log fixing is enabled
@@ -265,7 +265,7 @@ Puts navmesh area into chat
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt](translations/insurgency.phrases.txt)
+ * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
 
 #### CVAR List
  * "sm_navmesh_chat_enabled" "1" //sets whether this plugin is enabled
@@ -375,9 +375,9 @@ Respawn dead players via admincommand or by queues
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt](gamedata/plugin.respawn.txt)
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt](translations/common.phrases.txt)
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt](translations/respawn.phrases.txt)
+ * [gamedata/plugin.respawn.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt)
+ * [translations/common.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt)
+ * [translations/respawn.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt)
 
 #### CVAR List
  * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);

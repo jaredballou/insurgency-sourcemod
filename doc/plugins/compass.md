@@ -8,7 +8,7 @@ Puts a compass in the game
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
- * [https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt](translations/compass.phrases.txt)
+ * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
 
 #### CVAR List
  * "sm_compass_enabled" "1" //Enables compass
