@@ -327,7 +327,8 @@ native bool:SocketBind(Handle:socket, const String:hostname[], port);
  * @param Handle				socket		The handle of the socket to be used.
  * @param SocketConnectCB		cfunc		The connect callback
  * @param SocketReceiveCB		rfunc		The receive callback
- * @param SocketDisconnectCB	dfunc		The disconnect callback * @param String				hostname	The hostname (or IP) to connect to.
+ * @param SocketDisconnectCB	dfunc		The disconnect callback
+ * @param String				hostname	The hostname (or IP) to connect to.
  * @param cell_t				port		The port to connect to.
  * @noreturn
  */

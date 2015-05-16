@@ -3,6 +3,7 @@
 #include <sdktools>
 #include <insurgency>
 #include <loghelper>
+#include <smjansson>
 #undef REQUIRE_PLUGIN
 #include <updater>
 //Add ammo to 99 code in weapon_deploy
@@ -37,6 +38,14 @@ new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][WeaponStatFields];
 new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
+//new String:ServerName[100];                // Stores the server name.
+//new String:Version[100];                    // Stores the update version number
+//new String:IP_Port[100];                    // Stores the IP address & port number
+//new String:SteamID[100];                    // Stores the steam server ID
+//new String:Account[100];                    // Stores the account logged into the server.
+//new String:Map[100];                        // Stores the current map name
+//new String:Players[100];                    // Stores the total number of players & bots active
+//new String:Edicts[100];                    // Stores total number of edicts used
 //============================================================================================================
 
 public Plugin:myinfo =
@@ -90,22 +99,26 @@ public OnPluginStart()
 	//Begin HookEvents
 	hook_wstats();
 	HookEvent("player_hurt", Event_PlayerHurt);
-	HookEvent("weapon_fire", Event_WeaponFired);
+	HookEvent("weapon_fire", Event_WeaponFire);
+	HookEvent("weapon_firemode", Event_WeaponFireMode);
 	HookEvent("weapon_reload", Event_WeaponReload);
 	HookEvent("weapon_deploy", Event_WeaponDeploy);
 	
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
-//jballou - new events
 	HookEvent("player_suppressed", Event_PlayerSuppressed);
 	HookEvent("player_avenged_teammate", Event_PlayerAvengedTeammate);
+	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+
 	HookEvent("grenade_thrown", Event_GrenadeThrown);
 	HookEvent("grenade_detonate", Event_GrenadeDetonate);
+
 	HookEvent("game_end", Event_GameEnd);
 	HookEvent("game_end", Event_GameEndPre, EventHookMode_Pre);
 	HookEvent("game_newmap", Event_GameNewMap);
 	HookEvent("game_start", Event_GameStart);
+
 	HookEvent("round_start", Event_RoundStart);
 	HookEvent("round_begin", Event_RoundBegin);
 	HookEvent("round_end", Event_RoundEnd);
@@ -122,7 +135,10 @@ public OnPluginStart()
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouchPre, EventHookMode_Pre);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
 	HookEvent("controlpoint_endtouch", Event_ControlPointEndTouch);
-	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+
+	HookEvent("enter_spawnzone", Event_EnterSpawnZone);
+	HookEvent("exit_spawnzone", Event_ExitSpawnZone);
+
 	hGameConf = LoadGameConfigFile("insurgency.games");
 
 	//Begin Engine LogHooks
@@ -134,7 +150,9 @@ public OnPluginStart()
 	{
 		Updater_AddPlugin(UPDATE_URL);
 	}
+	//UpdateAllDataSources();
 }
+
 public OnPluginEnd()
 {
 	WstatsDumpAll();
@@ -143,16 +161,166 @@ public OnPluginEnd()
 	g_iObjResEntity = -1;
 	g_iPlayerManagerEntity = -1;
 }
+
 public OnMapStart()
 {
+	UpdateAllDataSources();
+}
+public UpdateAllDataSources()
+{
+	PrintToServer("[INSLIB] Starting UpdateAllDataSources");
 	GetObjResEnt(1);
 	GetLogicEnt(1);
 	GetPlayerManagerEnt(1);
 	GetWeaponData();
 	GetTeams(false);
+	GetStatus();
+//CreateTimer(4.5, GetStatus);
 }
 
+public GetStatus()
+//Action:GetStatus(Handle:Timer)
+{
+	PrintToServer("[INSLIB] Starting GetStatus");
+	// Grab status output.
+	// 600 characters is enough,
+//	decl String:Output[600];
+//	ServerCommandEx(Output, 600, "version");
+	// Grab the first 8 lines out only
+//	decl String:Derp[8][100];
+//	ExplodeString(Output, "\n", Derp, 8, 100);
+//	ServerName = Derp[0];	// Server name
+//	Version = Derp[1];	// Version number
+//	PrintToServer("[INSLIB] Derp %s Version %s",Derp,Version);
+//	IP_Port = Derp[2];	// Port & IP
+//	SteamID = Derp[3];	// Server steam ID
+//	Account = Derp[4];	// Steam account logged in
+//	Map = Derp[5];		// Map name
+//	Players = Derp[6];	// Players & bots
+//	Edicts = Derp[7];	// Edict count
+//new Handle:fileHandle=OpenFile(path,"r"); // Opens addons/sourcemod/blank.txt to read from (and only reading)
+//while(!IsEndOfFile(fileHandle)&&ReadFileLine(fileHandle,line,sizeof(line)))
+//{
+//  PrintToServer("line %s",line);
+//}
+//CloseHandle(fileHandle);
+	ParseTheater();
+}
 
+public ParseTheater()
+{
+//decl String:path[PLATFORM_MAX_PATH];
+//OpenFile(path,"r");
+//CloseHandle(fileHandle);
+
+	PrintToServer("[INSLIB] Starting ParseTheater");
+	new String:sGameMode[32],String:sTheaterOverride[32];
+	decl String:sTheaterPath[PLATFORM_MAX_PATH];
+	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+	//Try to load override theater first
+	GetConVarString(FindConVar("mp_theater_override"), sTheaterOverride, sizeof(sTheaterOverride));
+	Format(sTheaterPath, sizeof(sTheaterPath), "scripts/theaters/%s.theater", sTheaterOverride);
+	//If it does not exist, load normal theater from data directory.
+	if (!FileExists(sTheaterPath)) {
+		Format(sTheaterPath, sizeof(sTheaterPath), "insurgency-data/theaters/%s/default_%s.theater", "1.7.2.3",sGameMode);
+	}
+
+//	BuildPath(Path_SM,sTheaterPath,PLATFORM_MAX_PATH,
+	if (!FileExists(sTheaterPath)) {
+		PrintToServer("[INSLIB]: Cannot find theater %s",sTheaterPath);
+		return false;
+	}
+	PrintToServer("[INSLIB]: Loading theater %s",sTheaterPath);
+	new Handle:g_hTheater = CreateKeyValues("theater");
+	FileToKeyValues(g_hTheater,sTheaterPath);
+//	BrowseKeyValues(g_hTheater);
+       	// Convert it to JSON
+	KvRewind(g_hTheater);
+	KeyValuesToFile(g_hTheater,"theater.kv.txt");
+       	new Handle:hObj = KeyValuesToJSON(g_hTheater);
+
+       	// And finally save the JSON object to a file
+       	// with indenting set to 2.
+//       	Format(sPath, sizeof(sPath), "theater.json");
+       	json_dump_file(hObj, "theater.json", 2);
+
+       	// Close the Handle to the JSON object, i.e. free it's memory
+       	// and free the Handle.
+       	CloseHandle(hObj);
+	return true;
+}
+stock Handle:KeyValuesToJSON(Handle:kv) {
+	new Handle:hObj = json_object();
+
+	//Traverse the keyvalues structure
+	IterateKeyValues(kv, hObj);
+
+	//return output
+	return hObj;
+}
+
+IterateKeyValues(&Handle:kv, &Handle:hObj) {
+	do {
+		new String:sSection[255];
+		KvGetSectionName(kv, sSection, sizeof(sSection));
+
+		new String:sValue[255];
+		KvGetString(kv, "", sValue, sizeof(sValue));
+
+		new bool:bIsSubSection = ((KvNodesInStack(kv) == 0) || (KvGetDataType(kv, "") == KvData_None && KvNodesInStack(kv) > 0));
+
+		//new KvDataTypes:type = KvGetDataType(kv, "");
+		//LogMessage("Section: %s, Value: %s, Type: %d", sSection, sValue, type);
+
+		if(!bIsSubSection) {
+		//if(type != KvData_None) {
+			json_object_set_new(hObj, sSection, json_string(sValue));
+		} else {
+			//We have no value, this must be another section
+			new Handle:hChild = json_object();
+
+			if (KvGotoFirstSubKey(kv, false)) {
+				IterateKeyValues(kv, hChild);
+				KvGoBack(kv);
+			}
+
+			json_object_set_new(hObj, sSection, hChild);
+		}
+
+	} while (KvGotoNextKey(kv, false));
+}
+
+BrowseKeyValues(Handle:kv)
+{
+	new String:buffer[255];
+	do
+	{
+		// You can read the section/key name by using KvGetSectionName here.
+		KvGetSectionName(kv, buffer, sizeof(buffer));
+		PrintToServer("Section name is %s",buffer);
+		if (KvGotoFirstSubKey(kv, false))
+		{
+			// Current key is a section. Browse it recursively.
+			BrowseKeyValues(kv);
+			KvGoBack(kv);
+		}
+		else
+		{
+			// Current key is a regular key, or an empty section.
+			if (KvGetDataType(kv, NULL_STRING) != KvData_None)
+			{
+				KvGetString(kv, NULL_STRING, buffer, sizeof(buffer));
+				PrintToServer("Value is %s",buffer);
+				// Read value of key here (use NULL_STRING as key name). You can
+				// also get the key name by using KvGetSectionName here.
+			}
+			else
+			{
+				// Found an empty sub section. It can be handled here if necessary.
+			}
+		}
+	} while (KvGotoNextKey(kv, false));
+}
 public OnLibraryAdded(const String:name[])
 {
 	if (StrEqual(name, "updater"))
@@ -996,7 +1164,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 	PrintToServer("[INSLIB] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
 	return Plugin_Continue;
 }
-public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
+public Action:Event_WeaponFire(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
 	{
@@ -1021,6 +1189,35 @@ public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroa
 		g_client_last_weaponstring[client] = shotWeapName;
 	}
 	CheckInfiniteAmmo(client);
+	return Plugin_Continue;
+}
+public Action:Event_WeaponFireMode(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	//new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	//new weaponid = GetEventInt(event, "weaponid");
+	//new firemode = GetEventInt(event, "firemode");
+	return Plugin_Continue;
+}
+public Action:Event_EnterSpawnZone(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	//new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	return Plugin_Continue;
+}
+public Action:Event_ExitSpawnZone(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if (!GetConVarBool(cvarEnabled))
+	{
+		return Plugin_Continue;
+	}
+	//new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	return Plugin_Continue;
 }
 public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBroadcast)
