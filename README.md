@@ -12,7 +12,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-coop-lobby-override-version-001'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-damage-modifier-version-001'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx-ce-ingame-plugin-version-1619'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency-support-library-version-103'>Insurgency Support Library 1.0.3</a>
+ * <a href='#user-content-insurgency-support-library-version-110'>Insurgency Support Library 1.1.0</a>
  * <a href='#user-content-sourcepawn-navigation-mesh-parser-version-103'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-sp-readable-navigation-mesh-test-version-101'>SP-Readable Navigation Mesh Test 1.0.1</a>
  * <a href='#user-content-navmesh-chat-version-001'>Navmesh Chat 0.0.1</a>
@@ -205,7 +205,7 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
 
 ---
-### Insurgency Support Library (version 1.0.3)
+### Insurgency Support Library (version 1.1.0)
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
@@ -223,6 +223,7 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
  * "sm_insurgency_infinite_ammo" "0" //Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_infinite_magazine" "0" //Infinite magazine, will never need reloading.
+ * "sm_insurgency_disable_sliding" "0" //
 
 #### Todo
  * [ ] Weapon lookup by index/name

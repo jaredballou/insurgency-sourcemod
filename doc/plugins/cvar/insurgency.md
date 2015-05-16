@@ -3,3 +3,4 @@
  * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
  * "sm_insurgency_infinite_ammo" "0" //Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_infinite_magazine" "0" //Infinite magazine, will never need reloading.
+ * "sm_insurgency_disable_sliding" "0" //

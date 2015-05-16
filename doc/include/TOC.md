@@ -8,7 +8,7 @@
  * <a href='#user-content-coop-lobby-override-version-001'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-damage-modifier-version-001'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx-ce-ingame-plugin-version-1619'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency-support-library-version-103'>Insurgency Support Library 1.0.3</a>
+ * <a href='#user-content-insurgency-support-library-version-110'>Insurgency Support Library 1.1.0</a>
  * <a href='#user-content-sourcepawn-navigation-mesh-parser-version-103'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-sp-readable-navigation-mesh-test-version-101'>SP-Readable Navigation Mesh Test 1.0.1</a>
  * <a href='#user-content-navmesh-chat-version-001'>Navmesh Chat 0.0.1</a>

@@ -8,6 +8,10 @@
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
+#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
+
 #define INS
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
@@ -15,6 +19,7 @@ new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
 new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
 new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs reloads)
 new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
+new Handle:cvarDisableSliding = INVALID_HANDLE; // Disable Sliding
 
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
@@ -33,9 +38,6 @@ new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
 //============================================================================================================
-#define PLUGIN_VERSION "1.0.3"
-#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 public Plugin:myinfo =
 {
@@ -75,6 +77,7 @@ public OnPluginStart()
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "(0) do nothing, (1) disable for everyone, (2) disable for Security, (3) disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[INSLIB] Starting");
 /*
 	AddFolderToDownloadTable("materials/overviews");
@@ -748,6 +751,18 @@ public CheckInfiniteAmmo(client)
 
 
 //=====================================================================================================
+public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:angles[3], &weapon)
+{
+	if ((GetConVarInt(cvarDisableSliding) == 1) || (GetClientTeam(client) == GetConVarInt(cvarDisableSliding)))
+	{
+		if (buttons & IN_ATTACK || buttons & IN_ATTACK2)
+		{
+			if (GetEntProp(client, Prop_Send, "m_bWasSliding") == 1)
+				return Plugin_Handled;
+		}	
+	}	
+	return Plugin_Continue;
+}
 public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
