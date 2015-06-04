@@ -47,41 +47,6 @@
 		}
 	}
 	
-	/* CGlobalEntityList */
-	"#default"
-	{
-		/* These games do have symbols in the linux binaries */
-		"#supported"
-		{
-			"game"		"fof"
-			"game"		"nmrih"
-		}
-		
-		"Offsets"
-		{
-			/* Offset into LevelShutdown */
-			"gEntList"
-			{
-				"windows"	"11"
-			}
-		}
-		
-		"Signatures"
-		{
-			"LevelShutdown"
-			{
-				"library"	"server"
-				"windows"	"\xE8\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\xB9\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\xE8"
-			}
-			"gEntList"
-			{
-				"library"	"server"
-				"linux"		"@gEntList"
-				"mac"		"@gEntList"
-			}
-		}
-	}
-	
 	"#default"
 	{
 		"Keys"
