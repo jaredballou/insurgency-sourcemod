@@ -2,7 +2,7 @@
 
 #pragma semicolon 1
 
-#define PLUGIN_VERSION				"2.2"
+#define PLUGIN_VERSION				"2.3"
 
 public Plugin:myinfo = 
 {
@@ -77,7 +77,7 @@ public Action:OnSay( client, args )
 		{
 			QueryClientConVar(client, "cl_disablehtmlmotd", ConVarQueryFinished:ClientConVar, client);
 			
-			decl String:title [64];
+			decl String:title [256];
 			decl String:steamId [64];
 			decl String:userId [16];
 			decl String:name [64];
@@ -148,7 +148,7 @@ LoadWebshortcuts()
 	ClearArray( g_Links );
 	
 	decl String:shortcut [32];
-	decl String:title [64];
+	decl String:title [256];
 	decl String:link [512];
 	while ( !IsEndOfFile( f ) && ReadFileLine( f, buffer, sizeof(buffer) ) )
 	{
@@ -215,14 +215,14 @@ public StreamPanel(String:title[], String:url[], client) {
 	CloseHandle(Radio);
 }
 
-stock FixMotdCSGO(String:web[512], String:title[64])
+stock FixMotdCSGO(String:web[512], String:title[256])
 {
-	Format(web, sizeof(web), "http://www.cola-team.com/franug/webshortcuts2.php?web=%s;franug_is_pro;%s", title,web);
+	Format(web, sizeof(web), "http://claninspired.com/franug/webshortcuts2.php?web=%s;franug_is_pro;%s", title,web);
 }
 
 stock FixMotdCSGO_fullsize(String:web[512])
 {
-	Format(web, sizeof(web), "http://www.cola-team.com/franug/webshortcuts_f.php?web=%s", web);
+	Format(web, sizeof(web), "http://claninspired.com/franug/webshortcuts_f.html?web=%s", web);
 }
 
 public ClientConVar(QueryCookie:cookie, client, ConVarQueryResult:result, const String:cvarName[], const String:cvarValue[])
