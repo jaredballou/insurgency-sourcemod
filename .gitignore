@@ -3,3 +3,10 @@
 /gamedata/*
 data/sqlite/sourcebans-queue.sq3
 data/updater.txt
+configs/adminmenu_maplist.ini
+configs/admins_simple.ini
+configs/databases.cfg
+configs/serverhop.cfg
+configs/sourcebans/sourcebans.cfg
+data/sqlite/clientprefs-sqlite.sq3
+data/updater.txt
