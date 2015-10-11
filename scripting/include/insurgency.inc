@@ -15,6 +15,8 @@
 #define PREFIX_LEN 7
 #define MAX_SQUADS 8
 #define SQUAD_SIZE 8
+#define MAX_MAPS 256
+#define MAX_GAMEMODES 16
 
 native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
 native Ins_GetWeaponGetMaxClip1(weapon);
