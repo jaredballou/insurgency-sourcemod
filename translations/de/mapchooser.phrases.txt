@@ -1,13 +1,33 @@
 "Phrases"
 {
+	"Nextmap Voting Started"
+	{
+		"de"		"Abstimmung für die nächste Karte wurde gestartet. "
+	}
+
+	"Extend Map"
+	{
+		"de"		"Verlängere aktuelle Karte"
+	}
+
+	"Changed Next Map"
+	{
+		"de"		"Nächste Karte wurde  auf \"{1}\" geändert. "
+	}
+
+	"Dont Change"
+	{
+		"de"		"Nicht wechseln"
+	}
+
 	"Vote Nextmap"
 	{
 		"de"		"Stimme für die nächste Karte!"
 	}
 
-	"Nextmap Voting Started"
+	"Current Map Stays"
 	{
-		"de"		"Abstimmung für die nächste Karte wurde gestartet. "
+		"de"		" Aktuelle Karte geht weiter! Die Abstimmung hat entschieden! ({1}%% von {2} Stimmen erhalten) "
 	}
 
 	"Nextmap Voting Finished"
@@ -18,26 +38,6 @@
 	"Current Map Extended"
 	{
 		"de"		"Die aktuelle Karte wurde verlängert. ({1}%% von {2} Stimmen erhalten) "
-	}
-
-	"Extend Map"
-	{
-		"de"		"Verlängere aktuelle Karte"
-	}
-
-	"Dont Change"
-	{
-		"de"		"Nicht wechseln"
-	}
-
-	"Current Map Stays"
-	{
-		"de"		" Aktuelle Karte geht weiter! Die Abstimmung hat entschieden! ({1}%% von {2} Stimmen erhalten) "
-	}
-
-	"Changed Next Map"
-	{
-		"de"		"Nächste Karte wurde  auf \"{1}\" geändert. "
 	}
 
 	"Starting Runoff"

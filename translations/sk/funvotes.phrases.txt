@@ -1,18 +1,13 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
+	"Alltalk vote"
 	{
-		"sk"		"Spustené hlasovanie gravitácie."
+		"sk"		"Alltalk hlasovanie"
 	}
 
-	"Initiated Vote Burn"
+	"Change Gravity To"
 	{
-		"sk"		"Spustené hlasovanie na podpálenie hráča {1}."
-	}
-
-	"Initiated Vote Slay"
-	{
-		"sk"		"Spustené hlasovanie na zabitie hráča {1}."
+		"sk"		"Zmeniť gravitáciu na {1} ?"
 	}
 
 	"Initiated Vote Alltalk"
@@ -25,24 +20,24 @@
 		"sk"		"Spustené hlasovanie na friendly fire."
 	}
 
-	"Gravity Vote"
+	"Initiated Vote Gravity"
 	{
-		"sk"		"Hlasovanie o zmenu gravitácie: {1}"
+		"sk"		"Spustené hlasovanie gravitácie."
 	}
 
-	"Change Gravity To"
+	"Initiated Vote Slay"
 	{
-		"sk"		"Zmeniť gravitáciu na {1} ?"
+		"sk"		"Spustené hlasovanie na zabitie hráča {1}."
 	}
 
-	"Voteburn player"
+	"Slayed player"
 	{
-		"sk"		"Podpáliť hráča {1}?"
+		"sk"		"Zabitý hráč '{1}'"
 	}
 
-	"Voteslay Player"
+	"Vote FF"
 	{
-		"sk"		"Zabiť hráča {1}?"
+		"sk"		"Hlasovanie Friendly Fire"
 	}
 
 	"Votealltalk Off"
@@ -55,6 +50,11 @@
 		"sk"		"Zapnúť alltalk ? {1}  "
 	}
 
+	"Voteburn player"
+	{
+		"sk"		"Podpáliť hráča {1}?"
+	}
+
 	"Voteff Off"
 	{
 		"sk"		"Vypnúť friendly fire? {1}"
@@ -65,14 +65,9 @@
 		"sk"		"Zapnúť friendly fire? {1}"
 	}
 
-	"Gravity vote"
+	"Voteslay Player"
 	{
-		"sk"		"Hlasovanie o zmenu gravitácie"
-	}
-
-	"Vote FF"
-	{
-		"sk"		"Hlasovanie Friendly Fire"
+		"sk"		"Zabiť hráča {1}?"
 	}
 
 	"Burn vote"
@@ -80,19 +75,24 @@
 		"sk"		"Hlasovať za podpálenie"
 	}
 
-	"Alltalk vote"
+	"Gravity vote"
 	{
-		"sk"		"Alltalk hlasovanie"
+		"sk"		"Hlasovanie o zmenu gravitácie"
+	}
+
+	"Gravity Vote"
+	{
+		"sk"		"Hlasovanie o zmenu gravitácie: {1}"
+	}
+
+	"Initiated Vote Burn"
+	{
+		"sk"		"Spustené hlasovanie na podpálenie hráča {1}."
 	}
 
 	"Slay vote"
 	{
 		"sk"		"Hlasovanie za zabitie hráča "
-	}
-
-	"Slayed player"
-	{
-		"sk"		"Zabitý hráč '{1}'"
 	}
 
 }

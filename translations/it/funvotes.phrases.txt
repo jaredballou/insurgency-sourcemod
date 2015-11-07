@@ -1,33 +1,8 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
+	"Alltalk vote"
 	{
-		"it"		"Votazione per la gravità iniziata."
-	}
-
-	"Initiated Vote Burn"
-	{
-		"it"		"Votazione per incendiare {1} iniziata."
-	}
-
-	"Initiated Vote Slay"
-	{
-		"it"		"Votazione per giustiziare {1} iniziata."
-	}
-
-	"Initiated Vote Alltalk"
-	{
-		"it"		"Votazione per l'Alltalk iniziata."
-	}
-
-	"Initiated Vote FF"
-	{
-		"it"		"Votazione per il fuoco amico iniziata."
-	}
-
-	"Gravity Vote"
-	{
-		"it"		"Votazione per la gravità: {1}"
+		"it"		"Votazione per l'Alltalk"
 	}
 
 	"Change Gravity To"
@@ -35,19 +10,69 @@
 		"it"		"Modificare la gravità in {1}?"
 	}
 
-	"Voteburn player"
+	"Gravity Vote"
 	{
-		"it"		"Incendiare il giocatore {1}?"
+		"it"		"Votazione per la gravità: {1}"
 	}
 
-	"Voteslay Player"
+	"Gravity vote"
 	{
-		"it"		"Giustiziare {1}?"
+		"it"		"Votazione per la gravità"
+	}
+
+	"Burn vote"
+	{
+		"it"		"Votazione per incendiare..."
+	}
+
+	"Initiated Vote Alltalk"
+	{
+		"it"		"Votazione per l'Alltalk iniziata."
+	}
+
+	"Initiated Vote Burn"
+	{
+		"it"		"Votazione per incendiare {1} iniziata."
+	}
+
+	"Initiated Vote FF"
+	{
+		"it"		"Votazione per il fuoco amico iniziata."
+	}
+
+	"Initiated Vote Gravity"
+	{
+		"it"		"Votazione per la gravità iniziata."
+	}
+
+	"Initiated Vote Slay"
+	{
+		"it"		"Votazione per giustiziare {1} iniziata."
+	}
+
+	"Slay vote"
+	{
+		"it"		"Votazione per giustiziare..."
+	}
+
+	"Slayed player"
+	{
+		"it"		"Il giocatore '{1}' è stato giustiziato. "
+	}
+
+	"Vote FF"
+	{
+		"it"		"Votazione per il fuoco amico"
 	}
 
 	"Votealltalk Off"
 	{
 		"it"		"Disattivare l'Alltalk? {1}"
+	}
+
+	"Voteburn player"
+	{
+		"it"		"Incendiare il giocatore {1}?"
 	}
 
 	"Votealltalk On"
@@ -65,34 +90,9 @@
 		"it"		"Attivare il fuoco amico? {1}"
 	}
 
-	"Gravity vote"
+	"Voteslay Player"
 	{
-		"it"		"Votazione per la gravità"
-	}
-
-	"Vote FF"
-	{
-		"it"		"Votazione per il fuoco amico"
-	}
-
-	"Burn vote"
-	{
-		"it"		"Votazione per incendiare..."
-	}
-
-	"Alltalk vote"
-	{
-		"it"		"Votazione per l'Alltalk"
-	}
-
-	"Slay vote"
-	{
-		"it"		"Votazione per giustiziare..."
-	}
-
-	"Slayed player"
-	{
-		"it"		"Il giocatore '{1}' è stato giustiziato. "
+		"it"		"Giustiziare {1}?"
 	}
 
 }

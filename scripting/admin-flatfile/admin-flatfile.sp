@@ -36,7 +36,7 @@
 
 #include <sourcemod>
 
-public Plugin myinfo = 
+public Plugin:myinfo = 
 {
 	name = "Admin File Reader",
 	author = "AlliedModders LLC",
@@ -46,18 +46,18 @@ public Plugin myinfo =
 };
 
 /** Various parsing globals */
-bool g_LoggedFileName = false;       /* Whether or not the file name has been logged */
-int g_ErrorCount = 0;                /* Current error count */
-int g_IgnoreLevel = 0;               /* Nested ignored section count, so users can screw up files safely */
-int g_CurrentLine = 0;               /* Current line we're on */
-char g_Filename[PLATFORM_MAX_PATH];  /* Used for error messages */
+new bool:g_LoggedFileName = false;			/* Whether or not the file name has been logged */
+new g_ErrorCount = 0;						/* Current error count */
+new g_IgnoreLevel = 0;						/* Nested ignored section count, so users can screw up files safely */
+new g_CurrentLine = 0;						/* Current line we're on */
+new String:g_Filename[PLATFORM_MAX_PATH];	/* Used for error messages */
 
 #include "admin-overrides.sp"
 #include "admin-groups.sp"
 #include "admin-users.sp"
 #include "admin-simple.sp"
 
-public void OnRebuildAdminCache(AdminCachePart part)
+public OnRebuildAdminCache(AdminCachePart:part)
 {
 	if (part == AdminCache_Overrides)
 	{
@@ -70,9 +70,9 @@ public void OnRebuildAdminCache(AdminCachePart part)
 	}
 }
 
-void ParseError(const char[] format, any ...)
+ParseError(const String:format[], any:...)
 {
-	char buffer[512];
+	decl String:buffer[512];
 	
 	if (!g_LoggedFileName)
 	{
@@ -87,7 +87,7 @@ void ParseError(const char[] format, any ...)
 	g_ErrorCount++;
 }
 
-void InitGlobalStates()
+InitGlobalStates()
 {
 	g_ErrorCount = 0;
 	g_IgnoreLevel = 0;

@@ -36,7 +36,7 @@
 #include <sourcemod>
 #include <topmenus>
 
-public Plugin myinfo = 
+public Plugin:myinfo = 
 {
 	name = "Admin Menu",
 	author = "AlliedModders LLC",
@@ -46,8 +46,8 @@ public Plugin myinfo =
 };
 
 /* Forwards */
-Handle hOnAdminMenuReady = null;
-Handle hOnAdminMenuCreated = null;
+new Handle:hOnAdminMenuReady = null;
+new Handle:hOnAdminMenuCreated = null;
 
 /* Menus */
 TopMenu hAdminMenu;
@@ -59,7 +59,7 @@ TopMenuObject obj_votingcmds = INVALID_TOPMENUOBJECT;
 
 #include "adminmenu/dynamicmenu.sp"
 
-public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
 	CreateNative("GetAdminTopMenu", __GetAdminTopMenu);
 	CreateNative("AddTargetsToMenu", __AddTargetsToMenu);
@@ -68,7 +68,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	return APLRes_Success;
 }
 
-public void OnPluginStart()
+public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
 	LoadTranslations("adminmenu.phrases");
@@ -79,10 +79,10 @@ public void OnPluginStart()
 	RegAdminCmd("sm_admin", Command_DisplayMenu, ADMFLAG_GENERIC, "Displays the admin menu");
 }
 
-public void OnConfigsExecuted()
+public OnConfigsExecuted()
 {
-	char path[PLATFORM_MAX_PATH];
-	char error[256];
+	decl String:path[PLATFORM_MAX_PATH];
+	decl String:error[256];
 	
 	BuildPath(Path_SM, path, sizeof(path), "configs/adminmenu_sorting.txt");
 	
@@ -93,12 +93,12 @@ public void OnConfigsExecuted()
 	}
 }
 
-public void OnMapStart()
+public OnMapStart()
 {
 	ParseConfigs();
 }
 
-public void OnAllPluginsLoaded()
+public OnAllPluginsLoaded()
 {
 	hAdminMenu = new TopMenu(DefaultCategoryHandler);
 	
@@ -117,12 +117,12 @@ public void OnAllPluginsLoaded()
 	Call_Finish();
 }
 
-public void DefaultCategoryHandler(Handle topmenu, 
-						TopMenuAction action,
-						TopMenuObject object_id,
-						int param,
-						char[] buffer,
-						int maxlength)
+public DefaultCategoryHandler(Handle:topmenu, 
+						TopMenuAction:action,
+						TopMenuObject:object_id,
+						param,
+						String:buffer[],
+						maxlength)
 {
 	if (action == TopMenuAction_DisplayTitle)
 	{
@@ -160,14 +160,14 @@ public void DefaultCategoryHandler(Handle topmenu,
 	}
 }
 
-public int __GetAdminTopMenu(Handle plugin, int numParams)
+public __GetAdminTopMenu(Handle:plugin, numParams)
 {
-	return view_as<int>(hAdminMenu);
+	return _:hAdminMenu;
 }
 
-public int __AddTargetsToMenu(Handle plugin, int numParams)
+public __AddTargetsToMenu(Handle:plugin, numParams)
 {
-	bool alive_only = false;
+	new bool:alive_only = false;
 	
 	if (numParams >= 4)
 	{
@@ -177,12 +177,12 @@ public int __AddTargetsToMenu(Handle plugin, int numParams)
 	return UTIL_AddTargetsToMenu(GetNativeCell(1), GetNativeCell(2), GetNativeCell(3), alive_only);
 }
 
-public int __AddTargetsToMenu2(Handle plugin, int numParams)
+public __AddTargetsToMenu2(Handle:plugin, numParams)
 {
 	return UTIL_AddTargetsToMenu2(GetNativeCell(1), GetNativeCell(2), GetNativeCell(3));
 }
 
-public Action Command_DisplayMenu(int client, int args)
+public Action:Command_DisplayMenu(int client, int args)
 {
 	if (client == 0)
 	{
@@ -194,15 +194,15 @@ public Action Command_DisplayMenu(int client, int args)
 	return Plugin_Handled;
 }
 
-stock int UTIL_AddTargetsToMenu2(Menu menu, int source_client, int flags)
+stock int UTIL_AddTargetsToMenu2(Menu menu, source_client, flags)
 {
 	char user_id[12];
 	char name[MAX_NAME_LENGTH];
 	char display[MAX_NAME_LENGTH+12];
 	
-	int num_clients;
+	new num_clients;
 	
-	for (int i = 1; i <= MaxClients; i++)
+	for (new i = 1; i <= MaxClients; i++)
 	{
 		if (!IsClientConnected(i) || IsClientInKickQueue(i))
 		{
@@ -249,9 +249,9 @@ stock int UTIL_AddTargetsToMenu2(Menu menu, int source_client, int flags)
 	return num_clients;
 }
 
-stock int UTIL_AddTargetsToMenu(Menu menu, int source_client, bool in_game_only, bool alive_only)
+stock UTIL_AddTargetsToMenu(Menu menu, source_client, bool:in_game_only, bool:alive_only)
 {
-	int flags = 0;
+	new flags = 0;
 	
 	if (!in_game_only)
 	{

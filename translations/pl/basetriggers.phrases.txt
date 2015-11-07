@@ -1,13 +1,8 @@
 "Phrases"
 {
-	"Timeleft"
+	"Current Map"
 	{
-		"pl"		"Pozostały czas mapy:"
-	}
-
-	"Thetime"
-	{
-		"pl"		"Aktualny czas na serwerze to {1} "
+		"pl"		"Aktualna mapa to: {1}."
 	}
 
 	"Friendly Fire On"
@@ -20,9 +15,14 @@
 		"pl"		"Ogień Sojuszniczy jest wyłączony. "
 	}
 
-	"Current Map"
+	"Thetime"
 	{
-		"pl"		"Aktualna mapa to: {1}."
+		"pl"		"Aktualny czas na serwerze to {1} "
+	}
+
+	"Timeleft"
+	{
+		"pl"		"Pozostały czas mapy:"
 	}
 
 	"LastRound"
@@ -35,64 +35,14 @@
 		"pl"		"Brak limitu czasu dla mapy"
 	}
 
-	"Next Map"
-	{
-		"pl"		"Następna mapa: {1} "
-	}
-
-	"Pending Vote"
-	{
-		"pl"		"Oczekujące głosowanie"
-	}
-
-	"WinLimitAppend"
-	{
-		"pl"		", lub gdy drużyna wygra jedną rundę"
-	}
-
-	"WinLimit"
-	{
-		"pl"		"Mapa zmieni się, gdy drużyna wygra jedną rundę"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"pl"		", lub po jednej rundzie"
-	}
-
-	"MaxRounds"
-	{
-		"pl"		"Mapa zmieni się po jednej rundzie"
-	}
-
-	"FragLimitAppend"
-	{
-		"pl"		", lub po zdobyciu przez gracza jednego fraga"
-	}
-
 	"FragLimit"
 	{
 		"pl"		"Mapa zmieni się po zdobyciu przez gracza jednego fraga"
 	}
 
-	"WinLimitAppendPlural"
+	"FragLimitAppend"
 	{
-		"pl"		", lub gdy drużyna wygra w {1} rundach "
-	}
-
-	"WinLimitPlural"
-	{
-		"pl"		"Mapa zmieni się, gdy drużyna wygra {1} rund"
-	}
-
-	"MaxRoundsAppendPlural"
-	{
-		"pl"		", lub po {1} rundach "
-	}
-
-	"MaxRoundsPlural"
-	{
-		"pl"		"Mapa zmieni się po {1} rundach"
+		"pl"		", lub po zdobyciu przez gracza jednego fraga"
 	}
 
 	"FragLimitAppendPlural"
@@ -103,6 +53,56 @@
 	"FragLimitPlural"
 	{
 		"pl"		"Mapa zmieni się po zdobyciu przez gracza {1} fragów"
+	}
+
+	"MaxRounds"
+	{
+		"pl"		"Mapa zmieni się po jednej rundzie"
+	}
+
+	"MaxRoundsAppend"
+	{
+		"pl"		", lub po jednej rundzie"
+	}
+
+	"MaxRoundsPlural"
+	{
+		"pl"		"Mapa zmieni się po {1} rundach"
+	}
+
+	"MaxRoundsAppendPlural"
+	{
+		"pl"		", lub po {1} rundach "
+	}
+
+	"WinLimitAppendPlural"
+	{
+		"pl"		", lub gdy drużyna wygra w {1} rundach "
+	}
+
+	"WinLimit"
+	{
+		"pl"		"Mapa zmieni się, gdy drużyna wygra jedną rundę"
+	}
+
+	"WinLimitAppend"
+	{
+		"pl"		", lub gdy drużyna wygra jedną rundę"
+	}
+
+	"WinLimitPlural"
+	{
+		"pl"		"Mapa zmieni się, gdy drużyna wygra {1} rund"
+	}
+
+	"Next Map"
+	{
+		"pl"		"Następna mapa: {1} "
+	}
+
+	"Pending Vote"
+	{
+		"pl"		"Oczekujące głosowanie"
 	}
 
 }

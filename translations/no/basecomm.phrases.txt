@@ -1,53 +1,13 @@
 "Phrases"
 {
-	"Gag/Mute player"
-	{
-		"no"		"Kneble/Demp spiller"
-	}
-
-	"Choose Type"
-	{
-		"no"		"Velg metode"
-	}
-
-	"Gagged target"
-	{
-		"no"		"Kneblet {1}."
-	}
-
-	"Ungagged target"
-	{
-		"no"		"Fjernet knebling {1}."
-	}
-
-	"Muted target"
-	{
-		"no"		"Dempet {1}."
-	}
-
-	"Unmuted target"
-	{
-		"no"		"Fjernet demping {1}."
-	}
-
-	"Silenced target"
-	{
-		"no"		"Bringte til taushet {1}."
-	}
-
-	"Unsilenced target"
-	{
-		"no"		"Fjernet full demping fra {1}."
-	}
-
 	"Mute Player"
 	{
 		"no"		"Demp spiller"
 	}
 
-	"UnMute Player"
+	"Silence Player"
 	{
-		"no"		"Fjern demping"
+		"no"		"Bring til taushet"
 	}
 
 	"Gag Player"
@@ -55,14 +15,54 @@
 		"no"		"Kneble spiller"
 	}
 
+	"Muted target"
+	{
+		"no"		"Dempet {1}."
+	}
+
 	"UnGag Player"
 	{
 		"no"		"Omgjør knebling"
 	}
 
-	"Silence Player"
+	"UnMute Player"
 	{
-		"no"		"Bring til taushet"
+		"no"		"Fjern demping"
+	}
+
+	"Choose Type"
+	{
+		"no"		"Velg metode"
+	}
+
+	"Gag/Mute player"
+	{
+		"no"		"Kneble/Demp spiller"
+	}
+
+	"Gagged target"
+	{
+		"no"		"Kneblet {1}."
+	}
+
+	"Silenced target"
+	{
+		"no"		"Bringte til taushet {1}."
+	}
+
+	"Ungagged target"
+	{
+		"no"		"Fjernet knebling {1}."
+	}
+
+	"Unmuted target"
+	{
+		"no"		"Fjernet demping {1}."
+	}
+
+	"Unsilenced target"
+	{
+		"no"		"Fjernet full demping fra {1}."
 	}
 
 	"UnSilence Player"

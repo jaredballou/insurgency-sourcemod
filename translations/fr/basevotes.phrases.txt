@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Initiate Vote"
+	"Ban vote"
 	{
-		"fr"		"Propose un vote: {1}"
-	}
-
-	"Initiated Vote Map"
-	{
-		"fr"		" a commencé un vote pour changer la map "
-	}
-
-	"Initiated Vote Kick"
-	{
-		"fr"		"a commencé un vote pour kicker {1} ."
+		"fr"		"Vote pour bannir"
 	}
 
 	"Initiated Vote Ban"
@@ -20,39 +10,9 @@
 		"fr"		"a commencé un vote pour bannir {1} ."
 	}
 
-	"Map Vote"
+	"Initiated Vote Kick"
 	{
-		"fr"		"Vote pour la map: {1} "
-	}
-
-	"Change Map To"
-	{
-		"fr"		"Changer la Map pour {1}?"
-	}
-
-	"Votekick Player"
-	{
-		"fr"		"Kicker {1}?"
-	}
-
-	"Voteban Player"
-	{
-		"fr"		"Bannir {1}?"
-	}
-
-	"Vote Successful"
-	{
-		"fr"		"le vote a réussi. (Reçu {1}%% d'un total de {2} votes) "
-	}
-
-	"Vote Failed"
-	{
-		"fr"		"Le vote a échoué. {1}%% de votes nécessaires. (Reçu {2}%% d'un total de {3} votes) "
-	}
-
-	"Vote End"
-	{
-		"fr"		"La réponse à {1} est: {2}."
+		"fr"		"a commencé un vote pour kicker {1} ."
 	}
 
 	"Kick vote"
@@ -60,9 +20,9 @@
 		"fr"		"Vote pour kicker"
 	}
 
-	"Ban vote"
+	"Map Vote"
 	{
-		"fr"		"Vote pour bannir"
+		"fr"		"Vote pour la map: {1} "
 	}
 
 	"Map vote"
@@ -70,9 +30,49 @@
 		"fr"		"Vote pour une map"
 	}
 
+	"Change Map To"
+	{
+		"fr"		"Changer la Map pour {1}?"
+	}
+
+	"Initiate Vote"
+	{
+		"fr"		"Propose un vote: {1}"
+	}
+
+	"Vote End"
+	{
+		"fr"		"La réponse à {1} est: {2}."
+	}
+
+	"Voteban Player"
+	{
+		"fr"		"Bannir {1}?"
+	}
+
+	"Votekick Player"
+	{
+		"fr"		"Kicker {1}?"
+	}
+
 	"Confirm Vote"
 	{
 		"fr"		"Confirmer le Vote"
+	}
+
+	"Initiated Vote Map"
+	{
+		"fr"		" a commencé un vote pour changer la map "
+	}
+
+	"Vote Failed"
+	{
+		"fr"		"Le vote a échoué. {1}%% de votes nécessaires. (Reçu {2}%% d'un total de {3} votes) "
+	}
+
+	"Vote Successful"
+	{
+		"fr"		"le vote a réussi. (Reçu {1}%% d'un total de {2} votes) "
 	}
 
 	"Map Vote In Use"

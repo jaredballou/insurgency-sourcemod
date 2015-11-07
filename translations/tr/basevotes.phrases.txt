@@ -1,33 +1,28 @@
 "Phrases"
 {
-	"Initiate Vote"
-	{
-		"tr"		"Bir oylama başlatıldı: {1}"
-	}
-
-	"Initiated Vote Map"
-	{
-		"tr"		"Harita oylaması başlatıldı."
-	}
-
-	"Initiated Vote Kick"
-	{
-		"tr"		"{1} adlı oyuncuya karşı atma oylaması başlatıldı."
-	}
-
 	"Initiated Vote Ban"
 	{
 		"tr"		"{1} adlı oyuncuya karşı yasaklama oylaması başlatıldı."
 	}
 
-	"Map Vote"
+	"Initiate Vote"
 	{
-		"tr"		"Harita Oylaması: {1}"
+		"tr"		"Bir oylama başlatıldı: {1}"
+	}
+
+	"Confirm Vote"
+	{
+		"tr"		"Oylamayı Onayla"
 	}
 
 	"Change Map To"
 	{
 		"tr"		"Harita {1} olarak değiştirilsin mi?"
+	}
+
+	"Ban vote"
+	{
+		"tr"		"Yasaklama oylaması"
 	}
 
 	"Votekick Player"
@@ -40,6 +35,36 @@
 		"tr"		"{1} yasaklansın mı?"
 	}
 
+	"Vote End"
+	{
+		"tr"		"{1} sorusuna cevap: {2}."
+	}
+
+	"Map vote"
+	{
+		"tr"		"Harita oylaması"
+	}
+
+	"Map Vote"
+	{
+		"tr"		"Harita Oylaması: {1}"
+	}
+
+	"Kick vote"
+	{
+		"tr"		"Atma oylaması"
+	}
+
+	"Initiated Vote Map"
+	{
+		"tr"		"Harita oylaması başlatıldı."
+	}
+
+	"Initiated Vote Kick"
+	{
+		"tr"		"{1} adlı oyuncuya karşı atma oylaması başlatıldı."
+	}
+
 	"Vote Successful"
 	{
 		"tr"		"Oylama başarılı. ({2} oyun %%{1} kadarı alındı.) "
@@ -48,31 +73,6 @@
 	"Vote Failed"
 	{
 		"tr"		"Oylama başarısız. %%{1} oy gerekliydi. ({3} oyun %%{2} kadarı alındı.)"
-	}
-
-	"Vote End"
-	{
-		"tr"		"{1} sorusuna cevap: {2}."
-	}
-
-	"Kick vote"
-	{
-		"tr"		"Atma oylaması"
-	}
-
-	"Ban vote"
-	{
-		"tr"		"Yasaklama oylaması"
-	}
-
-	"Map vote"
-	{
-		"tr"		"Harita oylaması"
-	}
-
-	"Confirm Vote"
-	{
-		"tr"		"Oylamayı Onayla"
 	}
 
 	"Map Vote In Use"

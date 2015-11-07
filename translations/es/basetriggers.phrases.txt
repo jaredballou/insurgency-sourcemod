@@ -1,33 +1,13 @@
 "Phrases"
 {
-	"Timeleft"
-	{
-		"es"		"Tiempo restante del mapa:"
-	}
-
 	"Thetime"
 	{
 		"es"		"La hora del servidor es {1}"
 	}
 
-	"Friendly Fire On"
+	"Timeleft"
 	{
-		"es"		"Fuego Amigo está activado."
-	}
-
-	"Friendly Fire Off"
-	{
-		"es"		"Fuego Amigo está desactivado."
-	}
-
-	"Current Map"
-	{
-		"es"		"El mapa actual es {1}."
-	}
-
-	"LastRound"
-	{
-		"es"		"¡¡Es la última ronda!!"
+		"es"		"Tiempo restante del mapa:"
 	}
 
 	"NoTimelimit"
@@ -35,34 +15,9 @@
 		"es"		"No hay limite de tiempo para el mapa"
 	}
 
-	"Next Map"
+	"Current Map"
 	{
-		"es"		"Próximo mapa: {1}"
-	}
-
-	"Pending Vote"
-	{
-		"es"		"Votación pendiente"
-	}
-
-	"WinLimitAppend"
-	{
-		"es"		" , o cambiar mapa cuando un equipo gane una ronda"
-	}
-
-	"WinLimit"
-	{
-		"es"		"El mapa cambiará cuando un equipo gane una ronda"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"es"		", o cambiar mapa después de la siguiente ronda"
-	}
-
-	"MaxRounds"
-	{
-		"es"		"El mapa cambiará después de la siguiente ronda"
+		"es"		"El mapa actual es {1}."
 	}
 
 	"FragLimitAppend"
@@ -70,9 +25,14 @@
 		"es"		" , o cambiar mapa cuando un jugador alcance un frag"
 	}
 
-	"FragLimit"
+	"FragLimitAppendPlural"
 	{
-		"es"		"El mapa cambiará cuando un jugador alcance un frag"
+		"es"		" , o cambiar mapa cuando un jugador alcance {1} frags"
+	}
+
+	"WinLimitAppend"
+	{
+		"es"		" , o cambiar mapa cuando un equipo gane una ronda"
 	}
 
 	"WinLimitAppendPlural"
@@ -80,9 +40,39 @@
 		"es"		" , o cambiar mapa cuando un equipo gane {1} rondas"
 	}
 
-	"WinLimitPlural"
+	"FragLimit"
 	{
-		"es"		"El mapa cambiará cuando un equipo gane {1} rondas"
+		"es"		"El mapa cambiará cuando un jugador alcance un frag"
+	}
+
+	"FragLimitPlural"
+	{
+		"es"		"El mapa cambiará cuando un jugador alcance {1} frags"
+	}
+
+	"Friendly Fire Off"
+	{
+		"es"		"Fuego Amigo está desactivado."
+	}
+
+	"Friendly Fire On"
+	{
+		"es"		"Fuego Amigo está activado."
+	}
+
+	"LastRound"
+	{
+		"es"		"¡¡Es la última ronda!!"
+	}
+
+	"MaxRounds"
+	{
+		"es"		"El mapa cambiará después de la siguiente ronda"
+	}
+
+	"MaxRoundsAppend"
+	{
+		"es"		", o cambiar mapa después de la siguiente ronda"
 	}
 
 	"MaxRoundsAppendPlural"
@@ -95,14 +85,24 @@
 		"es"		"El mapa cambiará después de {1} rondas"
 	}
 
-	"FragLimitAppendPlural"
+	"Next Map"
 	{
-		"es"		" , o cambiar mapa cuando un jugador alcance {1} frags"
+		"es"		"Próximo mapa: {1}"
 	}
 
-	"FragLimitPlural"
+	"Pending Vote"
 	{
-		"es"		"El mapa cambiará cuando un jugador alcance {1} frags"
+		"es"		"Votación pendiente"
+	}
+
+	"WinLimit"
+	{
+		"es"		"El mapa cambiará cuando un equipo gane una ronda"
+	}
+
+	"WinLimitPlural"
+	{
+		"es"		"El mapa cambiará cuando un equipo gane {1} rondas"
 	}
 
 }

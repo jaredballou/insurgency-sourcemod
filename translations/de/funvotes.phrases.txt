@@ -1,48 +1,8 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
-	{
-		"de"		"Schwerkraft-Abstimmung gestartet"
-	}
-
-	"Initiated Vote Burn"
-	{
-		"de"		"Verbrennungs-Abstimmung gegen {1} gestartet."
-	}
-
-	"Initiated Vote Slay"
-	{
-		"de"		"Erschlagen-Abstimmung gegen {1} gestartet."
-	}
-
 	"Initiated Vote Alltalk"
 	{
 		"de"		"Abstimmung für teamübergreifende Kommuniktaion gestartet."
-	}
-
-	"Initiated Vote FF"
-	{
-		"de"		"Teambeschuss-Abstimmung gestartet."
-	}
-
-	"Gravity Vote"
-	{
-		"de"		"Schwerkraft-Abstimmung: {1}"
-	}
-
-	"Change Gravity To"
-	{
-		"de"		"Schwerkraft zu {1} ändern?"
-	}
-
-	"Voteburn player"
-	{
-		"de"		"{1} verbrennen? "
-	}
-
-	"Voteslay Player"
-	{
-		"de"		"Erschlage {1}?"
 	}
 
 	"Votealltalk Off"
@@ -55,9 +15,9 @@
 		"de"		"Teamübergreifende Kommunikation einschalten? {1}"
 	}
 
-	"Voteff Off"
+	"Alltalk vote"
 	{
-		"de"		"Teambeschuss ausschalten? {1}"
+		"de"		"Abstimmung für teamübergreifende Kommunikation"
 	}
 
 	"Voteff On"
@@ -65,9 +25,9 @@
 		"de"		"Teambeschuss einschalten? {1}"
 	}
 
-	"Gravity vote"
+	"Voteff Off"
 	{
-		"de"		"Schwerkraft-Abstimmung"
+		"de"		"Teambeschuss ausschalten? {1}"
 	}
 
 	"Vote FF"
@@ -75,24 +35,64 @@
 		"de"		"Teambeschuss-Abstimmung"
 	}
 
-	"Burn vote"
-	{
-		"de"		"Verbrennungs-Abstimmung"
-	}
-
-	"Alltalk vote"
-	{
-		"de"		"Abstimmung für teamübergreifende Kommunikation"
-	}
-
 	"Slay vote"
 	{
 		"de"		"Erschlagen-Abstimmung"
 	}
 
+	"Initiated Vote Slay"
+	{
+		"de"		"Erschlagen-Abstimmung gegen {1} gestartet."
+	}
+
+	"Initiated Vote Gravity"
+	{
+		"de"		"Schwerkraft-Abstimmung gestartet"
+	}
+
+	"Initiated Vote FF"
+	{
+		"de"		"Teambeschuss-Abstimmung gestartet."
+	}
+
+	"Initiated Vote Burn"
+	{
+		"de"		"Verbrennungs-Abstimmung gegen {1} gestartet."
+	}
+
+	"Gravity vote"
+	{
+		"de"		"Schwerkraft-Abstimmung"
+	}
+
+	"Gravity Vote"
+	{
+		"de"		"Schwerkraft-Abstimmung: {1}"
+	}
+
+	"Burn vote"
+	{
+		"de"		"Verbrennungs-Abstimmung"
+	}
+
 	"Slayed player"
 	{
 		"de"		"'{1}' wurde erschlagen"
+	}
+
+	"Change Gravity To"
+	{
+		"de"		"Schwerkraft zu {1} ändern?"
+	}
+
+	"Voteslay Player"
+	{
+		"de"		"Erschlage {1}?"
+	}
+
+	"Voteburn player"
+	{
+		"de"		"{1} verbrennen? "
 	}
 
 }

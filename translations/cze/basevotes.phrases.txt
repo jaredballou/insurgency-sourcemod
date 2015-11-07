@@ -1,28 +1,8 @@
 "Phrases"
 {
-	"Initiate Vote"
+	"Ban vote"
 	{
-		"cze"		" Zahajil hlasovani: {1}"
-	}
-
-	"Initiated Vote Map"
-	{
-		"cze"		"Zahajil hlasovani o mape."
-	}
-
-	"Initiated Vote Kick"
-	{
-		"cze"		"Zahajil hlasovani o vyhozeni proti hraci {1}."
-	}
-
-	"Initiated Vote Ban"
-	{
-		"cze"		"Zahajil hlasovani o banu proti hraci {1}"
-	}
-
-	"Map Vote"
-	{
-		"cze"		"Hlasovani o mape: {1}"
+		"cze"		"Hlasovani o banu"
 	}
 
 	"Change Map To"
@@ -30,29 +10,29 @@
 		"cze"		"Zmenit mapu na {1}?"
 	}
 
-	"Votekick Player"
+	"Confirm Vote"
 	{
-		"cze"		"Vyhodit {1}?"
+		"cze"		"Potvrdit hlasovani"
 	}
 
-	"Voteban Player"
+	"Initiate Vote"
 	{
-		"cze"		"Zabanovat {1}?"
+		"cze"		" Zahajil hlasovani: {1}"
 	}
 
-	"Vote Successful"
+	"Initiated Vote Ban"
 	{
-		"cze"		"Hlasovani prijato. (Obdrzeno {1}%% z {2} hlasu)"
+		"cze"		"Zahajil hlasovani o banu proti hraci {1}"
 	}
 
-	"Vote Failed"
+	"Initiated Vote Kick"
 	{
-		"cze"		"Hlasovani selhalo. Bylo potreba {1}%% hlasu. (Obdrzeno {2}%% z {3} hlasu)"
+		"cze"		"Zahajil hlasovani o vyhozeni proti hraci {1}."
 	}
 
-	"Vote End"
+	"Initiated Vote Map"
 	{
-		"cze"		"Odpoved na otazku {1} je: {2}."
+		"cze"		"Zahajil hlasovani o mape."
 	}
 
 	"Kick vote"
@@ -60,9 +40,9 @@
 		"cze"		"Hlasovani o vyhozeni"
 	}
 
-	"Ban vote"
+	"Map Vote In Use"
 	{
-		"cze"		"Hlasovani o banu"
+		"cze"		"Jiny admin prave pouziva hlasovaci menu."
 	}
 
 	"Map vote"
@@ -70,14 +50,34 @@
 		"cze"		"Hlasovani o mape"
 	}
 
-	"Confirm Vote"
+	"Map Vote"
 	{
-		"cze"		"Potvrdit hlasovani"
+		"cze"		"Hlasovani o mape: {1}"
 	}
 
-	"Map Vote In Use"
+	"Vote End"
 	{
-		"cze"		"Jiny admin prave pouziva hlasovaci menu."
+		"cze"		"Odpoved na otazku {1} je: {2}."
+	}
+
+	"Vote Failed"
+	{
+		"cze"		"Hlasovani selhalo. Bylo potreba {1}%% hlasu. (Obdrzeno {2}%% z {3} hlasu)"
+	}
+
+	"Vote Successful"
+	{
+		"cze"		"Hlasovani prijato. (Obdrzeno {1}%% z {2} hlasu)"
+	}
+
+	"Voteban Player"
+	{
+		"cze"		"Zabanovat {1}?"
+	}
+
+	"Votekick Player"
+	{
+		"cze"		"Vyhodit {1}?"
 	}
 
 	"Please select a map"

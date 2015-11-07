@@ -1,23 +1,8 @@
 "Phrases"
 {
-	"No Access"
-	{
-		"es"		"No tienes acceso a este comando"
-	}
-
-	"Back"
-	{
-		"es"		"Volver"
-	}
-
 	"Next"
 	{
 		"es"		"Siguiente"
-	}
-
-	"Exit"
-	{
-		"es"		"Salir"
 	}
 
 	"Previous"
@@ -25,14 +10,24 @@
 		"es"		"Anterior"
 	}
 
-	"all players"
+	"Back"
 	{
-		"es"		"todos los jugadores"
+		"es"		"Volver"
 	}
 
-	"all humans"
+	"Exit"
 	{
-		"es"		"todos los humanos"
+		"es"		"Salir"
+	}
+
+	"_s"
+	{
+		"es"		"{1}"
+	}
+
+	"all alive players"
+	{
+		"es"		"todos los jugadores vivos"
 	}
 
 	"all bots"
@@ -45,14 +40,24 @@
 		"es"		"todos los jugadores muertos"
 	}
 
-	"all alive players"
+	"all humans"
 	{
-		"es"		"todos los jugadores vivos"
+		"es"		"todos los humanos"
 	}
 
-	"_s"
+	"all players"
 	{
-		"es"		"{1}"
+		"es"		"todos los jugadores"
+	}
+
+	"No Access"
+	{
+		"es"		"No tienes acceso a este comando"
+	}
+
+	"Changed Vote"
+	{
+		"es"		"{1} cambió su voto a {2}"
 	}
 
 	"all spectators"
@@ -60,19 +65,14 @@
 		"es"		"todos los espectadores"
 	}
 
-	"Vote Count"
-	{
-		"es"		"Votos: {1}/{2}, {3} restante(s)"
-	}
-
 	"Voted For"
 	{
 		"es"		"{1} votó por {2}"
 	}
 
-	"Changed Vote"
+	"Vote Count"
 	{
-		"es"		"{1} cambió su voto a {2}"
+		"es"		"Votos: {1}/{2}, {3} restante(s)"
 	}
 
 	"No Vote"

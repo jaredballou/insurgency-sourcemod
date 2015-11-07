@@ -1,28 +1,18 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
+	"Votealltalk Off"
 	{
-		"es"		"Votación para cambiar gravedad iniciada."
+		"es"		"Desactivar alltalk? {1}"
 	}
 
-	"Initiated Vote Burn"
+	"Alltalk vote"
 	{
-		"es"		"Votación para quemar a {1} iniciada."
+		"es"		"Votar alltalk"
 	}
 
-	"Initiated Vote Slay"
+	"Burn vote"
 	{
-		"es"		"Votación para matar a {1} iniciada."
-	}
-
-	"Initiated Vote Alltalk"
-	{
-		"es"		"Votación para alltalk iniciada."
-	}
-
-	"Initiated Vote FF"
-	{
-		"es"		"Votación para fuego amigo iniciada."
+		"es"		"Votar quemar"
 	}
 
 	"Gravity Vote"
@@ -30,9 +20,19 @@
 		"es"		"Votar gravedad: {1}"
 	}
 
-	"Change Gravity To"
+	"Gravity vote"
 	{
-		"es"		"Cambiar la gravedad a {1}?"
+		"es"		"Votar gravedad"
+	}
+
+	"Slay vote"
+	{
+		"es"		"Votar matar"
+	}
+
+	"Vote FF"
+	{
+		"es"		"Votar FF"
 	}
 
 	"Voteburn player"
@@ -45,9 +45,9 @@
 		"es"		"Matar a {1}?"
 	}
 
-	"Votealltalk Off"
+	"Change Gravity To"
 	{
-		"es"		"Desactivar alltalk? {1}"
+		"es"		"Cambiar la gravedad a {1}?"
 	}
 
 	"Votealltalk On"
@@ -65,29 +65,29 @@
 		"es"		"Activar fuego amigo? {1}"
 	}
 
-	"Gravity vote"
+	"Initiated Vote Alltalk"
 	{
-		"es"		"Votar gravedad"
+		"es"		"Votación para alltalk iniciada."
 	}
 
-	"Vote FF"
+	"Initiated Vote Burn"
 	{
-		"es"		"Votar FF"
+		"es"		"Votación para quemar a {1} iniciada."
 	}
 
-	"Burn vote"
+	"Initiated Vote FF"
 	{
-		"es"		"Votar quemar"
+		"es"		"Votación para fuego amigo iniciada."
 	}
 
-	"Alltalk vote"
+	"Initiated Vote Gravity"
 	{
-		"es"		"Votar alltalk"
+		"es"		"Votación para cambiar gravedad iniciada."
 	}
 
-	"Slay vote"
+	"Initiated Vote Slay"
 	{
-		"es"		"Votar matar"
+		"es"		"Votación para matar a {1} iniciada."
 	}
 
 	"Slayed player"

@@ -1,28 +1,13 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
+	"Alltalk vote"
 	{
-		"sv"		"Startade en gravitation röstning."
+		"sv"		"Allprat röstning "
 	}
 
-	"Initiated Vote Burn"
+	"Burn vote"
 	{
-		"sv"		"Startade en bränn röstning mot {1}. "
-	}
-
-	"Initiated Vote Slay"
-	{
-		"sv"		"Startade en döds röstning mot {1}. "
-	}
-
-	"Initiated Vote Alltalk"
-	{
-		"sv"		"Startar en allprat röstning. "
-	}
-
-	"Initiated Vote FF"
-	{
-		"sv"		"Startade en vänlig skada röstning."
+		"sv"		"Bränn röstning"
 	}
 
 	"Gravity Vote"
@@ -30,9 +15,39 @@
 		"sv"		"Gravitations röstning: {1} "
 	}
 
-	"Change Gravity To"
+	"Gravity vote"
 	{
-		"sv"		" Ändra gravitationen till {1}"
+		"sv"		"Gravitations röstning"
+	}
+
+	"Initiated Vote Alltalk"
+	{
+		"sv"		"Startar en allprat röstning. "
+	}
+
+	"Initiated Vote Burn"
+	{
+		"sv"		"Startade en bränn röstning mot {1}. "
+	}
+
+	"Initiated Vote FF"
+	{
+		"sv"		"Startade en vänlig skada röstning."
+	}
+
+	"Initiated Vote Gravity"
+	{
+		"sv"		"Startade en gravitation röstning."
+	}
+
+	"Initiated Vote Slay"
+	{
+		"sv"		"Startade en döds röstning mot {1}. "
+	}
+
+	"Slay vote"
+	{
+		"sv"		"Dräp röstning"
 	}
 
 	"Voteburn player"
@@ -45,19 +60,24 @@
 		"sv"		"Dräp {1}? "
 	}
 
-	"Votealltalk Off"
-	{
-		"sv"		"Stäng av allprat? {1}"
-	}
-
 	"Votealltalk On"
 	{
 		"sv"		"Sätt på allprat? {1} "
 	}
 
-	"Voteff Off"
+	"Votealltalk Off"
 	{
-		"sv"		"Stäng av vänlig skada? {1} "
+		"sv"		"Stäng av allprat? {1}"
+	}
+
+	"Change Gravity To"
+	{
+		"sv"		" Ändra gravitationen till {1}"
+	}
+
+	"Slayed player"
+	{
+		"sv"		"Dräpte spelare '{1}'  "
 	}
 
 	"Voteff On"
@@ -65,34 +85,14 @@
 		"sv"		"Slå på vänlig skada? {1} "
 	}
 
-	"Gravity vote"
+	"Voteff Off"
 	{
-		"sv"		"Gravitations röstning"
+		"sv"		"Stäng av vänlig skada? {1} "
 	}
 
 	"Vote FF"
 	{
 		"sv"		"Rösta vänlig skada "
-	}
-
-	"Burn vote"
-	{
-		"sv"		"Bränn röstning"
-	}
-
-	"Alltalk vote"
-	{
-		"sv"		"Allprat röstning "
-	}
-
-	"Slay vote"
-	{
-		"sv"		"Dräp röstning"
-	}
-
-	"Slayed player"
-	{
-		"sv"		"Dräpte spelare '{1}'  "
 	}
 
 }

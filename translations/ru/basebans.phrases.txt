@@ -1,13 +1,28 @@
 "Phrases"
 {
+	"Cannot ban that IP"
+	{
+		"ru"		"Вы не можете забанить этот IP адрес."
+	}
+
 	"Ban player"
 	{
 		"ru"		"Забанить игрока"
 	}
 
+	"Ban added"
+	{
+		"ru"		"Бан добавлен"
+	}
+
 	"Ban reason"
 	{
 		"ru"		"Причина бана"
+	}
+
+	"Banned player"
+	{
+		"ru"		"Игрок \"{1}\" забанен на {2} минут."
 	}
 
 	"Permabanned player"
@@ -20,11 +35,6 @@
 		"ru"		"Игрок \"{1}\" забанен навсегда (причина: {2})."
 	}
 
-	"Banned player"
-	{
-		"ru"		"Игрок \"{1}\" забанен на {2} минут."
-	}
-
 	"Banned player reason"
 	{
 		"ru"		"Игрок \"{1}\" забанен на {2} минут (причина: {3})."
@@ -33,16 +43,6 @@
 	"Removed bans matching"
 	{
 		"ru"		"Удалены баны по фильтру: {1}"
-	}
-
-	"Ban added"
-	{
-		"ru"		"Бан добавлен"
-	}
-
-	"Cannot ban that IP"
-	{
-		"ru"		"Вы не можете забанить этот IP адрес."
 	}
 
 	"Custom ban reason explanation"

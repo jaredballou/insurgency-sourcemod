@@ -1,23 +1,8 @@
 "Phrases"
 {
-	"Gag/Mute player"
-	{
-		"hu"		"Írás tiltás / Némitás"
-	}
-
 	"Choose Type"
 	{
 		"hu"		"Tipus kiválasztása"
-	}
-
-	"Gagged target"
-	{
-		"hu"		"{1} írás joga  letiltva"
-	}
-
-	"Ungagged target"
-	{
-		"hu"		"{1} újra írhat"
 	}
 
 	"Muted target"
@@ -30,14 +15,9 @@
 		"hu"		"{1} feloldva"
 	}
 
-	"Silenced target"
+	"Gag Player"
 	{
-		"hu"		"{1} írás- és beszédjoga letiltva"
-	}
-
-	"Unsilenced target"
-	{
-		"hu"		"{1} újra írhat és beszélhet"
+		"hu"		"Írás tiltás"
 	}
 
 	"Mute Player"
@@ -45,14 +25,9 @@
 		"hu"		"Némítás"
 	}
 
-	"UnMute Player"
+	"Silence Player"
 	{
-		"hu"		"Némítás feloldása"
-	}
-
-	"Gag Player"
-	{
-		"hu"		"Írás tiltás"
+		"hu"		"Írás- és beszédjog tiltása"
 	}
 
 	"UnGag Player"
@@ -60,14 +35,39 @@
 		"hu"		"Írás tiltás feloldása"
 	}
 
-	"Silence Player"
+	"UnMute Player"
 	{
-		"hu"		"Írás- és beszédjog tiltása"
+		"hu"		"Némítás feloldása"
 	}
 
 	"UnSilence Player"
 	{
 		"hu"		"Írás és beszéd engedélyezése"
+	}
+
+	"Gag/Mute player"
+	{
+		"hu"		"Írás tiltás / Némitás"
+	}
+
+	"Silenced target"
+	{
+		"hu"		"{1} írás- és beszédjoga letiltva"
+	}
+
+	"Ungagged target"
+	{
+		"hu"		"{1} újra írhat"
+	}
+
+	"Unsilenced target"
+	{
+		"hu"		"{1} újra írhat és beszélhet"
+	}
+
+	"Gagged target"
+	{
+		"hu"		"{1} írás joga  letiltva"
 	}
 
 }

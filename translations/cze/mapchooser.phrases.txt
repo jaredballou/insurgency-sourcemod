@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Vote Nextmap"
+	"Changed Next Map"
 	{
-		"cze"		"Hlasujte o pristi mape!"
-	}
-
-	"Nextmap Voting Started"
-	{
-		"cze"		"Hlasovani o pristi mape zacalo."
-	}
-
-	"Nextmap Voting Finished"
-	{
-		"cze"		"Hlasovani o mape skoncilo. Pristi mapou bude {1}. (Obdrzela {2}%% z {3} hlasu)"
+		"cze"		"Zmenil pristi mapu na \"{1}\"."
 	}
 
 	"Current Map Extended"
@@ -20,9 +10,9 @@
 		"cze"		"Soucasna mapa byla prodlouzena. (Obdrzela {1}%% z {2} hlasu)"
 	}
 
-	"Extend Map"
+	"Current Map Stays"
 	{
-		"cze"		"Prodlouzit soucasnou mapu"
+		"cze"		"Soucasna mapa pokracuje! Hlasovani rozhodlo! (Obdrzela {1}%% z {2} hlasu)"
 	}
 
 	"Dont Change"
@@ -30,14 +20,24 @@
 		"cze"		" Nemenit soucasnou mapu"
 	}
 
-	"Current Map Stays"
+	"Extend Map"
 	{
-		"cze"		"Soucasna mapa pokracuje! Hlasovani rozhodlo! (Obdrzela {1}%% z {2} hlasu)"
+		"cze"		"Prodlouzit soucasnou mapu"
 	}
 
-	"Changed Next Map"
+	"Nextmap Voting Finished"
 	{
-		"cze"		"Zmenil pristi mapu na \"{1}\"."
+		"cze"		"Hlasovani o mape skoncilo. Pristi mapou bude {1}. (Obdrzela {2}%% z {3} hlasu)"
+	}
+
+	"Nextmap Voting Started"
+	{
+		"cze"		"Hlasovani o pristi mape zacalo."
+	}
+
+	"Vote Nextmap"
+	{
+		"cze"		"Hlasujte o pristi mape!"
 	}
 
 	"Starting Runoff"

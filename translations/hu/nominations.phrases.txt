@@ -40,6 +40,11 @@
 		"hu"		"Palya megjelolese:"
 	}
 
+	"Can't Nominate Current Map"
+	{
+		"hu"		"Nem jelölheted a jelenlegi pályát!"
+	}
+
 	"Current Map"
 	{
 		"hu"		"Jelenlegi pálya"
@@ -50,19 +55,14 @@
 		"hu"		"Nem jelölheted ezt a pályát"
 	}
 
-	"Can't Nominate Current Map"
+	"Nominated"
 	{
-		"hu"		"Nem jelölheted a jelenlegi pályát!"
+		"hu"		"Jelölve"
 	}
 
 	"Recently Played"
 	{
 		"hu"		"Sürűn játszott"
-	}
-
-	"Nominated"
-	{
-		"hu"		"Jelölve"
 	}
 
 }

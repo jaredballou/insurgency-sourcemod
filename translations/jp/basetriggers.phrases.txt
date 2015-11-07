@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Timeleft"
+	"Current Map"
 	{
-		"jp"		"このマップの残り時間:"
-	}
-
-	"Thetime"
-	{
-		"jp"		"現在のサーバ時刻は{1}です。"
-	}
-
-	"Friendly Fire On"
-	{
-		"jp"		"Friendly Fireを有効にしました。"
+		"jp"		"現在のマップは{1}です。"
 	}
 
 	"Friendly Fire Off"
@@ -20,9 +10,9 @@
 		"jp"		"Friendly Fireを無効にしました。"
 	}
 
-	"Current Map"
+	"Friendly Fire On"
 	{
-		"jp"		"現在のマップは{1}です。"
+		"jp"		"Friendly Fireを有効にしました。"
 	}
 
 	"LastRound"
@@ -30,44 +20,24 @@
 		"jp"		"最後のラウンドです！"
 	}
 
-	"NoTimelimit"
-	{
-		"jp"		"このマップは時間制限がありません。"
-	}
-
 	"Next Map"
 	{
 		"jp"		"次のマップ: {1}"
 	}
 
-	"Pending Vote"
+	"Thetime"
 	{
-		"jp"		"ペンディング投票"
+		"jp"		"現在のサーバ時刻は{1}です。"
 	}
 
-	"WinLimitAppend"
+	"Timeleft"
 	{
-		"jp"		"、またはあと1回チームが勝利した時にマップを変更します。"
+		"jp"		"このマップの残り時間:"
 	}
 
-	"WinLimit"
+	"NoTimelimit"
 	{
-		"jp"		"あと1回チームが勝利した時にマップを変更します。"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"jp"		"、またはあと1回のラウンドでマップを変更します。"
-	}
-
-	"MaxRounds"
-	{
-		"jp"		"あと1回のラウンドでマップを変更します。"
-	}
-
-	"FragLimitAppend"
-	{
-		"jp"		"、またはプレイヤーが1フラッグ取得した時にマップを変更します。"
+		"jp"		"このマップは時間制限がありません。"
 	}
 
 	"FragLimit"
@@ -75,14 +45,29 @@
 		"jp"		"プレイヤーが1フラッグ取得した時にマップを変更します。"
 	}
 
-	"WinLimitAppendPlural"
+	"FragLimitAppend"
 	{
-		"jp"		"、またはあと{1}回チームが勝利した時にマップを変更します。"
+		"jp"		"、またはプレイヤーが1フラッグ取得した時にマップを変更します。"
 	}
 
-	"WinLimitPlural"
+	"FragLimitAppendPlural"
 	{
-		"jp"		"あと{1}回チームが勝利した時にマップを変更します。"
+		"jp"		"、またはプレイヤーが{1}フラッグ取得した時にマップを変更します。"
+	}
+
+	"FragLimitPlural"
+	{
+		"jp"		"プレイヤーが{1}フラッグ取得した時にマップを変更します。"
+	}
+
+	"MaxRounds"
+	{
+		"jp"		"あと1回のラウンドでマップを変更します。"
+	}
+
+	"MaxRoundsAppend"
+	{
+		"jp"		"、またはあと1回のラウンドでマップを変更します。"
 	}
 
 	"MaxRoundsAppendPlural"
@@ -95,14 +80,29 @@
 		"jp"		"あと{1}回のラウンドでマップを変更します。"
 	}
 
-	"FragLimitAppendPlural"
+	"WinLimitPlural"
 	{
-		"jp"		"、またはプレイヤーが{1}フラッグ取得した時にマップを変更します。"
+		"jp"		"あと{1}回チームが勝利した時にマップを変更します。"
 	}
 
-	"FragLimitPlural"
+	"WinLimitAppendPlural"
 	{
-		"jp"		"プレイヤーが{1}フラッグ取得した時にマップを変更します。"
+		"jp"		"、またはあと{1}回チームが勝利した時にマップを変更します。"
+	}
+
+	"WinLimitAppend"
+	{
+		"jp"		"、またはあと1回チームが勝利した時にマップを変更します。"
+	}
+
+	"WinLimit"
+	{
+		"jp"		"あと1回チームが勝利した時にマップを変更します。"
+	}
+
+	"Pending Vote"
+	{
+		"jp"		"ペンディング投票"
 	}
 
 }

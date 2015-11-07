@@ -1,48 +1,48 @@
 "Phrases"
 {
-	"Burn player"
-	{
-		"pl"		"Podpal gracza"
-	}
-
-	"FireBomb player"
-	{
-		"pl"		"Zmień gracza w ognistą bombę"
-	}
-
-	"Freeze player"
-	{
-		"pl"		"Zamroź gracza"
-	}
-
-	"FreezeBomb player"
-	{
-		"pl"		"Zmień gracza w zamarzającą bombę"
-	}
-
-	"TimeBomb player"
-	{
-		"pl"		"Zmień gracza w bombę zegarową"
-	}
-
-	"Beacon player"
-	{
-		"pl"		"Oznacz gracza"
-	}
-
-	"NoClip player"
-	{
-		"pl"		"NoClip"
-	}
-
 	"Blind player"
 	{
 		"pl"		"Oślep gracza"
 	}
 
+	"Burn player"
+	{
+		"pl"		"Podpal gracza"
+	}
+
 	"Drug player"
 	{
 		"pl"		"Naćpaj gracza"
+	}
+
+	"Gravity Low"
+	{
+		"pl"		"Niska grawitacja"
+	}
+
+	"Gravity Normal"
+	{
+		"pl"		"Normalna grawitacja"
+	}
+
+	"Gravity Very High"
+	{
+		"pl"		"Bardzo wysoka grawitacja"
+	}
+
+	"Gravity Very Low"
+	{
+		"pl"		"Bardzo niska grawitacja"
+	}
+
+	"Gravity amount"
+	{
+		"pl"		"Grawitacja?"
+	}
+
+	"Gravity High"
+	{
+		"pl"		"Wysoka grawitacja"
 	}
 
 	"Gravity player"
@@ -55,84 +55,24 @@
 		"pl"		"Jak oślepić?"
 	}
 
-	"Fully blind"
+	"FireBomb player"
 	{
-		"pl"		"Całkowicie oślep"
+		"pl"		"Zmień gracza w ognistą bombę"
 	}
 
-	"Half blind"
+	"FreezeBomb player"
 	{
-		"pl"		"Oślep w połowie"
+		"pl"		"Zmień gracza w zamarzającą bombę"
 	}
 
-	"No blind"
+	"NoClip player"
 	{
-		"pl"		"Przywróć wzrok"
+		"pl"		"NoClip"
 	}
 
-	"Gravity amount"
+	"TimeBomb player"
 	{
-		"pl"		"Grawitacja?"
-	}
-
-	"Gravity Very High"
-	{
-		"pl"		"Bardzo wysoka grawitacja"
-	}
-
-	"Gravity High"
-	{
-		"pl"		"Wysoka grawitacja"
-	}
-
-	"Gravity Normal"
-	{
-		"pl"		"Normalna grawitacja"
-	}
-
-	"Gravity Low"
-	{
-		"pl"		"Niska grawitacja"
-	}
-
-	"Gravity Very Low"
-	{
-		"pl"		"Bardzo niska grawitacja"
-	}
-
-	"Set target on fire"
-	{
-		"pl"		"Podpalono {1}."
-	}
-
-	"Toggled FireBomb on target"
-	{
-		"pl"		"zamienia {1} w ognistą bombę. "
-	}
-
-	"Froze target"
-	{
-		"pl"		"Zamrożono {1}."
-	}
-
-	"Toggled FreezeBomb on target"
-	{
-		"pl"		"zamienia {1} w zamarzającą bombę. "
-	}
-
-	"Toggled beacon on target"
-	{
-		"pl"		"Ustawiono oznaczenie na {1}"
-	}
-
-	"Toggled TimeBomb on target"
-	{
-		"pl"		"zamienia {1} w bombę zegarową."
-	}
-
-	"Toggled noclip on target"
-	{
-		"pl"		"ustawiono NoClip na {1}."
+		"pl"		"Zmień gracza w bombę zegarową"
 	}
 
 	"Toggled drug on target"
@@ -145,14 +85,59 @@
 		"pl"		"użyto oślepienia na {1}."
 	}
 
+	"Toggled noclip on target"
+	{
+		"pl"		"ustawiono NoClip na {1}."
+	}
+
+	"Beacon player"
+	{
+		"pl"		"Oznacz gracza"
+	}
+
+	"Freeze player"
+	{
+		"pl"		"Zamroź gracza"
+	}
+
+	"No blind"
+	{
+		"pl"		"Przywróć wzrok"
+	}
+
+	"Toggled beacon on target"
+	{
+		"pl"		"Ustawiono oznaczenie na {1}"
+	}
+
 	"Set gravity on target"
 	{
 		"pl"		"ustawiono grawitację dla {1}."
 	}
 
+	"Set target on fire"
+	{
+		"pl"		"Podpalono {1}."
+	}
+
 	"Till Explodes"
 	{
 		"pl"		"{2} sek. zanim {1} eksploduje."
+	}
+
+	"Toggled FireBomb on target"
+	{
+		"pl"		"zamienia {1} w ognistą bombę. "
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"pl"		"zamienia {1} w zamarzającą bombę. "
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"pl"		"zamienia {1} w bombę zegarową."
 	}
 
 	"Unfrozen"
@@ -163,6 +148,21 @@
 	"You will be unfrozen"
 	{
 		"pl"		"Za {1} sek. zostaniesz odmrożony(a)."
+	}
+
+	"Froze target"
+	{
+		"pl"		"Zamrożono {1}."
+	}
+
+	"Fully blind"
+	{
+		"pl"		"Całkowicie oślep"
+	}
+
+	"Half blind"
+	{
+		"pl"		"Oślep w połowie"
 	}
 
 }

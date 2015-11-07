@@ -1,8 +1,8 @@
 "Phrases"
 {
-	"No Access"
+	"_s"
 	{
-		"pl"		"Nie masz dostępu do tej komendy."
+		"pl"		"{1} "
 	}
 
 	"Back"
@@ -10,14 +10,19 @@
 		"pl"		"Wstecz"
 	}
 
+	"Exit"
+	{
+		"pl"		"Wyjdź"
+	}
+
 	"Next"
 	{
 		"pl"		"Dalej"
 	}
 
-	"Exit"
+	"No Access"
 	{
-		"pl"		"Wyjdź"
+		"pl"		"Nie masz dostępu do tej komendy."
 	}
 
 	"Previous"
@@ -30,9 +35,9 @@
 		"pl"		"wszyscy gracze"
 	}
 
-	"all humans"
+	"all alive players"
 	{
-		"pl"		"wszyscy ludzie"
+		"pl"		"wszyscy żywi gracze"
 	}
 
 	"all bots"
@@ -45,19 +50,24 @@
 		"pl"		"wszyscy martwi gracze"
 	}
 
-	"all alive players"
+	"all humans"
 	{
-		"pl"		"wszyscy żywi gracze"
-	}
-
-	"_s"
-	{
-		"pl"		"{1} "
+		"pl"		"wszyscy ludzie"
 	}
 
 	"all spectators"
 	{
 		"pl"		"wszyscy obserwatorzy"
+	}
+
+	"No Vote"
+	{
+		"pl"		"Brak głosowania"
+	}
+
+	"Name Reserved"
+	{
+		"pl"		"Twój nick jest zarezerwowany przez SourceModa; ustaw swoje hasło, aby go użyć."
 	}
 
 	"Vote Count"
@@ -72,17 +82,7 @@
 
 	"Changed Vote"
 	{
-		"pl"		"{1} zmienia swój głos na {2}"
-	}
-
-	"No Vote"
-	{
-		"pl"		"Brak głosowania"
-	}
-
-	"Name Reserved"
-	{
-		"pl"		"Twoja nick jest zarezerwowany przez SourceModa; ustaw swoje hasło, aby go użyć. "
+		"pl"		"{1} zmienił swój głos na {2}"
 	}
 
 }

@@ -5,149 +5,9 @@
 		"no"		"Ja"
 	}
 
-	"No"
-	{
-		"no"		"Nei"
-	}
-
-	"No matching client"
-	{
-		"no"		"Fant ingen klient som samsvarer med verdien du skrev inn."
-	}
-
-	"No matching clients"
-	{
-		"no"		" Fant ingen klienter som samsvarer med verdien du skrev inn."
-	}
-
-	"More than one client matches"
-	{
-		"no"		"Mer enn én klient samsvarer med verdien \"{1}\"."
-	}
-
-	"More than one client matched"
-	{
-		"no"		"Mer enn én klient samsvarer med den gitte verdien."
-	}
-
-	"Player no longer available"
-	{
-		"no"		"Spilleren du valgte er ikke lengre på serveren."
-	}
-
-	"Kick player"
-	{
-		"no"		"Kast ut spiller"
-	}
-
-	"Kicked by admin"
-	{
-		"no"		"Kastet ut av administrator"
-	}
-
-	"Changing map"
-	{
-		"no"		"Bytter bane til {1}..."
-	}
-
-	"Map was not found"
-	{
-		"no"		"Banen {1} ble ikke funnet."
-	}
-
-	"Unable to target"
-	{
-		"no"		"Du kan ikke bruke dette på denne spilleren."
-	}
-
-	"Name"
-	{
-		"no"		"Navn"
-	}
-
-	"Access"
-	{
-		"no"		"Tilgang"
-	}
-
-	"See console for output"
-	{
-		"no"		"Se resultatet i consolen."
-	}
-
-	"Cannot target bot"
-	{
-		"no"		"Kan ikke utføre denne kommandoen på en bot."
-	}
-
-	"Unable to find cvar"
-	{
-		"no"		"Klarte ikke å finne kommandoen: {1}"
-	}
-
-	"No access to cvar"
-	{
-		"no"		"Du har ikke tilgang til denne kommandoen."
-	}
-
-	"Value of cvar"
-	{
-		"no"		"Verdien for kommandoen \"{1}\" er: \"{2}\"."
-	}
-
-	"Cvar changed"
-	{
-		"no"		"Endret kommandoen \"{1}\" til \"{2}\"."
-	}
-
-	"Config not found"
-	{
-		"no"		"Konfigureringsfilen \"{1}\" ble ikke funnet."
-	}
-
-	"Executed config"
-	{
-		"no"		"Kjørte konfigureringsfilen \"{1}\"."
-	}
-
-	"Admin cache refreshed"
-	{
-		"no"		"Admin hurtigbufferen ble oppdatert"
-	}
-
-	"Invalid Amount"
-	{
-		"no"		"Mengden spesifisert er ugyldig"
-	}
-
-	"Cannot be performed on dead"
-	{
-		"no"		"Denne handlingen kan ikke bli gjennomført på en død klient \"{1}"
-	}
-
-	"Player has since died"
-	{
-		"no"		"Handlingen kan ikke bli utført da spilleren er død."
-	}
-
 	"Vote in Progress"
 	{
 		"no"		"En avstemning er allerede i gang."
-	}
-
-	"Vote Not In Progress"
-	{
-		"no"		"En avstemning er ikke i gang på dette tidspunkt."
-	}
-
-	"Cancelled Vote"
-	{
-		"no"		"Avbrøt avstemningen."
-	}
-
-	"Cancel vote"
-	{
-		"no"		"Avbryt avstemning."
 	}
 
 	"Vote Select"
@@ -155,14 +15,9 @@
 		"no"		"{1} har valgt {2}."
 	}
 
-	"No Votes Cast"
+	"Vote Not In Progress"
 	{
-		"no"		"Ingen stemmer ble avgitt."
-	}
-
-	"Vote Delay Minutes"
-	{
-		"no"		"Du må vente {1} minutt(er) før du kan starte enda en avstemning."
+		"no"		"En avstemning er ikke i gang på dette tidspunkt."
 	}
 
 	"Vote Delay Seconds"
@@ -170,29 +25,19 @@
 		"no"		"Du må vente {1} sekunder(er) før du kan starte enda en avstemning."
 	}
 
-	"Could not connect to database"
+	"Vote Delay Minutes"
 	{
-		"no"		"Kunne ikke koble til databasen."
+		"no"		"Du må vente {1} minutt(er) før du kan starte enda en avstemning."
 	}
 
-	"Failed to query database"
+	"Value of cvar"
 	{
-		"no"		"Database forespørselen var mislykket.  "
+		"no"		"Verdien for kommandoen \"{1}\" er: \"{2}\"."
 	}
 
-	"Invalid SteamID specified"
+	"Unable to target"
 	{
-		"no"		"Du har spesifisert en ugyldig Steam ID ( Den må starte med 'STEAM_')."
-	}
-
-	"Reload admins"
-	{
-		"no"		"Last om admins"
-	}
-
-	"Command is in-game only"
-	{
-		"no"		"Denne kommandoen kan kun brukes i spillet."
+		"no"		"Du kan ikke bruke dette på denne spilleren."
 	}
 
 	"Target must be dead"
@@ -210,24 +55,94 @@
 		"no"		"Den gitte spilleren er ikke helt med i spillet enda."
 	}
 
-	"Played Sound"
+	"See console for output"
 	{
-		"no"		"Spilte lydfil til spiller '{1}' "
+		"no"		"Se resultatet i consolen."
 	}
 
-	"Slapped player"
+	"Player no longer available"
 	{
-		"no"		"Klasket spiller '{1}'"
+		"no"		"Spilleren du valgte er ikke lengre på serveren."
 	}
 
-	"Slayed player"
+	"Player has since died"
 	{
-		"no"		"Slo I hjel spiller '{1}'"
+		"no"		"Handlingen kan ikke bli utført da spilleren er død."
 	}
 
-	"Kicked player"
+	"On"
 	{
-		"no"		"Kastet ut spiller '{1}' "
+		"no"		"På"
+	}
+
+	"Off"
+	{
+		"no"		"Av"
+	}
+
+	"No matching client"
+	{
+		"no"		"Fant ingen klient som samsvarer med verdien du skrev inn."
+	}
+
+	"No access to cvar"
+	{
+		"no"		"Du har ikke tilgang til denne kommandoen."
+	}
+
+	"No Votes Cast"
+	{
+		"no"		"Ingen stemmer ble avgitt."
+	}
+
+	"No"
+	{
+		"no"		"Nei"
+	}
+
+	"Name"
+	{
+		"no"		"Navn"
+	}
+
+	"More than one client matches"
+	{
+		"no"		"Mer enn én klient samsvarer med verdien \"{1}\"."
+	}
+
+	"More than one client matched"
+	{
+		"no"		"Mer enn én klient samsvarer med den gitte verdien."
+	}
+
+	"Executed config"
+	{
+		"no"		"Kjørte konfigureringsfilen \"{1}\"."
+	}
+
+	"Cvar changed"
+	{
+		"no"		"Endret kommandoen \"{1}\" til \"{2}\"."
+	}
+
+	"Could not connect to database"
+	{
+		"no"		"Kunne ikke koble til databasen."
+	}
+
+	"Config not found"
+	{
+		"no"		"Konfigureringsfilen \"{1}\" ble ikke funnet."
+	}
+
+	"Command is in-game only"
+	{
+		"no"		"Denne kommandoen kan kun brukes i spillet."
+	}
+
+	"Cannot target bot"
+	{
+		"no"		"Kan ikke utføre denne kommandoen på en bot."
 	}
 
 	"Cannot participate in vote"
@@ -240,14 +155,99 @@
 		"no"		"Du kan ikke endre valget ditt for denne avstemningen."
 	}
 
-	"On"
+	"Cancelled Vote"
 	{
-		"no"		"På"
+		"no"		"Avbrøt avstemningen."
 	}
 
-	"Off"
+	"Cancel vote"
 	{
-		"no"		"Av"
+		"no"		"Avbryt avstemning."
+	}
+
+	"Access"
+	{
+		"no"		"Tilgang"
+	}
+
+	"Admin cache refreshed"
+	{
+		"no"		"Admin hurtigbufferen ble oppdatert"
+	}
+
+	"Cannot be performed on dead"
+	{
+		"no"		"Denne handlingen kan ikke bli gjennomført på en død klient \"{1}"
+	}
+
+	"Changing map"
+	{
+		"no"		"Bytter bane til {1}..."
+	}
+
+	"Failed to query database"
+	{
+		"no"		"Database forespørselen var mislykket.  "
+	}
+
+	"Invalid Amount"
+	{
+		"no"		"Mengden spesifisert er ugyldig"
+	}
+
+	"Invalid SteamID specified"
+	{
+		"no"		"Du har spesifisert en ugyldig Steam ID ( Den må starte med 'STEAM_')."
+	}
+
+	"Kick player"
+	{
+		"no"		"Kast ut spiller"
+	}
+
+	"Kicked by admin"
+	{
+		"no"		"Kastet ut av administrator"
+	}
+
+	"Kicked player"
+	{
+		"no"		"Kastet ut spiller '{1}' "
+	}
+
+	"Map was not found"
+	{
+		"no"		"Banen {1} ble ikke funnet."
+	}
+
+	"No matching clients"
+	{
+		"no"		" Fant ingen klienter som samsvarer med verdien du skrev inn."
+	}
+
+	"Played Sound"
+	{
+		"no"		"Spilte lydfil til spiller '{1}' "
+	}
+
+	"Reload admins"
+	{
+		"no"		"Last om admins"
+	}
+
+	"Slapped player"
+	{
+		"no"		"Klasket spiller '{1}'"
+	}
+
+	"Slayed player"
+	{
+		"no"		"Slo I hjel spiller '{1}'"
+	}
+
+	"Unable to find cvar"
+	{
+		"no"		"Klarte ikke å finne kommandoen: {1}"
 	}
 
 }

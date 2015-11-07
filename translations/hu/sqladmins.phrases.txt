@@ -1,33 +1,13 @@
 "Phrases"
 {
-	"Invalid authtype"
+	"SQL Group not found"
 	{
-		"hu"		"Az azonosító típusai csak ezek lehetnek: 'steam id', 'név' vagy 'ip cím'"
+		"hu"		"Nincs ilyen nevű csoport"
 	}
 
-	"Invalid immunity"
+	"SQL Group deleted"
 	{
-		"hu"		"A mentesség értéke csak pozítív egész lehet"
-	}
-
-	"SQL Admin already exists"
-	{
-		"hu"		"Már létezik ilyen admin"
-	}
-
-	"SQL Admin added"
-	{
-		"hu"		"Az admint sikeresen hozzáadtam az adatbázishoz"
-	}
-
-	"SQL Admin deleted"
-	{
-		"hu"		"Az admin törölve lett"
-	}
-
-	"SQL Admin not found"
-	{
-		"hu"		"Nincs ilyen admin"
+		"hu"		"A csoport el lett távolítva"
 	}
 
 	"SQL Group already exists"
@@ -40,21 +20,6 @@
 		"hu"		"A csoport hozzáadása sikeres"
 	}
 
-	"SQL Group deleted"
-	{
-		"hu"		"A csoport el lett távolítva"
-	}
-
-	"SQL Group not found"
-	{
-		"hu"		"Nincs ilyen nevű csoport"
-	}
-
-	"SQL Admin groups reset"
-	{
-		"hu"		"Az admin csoportjait visszaállítottam az eredetire"
-	}
-
 	"SQL Group X not found"
 	{
 		"hu"		"Nem létezik \"{1}\" számú csoport"
@@ -65,14 +30,49 @@
 		"hu"		"A {1} számú csoport hozzárendelése sikertelen"
 	}
 
-	"Added group to user"
+	"SQL Admin not found"
 	{
-		"hu"		"A csoportot sikeresen hozzáadtam az adott adminhoz"
+		"hu"		"Nincs ilyen admin"
+	}
+
+	"SQL Admin groups reset"
+	{
+		"hu"		"Az admin csoportjait visszaállítottam az eredetire"
+	}
+
+	"SQL Admin deleted"
+	{
+		"hu"		"Az admin törölve lett"
+	}
+
+	"SQL Admin already exists"
+	{
+		"hu"		"Már létezik ilyen admin"
+	}
+
+	"SQL Admin added"
+	{
+		"hu"		"Az admint sikeresen hozzáadtam az adatbázishoz"
+	}
+
+	"Invalid immunity"
+	{
+		"hu"		"A mentesség értéke csak pozítív egész lehet"
+	}
+
+	"Invalid authtype"
+	{
+		"hu"		"Az azonosító típusai csak ezek lehetnek: 'steam id', 'név' vagy 'ip cím'"
 	}
 
 	"Added groups to user"
 	{
 		"hu"		"Sikeresen hozzáadtam {1} csoportot az adott adminhoz"
+	}
+
+	"Added group to user"
+	{
+		"hu"		"A csoportot sikeresen hozzáadtam az adott adminhoz"
 	}
 
 }

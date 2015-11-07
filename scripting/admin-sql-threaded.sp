@@ -36,7 +36,7 @@
 
 #include <sourcemod>
 
-public Plugin myinfo = 
+public Plugin:myinfo = 
 {
 	name = "SQL Admins (Threaded)",
 	author = "AlliedModders LLC",
@@ -68,15 +68,15 @@ public Plugin myinfo =
  */
 
 Database hDatabase = null;						/** Database connection */
-int g_sequence = 0;								/** Global unique sequence number */
-int ConnectLock = 0;							/** Connect sequence number */
-int RebuildCachePart[3] = {0};					/** Cache part sequence numbers */
-int PlayerSeq[MAXPLAYERS+1];					/** Player-specific sequence numbers */
-bool PlayerAuth[MAXPLAYERS+1];				/** Whether a player has been "pre-authed" */
+new g_sequence = 0;								/** Global unique sequence number */
+new ConnectLock = 0;							/** Connect sequence number */
+new RebuildCachePart[3] = {0};					/** Cache part sequence numbers */
+new PlayerSeq[MAXPLAYERS+1];					/** Player-specific sequence numbers */
+new bool:PlayerAuth[MAXPLAYERS+1];				/** Whether a player has been "pre-authed" */
 
 //#define _DEBUG
 
-public void OnMapEnd()
+public OnMapEnd()
 {
 	/**
 	 * Clean up on map end just so we can start a fresh connection when we need it later.
@@ -84,14 +84,14 @@ public void OnMapEnd()
 	delete hDatabase;
 }
 
-public bool OnClientConnect(int client, char[] rejectmsg, int maxlen)
+public bool:OnClientConnect(client, String:rejectmsg[], maxlen)
 {
 	PlayerSeq[client] = 0;
 	PlayerAuth[client] = false;
 	return true;
 }
 
-public void OnClientDisconnect(int client)
+public OnClientDisconnect(client)
 {
 	PlayerSeq[client] = 0;
 	PlayerAuth[client] = false;
@@ -128,22 +128,22 @@ public void OnDatabaseConnect(Database db, const char[] error, any data)
 	/**
 	 * See if we need to get any of the cache stuff now.
 	 */
-	int sequence;
-	if ((sequence = RebuildCachePart[AdminCache_Overrides]) != 0)
+	new sequence;
+	if ((sequence = RebuildCachePart[_:AdminCache_Overrides]) != 0)
 	{
 		FetchOverrides(hDatabase, sequence);
 	}
-	if ((sequence = RebuildCachePart[AdminCache_Groups]) != 0)
+	if ((sequence = RebuildCachePart[_:AdminCache_Groups]) != 0)
 	{
 		FetchGroups(hDatabase, sequence);
 	}
-	if ((sequence = RebuildCachePart[AdminCache_Admins]) != 0)
+	if ((sequence = RebuildCachePart[_:AdminCache_Admins]) != 0)
 	{
 		FetchUsersWeCan(hDatabase);
 	}
 }
 
-void RequestDatabaseConnection()
+RequestDatabaseConnection()
 {
 	ConnectLock = ++g_sequence;
 	if (SQL_CheckConfig("admins"))
@@ -154,7 +154,7 @@ void RequestDatabaseConnection()
 	}
 }
 
-public void OnRebuildAdminCache(AdminCachePart part)
+public OnRebuildAdminCache(AdminCachePart part)
 {
 	/**
 	 * Mark this part of the cache as being rebuilt.  This is used by the 
@@ -162,7 +162,7 @@ public void OnRebuildAdminCache(AdminCachePart part)
 	 * used.
 	 */
 	int sequence = ++g_sequence;
-	RebuildCachePart[part] = sequence;
+	RebuildCachePart[_:part] = sequence;
 	
 	/**
 	 * If we don't have a database connection, we can't do any lookups just yet.
@@ -189,7 +189,7 @@ public void OnRebuildAdminCache(AdminCachePart part)
 	}
 }
 
-public Action OnClientPreAdminCheck(int client)
+public Action OnClientPreAdminCheck(client)
 {
 	PlayerAuth[client] = true;
 	
@@ -209,7 +209,7 @@ public Action OnClientPreAdminCheck(int client)
 	 * the user's normal connection flow.  The database will soon auth the user 
 	 * normally.
 	 */
-	if (RebuildCachePart[AdminCache_Admins] != 0)
+	if (RebuildCachePart[_:AdminCache_Admins] != 0)
 	{
 		return Plugin_Continue;
 	}
@@ -272,22 +272,22 @@ public void OnReceiveUserGroups(Database db, DBResultSet rs, const char[] error,
 	}
 	
 	char name[80];
-	GroupId grp;
+	GroupId gid;
 	
 	while (rs.FetchRow())
 	{
 		rs.FetchString(0, name, sizeof(name));
 		
-		if ((grp = FindAdmGroup(name)) == INVALID_GROUP_ID)
+		if ((gid = FindAdmGroup(name)) == INVALID_GROUP_ID)
 		{
 			continue;
 		}
 		
 #if defined _DEBUG
-		PrintToServer("Binding user group (%d, %d, %d, %s, %d)", client, sequence, adm, name, grp);
+		PrintToServer("Binding user group (%d, %d, %d, %s, %d)", client, sequence, adm, name, gid);
 #endif
 		
-		adm.InheritGroup(grp);
+		AdminInheritGroup(adm, gid);
 	}
 	
 	/**
@@ -370,14 +370,14 @@ public void OnReceiveUser(Database db, DBResultSet rs, const char[] error, any d
 		}
 		
 		adm = CreateAdmin(name);
-		if (!adm.BindIdentity(authtype, identity))
+		if (!BindAdminIdentity(adm, authtype, identity))
 		{
 			LogError("Could not bind prefetched SQL admin (authtype \"%s\") (identity \"%s\")", authtype, identity);
 			continue;
 		}
 		
 		user_lookup[total_users][0] = id;
-		user_lookup[total_users][1] = view_as<int>(adm);
+		user_lookup[total_users][1] = _:adm;
 		user_lookup[total_users][2] = rs.FetchInt(6);
 		total_users++;
 		
@@ -388,21 +388,21 @@ public void OnReceiveUser(Database db, DBResultSet rs, const char[] error, any d
 		/* See if this admin wants a password */
 		if (password[0] != '\0')
 		{
-			adm.SetPassword(password);
+			SetAdminPassword(adm, password);
 		}
 
-		adm.ImmunityLevel = immunity;
+		SetAdminImmunityLevel(adm, immunity);
 		
 		/* Apply each flag */
 		int len = strlen(flags);
 		AdminFlag flag;
-		for (int i=0; i<len; i++)
+		for (new i=0; i<len; i++)
 		{
 			if (!FindFlagByChar(flags[i], flag))
 			{
 				continue;
 			}
-			adm.SetFlag(flag, true);
+			SetAdminFlag(adm, flag, true);
 		}
 	}
 	
@@ -415,9 +415,9 @@ public void OnReceiveUser(Database db, DBResultSet rs, const char[] error, any d
 	id = 0;
 	
 	
-	for (int i=0; i<total_users; i++)
+	for (new i=0; i<total_users; i++)
 	{
-		if (user_lookup[i][1] == view_as<int>(adm))
+		if (user_lookup[i][1] == _:adm)
 		{
 			id = user_lookup[i][0];
 			group_count = user_lookup[i][2];
@@ -449,13 +449,13 @@ public void OnReceiveUser(Database db, DBResultSet rs, const char[] error, any d
 	pk.Reset();
 	pk.WriteCell(client);
 	pk.WriteCell(sequence);
-	pk.WriteCell(adm);
+	pk.WriteCell(_:adm);
 	pk.WriteString(query);
 	
 	db.Query(OnReceiveUserGroups, query, pk, DBPrio_High);
 }
 
-void FetchUser(Database db, int client)
+FetchUser(Database db, client)
 {
 	char name[65];
 	char safe_name[140];
@@ -484,7 +484,7 @@ void FetchUser(Database db, int client)
 	 * Construct the query using the information the user gave us.
 	 */
 	char query[512];
-	int len = 0;
+	new len = 0;
 	
 	len += Format(query[len], sizeof(query)-len, "SELECT a.id, a.authtype, a.identity, a.password, a.flags, a.name, COUNT(ag.group_id), immunity");
 	len += Format(query[len], sizeof(query)-len, " FROM sm_admins a LEFT JOIN sm_admins_groups ag ON a.id = ag.admin_id WHERE ");
@@ -516,7 +516,7 @@ void FetchUser(Database db, int client)
 	db.Query(OnReceiveUser, query, pk, DBPrio_High);
 }
 
-void FetchUsersWeCan(Database db)
+FetchUsersWeCan(Database db)
 {
 	for (int i=1; i<=MaxClients; i++)
 	{
@@ -529,7 +529,7 @@ void FetchUsersWeCan(Database db)
 	/**
 	 * This round of updates is done.  Go in peace.
 	 */
-	RebuildCachePart[AdminCache_Admins] = 0;
+	RebuildCachePart[_:AdminCache_Admins] = 0;
 }
 
 
@@ -542,7 +542,7 @@ public void OnReceiveGroupImmunity(Database db, DBResultSet rs, const char[] err
 	 * Check if this is the latest result request.
 	 */
 	int sequence = pk.ReadCell();
-	if (RebuildCachePart[AdminCache_Groups] != sequence)
+	if (RebuildCachePart[_:AdminCache_Groups] != sequence)
 	{
 		/* Discard everything, since we're out of sequence. */
 		delete pk;
@@ -569,28 +569,28 @@ public void OnReceiveGroupImmunity(Database db, DBResultSet rs, const char[] err
 	{
 		char group1[80];
 		char group2[80];
-		GroupId grp, other;
+		GroupId gid1, gid2;
 		
 		rs.FetchString(0, group1, sizeof(group1));
 		rs.FetchString(1, group2, sizeof(group2));
 		
-		if (((grp = FindAdmGroup(group1)) == INVALID_GROUP_ID)
-			|| (other = FindAdmGroup(group2)) == INVALID_GROUP_ID)
+		if (((gid1 = FindAdmGroup(group1)) == INVALID_GROUP_ID)
+			|| (gid2 = FindAdmGroup(group2)) == INVALID_GROUP_ID)
 		{
 			continue;
 		}
 		
-		grp.AddGroupImmunity(other);
+		SetAdmGroupImmuneFrom(gid1, gid2);
 #if defined _DEBUG
-		PrintToServer("SetAdmGroupImmuneFrom(%d, %d)", grp, other);
+		PrintToServer("SetAdmGroupImmuneFrom(%d, %d)", gid1, gid2);
 #endif
 	}
 	
 	/* Clear the sequence so another connect doesn't refetch */
-	RebuildCachePart[AdminCache_Groups] = 0;
+	RebuildCachePart[_:AdminCache_Groups] = 0;
 }
 
-public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] error, any data)
+public OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] error, any data)
 {
 	DataPack pk = view_as<DataPack>(data);
 	pk.Reset();
@@ -599,7 +599,7 @@ public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] er
 	 * Check if this is the latest result request.
 	 */
 	int sequence = pk.ReadCell();
-	if (RebuildCachePart[AdminCache_Groups] != sequence)
+	if (RebuildCachePart[_:AdminCache_Groups] != sequence)
 	{
 		/* Discard everything, since we're out of sequence. */
 		delete pk;
@@ -626,7 +626,7 @@ public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] er
 	char type[16];
 	char command[64];
 	char access[16];
-	GroupId grp;
+	GroupId gid;
 	while (rs.FetchRow())
 	{
 		rs.FetchString(0, name, sizeof(name));
@@ -635,7 +635,7 @@ public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] er
 		rs.FetchString(3, access, sizeof(access));
 		
 		/* Find the group.  This is actually faster than doing the ID lookup. */
-		if ((grp = FindAdmGroup(name)) == INVALID_GROUP_ID)
+		if ((gid = FindAdmGroup(name)) == INVALID_GROUP_ID)
 		{
 			/* Oh well, just ignore it. */
 			continue;
@@ -654,10 +654,10 @@ public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] er
 		}
 				
 #if defined _DEBUG
-		PrintToServer("AddAdmGroupCmdOverride(%d, %s, %d, %d)", grp, command, o_type, o_rule);
+		PrintToServer("AddAdmGroupCmdOverride(%d, %s, %d, %d)", gid, command, o_type, o_rule);
 #endif
 				
-		grp.AddCommandOverride(command, o_type, o_rule);
+		AddAdmGroupCmdOverride(gid, command, o_type, o_rule);
 	}
 	
 	/**
@@ -676,7 +676,7 @@ public void OnReceiveGroupOverrides(Database db, DBResultSet rs, const char[] er
 	db.Query(OnReceiveGroupImmunity, query, pk, DBPrio_High);
 }
 
-public void OnReceiveGroups(Database db, DBResultSet rs, const char[] error, any data)
+public OnReceiveGroups(Database db, DBResultSet rs, const char[] error, any data)
 {
 	DataPack pk = view_as<DataPack>(data);
 	pk.Reset();
@@ -685,7 +685,7 @@ public void OnReceiveGroups(Database db, DBResultSet rs, const char[] error, any
 	 * Check if this is the latest result request.
 	 */
 	int sequence = pk.ReadCell();
-	if (RebuildCachePart[AdminCache_Groups] != sequence)
+	if (RebuildCachePart[_:AdminCache_Groups] != sequence)
 	{
 		/* Discard everything, since we're out of sequence. */
 		delete pk;
@@ -722,25 +722,25 @@ public void OnReceiveGroups(Database db, DBResultSet rs, const char[] error, any
 #endif
 		
 		/* Find or create the group */
-		GroupId grp;
-		if ((grp = FindAdmGroup(name)) == INVALID_GROUP_ID)
+		GroupId gid;
+		if ((gid = FindAdmGroup(name)) == INVALID_GROUP_ID)
 		{
-			grp = CreateAdmGroup(name);
+			gid = CreateAdmGroup(name);
 		}
 
 		/* Add flags from the database to the group */
 		int num_flag_chars = strlen(flags);
 		for (int i=0; i<num_flag_chars; i++)
 		{
-			AdminFlag flag;
+			decl AdminFlag:flag;
 			if (!FindFlagByChar(flags[i], flag))
 			{
 				continue;
 			}
-			grp.SetFlag(flag, true);
+			SetAdmGroupAddFlag(gid, flag, true);
 		}
 		
-		grp.ImmunityLevel = immunity;
+		SetAdmGroupImmunityLevel(gid, immunity);
 	}
 	
 	/**
@@ -758,7 +758,7 @@ public void OnReceiveGroups(Database db, DBResultSet rs, const char[] error, any
 	db.Query(OnReceiveGroupOverrides, query, pk, DBPrio_High);
 }
 
-void FetchGroups(Database db, int sequence)
+void FetchGroups(Database db, sequence)
 {
 	char query[255];
 	
@@ -780,7 +780,7 @@ public void OnReceiveOverrides(Database db, DBResultSet rs, const char[] error, 
 	 * Check if this is the latest result request.
 	 */
 	int sequence = pk.ReadCell();
-	if (RebuildCachePart[AdminCache_Overrides] != sequence)
+	if (RebuildCachePart[_:AdminCache_Overrides] != sequence)
 	{
 		/* Discard everything, since we're out of sequence. */
 		delete pk;
@@ -829,10 +829,10 @@ public void OnReceiveOverrides(Database db, DBResultSet rs, const char[] error, 
 	}
 	
 	/* Clear the sequence so another connect doesn't refetch */
-	RebuildCachePart[AdminCache_Overrides] = 0;
+	RebuildCachePart[_:AdminCache_Overrides] = 0;
 }
 
-void FetchOverrides(Database db, int sequence)
+void FetchOverrides(Database db, sequence)
 {
 	char query[255];
 	

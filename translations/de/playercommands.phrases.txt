@@ -1,13 +1,8 @@
 "Phrases"
 {
-	"Slap player"
+	"Slayed target"
 	{
-		"de"		"Spieler ohrfeigen"
-	}
-
-	"Slap damage"
-	{
-		"de"		"Schaden beim Ohrfeigen"
+		"de"		"{1} erschlagen."
 	}
 
 	"Slay player"
@@ -20,9 +15,14 @@
 		"de"		"{1} geohrfeigt."
 	}
 
-	"Slayed target"
+	"Slap damage"
 	{
-		"de"		"{1} erschlagen."
+		"de"		"Schaden beim Ohrfeigen"
+	}
+
+	"Slap player"
+	{
+		"de"		"Spieler ohrfeigen"
 	}
 
 	"Name changed"
@@ -30,14 +30,14 @@
 		"de"		"Ein Administrator hat deinen Namen geändert"
 	}
 
-	"Renamed target"
-	{
-		"de"		"{1} wurde umbenannt"
-	}
-
 	"Rename player"
 	{
 		"de"		"Spieler umbenennen"
+	}
+
+	"Renamed target"
+	{
+		"de"		"{1} wurde umbenannt"
 	}
 
 	"Dead Player Rename"

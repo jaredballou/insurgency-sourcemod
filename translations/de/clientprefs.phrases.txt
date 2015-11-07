@@ -1,10 +1,5 @@
 "Phrases"
 {
-	"Cookie List"
-	{
-		"de"		"SourceMod-Cookie-Liste"
-	}
-
 	"Printing Cookie List"
 	{
 		"de"		"Ausgabe der Cookie-Liste in der Konsole "
@@ -20,9 +15,14 @@
 		"de"		"Der Wert von {1} ist {2}"
 	}
 
-	"Protected Cookie"
+	"Choose Option"
 	{
-		"de"		"Der Wert des geschützten Cookie \"{1}\" kann nicht geändert werden "
+		"de"		"Wähle Option"
+	}
+
+	"Client Settings"
+	{
+		"de"		"Client-Einstellungen"
 	}
 
 	"Cookie Changed Value"
@@ -35,14 +35,14 @@
 		"de"		"Einstellungsmenü kann nicht in der Konsole angezeigt werden "
 	}
 
-	"Choose Option"
+	"Protected Cookie"
 	{
-		"de"		"Wähle Option"
+		"de"		"Der Wert des geschützten Cookie \"{1}\" kann nicht geändert werden "
 	}
 
-	"Client Settings"
+	"Cookie List"
 	{
-		"de"		"Client-Einstellungen"
+		"de"		"SourceMod-Cookie-Liste"
 	}
 
 }

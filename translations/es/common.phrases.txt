@@ -1,8 +1,13 @@
 "Phrases"
 {
-	"Yes"
+	"Access"
 	{
-		"es"		"Sí"
+		"es"		"Acceso"
+	}
+
+	"Name"
+	{
+		"es"		"Nombre"
 	}
 
 	"No"
@@ -10,29 +15,9 @@
 		"es"		"No"
 	}
 
-	"No matching client"
+	"Cannot target bot"
 	{
-		"es"		"No se encontró cliente que coincida."
-	}
-
-	"No matching clients"
-	{
-		"es"		"No se encontraron clientes que coincidan."
-	}
-
-	"More than one client matches"
-	{
-		"es"		"Más de un cliente coincide con el argumento \"{1}\"."
-	}
-
-	"More than one client matched"
-	{
-		"es"		"Más de un cliente coincide con el argumento dado."
-	}
-
-	"Player no longer available"
-	{
-		"es"		"El jugador seleccionado ya no está disponible."
+		"es"		"Este comando no puede llevarse a cabo sobre un bot."
 	}
 
 	"Kick player"
@@ -45,6 +30,36 @@
 		"es"		"Expulsado por administrador"
 	}
 
+	"No Votes Cast"
+	{
+		"es"		"No se consiguieron votos."
+	}
+
+	"No access to cvar"
+	{
+		"es"		"No tienes acceso a esta cvar."
+	}
+
+	"No matching clients"
+	{
+		"es"		"No se encontraron clientes que coincidan."
+	}
+
+	"Vote Select"
+	{
+		"es"		"{1} ha elegido {2}."
+	}
+
+	"Off"
+	{
+		"es"		"Desactivado"
+	}
+
+	"On"
+	{
+		"es"		"Activado"
+	}
+
 	"Changing map"
 	{
 		"es"		"Cambiando mapa a {1}..."
@@ -55,94 +70,9 @@
 		"es"		"Mapa {1} no encontrado."
 	}
 
-	"Unable to target"
-	{
-		"es"		"Este jugador no puede ser un objetivo tuyo."
-	}
-
-	"Name"
-	{
-		"es"		"Nombre"
-	}
-
-	"Access"
-	{
-		"es"		"Acceso"
-	}
-
-	"See console for output"
-	{
-		"es"		"Mira la salida en consola."
-	}
-
-	"Cannot target bot"
-	{
-		"es"		"Este comando no puede llevarse a cabo sobre un bot."
-	}
-
-	"Unable to find cvar"
-	{
-		"es"		"No se encontrá cvar: {1}"
-	}
-
-	"No access to cvar"
-	{
-		"es"		"No tienes acceso a esta cvar."
-	}
-
-	"Value of cvar"
-	{
-		"es"		"Valor de cvar \"{1}\": \"{2}\""
-	}
-
-	"Cvar changed"
-	{
-		"es"		"Cvar \"{1}\" cambiada a \"{2}\"."
-	}
-
-	"Config not found"
-	{
-		"es"		"Fichero de configuración \"{1}\" no encontrado."
-	}
-
-	"Executed config"
-	{
-		"es"		"Config \"{1}\" ejecutada."
-	}
-
 	"Admin cache refreshed"
 	{
 		"es"		"La caché de admins ha sido actualizada."
-	}
-
-	"Invalid Amount"
-	{
-		"es"		"La cantidad especificada no es válida"
-	}
-
-	"Cannot be performed on dead"
-	{
-		"es"		"Esta acción no se puede llevar a cabo sobre el cliente muerto \"{1}\""
-	}
-
-	"Player has since died"
-	{
-		"es"		"La acción no puede llevarse a cabo, el jugador ya ha muerto."
-	}
-
-	"Vote in Progress"
-	{
-		"es"		"Ya hay una votación en progreso."
-	}
-
-	"Vote Not In Progress"
-	{
-		"es"		"No hay ninguna votación en progreso en este momento."
-	}
-
-	"Cancelled Vote"
-	{
-		"es"		"Votación cancelada."
 	}
 
 	"Cancel vote"
@@ -150,44 +80,24 @@
 		"es"		"Cancelar votación"
 	}
 
-	"Vote Select"
+	"Cancelled Vote"
 	{
-		"es"		"{1} ha elegido {2}."
+		"es"		"Votación cancelada."
 	}
 
-	"No Votes Cast"
+	"Cannot be performed on dead"
 	{
-		"es"		"No se consiguieron votos."
+		"es"		"Esta acción no se puede llevar a cabo sobre el cliente muerto \"{1}\""
 	}
 
-	"Vote Delay Minutes"
+	"Cannot change vote"
 	{
-		"es"		"Debes esperar {1} minutos antes de comenzar otra votación."
+		"es"		"No puedes cambiar tu selección para este voto."
 	}
 
-	"Vote Delay Seconds"
+	"Cannot participate in vote"
 	{
-		"es"		"Debes esperar {1} segundos antes de comenzar otra votación."
-	}
-
-	"Could not connect to database"
-	{
-		"es"		"Imposible conectar a la base de datos."
-	}
-
-	"Failed to query database"
-	{
-		"es"		"Fallo al consultar la base de datos."
-	}
-
-	"Invalid SteamID specified"
-	{
-		"es"		"Has especificado un Steam ID inválido (debe comenzar con 'STEAM_:'). "
-	}
-
-	"Reload admins"
-	{
-		"es"		"Recargar admins"
+		"es"		"No puedes participar en esta votación."
 	}
 
 	"Command is in-game only"
@@ -195,24 +105,79 @@
 		"es"		"Este comando sólo puede usarse dentro del juego."
 	}
 
-	"Target must be dead"
+	"Config not found"
 	{
-		"es"		"Este comando sólo se puede usar sobre jugadores muertos."
+		"es"		"Fichero de configuración \"{1}\" no encontrado."
 	}
 
-	"Target must be alive"
+	"Could not connect to database"
 	{
-		"es"		"Este comando sólo puede usarse sobre jugadores vivos."
+		"es"		"Imposible conectar a la base de datos."
 	}
 
-	"Target is not in game"
+	"Cvar changed"
 	{
-		"es"		"El jugador elegido aún no está completamente en el juego."
+		"es"		"Cvar \"{1}\" cambiada a \"{2}\"."
+	}
+
+	"Executed config"
+	{
+		"es"		"Config \"{1}\" ejecutada."
+	}
+
+	"Failed to query database"
+	{
+		"es"		"Fallo al consultar la base de datos."
+	}
+
+	"Invalid Amount"
+	{
+		"es"		"La cantidad especificada no es válida"
+	}
+
+	"Kicked player"
+	{
+		"es"		"'{1}' expulsado"
+	}
+
+	"More than one client matched"
+	{
+		"es"		"Más de un cliente coincide con el argumento dado."
+	}
+
+	"More than one client matches"
+	{
+		"es"		"Más de un cliente coincide con el argumento \"{1}\"."
+	}
+
+	"No matching client"
+	{
+		"es"		"No se encontró cliente que coincida."
 	}
 
 	"Played Sound"
 	{
 		"es"		"Sonido reproducido a '{1}'"
+	}
+
+	"Player has since died"
+	{
+		"es"		"La acción no puede llevarse a cabo, el jugador ya ha muerto."
+	}
+
+	"Player no longer available"
+	{
+		"es"		"El jugador seleccionado ya no está disponible."
+	}
+
+	"Reload admins"
+	{
+		"es"		"Recargar admins"
+	}
+
+	"See console for output"
+	{
+		"es"		"Mira la salida en consola."
 	}
 
 	"Slapped player"
@@ -225,29 +190,64 @@
 		"es"		"'{1}' asesinado"
 	}
 
-	"Kicked player"
+	"Target is not in game"
 	{
-		"es"		"'{1}' expulsado"
+		"es"		"El jugador elegido aún no está completamente en el juego."
 	}
 
-	"Cannot participate in vote"
+	"Target must be alive"
 	{
-		"es"		"No puedes participar en esta votación."
+		"es"		"Este comando sólo puede usarse sobre jugadores vivos."
 	}
 
-	"Cannot change vote"
+	"Target must be dead"
 	{
-		"es"		"No puedes cambiar tu selección para este voto."
+		"es"		"Este comando sólo se puede usar sobre jugadores muertos."
 	}
 
-	"On"
+	"Unable to find cvar"
 	{
-		"es"		"Activado"
+		"es"		"No se encontrá cvar: {1}"
 	}
 
-	"Off"
+	"Unable to target"
 	{
-		"es"		"Desactivado"
+		"es"		"Este jugador no puede ser un objetivo tuyo."
+	}
+
+	"Value of cvar"
+	{
+		"es"		"Valor de cvar \"{1}\": \"{2}\""
+	}
+
+	"Vote Delay Minutes"
+	{
+		"es"		"Debes esperar {1} minutos antes de comenzar otra votación."
+	}
+
+	"Vote Delay Seconds"
+	{
+		"es"		"Debes esperar {1} segundos antes de comenzar otra votación."
+	}
+
+	"Vote Not In Progress"
+	{
+		"es"		"No hay ninguna votación en progreso en este momento."
+	}
+
+	"Vote in Progress"
+	{
+		"es"		"Ya hay una votación en progreso."
+	}
+
+	"Yes"
+	{
+		"es"		"Sí"
+	}
+
+	"Invalid SteamID specified"
+	{
+		"es"		"Has especificado un Steam ID inválido (debe comenzar con 'STEAM_:'). "
 	}
 
 }

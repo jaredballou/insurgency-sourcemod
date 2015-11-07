@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Next Map"
+	"ago"
 	{
-		"it"		"Mappa successiva: {1}"
-	}
-
-	"Map History"
-	{
-		"it"		"Cronologia delle mappe"
-	}
-
-	"Map"
-	{
-		"it"		"[Mappa]"
+		"it"		"fa"
 	}
 
 	"Started"
@@ -20,14 +10,14 @@
 		"it"		"[Iniziata]"
 	}
 
-	"Played Time"
-	{
-		"it"		"[Tempo di gioco]"
-	}
-
 	"Reason"
 	{
 		"it"		"[Motivo della fine]"
+	}
+
+	"Map"
+	{
+		"it"		"[Mappa]"
 	}
 
 	"Current Map"
@@ -35,9 +25,19 @@
 		"it"		"Mappa attuale"
 	}
 
-	"ago"
+	"Map History"
 	{
-		"it"		"fa"
+		"it"		"Cronologia delle mappe"
+	}
+
+	"Next Map"
+	{
+		"it"		"Mappa successiva: {1}"
+	}
+
+	"Played Time"
+	{
+		"it"		"[Tempo di gioco]"
 	}
 
 }

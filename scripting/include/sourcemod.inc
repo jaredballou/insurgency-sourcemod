@@ -643,7 +643,8 @@ enum NumberType
 
 enum Address
 {
-    Address_Null = 0,              // a typical invalid result when an address lookup fails
+    Address_Null = 0,              //a typical invalid result when an address lookup fails
+    Address_MinimumValid = 0x10000 //addresses below this value are considered invalid to use for Load/Store
 };
 
 /**

@@ -1,18 +1,13 @@
 "Phrases"
 {
-	"No Access"
+	"_s"
 	{
-		"it"		"Non hai accesso a questo comando"
+		"it"		"{1}"
 	}
 
 	"Back"
 	{
 		"it"		"Indietro"
-	}
-
-	"Next"
-	{
-		"it"		"Successiva"
 	}
 
 	"Exit"
@@ -25,16 +20,6 @@
 		"it"		"Precedente"
 	}
 
-	"all players"
-	{
-		"it"		"tutti i giocatori"
-	}
-
-	"all humans"
-	{
-		"it"		"tutti gli umani"
-	}
-
 	"all bots"
 	{
 		"it"		"tutti i bot"
@@ -45,24 +30,14 @@
 		"it"		"tutti i giocatori morti"
 	}
 
-	"all alive players"
+	"all humans"
 	{
-		"it"		"tutti i giocatori in vita"
+		"it"		"tutti gli umani"
 	}
 
-	"_s"
+	"all players"
 	{
-		"it"		"{1}"
-	}
-
-	"all spectators"
-	{
-		"it"		"tutti gli spettatori"
-	}
-
-	"Vote Count"
-	{
-		"it"		"Voti:  {1}/{2}, {3} rimasti"
+		"it"		"tutti i giocatori"
 	}
 
 	"Voted For"
@@ -70,9 +45,14 @@
 		"it"		"{1} ha votato per {2}"
 	}
 
-	"Changed Vote"
+	"Vote Count"
 	{
-		"it"		"{1} ha cambiato il proprio voto in {2}"
+		"it"		"Voti:  {1}/{2}, {3} rimasti"
+	}
+
+	"No Access"
+	{
+		"it"		"Non hai accesso a questo comando"
 	}
 
 	"No Vote"
@@ -80,9 +60,29 @@
 		"it"		"Nessun voto"
 	}
 
+	"all alive players"
+	{
+		"it"		"tutti i giocatori in vita"
+	}
+
+	"all spectators"
+	{
+		"it"		"tutti gli spettatori"
+	}
+
 	"Name Reserved"
 	{
 		"it"		"Il tuo nome è stato riservato da SourceMod; imposta la tua password per utilizzarlo."
+	}
+
+	"Next"
+	{
+		"it"		"Successiva"
+	}
+
+	"Changed Vote"
+	{
+		"it"		"{1} ha cambiato il proprio voto in {2}"
 	}
 
 }

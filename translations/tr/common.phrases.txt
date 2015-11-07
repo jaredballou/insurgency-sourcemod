@@ -1,13 +1,133 @@
 "Phrases"
 {
+	"Access"
+	{
+		"tr"		"Erişim"
+	}
+
+	"Admin cache refreshed"
+	{
+		"tr"		"Yönetici önbelleği yenilendi."
+	}
+
+	"Cancel vote"
+	{
+		"tr"		"Oylamayı iptal et."
+	}
+
+	"Cancelled Vote"
+	{
+		"tr"		"Oylama iptal edildi."
+	}
+
 	"Yes"
 	{
 		"tr"		"Evet"
 	}
 
+	"Cannot be performed on dead"
+	{
+		"tr"		"Bu eylem ölü alıcı \"{1}\" üzerinde uygulanamaz"
+	}
+
+	"Cannot target bot"
+	{
+		"tr"		"Bu komutu bir bot üzerinde kullanmak olanaksız."
+	}
+
+	"Could not connect to database"
+	{
+		"tr"		"Veritabanına bağlanılamadı."
+	}
+
+	"Config not found"
+	{
+		"tr"		"Ayar dosyası \"{1}\" bulunamadı."
+	}
+
+	"Command is in-game only"
+	{
+		"tr"		"Bu komut sadece oyun içine kullanılabilir."
+	}
+
+	"Changing map"
+	{
+		"tr"		"Harita {1} olarak değiştiriliyor..."
+	}
+
+	"Executed config"
+	{
+		"tr"		"Ayar dosyası \"{1}\" çalıştırıldı."
+	}
+
+	"Cvar changed"
+	{
+		"tr"		"\"{1}\" adlı cvar \"{2}\" olarak değiştirildi."
+	}
+
+	"Invalid Amount"
+	{
+		"tr"		"Geçersiz miktar belirlendi"
+	}
+
+	"Failed to query database"
+	{
+		"tr"		"Veritabanı sorgulanamadı."
+	}
+
+	"Kick player"
+	{
+		"tr"		"Oyuncuyu at."
+	}
+
+	"Invalid SteamID specified"
+	{
+		"tr"		"Geçersiz bir Steam ID belirttiniz ('STEAM_:' ile başlamalı). "
+	}
+
+	"Kicked by admin"
+	{
+		"tr"		"Yönetici tarafından atıldı"
+	}
+
+	"More than one client matched"
+	{
+		"tr"		"Verilen biçim düzeniyle birden fazla alıcı eşleşti."
+	}
+
+	"Map was not found"
+	{
+		"tr"		"{1} adlı harita bulunamadı."
+	}
+
+	"Kicked player"
+	{
+		"tr"		"'{1}' adlı oyuncu atıldı"
+	}
+
+	"Name"
+	{
+		"tr"		"Ad"
+	}
+
+	"More than one client matches"
+	{
+		"tr"		"Biçim düzeniyle birden fazla alıcı eşleşiyor \"{1}\""
+	}
+
 	"No"
 	{
 		"tr"		"Hayır"
+	}
+
+	"No Votes Cast"
+	{
+		"tr"		"Hiç oy atılmadı."
+	}
+
+	"No access to cvar"
+	{
+		"tr"		"Bu cvar'a erişiminiz yok."
 	}
 
 	"No matching client"
@@ -20,54 +140,9 @@
 		"tr"		"Eşleşen alıcı bulunamadı."
 	}
 
-	"More than one client matches"
+	"Played Sound"
 	{
-		"tr"		"Biçim düzeniyle birden fazla alıcı eşleşiyor \"{1}\""
-	}
-
-	"More than one client matched"
-	{
-		"tr"		"Verilen biçim düzeniyle birden fazla alıcı eşleşti."
-	}
-
-	"Player no longer available"
-	{
-		"tr"		"Seçtiğiniz uyuncu artık mevcut değil."
-	}
-
-	"Kick player"
-	{
-		"tr"		"Oyuncuyu at."
-	}
-
-	"Kicked by admin"
-	{
-		"tr"		"Yönetici tarafından atıldı"
-	}
-
-	"Changing map"
-	{
-		"tr"		"Harita {1} olarak değiştiriliyor..."
-	}
-
-	"Map was not found"
-	{
-		"tr"		"{1} adlı harita bulunamadı."
-	}
-
-	"Unable to target"
-	{
-		"tr"		"Bu oyuncuyu hedefleyemezsiniz."
-	}
-
-	"Name"
-	{
-		"tr"		"Ad"
-	}
-
-	"Access"
-	{
-		"tr"		"Erişim"
+		"tr"		"'{1}' adlı oyuncuyua ses çalındı"
 	}
 
 	"See console for output"
@@ -75,124 +150,19 @@
 		"tr"		"Konsol çıktısına bakın."
 	}
 
-	"Cannot target bot"
-	{
-		"tr"		"Bu komutu bir bot üzerinde kullanmak olanaksız."
-	}
-
-	"Unable to find cvar"
-	{
-		"tr"		"Aranan cvar bulunamadı: {1}"
-	}
-
-	"No access to cvar"
-	{
-		"tr"		"Bu cvar'a erişiminiz yok."
-	}
-
-	"Value of cvar"
-	{
-		"tr"		"\"{1}\" adlı cvar'ın değeri: {2}"
-	}
-
-	"Cvar changed"
-	{
-		"tr"		"\"{1}\" adlı cvar \"{2}\" olarak değiştirildi."
-	}
-
-	"Config not found"
-	{
-		"tr"		"Ayar dosyası \"{1}\" bulunamadı."
-	}
-
-	"Executed config"
-	{
-		"tr"		"Ayar dosyası \"{1}\" çalıştırıldı."
-	}
-
-	"Admin cache refreshed"
-	{
-		"tr"		"Yönetici önbelleği yenilendi."
-	}
-
-	"Invalid Amount"
-	{
-		"tr"		"Geçersiz miktar belirlendi"
-	}
-
-	"Cannot be performed on dead"
-	{
-		"tr"		"Bu eylem ölü alıcı \"{1}\" üzerinde uygulanamaz"
-	}
-
-	"Player has since died"
-	{
-		"tr"		"Eylem gerçekleştirilemedi, oyuncu öldü."
-	}
-
-	"Vote in Progress"
-	{
-		"tr"		"Bir oylama zaten yürürlükte."
-	}
-
-	"Vote Not In Progress"
-	{
-		"tr"		"Şu anda bir oylama yürürlükte değil."
-	}
-
-	"Cancelled Vote"
-	{
-		"tr"		"Oylama iptal edildi."
-	}
-
-	"Cancel vote"
-	{
-		"tr"		"Oylamayı iptal et."
-	}
-
-	"Vote Select"
-	{
-		"tr"		"{1}, {2} şıkkını seçti."
-	}
-
-	"No Votes Cast"
-	{
-		"tr"		"Hiç oy atılmadı."
-	}
-
-	"Vote Delay Minutes"
-	{
-		"tr"		"Başka bir oylama başlatmadan önce {1} dakika beklemelisiniz."
-	}
-
-	"Vote Delay Seconds"
-	{
-		"tr"		"Başka bir oylama başlatmadan önce {1} saniye beklemelisiniz."
-	}
-
-	"Could not connect to database"
-	{
-		"tr"		"Veritabanına bağlanılamadı."
-	}
-
-	"Failed to query database"
-	{
-		"tr"		"Veritabanı sorgulanamadı."
-	}
-
-	"Invalid SteamID specified"
-	{
-		"tr"		"Geçersiz bir Steam ID belirttiniz ('STEAM_:' ile başlamalı). "
-	}
-
 	"Reload admins"
 	{
 		"tr"		"Yöneticileri yeniden yükle"
 	}
 
-	"Command is in-game only"
+	"Player no longer available"
 	{
-		"tr"		"Bu komut sadece oyun içine kullanılabilir."
+		"tr"		"Seçtiğiniz uyuncu artık mevcut değil."
+	}
+
+	"Player has since died"
+	{
+		"tr"		"Eylem gerçekleştirilemedi, oyuncu öldü."
 	}
 
 	"Target must be dead"
@@ -210,9 +180,9 @@
 		"tr"		"Verilen oyuncu tamamen oyunda değil."
 	}
 
-	"Played Sound"
+	"Slayed player"
 	{
-		"tr"		"'{1}' adlı oyuncuyua ses çalındı"
+		"tr"		"'{1}' adlı oyuncu katledildi"
 	}
 
 	"Slapped player"
@@ -220,19 +190,44 @@
 		"tr"		"'{1}' adlı oyuncu tokatlandı"
 	}
 
-	"Slayed player"
+	"Vote in Progress"
 	{
-		"tr"		"'{1}' adlı oyuncu katledildi"
+		"tr"		"Bir oylama zaten yürürlükte."
 	}
 
-	"Kicked player"
+	"Vote Select"
 	{
-		"tr"		"'{1}' adlı oyuncu atıldı"
+		"tr"		"{1}, {2} şıkkını seçti."
 	}
 
-	"Cannot participate in vote"
+	"Vote Not In Progress"
 	{
-		"tr"		"Bu oylamaya katılamazsınız."
+		"tr"		"Şu anda bir oylama yürürlükte değil."
+	}
+
+	"Vote Delay Seconds"
+	{
+		"tr"		"Başka bir oylama başlatmadan önce {1} saniye beklemelisiniz."
+	}
+
+	"Vote Delay Minutes"
+	{
+		"tr"		"Başka bir oylama başlatmadan önce {1} dakika beklemelisiniz."
+	}
+
+	"Value of cvar"
+	{
+		"tr"		"\"{1}\" adlı cvar'ın değeri: {2}"
+	}
+
+	"Unable to target"
+	{
+		"tr"		"Bu oyuncuyu hedefleyemezsiniz."
+	}
+
+	"Unable to find cvar"
+	{
+		"tr"		"Aranan cvar bulunamadı: {1}"
 	}
 
 	"Cannot change vote"
@@ -240,14 +235,19 @@
 		"tr"		"Bu oylama için seçiminizi değiştiremezsiniz."
 	}
 
-	"On"
+	"Cannot participate in vote"
 	{
-		"tr"		"Açık"
+		"tr"		"Bu oylamaya katılamazsınız."
 	}
 
 	"Off"
 	{
 		"tr"		"Kapalı"
+	}
+
+	"On"
+	{
+		"tr"		"Açık"
 	}
 
 }

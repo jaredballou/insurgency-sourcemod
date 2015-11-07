@@ -1,5 +1,20 @@
 "Phrases"
 {
+	"Ban vote"
+	{
+		"pl"		"Zbanować"
+	}
+
+	"Change Map To"
+	{
+		"pl"		" Zmienić mapę na {1}? "
+	}
+
+	"Confirm Vote"
+	{
+		"pl"		"Potwierdzić głosowanie"
+	}
+
 	"Initiate Vote"
 	{
 		"pl"		"Rozpoczęto głosowanie: {1}"
@@ -10,59 +25,9 @@
 		"pl"		"Rozpoczęto głosowanie na mapę."
 	}
 
-	"Initiated Vote Kick"
-	{
-		"pl"		"Rozpoczęto głosowanie, aby wykopać {1}."
-	}
-
-	"Initiated Vote Ban"
-	{
-		"pl"		"Rozpoczęto głosowanie, aby zbanować {1}."
-	}
-
-	"Map Vote"
-	{
-		"pl"		"Głosowanie na mapę: {1}"
-	}
-
-	"Change Map To"
-	{
-		"pl"		" Zmienić mapę na {1}? "
-	}
-
-	"Votekick Player"
-	{
-		"pl"		"Wykopać {1}?"
-	}
-
-	"Voteban Player"
-	{
-		"pl"		"Zbanować {1}?"
-	}
-
-	"Vote Successful"
-	{
-		"pl"		"Głosowanie powiodło się. (Otrzymano {1}%% z {2} głosów)"
-	}
-
-	"Vote Failed"
-	{
-		"pl"		"Głosowanie nie powiodło się. Wymagane jest {1}%% głosów. (Otrzymano {2}%% z {3} głosów) "
-	}
-
-	"Vote End"
-	{
-		"pl"		"Odpowiedź {1} to: {2}."
-	}
-
 	"Kick vote"
 	{
 		"pl"		"Wykopać"
-	}
-
-	"Ban vote"
-	{
-		"pl"		"Zbanować"
 	}
 
 	"Map vote"
@@ -70,9 +35,34 @@
 		"pl"		"Głosowanie na mapę"
 	}
 
-	"Confirm Vote"
+	"Vote End"
 	{
-		"pl"		"Potwierdzić głosowanie"
+		"pl"		"Odpowiedź {1} to: {2}."
+	}
+
+	"Vote Failed"
+	{
+		"pl"		"Głosowanie nie powiodło się. Wymagane jest {1}%% głosów. (Otrzymano {2}%% z {3} głosów) "
+	}
+
+	"Vote Successful"
+	{
+		"pl"		"Głosowanie powiodło się. (Otrzymano {1}%% z {2} głosów)"
+	}
+
+	"Voteban Player"
+	{
+		"pl"		"Zbanować {1}?"
+	}
+
+	"Votekick Player"
+	{
+		"pl"		"Wykopać {1}?"
+	}
+
+	"Map Vote"
+	{
+		"pl"		"Głosowanie na mapę: {1}"
 	}
 
 	"Map Vote In Use"
@@ -88,6 +78,16 @@
 	"Start the Vote"
 	{
 		"pl"		"Rozpocznij głosowanie"
+	}
+
+	"Initiated Vote Ban"
+	{
+		"pl"		"Rozpoczęto głosowanie, aby zbanować {1}."
+	}
+
+	"Initiated Vote Kick"
+	{
+		"pl"		"Rozpoczęto głosowanie, aby wykopać {1}."
 	}
 
 }

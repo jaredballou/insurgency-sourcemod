@@ -5,9 +5,9 @@
 		"de"		"Nächste Karte: {1}"
 	}
 
-	"Map History"
+	"Current Map"
 	{
-		"de"		"Zuletzt gespielte Karten"
+		"de"		"Aktuelle Karte"
 	}
 
 	"Map"
@@ -15,9 +15,9 @@
 		"de"		"[Karte]"
 	}
 
-	"Started"
+	"Map History"
 	{
-		"de"		"[Gestartet]"
+		"de"		"Zuletzt gespielte Karten"
 	}
 
 	"Played Time"
@@ -25,19 +25,19 @@
 		"de"		"[Gespielte Zeit]"
 	}
 
-	"Reason"
+	"Started"
 	{
-		"de"		"[Grund für Beendigung]"
-	}
-
-	"Current Map"
-	{
-		"de"		"Aktuelle Karte"
+		"de"		"[Gestartet]"
 	}
 
 	"ago"
 	{
 		"de"		"vor"
+	}
+
+	"Reason"
+	{
+		"de"		"[Grund für Beendigung]"
 	}
 
 }

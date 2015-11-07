@@ -5,19 +5,14 @@
 		"sv"		"Bannlys spelare"
 	}
 
-	"Ban reason"
-	{
-		"sv"		"Bannlysningsanledning"
-	}
-
 	"Permabanned player"
 	{
 		"sv"		"Bannlyste spelare \"{1}\" permanent"
 	}
 
-	"Permabanned player reason"
+	"Ban added"
 	{
-		"sv"		"Bannlyste spelare \"{1}\" permanent (skäl: {2})."
+		"sv"		"Bannlysning tillagd."
 	}
 
 	"Banned player"
@@ -35,9 +30,9 @@
 		"sv"		"Tog bort bannlysningar som möter kriterierna: {1}"
 	}
 
-	"Ban added"
+	"Ban reason"
 	{
-		"sv"		"Bannlysning tillagd."
+		"sv"		"Bannlysningsanledning"
 	}
 
 	"Cannot ban that IP"
@@ -45,19 +40,24 @@
 		"sv"		" Du kan inte bannlysa den IP adressen."
 	}
 
+	"Permabanned player reason"
+	{
+		"sv"		"Bannlyste spelare \"{1}\" permanent (skäl: {2})."
+	}
+
 	"Custom ban reason explanation"
 	{
 		"sv"		"Skriv in anledningen som ett chattmeddelande. Använd {1} för att avbryta."
 	}
 
-	"AbortBan applied successfully"
-	{
-		"sv"		"Bannlysning avbruten."
-	}
-
 	"AbortBan not waiting for custom reason"
 	{
 		"sv"		"Väntar inte på att en bannlysningsanledning ska skrivas in, ingen bannlysning att avbryta."
+	}
+
+	"AbortBan applied successfully"
+	{
+		"sv"		"Bannlysning avbruten."
 	}
 
 }

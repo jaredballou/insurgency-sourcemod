@@ -1,18 +1,18 @@
 "Phrases"
 {
-	"No Access"
-	{
-		"cze"		"Nemate pristup k tomuto prikazu"
-	}
-
 	"Back"
 	{
 		"cze"		"Zpet"
 	}
 
-	"Next"
+	"_s"
 	{
-		"cze"		"Dalsi"
+		"cze"		"{1}"
+	}
+
+	"Changed Vote"
+	{
+		"cze"		" {1} zmenil svou volbu na {2}"
 	}
 
 	"Exit"
@@ -20,19 +20,34 @@
 		"cze"		"Exit"
 	}
 
+	"Next"
+	{
+		"cze"		"Dalsi"
+	}
+
+	"No Access"
+	{
+		"cze"		"Nemate pristup k tomuto prikazu"
+	}
+
 	"Previous"
 	{
 		"cze"		"Predchozi"
 	}
 
-	"all players"
+	"Voted For"
 	{
-		"cze"		"vsichni hraci"
+		"cze"		"{1} hlasoval pro {2}"
 	}
 
-	"all humans"
+	"Vote Count"
 	{
-		"cze"		"vsichni lide"
+		"cze"		"Hlasy: {1}/{2}, zbyva {3}s"
+	}
+
+	"all alive players"
+	{
+		"cze"		"vsichni zivi hraci"
 	}
 
 	"all bots"
@@ -45,34 +60,19 @@
 		"cze"		"vsichni mrtvi hraci"
 	}
 
-	"all alive players"
+	"all humans"
 	{
-		"cze"		"vsichni zivi hraci"
+		"cze"		"vsichni lide"
 	}
 
-	"_s"
+	"all players"
 	{
-		"cze"		"{1}"
+		"cze"		"vsichni hraci"
 	}
 
 	"all spectators"
 	{
 		"cze"		"vsichni pozorovatele"
-	}
-
-	"Vote Count"
-	{
-		"cze"		"Hlasy: {1}/{2}, zbyva {3}s"
-	}
-
-	"Voted For"
-	{
-		"cze"		"{1} hlasoval pro {2}"
-	}
-
-	"Changed Vote"
-	{
-		"cze"		" {1} zmenil svou volbu na {2}"
 	}
 
 	"No Vote"

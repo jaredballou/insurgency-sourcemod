@@ -5,9 +5,9 @@
 		"sv"		"Nästa bana: {1}"
 	}
 
-	"Map History"
+	"Current Map"
 	{
-		"sv"		"Banans historia"
+		"sv"		"Nuvarande bana"
 	}
 
 	"Map"
@@ -15,9 +15,19 @@
 		"sv"		"[Bana]  "
 	}
 
+	"Reason"
+	{
+		"sv"		"[Anledning till avslutande]  "
+	}
+
 	"Started"
 	{
 		"sv"		"[Startad]  "
+	}
+
+	"ago"
+	{
+		"sv"		"sedan"
 	}
 
 	"Played Time"
@@ -25,19 +35,9 @@
 		"sv"		"[Spelad tid]  "
 	}
 
-	"Reason"
+	"Map History"
 	{
-		"sv"		"[Anledning till avslutande]  "
-	}
-
-	"Current Map"
-	{
-		"sv"		"Nuvarande bana"
-	}
-
-	"ago"
-	{
-		"sv"		"sedan"
+		"sv"		"Banans historia"
 	}
 
 }

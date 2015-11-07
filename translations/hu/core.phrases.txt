@@ -55,9 +55,9 @@
 		"hu"		"{1}"
 	}
 
-	"all spectators"
+	"Changed Vote"
 	{
-		"hu"		"minden nézőt"
+		"hu"		"{1} meváltoztatta a szavazatát {2}-ra"
 	}
 
 	"Vote Count"
@@ -70,9 +70,9 @@
 		"hu"		"{1} szavazott {2}-ra"
 	}
 
-	"Changed Vote"
+	"all spectators"
 	{
-		"hu"		"{1} meváltoztatta a szavazatát {2}-ra"
+		"hu"		"minden nézőt"
 	}
 
 	"No Vote"

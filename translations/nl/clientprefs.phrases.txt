@@ -1,13 +1,23 @@
 "Phrases"
 {
+	"Choose Option"
+	{
+		"nl"		"Kies optie"
+	}
+
+	"Client Settings"
+	{
+		"nl"		"Client instellingen"
+	}
+
 	"Cookie List"
 	{
 		"nl"		"Sourcemod Cookie lijst"
 	}
 
-	"Printing Cookie List"
+	"Cookie Value"
 	{
-		"nl"		"Cookie lijst laten zien naar de console"
+		"nl"		"{1} zijn waarde is {2}"
 	}
 
 	"Cookie not Found"
@@ -15,9 +25,14 @@
 		"nl"		"Kan geen cookie \"{1}\" vinden"
 	}
 
-	"Cookie Value"
+	"No Console"
 	{
-		"nl"		"{1} zijn waarde is {2}"
+		"nl"		"Kan geen instellingsmenu laten zien naar de console"
+	}
+
+	"Printing Cookie List"
+	{
+		"nl"		"Cookie lijst laten zien naar de console"
 	}
 
 	"Protected Cookie"
@@ -28,21 +43,6 @@
 	"Cookie Changed Value"
 	{
 		"nl"		"De waarde van cookie \"{1}\" is naar \"{2}\" veranderd"
-	}
-
-	"No Console"
-	{
-		"nl"		"Kan geen instellingsmenu laten zien naar de console"
-	}
-
-	"Choose Option"
-	{
-		"nl"		"Kies optie"
-	}
-
-	"Client Settings"
-	{
-		"nl"		"Client instellingen"
 	}
 
 }

@@ -1,8 +1,28 @@
 "Phrases"
 {
+	"Beacon player"
+	{
+		"cze"		"Oznacit hrace"
+	}
+
+	"Blind amount"
+	{
+		"cze"		"Sila oslepeni?"
+	}
+
+	"Blind player"
+	{
+		"cze"		"Oslepit hrace"
+	}
+
 	"Burn player"
 	{
 		"cze"		"Zapalit hrace"
+	}
+
+	"Drug player"
+	{
+		"cze"		"Zfetovat hrace"
 	}
 
 	"FireBomb player"
@@ -20,44 +40,49 @@
 		"cze"		"Udelat z hrace mrazici bombu"
 	}
 
-	"TimeBomb player"
+	"Fully blind"
 	{
-		"cze"		" Udelat z hrace casovanou bombu"
+		"cze"		"Uplne oslepeni"
 	}
 
-	"Beacon player"
+	"Froze target"
 	{
-		"cze"		"Oznacit hrace"
+		"cze"		"zmrazil hrace {1}."
 	}
 
-	"NoClip player"
+	"Gravity High"
 	{
-		"cze"		"Dat hraci NoClip"
+		"cze"		"Vysoka gravitace"
 	}
 
-	"Blind player"
+	"Gravity Low"
 	{
-		"cze"		"Oslepit hrace"
+		"cze"		"Nizka gravitace"
 	}
 
-	"Drug player"
+	"Gravity Normal"
 	{
-		"cze"		"Zfetovat hrace"
+		"cze"		"Normalni gravitace"
+	}
+
+	"Gravity Very High"
+	{
+		"cze"		"Velmi vysoka gravitace"
+	}
+
+	"Gravity Very Low"
+	{
+		"cze"		"Velmi nizka gravitace"
+	}
+
+	"Gravity amount"
+	{
+		"cze"		"Sila gravitace?"
 	}
 
 	"Gravity player"
 	{
 		"cze"		"Nastavit hraci gravitaci"
-	}
-
-	"Blind amount"
-	{
-		"cze"		"Sila oslepeni?"
-	}
-
-	"Fully blind"
-	{
-		"cze"		"Uplne oslepeni"
 	}
 
 	"Half blind"
@@ -70,76 +95,6 @@
 		"cze"		"Zadne oslepeni"
 	}
 
-	"Gravity amount"
-	{
-		"cze"		"Sila gravitace?"
-	}
-
-	"Gravity Very High"
-	{
-		"cze"		"Velmi vysoka gravitace"
-	}
-
-	"Gravity High"
-	{
-		"cze"		"Vysoka gravitace"
-	}
-
-	"Gravity Normal"
-	{
-		"cze"		"Normalni gravitace"
-	}
-
-	"Gravity Low"
-	{
-		"cze"		"Nizka gravitace"
-	}
-
-	"Gravity Very Low"
-	{
-		"cze"		"Velmi nizka gravitace"
-	}
-
-	"Set target on fire"
-	{
-		"cze"		"zapalil hrace {1}."
-	}
-
-	"Toggled FireBomb on target"
-	{
-		"cze"		"zmenil hrace {1} v ohnivou bombu."
-	}
-
-	"Froze target"
-	{
-		"cze"		"zmrazil hrace {1}."
-	}
-
-	"Toggled FreezeBomb on target"
-	{
-		"cze"		"zmenil hrace {1} v mrazici bombu."
-	}
-
-	"Toggled beacon on target"
-	{
-		"cze"		"oznacil hrace {1}."
-	}
-
-	"Toggled TimeBomb on target"
-	{
-		"cze"		"zmenil hrace {1} v casovanou bombu."
-	}
-
-	"Toggled noclip on target"
-	{
-		"cze"		"prepl NoClip na  hraci {1}."
-	}
-
-	"Toggled drug on target"
-	{
-		"cze"		"zfetoval hrace {1}."
-	}
-
 	"Set blind on target"
 	{
 		"cze"		"oslepil hrace {1}."
@@ -150,9 +105,54 @@
 		"cze"		"nastavil gravitaci hraci {1}."
 	}
 
+	"Set target on fire"
+	{
+		"cze"		"zapalil hrace {1}."
+	}
+
 	"Till Explodes"
 	{
 		"cze"		"{2} sekund(y) nez {1} vybuchne."
+	}
+
+	"TimeBomb player"
+	{
+		"cze"		" Udelat z hrace casovanou bombu"
+	}
+
+	"Toggled FireBomb on target"
+	{
+		"cze"		"zmenil hrace {1} v ohnivou bombu."
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"cze"		"zmenil hrace {1} v mrazici bombu."
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"cze"		"zmenil hrace {1} v casovanou bombu."
+	}
+
+	"Toggled beacon on target"
+	{
+		"cze"		"oznacil hrace {1}."
+	}
+
+	"Toggled drug on target"
+	{
+		"cze"		"zfetoval hrace {1}."
+	}
+
+	"NoClip player"
+	{
+		"cze"		"Dat hraci NoClip"
+	}
+
+	"Toggled noclip on target"
+	{
+		"cze"		"prepl NoClip na  hraci {1}."
 	}
 
 	"Unfrozen"

@@ -1,13 +1,8 @@
 "Phrases"
 {
-	"SM help commands"
+	"Entries n - m in page k"
 	{
-		"chi"		"SourceMod 帮助: 指令信息"
-	}
-
-	"No description available"
-	{
-		"chi"		"无详细描述"
+		"chi"		"条目 {1} - {2} 于第 {3} 页"
 	}
 
 	"No commands available"
@@ -15,19 +10,24 @@
 		"chi"		"无适用指令"
 	}
 
-	"Type sm_help to see more"
+	"No description available"
 	{
-		"chi"		"键入 sm_help {1} 查看更多指令"
-	}
-
-	"Entries n - m in page k"
-	{
-		"chi"		"条目 {1} - {2} 于第 {3} 页"
+		"chi"		"无详细描述"
 	}
 
 	"No matching results found"
 	{
 		"chi"		"无匹配结果可寻"
+	}
+
+	"SM help commands"
+	{
+		"chi"		"SourceMod 帮助: 指令信息"
+	}
+
+	"Type sm_help to see more"
+	{
+		"chi"		"键入 sm_help {1} 查看更多指令"
 	}
 
 }

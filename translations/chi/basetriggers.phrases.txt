@@ -25,44 +25,9 @@
 		"chi"		"当前地图为 {1}."
 	}
 
-	"LastRound"
+	"FragLimit"
 	{
-		"chi"		"最后一局了!!"
-	}
-
-	"NoTimelimit"
-	{
-		"chi"		"当前地图无时间限制"
-	}
-
-	"Next Map"
-	{
-		"chi"		"下一幅地图: {1}"
-	}
-
-	"Pending Vote"
-	{
-		"chi"		"投票正在进行中"
-	}
-
-	"WinLimitAppend"
-	{
-		"chi"		", 或当某方赢得一局后更换地图"
-	}
-
-	"WinLimit"
-	{
-		"chi"		"地图将于某方赢得一局后更换"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"chi"		", 或再过一局后更换地图"
-	}
-
-	"MaxRounds"
-	{
-		"chi"		"地图将再过一局后更换"
+		"chi"		"地图将于某玩家杀满一人后更换"
 	}
 
 	"FragLimitAppend"
@@ -70,19 +35,29 @@
 		"chi"		", 或当某玩家杀满一人后更换地图"
 	}
 
-	"FragLimit"
+	"FragLimitAppendPlural"
 	{
-		"chi"		"地图将于某玩家杀满一人后更换"
+		"chi"		", 或当某玩家杀满 {1} 人后更换地图"
 	}
 
-	"WinLimitAppendPlural"
+	"FragLimitPlural"
 	{
-		"chi"		", 或当某方赢得 {1} 局后更换地图"
+		"chi"		"地图将于某玩家杀满 {1} 人后更换"
 	}
 
-	"WinLimitPlural"
+	"LastRound"
 	{
-		"chi"		"地图将于某方赢得 {1} 局后更换"
+		"chi"		"最后一局了!!"
+	}
+
+	"MaxRounds"
+	{
+		"chi"		"地图将再过一局后更换"
+	}
+
+	"MaxRoundsAppend"
+	{
+		"chi"		", 或再过一局后更换地图"
 	}
 
 	"MaxRoundsAppendPlural"
@@ -95,14 +70,39 @@
 		"chi"		"地图将再过 {1} 局后更换"
 	}
 
-	"FragLimitAppendPlural"
+	"Next Map"
 	{
-		"chi"		", 或当某玩家杀满 {1} 人后更换地图"
+		"chi"		"下一幅地图: {1}"
 	}
 
-	"FragLimitPlural"
+	"NoTimelimit"
 	{
-		"chi"		"地图将于某玩家杀满 {1} 人后更换"
+		"chi"		"当前地图无时间限制"
+	}
+
+	"Pending Vote"
+	{
+		"chi"		"投票正在进行中"
+	}
+
+	"WinLimit"
+	{
+		"chi"		"地图将于某方赢得一局后更换"
+	}
+
+	"WinLimitAppend"
+	{
+		"chi"		", 或当某方赢得一局后更换地图"
+	}
+
+	"WinLimitAppendPlural"
+	{
+		"chi"		", 或当某方赢得 {1} 局后更换地图"
+	}
+
+	"WinLimitPlural"
+	{
+		"chi"		"地图将于某方赢得 {1} 局后更换"
 	}
 
 }

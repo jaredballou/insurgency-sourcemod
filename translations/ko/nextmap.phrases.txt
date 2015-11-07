@@ -1,13 +1,8 @@
 "Phrases"
 {
-	"Next Map"
+	"Current Map"
 	{
-		"ko"		"다음 맵은 {1} 입니다"
-	}
-
-	"Map History"
-	{
-		"ko"		"맵 기록"
+		"ko"		"현재 맵"
 	}
 
 	"Map"
@@ -15,9 +10,9 @@
 		"ko"		"[맵]"
 	}
 
-	"Started"
+	"Map History"
 	{
-		"ko"		"[시작됨]"
+		"ko"		"맵 기록"
 	}
 
 	"Played Time"
@@ -30,14 +25,19 @@
 		"ko"		"[끝난 이유]"
 	}
 
-	"Current Map"
+	"Started"
 	{
-		"ko"		"현재 맵"
+		"ko"		"[시작됨]"
 	}
 
 	"ago"
 	{
 		"ko"		"지남"
+	}
+
+	"Next Map"
+	{
+		"ko"		"다음 맵은 {1} 입니다"
 	}
 
 }

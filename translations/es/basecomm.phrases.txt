@@ -15,19 +15,9 @@
 		"es"		"{1} gageado."
 	}
 
-	"Ungagged target"
-	{
-		"es"		"{1} des-gageado."
-	}
-
 	"Muted target"
 	{
 		"es"		"{1} muteado."
-	}
-
-	"Unmuted target"
-	{
-		"es"		"{1} des-muteado."
 	}
 
 	"Silenced target"
@@ -35,24 +25,29 @@
 		"es"		"{1} silenciado."
 	}
 
+	"Ungagged target"
+	{
+		"es"		"{1} des-gageado."
+	}
+
+	"Unmuted target"
+	{
+		"es"		"{1} des-muteado."
+	}
+
 	"Unsilenced target"
 	{
 		"es"		"{1} desilenciado."
 	}
 
-	"Mute Player"
+	"UnSilence Player"
 	{
-		"es"		"Mutear Jugador"
+		"es"		"DesSilenciar Jugador"
 	}
 
 	"UnMute Player"
 	{
 		"es"		"DesMutear Jugador"
-	}
-
-	"Gag Player"
-	{
-		"es"		"Gagear Jugador"
 	}
 
 	"UnGag Player"
@@ -65,9 +60,14 @@
 		"es"		"Silenciar Jugador"
 	}
 
-	"UnSilence Player"
+	"Mute Player"
 	{
-		"es"		"DesSilenciar Jugador"
+		"es"		"Mutear Jugador"
+	}
+
+	"Gag Player"
+	{
+		"es"		"Gagear Jugador"
 	}
 
 }

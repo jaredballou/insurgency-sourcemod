@@ -1,18 +1,13 @@
 "Phrases"
 {
-	"Slap player"
-	{
-		"sv"		"Smiska spelare"
-	}
-
 	"Slap damage"
 	{
 		"sv"		"Smisk skada"
 	}
 
-	"Slay player"
+	"Slap player"
 	{
-		"sv"		"Dräp spelare"
+		"sv"		"Smiska spelare"
 	}
 
 	"Slapped target"
@@ -20,14 +15,19 @@
 		"sv"		"Smiskade {1}."
 	}
 
+	"Slay player"
+	{
+		"sv"		"Dräp spelare"
+	}
+
 	"Slayed target"
 	{
 		"sv"		"Dräpte {1}."
 	}
 
-	"Name changed"
+	"Rename player"
 	{
-		"sv"		"En Admin har ändrat ditt namn."
+		"sv"		"Byta alias"
 	}
 
 	"Renamed target"
@@ -35,9 +35,9 @@
 		"sv"		"Bytte aliaset till {1}."
 	}
 
-	"Rename player"
+	"Name changed"
 	{
-		"sv"		"Byta alias"
+		"sv"		"En Admin har ändrat ditt namn."
 	}
 
 	"Dead Player Rename"

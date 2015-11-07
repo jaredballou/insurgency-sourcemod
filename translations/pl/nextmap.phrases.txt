@@ -5,24 +5,14 @@
 		"pl"		"Następna mapa: {1}"
 	}
 
-	"Map History"
-	{
-		"pl"		"Historia map"
-	}
-
 	"Map"
 	{
 		"pl"		"[Mapa]"
 	}
 
-	"Started"
+	"ago"
 	{
-		"pl"		"[Rozpoczęto]"
-	}
-
-	"Played Time"
-	{
-		"pl"		"[Czas gry]"
+		"pl"		"temu"
 	}
 
 	"Reason"
@@ -30,14 +20,24 @@
 		"pl"		"[Powód zakończenia]"
 	}
 
+	"Started"
+	{
+		"pl"		"[Rozpoczęto]"
+	}
+
+	"Map History"
+	{
+		"pl"		"Historia map"
+	}
+
+	"Played Time"
+	{
+		"pl"		"[Czas gry]"
+	}
+
 	"Current Map"
 	{
 		"pl"		"Aktualna mapa"
-	}
-
-	"ago"
-	{
-		"pl"		"temu"
 	}
 
 }

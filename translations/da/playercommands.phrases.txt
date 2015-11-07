@@ -1,23 +1,23 @@
 "Phrases"
 {
-	"Slap player"
-	{
-		"da"		"Klask spiller"
-	}
-
 	"Slap damage"
 	{
 		"da"		"Klask-skade"
 	}
 
-	"Slay player"
+	"Slap player"
 	{
-		"da"		"Dræb spiller"
+		"da"		"Klask spiller"
 	}
 
 	"Slapped target"
 	{
 		"da"		"Klaskede {1}."
+	}
+
+	"Slay player"
+	{
+		"da"		"Dræb spiller"
 	}
 
 	"Slayed target"
@@ -30,14 +30,14 @@
 		"da"		"En administrator har ændret dit navn"
 	}
 
-	"Renamed target"
-	{
-		"da"		"Omdøbte {1}."
-	}
-
 	"Rename player"
 	{
 		"da"		"Omdøb spiller"
+	}
+
+	"Renamed target"
+	{
+		"da"		"Omdøbte {1}."
 	}
 
 	"Dead Player Rename"

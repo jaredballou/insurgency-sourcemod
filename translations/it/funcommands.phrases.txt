@@ -1,28 +1,13 @@
 "Phrases"
 {
-	"Burn player"
+	"Gravity amount"
 	{
-		"it"		"Incendia un giocatore"
+		"it"		"Gravità?"
 	}
 
-	"FireBomb player"
+	"Unfrozen"
 	{
-		"it"		"Bomba incendiaria su un giocatore"
-	}
-
-	"Freeze player"
-	{
-		"it"		"Congela un giocatore"
-	}
-
-	"FreezeBomb player"
-	{
-		"it"		"Bomba congelante su un giocatore"
-	}
-
-	"TimeBomb player"
-	{
-		"it"		"Bomba a tempo su un giocatore"
+		"it"		"Sei stato scongelato."
 	}
 
 	"Beacon player"
@@ -30,9 +15,9 @@
 		"it"		"Tracciante su un giocatore"
 	}
 
-	"NoClip player"
+	"Blind amount"
 	{
-		"it"		"Noclip su un giocatore"
+		"it"		"Quanto accecato?"
 	}
 
 	"Blind player"
@@ -45,19 +30,54 @@
 		"it"		"Droga un giocatore"
 	}
 
-	"Gravity player"
+	"FireBomb player"
 	{
-		"it"		"Gravità su un giocatore"
+		"it"		"Bomba incendiaria su un giocatore"
 	}
 
-	"Blind amount"
+	"FreezeBomb player"
 	{
-		"it"		"Quanto accecato?"
+		"it"		"Bomba congelante su un giocatore"
+	}
+
+	"Froze target"
+	{
+		"it"		"{1} è stato congelato."
 	}
 
 	"Fully blind"
 	{
 		"it"		"Completamente accecato"
+	}
+
+	"Gravity High"
+	{
+		"it"		"Alta gravità"
+	}
+
+	"Gravity Low"
+	{
+		"it"		"Bassa gravità"
+	}
+
+	"Gravity Normal"
+	{
+		"it"		"Gravità normale"
+	}
+
+	"Gravity Very High"
+	{
+		"it"		"Gravità molto alta"
+	}
+
+	"Gravity Very Low"
+	{
+		"it"		"Gravità molto bassa"
+	}
+
+	"Gravity player"
+	{
+		"it"		"Gravità su un giocatore"
 	}
 
 	"Half blind"
@@ -70,74 +90,9 @@
 		"it"		"Nessun accecamento"
 	}
 
-	"Gravity amount"
+	"NoClip player"
 	{
-		"it"		"Gravità?"
-	}
-
-	"Gravity Very High"
-	{
-		"it"		"Gravità molto alta"
-	}
-
-	"Gravity High"
-	{
-		"it"		"Alta gravità"
-	}
-
-	"Gravity Normal"
-	{
-		"it"		"Gravità normale"
-	}
-
-	"Gravity Low"
-	{
-		"it"		"Bassa gravità"
-	}
-
-	"Gravity Very Low"
-	{
-		"it"		"Gravità molto bassa"
-	}
-
-	"Set target on fire"
-	{
-		"it"		"{1} è stato incendiato."
-	}
-
-	"Toggled FireBomb on target"
-	{
-		"it"		"Attivata/disattivata la bomba incendiaria su {1}."
-	}
-
-	"Froze target"
-	{
-		"it"		"{1} è stato congelato."
-	}
-
-	"Toggled FreezeBomb on target"
-	{
-		"it"		"Attivata/disattivata la bomba congelante su {1}."
-	}
-
-	"Toggled beacon on target"
-	{
-		"it"		"Attivato/disattivato il tracciante su {1}."
-	}
-
-	"Toggled TimeBomb on target"
-	{
-		"it"		"Attivata/disattivata la bomba a tempo su {1}."
-	}
-
-	"Toggled noclip on target"
-	{
-		"it"		"Attivato/disattivato il noclip su {1}."
-	}
-
-	"Toggled drug on target"
-	{
-		"it"		"Attivata/disattivata la droga su {1}."
+		"it"		"Noclip su un giocatore"
 	}
 
 	"Set blind on target"
@@ -155,14 +110,59 @@
 		"it"		"{2} secondo/i prima che {1} esploda."
 	}
 
-	"Unfrozen"
+	"TimeBomb player"
 	{
-		"it"		"Sei stato scongelato."
+		"it"		"Bomba a tempo su un giocatore"
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"it"		"Attivata/disattivata la bomba congelante su {1}."
+	}
+
+	"Toggled FireBomb on target"
+	{
+		"it"		"Attivata/disattivata la bomba incendiaria su {1}."
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"it"		"Attivata/disattivata la bomba a tempo su {1}."
+	}
+
+	"Toggled beacon on target"
+	{
+		"it"		"Attivato/disattivato il tracciante su {1}."
+	}
+
+	"Toggled drug on target"
+	{
+		"it"		"Attivata/disattivata la droga su {1}."
+	}
+
+	"Toggled noclip on target"
+	{
+		"it"		"Attivato/disattivato il noclip su {1}."
 	}
 
 	"You will be unfrozen"
 	{
 		"it"		"Verrai scongelato tra {1} secondo/i."
+	}
+
+	"Burn player"
+	{
+		"it"		"Incendia un giocatore"
+	}
+
+	"Freeze player"
+	{
+		"it"		"Congela un giocatore"
+	}
+
+	"Set target on fire"
+	{
+		"it"		"{1} è stato incendiato."
 	}
 
 }

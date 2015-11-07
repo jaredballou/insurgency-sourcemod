@@ -1,8 +1,8 @@
 "Phrases"
 {
-	"Gag/Mute player"
+	"Unsilenced target"
 	{
-		"fr"		"Rendre muet un joueur "
+		"fr"		"{1} n'est plus silencieux."
 	}
 
 	"Choose Type"
@@ -10,14 +10,14 @@
 		"fr"		"Choisissez"
 	}
 
+	"Gag/Mute player"
+	{
+		"fr"		"Rendre muet un joueur "
+	}
+
 	"Gagged target"
 	{
 		"fr"		"{1} ne peut plus écrire."
-	}
-
-	"Ungagged target"
-	{
-		"fr"		"{1} peut à nouveau écrire."
 	}
 
 	"Muted target"
@@ -25,29 +25,19 @@
 		"fr"		"{1} est maintenant muet."
 	}
 
-	"Unmuted target"
-	{
-		"fr"		"{1} n'est plus muet."
-	}
-
 	"Silenced target"
 	{
 		"fr"		"{1} est maintenant totalement silencieux."
 	}
 
-	"Unsilenced target"
+	"Ungagged target"
 	{
-		"fr"		"{1} n'est plus silencieux."
+		"fr"		"{1} peut à nouveau écrire."
 	}
 
-	"Mute Player"
+	"Unmuted target"
 	{
-		"fr"		"Bloquer la voix d'un joueur"
-	}
-
-	"UnMute Player"
-	{
-		"fr"		"Rétablir la parole à un joueur"
+		"fr"		"{1} n'est plus muet."
 	}
 
 	"Gag Player"
@@ -55,14 +45,24 @@
 		"fr"		"Bloquer les écrits d'un joueur"
 	}
 
-	"UnGag Player"
+	"Mute Player"
 	{
-		"fr"		"Rétablir l'écriture d'un joueur"
+		"fr"		"Bloquer la voix d'un joueur"
 	}
 
 	"Silence Player"
 	{
 		"fr"		"Bloquer les écrits et la voix d'un joueur"
+	}
+
+	"UnGag Player"
+	{
+		"fr"		"Rétablir l'écriture d'un joueur"
+	}
+
+	"UnMute Player"
+	{
+		"fr"		"Rétablir la parole à un joueur"
 	}
 
 	"UnSilence Player"

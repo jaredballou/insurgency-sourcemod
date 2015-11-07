@@ -5,11 +5,6 @@
 		"pl"		"Typem autoryzacji musi być  'steam', 'nazwa' lub 'ip'."
 	}
 
-	"Invalid immunity"
-	{
-		"pl"		"Immunitet musi być dodatnią liczbą całkowitą. "
-	}
-
 	"SQL Admin already exists"
 	{
 		"pl"		"Administrator o podanym uwierzytelnieniu już istnieje. "
@@ -73,6 +68,11 @@
 	"Added groups to user"
 	{
 		"pl"		" Pomyślnie dodano {1} grup(y) dla danego administratora. "
+	}
+
+	"Invalid immunity"
+	{
+		"pl"		"Immunitet musi być dodatnią liczbą całkowitą. "
 	}
 
 }

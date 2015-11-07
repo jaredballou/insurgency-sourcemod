@@ -2,7 +2,7 @@
 {
 	"Slot reserved"
 	{
-		"pl"		"Wyrzucono cię z powodu rezerwacji slotów."
+		"pl"		"Zostałeś wyrzucony z powodu rezerwacji slotów"
 	}
 
 }

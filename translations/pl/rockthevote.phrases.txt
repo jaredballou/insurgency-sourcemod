@@ -1,33 +1,18 @@
 "Phrases"
 {
-	"Rock The Vote"
+	"Changing Maps"
 	{
-		"pl"		"Rock The Vote:  "
+		"pl"		"Zmiana mapy na {1}! Głos ludu przemówił!"
 	}
 
-	"RTV Not Allowed"
+	"Current Map Stays"
 	{
-		"pl"		"Rock the Vote nie jest jeszcze dozwolone."
+		"pl"		"Aktualna mapa będzie kontynuowana! Głos ludu przemówił!"
 	}
 
-	"RTV Started"
+	"Don't Change"
 	{
-		"pl"		"Rock the Vote już się rozpoczęło."
-	}
-
-	"RTV Ended"
-	{
-		"pl"		"RTV już się skończyło, nie możesz rozpocząć go ponownie oraz nominować map."
-	}
-
-	"Already Voted"
-	{
-		"pl"		"Głos w Rock the Vote został już przez ciebie oddany. (Głosy: {1}, wymagane: {2})"
-	}
-
-	"Minimal Players Not Met"
-	{
-		"pl"		"Minimalna wymagana liczba graczy nie została osiągnięta."
+		"pl"		"Zachowaj Aktualną Mapę"
 	}
 
 	"Map Already In Vote"
@@ -40,9 +25,24 @@
 		"pl"		"Mapa '{1}' została dodana na listę Rock the Vote."
 	}
 
-	"RTV Requested"
+	"Nominate Title"
 	{
-		"pl"		"{1} chce Rock the Vote. (Głosy: {2}, wymagane: {3})"
+		"pl"		"Wytypowana Mapa:"
+	}
+
+	"RTV Ended"
+	{
+		"pl"		"RTV już się skończyło, nie możesz rozpocząć go ponownie oraz nominować map."
+	}
+
+	"RTV Not Allowed"
+	{
+		"pl"		"Rock the Vote nie jest jeszcze dozwolone."
+	}
+
+	"RTV Started"
+	{
+		"pl"		"Rock the Vote już się rozpoczęło."
 	}
 
 	"RTV Vote Ready"
@@ -50,14 +50,24 @@
 		"pl"		"Niech głos ludu przemówi!"
 	}
 
-	"Don't Change"
+	"Rock The Vote"
 	{
-		"pl"		"Zachowaj Aktualną Mapę"
+		"pl"		"Rock The Vote:  "
 	}
 
-	"Already Nominated"
+	"Already Voted"
 	{
-		"pl"		"Ta mapa została już przez ciebie nominowana."
+		"pl"		"Głos w Rock the Vote został już przez ciebie oddany. (Głosy: {1}, wymagane: {2})"
+	}
+
+	"Minimal Players Not Met"
+	{
+		"pl"		"Minimalna wymagana liczba graczy nie została osiągnięta."
+	}
+
+	"RTV Requested"
+	{
+		"pl"		"{1} chce Rock the Vote. (Głosy: {2}, wymagane: {3})"
 	}
 
 	"Max Nominations"
@@ -65,24 +75,14 @@
 		"pl"		"Maksymalna dozwolona liczba nominacji została osiągnięta."
 	}
 
-	"Selected Map"
-	{
-		"pl"		"{1} wybiera {2}"
-	}
-
 	"No Votes"
 	{
 		"pl"		"Nie otrzymano głosów w Rock the Vote, aktualna mapa zostaje."
 	}
 
-	"Current Map Stays"
+	"Already Nominated"
 	{
-		"pl"		"Aktualna mapa będzie kontynuowana! Głos ludu przemówił!"
-	}
-
-	"Changing Maps"
-	{
-		"pl"		"Zmiana mapy na {1}! Głos ludu przemówił!"
+		"pl"		"Ta mapa została już przez ciebie nominowana."
 	}
 
 	"Map Already Nominated"
@@ -95,9 +95,9 @@
 		"pl"		"{1} nominuje {2} do Rock the Vote."
 	}
 
-	"Nominate Title"
+	"Selected Map"
 	{
-		"pl"		"Wytypowana Mapa:"
+		"pl"		"{1} wybiera {2}"
 	}
 
 }

@@ -1,13 +1,13 @@
 "Phrases"
 {
-	"Gag/Mute player"
-	{
-		"tr"		"Oyuncunun Ağzını Tıka/Sustur"
-	}
-
 	"Choose Type"
 	{
 		"tr"		"Tür Seç"
+	}
+
+	"Gag/Mute player"
+	{
+		"tr"		"Oyuncunun Ağzını Tıka/Sustur"
 	}
 
 	"Gagged target"
@@ -15,24 +15,9 @@
 		"tr"		"{1}'in ağzı tıkandı"
 	}
 
-	"Ungagged target"
-	{
-		"tr"		"Artık {1}'in ağzı tıkalı değil."
-	}
-
 	"Muted target"
 	{
 		"tr"		"{1} Susturuldu."
-	}
-
-	"Unmuted target"
-	{
-		"tr"		"Artık {1} susturulmuş değil."
-	}
-
-	"Silenced target"
-	{
-		"tr"		"{1} sessizleştirildi."
 	}
 
 	"Unsilenced target"
@@ -40,19 +25,29 @@
 		"tr"		"Artık {1} sessiz değil."
 	}
 
-	"Mute Player"
+	"Unmuted target"
 	{
-		"tr"		"Oyuncuyu Sustur"
+		"tr"		"Artık {1} susturulmuş değil."
+	}
+
+	"Ungagged target"
+	{
+		"tr"		"Artık {1}'in ağzı tıkalı değil."
+	}
+
+	"Silenced target"
+	{
+		"tr"		"{1} sessizleştirildi."
+	}
+
+	"UnSilence Player"
+	{
+		"tr"		"Oyuncuyu Sessizleştirme"
 	}
 
 	"UnMute Player"
 	{
 		"tr"		"Oyuncuyu Susturma"
-	}
-
-	"Gag Player"
-	{
-		"tr"		"Oyuncunun Ağzını Tıka"
 	}
 
 	"UnGag Player"
@@ -65,9 +60,14 @@
 		"tr"		"Oyuncuyu Sessizleştir"
 	}
 
-	"UnSilence Player"
+	"Mute Player"
 	{
-		"tr"		"Oyuncuyu Sessizleştirme"
+		"tr"		"Oyuncuyu Sustur"
+	}
+
+	"Gag Player"
+	{
+		"tr"		"Oyuncunun Ağzını Tıka"
 	}
 
 }

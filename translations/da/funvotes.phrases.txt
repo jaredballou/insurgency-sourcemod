@@ -1,33 +1,13 @@
 "Phrases"
 {
-	"Initiated Vote Gravity"
+	"Alltalk vote"
 	{
-		"da"		"Tyngde afstemning er startet."
+		"da"		"Stem om alltalk"
 	}
 
-	"Initiated Vote Burn"
+	"Burn vote"
 	{
-		"da"		"Brænd spiller afstemning startet mod {1}."
-	}
-
-	"Initiated Vote Slay"
-	{
-		"da"		"Afstemning om henrettelse mod {1} er startet."
-	}
-
-	"Initiated Vote Alltalk"
-	{
-		"da"		"Alltalk afstemning startet."
-	}
-
-	"Initiated Vote FF"
-	{
-		"da"		"Friendly Fire afstemning er startet."
-	}
-
-	"Gravity Vote"
-	{
-		"da"		"Tyngde afstemning: {1}"
+		"da"		"Stem om at brænde en spiller"
 	}
 
 	"Change Gravity To"
@@ -35,14 +15,49 @@
 		"da"		"Ændre tyngdekraften til {1}?"
 	}
 
-	"Voteburn player"
+	"Gravity Vote"
 	{
-		"da"		"Brænd spiller {1}?"
+		"da"		"Tyngde afstemning: {1}"
 	}
 
-	"Voteslay Player"
+	"Gravity vote"
 	{
-		"da"		"Dræb {1}?"
+		"da"		"Stem om tyngdekraft"
+	}
+
+	"Initiated Vote Alltalk"
+	{
+		"da"		"Alltalk afstemning startet."
+	}
+
+	"Initiated Vote Burn"
+	{
+		"da"		"Brænd spiller afstemning startet mod {1}."
+	}
+
+	"Initiated Vote FF"
+	{
+		"da"		"Friendly Fire afstemning er startet."
+	}
+
+	"Initiated Vote Gravity"
+	{
+		"da"		"Tyngde afstemning er startet."
+	}
+
+	"Initiated Vote Slay"
+	{
+		"da"		"Afstemning om henrettelse mod {1} er startet."
+	}
+
+	"Slay vote"
+	{
+		"da"		"Stem om henrettelse mod spiller"
+	}
+
+	"Vote FF"
+	{
+		"da"		"Stem om Friendly Fire"
 	}
 
 	"Votealltalk Off"
@@ -55,6 +70,11 @@
 		"da"		"Slå alltalk til? {1}"
 	}
 
+	"Voteburn player"
+	{
+		"da"		"Brænd spiller {1}?"
+	}
+
 	"Voteff Off"
 	{
 		"da"		"Slå Friendly Fire fra? {1}"
@@ -65,29 +85,9 @@
 		"da"		"Slå Friendly Fire til? {1}"
 	}
 
-	"Gravity vote"
+	"Voteslay Player"
 	{
-		"da"		"Stem om tyngdekraft"
-	}
-
-	"Vote FF"
-	{
-		"da"		"Stem om Friendly Fire"
-	}
-
-	"Burn vote"
-	{
-		"da"		"Stem om at brænde en spiller"
-	}
-
-	"Alltalk vote"
-	{
-		"da"		"Stem om alltalk"
-	}
-
-	"Slay vote"
-	{
-		"da"		"Stem om henrettelse mod spiller"
+		"da"		"Dræb {1}?"
 	}
 
 	"Slayed player"

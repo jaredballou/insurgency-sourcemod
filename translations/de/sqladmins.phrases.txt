@@ -1,15 +1,5 @@
 "Phrases"
 {
-	"Invalid authtype"
-	{
-		"de"		"Autorisierungs-Typ muss entweder 'steam', 'name' oder 'ip' sein."
-	}
-
-	"Invalid immunity"
-	{
-		"de"		"Immunität muss eine positive Ganzzahl sein."
-	}
-
 	"SQL Admin already exists"
 	{
 		"de"		"Ein Administrator mit den gegebenen Referenzen existiert bereits."
@@ -18,11 +8,6 @@
 	"SQL Admin added"
 	{
 		"de"		"Administrator erfolgreich zur Datenbank hinzugefügt."
-	}
-
-	"SQL Admin deleted"
-	{
-		"de"		"Administrator erfolgreich aus der Datenbank gelöscht."
 	}
 
 	"SQL Admin not found"
@@ -40,19 +25,9 @@
 		"de"		"Gruppe erfolgreich zur Datenbank hinzugefügt."
 	}
 
-	"SQL Group deleted"
-	{
-		"de"		"Gruppe erfolgreich aus der Datenbank gelöscht."
-	}
-
 	"SQL Group not found"
 	{
 		"de"		"Keine Gruppe mit dem gegebenen Namen wurde gefunden."
-	}
-
-	"SQL Admin groups reset"
-	{
-		"de"		"Gruppen des Administrators wurden erfolgreich zurückgesetzt."
 	}
 
 	"SQL Group X not found"
@@ -60,9 +35,9 @@
 		"de"		"Kann Gruppe \"{1}\" nicht finden."
 	}
 
-	"SQL Group X failed to bind"
+	"Added groups to user"
 	{
-		"de"		"Gruppe '{1}' konnte nicht verknüpft werden."
+		"de"		"Erfolgreich {1} Gruppen zum gegebenen Administrator hinzugefügt."
 	}
 
 	"Added group to user"
@@ -70,9 +45,34 @@
 		"de"		"Erfolgreich eine Gruppe zum gegebenen Administrator hinzugefügt."
 	}
 
-	"Added groups to user"
+	"Invalid immunity"
 	{
-		"de"		"Erfolgreich {1} Gruppen zum gegebenen Administrator hinzugefügt."
+		"de"		"Immunität muss eine positive Ganzzahl sein."
+	}
+
+	"SQL Admin groups reset"
+	{
+		"de"		"Gruppen des Administrators wurden erfolgreich zurückgesetzt."
+	}
+
+	"SQL Group deleted"
+	{
+		"de"		"Gruppe erfolgreich aus der Datenbank gelöscht."
+	}
+
+	"SQL Admin deleted"
+	{
+		"de"		"Administrator erfolgreich aus der Datenbank gelöscht."
+	}
+
+	"Invalid authtype"
+	{
+		"de"		"Autorisierungs-Typ muss entweder 'steam', 'name' oder 'ip' sein."
+	}
+
+	"SQL Group X failed to bind"
+	{
+		"de"		"Gruppe '{1}' konnte nicht verknüpft werden."
 	}
 
 }

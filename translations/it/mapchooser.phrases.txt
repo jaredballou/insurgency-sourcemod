@@ -5,14 +5,9 @@
 		"it"		"Vota per la prossima mappa!"
 	}
 
-	"Nextmap Voting Started"
+	"Changed Next Map"
 	{
-		"it"		"La votazione per la prossima mappa è iniziata."
-	}
-
-	"Nextmap Voting Finished"
-	{
-		"it"		"La votazione è terminata. La prossima mappa sarà {1}. (Voti ricevuti: {2}%% di {3}) "
+		"it"		"La prossima mappa è stata cambiata in \"{1}\"."
 	}
 
 	"Current Map Extended"
@@ -20,9 +15,9 @@
 		"it"		"La mappa attuale è stata estesa. (Voti ricevuti: {1}%% di {2}) "
 	}
 
-	"Extend Map"
+	"Current Map Stays"
 	{
-		"it"		"Estendi la mappa attuale"
+		"it"		"La mappa attuale continua! La votazione ha deciso! (Voti ricevuti: {1}%% di {2}) "
 	}
 
 	"Dont Change"
@@ -30,14 +25,19 @@
 		"it"		"Non cambiare"
 	}
 
-	"Current Map Stays"
+	"Extend Map"
 	{
-		"it"		"La mappa attuale continua! La votazione ha deciso! (Voti ricevuti: {1}%% di {2}) "
+		"it"		"Estendi la mappa attuale"
 	}
 
-	"Changed Next Map"
+	"Nextmap Voting Finished"
 	{
-		"it"		"La prossima mappa è stata cambiata in \"{1}\"."
+		"it"		"La votazione è terminata. La prossima mappa sarà {1}. (Voti ricevuti: {2}%% di {3}) "
+	}
+
+	"Nextmap Voting Started"
+	{
+		"it"		"La votazione per la prossima mappa è iniziata."
 	}
 
 	"Starting Runoff"

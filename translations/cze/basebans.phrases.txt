@@ -1,5 +1,25 @@
 "Phrases"
 {
+	"Custom ban reason explanation"
+	{
+		"cze"		"Zadejte duvod zpravou do chatu. Pouzijte {1} pro zruseni."
+	}
+
+	"AbortBan not waiting for custom reason"
+	{
+		"cze"		"Neceka se na zadani duvodu banu, zadny ban na zruseni."
+	}
+
+	"AbortBan applied successfully"
+	{
+		"cze"		"Ban zrusen."
+	}
+
+	"Ban added"
+	{
+		"cze"		"Ban byl pridan."
+	}
+
 	"Ban player"
 	{
 		"cze"		"Zabanovat hrace"
@@ -8,16 +28,6 @@
 	"Ban reason"
 	{
 		"cze"		"Duvod banu"
-	}
-
-	"Permabanned player"
-	{
-		"cze"		"Permanentne zabanoval hrace \"{1}\"."
-	}
-
-	"Permabanned player reason"
-	{
-		"cze"		"Permanentne zabanoval hrace \"{1}\" (duvod: {2})"
 	}
 
 	"Banned player"
@@ -30,34 +40,24 @@
 		"cze"		"Zabanoval hrace \"{1}\" na {2} minut (duvod: {3})."
 	}
 
-	"Removed bans matching"
-	{
-		"cze"		"Byly odstraneny bany splnujici filter: {1}"
-	}
-
-	"Ban added"
-	{
-		"cze"		"Ban byl pridan."
-	}
-
 	"Cannot ban that IP"
 	{
 		"cze"		"Nemuzete zabanovat tuto IP adresu."
 	}
 
-	"Custom ban reason explanation"
+	"Permabanned player"
 	{
-		"cze"		"Zadejte duvod zpravou do chatu. Pouzijte {1} pro zruseni."
+		"cze"		"Permanentne zabanoval hrace \"{1}\"."
 	}
 
-	"AbortBan applied successfully"
+	"Permabanned player reason"
 	{
-		"cze"		"Ban zrusen."
+		"cze"		"Permanentne zabanoval hrace \"{1}\" (duvod: {2})"
 	}
 
-	"AbortBan not waiting for custom reason"
+	"Removed bans matching"
 	{
-		"cze"		"Neceka se na zadani duvodu banu, zadny ban na zruseni."
+		"cze"		"Byly odstraneny bany splnujici filter: {1}"
 	}
 
 }

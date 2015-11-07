@@ -1,13 +1,8 @@
 "Phrases"
 {
-	"Next Map"
+	"Current Map"
 	{
-		"es"		"Siguiente Mapa: {1}"
-	}
-
-	"Map History"
-	{
-		"es"		"Historial del Mapa"
+		"es"		"Mapa Actual"
 	}
 
 	"Map"
@@ -15,9 +10,9 @@
 		"es"		"[Mapa]"
 	}
 
-	"Started"
+	"Map History"
 	{
-		"es"		"[Comenzado]"
+		"es"		"Historial del Mapa"
 	}
 
 	"Played Time"
@@ -30,9 +25,14 @@
 		"es"		"[Causa de finalizacion]"
 	}
 
-	"Current Map"
+	"Started"
 	{
-		"es"		"Mapa Actual"
+		"es"		"[Comenzado]"
+	}
+
+	"Next Map"
+	{
+		"es"		"Siguiente Mapa: {1}"
 	}
 
 	"ago"

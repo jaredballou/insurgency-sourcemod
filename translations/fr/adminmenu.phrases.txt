@@ -5,6 +5,11 @@
 		"fr"		"Menu d'administration"
 	}
 
+	"Voting Commands"
+	{
+		"fr"		"Gestion des votes"
+	}
+
 	"Player Commands"
 	{
 		"fr"		"Gestion des Joueurs"
@@ -13,11 +18,6 @@
 	"Server Commands"
 	{
 		"fr"		"Gestion du Serveur"
-	}
-
-	"Voting Commands"
-	{
-		"fr"		"Gestion des votes"
 	}
 
 }

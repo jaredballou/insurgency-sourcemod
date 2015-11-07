@@ -1,23 +1,8 @@
 "Phrases"
 {
-	"No Access"
+	"_s"
 	{
-		"no"		"Du har ikke tilgang til denne kommandoen."
-	}
-
-	"Back"
-	{
-		"no"		"Tilbake"
-	}
-
-	"Next"
-	{
-		"no"		"Neste"
-	}
-
-	"Exit"
-	{
-		"no"		"Avslutt"
+		"no"		"{1}"
 	}
 
 	"Previous"
@@ -25,49 +10,34 @@
 		"no"		"Forrige"
 	}
 
-	"all players"
+	"No Access"
 	{
-		"no"		"Alle spillere"
+		"no"		"Du har ikke tilgang til denne kommandoen."
 	}
 
-	"all humans"
+	"Next"
 	{
-		"no"		"Alle mennesker"
+		"no"		"Neste"
 	}
 
-	"all bots"
+	"Back"
 	{
-		"no"		"Alle botter"
+		"no"		"Tilbake"
 	}
 
-	"all dead players"
+	"Exit"
 	{
-		"no"		"Alle døde spillere"
-	}
-
-	"all alive players"
-	{
-		"no"		"Alle levende spillere"
-	}
-
-	"_s"
-	{
-		"no"		"{1}"
-	}
-
-	"all spectators"
-	{
-		"no"		"Alle tillskuere"
-	}
-
-	"Vote Count"
-	{
-		"no"		"Avstemning: {1}/{2}, {3} igjen"
+		"no"		"Avslutt"
 	}
 
 	"Voted For"
 	{
 		"no"		"{1} stemte på {2}"
+	}
+
+	"Vote Count"
+	{
+		"no"		"Avstemning: {1}/{2}, {3} igjen"
 	}
 
 	"Changed Vote"
@@ -83,6 +53,36 @@
 	"Name Reserved"
 	{
 		"no"		"Navnet ditt er reservert av Sourcemod, skriv in ditt passord foor å bruke det"
+	}
+
+	"all alive players"
+	{
+		"no"		"Alle levende spillere"
+	}
+
+	"all bots"
+	{
+		"no"		"Alle botter"
+	}
+
+	"all dead players"
+	{
+		"no"		"Alle døde spillere"
+	}
+
+	"all humans"
+	{
+		"no"		"Alle mennesker"
+	}
+
+	"all players"
+	{
+		"no"		"Alle spillere"
+	}
+
+	"all spectators"
+	{
+		"no"		"Alle tillskuere"
 	}
 
 }

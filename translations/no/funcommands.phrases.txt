@@ -1,123 +1,13 @@
 "Phrases"
 {
-	"Burn player"
+	"Toggled noclip on target"
 	{
-		"no"		"Brenn spilleren."
+		"no"		"Satte/fjernet noclip på {1}."
 	}
 
-	"FireBomb player"
+	"Toggled drug on target"
 	{
-		"no"		"Send en brannbombe på spilleren."
-	}
-
-	"Freeze player"
-	{
-		"no"		"Frys spilleren."
-	}
-
-	"FreezeBomb player"
-	{
-		"no"		"Send en frys bombe på spilleren."
-	}
-
-	"TimeBomb player"
-	{
-		"no"		"Sett en tidsinnstilt bombe på spilleren."
-	}
-
-	"Beacon player"
-	{
-		"no"		"Send en sonde på spilleren."
-	}
-
-	"NoClip player"
-	{
-		"no"		"Gi spilleren noclip"
-	}
-
-	"Blind player"
-	{
-		"no"		"Gjør spilleren blind."
-	}
-
-	"Drug player"
-	{
-		"no"		"Gi dop til spilleren."
-	}
-
-	"Gravity player"
-	{
-		"no"		"Juster spillerens tyngdekraft. "
-	}
-
-	"Blind amount"
-	{
-		"no"		"Hvor blind?"
-	}
-
-	"Fully blind"
-	{
-		"no"		"Helt blind."
-	}
-
-	"Half blind"
-	{
-		"no"		"Halvblind"
-	}
-
-	"No blind"
-	{
-		"no"		"Ikke blind"
-	}
-
-	"Gravity amount"
-	{
-		"no"		"Tyngdekraft?"
-	}
-
-	"Gravity Very High"
-	{
-		"no"		"Veldig høy tyngdekraft."
-	}
-
-	"Gravity High"
-	{
-		"no"		"Høy tyngdekraft."
-	}
-
-	"Gravity Normal"
-	{
-		"no"		"Normal tyngdekraft."
-	}
-
-	"Gravity Low"
-	{
-		"no"		"Lav tyngdekraft."
-	}
-
-	"Gravity Very Low"
-	{
-		"no"		"Veldig lav tyngdekraft."
-	}
-
-	"Set target on fire"
-	{
-		"no"		"Satte fyr på {1}."
-	}
-
-	"Toggled FireBomb on target"
-	{
-		"no"		"Satte/fjernet en brannbombe på {1}."
-	}
-
-	"Froze target"
-	{
-		"no"		"Frøs {1}."
-	}
-
-	"Toggled FreezeBomb on target"
-	{
-		"no"		"Satte/fjernet en frys bombe på {1}. "
+		"no"		"Ga/fjernet dop(et) til {1}."
 	}
 
 	"Toggled beacon on target"
@@ -130,24 +20,9 @@
 		"no"		"Satte/fjernet en tidsinnstilt bombe på {1}."
 	}
 
-	"Toggled noclip on target"
+	"Toggled FireBomb on target"
 	{
-		"no"		"Satte/fjernet noclip på {1}."
-	}
-
-	"Toggled drug on target"
-	{
-		"no"		"Ga/fjernet dop(et) til {1}."
-	}
-
-	"Set blind on target"
-	{
-		"no"		"blendet {1}."
-	}
-
-	"Set gravity on target"
-	{
-		"no"		"endret på {1}s tyngdekraft."
+		"no"		"Satte/fjernet en brannbombe på {1}."
 	}
 
 	"Till Explodes"
@@ -155,14 +30,139 @@
 		"no"		"{2} sekund(er) til {1} eksploderer."
 	}
 
-	"Unfrozen"
+	"TimeBomb player"
 	{
-		"no"		"Du er ikke lenger fryst."
+		"no"		"Sett en tidsinnstilt bombe på spilleren."
+	}
+
+	"Set target on fire"
+	{
+		"no"		"Satte fyr på {1}."
+	}
+
+	"Set gravity on target"
+	{
+		"no"		"endret på {1}s tyngdekraft."
+	}
+
+	"Set blind on target"
+	{
+		"no"		"blendet {1}."
+	}
+
+	"NoClip player"
+	{
+		"no"		"Gi spilleren noclip"
+	}
+
+	"No blind"
+	{
+		"no"		"Ikke blind"
+	}
+
+	"Half blind"
+	{
+		"no"		"Halvblind"
+	}
+
+	"Gravity amount"
+	{
+		"no"		"Tyngdekraft?"
+	}
+
+	"Gravity Very Low"
+	{
+		"no"		"Veldig lav tyngdekraft."
+	}
+
+	"Gravity Very High"
+	{
+		"no"		"Veldig høy tyngdekraft."
+	}
+
+	"Gravity Normal"
+	{
+		"no"		"Normal tyngdekraft."
+	}
+
+	"Gravity Low"
+	{
+		"no"		"Lav tyngdekraft."
+	}
+
+	"Gravity High"
+	{
+		"no"		"Høy tyngdekraft."
+	}
+
+	"Fully blind"
+	{
+		"no"		"Helt blind."
+	}
+
+	"Froze target"
+	{
+		"no"		"Frøs {1}."
+	}
+
+	"Freeze player"
+	{
+		"no"		"Frys spilleren."
+	}
+
+	"FireBomb player"
+	{
+		"no"		"Send en brannbombe på spilleren."
+	}
+
+	"Drug player"
+	{
+		"no"		"Gi dop til spilleren."
+	}
+
+	"Burn player"
+	{
+		"no"		"Brenn spilleren."
+	}
+
+	"Blind player"
+	{
+		"no"		"Gjør spilleren blind."
+	}
+
+	"Blind amount"
+	{
+		"no"		"Hvor blind?"
+	}
+
+	"Beacon player"
+	{
+		"no"		"Send en sonde på spilleren."
 	}
 
 	"You will be unfrozen"
 	{
 		"no"		"Du vil ikke lenger være fryst om {1} sekunder."
+	}
+
+	"Unfrozen"
+	{
+		"no"		"Du er ikke lenger fryst."
+	}
+
+	"FreezeBomb player"
+	{
+		"no"		"Send en frys bombe på spilleren."
+	}
+
+	"Gravity player"
+	{
+		"no"		"Juster spillerens tyngdekraft. "
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"no"		"Satte/fjernet en frys bombe på {1}. "
 	}
 
 }

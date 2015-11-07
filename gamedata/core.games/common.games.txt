@@ -100,7 +100,6 @@
 			"engine"			"dota"
 			"engine"			"sdk2013"
 			"engine"			"contagion"
-			"engine"			"bms"
 		}
 		
 		"Offsets"
@@ -237,7 +236,6 @@
 			"game"					"berimbau"
 			"game"					"cstrike"
 			"game"					"synergy"
-			"game"					"bms"
 		}
 		
 		"Keys"

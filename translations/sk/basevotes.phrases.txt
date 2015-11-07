@@ -1,33 +1,23 @@
 "Phrases"
 {
-	"Initiate Vote"
+	"Ban vote"
 	{
-		"sk"		"Spustené hlasovanie : {1} "
-	}
-
-	"Initiated Vote Map"
-	{
-		"sk"		"Spustené hlasovanie mapy."
-	}
-
-	"Initiated Vote Kick"
-	{
-		"sk"		"Spustené hlasovanie o vykopnutie hráča {1}. "
-	}
-
-	"Initiated Vote Ban"
-	{
-		"sk"		"Spustené hlasovanie o zabanovanie hráča {1}. "
-	}
-
-	"Map Vote"
-	{
-		"sk"		"Hlasovanie mapy: {1}  "
+		"sk"		"Hlasovať o zabanovanie"
 	}
 
 	"Change Map To"
 	{
 		"sk"		"Zmeniť mapu na {1}? "
+	}
+
+	"Confirm Vote"
+	{
+		"sk"		"Potvrdiť hlasovanie"
+	}
+
+	"Initiate Vote"
+	{
+		"sk"		"Spustené hlasovanie : {1} "
 	}
 
 	"Votekick Player"
@@ -45,14 +35,14 @@
 		"sk"		"Hlasovanie úspešné. (Získaných {1}%% z {2} hlasov)  "
 	}
 
-	"Vote Failed"
+	"Map vote"
 	{
-		"sk"		"Hlasovanie zlyhalo. {1}%% potrebných hlasov. (Získaných {2}%% z {3} hlasov) "
+		"sk"		"Hlasovanie mapy"
 	}
 
-	"Vote End"
+	"Map Vote"
 	{
-		"sk"		"Odpoveď na {1} je: {2}. "
+		"sk"		"Hlasovanie mapy: {1}  "
 	}
 
 	"Kick vote"
@@ -60,24 +50,34 @@
 		"sk"		"Hlasovanie vyhodenia"
 	}
 
-	"Ban vote"
+	"Initiated Vote Map"
 	{
-		"sk"		"Hlasovať o zabanovanie"
+		"sk"		"Spustené hlasovanie mapy."
 	}
 
-	"Map vote"
+	"Initiated Vote Kick"
 	{
-		"sk"		"Hlasovanie mapy"
+		"sk"		"Spustené hlasovanie o vykopnutie hráča {1}. "
 	}
 
-	"Confirm Vote"
+	"Initiated Vote Ban"
 	{
-		"sk"		"Potvrdiť hlasovanie"
+		"sk"		"Spustené hlasovanie o zabanovanie hráča {1}. "
 	}
 
-	"Map Vote In Use"
+	"Start the Vote"
 	{
-		"sk"		"Iný admin práve používa menu hlasovania mapy."
+		"sk"		"Začiatok hlasovania"
+	}
+
+	"Vote End"
+	{
+		"sk"		"Odpoveď na {1} je: {2}. "
+	}
+
+	"Vote Failed"
+	{
+		"sk"		"Hlasovanie zlyhalo. {1}%% potrebných hlasov. (Získaných {2}%% z {3} hlasov) "
 	}
 
 	"Please select a map"
@@ -85,9 +85,9 @@
 		"sk"		"Prosím vyberte mapu"
 	}
 
-	"Start the Vote"
+	"Map Vote In Use"
 	{
-		"sk"		"Začiatok hlasovania"
+		"sk"		"Iný admin práve používa menu hlasovania mapy."
 	}
 
 }

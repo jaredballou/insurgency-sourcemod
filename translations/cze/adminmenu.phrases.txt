@@ -5,9 +5,9 @@
 		"cze"		"Admin Menu"
 	}
 
-	"Player Commands"
+	"Voting Commands"
 	{
-		"cze"		"Hracske prikazy"
+		"cze"		"Hlasovani"
 	}
 
 	"Server Commands"
@@ -15,9 +15,9 @@
 		"cze"		"Serverove prikazy"
 	}
 
-	"Voting Commands"
+	"Player Commands"
 	{
-		"cze"		"Hlasovani"
+		"cze"		"Hracske prikazy"
 	}
 
 }

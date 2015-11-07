@@ -1,13 +1,13 @@
 "Phrases"
 {
-	"Gag/Mute player"
-	{
-		"cze"		"Umlcet hrace"
-	}
-
 	"Choose Type"
 	{
 		"cze"		"Vyberte typ"
+	}
+
+	"Gag/Mute player"
+	{
+		"cze"		"Umlcet hrace"
 	}
 
 	"Gagged target"
@@ -15,19 +15,9 @@
 		"cze"		"Hrac {1} byl odstrihnut od chatu."
 	}
 
-	"Ungagged target"
-	{
-		"cze"		"Hrac {1} muze znovu psat."
-	}
-
 	"Muted target"
 	{
 		"cze"		"Hrac {1} byl utisen."
-	}
-
-	"Unmuted target"
-	{
-		"cze"		"Hrac {1} muze znovu mluvit."
 	}
 
 	"Silenced target"
@@ -35,19 +25,19 @@
 		"cze"		"Hrac {1} byl uplne umlcen."
 	}
 
+	"Ungagged target"
+	{
+		"cze"		"Hrac {1} muze znovu psat."
+	}
+
+	"Unmuted target"
+	{
+		"cze"		"Hrac {1} muze znovu mluvit."
+	}
+
 	"Unsilenced target"
 	{
 		"cze"		"Hrac {1} se muze znovu projevovat."
-	}
-
-	"Mute Player"
-	{
-		"cze"		"Utisit hrace"
-	}
-
-	"UnMute Player"
-	{
-		"cze"		"Povolit hraci mluvit"
 	}
 
 	"Gag Player"
@@ -55,9 +45,9 @@
 		"cze"		"Odstrihnout hrace od chatu"
 	}
 
-	"UnGag Player"
+	"Mute Player"
 	{
-		"cze"		"Povolit hraci psat"
+		"cze"		"Utisit hrace"
 	}
 
 	"Silence Player"
@@ -65,9 +55,19 @@
 		"cze"		"Umlcet hrace"
 	}
 
+	"UnMute Player"
+	{
+		"cze"		"Povolit hraci mluvit"
+	}
+
 	"UnSilence Player"
 	{
 		"cze"		"Povolit hraci mluvit a psat"
+	}
+
+	"UnGag Player"
+	{
+		"cze"		"Povolit hraci psat"
 	}
 
 }

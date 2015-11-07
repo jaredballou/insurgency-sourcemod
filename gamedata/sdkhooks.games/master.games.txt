@@ -184,4 +184,14 @@
 	{
 		"game"		"hl2ctf"
 	}
+	
+	"game.modularcombat.txt"
+	{
+		"game"		"modularcombat"
+	}
+	
+	"game.kz.txt"
+	{
+		"game"		"KreedzClimbing"
+	}
 }

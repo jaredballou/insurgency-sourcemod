@@ -5,16 +5,6 @@
 		"pl"		"Rozpoczęto głosowanie na grawitację."
 	}
 
-	"Initiated Vote Burn"
-	{
-		"pl"		"Rozpoczęto głosowanie o podpalenie {1}. "
-	}
-
-	"Initiated Vote Slay"
-	{
-		"pl"		"Rozpoczęto głosowanie o zgładzenie {1}. "
-	}
-
 	"Initiated Vote Alltalk"
 	{
 		"pl"		"Rozpoczęto głosowanie na AllTalk."
@@ -65,19 +55,9 @@
 		"pl"		"Włączyć ogień sojuszniczy? {1}"
 	}
 
-	"Gravity vote"
-	{
-		"pl"		"Głosowanie na grawitację "
-	}
-
 	"Vote FF"
 	{
 		"pl"		"Głosowanie na Ogień Sojuszniczy"
-	}
-
-	"Burn vote"
-	{
-		"pl"		"Głosowanie na podpalenie"
 	}
 
 	"Alltalk vote"
@@ -85,14 +65,34 @@
 		"pl"		"Głosowanie na AllTalk"
 	}
 
+	"Slayed player"
+	{
+		"pl"		"Zgładzono gracza '{1}'"
+	}
+
+	"Initiated Vote Burn"
+	{
+		"pl"		"Rozpoczęto głosowanie o podpalenie {1}. "
+	}
+
+	"Initiated Vote Slay"
+	{
+		"pl"		"Rozpoczęto głosowanie o zgładzenie {1}. "
+	}
+
+	"Gravity vote"
+	{
+		"pl"		"Głosowanie na grawitację "
+	}
+
 	"Slay vote"
 	{
 		"pl"		"Głosowanie o zgładzenie"
 	}
 
-	"Slayed player"
+	"Burn vote"
 	{
-		"pl"		"Zgładzono gracza '{1}'"
+		"pl"		"Głosowanie na podpalenie"
 	}
 
 }

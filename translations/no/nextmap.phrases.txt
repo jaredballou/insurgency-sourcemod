@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Next Map"
+	"Played Time"
 	{
-		"no"		"Neste bane: {1} "
-	}
-
-	"Map History"
-	{
-		"no"		"Bane Historikk"
-	}
-
-	"Map"
-	{
-		"no"		"[BANE]"
+		"no"		"[Spilt tid]"
 	}
 
 	"Started"
@@ -20,14 +10,9 @@
 		"no"		"[Startet]"
 	}
 
-	"Played Time"
+	"ago"
 	{
-		"no"		"[Spilt tid]"
-	}
-
-	"Reason"
-	{
-		"no"		"[Grunn for avsluttning]"
+		"no"		"siden"
 	}
 
 	"Current Map"
@@ -35,9 +20,24 @@
 		"no"		"Gjellende bane"
 	}
 
-	"ago"
+	"Map"
 	{
-		"no"		"siden"
+		"no"		"[BANE]"
+	}
+
+	"Map History"
+	{
+		"no"		"Bane Historikk"
+	}
+
+	"Next Map"
+	{
+		"no"		"Neste bane: {1} "
+	}
+
+	"Reason"
+	{
+		"no"		"[Grunn for avsluttning]"
 	}
 
 }

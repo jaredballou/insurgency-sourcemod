@@ -25,26 +25,6 @@
 		"ru"		"Часовая бомба"
 	}
 
-	"Beacon player"
-	{
-		"ru"		"Маяк"
-	}
-
-	"NoClip player"
-	{
-		"ru"		"Режим полета"
-	}
-
-	"Blind player"
-	{
-		"ru"		"Ослепить"
-	}
-
-	"Drug player"
-	{
-		"ru"		"Опьянить"
-	}
-
 	"Gravity player"
 	{
 		"ru"		"Гравитация"
@@ -55,29 +35,19 @@
 		"ru"		"Насколько ослепить?"
 	}
 
+	"Toggled drug on target"
+	{
+		"ru"		"Игрок {1} опьянен."
+	}
+
+	"Drug player"
+	{
+		"ru"		"Опьянить"
+	}
+
 	"Fully blind"
 	{
 		"ru"		"Ослепить полностью"
-	}
-
-	"Half blind"
-	{
-		"ru"		"Ослепить наполовину"
-	}
-
-	"No blind"
-	{
-		"ru"		"Без ослепления"
-	}
-
-	"Gravity amount"
-	{
-		"ru"		"Какая гравитация?"
-	}
-
-	"Gravity Very High"
-	{
-		"ru"		"Очень высокая гравитация"
 	}
 
 	"Gravity High"
@@ -85,14 +55,19 @@
 		"ru"		"Высокая гравитация"
 	}
 
+	"Gravity Low"
+	{
+		"ru"		"Низкая гравитация"
+	}
+
 	"Gravity Normal"
 	{
 		"ru"		"Нормальная гравитация"
 	}
 
-	"Gravity Low"
+	"Gravity Very High"
 	{
-		"ru"		"Низкая гравитация"
+		"ru"		"Очень высокая гравитация"
 	}
 
 	"Gravity Very Low"
@@ -100,49 +75,39 @@
 		"ru"		"Очень низкая гравитация"
 	}
 
-	"Set target on fire"
-	{
-		"ru"		"Игрок {1} подожжен."
-	}
-
-	"Toggled FireBomb on target"
-	{
-		"ru"		"на игроке {1} установлена зажигательная бомба."
-	}
-
-	"Froze target"
-	{
-		"ru"		"Игрок {1} заморожен."
-	}
-
-	"Toggled FreezeBomb on target"
-	{
-		"ru"		"на игроке {1} установлена замораживающая бомба."
-	}
-
-	"Toggled beacon on target"
-	{
-		"ru"		"на игроке {1} установлен маяк."
-	}
-
-	"Toggled TimeBomb on target"
-	{
-		"ru"		"на игроке {1} установлена часовая бомба."
-	}
-
 	"Toggled noclip on target"
 	{
 		"ru"		"для игрока {1} установлен режим полета."
 	}
 
-	"Toggled drug on target"
+	"Half blind"
 	{
-		"ru"		"Игрок {1} опьянен."
+		"ru"		"Ослепить наполовину"
 	}
 
-	"Set blind on target"
+	"NoClip player"
 	{
-		"ru"		"Игрок {1} ослеплен."
+		"ru"		"Режим полета"
+	}
+
+	"Set target on fire"
+	{
+		"ru"		"Игрок {1} подожжен."
+	}
+
+	"Gravity amount"
+	{
+		"ru"		"Какая гравитация?"
+	}
+
+	"Beacon player"
+	{
+		"ru"		"Маяк"
+	}
+
+	"Blind player"
+	{
+		"ru"		"Ослепить"
 	}
 
 	"Set gravity on target"
@@ -150,19 +115,54 @@
 		"ru"		"гравитация для игрока {1} изменена."
 	}
 
+	"Froze target"
+	{
+		"ru"		"Игрок {1} заморожен."
+	}
+
+	"No blind"
+	{
+		"ru"		"Без ослепления"
+	}
+
+	"Set blind on target"
+	{
+		"ru"		"Игрок {1} ослеплен."
+	}
+
 	"Till Explodes"
 	{
 		"ru"		"{2} секунд до взрыва игрока {1}."
 	}
 
-	"Unfrozen"
+	"Toggled FireBomb on target"
 	{
-		"ru"		"Вы были разморожены."
+		"ru"		"на игроке {1} установлена зажигательная бомба."
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"ru"		"на игроке {1} установлена замораживающая бомба."
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"ru"		"на игроке {1} установлена часовая бомба."
+	}
+
+	"Toggled beacon on target"
+	{
+		"ru"		"на игроке {1} установлен маяк."
 	}
 
 	"You will be unfrozen"
 	{
 		"ru"		"Вы будете разморожены через {1} секунд."
+	}
+
+	"Unfrozen"
+	{
+		"ru"		"Вы были разморожены."
 	}
 
 }

@@ -31,24 +31,21 @@
  * Version: $Id$
  */
 
-enum UserState
-{
-	UserState_None,
-	UserState_Admins,
-	UserState_InAdmin,
-}
+#define USER_STATE_NONE			0
+#define USER_STATE_ADMINS		1
+#define USER_STATE_INADMIN		2
 
 static SMCParser g_hUserParser;
-static UserState g_UserState = UserState_None;
-static char g_CurAuth[64];
-static char g_CurIdent[64];
-static char g_CurName[64];
-static char g_CurPass[64];
-static ArrayList g_GroupArray;
-static int g_CurFlags;
-static int g_CurImmunity;
+static g_UserState = USER_STATE_NONE;
+static String:g_CurAuth[64];
+static String:g_CurIdent[64];
+static String:g_CurName[64];
+static String:g_CurPass[64];
+static Handle:g_GroupArray;
+static g_CurFlags;
+static g_CurImmunity;
 
-public SMCResult ReadUsers_NewSection(SMCParser smc, const char[] name, bool opt_quotes)
+public SMCResult:ReadUsers_NewSection(Handle:smc, const String:name[], bool:opt_quotes)
 {
 	if (g_IgnoreLevel)
 	{
@@ -56,25 +53,25 @@ public SMCResult ReadUsers_NewSection(SMCParser smc, const char[] name, bool opt
 		return SMCParse_Continue;
 	}
 	
-	if (g_UserState == UserState_None)
+	if (g_UserState == USER_STATE_NONE)
 	{
 		if (StrEqual(name, "Admins"))
 		{
-			g_UserState = UserState_Admins;
+			g_UserState = USER_STATE_ADMINS;
 		}
 		else
 		{
 			g_IgnoreLevel++;
 		}
 	}
-	else if (g_UserState == UserState_Admins)
+	else if (g_UserState == USER_STATE_ADMINS)
 	{
-		g_UserState = UserState_InAdmin;
+		g_UserState = USER_STATE_INADMIN;
 		strcopy(g_CurName, sizeof(g_CurName), name);
 		g_CurAuth[0] = '\0';
 		g_CurIdent[0] = '\0';
 		g_CurPass[0] = '\0';
-		g_GroupArray.Clear();
+		ClearArray(g_GroupArray);
 		g_CurFlags = 0;
 		g_CurImmunity = 0;
 	}
@@ -86,13 +83,13 @@ public SMCResult ReadUsers_NewSection(SMCParser smc, const char[] name, bool opt
 	return SMCParse_Continue;
 }
 
-public SMCResult ReadUsers_KeyValue(SMCParser smc, 
-									const char[] key, 
-									const char[] value, 
-									bool key_quotes, 
-									bool value_quotes)
+public SMCResult:ReadUsers_KeyValue(Handle:smc, 
+									const String:key[], 
+									const String:value[], 
+									bool:key_quotes, 
+									bool:value_quotes)
 {
-	if (g_UserState != UserState_InAdmin || g_IgnoreLevel)
+	if (g_UserState != USER_STATE_INADMIN || g_IgnoreLevel)
 	{
 		return SMCParse_Continue;
 	}
@@ -111,20 +108,20 @@ public SMCResult ReadUsers_KeyValue(SMCParser smc,
 	} 
 	else if (StrEqual(key, "group")) 
 	{
-		GroupId id = FindAdmGroup(value);
+		new GroupId:id = FindAdmGroup(value);
 		if (id == INVALID_GROUP_ID)
 		{
 			ParseError("Unknown group \"%s\"", value);
 		}
 
-		g_GroupArray.Push(id);
+		PushArrayCell(g_GroupArray, id);
 	} 
 	else if (StrEqual(key, "flags")) 
 	{
-		int len = strlen(value);
-		AdminFlag flag;
+		new len = strlen(value);
+		new AdminFlag:flag;
 		
-		for (int i = 0; i < len; i++)
+		for (new i = 0; i < len; i++)
 		{
 			if (!FindFlagByChar(value[i], flag))
 			{
@@ -144,7 +141,7 @@ public SMCResult ReadUsers_KeyValue(SMCParser smc,
 	return SMCParse_Continue;
 }
 
-public SMCResult ReadUsers_EndSection(SMCParser smc)
+public SMCResult:ReadUsers_EndSection(Handle:smc)
 {
 	if (g_IgnoreLevel)
 	{
@@ -152,14 +149,13 @@ public SMCResult ReadUsers_EndSection(SMCParser smc)
 		return SMCParse_Continue;
 	}
 	
-	if (g_UserState == UserState_InAdmin)
+	if (g_UserState == USER_STATE_INADMIN)
 	{
 		/* Dump this user to memory */
 		if (g_CurIdent[0] != '\0' && g_CurAuth[0] != '\0')
 		{
-			AdminFlag flags[26];
-			AdminId id;
-			int i, num_groups, num_flags;
+			decl AdminFlag:flags[26];
+			new AdminId:id, i, num_groups, num_flags;
 			
 			if ((id = FindAdminByIdentity(g_CurAuth, g_CurIdent)) == INVALID_ADMIN_ID)
 			{
@@ -172,10 +168,10 @@ public SMCResult ReadUsers_EndSection(SMCParser smc)
 				}
 			}
 			
-			num_groups = g_GroupArray.Length;
+			num_groups = GetArraySize(g_GroupArray);
 			for (i = 0; i < num_groups; i++)
 			{
-				AdminInheritGroup(id, g_GroupArray.Get(i));
+				AdminInheritGroup(id, GetArrayCell(g_GroupArray, i));
 			}
 			
 			SetAdminPassword(id, g_CurPass);
@@ -195,24 +191,24 @@ public SMCResult ReadUsers_EndSection(SMCParser smc)
 			ParseError("Failed to create admin: did you forget either the auth or identity properties?");
 		}
 		
-		g_UserState = UserState_Admins;
+		g_UserState = USER_STATE_ADMINS;
 	}
-	else if (g_UserState == UserState_Admins)
+	else if (g_UserState == USER_STATE_ADMINS)
 	{
-		g_UserState = UserState_None;
+		g_UserState = USER_STATE_NONE;
 	}
 	
 	return SMCParse_Continue;
 }
 
-public SMCResult ReadUsers_CurrentLine(SMCParser smc, const char[] line, int lineno)
+public SMCResult:ReadUsers_CurrentLine(Handle:smc, const String:line[], lineno)
 {
 	g_CurrentLine = lineno;
 	
 	return SMCParse_Continue;
 }
 
-static void InitializeUserParser()
+static InitializeUserParser()
 {
 	if (!g_hUserParser)
 	{
@@ -226,7 +222,7 @@ static void InitializeUserParser()
 	}
 }
 
-void ReadUsers()
+ReadUsers()
 {
 	InitializeUserParser();
 	
@@ -234,7 +230,7 @@ void ReadUsers()
 
 	/* Set states */
 	InitGlobalStates();
-	g_UserState = UserState_None;
+	g_UserState = USER_STATE_NONE;
 		
 	SMCError err = g_hUserParser.ParseFile(g_Filename);
 	if (err != SMCError_Okay)

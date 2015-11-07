@@ -1,43 +1,28 @@
 "Phrases"
 {
-	"Unable to find cvar"
+	"Ban added"
 	{
-		"tr"		"Aranan cvar bulunamadı: {1}"
+		"tr"		"Yasak eklendi."
 	}
 
-	"No access to cvar"
+	"Admin logged in as"
 	{
-		"tr"		"Bu cvar'a erişiminiz yok."
+		"tr"		"\"{1}\", \"{2}\" olarak şu erişimle oturum açtı: {3}"
 	}
 
-	"Value of cvar"
+	"Admin cache refreshed"
 	{
-		"tr"		"\"{1}\" adlı cvar'ın değeri: \"{2}\""
+		"tr"		"Yönetici önbelleği yenilendi"
 	}
 
-	"Cvar changed"
+	"Admin access"
 	{
-		"tr"		"\"{1}\" adlı cvar \"{2}\" olarak değiştirildi."
+		"tr"		"Yönetici erişimi"
 	}
 
-	"Config not found"
+	"Admin logged in anon"
 	{
-		"tr"		"Ayar dosyası \"{1}\" bulunamadı."
-	}
-
-	"Executed config"
-	{
-		"tr"		"Ayar çalıştırıldı \"{1}\"."
-	}
-
-	"Permabanned player"
-	{
-		"tr"		"\"{1}\" adlı oyuncu kalıcı olarak yasaklandı."
-	}
-
-	"Permabanned player reason"
-	{
-		"tr"		"\"{1}\" adlı oyuncu kalıcı olarak yasaklandı (neden: {2})."
+		"tr"		"\"{1}\" şu erişime sahip: {2} "
 	}
 
 	"Banned player"
@@ -50,29 +35,14 @@
 		"tr"		"\"{1}\" adlı oyuncu {2} dakikalığına yasaklandı (neden: {3})."
 	}
 
-	"Removed bans matching"
-	{
-		"tr"		"Şu süzgeçle eşleşen yasaklar kaldırıldı: {1}"
-	}
-
-	"Ban added"
-	{
-		"tr"		"Yasak eklendi."
-	}
-
-	"Admin cache refreshed"
-	{
-		"tr"		"Yönetici önbelleği yenilendi"
-	}
-
-	"Identify player"
-	{
-		"tr"		"Oyuncuyu teşhis et"
-	}
-
 	"Choose Map"
 	{
 		"tr"		"Harita Seç"
+	}
+
+	"Executed config"
+	{
+		"tr"		"Ayar çalıştırıldı \"{1}\"."
 	}
 
 	"Exec CFG"
@@ -80,14 +50,44 @@
 		"tr"		"CFG Çalıştır"
 	}
 
-	"Admin logged in as"
+	"Cvar is now protected"
 	{
-		"tr"		"\"{1}\", \"{2}\" olarak şu erişimle oturum açtı: {3}"
+		"tr"		"{1} adlı cvar artık korunuyor."
 	}
 
-	"Admin logged in anon"
+	"Cvar changed"
 	{
-		"tr"		"\"{1}\" şu erişime sahip: {2} "
+		"tr"		"\"{1}\" adlı cvar \"{2}\" olarak değiştirildi."
+	}
+
+	"Config not found"
+	{
+		"tr"		"Ayar dosyası \"{1}\" bulunamadı."
+	}
+
+	"Permabanned player"
+	{
+		"tr"		"\"{1}\" adlı oyuncu kalıcı olarak yasaklandı."
+	}
+
+	"No access to cvar"
+	{
+		"tr"		"Bu cvar'a erişiminiz yok."
+	}
+
+	"Kicked target"
+	{
+		"tr"		"{1} atıldı."
+	}
+
+	"Identify player"
+	{
+		"tr"		"Oyuncuyu teşhis et"
+	}
+
+	"Permabanned player reason"
+	{
+		"tr"		"\"{1}\" adlı oyuncu kalıcı olarak yasaklandı (neden: {2})."
 	}
 
 	"Player is not an admin"
@@ -100,24 +100,24 @@
 		"tr"		"\"{1}\" bir yönetici."
 	}
 
+	"Removed bans matching"
+	{
+		"tr"		"Şu süzgeçle eşleşen yasaklar kaldırıldı: {1}"
+	}
+
 	"Username"
 	{
 		"tr"		"Kullanıcı Adı"
 	}
 
-	"Kicked target"
+	"Value of cvar"
 	{
-		"tr"		"{1} atıldı."
+		"tr"		"\"{1}\" adlı cvar'ın değeri: \"{2}\""
 	}
 
-	"Admin access"
+	"Unable to find cvar"
 	{
-		"tr"		"Yönetici erişimi"
-	}
-
-	"Cvar is now protected"
-	{
-		"tr"		"{1} adlı cvar artık korunuyor."
+		"tr"		"Aranan cvar bulunamadı: {1}"
 	}
 
 	"Kicked target reason"

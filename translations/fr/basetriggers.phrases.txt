@@ -1,8 +1,8 @@
 "Phrases"
 {
-	"Timeleft"
+	"Current Map"
 	{
-		"fr"		"Temps restant pour la Map: "
+		"fr"		"La map actuelle est {1} ."
 	}
 
 	"Thetime"
@@ -10,39 +10,14 @@
 		"fr"		"L'heure du serveur est {1} "
 	}
 
-	"Friendly Fire On"
+	"MaxRoundsAppend"
 	{
-		"fr"		"Le Tir Amical (FriendlyFire) est activé."
+		"fr"		", ou la carte changera après le prochain round."
 	}
 
-	"Friendly Fire Off"
+	"MaxRoundsPlural"
 	{
-		"fr"		"Le Tir Amical (FriendlyFire) est désactivé "
-	}
-
-	"Current Map"
-	{
-		"fr"		"La map actuelle est {1} ."
-	}
-
-	"LastRound"
-	{
-		"fr"		"C'est le dernier round!!"
-	}
-
-	"NoTimelimit"
-	{
-		"fr"		"Pas de limite de temps pour la Map"
-	}
-
-	"Next Map"
-	{
-		"fr"		"Prochaine Map: {1}"
-	}
-
-	"Pending Vote"
-	{
-		"fr"		"Vote en attente"
+		"fr"		"La carte changera après {1} round."
 	}
 
 	"WinLimitAppend"
@@ -53,16 +28,6 @@
 	"WinLimit"
 	{
 		"fr"		"La Map changera après la victoire d'un round"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"fr"		", ou la carte changera après le prochain round."
-	}
-
-	"MaxRounds"
-	{
-		"fr"		"La map changera au prochain round. "
 	}
 
 	"FragLimitAppend"
@@ -90,11 +55,6 @@
 		"fr"		", ou changer de Map après {1} rounds de plus"
 	}
 
-	"MaxRoundsPlural"
-	{
-		"fr"		"La carte changera après {1} round."
-	}
-
 	"FragLimitAppendPlural"
 	{
 		"fr"		", ou changer de Map après {1} frags atteints par un joueur"
@@ -103,6 +63,46 @@
 	"FragLimitPlural"
 	{
 		"fr"		"La Map changera après {1} frags atteints par un joueur"
+	}
+
+	"LastRound"
+	{
+		"fr"		"C'est le dernier round!!"
+	}
+
+	"NoTimelimit"
+	{
+		"fr"		"Pas de limite de temps pour la Map"
+	}
+
+	"Next Map"
+	{
+		"fr"		"Prochaine Map: {1}"
+	}
+
+	"Pending Vote"
+	{
+		"fr"		"Vote en attente"
+	}
+
+	"Timeleft"
+	{
+		"fr"		"Temps restant pour la Map: "
+	}
+
+	"Friendly Fire Off"
+	{
+		"fr"		"Le Tir Amical (FriendlyFire) est désactivé "
+	}
+
+	"Friendly Fire On"
+	{
+		"fr"		"Le Tir Amical (FriendlyFire) est activé."
+	}
+
+	"MaxRounds"
+	{
+		"fr"		"La map changera au prochain round. "
 	}
 
 }

@@ -1,8 +1,8 @@
 "Phrases"
 {
-	"No Access"
+	"_s"
 	{
-		"ko"		"당신은 이 명령을 사용할 권한이 없습니다"
+		"ko"		"{1}"
 	}
 
 	"Back"
@@ -10,19 +10,9 @@
 		"ko"		"뒤로"
 	}
 
-	"Next"
+	"all bots"
 	{
-		"ko"		"다음"
-	}
-
-	"Exit"
-	{
-		"ko"		"종료"
-	}
-
-	"Previous"
-	{
-		"ko"		"이전"
+		"ko"		"모든 봇"
 	}
 
 	"all players"
@@ -30,19 +20,29 @@
 		"ko"		"모든 플레이어"
 	}
 
-	"all humans"
+	"all spectators"
 	{
-		"ko"		"모든 사람"
+		"ko"		"모든 관전자"
 	}
 
-	"all bots"
+	"Exit"
 	{
-		"ko"		"모든 봇"
+		"ko"		"종료"
 	}
 
-	"all dead players"
+	"Next"
 	{
-		"ko"		"모든 죽은 플레이어"
+		"ko"		"다음"
+	}
+
+	"No Access"
+	{
+		"ko"		"당신은 이 명령을 사용할 권한이 없습니다"
+	}
+
+	"Previous"
+	{
+		"ko"		"이전"
 	}
 
 	"all alive players"
@@ -50,14 +50,14 @@
 		"ko"		"모든 살아있는 플레이어"
 	}
 
-	"_s"
+	"all dead players"
 	{
-		"ko"		"{1}"
+		"ko"		"모든 죽은 플레이어"
 	}
 
-	"all spectators"
+	"Changed Vote"
 	{
-		"ko"		"모든 관전자"
+		"ko"		"{1} 님이 자신의 투표를 {2} 로 바꿧습니다"
 	}
 
 	"Vote Count"
@@ -70,14 +70,14 @@
 		"ko"		"{1} 님이 {2} 에 투표했습니다."
 	}
 
-	"Changed Vote"
-	{
-		"ko"		"{1} 님이 자신의 투표를 {2} 로 바꿧습니다"
-	}
-
 	"No Vote"
 	{
 		"ko"		"투표 없음"
+	}
+
+	"all humans"
+	{
+		"ko"		"모든 사람"
 	}
 
 	"Name Reserved"

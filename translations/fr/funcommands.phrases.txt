@@ -1,38 +1,8 @@
 "Phrases"
 {
-	"Burn player"
-	{
-		"fr"		"Brûler un joueur"
-	}
-
-	"FireBomb player"
-	{
-		"fr"		"Bombe incendiaire sur un joueur"
-	}
-
-	"Freeze player"
-	{
-		"fr"		"Paralyser un joueur"
-	}
-
-	"FreezeBomb player"
-	{
-		"fr"		"Bombe paralysante sur un joueur"
-	}
-
-	"TimeBomb player"
-	{
-		"fr"		"Bombe a retardement"
-	}
-
 	"Beacon player"
 	{
 		"fr"		"Baliser un joueur"
-	}
-
-	"NoClip player"
-	{
-		"fr"		"Donner le pouvoir passe-murailles (NoClip) à un joueur"
 	}
 
 	"Blind player"
@@ -45,9 +15,9 @@
 		"fr"		"Droguer un joueur"
 	}
 
-	"Gravity player"
+	"Half blind"
 	{
-		"fr"		"Modifier la Gravité sur un Joueur"
+		"fr"		"Aveuglement partiel"
 	}
 
 	"Blind amount"
@@ -55,29 +25,24 @@
 		"fr"		"Taux d'aveuglement?"
 	}
 
+	"Burn player"
+	{
+		"fr"		"Brûler un joueur"
+	}
+
+	"FireBomb player"
+	{
+		"fr"		"Bombe incendiaire sur un joueur"
+	}
+
+	"FreezeBomb player"
+	{
+		"fr"		"Bombe paralysante sur un joueur"
+	}
+
 	"Fully blind"
 	{
 		"fr"		"Aveuglement total"
-	}
-
-	"Half blind"
-	{
-		"fr"		"Aveuglement partiel"
-	}
-
-	"No blind"
-	{
-		"fr"		"Pas d'aveuglement"
-	}
-
-	"Gravity amount"
-	{
-		"fr"		"Gravité ?"
-	}
-
-	"Gravity Very High"
-	{
-		"fr"		"Gravité Très Forte"
 	}
 
 	"Gravity High"
@@ -100,44 +65,24 @@
 		"fr"		"Gravité Très Faible"
 	}
 
-	"Set target on fire"
+	"Gravity Very High"
 	{
-		"fr"		"a mis {1} en feu."
+		"fr"		"Gravité Très Forte"
 	}
 
-	"Toggled FireBomb on target"
+	"Gravity amount"
 	{
-		"fr"		"a activé la bombe incendiaire sur {1}."
+		"fr"		"Gravité ?"
 	}
 
-	"Froze target"
+	"Gravity player"
 	{
-		"fr"		"{1} gelé."
+		"fr"		"Modifier la Gravité sur un Joueur"
 	}
 
-	"Toggled FreezeBomb on target"
+	"No blind"
 	{
-		"fr"		"a activé la bombe paralysante sur {1}."
-	}
-
-	"Toggled beacon on target"
-	{
-		"fr"		"a placé/enlevé une Balise sur {1}."
-	}
-
-	"Toggled TimeBomb on target"
-	{
-		"fr"		"a activé la bombe a retardement sur {1}."
-	}
-
-	"Toggled noclip on target"
-	{
-		"fr"		"a placé/enlevé le pouvoir passe-murailles (NoClip) sur {1}."
-	}
-
-	"Toggled drug on target"
-	{
-		"fr"		"a drogué {1}. "
+		"fr"		"Pas d'aveuglement"
 	}
 
 	"Set blind on target"
@@ -150,19 +95,74 @@
 		"fr"		"a modifié la gravité sur {1}."
 	}
 
+	"Set target on fire"
+	{
+		"fr"		"a mis {1} en feu."
+	}
+
+	"Toggled beacon on target"
+	{
+		"fr"		"a placé/enlevé une Balise sur {1}."
+	}
+
 	"Till Explodes"
 	{
 		"fr"		"{2} secondes avant l'explosion de {1} "
 	}
 
-	"Unfrozen"
+	"Toggled FireBomb on target"
 	{
-		"fr"		"Vous êtes maintenant dégelé."
+		"fr"		"a activé la bombe incendiaire sur {1}."
+	}
+
+	"Toggled TimeBomb on target"
+	{
+		"fr"		"a activé la bombe a retardement sur {1}."
+	}
+
+	"TimeBomb player"
+	{
+		"fr"		"Bombe a retardement"
+	}
+
+	"Freeze player"
+	{
+		"fr"		"Paralyser un joueur"
+	}
+
+	"Toggled FreezeBomb on target"
+	{
+		"fr"		"a activé la bombe paralysante sur {1}."
+	}
+
+	"NoClip player"
+	{
+		"fr"		"Donner le pouvoir passe-murailles (NoClip) à un joueur"
+	}
+
+	"Froze target"
+	{
+		"fr"		"{1} gelé."
+	}
+
+	"Toggled noclip on target"
+	{
+		"fr"		"a placé/enlevé le pouvoir passe-murailles (NoClip) sur {1}."
+	}
+
+	"Toggled drug on target"
+	{
+		"fr"		"a drogué {1}. "
 	}
 
 	"You will be unfrozen"
 	{
 		"fr"		"Vous serez dégelé dans {1} secondes."
+	}
+
+	"Unfrozen"
+	{
+		"fr"		"Vous êtes maintenant dégelé."
 	}
 
 }

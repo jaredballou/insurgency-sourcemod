@@ -1,8 +1,8 @@
 "Phrases"
 {
-	"No Access"
+	"_s"
 	{
-		"sv"		"Du har inte tillgång till detta kommando"
+		"sv"		"{1}"
 	}
 
 	"Back"
@@ -15,34 +15,9 @@
 		"sv"		"Nästa"
 	}
 
-	"Exit"
-	{
-		"sv"		"Avsluta"
-	}
-
 	"Previous"
 	{
 		"sv"		"Föregående"
-	}
-
-	"all players"
-	{
-		"sv"		"alla spelare"
-	}
-
-	"all humans"
-	{
-		"sv"		"alla människor"
-	}
-
-	"all bots"
-	{
-		"sv"		"alla botar"
-	}
-
-	"all dead players"
-	{
-		"sv"		"alla döda spelare"
 	}
 
 	"all alive players"
@@ -50,9 +25,39 @@
 		"sv"		"alla levande spelare"
 	}
 
-	"_s"
+	"all dead players"
 	{
-		"sv"		"{1}"
+		"sv"		"alla döda spelare"
+	}
+
+	"all players"
+	{
+		"sv"		"alla spelare"
+	}
+
+	"No Access"
+	{
+		"sv"		"Du har inte tillgång till detta kommando"
+	}
+
+	"all humans"
+	{
+		"sv"		"alla människor"
+	}
+
+	"Exit"
+	{
+		"sv"		"Avsluta"
+	}
+
+	"all bots"
+	{
+		"sv"		"alla botar"
+	}
+
+	"Voted For"
+	{
+		"sv"		"{1} röstade för {2}"
 	}
 
 	"all spectators"
@@ -65,19 +70,14 @@
 		"sv"		"{1}/{2}, {3} kvar"
 	}
 
-	"Voted For"
+	"No Vote"
 	{
-		"sv"		"{1} röstade för {2}"
+		"sv"		"Ingen röst"
 	}
 
 	"Changed Vote"
 	{
 		"sv"		"{1} ändrade sin röst till {2}"
-	}
-
-	"No Vote"
-	{
-		"sv"		"Ingen röst"
 	}
 
 	"Name Reserved"

@@ -1,18 +1,8 @@
 "Phrases"
 {
-	"Timeleft"
+	"Current Map"
 	{
-		"nl"		"Resterende tijd voor de map:"
-	}
-
-	"Thetime"
-	{
-		"nl"		"De huidige servertijd is {1}."
-	}
-
-	"Friendly Fire On"
-	{
-		"nl"		"Friendly Fire is aangezet."
+		"nl"		"De huidige map is {1}."
 	}
 
 	"Friendly Fire Off"
@@ -20,54 +10,14 @@
 		"nl"		"Friendly Fire is uitgezet."
 	}
 
-	"Current Map"
+	"Friendly Fire On"
 	{
-		"nl"		"De huidige map is {1}."
+		"nl"		"Friendly Fire is aangezet."
 	}
 
-	"LastRound"
+	"Thetime"
 	{
-		"nl"		"Dit is de laatste ronde!!"
-	}
-
-	"NoTimelimit"
-	{
-		"nl"		"Geen tijdlimiet voor de map"
-	}
-
-	"Next Map"
-	{
-		"nl"		"Volgende Map: {1}"
-	}
-
-	"Pending Vote"
-	{
-		"nl"		"Wachtende vote"
-	}
-
-	"WinLimitAppend"
-	{
-		"nl"		", of verander de map nadat een team een ronde wint"
-	}
-
-	"WinLimit"
-	{
-		"nl"		"Map verandert nadat een team een ronde wint"
-	}
-
-	"MaxRoundsAppend"
-	{
-		"nl"		", of verander de map na één of meer rondes"
-	}
-
-	"MaxRounds"
-	{
-		"nl"		"Map verandert na een ronde"
-	}
-
-	"FragLimitAppend"
-	{
-		"nl"		", of verander de map nadat een speler een frag heeft gemaakt"
+		"nl"		"De huidige servertijd is {1}."
 	}
 
 	"FragLimit"
@@ -75,14 +25,29 @@
 		"nl"		"De map verandert nadat een speler een frag heeft gemaakt"
 	}
 
-	"WinLimitAppendPlural"
+	"FragLimitAppend"
 	{
-		"nl"		", of verander de map nadat een team {1} rondes wint"
+		"nl"		", of verander de map nadat een speler een frag heeft gemaakt"
 	}
 
-	"WinLimitPlural"
+	"FragLimitAppendPlural"
 	{
-		"nl"		"Map verandert nadat een team {1} rondes wint"
+		"nl"		", of verander de map nadat een speler {1} frags heeft gemaakt"
+	}
+
+	"FragLimitPlural"
+	{
+		"nl"		"De map verandert nadat een speler {1} frags heeft gemaakt"
+	}
+
+	"LastRound"
+	{
+		"nl"		"Dit is de laatste ronde!!"
+	}
+
+	"MaxRoundsAppend"
+	{
+		"nl"		", of verander de map na één of meer rondes"
 	}
 
 	"MaxRoundsAppendPlural"
@@ -95,14 +60,49 @@
 		"nl"		"Map verandert na {1} meer rondes"
 	}
 
-	"FragLimitAppendPlural"
+	"Next Map"
 	{
-		"nl"		", of verander de map nadat een speler {1} frags heeft gemaakt"
+		"nl"		"Volgende Map: {1}"
 	}
 
-	"FragLimitPlural"
+	"NoTimelimit"
 	{
-		"nl"		"De map verandert nadat een speler {1} frags heeft gemaakt"
+		"nl"		"Geen tijdlimiet voor de map"
+	}
+
+	"Pending Vote"
+	{
+		"nl"		"Wachtende vote"
+	}
+
+	"WinLimit"
+	{
+		"nl"		"Map verandert nadat een team een ronde wint"
+	}
+
+	"WinLimitAppend"
+	{
+		"nl"		", of verander de map nadat een team een ronde wint"
+	}
+
+	"WinLimitAppendPlural"
+	{
+		"nl"		", of verander de map nadat een team {1} rondes wint"
+	}
+
+	"WinLimitPlural"
+	{
+		"nl"		"Map verandert nadat een team {1} rondes wint"
+	}
+
+	"MaxRounds"
+	{
+		"nl"		"Map verandert na een ronde"
+	}
+
+	"Timeleft"
+	{
+		"nl"		"Resterende tijd voor de map:"
 	}
 
 }

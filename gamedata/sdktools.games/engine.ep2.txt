@@ -99,6 +99,7 @@
 			"game"		"fas"
 			"game"		"cspromod"
 			"game"		"ag2"
+			"game"		"modularcombat"
 		}
 		
 		"Offsets"
@@ -218,6 +219,16 @@
 			{
 				"windows"	"17"
 				"linux"		"55"
+			}
+			/**
+			 * CBaseClient::SetName(char  const*);
+			 * Linux offset straight from VTable dump.
+			 * Has string "(%d)%-0.*s"
+			 */
+			"SetClientName"
+			{
+				"windows"	"16"
+				"linux"		"54"
 			}
 			/**
 			 * Offset into CBaseClient - Used by CBaseServer::UpdateUserSettings to determine when changes have been made.

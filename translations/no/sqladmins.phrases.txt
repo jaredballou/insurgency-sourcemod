@@ -1,33 +1,13 @@
 "Phrases"
 {
-	"Invalid authtype"
+	"SQL Group deleted"
 	{
-		"no"		"Gjenkjenningstypen (auth) må enten være 'steam', 'name' (navn) eller 'ip'."
+		"no"		"Gruppen ble slettet fra databasen."
 	}
 
-	"Invalid immunity"
+	"SQL Group not found"
 	{
-		"no"		"Immunitet må ha en positivt helltall"
-	}
-
-	"SQL Admin already exists"
-	{
-		"no"		"En administrator med den angitte data eksisterer allerede."
-	}
-
-	"SQL Admin added"
-	{
-		"no"		"Administratoren ble lagt til i databasen."
-	}
-
-	"SQL Admin deleted"
-	{
-		"no"		"Administratoren ble slettet fra databasen."
-	}
-
-	"SQL Admin not found"
-	{
-		"no"		"Ingen administratorer med de angitte data ble funnet. "
+		"no"		"Ingen grupper med det angitte navnet ble funnet."
 	}
 
 	"SQL Group already exists"
@@ -40,14 +20,39 @@
 		"no"		"Gruppen ble lagt til databasen."
 	}
 
-	"SQL Group deleted"
+	"SQL Group X not found"
 	{
-		"no"		"Gruppen ble slettet fra databasen."
+		"no"		"Fant ikke gruppen: \"{1}\""
 	}
 
-	"SQL Group not found"
+	"SQL Admin deleted"
 	{
-		"no"		"Ingen grupper med det angitte navnet ble funnet."
+		"no"		"Administratoren ble slettet fra databasen."
+	}
+
+	"SQL Admin added"
+	{
+		"no"		"Administratoren ble lagt til i databasen."
+	}
+
+	"Invalid authtype"
+	{
+		"no"		"Gjenkjenningstypen (auth) må enten være 'steam', 'name' (navn) eller 'ip'."
+	}
+
+	"Added groups to user"
+	{
+		"no"		"La til {1} gruppe(r) til den angitte administratoren."
+	}
+
+	"Invalid immunity"
+	{
+		"no"		"Immunitet må ha en positivt helltall"
+	}
+
+	"SQL Admin already exists"
+	{
+		"no"		"En administrator med den angitte data eksisterer allerede."
 	}
 
 	"SQL Admin groups reset"
@@ -55,9 +60,9 @@
 		"no"		"Administrative grupper ble tillbakestilt."
 	}
 
-	"SQL Group X not found"
+	"SQL Admin not found"
 	{
-		"no"		"Fant ikke gruppen: \"{1}\""
+		"no"		"Ingen administratorer med de angitte data ble funnet. "
 	}
 
 	"SQL Group X failed to bind"
@@ -67,12 +72,7 @@
 
 	"Added group to user"
 	{
-		"no"		"La til en gruppe til den angitte administratoren."
-	}
-
-	"Added groups to user"
-	{
-		"no"		"La til {1} gruppe(r) til den angitte administratoren."
+		"no"		"Gruppe tillegnet den angitte administratoren. "
 	}
 
 }

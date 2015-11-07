@@ -1,8 +1,43 @@
 "Phrases"
 {
-	"Invalid authtype"
+	"SQL Group X not found"
 	{
-		"it"		"Il tipo di autenticazione deve essere tramite \"Steam\", \"nome\" o \"IP\""
+		"it"		"Impossibile trovare il gruppo: \"{1}\"  "
+	}
+
+	"SQL Group already exists"
+	{
+		"it"		"Esiste già un gruppo con questo nome."
+	}
+
+	"SQL Admin already exists"
+	{
+		"it"		"Esiste già un amministratore con le credenziali specificate."
+	}
+
+	"SQL Admin groups reset"
+	{
+		"it"		"I gruppi dell'amministratore sono stati reimpostati."
+	}
+
+	"SQL Admin not found"
+	{
+		"it"		"Non è stato trovato nessun amministratore con le credenziali specificate."
+	}
+
+	"SQL Group not found"
+	{
+		"it"		"Non è stato trovato nessun gruppo con il nome specificato."
+	}
+
+	"Added group to user"
+	{
+		"it"		"1 gruppo aggiunto all'amministratore specificato."
+	}
+
+	"Added groups to user"
+	{
+		"it"		"{1} gruppi aggiunti all'amministratore specificato."
 	}
 
 	"Invalid immunity"
@@ -10,9 +45,14 @@
 		"it"		"L'immunità deve essere un intero positivo."
 	}
 
-	"SQL Admin already exists"
+	"Invalid authtype"
 	{
-		"it"		"Esiste già un amministratore con le credenziali specificate."
+		"it"		"Il tipo di autenticazione deve essere tramite \"Steam\", \"nome\" o \"IP\""
+	}
+
+	"SQL Group X failed to bind"
+	{
+		"it"		"Impossibile associare il gruppo: \"{1}\""
 	}
 
 	"SQL Admin added"
@@ -25,16 +65,6 @@
 		"it"		"Amministratore eliminato dal database."
 	}
 
-	"SQL Admin not found"
-	{
-		"it"		"Non è stato trovato nessun amministratore con le credenziali specificate."
-	}
-
-	"SQL Group already exists"
-	{
-		"it"		"Esiste già un gruppo con questo nome."
-	}
-
 	"SQL Group added"
 	{
 		"it"		"Gruppo aggiunto al database."
@@ -43,36 +73,6 @@
 	"SQL Group deleted"
 	{
 		"it"		"Gruppo eliminato dal database."
-	}
-
-	"SQL Group not found"
-	{
-		"it"		"Non è stato trovato nessun gruppo con il nome specificato."
-	}
-
-	"SQL Admin groups reset"
-	{
-		"it"		"I gruppi dell'amministratore sono stati reimpostati."
-	}
-
-	"SQL Group X not found"
-	{
-		"it"		"Impossibile trovare il gruppo: \"{1}\"  "
-	}
-
-	"SQL Group X failed to bind"
-	{
-		"it"		"Impossibile associare il gruppo: \"{1}\""
-	}
-
-	"Added group to user"
-	{
-		"it"		"1 gruppo aggiunto all'amministratore specificato."
-	}
-
-	"Added groups to user"
-	{
-		"it"		"{1} gruppi aggiunti all'amministratore specificato."
 	}
 
 }

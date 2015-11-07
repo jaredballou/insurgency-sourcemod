@@ -1,63 +1,8 @@
 "Phrases"
 {
-	"Unable to find cvar"
+	"Admin access"
 	{
-		"pl"		"Nie można znaleźć zmiennej: {1} "
-	}
-
-	"No access to cvar"
-	{
-		"pl"		"Nie masz dostępu do tej zmiennej."
-	}
-
-	"Value of cvar"
-	{
-		"pl"		"Wartość zmiennej \"{1}\": \"{2}\" "
-	}
-
-	"Cvar changed"
-	{
-		"pl"		"Zmieniono zmienną \"{1}\" na \"{2}\". "
-	}
-
-	"Config not found"
-	{
-		"pl"		"Plik konfiguracyjny \"{1}\" nie został odnaleziony."
-	}
-
-	"Executed config"
-	{
-		"pl"		"Wykonano konfig \"{1}\"."
-	}
-
-	"Permabanned player"
-	{
-		"pl"		"Permanentnie zbanowano gracza  \"{1}\"."
-	}
-
-	"Permabanned player reason"
-	{
-		"pl"		"Permanentnie zbanowano gracza \"{1}\" (powód: {2}).  "
-	}
-
-	"Banned player"
-	{
-		"pl"		"Zbanowano gracza \"{1}\" na {2} min."
-	}
-
-	"Banned player reason"
-	{
-		"pl"		"Zbanowano gracza \"{1}\" na {2} min. (powód: {3})."
-	}
-
-	"Removed bans matching"
-	{
-		"pl"		"Usunięto bany pasujące do filtra: {1} "
-	}
-
-	"Ban added"
-	{
-		"pl"		"Ban został dodany."
+		"pl"		"Dostęp administratora"
 	}
 
 	"Admin cache refreshed"
@@ -65,29 +10,29 @@
 		"pl"		"Konta administracyjne zostały odświeżone."
 	}
 
-	"Identify player"
+	"Ban added"
 	{
-		"pl"		"Identyfikacja gracza"
+		"pl"		"Ban został dodany."
 	}
 
-	"Choose Map"
+	"Cvar changed"
 	{
-		"pl"		"Wybierz mapę"
+		"pl"		"Zmieniono zmienną \"{1}\" na \"{2}\". "
 	}
 
-	"Exec CFG"
+	"Value of cvar"
 	{
-		"pl"		"Wykonaj CFG"
+		"pl"		"Wartość zmiennej \"{1}\": \"{2}\" "
 	}
 
-	"Admin logged in as"
+	"Username"
 	{
-		"pl"		"Gracz \"{1}\" jest zalogowany jako \"{2}\" z dostępem: {3}"
+		"pl"		"Nazwa użytkownika"
 	}
 
-	"Admin logged in anon"
+	"Unable to find cvar"
 	{
-		"pl"		"{1}\" posiada dostęp: {2} "
+		"pl"		"Nie można znaleźć zmiennej: {1} "
 	}
 
 	"Player is not an admin"
@@ -100,19 +45,34 @@
 		"pl"		"\"{1}\" jest administratorem."
 	}
 
-	"Username"
+	"Permabanned player"
 	{
-		"pl"		"Nazwa użytkownika"
+		"pl"		"Permanentnie zbanowano gracza  \"{1}\"."
 	}
 
-	"Kicked target"
+	"No access to cvar"
 	{
-		"pl"		"Wykopano {1}"
+		"pl"		"Nie masz dostępu do tej zmiennej."
 	}
 
-	"Admin access"
+	"Identify player"
 	{
-		"pl"		"Dostęp administratora"
+		"pl"		"Identyfikacja gracza"
+	}
+
+	"Exec CFG"
+	{
+		"pl"		"Wykonaj CFG"
+	}
+
+	"Executed config"
+	{
+		"pl"		"Wykonano konfig \"{1}\"."
+	}
+
+	"Removed bans matching"
+	{
+		"pl"		"Usunięto bany pasujące do filtra: {1} "
 	}
 
 	"Cvar is now protected"
@@ -120,9 +80,49 @@
 		"pl"		"Zmienna {1} jest teraz chroniona."
 	}
 
+	"Config not found"
+	{
+		"pl"		"Plik konfiguracyjny \"{1}\" nie został odnaleziony."
+	}
+
+	"Admin logged in as"
+	{
+		"pl"		"Gracz \"{1}\" jest zalogowany jako \"{2}\" z dostępem: {3}"
+	}
+
+	"Banned player reason"
+	{
+		"pl"		"Zbanowano gracza \"{1}\" na {2} min. (powód: {3})."
+	}
+
+	"Permabanned player reason"
+	{
+		"pl"		"Permanentnie zbanowano gracza \"{1}\" (powód: {2}).  "
+	}
+
 	"Kicked target reason"
 	{
 		"pl"		"Wykopano {1} (Powód: {2})"
+	}
+
+	"Kicked target"
+	{
+		"pl"		"Wykopano {1}"
+	}
+
+	"Banned player"
+	{
+		"pl"		"Zbanowano gracza \"{1}\" na {2} min."
+	}
+
+	"Choose Map"
+	{
+		"pl"		"Wybierz mapę"
+	}
+
+	"Admin logged in anon"
+	{
+		"pl"		"\"{1}\" posiada dostęp: {2}"
 	}
 
 }

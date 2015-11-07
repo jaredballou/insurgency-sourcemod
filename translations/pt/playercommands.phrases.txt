@@ -1,23 +1,38 @@
 "Phrases"
 {
-	"Slap player"
-	{
-		"pt"		"Estapear jogador"
-	}
-
 	"Slap damage"
 	{
 		"pt"		"Dano do tapa"
 	}
 
-	"Slay player"
+	"Rename player"
 	{
-		"pt"		"Assassinar jogador"
+		"pt"		"Renomear jogador"
+	}
+
+	"Renamed target"
+	{
+		"pt"		"Renomeou {1}."
 	}
 
 	"Slapped target"
 	{
 		"pt"		"Estapeou {1}."
+	}
+
+	"Slap player"
+	{
+		"pt"		"Estapear jogador"
+	}
+
+	"Dead Player Rename"
+	{
+		"pt"		"{1} será renomeado na próxima rodada."
+	}
+
+	"Slay player"
+	{
+		"pt"		"Assassinar jogador"
 	}
 
 	"Slayed target"
@@ -28,21 +43,6 @@
 	"Name changed"
 	{
 		"pt"		"Um administrador alterou o nome"
-	}
-
-	"Renamed target"
-	{
-		"pt"		"Renomeou {1}."
-	}
-
-	"Rename player"
-	{
-		"pt"		"Renomear jogador"
-	}
-
-	"Dead Player Rename"
-	{
-		"pt"		"{1} será renomeado na próxima rodada."
 	}
 
 }

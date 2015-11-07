@@ -1,23 +1,13 @@
 "Phrases"
 {
-	"Invalid authtype"
+	"SQL Group already exists"
 	{
-		"es"		"El tipo de autentificación debe ser 'steam', 'name', o 'ip'."
+		"es"		"Un grupo con este nombre ya existe."
 	}
 
-	"Invalid immunity"
+	"SQL Admin groups reset"
 	{
-		"es"		"La inmunidad debe ser un entero positivo."
-	}
-
-	"SQL Admin already exists"
-	{
-		"es"		"Ya existe un administrador con los credenciales dados."
-	}
-
-	"SQL Admin added"
-	{
-		"es"		"Administrador agregado exitosamente a la base de datos."
+		"es"		"Los grupos del administrador han sido reestablecidos exitosamente."
 	}
 
 	"SQL Admin deleted"
@@ -25,14 +15,34 @@
 		"es"		"Administrador borrado exitosamente de la base de datos."
 	}
 
-	"SQL Admin not found"
+	"SQL Admin added"
 	{
-		"es"		"No se encontró ningún administrador con los credenciales dados."
+		"es"		"Administrador agregado exitosamente a la base de datos."
 	}
 
-	"SQL Group already exists"
+	"Invalid immunity"
 	{
-		"es"		"Un grupo con este nombre ya existe."
+		"es"		"La inmunidad debe ser un entero positivo."
+	}
+
+	"Added groups to user"
+	{
+		"es"		"Agregados exitosamente {1} grupos al administrador dado."
+	}
+
+	"Added group to user"
+	{
+		"es"		"Agregado exitosamente un grupo al administrador dado."
+	}
+
+	"SQL Group X failed to bind"
+	{
+		"es"		"El grupo no se pudo agregar: \"{1}\""
+	}
+
+	"SQL Group X not found"
+	{
+		"es"		"Grupo no encontrado: \"{1}\""
 	}
 
 	"SQL Group added"
@@ -45,34 +55,24 @@
 		"es"		"Grupo borrado exitosamente de la base de datos."
 	}
 
+	"SQL Admin already exists"
+	{
+		"es"		"Ya existe un administrador con los credenciales dados."
+	}
+
+	"Invalid authtype"
+	{
+		"es"		"El tipo de autentificación debe ser 'steam', 'name', o 'ip'."
+	}
+
+	"SQL Admin not found"
+	{
+		"es"		"No se encontró ningún administrador con los credenciales dados."
+	}
+
 	"SQL Group not found"
 	{
 		"es"		" No se encontró ningún grupo con el nombre dado. "
-	}
-
-	"SQL Admin groups reset"
-	{
-		"es"		"Los grupos del administrador han sido reestablecidos exitosamente."
-	}
-
-	"SQL Group X not found"
-	{
-		"es"		"Grupo no encontrado: \"{1}\""
-	}
-
-	"SQL Group X failed to bind"
-	{
-		"es"		"El grupo no se pudo agregar: \"{1}\""
-	}
-
-	"Added group to user"
-	{
-		"es"		"Agregado exitosamente un grupo al administrador dado."
-	}
-
-	"Added groups to user"
-	{
-		"es"		"Agregados exitosamente {1} grupos al administrador dado."
 	}
 
 }

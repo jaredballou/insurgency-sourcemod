@@ -30,19 +30,29 @@
 		"tr"		"Bu son tur!!"
 	}
 
-	"NoTimelimit"
-	{
-		"tr"		"Haritanın süre sınırı yok"
-	}
-
 	"Next Map"
 	{
 		"tr"		"Sıradaki Harita: {1}"
 	}
 
+	"NoTimelimit"
+	{
+		"tr"		"Haritanın süre sınırı yok"
+	}
+
 	"Pending Vote"
 	{
 		"tr"		"Oylama Bekleniyor"
+	}
+
+	"WinLimitPlural"
+	{
+		"tr"		"Harita bir takım {1} tur kazandığında değişecek"
+	}
+
+	"WinLimitAppendPlural"
+	{
+		"tr"		" ya da harita {1} takım bir tur kazandığında değişecek"
 	}
 
 	"WinLimitAppend"
@@ -55,6 +65,11 @@
 		"tr"		"Harita bir takım bir tur kazandığında değişecek"
 	}
 
+	"MaxRoundsPlural"
+	{
+		"tr"		"Harita {1} tur sonra değişecek"
+	}
+
 	"MaxRoundsAppend"
 	{
 		"tr"		" ya da harita bir tur sonra değişecek"
@@ -65,9 +80,9 @@
 		"tr"		"Harita bir tur sonra değişecek"
 	}
 
-	"FragLimitAppend"
+	"FragLimitPlural"
 	{
-		"tr"		" ya da harita bir oyuncu bir öldürme sayısına ulaştığında değişecek"
+		"tr"		"Harita bir oyuncu {1} öldürme sayısına ulaştığında değişecek"
 	}
 
 	"FragLimit"
@@ -75,24 +90,9 @@
 		"tr"		"Harita bir oyuncu bir öldürme sayısına ulaştığında değişecek"
 	}
 
-	"WinLimitAppendPlural"
+	"FragLimitAppend"
 	{
-		"tr"		" ya da harita {1} takım bir tur kazandığında değişecek"
-	}
-
-	"WinLimitPlural"
-	{
-		"tr"		"Harita bir takım {1} tur kazandığında değişecek"
-	}
-
-	"MaxRoundsAppendPlural"
-	{
-		"tr"		" ya da harita {1} tur sonra değişecek"
-	}
-
-	"MaxRoundsPlural"
-	{
-		"tr"		"Harita {1} tur sonra değişecek"
+		"tr"		" ya da harita bir oyuncu bir öldürme sayısına ulaştığında değişecek"
 	}
 
 	"FragLimitAppendPlural"
@@ -100,9 +100,9 @@
 		"tr"		" ya da harita bir oyuncu {1} öldürme sayısına ulaştığında değişecek"
 	}
 
-	"FragLimitPlural"
+	"MaxRoundsAppendPlural"
 	{
-		"tr"		"Harita bir oyuncu {1} öldürme sayısına ulaştığında değişecek"
+		"tr"		" ya da harita {1} tur sonra değişecek"
 	}
 
 }
