@@ -1,5 +1,6 @@
+<a name='score'>
 ---
-<a name='score'>### Score Modifiers 0.0.1</a>
+### Score Modifiers 0.0.1</a>
 Adds a number of new ways to get score, or remove score for players
 
  * [Plugin - score.smx](plugins/score.smx?raw=true)

@@ -1,5 +1,6 @@
+<a name='hlstatsx'>
 ---
-<a name='hlstatsx'>### HLstatsX CE Ingame Plugin 1.6.19</a>
+### HLstatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)

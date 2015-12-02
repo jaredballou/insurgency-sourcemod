@@ -1,5 +1,6 @@
+<a name='navmesh'>
 ---
-<a name='navmesh'>### SourcePawn Navigation Mesh Parser 1.0.3</a>
+### SourcePawn Navigation Mesh Parser 1.0.3</a>
 A plugin that can read Valve's Navigation Mesh.
 
  * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)

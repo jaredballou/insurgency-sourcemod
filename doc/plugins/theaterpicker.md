@@ -1,5 +1,6 @@
+<a name='theaterpicker'>
 ---
-<a name='theaterpicker'>### Theater Picker 0.0.2</a>
+### Theater Picker 0.0.2</a>
 Allows admins to set theater, and clients to vote
 
  * [Plugin - theaterpicker.smx](plugins/theaterpicker.smx?raw=true)

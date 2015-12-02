@@ -1,5 +1,6 @@
+<a name='botcount'>
 ---
-<a name='botcount'>### Bot Counter 0.0.2</a>
+### Bot Counter 0.0.2</a>
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)

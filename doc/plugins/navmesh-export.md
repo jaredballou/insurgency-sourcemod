@@ -1,5 +1,6 @@
+<a name='navmesh-export'>
 ---
-<a name='navmesh-export'>### Navmesh Export 0.0.3</a>
+### Navmesh Export 0.0.3</a>
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)

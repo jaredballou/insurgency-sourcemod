@@ -1,5 +1,6 @@
+<a name='botspawns'>
 ---
-<a name='botspawns'>### Bot spawns 0.2.7</a>
+### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
  * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)

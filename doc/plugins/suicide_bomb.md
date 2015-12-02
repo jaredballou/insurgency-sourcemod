@@ -1,5 +1,6 @@
+<a name='suicide_bomb'>
 ---
-<a name='suicide_bomb'>### Suicide Bombers 0.0.5</a>
+### Suicide Bombers 0.0.5</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)

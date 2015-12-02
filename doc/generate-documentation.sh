@@ -74,13 +74,15 @@ do
 	# Create all pieces of the documentation if files are missing
 	for PIECE in "${DOC_UPDATER_FILE}" "${DOC_DESC_FILE}" "${DOC_TODO_FILE}"
 	do
-#		echo "${PIECE}"
-		if [ ! -e "${PIECE}" ]; then touch "${PIECE}"; fi
+		if [ ! -e "${PIECE}" ]
+		then
+			echo "Creating ${PIECE}"
+			touch "${PIECE}"
+		fi
 	done
 
 	# Merge items in the updater file and anything we added manually to the plugins/updater text file
 	egrep '"(Plugin|Source)"' "${UPDATE}" >> "${DOC_UPDATER_FILE}"
-	grep '"' "${DOC_UPDATER_FILE}" | awk '{print "\t\t"$1"\t"$2}' > "${DOC_UPDATER_FILE}"
 
 	# These are lists of the items that we need to put into the updater
 	add_file_to_update "Plugin" "${PLUGIN_PATH}"
@@ -171,7 +173,7 @@ do
 	# Update plugin documentation for readme
 	echo -e " * <a href='#${ITEM}'>${NEWNAME} ${NEWVER}</a>" >> "${TOC_FILE}"
 
-	echo -e "---\n<a name='${ITEM}'>### ${NEWTITLE}</a>" > "${DOC_PLUGIN_FILE}"
+	echo -e "<a name='${ITEM}'>\n---\n### ${NEWTITLE}</a>" > "${DOC_PLUGIN_FILE}"
 	echo "${NEWDESC}" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
 	echo " * [Plugin - ${ITEM}.smx](plugins/${ITEM}.smx?raw=true)" >> "${DOC_PLUGIN_FILE}"
@@ -200,7 +202,8 @@ do
 
 	# Update the updater files with the Plugin and Source items we have collected
 	# TODO: Fix this hacky shitshow and do this a better way
-	sort -u ${DOC_UPDATER_FILE} -o ${DOC_UPDATER_FILE}
+	sed -e 's/#.*//' -e 's/[ ^I]*$//' -e '/^$/ d' "${DOC_UPDATER_FILE}" > /tmp/updater-cache
+	awk '{print "\t\t"$1"\t"$2}' /tmp/updater-cache | sort -u > "${DOC_UPDATER_FILE}"
 	perl -i -p0e 's/("Files"[^\{]*\{)[^\}]*\}/\1\nPUT_FILES_HERE\n\t\}/s' "${UPDATE}"
 	sed -i -e "/PUT_FILES_HERE/{r ${DOC_UPDATER_FILE}" -e 'd}' "${UPDATE}"
 

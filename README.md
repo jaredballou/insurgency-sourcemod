@@ -29,8 +29,9 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#suicide_bomb'>Suicide Bombers 0.0.5</a>
  * <a href='#theaterpicker'>Theater Picker 0.0.2</a>
 
+<a name='ammocheck'>
 ---
-<a name='ammocheck'>### Ammo Check 0.0.7</a>
+### Ammo Check 0.0.7</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
@@ -49,8 +50,9 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
  * [ ] Show a reload animation partially to animate the check
  * [ ] Have the check command delay the next weapon attack to simulate removing and checking the magazine.
 
+<a name='backblast'>
 ---
-<a name='backblast'>### Backblast 0.0.2</a>
+### Backblast 0.0.2</a>
 Adds backblast to rocket based weapons
 
  * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
@@ -72,8 +74,9 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
  * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
  * [ ] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
 
+<a name='botcount'>
 ---
-<a name='botcount'>### Bot Counter 0.0.2</a>
+### Bot Counter 0.0.2</a>
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
@@ -88,8 +91,9 @@ Displays a popup to players every 60 seconds by default identifying remaining en
  * "sm_botcount_enabled" "0" //sets whether bot naming is enabled
  * "sm_botcount_timer" "60" //Frequency to show count
 
+<a name='botnames'>
 ---
-<a name='botnames'>### Bot Names 1.0</a>
+### Bot Names 1.0</a>
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
@@ -108,8 +112,9 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 #### Todo
  * [ ] Add per-team CVARs to use different lists
 
+<a name='botspawns'>
 ---
-<a name='botspawns'>### Bot spawns 0.2.7</a>
+### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
  * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
@@ -154,8 +159,9 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
  * [X] Create functionality to respawn bots to simulate more bots than game can support
 
 
+<a name='compass'>
 ---
-<a name='compass'>### Compass 0.0.6</a>
+### Compass 0.0.6</a>
 Puts a compass in the game
 
  * [Plugin - compass.smx](plugins/compass.smx?raw=true)
@@ -178,8 +184,9 @@ Adds a check_compass command that clients can use and get their ordinal directio
  * "sm_compass_default_direction" "1" //Default compass
  * "sm_compass_default_bearing" "1" //Default compass
 
+<a name='cooplobby'>
 ---
-<a name='cooplobby'>### Coop Lobby Override 0.0.1</a>
+### Coop Lobby Override 0.0.1</a>
 Plugin for overriding Insurgency Coop to 16 players
 
  * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)
@@ -187,16 +194,18 @@ Plugin for overriding Insurgency Coop to 16 players
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
+<a name='cvarlist'>
 ---
-<a name='cvarlist'>### CVAR List 0.0.1</a>
+### CVAR List 0.0.1</a>
 CVAR List
 
  * [Plugin - cvarlist.smx](plugins/cvarlist.smx?raw=true)
  * [Source - cvarlist.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/cvarlist.sp)
 
 
+<a name='damagemod'>
 ---
-<a name='damagemod'>### Damage Modifier 0.0.1</a>
+### Damage Modifier 0.0.1</a>
 Modifies all damage applied
 
  * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
@@ -207,8 +216,9 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 #### CVAR List
  * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
 
+<a name='hlstatsx'>
 ---
-<a name='hlstatsx'>### HLstatsX CE Ingame Plugin 1.6.19</a>
+### HLstatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
@@ -226,8 +236,9 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
  * "hlx_protect_address" "" //Address to be protected for logging/forwarding
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
 
+<a name='insurgency'>
 ---
-<a name='insurgency'>### Insurgency Support Library 1.2.1</a>
+### Insurgency Support Library 1.2.1</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
@@ -257,8 +268,9 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
 
 
+<a name='looting'>
 ---
-<a name='looting'>### Looting 0.0.1</a>
+### Looting 0.0.1</a>
 Adds ability to loot items from dead bodies
 
  * [Plugin - looting.smx](plugins/looting.smx?raw=true)
@@ -279,8 +291,9 @@ Allows looting bodies for ammo. Not yet functional.
  * [ ] Get model for magazines for dropped mags.
  * [ ] Add CVAR option to simply drop ammo box or all magazines on death (like a munitions pinata).
 
+<a name='navmesh-chat'>
 ---
-<a name='navmesh-chat'>### Navmesh Chat 0.0.1</a>
+### Navmesh Chat 0.0.1</a>
 Puts navmesh area into chat
 
  * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
@@ -310,8 +323,9 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
  * [ ] Replace spotting box with callout of distance/direction, add map marker
 
 
+<a name='navmesh-export'>
 ---
-<a name='navmesh-export'>### Navmesh Export 0.0.3</a>
+### Navmesh Export 0.0.3</a>
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
@@ -325,8 +339,9 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 #### CVAR List
  * "sm_navmesh_export_enabled" "0" //sets whether this plugin is enabled
 
+<a name='navmesh'>
 ---
-<a name='navmesh'>### SourcePawn Navigation Mesh Parser 1.0.3</a>
+### SourcePawn Navigation Mesh Parser 1.0.3</a>
 A plugin that can read Valve's Navigation Mesh.
 
  * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)
@@ -337,8 +352,9 @@ Navmesh parser, created by KitRifty and modified by me to support Hiding Spots a
 #### Dependencies
  * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
 
+<a name='nofog'>
 ---
-<a name='nofog'>### No Fog 0.0.1</a>
+### No Fog 0.0.1</a>
 Removes fog
 
  * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
@@ -349,8 +365,9 @@ Removes all fog on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_nofog_enabled" "1" //sets whether bot naming is enabled
 
+<a name='noobj'>
 ---
-<a name='noobj'>### No Objectives 0.0.1</a>
+### No Objectives 0.0.1</a>
 Removes all objectives
 
  * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
@@ -364,8 +381,9 @@ Removes objectives, not yet functional.
  * "sm_noobj_capture" "1" //Can points be captured?
  * "sm_noobj_remove" "0" //Remove all points?
 
+<a name='pistolsonly'>
 ---
-<a name='pistolsonly'>### Pistols Only 0.0.3</a>
+### Pistols Only 0.0.3</a>
 Adds a game modifier that only allows pistols
 
  * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
@@ -376,8 +394,9 @@ Disables all primary weapons, enables only pistols. Not yet functional.
 #### CVAR List
  * "sm_pistolsonly_enabled" "0" //sets whether ammo check is enabled
 
+<a name='prop_dynamic'>
 ---
-<a name='prop_dynamic'>### Prop Removal 0.0.1</a>
+### Prop Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
@@ -388,8 +407,9 @@ Removes all prop_dynamic entities.
 #### CVAR List
  * "sm_prop_dynamic_enabled" "1" //sets whether bot naming is enabled
 
+<a name='respawn'>
 ---
-<a name='respawn'>### Player Respawn 1.7.1</a>
+### Player Respawn 1.7.1</a>
 Respawn dead players via admincommand or by queues
 
  * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
@@ -415,8 +435,9 @@ Allows respawning of players or bots. Support for some customization of per roun
  * "sm_respawn_reset_each_round" "1" //Reset player respawn counts each round);
  * "sm_respawn_reset_each_objective" "1" //Reset player respawn counts each objective);
 
+<a name='restrictedarea'>
 ---
-<a name='restrictedarea'>### Restricted Area Removal 0.0.1</a>
+### Restricted Area Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
@@ -427,8 +448,9 @@ Removes all restricted areas on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_restrictedarea_enabled" "1" //sets whether bot naming is enabled
 
+<a name='rpgdrift'>
 ---
-<a name='rpgdrift'>### RPG Adjustments 0.0.3</a>
+### RPG Adjustments 0.0.3</a>
 Adjusts behavior of RPG rounds
 
  * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
@@ -448,8 +470,9 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
  * [X] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 
 
+<a name='score'>
 ---
-<a name='score'>### Score Modifiers 0.0.1</a>
+### Score Modifiers 0.0.1</a>
 Adds a number of new ways to get score, or remove score for players
 
  * [Plugin - score.smx](plugins/score.smx?raw=true)
@@ -462,8 +485,9 @@ Adds a number of new ways to get score, or remove score for players
 #### CVAR List
  * "sm_score_enabled" "1" //sets whether score modifier is enabled
 
+<a name='suicide_bomb'>
 ---
-<a name='suicide_bomb'>### Suicide Bombers 0.0.5</a>
+### Suicide Bombers 0.0.5</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)
@@ -493,8 +517,9 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
  * [ ] Work on PVP mode and figuring out how to balance when a player is using the suicide bomb rather than a bot.
 
 
+<a name='theaterpicker'>
 ---
-<a name='theaterpicker'>### Theater Picker 0.0.2</a>
+### Theater Picker 0.0.2</a>
 Allows admins to set theater, and clients to vote
 
  * [Plugin - theaterpicker.smx](plugins/theaterpicker.smx?raw=true)

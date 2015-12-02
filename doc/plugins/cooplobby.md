@@ -1,5 +1,6 @@
+<a name='cooplobby'>
 ---
-<a name='cooplobby'>### Coop Lobby Override 0.0.1</a>
+### Coop Lobby Override 0.0.1</a>
 Plugin for overriding Insurgency Coop to 16 players
 
  * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)

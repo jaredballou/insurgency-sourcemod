@@ -1,5 +1,6 @@
+<a name='nofog'>
 ---
-<a name='nofog'>### No Fog 0.0.1</a>
+### No Fog 0.0.1</a>
 Removes fog
 
  * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
