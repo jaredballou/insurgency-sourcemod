@@ -4,14 +4,14 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.3"
+			"Latest"		"0.0.3"
 		}
-		"Notes"		"[INS] Navmesh Export - Exports navmesh data in JSON format"
-
-	}	
+		"Notes"		"Navmesh Export - Exports navmesh data in JSON format"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/navmesh-export.smx"		
+		"Plugin"	"Path_SM/plugins/navmesh-export.smx"
+		"Source"	"Path_SM/scripting/include/navmesh.inc"
 		"Source"	"Path_SM/scripting/navmesh-export.sp"
 	}
 }

@@ -1,0 +1,3 @@
+		"Plugin"	"Path_SM/plugins/score.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/score.sp"

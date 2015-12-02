@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/restrictedarea.smx"
+		"Source"	"Path_SM/scripting/restrictedarea.sp"

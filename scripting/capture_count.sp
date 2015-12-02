@@ -6,11 +6,11 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
-#include <insurgency>
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Adds a timer that displays the captured points count for each team for competitive mode"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-capture_count.txt"
 

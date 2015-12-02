@@ -6,13 +6,11 @@
 #include <sdktools>
 #undef REQUIRE_PLUGIN
 #include <updater>
+#include <insurgency>
 
 
 //Define CVARS
-#define TEAM_SPECTATORS 1
-#define TEAM_SECURITY 2
-#define TEAM_INSURGENTS 3
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botcount.txt"
 
@@ -72,7 +70,7 @@ public Action:RefreshPanel(Handle:timer, any:client)
 	if (IsValidPlayer(client))
 	{
 		new myteam = GetClientTeam(client);
-		new otherteam = (myteam == TEAM_SECURITY) ? TEAM_INSURGENTS : TEAM_SECURITY;
+		new otherteam = view_as<int>(myteam == view_as<int>(TEAM_SECURITY) ? TEAM_INSURGENTS : TEAM_SECURITY);
 		decl String:hint[40];
 		new num_ins = 0, total_ins;
 		new maxplayers = GetMaxClients();

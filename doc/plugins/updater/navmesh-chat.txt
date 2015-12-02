@@ -1,0 +1,4 @@
+		"Plugin"	"Path_SM/plugins/navmesh-chat.smx"
+		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
+		"Source"	"Path_SM/scripting/include/navmesh.inc"
+		"Source"	"Path_SM/scripting/navmesh-chat.sp"

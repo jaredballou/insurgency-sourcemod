@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/cvarlist.smx"
+		"Source"	"Path_SM/scripting/cvarlist.sp"

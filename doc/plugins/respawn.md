@@ -1,5 +1,5 @@
 ---
-### Player Respawn (version 1.7.0)
+<a name='respawn'>### Player Respawn 1.7.1</a>
 Respawn dead players via admincommand or by queues
 
  * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
@@ -8,9 +8,11 @@ Respawn dead players via admincommand or by queues
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [gamedata/plugin.respawn.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt)
  * [translations/common.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt)
  * [translations/respawn.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt)
+ * [Third-Party Plugin: adminmenu](plugins/adminmenu.smx?raw=true)
 
 #### CVAR List
  * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);

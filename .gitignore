@@ -10,4 +10,5 @@ configs/databases.cfg
 configs/serverhop.cfg
 configs/sourcebans/sourcebans.cfg
 data/sqlite/clientprefs-sqlite.sq3
+*.sq3
 data/updater.txt

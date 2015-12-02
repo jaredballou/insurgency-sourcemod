@@ -1,5 +1,5 @@
 ---
-### No Objectives (version 0.0.1)
+<a name='noobj'>### No Objectives 0.0.1</a>
 Removes all objectives
 
  * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)

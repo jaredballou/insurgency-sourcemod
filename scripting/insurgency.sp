@@ -9,7 +9,7 @@
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_VERSION "1.2.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -35,6 +35,7 @@ new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][WeaponStatFields];
 
 #define KILL_REGEX_PATTERN "^\"(.+(?:<[^>]*>))\" killed \"(.+(?:<[^>]*>))\" with \"([^\"]*)\" at (.*)"
 #define SUICIDE_REGEX_PATTERN "^\"(.+(?:<[^>]*>))\" committed suicide with \"([^\"]*)\""
+
 new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
@@ -76,6 +77,14 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
         CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
         CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
 	return APLRes_Success;
+}
+
+public OnLibraryRemoved(const String:name[])
+{
+        if (StrEqual(name, "insurgency"))
+        {
+                SetFailState("Insurgency Library not present, disabling plugin...");
+        }
 }
 
 public OnPluginStart()

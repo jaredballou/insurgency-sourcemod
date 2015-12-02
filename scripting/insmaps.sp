@@ -5,11 +5,12 @@
 #include <sourcemod>
 #include <sdktools>
 #include <insurgency>
+
 new Handle:g_aMaps = INVALID_HANDLE;
 new Handle:g_aMapList = INVALID_HANDLE;
 new Handle:g_aGameModes = INVALID_HANDLE;
 
-#define PLUGIN_VERSION		"1.4"
+#define PLUGIN_VERSION		"1.4.1"
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-insmaps.txt"
 
 

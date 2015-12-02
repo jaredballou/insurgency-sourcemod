@@ -1,5 +1,5 @@
 ---
-### Pistols Only (version 0.0.3)
+<a name='pistolsonly'>### Pistols Only 0.0.3</a>
 Adds a game modifier that only allows pistols
 
  * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)

@@ -10,7 +10,7 @@ new Handle:g_aMaps = INVALID_HANDLE;
 new Handle:g_aMapList = INVALID_HANDLE;
 new Handle:g_aGameModes = INVALID_HANDLE;
 
-#define PLUGIN_VERSION		"0.0.1"
+#define PLUGIN_VERSION		"0.0.2"
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-theaterpicker.txt"
 
 

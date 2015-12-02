@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.1"
 		}
-		"Notes"		"[INS] Damage Modifier - Modifies all damage applied"
-
-	}	
+		"Notes"		"Damage Modifier - Modifies all damage applied"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/damagemod.smx"		
+		"Plugin"	"Path_SM/plugins/damagemod.smx"
 		"Source"	"Path_SM/scripting/damagemod.sp"
 	}
 }

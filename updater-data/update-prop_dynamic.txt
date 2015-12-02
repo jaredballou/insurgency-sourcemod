@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.1"
 		}
-		"Notes"		"[INS] Prop Removal - Plugin for removing Restricted Areas"
-
-	}	
+		"Notes"		"Prop Removal - Plugin for removing Restricted Areas"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/prop_dynamic.smx"		
+		"Plugin"	"Path_SM/plugins/prop_dynamic.smx"
 		"Source"	"Path_SM/scripting/prop_dynamic.sp"
 	}
 }

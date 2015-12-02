@@ -1,5 +1,5 @@
 ---
-### RPG Adjustments (version 0.0.3)
+<a name='rpgdrift'>### RPG Adjustments 0.0.3</a>
 Adjusts behavior of RPG rounds
 
  * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)

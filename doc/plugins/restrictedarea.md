@@ -1,5 +1,5 @@
 ---
-### Restricted Area Removal (version 0.0.1)
+<a name='restrictedarea'>### Restricted Area Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)

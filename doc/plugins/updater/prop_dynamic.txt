@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/prop_dynamic.smx"
+		"Source"	"Path_SM/scripting/prop_dynamic.sp"

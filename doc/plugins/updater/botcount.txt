@@ -1,0 +1,3 @@
+		"Plugin"	"Path_SM/plugins/botcount.smx"
+		"Source"	"Path_SM/scripting/botcount.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"

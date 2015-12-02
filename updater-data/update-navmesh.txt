@@ -4,14 +4,14 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.3"
+			"Latest"		"1.0.3"
 		}
 		"Notes"		"SourcePawn Navigation Mesh Parser - A plugin that can read Valve's Navigation Mesh."
-
-	}	
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/navmesh.smx"		
+		"Plugin"	"Path_SM/plugins/navmesh.smx"
+		"Source"	"Path_SM/scripting/include/navmesh.inc"
 		"Source"	"Path_SM/scripting/navmesh.sp"
 	}
 }

@@ -1,46 +1,5 @@
 "Games"
 {
-	"#default"
-	{
-		"#supported"
-		{
-			"game"		"cstrike"
-			"game"		"dod"
-			"game"		"hl2mp"
-		}
-
-		"Offsets"
-		{
-			"GetMaxClip1"
-			{
-				"windows"	"310"
-				"linux"		"311"
-			}
-		}
-	}
-
-	"tf"
-	{
-		"Offsets"
-		{
-			"GetMaxClip1"
-			{
-				"windows"	"319"
-				"linux"		"320"
-			}
-		}
-	}
-	"csgo"
-	{
-		"Offsets"
-		{
-			"GetMaxClip1"
-			{
-				"windows"	"352"
-				"linux"		"354"
-			}
-		}
-	}
 	"insurgency"
 	{
 		"Signatures"
@@ -101,69 +60,69 @@
 		{
 			"ShouldBlockPrimaryFire"
 			{
-				"windows"	"279"
-				"linux"		"280"
-			}
-
-			"IsWeaponZoomed"
-			{
-				"windows"	"280"
-				"linux"		"281"
-			}
-
-			"CheckReload"
-			{
 				"windows"	"281"
 				"linux"		"282"
 			}
 
+			"IsWeaponZoomed"
+			{
+				"windows"	"282"
+				"linux"		"283"
+			}
+
+			"CheckReload"
+			{
+				"windows"	"283"
+				"linux"		"284"
+			}
+
 			"GetFireRate"
 			{
-				"windows"	"296"
-				"linux"		"297"
+				"windows"	"298"
+				"linux"		"299"
 			}
 
 			"GetWeight"
 			{
-				"windows"	"327"
-				"linux"		"328"
+				"windows"	"329"
+				"linux"		"330"
 			}
 
 			"GetSlot"
-			{
-				"windows"	"331"
-				"linux"		"332"
-			}
-
-			"GetName"
 			{
 				"windows"	"333"
 				"linux"		"334"
 			}
 
-			"GetMaxClip1"
+			"GetName"
 			{
-				"windows"	"323"
-				"linux"		"324"
+				"windows"	"335"
+				"linux"		"336"
 			}
 
-
-			"GetDefaultClip1"
+			"GetMaxClip1"
 			{
 				"windows"	"325"
 				"linux"		"326"
 			}
 
+
+			"GetDefaultClip1"
+			{
+				"windows"	"327"
+				"linux"		"328"
+			}
+
 			"GetPrintName"
 			{
-				"windows"	"334"
-				"linux"		"335"
+				"windows"	"336"
+				"linux"		"337"
 			}
 
 			"UsesClipsForAmmo1"
 			{
-				"windows"	"337"
-				"linux"		"338"
+				"windows"	"339"
+				"linux"		"340"
 			}
 		}
 	}

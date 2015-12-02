@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/rpgdrift.smx"
+		"Source"	"Path_SM/scripting/rpgdrift.sp"

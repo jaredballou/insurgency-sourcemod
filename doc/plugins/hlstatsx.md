@@ -1,11 +1,14 @@
 ---
-### HLstatsX CE Ingame Plugin (version 1.6.19)
+<a name='hlstatsx'>### HLstatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
  * [Source - hlstatsx.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/hlstatsx.sp)
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
+
+#### Dependencies
+ * [Third-Party Plugin: clientprefs](plugins/clientprefs.smx?raw=true)
 
 #### CVAR List
  * "hlxce_webpage" "http://www.hlxcommunity.com" //http://www.hlxcommunity.com

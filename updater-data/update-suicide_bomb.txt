@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.4"
+			"Latest"		"0.0.5"
 		}
-		"Notes"		"[INS] Suicide Bombers - Adds suicide bomb for bots"
-
-	}	
+		"Notes"		"Suicide Bombers - Adds suicide bomb for bots"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/suicide_bomb.smx"		
+		"Plugin"	"Path_SM/plugins/suicide_bomb.smx"
 		"Source"	"Path_SM/scripting/suicide_bomb.sp"
 	}
 }

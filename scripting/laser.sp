@@ -2,7 +2,7 @@
 #include <sdktools>
 #include <insurgency>
 
-#define VERSION "1.3" 
+#define VERSION "1.3"
 
 new Handle:g_CvarEnable = INVALID_HANDLE;
 

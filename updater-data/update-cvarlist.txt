@@ -1,0 +1,16 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"0.0.1"
+		}
+		"Notes"		"CVAR List - CVAR List"
+	}
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/cvarlist.smx"
+		"Source"	"Path_SM/scripting/cvarlist.sp"
+	}
+}
