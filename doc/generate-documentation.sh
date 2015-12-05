@@ -171,7 +171,7 @@ do
 	fi
 
 	# Update plugin documentation for readme
-	echo -e " * <a href='#${ITEM}'>${NEWNAME} ${NEWVER}</a>" >> "${TOC_FILE}"
+	echo -e " * <a href='#user-content-${ITEM}'>${NEWNAME} ${NEWVER}</a>" >> "${TOC_FILE}"
 
 	echo -e "<a name='${ITEM}'>\n---\n### ${NEWTITLE}</a>" > "${DOC_PLUGIN_FILE}"
 	echo "${NEWDESC}" >> "${DOC_PLUGIN_FILE}"
