@@ -35,6 +35,8 @@ public OnPluginStart()
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	PrintToServer("[score] Started!");
+	LoadTranslations("common.phrases");
+	LoadTranslations("score.phrases");
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
