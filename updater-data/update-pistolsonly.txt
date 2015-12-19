@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.3"
+			"Latest"		"0.0.3"
 		}
-		"Notes"		"[INS] Pistols Only - Adds a game modifier that only allows pistols"
-
-	}	
+		"Notes"		"Pistols Only - Adds a game modifier that only allows pistols"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/pistolsonly.smx"		
+		"Plugin"	"Path_SM/plugins/pistolsonly.smx"
 		"Source"	"Path_SM/scripting/pistolsonly.sp"
 	}
 }

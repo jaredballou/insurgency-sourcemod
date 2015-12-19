@@ -6,14 +6,14 @@
 #include <sourcemod>
 #include <sdktools>
 #include <navmesh>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
-#include <insurgency>
 
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.2.6"
+#define PLUGIN_VERSION "0.2.7"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 

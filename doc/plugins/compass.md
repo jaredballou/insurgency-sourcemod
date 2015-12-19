@@ -1,5 +1,6 @@
+<a name='compass'>
 ---
-### Compass (version 0.0.5)
+### Compass 0.0.6</a>
 Puts a compass in the game
 
  * [Plugin - compass.smx](plugins/compass.smx?raw=true)
@@ -8,6 +9,7 @@ Puts a compass in the game
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
 
 #### CVAR List

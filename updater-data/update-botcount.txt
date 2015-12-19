@@ -4,15 +4,14 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.2"
 		}
-		"Notes"		"[INS] Bot Counter - Shows Bots Left Alive"
-
+		"Notes"		"Bot Counter - Shows Bots Left Alive"
 	}
 	"Files"
 	{
 		"Plugin"	"Path_SM/plugins/botcount.smx"
-
 		"Source"	"Path_SM/scripting/botcount.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
 	}
 }

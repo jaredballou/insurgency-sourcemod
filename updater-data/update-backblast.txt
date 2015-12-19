@@ -4,10 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.2"
+			"Latest"		"0.0.2"
 		}
-		"Notes"		"[INS] Backblast - Adds backblast to rocket based weapons"
-
+		"Notes"		"Backblast - Adds backblast to rocket based weapons"
 	}
 	"Files"
 	{

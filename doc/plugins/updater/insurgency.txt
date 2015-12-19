@@ -1,0 +1,5 @@
+		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
+		"Plugin"	"Path_SM/plugins/insurgency.smx"
+		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/insurgency.sp"

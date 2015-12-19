@@ -1,0 +1,4 @@
+		"Plugin"	"Path_SM/plugins/compass.smx"
+		"Plugin"	"Path_SM/translations/compass.phrases.txt"
+		"Source"	"Path_SM/scripting/compass.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"

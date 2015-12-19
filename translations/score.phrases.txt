@@ -1,0 +1,67 @@
+"Phrases"
+{
+	"title"
+	{
+		"en"		"Round Awards"
+	}
+	"round_mvp"
+	{
+		"#format"	"{1:d}"
+		"en"		"MVP (Score: {1}"
+	}
+	"round_suppressions"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Suppressions ({1})"
+	}
+	"round_kills"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Kills ({1})"
+	}
+	"round_deaths"
+	{
+		"#format"	"{1:d}"
+		"en"		"Fewest Deaths ({1})"
+	}
+	"round_shots"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Shots ({1})"
+	}
+	"round_hits"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Hits ({1})"
+	}
+	"round_accuracy"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Accurate ({1})"
+	}
+	"round_grenades"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Grenades Thrown ({1})"
+	}
+	"round_captures"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Captures ({1})"
+	}
+	"round_caches"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Caches Destroyed ({1})"
+	}
+	"round_dmg_given"
+	{
+		"#format"	"{1:d}"
+		"en"		"Most Damage Given ({1})"
+	}
+	"round_dmg_taken"
+	{
+		"#format"	"{1:d}"
+		"en"		"Least Damage Taken ({1})"
+	}
+}

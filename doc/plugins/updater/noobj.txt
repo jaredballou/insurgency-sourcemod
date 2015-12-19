@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/noobj.smx"
+		"Source"	"Path_SM/scripting/noobj.sp"

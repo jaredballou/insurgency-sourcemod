@@ -1,0 +1,2 @@
+		"Plugin"	"Path_SM/plugins/looting.smx"
+		"Source"	"Path_SM/scripting/looting.sp"

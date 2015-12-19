@@ -1,5 +1,6 @@
+<a name='prop_dynamic'>
 ---
-### Prop Removal (version 0.0.1)
+### Prop Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)

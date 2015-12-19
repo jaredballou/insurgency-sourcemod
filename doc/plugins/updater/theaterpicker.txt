@@ -1,0 +1,3 @@
+		"Plugin"	"Path_SM/plugins/theaterpicker.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/theaterpicker.sp"

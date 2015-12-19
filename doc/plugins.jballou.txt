@@ -5,11 +5,11 @@ botnames
 botspawns
 compass
 cooplobby
+cvarlist
 damagemod
 hlstatsx
 insurgency
 navmesh
-navmesh-test
 navmesh-chat
 navmesh-export
 looting
@@ -20,4 +20,6 @@ prop_dynamic
 respawn
 restrictedarea
 rpgdrift
+score
 suicide_bomb
+theaterpicker

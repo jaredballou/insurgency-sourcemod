@@ -1,14 +1,17 @@
 #pragma semicolon 1
 #include <sourcemod>
 
-public Plugin:myinfo =
-{
-	name = "All Command and ConVar Lister",
-	author = "Upholder of the [BFG]",
-	description = "A plugin to list all cvars and commands",
-	version = "1.0",
-	url = "http://www.sourcemod.net/"
-}
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_DESCRIPTION "CVAR List"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-cvarlist.txt"
+
+public Plugin:myinfo = {
+	name        = "[INS] CVAR List",
+	author      = "Upholder of the [BFG], modified by Jared Ballou (jballou)",
+	description = PLUGIN_DESCRIPTION,
+	version     = PLUGIN_VERSION,
+	url         = "http://jballou.com/"
+};
 
 public OnPluginStart()
 {
@@ -22,6 +25,9 @@ public Action:Command_Mycvrlist(client, args)
 	decl String:value[256], String:buffer[256], flags, bool:isCommand;
 	new  count = 1;
 	ConVar hCvar;
+	decl String:path[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM,path,PLATFORM_MAX_PATH,"cvarlist.txt");
+	new Handle:fileHandle=OpenFile(path,"a");
 	iter = FindFirstConCommand(buffer, sizeof(buffer), isCommand, flags);
 	do
 	{
@@ -29,11 +35,13 @@ public Action:Command_Mycvrlist(client, args)
 		{
 			hCvar = FindConVar(buffer);
 			hCvar.GetString(value,256);
+			WriteFileLine(fileHandle, "%s %s", buffer, value);
 			ReplyToCommand(client, "%s %s", buffer, value);
 			count += 1;
 		}
 	}
 	while (FindNextConCommand(iter, buffer, sizeof(buffer), isCommand, flags));
+	CloseHandle(fileHandle);
 	ReplyToCommand(client, "Total ConVars: %d", count);
 
 	CloseHandle(iter);

@@ -1,14 +1,13 @@
 #pragma semicolon 1
 #include <sourcemod>
 #include <sdktools>
+#include <insurgency>
 
 #undef REQUIRE_EXTENSIONS
 #include <cstrike>
 #include <tf2>
 #include <tf2_stocks>
 #define REQUIRE_EXTENSIONS
-
-#include <insurgency>
 
 #undef REQUIRE_PLUGIN
 #include <adminmenu>
@@ -39,7 +38,7 @@ new Handle:sm_respawn_reset_each_objective = INVALID_HANDLE;
 
 new g_iSpawnTokens[MAXPLAYERS];
 new g_iRespawnCount[4];
-#define PLUGIN_VERSION "1.7.0"
+#define PLUGIN_VERSION "1.7.1"
 #define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
 

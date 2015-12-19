@@ -1,0 +1,17 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"0.0.1"
+		}
+		"Notes"		"Score Modifiers - Adds a number of new ways to get score, or remove score for players"
+	}
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/score.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/score.sp"
+	}
+}

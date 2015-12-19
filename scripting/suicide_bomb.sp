@@ -6,6 +6,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
@@ -108,12 +109,12 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	return Plugin_Continue;
 }
 public CheckExplode(client) {
-	new m_iSquad = GetEntProp(client, Prop_Send, "m_iSquad");
-	new m_iSquadSlot = GetEntProp(client, Prop_Send, "m_iSquadSlot");
+	if (!IsValidClient(client))
+		return;
 	new bool:bExplodeArmed = GetConVarBool(cvarExplodeArmed);
 	new Float:fDeathChance = GetConVarFloat(cvarDeathChance);
 
-	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N squad %d squadslot %d",client,client,m_iSquad,m_iSquadSlot);
+	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N class %s",client,client,g_client_last_classstring[client]);
 	if (!bEnabled)
 	{
 		return;

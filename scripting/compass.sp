@@ -7,11 +7,11 @@
 #include <smlib>
 //#include <sdktools>
 //#include <smlib>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
-#include <insurgency>
 
-#define PLUGIN_VERSION "0.0.5"
+#define PLUGIN_VERSION "0.0.6"
 #define PLUGIN_DESCRIPTION "Puts a compass in the game"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-compass.txt"
 

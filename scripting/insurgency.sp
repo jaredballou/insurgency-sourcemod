@@ -4,48 +4,65 @@
 #include <insurgency>
 #include <loghelper>
 #include <smjansson>
+#include <smlib>
 #undef REQUIRE_PLUGIN
 #include <updater>
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_VERSION "1.3.0"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 #define INS
-new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
+new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
 new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
 new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs reloads)
 new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
 new Handle:cvarDisableSliding = INVALID_HANDLE; // Disable Sliding
+new Handle:cvarLogLevel = INVALID_HANDLE; // Log level
 
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
-new g_iObjResEntity, String:g_iObjResEntityNetClass[32], g_iLogicEntity, String:g_iLogicEntityNetClass[32], g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
+
+new g_iObjResEntity, String:g_iObjResEntityNetClass[32];
+new g_iLogicEntity, String:g_iLogicEntityNetClass[32]
+new g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
+
 new String:g_classes[Teams][MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
+
+new LOG_LEVEL:g_iLogLevel;
+new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][WeaponStatFields];
 new g_round_stats[MAXPLAYERS+1][RoundStatFields];
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
 new String:g_client_last_weaponstring[MAXPLAYERS+1][64];
 new String:g_client_hurt_weaponstring[MAXPLAYERS+1][64];
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
-new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][WeaponStatFields];
 
 #define KILL_REGEX_PATTERN "^\"(.+(?:<[^>]*>))\" killed \"(.+(?:<[^>]*>))\" with \"([^\"]*)\" at (.*)"
 #define SUICIDE_REGEX_PATTERN "^\"(.+(?:<[^>]*>))\" committed suicide with \"([^\"]*)\""
+
 new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
-//new String:ServerName[100];                // Stores the server name.
-//new String:Version[100];                    // Stores the update version number
-//new String:IP_Port[100];                    // Stores the IP address & port number
-//new String:SteamID[100];                    // Stores the steam server ID
-//new String:Account[100];                    // Stores the account logged into the server.
-//new String:Map[100];                        // Stores the current map name
-//new String:Players[100];                    // Stores the total number of players & bots active
-//new String:Edicts[100];                    // Stores total number of edicts used
+new String:g_sLogLevel[6][32] = {
+	"default",
+	"trace",
+	"debug",
+	"info",
+	"warn",
+	"error"
+};
+//new String:ServerName[100];// Stores the server name.
+//new String:Version[100];    // Stores the update version number
+//new String:IP_Port[100];    // Stores the IP address & port number
+//new String:SteamID[100];    // Stores the steam server ID
+//new String:Account[100];    // Stores the account logged into the server.
+//new String:Map[100];// Stores the current map name
+//new String:Players[100];    // Stores the total number of players & bots active
+//new String:Edicts[100];    // Stores total number of edicts used
 //============================================================================================================
 
 public Plugin:myinfo =
@@ -59,35 +76,47 @@ public Plugin:myinfo =
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
-	RegPluginLibrary("insurgency");	
+//	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
-        CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
-        CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
+	CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
+	CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
 
-        CreateNative("Ins_ObjectiveResource_GetProp", Native_ObjectiveResource_GetProp);
-        CreateNative("Ins_ObjectiveResource_GetPropFloat", Native_ObjectiveResource_GetPropFloat);
-        CreateNative("Ins_ObjectiveResource_GetPropEnt", Native_ObjectiveResource_GetPropEnt);
-        CreateNative("Ins_ObjectiveResource_GetPropBool", Native_ObjectiveResource_GetPropBool);
-        CreateNative("Ins_ObjectiveResource_GetPropVector", Native_ObjectiveResource_GetPropVector);
-        CreateNative("Ins_ObjectiveResource_GetPropString", Native_ObjectiveResource_GetPropString);
+	CreateNative("Ins_ObjectiveResource_GetProp", Native_ObjectiveResource_GetProp);
+	CreateNative("Ins_ObjectiveResource_GetPropFloat", Native_ObjectiveResource_GetPropFloat);
+	CreateNative("Ins_ObjectiveResource_GetPropEnt", Native_ObjectiveResource_GetPropEnt);
+	CreateNative("Ins_ObjectiveResource_GetPropBool", Native_ObjectiveResource_GetPropBool);
+	CreateNative("Ins_ObjectiveResource_GetPropVector", Native_ObjectiveResource_GetPropVector);
+	CreateNative("Ins_ObjectiveResource_GetPropString", Native_ObjectiveResource_GetPropString);
 
-        CreateNative("Ins_InCounterAttack", Native_InCounterAttack);
+	CreateNative("Ins_InCounterAttack", Native_InCounterAttack);
+	CreateNative("Ins_Log", Native_Log);
 
-        CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
-        CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
+	CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
+	CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
 	return APLRes_Success;
 }
-
+/*
+public OnLibraryRemoved(const String:name[])
+{
+	if (StrEqual(name, "insurgency"))
+	{
+		SetFailState("Insurgency Library not present, disabling plugin...");
+	}
+}
+*/
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_inslogger_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_insurgency_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "(0) do nothing, (1) disable for everyone, (2) disable for Security, (3) disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	PrintToServer("[INSLIB] Starting");
+	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
+
+	InsLog(DEFAULT,"Starting");
 /*
 	AddFolderToDownloadTable("materials/overviews");
 	AddFolderToDownloadTable("materials/vgui/backgrounds/maps");
@@ -152,6 +181,20 @@ public OnPluginStart()
 	}
 	//UpdateAllDataSources();
 }
+public OnCvarLogLevelChange(Handle:cvar, const String:oldVal[], const String:newVal[])
+{
+	// If nothing has changed, exit
+	if (strcmp(oldVal,newVal,false) == 0)
+		return;
+	for (new i=0; i<sizeof(g_sLogLevel); i++)
+	{
+		if (strcmp(newVal,g_sLogLevel[i],false) == 0)
+		{
+			g_iLogLevel = LOG_LEVEL:i;
+			InsLog(DEBUG,"New log level is %s (%d), g_iLogLevel %d, old was %s",newVal,i,g_iLogLevel,oldVal);
+		}
+	}
+}
 
 public OnPluginEnd()
 {
@@ -168,7 +211,7 @@ public OnMapStart()
 }
 public UpdateAllDataSources()
 {
-	PrintToServer("[INSLIB] Starting UpdateAllDataSources");
+	InsLog(DEBUG,"Starting UpdateAllDataSources");
 	GetObjResEnt(1);
 	GetLogicEnt(1);
 	GetPlayerManagerEnt(1);
@@ -181,7 +224,7 @@ public UpdateAllDataSources()
 public GetStatus()
 //Action:GetStatus(Handle:Timer)
 {
-	PrintToServer("[INSLIB] Starting GetStatus");
+	InsLog(DEBUG,"Starting GetStatus");
 	// Grab status output.
 	// 600 characters is enough,
 //	decl String:Output[600];
@@ -191,7 +234,7 @@ public GetStatus()
 //	ExplodeString(Output, "\n", Derp, 8, 100);
 //	ServerName = Derp[0];	// Server name
 //	Version = Derp[1];	// Version number
-//	PrintToServer("[INSLIB] Derp %s Version %s",Derp,Version);
+//	InsLog(DEBUG,"Derp %s Version %s",Derp,Version);
 //	IP_Port = Derp[2];	// Port & IP
 //	SteamID = Derp[3];	// Server steam ID
 //	Account = Derp[4];	// Steam account logged in
@@ -201,7 +244,7 @@ public GetStatus()
 //new Handle:fileHandle=OpenFile(path,"r"); // Opens addons/sourcemod/blank.txt to read from (and only reading)
 //while(!IsEndOfFile(fileHandle)&&ReadFileLine(fileHandle,line,sizeof(line)))
 //{
-//  PrintToServer("line %s",line);
+//  InsLog(DEBUG,"line %s",line);
 //}
 //CloseHandle(fileHandle);
 	ParseTheater();
@@ -213,7 +256,7 @@ public ParseTheater()
 //OpenFile(path,"r");
 //CloseHandle(fileHandle);
 
-	PrintToServer("[INSLIB] Starting ParseTheater");
+	InsLog(DEBUG,"Starting ParseTheater");
 	new String:sGameMode[32],String:sTheaterOverride[32];
 	decl String:sTheaterPath[PLATFORM_MAX_PATH];
 	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
@@ -227,10 +270,10 @@ public ParseTheater()
 
 //	BuildPath(Path_SM,sTheaterPath,PLATFORM_MAX_PATH,
 	if (!FileExists(sTheaterPath)) {
-		PrintToServer("[INSLIB]: Cannot find theater %s",sTheaterPath);
+		InsLog(WARN,"Cannot find theater %s",sTheaterPath);
 		return false;
 	}
-	PrintToServer("[INSLIB]: Loading theater %s",sTheaterPath);
+	InsLog(DEBUG,"Loading theater %s",sTheaterPath);
 	new Handle:g_hTheater = CreateKeyValues("theater");
 	FileToKeyValues(g_hTheater,sTheaterPath);
 //	BrowseKeyValues(g_hTheater);
@@ -297,7 +340,7 @@ BrowseKeyValues(Handle:kv)
 	{
 		// You can read the section/key name by using KvGetSectionName here.
 		KvGetSectionName(kv, buffer, sizeof(buffer));
-		PrintToServer("Section name is %s",buffer);
+		InsLog(DEBUG,"Section name is %s",buffer);
 		if (KvGotoFirstSubKey(kv, false))
 		{
 			// Current key is a section. Browse it recursively.
@@ -310,7 +353,7 @@ BrowseKeyValues(Handle:kv)
 			if (KvGetDataType(kv, NULL_STRING) != KvData_None)
 			{
 				KvGetString(kv, NULL_STRING, buffer, sizeof(buffer));
-				PrintToServer("Value is %s",buffer);
+				InsLog(DEBUG,"Value is %s",buffer);
 				// Read value of key here (use NULL_STRING as key name). You can
 				// also get the key name by using KvGetSectionName here.
 			}
@@ -334,6 +377,7 @@ OnPlayerDisconnect(client)
 	{
 		dump_player_stats(client);
 		reset_player_stats(client);
+		reset_round_stats(client);
 	}
 }
 
@@ -359,7 +403,7 @@ public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
 	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
 	{
-		//PrintToServer("[INSLIB] team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
+		InsLog(DEBUG,"team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
 		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
@@ -369,8 +413,12 @@ GetObjResEnt(always=0)
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
 		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
-		//PrintToServer("[INSLIB] g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
+		InsLog(DEBUG,"g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
 	}
+	if (g_iObjResEntity)
+		return g_iObjResEntity;
+	InsLog(WARN,"GetObjResEnt failed!");
+	return -1;
 }
 GetLogicEnt(always=0) {
 	if (((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity)) || (always))
@@ -378,19 +426,27 @@ GetLogicEnt(always=0) {
 		new String:sGameMode[32],String:sLogicEnt[64];
 		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
 		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
-		if (!StrEqual(sGameMode,"checkpoint")) return;
+		if (!StrEqual(sGameMode,"checkpoint")) return -1;
 		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
 		GetEntityNetClass(g_iLogicEntity, g_iLogicEntityNetClass, sizeof(g_iLogicEntityNetClass));
-		//PrintToServer("[INSLIB] g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
+		InsLog(DEBUG,"g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
 	}
+	if (g_iLogicEntity)
+		return g_iLogicEntity;
+	InsLog(WARN,"GetLogicEnt failed!");
+	return -1;
 }
 GetPlayerManagerEnt(always=0) {
 	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
 	{
 		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
 		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
-		//PrintToServer("[INSLIB] g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
+		InsLog(DEBUG,"g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
 	}
+	if (g_iPlayerManagerEntity)
+		return g_iPlayerManagerEntity;
+	InsLog(WARN,"GetPlayerManagerEnt failed!");
+	return -1;
 }
 public GetWeaponData()
 {
@@ -401,7 +457,7 @@ public GetWeaponData()
 		{
 			PushArrayString(g_weap_array, "");
 		}
-		//PrintToServer("[INSLIB] starting LoadValues");
+		InsLog(DEBUG,"starting LoadValues");
 		new String:name[32];
 		for(new i=0;i<= GetMaxEntities() ;i++){
 			if(!IsValidEntity(i))
@@ -417,20 +473,31 @@ public GetWeaponData()
 
 reset_round_stats(client)
 {
-	if (IsValidClient(client))
-	{
-		//PrintToServer("[INSLIB] Running reset_round_stats for %N",client);
-	}
-	for (new i = 1; i < 13; i++)
+	for (new i = 1; i < sizeof(g_round_stats[]); i++)
 	{
 		g_round_stats[client][i] = 0;
 	}
-	g_round_stats[client][STAT_SCORE] = Ins_GetPlayerScore(client);
+	if (IsValidClient(client))
+	{
+		InsLog(DEBUG,"Running reset_round_stats for %N",client);
+		g_round_stats[client][STAT_SCORE] = Ins_GetPlayerScore(client);
+	}
+	else
+	{
+		g_round_stats[client][STAT_SCORE] = 0;
+	}
+}
+reset_round_stats_all()
+{
+	for (new i = 1; i < MaxClients; i++)
+	{
+		reset_round_stats(i);
+	}
 }
 DoRoundAwards()
 {
-	PrintToServer("[INSLIB] Running DoRoundAwards");
-	new iHighPlayer[RoundStatFields],iLowPlayer[RoundStatFields],iHighScore[RoundStatFields],iLowScore[RoundStatFields];
+	InsLog(DEBUG,"Running DoRoundAwards");
+	new iHighStat[RoundStatFields],iLowStat[RoundStatFields], val;
 	for (new i = 1; i < MaxClients; i++)
 	{
 		if (IsValidClient(i))
@@ -438,39 +505,57 @@ DoRoundAwards()
 			new m_iPlayerScore = Ins_GetPlayerScore(i);
 			g_round_stats[i][STAT_SCORE] = (m_iPlayerScore - g_round_stats[i][STAT_SCORE]);
 			g_round_stats[i][STAT_ACCURACY] = RoundToFloor((Float:g_round_stats[i][STAT_HITS] / Float:g_round_stats[i][STAT_SHOTS]) * 100.0);
-			for (new s;s<sizeof(iHighPlayer);s++)
+			for (new s;s<sizeof(iHighStat);s++)
 			{
-				if ((g_round_stats[i][s] > iHighScore[s]) || (iHighPlayer[s] < 1))
+				val = g_round_stats[i][s];
+				if (val > iHighStat[s])
 				{
-					iHighPlayer[s] = i;
-					iHighScore[s] = g_round_stats[i][s];
+					iHighStat[s] = val;
 				}
-				if ((g_round_stats[i][s] < iLowScore[s]) || (iLowPlayer[s] < 1))
+				if ((val < iLowStat[s]) || (i == 1))
 				{
-					iLowPlayer[s] = i;
-					iLowScore[s] = g_round_stats[i][s];
+					iLowStat[s] = val;
 				}
 			}
-			//PrintToServer("[INSLIB] Client %N KILLS %d, DEATHS %d, SHOTS %d, HITS %d, GRENADES %d, CAPTURES %d, CACHES %d, DMG_GIVEN %d, DMG_TAKEN %d, TEAMKILLS %d SCORE %d (total %d) SUPPRESSIONS %d",i,g_round_stats[i][STAT_KILLS],g_round_stats[i][STAT_DEATHS],g_round_stats[i][STAT_SHOTS],g_round_stats[i][STAT_HITS],g_round_stats[i][STAT_GRENADES],g_round_stats[i][STAT_CAPTURES],g_round_stats[i][STAT_CACHES],g_round_stats[i][STAT_DMG_GIVEN],g_round_stats[i][STAT_DMG_TAKEN],g_round_stats[i][STAT_TEAMKILLS],g_round_stats[i][STAT_SCORE],m_iPlayerScore,g_round_stats[i][STAT_SUPPRESSIONS]);
+			InsLog(DEBUG,"Client %N KILLS %d, DEATHS %d, SHOTS %d, HITS %d, GRENADES %d, CAPTURES %d, CACHES %d, DMG_GIVEN %d, DMG_TAKEN %d, TEAMKILLS %d SCORE %d (total %d) SUPPRESSIONS %d",i,g_round_stats[i][STAT_KILLS],g_round_stats[i][STAT_DEATHS],g_round_stats[i][STAT_SHOTS],g_round_stats[i][STAT_HITS],g_round_stats[i][STAT_GRENADES],g_round_stats[i][STAT_CAPTURES],g_round_stats[i][STAT_CACHES],g_round_stats[i][STAT_DMG_GIVEN],g_round_stats[i][STAT_DMG_TAKEN],g_round_stats[i][STAT_TEAMKILLS],g_round_stats[i][STAT_SCORE],m_iPlayerScore,g_round_stats[i][STAT_SUPPRESSIONS]);
 		}
-		reset_round_stats(i);
+//		reset_round_stats(i);
 	}
-	LogPlayerEvent(iHighPlayer[STAT_SCORE], "triggered", "round_mvp");
-	LogPlayerEvent(iHighPlayer[STAT_KILLS], "triggered", "round_kills");
-	LogPlayerEvent(iLowPlayer[STAT_DEATHS], "triggered", "round_deaths");
-	LogPlayerEvent(iHighPlayer[STAT_SHOTS], "triggered", "round_shots");
-	LogPlayerEvent(iHighPlayer[STAT_HITS], "triggered", "round_hits");
-	LogPlayerEvent(iHighPlayer[STAT_ACCURACY], "triggered", "round_accuracy");
-	LogPlayerEvent(iHighPlayer[STAT_GRENADES], "triggered", "round_grenades");
-	LogPlayerEvent(iHighPlayer[STAT_CAPTURES], "triggered", "round_captures");
-	LogPlayerEvent(iHighPlayer[STAT_CACHES], "triggered", "round_caches");
-	LogPlayerEvent(iHighPlayer[STAT_DMG_GIVEN], "triggered", "round_dmg_given");
-	LogPlayerEvent(iLowPlayer[STAT_DMG_TAKEN], "triggered", "round_dmg_taken");
-	LogPlayerEvent(iHighPlayer[STAT_SUPPRESSIONS], "triggered", "round_suppressions");
+	GiveRoundAward(STAT_SCORE,1,iHighStat[STAT_SCORE],"round_mvp","score");
+	GiveRoundAward(STAT_KILLS,1,iHighStat[STAT_KILLS],"round_kills","kills");
+	GiveRoundAward(STAT_DEATHS,-1,iLowStat[STAT_DEATHS],"round_deaths","deaths");
+	GiveRoundAward(STAT_SHOTS,1,iHighStat[STAT_SHOTS],"round_shots","shots");
+	GiveRoundAward(STAT_HITS,1,iHighStat[STAT_HITS],"round_hits","hits");
+	GiveRoundAward(STAT_ACCURACY,1,iHighStat[STAT_ACCURACY],"round_accuracy","accuracy");
+	GiveRoundAward(STAT_GRENADES,1,iHighStat[STAT_GRENADES],"round_grenades","grenades");
+	GiveRoundAward(STAT_CAPTURES,1,iHighStat[STAT_CAPTURES],"round_captures","captures");
+	GiveRoundAward(STAT_CACHES,1,iHighStat[STAT_CACHES],"round_caches","caches");
+	GiveRoundAward(STAT_DMG_GIVEN,1,iHighStat[STAT_DMG_GIVEN],"round_dmg_given","dmg_given");
+	GiveRoundAward(STAT_DMG_TAKEN,-1,iLowStat[STAT_DMG_TAKEN],"round_dmg_taken","dmg_taken");
+	GiveRoundAward(STAT_SUPPRESSIONS,1,iHighStat[STAT_SUPPRESSIONS],"round_suppressions","suppressions");
 }
-
-
-
+GiveRoundAward(RoundStatFields:stat,high,value,String:award[32],String:valname[32])
+{
+	new String:buffer[256];
+	if (high)
+	{
+		if (value <= 0)
+		{
+			return;
+		}
+	}
+	for (new i = 1; i < MaxClients; i++)
+	{
+		if (IsValidClient(i))
+		{
+			Format(buffer, sizeof(buffer), " (%s \"%d\")",valname,value);
+			if (((high) && (g_round_stats[i][stat] >= value)) || (g_round_stats[i][stat] <= value))
+			{
+				LogPlayerEvent(i, "triggered", award, false, buffer);
+			}
+		}
+	}	
+}
 GetWeaponId(i)
 {
 	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
@@ -481,7 +566,7 @@ GetWeaponId(i)
 	if(!StrEqual(name, strBuf))
 	{
 		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, name);
-		PrintToServer("[INSLIB] Weapons %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
+		InsLog(DEBUG,"Weapons %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
 	}
 	return m_hWeaponDefinitionHandle;
 }
@@ -507,7 +592,6 @@ dump_player_stats(client)
 			decl String:strBuf[32];
 			Ins_GetWeaponName(i, strBuf, sizeof(strBuf));
 			
-			#if defined INS
 			if (g_weapon_stats[client][i][LOG_HIT_HITS] > 0)
 			{
 				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (kills \"%d\") (headshots \"%d\") (tks \"%d\") (damage \"%d\") (deaths \"%d\")", 
@@ -537,67 +621,6 @@ dump_player_stats(client)
 				g_weapon_stats[client][i][LOG_HIT_RIGHTARM], 
 				g_weapon_stats[client][i][LOG_HIT_LEFTLEG], 
 				g_weapon_stats[client][i][LOG_HIT_RIGHTLEG]);
-			#else
-			if (g_weapon_stats[client][i][LOG_HIT_SHOTS] > 0)
-			{
-				#if defined GES
-				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (kills \"%d\") (headshots \"%d\") (tks \"%d\") (damage \"%d\") (deaths \"%d\")", 
-				client, 
-				player_userid, 
-				player_authid, 
-				g_team_list[player_team_index], 
-				g_weapon_loglist[i], 
-				g_weapon_stats[client][i][LOG_HIT_SHOTS], 
-				g_weapon_stats[client][i][LOG_HIT_HITS], 
-				g_weapon_stats[client][i][LOG_HIT_KILLS], 
-				g_weapon_stats[client][i][LOG_HIT_HEADSHOTS], 
-				g_weapon_stats[client][i][LOG_HIT_TEAMKILLS], 
-				g_weapon_stats[client][i][LOG_HIT_DAMAGE], 
-				g_weapon_stats[client][i][LOG_HIT_DEATHS]); 
-				
-				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats2\" (weapon \"%s\") (head \"%d\") (chest \"%d\") (stomach \"%d\") (leftarm \"%d\") (rightarm \"%d\") (leftleg \"%d\") (rightleg \"%d\")", 
-				client, 
-				player_userid, 
-				player_authid, 
-				g_team_list[player_team_index], 
-				g_weapon_loglist[i], 
-				g_weapon_stats[client][i][LOG_HIT_HEAD], 
-				g_weapon_stats[client][i][LOG_HIT_CHEST], 
-				g_weapon_stats[client][i][LOG_HIT_STOMACH], 
-				g_weapon_stats[client][i][LOG_HIT_LEFTARM], 
-				g_weapon_stats[client][i][LOG_HIT_RIGHTARM], 
-				g_weapon_stats[client][i][LOG_HIT_LEFTLEG], 
-				g_weapon_stats[client][i][LOG_HIT_RIGHTLEG]); 
-				#else
-				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (kills \"%d\") (headshots \"%d\") (tks \"%d\") (damage \"%d\") (deaths \"%d\")", 
-				client, 
-				player_userid, 
-				player_authid, 
-				g_team_list[player_team_index], 
-				strBuf, //g_weapon_list[i], 
-				g_weapon_stats[client][i][LOG_HIT_SHOTS], 
-				g_weapon_stats[client][i][LOG_HIT_HITS], 
-				g_weapon_stats[client][i][LOG_HIT_KILLS], 
-				g_weapon_stats[client][i][LOG_HIT_HEADSHOTS], 
-				g_weapon_stats[client][i][LOG_HIT_TEAMKILLS], 
-				g_weapon_stats[client][i][LOG_HIT_DAMAGE], 
-				g_weapon_stats[client][i][LOG_HIT_DEATHS]);
-				
-				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats2\" (weapon \"%s\") (head \"%d\") (chest \"%d\") (stomach \"%d\") (leftarm \"%d\") (rightarm \"%d\") (leftleg \"%d\") (rightleg \"%d\")", 
-				client, 
-				player_userid, 
-				player_authid, 
-				g_team_list[player_team_index], 
-				strBuf, //g_weapon_list[i], 
-				g_weapon_stats[client][i][LOG_HIT_HEAD],
-				g_weapon_stats[client][i][LOG_HIT_CHEST], 
-				g_weapon_stats[client][i][LOG_HIT_STOMACH], 
-				g_weapon_stats[client][i][LOG_HIT_LEFTARM], 
-				g_weapon_stats[client][i][LOG_HIT_RIGHTARM], 
-				g_weapon_stats[client][i][LOG_HIT_LEFTLEG], 
-				g_weapon_stats[client][i][LOG_HIT_RIGHTLEG]);
-				#endif
-			#endif
 				is_logged++;
 			}
 		}
@@ -669,10 +692,29 @@ GetPlayerScore(client)
 	if ((IsValidClient(client)) && (g_iPlayerManagerEntity > 0))
 	{
 		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropOffs(g_iPlayerManagerEntityNetClass, "m_iPlayerScore") + (4 * client));
-		//PrintToServer("[INSLIB] Client %N m_iPlayerScore %d",client,retval);
+		InsLog(DEBUG,"Client %N m_iPlayerScore %d",client,retval);
 	}
 	return retval;
 }
+public Native_Log(Handle:plugin, numParams)
+{
+	new LOG_LEVEL:level = GetNativeCell(1);
+	decl String:buffer[1024];
+	FormatNativeString(0, 2, 3, sizeof(buffer), _,buffer);
+	InsLog(level,buffer);
+	return 0;
+}
+
+InsLog(LOG_LEVEL:level,const String:format[], any:...)
+{
+	if ((level) && (level > g_iLogLevel))
+		return;
+	decl String:buffer[512],String:sLevel[32];
+	String_ToUpper(g_sLogLevel[level],sLevel,sizeof(sLevel));
+	VFormat(buffer, sizeof(buffer), format, 3);
+	PrintToServer("[INSLIB] [%s] %s",sLevel,buffer);
+}
+
 public Native_GetPlayerScore(Handle:plugin, numParams)
 {
 	new client = GetNativeCell(1);
@@ -893,7 +935,7 @@ public CheckInfiniteAmmo(client)
 		new m_iClip1 = GetEntProp(weapon, Prop_Send, "m_iClip1"); // weapon clip amount bullets
 		new m_iAmmo_prim = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 		new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoCount");
-		PrintToServer("[INSLIB] weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo_prim %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo_prim,m_iPrimaryAmmoCount);
+		InsLog(DEBUG,"weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo_prim %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo_prim,m_iPrimaryAmmoCount);
 		SetEntProp(client, Prop_Send, "m_iAmmo", 99, _, m_iPrimaryAmmoType); // Set player ammunition of this weapon primary ammo type
 
 		//new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
@@ -950,15 +992,15 @@ public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], b
 
 	if ((InCounterAttack()) && (team == 3) && (!GetConVarBool(cvarCheckpointCounterattackCapture)))
 	{
-		PrintToServer("[INSLIB] Event_ControlPointCaptured: Want to block CounterAttack Capture!");
+		InsLog(DEBUG,"Event_ControlPointCaptured: Want to block CounterAttack Capture!");
 		//return Plugin_Stop;
 	}
 	new Float:ratio = (Float:capperlen / Float:Team_CountAlivePlayers(team));
 	new Float:goalratio = GetConVarFloat(cvarCheckpointCapturePlayerRatio);
-	//PrintToServer("[INSLIB] Event_ControlPointCaptured ratio %0.2f (%d of %d) goalratio %0.2f",ratio,capperlen,Team_CountAlivePlayers(team),goalratio);
+	//InsLog(DEBUG,"Event_ControlPointCaptured ratio %0.2f (%d of %d) goalratio %0.2f",ratio,capperlen,Team_CountAlivePlayers(team),goalratio);
 	if (ratio < goalratio)
 	{
-		PrintToServer("[INSLIB] Event_ControlPointCaptured Blocking due to insufficient friendly players!");
+		InsLog(DEBUG,"Event_ControlPointCaptured Blocking due to insufficient friendly players!");
 		//return Plugin_Stop;
 	}
 	return Plugin_Continue;
@@ -981,12 +1023,12 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 	GetEventString(event, "cpname", cpname, sizeof(cpname));
 	new team = GetEventInt(event, "team");
 	new capperlen = GetCharBytes(cappers);
-	PrintToServer("[INSLIB] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
+	InsLog(DEBUG,"Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
 	//"cp" "byte" - for naming, currently not needed
 	for (new i = 0; i < strlen(cappers); i++)
 	{
 		new client = cappers[i];
-		//PrintToServer("[INSLIB] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
+		//InsLog(DEBUG,"Event_ControlPointCaptured parsing capper id %d client %d",i,client);
 		if(client > 0 && client <= MaxClients && IsClientInGame(client))
 		{
 			decl String:player_authid[64];
@@ -1021,7 +1063,7 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 	//new team = GetEventInt(event, "team");
 
 	//new capperlen = GetCharBytes(cappers);
-	//PrintToServer("[INSLIB] Event_ControlPointNeutralized priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
+	//InsLog(DEBUG,"Event_ControlPointNeutralized priority %d cp %d capperlen %d cpname %s team %d", priority,cp,capperlen,cpname,team);
 
 	//"cp" "byte" - for naming, currently not needed
 	GetEventString(event, "cappers", cappers, sizeof(cappers));
@@ -1061,7 +1103,7 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 		new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,i);
 		if (m_nSecurityCount || m_nInsurgentCount)
 		{
-			//PrintToServer("[INSLIB] Area %d m_nSecurityCount %d m_nInsurgentCount %d",i,m_nSecurityCount,m_nInsurgentCount);
+			//InsLog(DEBUG,"Area %d m_nSecurityCount %d m_nInsurgentCount %d",i,m_nSecurityCount,m_nInsurgentCount);
 		}
 	}
 /*
@@ -1081,7 +1123,7 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 	new m_nSecurityCount = Ins_ObjectiveResource_GetProp("m_nSecurityCount",4,area);
 	new m_nInsurgentCount = Ins_ObjectiveResource_GetProp("m_nInsurgentCount",4,area);
 	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
-	PrintToServer("[INSLIB] Event_ControlPointStartTouch: player %N area %d m_nActivePushPointIndex %d m_nSecurityCount %d m_nInsurgentCount %d m_flCaptureTime %f m_flDeteriorateTime %f m_flLazyCapPerc %f m_nTeamBlocking %d m_flCapPercentages %f m_bSecurityLocked %b m_bInsurgentsLocked %b object %d player %d team %d owner %d type %d", player, area, m_nActivePushPointIndex, m_nSecurityCount, m_nInsurgentCount, m_flCaptureTime, m_flDeteriorateTime, m_flLazyCapPerc, m_nTeamBlocking, m_flCapPercentages, m_bSecurityLocked, m_bInsurgentsLocked, m_iObject, player, team, owner, type);
+	InsLog(DEBUG,"Event_ControlPointStartTouch: player %N area %d m_nActivePushPointIndex %d m_nSecurityCount %d m_nInsurgentCount %d m_flCaptureTime %f m_flDeteriorateTime %f m_flLazyCapPerc %f m_nTeamBlocking %d m_flCapPercentages %f m_bSecurityLocked %b m_bInsurgentsLocked %b object %d player %d team %d owner %d type %d", player, area, m_nActivePushPointIndex, m_nSecurityCount, m_nInsurgentCount, m_flCaptureTime, m_flDeteriorateTime, m_flLazyCapPerc, m_nTeamBlocking, m_flCapPercentages, m_bSecurityLocked, m_bInsurgentsLocked, m_iObject, player, team, owner, type);
 */
 	return Plugin_Continue;
 }
@@ -1100,7 +1142,7 @@ public Action:Event_ControlPointEndTouch(Handle:event, const String:name[], bool
 	//new team = GetEventInt(event, "team");
 	//new area = GetEventInt(event, "area");
 
-	//PrintToServer("[INSLIB] Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
+	//InsLog(DEBUG,"Event_ControlPointEndTouch: player %N area %d player %d team %d owner %d",player,area,player,team,owner);
 	return Plugin_Continue;
 }
 
@@ -1161,7 +1203,7 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 		g_round_stats[attacker][STAT_CACHES]++;
 		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
 	}
-	PrintToServer("[INSLIB] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
+	InsLog(DEBUG,"Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
 	return Plugin_Continue;
 }
 public Action:Event_WeaponFire(Handle:event, const String:name[], bool:dontBroadcast)
@@ -1179,7 +1221,7 @@ public Action:Event_WeaponFire(Handle:event, const String:name[], bool:dontBroad
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
 	new weapon_index = Ins_GetWeaponId(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
-	//PrintToServer("WeaponIndex: %d - %s", weapon_index, shotWeapName);
+	//InsLog(DEBUG,"WeaponIndex: %d - %s", weapon_index, shotWeapName);
 	
 	if (weapon_index > -1)
 	{
@@ -1235,7 +1277,7 @@ public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBro
 	//Game WeaponId is not consistent with our list, we cannot assume it to be the same, thus the requirement for iteration. it's slow but it'll do
 	new weapon_index = Ins_GetWeaponId(shotWeapName);
 	//PrintToChatAll("WeapFired: %s", shotWeapName);
-	//PrintToServer("WeaponIndex: %d - %s", weapon_index, shotWeapName);
+	//InsLog(DEBUG,"WeaponIndex: %d - %s", weapon_index, shotWeapName);
 	
 	if (weapon_index > -1)
 	{
@@ -1396,6 +1438,7 @@ public Action:Event_RoundStart( Handle:event, const String:name[], bool:dontBroa
 	new timelimit = GetEventInt( event, "timelimit");
 	new lives = GetEventInt( event, "lives");
 	new gametype = GetEventInt( event, "gametype");
+	reset_round_stats_all();
 	LogToGame("World triggered \"Round_Start\" (priority \"%d) (timelimit \"%d\") (lives \"%d\") (gametype \"%d\")",priority,timelimit,lives,gametype);
 	return Plugin_Continue;
 }
@@ -1475,7 +1518,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		return Plugin_Continue;
 	}
-	//PrintToServer("[INSLIB] from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
+	//InsLog(DEBUG,"from event (weaponid: %d weapon: %s) from last (g_client_hurt_weaponstring: %s weapon_index: %d strLastWeapon: %s)", weaponid, weapon, g_client_hurt_weaponstring[victim], weapon_index, strLastWeapon);
 	
 	if (attacker == 0 || victim == 0 || attacker == victim)
 	{
@@ -1525,7 +1568,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 		}
 		g_client_hurt_weaponstring[victim] = weapon;
 	}
-	//PrintToServer("[INSLIB] PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
+	//InsLog(DEBUG,"PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
 	if (attacker > 0 && attacker != victim)
 	{
 		new hitgroup  = GetEventInt(event, "hitgroup");
@@ -1652,7 +1695,7 @@ public Action:LogEvent(const String:message[])
 		}
 		else
 		{
-			PrintToChatAll("[INSLIB] Regex Pattern Failure!");
+			InsLog(DEBUG,"Regex Pattern Failure!");
 		}
 	}
 	else if(StrContains(message, "committed suicide") > -1)
@@ -1707,7 +1750,7 @@ public Action:LogEvent(const String:message[])
 		}
 		else
 		{
-			PrintToChatAll("[INSLIB] Regex Pattern Failure");
+			InsLog(DEBUG,"Regex Pattern Failure");
 		}
 	}
 	else if(StrContains(message, "obj_captured") > -1) return Plugin_Handled;
@@ -1728,10 +1771,11 @@ public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBro
 	{
 		if (!GetConVarBool(cvarCheckpointCounterattackCapture))
 		{
-			PrintToServer("[INSLIB] Event_RoundEnd: Blocking due to checkpoint recapture disabled!");
+			InsLog(DEBUG,"Event_RoundEnd: Blocking due to checkpoint recapture disabled!");
 			//return Plugin_Stop;
 		}
 	}
+	DoRoundAwards();
 	return Plugin_Continue;
 }
 public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
@@ -1746,12 +1790,10 @@ public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadc
 	GetEventString(event, "message",message,sizeof(message));
 	GetEventString(event, "message_string",message_string,sizeof(message_string));
 	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
-	DoRoundAwards();
 	WstatsDumpAll();
 	GetObjResEnt();
 	return Plugin_Continue;
 }
-
 
 public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {

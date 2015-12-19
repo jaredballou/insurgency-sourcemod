@@ -1,0 +1,5 @@
+		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
+		"Plugin"	"Path_SM/plugins/botspawns.smx"
+		"Source"	"Path_SM/scripting/botspawns.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/navmesh.inc"

@@ -3,38 +3,44 @@ This repository has a complete installation of SourceMod, including all my plugi
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
- * <a href='#user-content-ammo-check-version-006'>Ammo Check 0.0.6</a>
- * <a href='#user-content-backblast-version-002'>Backblast 0.0.2</a>
- * <a href='#user-content-bot-counter-version-001'>Bot Counter 0.0.1</a>
- * <a href='#user-content-bot-names-version-10'>Bot Names 1.0</a>
- * <a href='#user-content-bot-spawns-version-026'>Bot spawns 0.2.6</a>
- * <a href='#user-content-compass-version-005'>Compass 0.0.5</a>
- * <a href='#user-content-coop-lobby-override-version-001'>Coop Lobby Override 0.0.1</a>
- * <a href='#user-content-damage-modifier-version-001'>Damage Modifier 0.0.1</a>
- * <a href='#user-content-hlstatsx-ce-ingame-plugin-version-1619'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency-support-library-version-110'>Insurgency Support Library 1.1.0</a>
- * <a href='#user-content-sourcepawn-navigation-mesh-parser-version-103'>SourcePawn Navigation Mesh Parser 1.0.3</a>
- * <a href='#user-content-sp-readable-navigation-mesh-test-version-101'>SP-Readable Navigation Mesh Test 1.0.1</a>
- * <a href='#user-content-navmesh-chat-version-001'>Navmesh Chat 0.0.1</a>
- * <a href='#user-content-navmesh-export-version-003'>Navmesh Export 0.0.3</a>
- * <a href='#user-content-looting-version-001'>Looting 0.0.1</a>
- * <a href='#user-content-no-fog-version-001'>No Fog 0.0.1</a>
- * <a href='#user-content-no-objectives-version-001'>No Objectives 0.0.1</a>
- * <a href='#user-content-pistols-only-version-003'>Pistols Only 0.0.3</a>
- * <a href='#user-content-prop-removal-version-001'>Prop Removal 0.0.1</a>
- * <a href='#user-content-player-respawn-version-170'>Player Respawn 1.7.0</a>
- * <a href='#user-content-restricted-area-removal-version-001'>Restricted Area Removal 0.0.1</a>
- * <a href='#user-content-rpg-adjustments-version-003'>RPG Adjustments 0.0.3</a>
- * <a href='#user-content-suicide-bombers-version-004'>Suicide Bombers 0.0.4</a>
+ * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
+ * <a href='#user-content-backblast'>Backblast 0.0.2</a>
+ * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
+ * <a href='#user-content-botnames'>Bot Names 1.0</a>
+ * <a href='#user-content-botspawns'>Bot spawns 0.2.7</a>
+ * <a href='#user-content-compass'>Compass 0.0.6</a>
+ * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
+ * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
+ * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
+ * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.2.1</a>
+ * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
+ * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
+ * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
+ * <a href='#user-content-looting'>Looting 0.0.1</a>
+ * <a href='#user-content-nofog'>No Fog 0.0.1</a>
+ * <a href='#user-content-noobj'>No Objectives 0.0.1</a>
+ * <a href='#user-content-pistolsonly'>Pistols Only 0.0.3</a>
+ * <a href='#user-content-prop_dynamic'>Prop Removal 0.0.1</a>
+ * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
+ * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
+ * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
+ * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
+ * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
+ * <a href='#user-content-theaterpicker'>Theater Picker 0.0.2</a>
 
+<a name='ammocheck'>
 ---
-### Ammo Check (version 0.0.6)
+### Ammo Check 0.0.7</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
  * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
  * [Source - ammocheck.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/ammocheck.sp)
 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
 
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
@@ -44,8 +50,9 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
  * [ ] Show a reload animation partially to animate the check
  * [ ] Have the check command delay the next weapon attack to simulate removing and checking the magazine.
 
+<a name='backblast'>
 ---
-### Backblast (version 0.0.2)
+### Backblast 0.0.2</a>
 Adds backblast to rocket based weapons
 
  * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
@@ -67,8 +74,9 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
  * [X] Add CVAR for wall proximity, hurt or kill player if too close to a wall behind them
  * [ ] On weapon fire for AT4/RPG, get all clients in a radius, determine angle, and apply damage or effect accordingly
 
+<a name='botcount'>
 ---
-### Bot Counter (version 0.0.1)
+### Bot Counter 0.0.2</a>
 Shows Bots Left Alive
 
  * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
@@ -76,12 +84,16 @@ Shows Bots Left Alive
 
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
+#### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+
 #### CVAR List
  * "sm_botcount_enabled" "0" //sets whether bot naming is enabled
  * "sm_botcount_timer" "60" //Frequency to show count
 
+<a name='botnames'>
 ---
-### Bot Names (version 1.0)
+### Bot Names 1.0</a>
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
@@ -100,8 +112,9 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 #### Todo
  * [ ] Add per-team CVARs to use different lists
 
+<a name='botspawns'>
 ---
-### Bot spawns (version 0.2.6)
+### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
  * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
@@ -110,6 +123,8 @@ Adds a number of options and ways to handle bot spawns
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
+ * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
 
 #### CVAR List
@@ -144,8 +159,9 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
  * [X] Create functionality to respawn bots to simulate more bots than game can support
 
 
+<a name='compass'>
 ---
-### Compass (version 0.0.5)
+### Compass 0.0.6</a>
 Puts a compass in the game
 
  * [Plugin - compass.smx](plugins/compass.smx?raw=true)
@@ -154,6 +170,7 @@ Puts a compass in the game
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
 
 #### CVAR List
@@ -167,8 +184,9 @@ Adds a check_compass command that clients can use and get their ordinal directio
  * "sm_compass_default_direction" "1" //Default compass
  * "sm_compass_default_bearing" "1" //Default compass
 
+<a name='cooplobby'>
 ---
-### Coop Lobby Override (version 0.0.1)
+### Coop Lobby Override 0.0.1</a>
 Plugin for overriding Insurgency Coop to 16 players
 
  * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)
@@ -176,8 +194,18 @@ Plugin for overriding Insurgency Coop to 16 players
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
+<a name='cvarlist'>
 ---
-### Damage Modifier (version 0.0.1)
+### CVAR List 0.0.1</a>
+CVAR List
+
+ * [Plugin - cvarlist.smx](plugins/cvarlist.smx?raw=true)
+ * [Source - cvarlist.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/cvarlist.sp)
+
+
+<a name='damagemod'>
+---
+### Damage Modifier 0.0.1</a>
 Modifies all damage applied
 
  * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
@@ -188,14 +216,18 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 #### CVAR List
  * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
 
+<a name='hlstatsx'>
 ---
-### HLstatsX CE Ingame Plugin (version 1.6.19)
+### HLstatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
  * [Source - hlstatsx.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/hlstatsx.sp)
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
+
+#### Dependencies
+ * [Third-Party Plugin: clientprefs](plugins/clientprefs.smx?raw=true)
 
 #### CVAR List
  * "hlxce_webpage" "http://www.hlxcommunity.com" //http://www.hlxcommunity.com
@@ -204,8 +236,9 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
  * "hlx_protect_address" "" //Address to be protected for logging/forwarding
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
 
+<a name='insurgency'>
 ---
-### Insurgency Support Library (version 1.1.0)
+### Insurgency Support Library 1.2.1</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
@@ -214,6 +247,7 @@ Provides functions to support Insurgency and fixes logging
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
 #### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
  * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
 
@@ -234,8 +268,9 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * [ ] Complete theater parser in SM to get around engine theater lookup limitations?
 
 
+<a name='looting'>
 ---
-### Looting (version 0.0.1)
+### Looting 0.0.1</a>
 Adds ability to loot items from dead bodies
 
  * [Plugin - looting.smx](plugins/looting.smx?raw=true)
@@ -256,8 +291,9 @@ Allows looting bodies for ammo. Not yet functional.
  * [ ] Get model for magazines for dropped mags.
  * [ ] Add CVAR option to simply drop ammo box or all magazines on death (like a munitions pinata).
 
+<a name='navmesh-chat'>
 ---
-### Navmesh Chat (version 0.0.1)
+### Navmesh Chat 0.0.1</a>
 Puts navmesh area into chat
 
  * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
@@ -266,6 +302,7 @@ Puts navmesh area into chat
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
 #### Dependencies
+ * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
  * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
 
 #### CVAR List
@@ -286,8 +323,9 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
  * [ ] Replace spotting box with callout of distance/direction, add map marker
 
 
+<a name='navmesh-export'>
 ---
-### Navmesh Export (version 0.0.3)
+### Navmesh Export 0.0.3</a>
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
@@ -295,11 +333,15 @@ Exports navmesh data in JSON format
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
+#### Dependencies
+ * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+
 #### CVAR List
  * "sm_navmesh_export_enabled" "0" //sets whether this plugin is enabled
 
+<a name='navmesh'>
 ---
-### SourcePawn Navigation Mesh Parser (version 1.0.3)
+### SourcePawn Navigation Mesh Parser 1.0.3</a>
 A plugin that can read Valve's Navigation Mesh.
 
  * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)
@@ -307,16 +349,12 @@ A plugin that can read Valve's Navigation Mesh.
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
+#### Dependencies
+ * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+
+<a name='nofog'>
 ---
-### SP-Readable Navigation Mesh Test (version 1.0.1)
-Testing plugin of the SP-Readable Navigation Mesh plugin.
-
- * [Plugin - navmesh-test.smx](plugins/navmesh-test.smx?raw=true)
- * [Source - navmesh-test.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/navmesh-test.sp)
-
-
----
-### No Fog (version 0.0.1)
+### No Fog 0.0.1</a>
 Removes fog
 
  * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
@@ -327,8 +365,9 @@ Removes all fog on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_nofog_enabled" "1" //sets whether bot naming is enabled
 
+<a name='noobj'>
 ---
-### No Objectives (version 0.0.1)
+### No Objectives 0.0.1</a>
 Removes all objectives
 
  * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
@@ -342,8 +381,9 @@ Removes objectives, not yet functional.
  * "sm_noobj_capture" "1" //Can points be captured?
  * "sm_noobj_remove" "0" //Remove all points?
 
+<a name='pistolsonly'>
 ---
-### Pistols Only (version 0.0.3)
+### Pistols Only 0.0.3</a>
 Adds a game modifier that only allows pistols
 
  * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
@@ -354,8 +394,9 @@ Disables all primary weapons, enables only pistols. Not yet functional.
 #### CVAR List
  * "sm_pistolsonly_enabled" "0" //sets whether ammo check is enabled
 
+<a name='prop_dynamic'>
 ---
-### Prop Removal (version 0.0.1)
+### Prop Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
@@ -366,8 +407,9 @@ Removes all prop_dynamic entities.
 #### CVAR List
  * "sm_prop_dynamic_enabled" "1" //sets whether bot naming is enabled
 
+<a name='respawn'>
 ---
-### Player Respawn (version 1.7.0)
+### Player Respawn 1.7.1</a>
 Respawn dead players via admincommand or by queues
 
  * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
@@ -376,9 +418,11 @@ Respawn dead players via admincommand or by queues
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
  * [gamedata/plugin.respawn.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt)
  * [translations/common.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt)
  * [translations/respawn.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt)
+ * [Third-Party Plugin: adminmenu](plugins/adminmenu.smx?raw=true)
 
 #### CVAR List
  * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);
@@ -391,8 +435,9 @@ Allows respawning of players or bots. Support for some customization of per roun
  * "sm_respawn_reset_each_round" "1" //Reset player respawn counts each round);
  * "sm_respawn_reset_each_objective" "1" //Reset player respawn counts each objective);
 
+<a name='restrictedarea'>
 ---
-### Restricted Area Removal (version 0.0.1)
+### Restricted Area Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
  * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
@@ -403,8 +448,9 @@ Removes all restricted areas on the map. Release ready, no known bugs.
 #### CVAR List
  * "sm_restrictedarea_enabled" "1" //sets whether bot naming is enabled
 
+<a name='rpgdrift'>
 ---
-### RPG Adjustments (version 0.0.3)
+### RPG Adjustments 0.0.3</a>
 Adjusts behavior of RPG rounds
 
  * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
@@ -424,8 +470,24 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
  * [X] CVAR Variables to set amount of drift, chance, and option to always force drift for bots.
 
 
+<a name='score'>
 ---
-### Suicide Bombers (version 0.0.4)
+### Score Modifiers 0.0.1</a>
+Adds a number of new ways to get score, or remove score for players
+
+ * [Plugin - score.smx](plugins/score.smx?raw=true)
+ * [Source - score.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/score.sp)
+
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+
+#### CVAR List
+ * "sm_score_enabled" "1" //sets whether score modifier is enabled
+
+<a name='suicide_bomb'>
+---
+### Suicide Bombers 0.0.5</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)
@@ -434,9 +496,15 @@ Adds suicide bomb for bots
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
 
 #### CVAR List
+ * "sm_suicidebomb_" "" //
  * "sm_suicidebomb_enabled" "0" //sets whether suicide bombs are enabled
  * "sm_suicidebomb_explode_armed" "0" //Explode when killed if C4 or IED is in hand
  * "sm_suicidebomb_death_chance" "0.1" //Chance as a fraction of 1 that a bomber will explode when killed
+ * "sm_suicidebomb_bots_only" "1" //Only apply suicide bomber code to bots
+ * "sm_suicidebomb_auto_detonate_range" "0" //Range at which to automatically set off the bomb
+ * "sm_suicidebomb_auto_detonate_count" "2" //Do not detonate until this many enemies are in range
+ * "sm_suicidebomb_strip_weapons" "1" //Remove all weapons from suicide bombers except the bomb
+ * "sm_suicidebomb_player_classes" "sapper" //bomber suicide Player classes to apply suicide bomber changes to
 
 #### Todo
  * [ ] Add bot targeting and behavior to make them seek players
@@ -449,10 +517,26 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
  * [ ] Work on PVP mode and figuring out how to balance when a player is using the suicide bomb rather than a bot.
 
 
+<a name='theaterpicker'>
+---
+### Theater Picker 0.0.2</a>
+Allows admins to set theater, and clients to vote
+
+ * [Plugin - theaterpicker.smx](plugins/theaterpicker.smx?raw=true)
+ * [Source - theaterpicker.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/theaterpicker.sp)
+
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+
+#### CVAR List
+ * "sm_theaterpicker_file" "PLUGIN_VERSION" //Custom theater file name
+ * "sm_theaterpicker_config" "PLUGIN_VERSION" //Custom theater file name
+
 ## Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
-* [ ] Remove counterattack capture ability in checkpoint coop mode via a cvar. Having to capture a building and then stand inside it while it gets assaulted instead of choosing good firing positions outside makes the game switch from tight, careful action to Call of Duty twitch shooter.
-* [ ] Review bot CVARs and changes from last two patches to see if there are any new options to try or setting changes that can help get the bots to behave like mildly well trained, scared teenagers instead of a guy on a sunday stroll who can hipshoot you at a hundred meters.
+* [X] Remove counterattack capture ability in checkpoint coop mode via a cvar. Having to capture a building and then stand inside it while it gets assaulted instead of choosing good firing positions outside makes the game switch from tight, careful action to Call of Duty twitch shooter.
+* [X] Review bot CVARs and changes from last two patches to see if there are any new options to try or setting changes that can help get the bots to behave like mildly well trained, scared teenagers instead of a guy on a sunday stroll who can hipshoot you at a hundred meters.
 * [ ] IR strobe on the back of US helmets for IFF. Possible to do with a particle effect or alpha/color mask, Source engine precompiled lighting makes actual strobes unlikely.
 * [ ] IR laser? Is there a variable I can check to see if a player has NV enabled, and then how to control visibility of the beam per-client.
 * [ ] Artillery, mortar, or air support SM plugin to give delayed but devastating damage on an area? How to balance and offset the massive power for the Insurgent side?
@@ -460,11 +544,14 @@ This is a sort of scratchpad and todo list for things that I think of or people 
 * [ ] Look at ability to modify game rules via tricky Sourcemod magic, like passing off spawning additional waves, spawning in staggered groups, and other fun things we need to do.
 * [ ] Ability to loot ammo from dead bodies and have them added to the player's inventory properly. Needs to be sorted out how player inventory is handled, with the array method where each magazine's capacity is tracked and retained, and make sure we only pick up the right ammo for the primary weapon. The system needs to inform player "picked up one full AK74 magazine" or "picked up one nearly empty M16 magazine". Should loot from most full to least full, loot one mag per run of the command, and say how many mags still available to be looted. Add cvar-controlled timer to delay next loot/shoot/reload/switch for half a second or so to balance it. Add support for shared magazines, namely AKS74U/AK74 and M16/M4A1/MK18.
 * [ ] Decouple flashbang visual impairment and audio impairment. The goal is to slightly increase flashed vision loss time, but greatly increase efefct and duration of audio impairment.
-* [ ] Add controls to disable bot shooting while sliding.
-* [ ] Add controls to disable firing for slight delay after jumping or falling.
+* [X] Add controls to disable bot shooting while sliding or jumping.
+* [X] Add controls to disable firing for slight delay after jumping or falling.
 * [ ] Add slot for "ear protection", can be Peltors, plugs, or nothing. Costs points, affects shots/frags/flashes impact on hearing
 * [ ] Add slot for radio, allow Prox, Squad, or Team as options to select how widely they want to communicate. maybe some team-level abilities via radio?
 * [ ] Add tripwires, timers, and daisy chains to IEDs for Insurgents, give them multiple IEDs and have a defuse mission
-* [ ] Add fragmentation effect to grenades, slightly reduce damage blast radius but shoots 60+ fragments (bullets) out in a random pattern to really clear a room
+* [X] Add fragmentation effect to grenades, slightly reduce damage blast radius but shoots 60+ fragments (bullets) out in a random pattern to really clear a room
 * [ ] Create config-driven rules-based tutorial mod to tell players about their chosen kits and loadout. Have events hooked to firing, killing, getting killed, etc. to use in tips.
+* [ ] Add ability to place explosives (grenades with mechanical switches) as booby traps
+* [ ] Add 100 round magazine for SAR that adds weight/recoil to promote bipod use in intermediate machinegun role
+* [ ] Add deployable supply point to Squad Leader. Destructible cache point that can be deployed and packed. One per round so it needs to be protected.
 

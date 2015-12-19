@@ -4,19 +4,15 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.1"
 		}
-		"Notes"		"[INS] Navmesh Chat - Puts navmesh area into chat"
-
-	}	
+		"Notes"		"Navmesh Chat - Puts navmesh area into chat"
+	}
 	"Files"
 	{
 		"Plugin"	"Path_SM/plugins/navmesh-chat.smx"
 		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
-
-		"Source"	"Path_SM/scripting/navmesh-chat.sp"
-		"Source"	"Path_SM/scripting/include/scp.inc"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/navmesh.inc"
+		"Source"	"Path_SM/scripting/navmesh-chat.sp"
 	}
 }

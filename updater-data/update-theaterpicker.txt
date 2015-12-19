@@ -1,0 +1,17 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"0.0.2"
+		}
+		"Notes"		"Theater Picker - Allows admins to set theater, and clients to vote"
+	}
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/theaterpicker.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/theaterpicker.sp"
+	}
+}

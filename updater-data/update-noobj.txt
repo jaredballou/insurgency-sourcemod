@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.1"
 		}
-		"Notes"		"[INS] No Objectives - Removes all objectives"
-
-	}	
+		"Notes"		"No Objectives - Removes all objectives"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/noobj.smx"		
+		"Plugin"	"Path_SM/plugins/noobj.smx"
 		"Source"	"Path_SM/scripting/noobj.sp"
 	}
 }

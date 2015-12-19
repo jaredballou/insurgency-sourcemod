@@ -4,14 +4,13 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.1"
 		}
-		"Notes"		"[INS] No Fog - Removes fog"
-
-	}	
+		"Notes"		"No Fog - Removes fog"
+	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/nofog.smx"		
+		"Plugin"	"Path_SM/plugins/nofog.smx"
 		"Source"	"Path_SM/scripting/nofog.sp"
 	}
 }
