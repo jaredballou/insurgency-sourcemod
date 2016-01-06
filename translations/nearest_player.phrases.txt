@@ -1,0 +1,13 @@
+"Phrases"
+{
+	"feet"
+	{
+		"en"		"feet"
+		"de"		"Fuß"
+	}
+	"meter"
+	{
+		"en"		"meter"
+		"de"		"Meter"
+	}
+}

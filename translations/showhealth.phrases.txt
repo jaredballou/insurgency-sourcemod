@@ -1,0 +1,22 @@
+﻿"Phrases"
+{
+	"HintText Health Text"
+	{
+		"#format"		"{1:d}"
+		"en"			"{1} HP"
+		"ru"			"{1} HP"
+	}
+	
+	"CenterText Health Text"
+	{
+		"#format"		"{1:d}"
+		"en"			"{1} HP"
+		"ru"			"{1} HP"
+	}
+
+	"Cookie Show Health"
+	{
+		"en"			"Show Health"
+		"ru"			"Показ здоровья"
+	}
+}
