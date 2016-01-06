@@ -19,7 +19,6 @@ DOC_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SOURCEMOD_PATH="$(dirname "${DOC_PATH}")"
 
 GITHUB_URL="https://github.com/jaredballou/insurgency-sourcemod/blob/master"
-GITHUB_RAW_URL="https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master"
 
 PLUGINS_FILE="${DOC_PATH}/plugins.jballou.txt"
 PLUGINS_LIST=$(cat "${PLUGINS_FILE}")
@@ -98,18 +97,18 @@ do
 	do
 		if [ $(grep "^$(basename "${INC}")\$" "${PLUGINS_FILE}" -c) -gt 0 ]
 		then
-			echo " * [Source Include - ${INC}.inc](${GITHUB_RAW_URL}/scripting/include/${INC}.inc)" >> "${DOC_DEPENDENCY_FILE}"
+			echo " * [Source Include - ${INC}.inc](${GITHUB_URL}/scripting/include/${INC}.inc?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
 			add_file_to_update "Source" "scripting/include/${INC}.inc"
 		fi
 	done
 	for CFGFILE in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
-		echo " * [gamedata/${CFGFILE}.txt](${GITHUB_RAW_URL}/gamedata/${CFGFILE}.txt)" >> "${DOC_DEPENDENCY_FILE}"
+		echo " * [gamedata/${CFGFILE}.txt](${GITHUB_URL}/gamedata/${CFGFILE}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
 		add_file_to_update "Plugin" "gamedata/${CFGFILE}.txt"
 	done
 	for TRANSFILE in $(grep -Po 'LoadTranslations\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
-		echo " * [translations/${TRANSFILE}.txt](${GITHUB_RAW_URL}/translations/${TRANSFILE}.txt)" >> "${DOC_DEPENDENCY_FILE}"
+		echo " * [translations/${TRANSFILE}.txt](${GITHUB_URL}/translations/${TRANSFILE}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
 		add_file_to_update "Plugin" "translations/${TRANSFILE}.txt"
 	done
 	for LIBRARY in $(grep -Po 'LibraryExists\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
@@ -121,7 +120,7 @@ do
 			# TODO: Make this use the LIBRARY_IGNORE variable, for now just ignore updater
 			if [ "${LIBRARY}" != "updater" ]
 			then
-				echo " * [Third-Party Plugin: ${LIBRARY}](plugins/${LIBRARY}.smx?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
+				echo " * [Third-Party Plugin: ${LIBRARY}](${GITHUB_URL}/plugins/${LIBRARY}.smx?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
 			fi
 		fi
 	done
@@ -176,8 +175,8 @@ do
 	echo -e "<a name='${ITEM}'>\n---\n### ${NEWTITLE}</a>" > "${DOC_PLUGIN_FILE}"
 	echo "${NEWDESC}" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
-	echo " * [Plugin - ${ITEM}.smx](plugins/${ITEM}.smx?raw=true)" >> "${DOC_PLUGIN_FILE}"
-	echo " * [Source - ${ITEM}.sp](${GITHUB_RAW_URL}/scripting/${ITEM}.sp)" >> "${DOC_PLUGIN_FILE}"
+	echo " * [Plugin - ${ITEM}.smx](${GITHUB_URL}/plugins/${ITEM}.smx?raw=true)" >> "${DOC_PLUGIN_FILE}"
+	echo " * [Source - ${ITEM}.sp](${GITHUB_URL}/scripting/${ITEM}.sp?raw=true)" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
 	cat "${DOC_DESC_FILE}" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"

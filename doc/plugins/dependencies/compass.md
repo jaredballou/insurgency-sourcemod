@@ -1,2 +1,2 @@
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [translations/compass.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/compass.phrases.txt?raw=true)

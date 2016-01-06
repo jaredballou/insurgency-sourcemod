@@ -3,14 +3,14 @@
 ### Compass 0.0.6</a>
 Puts a compass in the game
 
- * [Plugin - compass.smx](plugins/compass.smx?raw=true)
- * [Source - compass.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/compass.sp)
+ * [Plugin - compass.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/compass.smx?raw=true)
+ * [Source - compass.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/compass.sp?raw=true)
 
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [translations/compass.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/compass.phrases.txt?raw=true)
 
 #### CVAR List
  * "sm_compass_enabled" "1" //Enables compass

@@ -1,3 +1,3 @@
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
- * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
+ * [translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)

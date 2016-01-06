@@ -3,8 +3,8 @@
 ### Looting 0.0.1</a>
 Adds ability to loot items from dead bodies
 
- * [Plugin - looting.smx](plugins/looting.smx?raw=true)
- * [Source - looting.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/looting.sp)
+ * [Plugin - looting.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/looting.smx?raw=true)
+ * [Source - looting.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/looting.sp?raw=true)
 
 Allows looting bodies for ammo. Not yet functional.
 

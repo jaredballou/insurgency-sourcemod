@@ -3,17 +3,17 @@
 ### Player Respawn 1.7.1</a>
 Respawn dead players via admincommand or by queues
 
- * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
- * [Source - respawn.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/respawn.sp)
+ * [Plugin - respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
+ * [Source - respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
 
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/plugin.respawn.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt)
- * [translations/common.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt)
- * [translations/respawn.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt)
- * [Third-Party Plugin: adminmenu](plugins/adminmenu.smx?raw=true)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)
+ * [translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
+ * [translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
+ * [Third-Party Plugin: adminmenu](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/adminmenu.smx?raw=true)
 
 #### CVAR List
  * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);

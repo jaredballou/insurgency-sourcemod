@@ -3,8 +3,8 @@
 ### No Objectives 0.0.1</a>
 Removes all objectives
 
- * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
- * [Source - noobj.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/noobj.sp)
+ * [Plugin - noobj.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/noobj.smx?raw=true)
+ * [Source - noobj.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/noobj.sp?raw=true)
 
 Removes objectives, not yet functional.
 

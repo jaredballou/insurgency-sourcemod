@@ -3,10 +3,13 @@
 ### Suicide Bombers 0.0.5</a>
 Adds suicide bomb for bots
 
- * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)
- * [Source - suicide_bomb.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/suicide_bomb.sp)
+ * [Plugin - suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)
+ * [Source - suicide_bomb.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/suicide_bomb.sp?raw=true)
 
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_suicidebomb_" "" //

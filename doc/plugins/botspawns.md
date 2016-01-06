@@ -3,15 +3,15 @@
 ### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
- * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
- * [Source - botspawns.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botspawns.sp)
+ * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+ * [Source - botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
 
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features

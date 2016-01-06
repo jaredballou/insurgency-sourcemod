@@ -13,7 +13,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.2.1</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.0</a>
  * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
@@ -26,6 +26,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.1</a>
  * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.2</a>
 
@@ -34,13 +35,13 @@ These plugins are all provided as-is, I do my best to document and describe them
 ### Ammo Check 0.0.7</a>
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 
- * [Plugin - ammocheck.smx](plugins/ammocheck.smx?raw=true)
- * [Source - ammocheck.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/ammocheck.sp)
+ * [Plugin - ammocheck.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/ammocheck.smx?raw=true)
+ * [Source - ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)
 
 Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly full" estimation of remaining ammo. Reloading will also pop this up to alert player if they have inserted a magazine that is less than full. There are other workarounds and todos in the source code as well. Release candidate, no obvious bugs, but still needs a lot of polish.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
@@ -55,8 +56,8 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 ### Backblast 0.0.2</a>
 Adds backblast to rocket based weapons
 
- * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
- * [Source - backblast.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/backblast.sp)
+ * [Plugin - backblast.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/backblast.smx?raw=true)
+ * [Source - backblast.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/backblast.sp?raw=true)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 
@@ -79,13 +80,13 @@ Adds backblast to AT4 and RPG. Still in progress, this is not yet fully function
 ### Bot Counter 0.0.2</a>
 Shows Bots Left Alive
 
- * [Plugin - botcount.smx](plugins/botcount.smx?raw=true)
- * [Source - botcount.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botcount.sp)
+ * [Plugin - botcount.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botcount.smx?raw=true)
+ * [Source - botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)
 
 Displays a popup to players every 60 seconds by default identifying remaining enemy players alive. Beginning of a "UAV" feature, my goal is to create an entity on the map that can be used to get this information rather than just spamming it. Release ready, no known bugs.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_botcount_enabled" "0" //sets whether bot naming is enabled
@@ -96,8 +97,8 @@ Displays a popup to players every 60 seconds by default identifying remaining en
 ### Bot Names 1.0</a>
 Gives automatic names to bots on creation.
 
- * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
- * [Source - botnames.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botnames.sp)
+ * [Plugin - botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
+ * [Source - botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 
@@ -117,15 +118,15 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 ### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
- * [Plugin - botspawns.smx](plugins/botspawns.smx?raw=true)
- * [Source - botspawns.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botspawns.sp)
+ * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+ * [Source - botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
 
 #### Dependencies
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
 
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features
@@ -164,14 +165,14 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
 ### Compass 0.0.6</a>
 Puts a compass in the game
 
- * [Plugin - compass.smx](plugins/compass.smx?raw=true)
- * [Source - compass.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/compass.sp)
+ * [Plugin - compass.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/compass.smx?raw=true)
+ * [Source - compass.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/compass.sp?raw=true)
 
 Adds a check_compass command that clients can use and get their ordinal direction where they are looking in relation to where they stand. Like a compass. Release ready, no known bugs.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [translations/compass.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/compass.phrases.txt)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [translations/compass.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/compass.phrases.txt?raw=true)
 
 #### CVAR List
  * "sm_compass_enabled" "1" //Enables compass
@@ -189,8 +190,8 @@ Adds a check_compass command that clients can use and get their ordinal directio
 ### Coop Lobby Override 0.0.1</a>
 Plugin for overriding Insurgency Coop to 16 players
 
- * [Plugin - cooplobby.smx](plugins/cooplobby.smx?raw=true)
- * [Source - cooplobby.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/cooplobby.sp)
+ * [Plugin - cooplobby.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cooplobby.smx?raw=true)
+ * [Source - cooplobby.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cooplobby.sp?raw=true)
 
 Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to allow all 16 players to select a class. Release ready, no known bugs.
 
@@ -199,8 +200,8 @@ Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to all
 ### CVAR List 0.0.1</a>
 CVAR List
 
- * [Plugin - cvarlist.smx](plugins/cvarlist.smx?raw=true)
- * [Source - cvarlist.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/cvarlist.sp)
+ * [Plugin - cvarlist.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cvarlist.smx?raw=true)
+ * [Source - cvarlist.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cvarlist.sp?raw=true)
 
 
 <a name='damagemod'>
@@ -208,8 +209,8 @@ CVAR List
 ### Damage Modifier 0.0.1</a>
 Modifies all damage applied
 
- * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
- * [Source - damagemod.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/damagemod.sp)
+ * [Plugin - damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
+ * [Source - damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
 
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
@@ -221,13 +222,13 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 ### HLstatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
- * [Plugin - hlstatsx.smx](plugins/hlstatsx.smx?raw=true)
- * [Source - hlstatsx.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/hlstatsx.sp)
+ * [Plugin - hlstatsx.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/hlstatsx.smx?raw=true)
+ * [Source - hlstatsx.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/hlstatsx.sp?raw=true)
 
 Adds in-game support for HLStatsX servers to connect and send messages and other tasks. Adds color support, and a number of other features absent from the HLStatsX upstream version. Release ready, no known bugs.
 
 #### Dependencies
- * [Third-Party Plugin: clientprefs](plugins/clientprefs.smx?raw=true)
+ * [Third-Party Plugin: clientprefs](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/clientprefs.smx?raw=true)
 
 #### CVAR List
  * "hlxce_webpage" "http://www.hlxcommunity.com" //http://www.hlxcommunity.com
@@ -238,26 +239,27 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.2.1</a>
+### Insurgency Support Library 1.3.0</a>
 Provides functions to support Insurgency and fixes logging
 
- * [Plugin - insurgency.smx](plugins/insurgency.smx?raw=true)
- * [Source - insurgency.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/insurgency.sp)
+ * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
+ * [Source - insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)
 
 Creates hooks and events for Insurgency-specific stat logging, entities, and events. Fixes a lot of issues with missing log entries for HLStatsX, this plugin is tightly bound with my HLStatsX fork I created to handle more Insurgency-specific data and events. This is based off of Brutus' Insurgency logger, but adds support for nearly every event supported by the game, enhances support for new weapons by removing the old config file method of adding weapons, and generally kicks ass if you're looking to create stats from Insurgency. It also includes a number of natives for checking game rules and objective status. This is generally stable, I look at it as a beta release candidate right now.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/insurgency.games.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/insurgency.games.txt)
- * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
+ * [translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)
 
 #### CVAR List
- * "sm_inslogger_enabled" "1" //sets whether log fixing is enabled
+ * "sm_insurgency_enabled" "1" //sets whether log fixing is enabled
  * "sm_insurgency_checkpoint_capture_player_ratio" "0.5" //Fraction of living players required to capture in Checkpoint
  * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
  * "sm_insurgency_infinite_ammo" "0" //Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_infinite_magazine" "0" //Infinite magazine, will never need reloading.
  * "sm_insurgency_disable_sliding" "0" //
+ * "sm_insurgency_log_level" "error" //Logging level, values can be: all, trace, debug, info, warn, error
 
 #### Todo
  * [ ] Weapon lookup by index/name
@@ -273,8 +275,8 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
 ### Looting 0.0.1</a>
 Adds ability to loot items from dead bodies
 
- * [Plugin - looting.smx](plugins/looting.smx?raw=true)
- * [Source - looting.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/looting.sp)
+ * [Plugin - looting.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/looting.smx?raw=true)
+ * [Source - looting.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/looting.sp?raw=true)
 
 Allows looting bodies for ammo. Not yet functional.
 
@@ -296,14 +298,14 @@ Allows looting bodies for ammo. Not yet functional.
 ### Navmesh Chat 0.0.1</a>
 Puts navmesh area into chat
 
- * [Plugin - navmesh-chat.smx](plugins/navmesh-chat.smx?raw=true)
- * [Source - navmesh-chat.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/navmesh-chat.sp)
+ * [Plugin - navmesh-chat.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh-chat.smx?raw=true)
+ * [Source - navmesh-chat.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh-chat.sp?raw=true)
 
 Adds prefix to all chat messages (selectable team or all) that includes grid coordinates, area name (if named in navmesh). For radio commands, it adds those and also a distance and direction related to the player. This plugin is currently complex in that it relies on parsing the map overview data from the Data repository existing in the Insurgency game root directory, cloned to insurgency-data. This has a lot of work to do, especially in getting the overview data from the engine directly rather than hacking around it. This is still very much under active development and could blow up your server, but I'd appreciate testing and feedback.
 
 #### Dependencies
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
- * [translations/insurgency.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/insurgency.phrases.txt)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
+ * [translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)
 
 #### CVAR List
  * "sm_navmesh_chat_enabled" "1" //sets whether this plugin is enabled
@@ -328,13 +330,13 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
 ### Navmesh Export 0.0.3</a>
 Exports navmesh data in JSON format
 
- * [Plugin - navmesh-export.smx](plugins/navmesh-export.smx?raw=true)
- * [Source - navmesh-export.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/navmesh-export.sp)
+ * [Plugin - navmesh-export.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh-export.smx?raw=true)
+ * [Source - navmesh-export.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh-export.sp?raw=true)
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
 
 #### Dependencies
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
 
 #### CVAR List
  * "sm_navmesh_export_enabled" "0" //sets whether this plugin is enabled
@@ -344,21 +346,21 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 ### SourcePawn Navigation Mesh Parser 1.0.3</a>
 A plugin that can read Valve's Navigation Mesh.
 
- * [Plugin - navmesh.smx](plugins/navmesh.smx?raw=true)
- * [Source - navmesh.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/navmesh.sp)
+ * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh.smx?raw=true)
+ * [Source - navmesh.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh.sp?raw=true)
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
 
 #### Dependencies
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
 
 <a name='nofog'>
 ---
 ### No Fog 0.0.1</a>
 Removes fog
 
- * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
- * [Source - nofog.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/nofog.sp)
+ * [Plugin - nofog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/nofog.smx?raw=true)
+ * [Source - nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)
 
 Removes all fog on the map. Release ready, no known bugs.
 
@@ -370,8 +372,8 @@ Removes all fog on the map. Release ready, no known bugs.
 ### No Objectives 0.0.1</a>
 Removes all objectives
 
- * [Plugin - noobj.smx](plugins/noobj.smx?raw=true)
- * [Source - noobj.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/noobj.sp)
+ * [Plugin - noobj.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/noobj.smx?raw=true)
+ * [Source - noobj.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/noobj.sp?raw=true)
 
 Removes objectives, not yet functional.
 
@@ -386,8 +388,8 @@ Removes objectives, not yet functional.
 ### Pistols Only 0.0.3</a>
 Adds a game modifier that only allows pistols
 
- * [Plugin - pistolsonly.smx](plugins/pistolsonly.smx?raw=true)
- * [Source - pistolsonly.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/pistolsonly.sp)
+ * [Plugin - pistolsonly.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/pistolsonly.smx?raw=true)
+ * [Source - pistolsonly.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/pistolsonly.sp?raw=true)
 
 Disables all primary weapons, enables only pistols. Not yet functional.
 
@@ -399,8 +401,8 @@ Disables all primary weapons, enables only pistols. Not yet functional.
 ### Prop Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
- * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
- * [Source - prop_dynamic.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/prop_dynamic.sp)
+ * [Plugin - prop_dynamic.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/prop_dynamic.smx?raw=true)
+ * [Source - prop_dynamic.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/prop_dynamic.sp?raw=true)
 
 Removes all prop_dynamic entities.
 
@@ -412,17 +414,17 @@ Removes all prop_dynamic entities.
 ### Player Respawn 1.7.1</a>
 Respawn dead players via admincommand or by queues
 
- * [Plugin - respawn.smx](plugins/respawn.smx?raw=true)
- * [Source - respawn.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/respawn.sp)
+ * [Plugin - respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
+ * [Source - respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
 
 Allows respawning of players or bots. Support for some customization of per round counting, total respawns, delays, and team-specific rules. Also has an admin menu hook.
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
- * [gamedata/plugin.respawn.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/gamedata/plugin.respawn.txt)
- * [translations/common.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/common.phrases.txt)
- * [translations/respawn.phrases.txt](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/translations/respawn.phrases.txt)
- * [Third-Party Plugin: adminmenu](plugins/adminmenu.smx?raw=true)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)
+ * [translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
+ * [translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
+ * [Third-Party Plugin: adminmenu](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/adminmenu.smx?raw=true)
 
 #### CVAR List
  * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);
@@ -440,8 +442,8 @@ Allows respawning of players or bots. Support for some customization of per roun
 ### Restricted Area Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
- * [Plugin - restrictedarea.smx](plugins/restrictedarea.smx?raw=true)
- * [Source - restrictedarea.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/restrictedarea.sp)
+ * [Plugin - restrictedarea.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/restrictedarea.smx?raw=true)
+ * [Source - restrictedarea.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/restrictedarea.sp?raw=true)
 
 Removes all restricted areas on the map. Release ready, no known bugs.
 
@@ -453,8 +455,8 @@ Removes all restricted areas on the map. Release ready, no known bugs.
 ### RPG Adjustments 0.0.3</a>
 Adjusts behavior of RPG rounds
 
- * [Plugin - rpgdrift.smx](plugins/rpgdrift.smx?raw=true)
- * [Source - rpgdrift.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/rpgdrift.sp)
+ * [Plugin - rpgdrift.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/rpgdrift.smx?raw=true)
+ * [Source - rpgdrift.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/rpgdrift.sp?raw=true)
 
 Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. This currently works, but affects all RPGs all the time.
 
@@ -475,25 +477,42 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
 ### Score Modifiers 0.0.1</a>
 Adds a number of new ways to get score, or remove score for players
 
- * [Plugin - score.smx](plugins/score.smx?raw=true)
- * [Source - score.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/score.sp)
+ * [Plugin - score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/score.smx?raw=true)
+ * [Source - score.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/score.sp?raw=true)
 
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
+ * [translations/score.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/score.phrases.txt?raw=true)
 
 #### CVAR List
  * "sm_score_enabled" "1" //sets whether score modifier is enabled
+
+<a name='sprinklers'>
+---
+### Sprinkler Removal 0.0.1</a>
+Plugin for removing Sprinkers
+
+ * [Plugin - sprinklers.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinklers.smx?raw=true)
+ * [Source - sprinklers.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/sprinklers.sp?raw=true)
+
+
+#### CVAR List
+ * "sm_sprinklers_enabled" "1" //sets whether bot naming is enabled
 
 <a name='suicide_bomb'>
 ---
 ### Suicide Bombers 0.0.5</a>
 Adds suicide bomb for bots
 
- * [Plugin - suicide_bomb.smx](plugins/suicide_bomb.smx?raw=true)
- * [Source - suicide_bomb.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/suicide_bomb.sp)
+ * [Plugin - suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)
+ * [Source - suicide_bomb.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/suicide_bomb.sp?raw=true)
 
 Adds a suicide bomb effect that creates an IED at the player's origin and immediately detonates. Release 1 has all 'bomber' class players detonate on death, which is very annoying in game but is a proof of concept.
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_suicidebomb_" "" //
@@ -522,12 +541,12 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
 ### Theater Picker 0.0.2</a>
 Allows admins to set theater, and clients to vote
 
- * [Plugin - theaterpicker.smx](plugins/theaterpicker.smx?raw=true)
- * [Source - theaterpicker.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/theaterpicker.sp)
+ * [Plugin - theaterpicker.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theaterpicker.smx?raw=true)
+ * [Source - theaterpicker.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/theaterpicker.sp?raw=true)
 
 
 #### Dependencies
- * [Source Include - insurgency.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/insurgency.inc)
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_theaterpicker_file" "PLUGIN_VERSION" //Custom theater file name

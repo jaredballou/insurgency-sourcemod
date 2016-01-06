@@ -3,8 +3,8 @@
 ### No Fog 0.0.1</a>
 Removes fog
 
- * [Plugin - nofog.smx](plugins/nofog.smx?raw=true)
- * [Source - nofog.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/nofog.sp)
+ * [Plugin - nofog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/nofog.smx?raw=true)
+ * [Source - nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)
 
 Removes all fog on the map. Release ready, no known bugs.
 

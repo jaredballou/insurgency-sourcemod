@@ -1,0 +1,16 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"0.0.1"
+		}
+		"Notes"		"Sprinkler Removal - Plugin for removing Sprinkers"
+	}
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/sprinklers.smx"
+		"Source"	"Path_SM/scripting/sprinklers.sp"
+	}
+}

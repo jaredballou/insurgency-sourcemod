@@ -3,8 +3,8 @@
 ### Backblast 0.0.2</a>
 Adds backblast to rocket based weapons
 
- * [Plugin - backblast.smx](plugins/backblast.smx?raw=true)
- * [Source - backblast.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/backblast.sp)
+ * [Plugin - backblast.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/backblast.smx?raw=true)
+ * [Source - backblast.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/backblast.sp?raw=true)
 
 Adds backblast to AT4 and RPG. Still in progress, this is not yet fully functional.
 

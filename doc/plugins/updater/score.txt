@@ -1,3 +1,5 @@
 		"Plugin"	"Path_SM/plugins/score.smx"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+		"Plugin"	"Path_SM/translations/score.phrases.txt"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/score.sp"

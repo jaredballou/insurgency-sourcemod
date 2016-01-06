@@ -3,8 +3,8 @@
 ### Bot Names 1.0</a>
 Gives automatic names to bots on creation.
 
- * [Plugin - botnames.smx](plugins/botnames.smx?raw=true)
- * [Source - botnames.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/botnames.sp)
+ * [Plugin - botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
+ * [Source - botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
 
 Changes bot names to selectable lists of names. Included are Arabic, Pashtun, and English name lists.
 

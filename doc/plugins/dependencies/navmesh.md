@@ -1,1 +1,1 @@
- * [Source Include - navmesh.inc](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/include/navmesh.inc)
+ * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)

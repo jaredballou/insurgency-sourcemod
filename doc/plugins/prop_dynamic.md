@@ -3,8 +3,8 @@
 ### Prop Removal 0.0.1</a>
 Plugin for removing Restricted Areas
 
- * [Plugin - prop_dynamic.smx](plugins/prop_dynamic.smx?raw=true)
- * [Source - prop_dynamic.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/prop_dynamic.sp)
+ * [Plugin - prop_dynamic.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/prop_dynamic.smx?raw=true)
+ * [Source - prop_dynamic.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/prop_dynamic.sp?raw=true)
 
 Removes all prop_dynamic entities.
 

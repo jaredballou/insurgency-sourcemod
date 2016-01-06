@@ -3,8 +3,8 @@
 ### Damage Modifier 0.0.1</a>
 Modifies all damage applied
 
- * [Plugin - damagemod.smx](plugins/damagemod.smx?raw=true)
- * [Source - damagemod.sp](https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master/scripting/damagemod.sp)
+ * [Plugin - damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
+ * [Source - damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
 
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
