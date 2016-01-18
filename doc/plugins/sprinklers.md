@@ -8,5 +8,5 @@ Plugin for removing Sprinkers
 
 
 #### CVAR List
- * "sm_sprinklers_enabled" "1" //sets whether bot naming is enabled
+ * "sm_sprinklers_enabled" "0" //Set to 1 to remove sprinklers. 0 leaves them alone.
 

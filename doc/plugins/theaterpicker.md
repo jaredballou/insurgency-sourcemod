@@ -1,6 +1,6 @@
 <a name='theaterpicker'>
 ---
-### Theater Picker 0.0.2</a>
+### Theater Picker 0.0.3</a>
 Allows admins to set theater, and clients to vote
 
  * [Plugin - theaterpicker.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theaterpicker.smx?raw=true)

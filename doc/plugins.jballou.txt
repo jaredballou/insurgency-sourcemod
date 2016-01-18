@@ -21,6 +21,6 @@ respawn
 restrictedarea
 rpgdrift
 score
-sprinkler
+sprinklers
 suicide_bomb
 theaterpicker

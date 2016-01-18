@@ -13,7 +13,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.0</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.1</a>
  * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
@@ -28,7 +28,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
  * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.1</a>
  * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
- * <a href='#user-content-theaterpicker'>Theater Picker 0.0.2</a>
+ * <a href='#user-content-theaterpicker'>Theater Picker 0.0.3</a>
 
 <a name='ammocheck'>
 ---
@@ -239,7 +239,7 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.0</a>
+### Insurgency Support Library 1.3.1</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
@@ -489,6 +489,15 @@ Adds a number of new ways to get score, or remove score for players
 #### CVAR List
  * "sm_score_enabled" "1" //sets whether score modifier is enabled
 
+<a name='sprinkler'>
+---
+###  </a>
+
+
+ * [Plugin - sprinkler.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinkler.smx?raw=true)
+ * [Source - sprinkler.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/sprinkler.sp?raw=true)
+
+
 <a name='sprinklers'>
 ---
 ### Sprinkler Removal 0.0.1</a>
@@ -499,7 +508,7 @@ Plugin for removing Sprinkers
 
 
 #### CVAR List
- * "sm_sprinklers_enabled" "1" //sets whether bot naming is enabled
+ * "sm_sprinklers_enabled" "0" //Set to 1 to remove sprinklers. 0 leaves them alone.
 
 <a name='suicide_bomb'>
 ---
@@ -538,7 +547,7 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
 
 <a name='theaterpicker'>
 ---
-### Theater Picker 0.0.2</a>
+### Theater Picker 0.0.3</a>
 Allows admins to set theater, and clients to vote
 
  * [Plugin - theaterpicker.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theaterpicker.smx?raw=true)

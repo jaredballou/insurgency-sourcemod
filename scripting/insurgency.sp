@@ -3,14 +3,13 @@
 #include <sdktools>
 #include <insurgency>
 #include <loghelper>
-#include <smjansson>
 #include <smlib>
 #undef REQUIRE_PLUGIN
 #include <updater>
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.3.0"
+#define PLUGIN_VERSION "1.3.1"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -76,7 +75,7 @@ public Plugin:myinfo =
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
-//	RegPluginLibrary("insurgency");	
+	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
 	CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
@@ -247,122 +246,6 @@ public GetStatus()
 //  InsLog(DEBUG,"line %s",line);
 //}
 //CloseHandle(fileHandle);
-	ParseTheater();
-}
-
-public ParseTheater()
-{
-//decl String:path[PLATFORM_MAX_PATH];
-//OpenFile(path,"r");
-//CloseHandle(fileHandle);
-
-	InsLog(DEBUG,"Starting ParseTheater");
-	new String:sGameMode[32],String:sTheaterOverride[32];
-	decl String:sTheaterPath[PLATFORM_MAX_PATH];
-	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
-	//Try to load override theater first
-	GetConVarString(FindConVar("mp_theater_override"), sTheaterOverride, sizeof(sTheaterOverride));
-	Format(sTheaterPath, sizeof(sTheaterPath), "scripts/theaters/%s.theater", sTheaterOverride);
-	//If it does not exist, load normal theater from data directory.
-	if (!FileExists(sTheaterPath)) {
-		Format(sTheaterPath, sizeof(sTheaterPath), "insurgency-data/theaters/%s/default_%s.theater", "1.7.2.3",sGameMode);
-	}
-
-//	BuildPath(Path_SM,sTheaterPath,PLATFORM_MAX_PATH,
-	if (!FileExists(sTheaterPath)) {
-		InsLog(WARN,"Cannot find theater %s",sTheaterPath);
-		return false;
-	}
-	InsLog(DEBUG,"Loading theater %s",sTheaterPath);
-	new Handle:g_hTheater = CreateKeyValues("theater");
-	FileToKeyValues(g_hTheater,sTheaterPath);
-//	BrowseKeyValues(g_hTheater);
-       	// Convert it to JSON
-	KvRewind(g_hTheater);
-	KeyValuesToFile(g_hTheater,"theater.kv.txt");
-       	new Handle:hObj = KeyValuesToJSON(g_hTheater);
-
-       	// And finally save the JSON object to a file
-       	// with indenting set to 2.
-//       	Format(sPath, sizeof(sPath), "theater.json");
-       	json_dump_file(hObj, "theater.json", 2);
-
-       	// Close the Handle to the JSON object, i.e. free it's memory
-       	// and free the Handle.
-       	CloseHandle(hObj);
-	return true;
-}
-stock Handle:KeyValuesToJSON(Handle:kv) {
-	new Handle:hObj = json_object();
-
-	//Traverse the keyvalues structure
-	IterateKeyValues(kv, hObj);
-
-	//return output
-	return hObj;
-}
-
-IterateKeyValues(&Handle:kv, &Handle:hObj) {
-	do {
-		new String:sSection[255];
-		KvGetSectionName(kv, sSection, sizeof(sSection));
-
-		new String:sValue[255];
-		KvGetString(kv, "", sValue, sizeof(sValue));
-
-		new bool:bIsSubSection = ((KvNodesInStack(kv) == 0) || (KvGetDataType(kv, "") == KvData_None && KvNodesInStack(kv) > 0));
-
-		//new KvDataTypes:type = KvGetDataType(kv, "");
-		//LogMessage("Section: %s, Value: %s, Type: %d", sSection, sValue, type);
-
-		if(!bIsSubSection) {
-		//if(type != KvData_None) {
-			json_object_set_new(hObj, sSection, json_string(sValue));
-		} else {
-			//We have no value, this must be another section
-			new Handle:hChild = json_object();
-
-			if (KvGotoFirstSubKey(kv, false)) {
-				IterateKeyValues(kv, hChild);
-				KvGoBack(kv);
-			}
-
-			json_object_set_new(hObj, sSection, hChild);
-		}
-
-	} while (KvGotoNextKey(kv, false));
-}
-
-BrowseKeyValues(Handle:kv)
-{
-	new String:buffer[255];
-	do
-	{
-		// You can read the section/key name by using KvGetSectionName here.
-		KvGetSectionName(kv, buffer, sizeof(buffer));
-		InsLog(DEBUG,"Section name is %s",buffer);
-		if (KvGotoFirstSubKey(kv, false))
-		{
-			// Current key is a section. Browse it recursively.
-			BrowseKeyValues(kv);
-			KvGoBack(kv);
-		}
-		else
-		{
-			// Current key is a regular key, or an empty section.
-			if (KvGetDataType(kv, NULL_STRING) != KvData_None)
-			{
-				KvGetString(kv, NULL_STRING, buffer, sizeof(buffer));
-				InsLog(DEBUG,"Value is %s",buffer);
-				// Read value of key here (use NULL_STRING as key name). You can
-				// also get the key name by using KvGetSectionName here.
-			}
-			else
-			{
-				// Found an empty sub section. It can be handled here if necessary.
-			}
-		}
-	} while (KvGotoNextKey(kv, false));
 }
 public OnLibraryAdded(const String:name[])
 {
@@ -494,6 +377,15 @@ reset_round_stats_all()
 		reset_round_stats(i);
 	}
 }
+/*
+DoRoundAwards
+At the end of each round, give awards for "best" of each stat
+TODO:
+ * Avoid giving least deaths and best accuracy to those who just joined or didn't take part.
+ * Add K/D counter to help with this or add points?
+ * Find a way to give points to actual in-game score before final tally is generated.
+*/
+
 DoRoundAwards()
 {
 	InsLog(DEBUG,"Running DoRoundAwards");
@@ -663,25 +555,6 @@ WstatsDumpAll()
 		dump_player_stats(i);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //=====================================================================================================
 
@@ -917,15 +790,6 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 	return retval;
 }
 
-
-
-
-
-
-
-
-
-
 public CheckInfiniteAmmo(client)
 {
 	if (GetConVarBool(cvarInfiniteAmmo))
@@ -948,19 +812,8 @@ public CheckInfiniteAmmo(client)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 //=====================================================================================================
+// Disable sliding
 public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:angles[3], &weapon)
 {
 	if ((GetConVarInt(cvarDisableSliding) == 1) || (GetClientTeam(client) == GetConVarInt(cvarDisableSliding)))
@@ -1087,6 +940,7 @@ public Action:Event_ControlPointNeutralized(Handle:event, const String:name[], b
 }
 public Action:Event_ControlPointStartTouchPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	return Plugin_Continue;
 }
 public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -1192,7 +1046,6 @@ public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dont
 			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
 		}
 	}
-
 	if (attacker)
 	{
 		attacker_userid = GetClientUserId(attacker);
@@ -1795,6 +1648,8 @@ public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadc
 	return Plugin_Continue;
 }
 
+// This adds the player class name (without some bits we don't want) to the list
+// TODO: Handle the "unwanted" bits better, perhaps read strings from theater/game translations?
 public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	//"squad_slot" "byte"
