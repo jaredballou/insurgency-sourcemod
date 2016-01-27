@@ -1,0 +1,541 @@
+"Phrases"
+{
+	// Mod Detection (Debug Messages)
+	"Insurgency"
+	{
+		"en"		"Detected Mod Insurgency"
+		"fr"		"Mod Insurgency détecté"
+		"de"		"Insurgency Mod gefunden"
+		"pl"		"Wykryto Mod Insurgency"
+		"ru"		"Обнаружен мод Insurgency"
+	}
+
+	"ZPS"
+	{
+		"en"		"Detected Mod Zombie Panic Source"
+		"fr"		"Mod Zombie Panic Source détecté"
+		"de"		"Zombie Panic Source Mod gefunden"
+		"pl"		"Wykryto Mod Zombie Panic Source"
+		"ru"		"Обнаружен мод Zombie Panic Source"
+	}
+
+	"TF2"
+	{
+		"en"		"Detected Mod Team Fortress 2"
+		"fr"		"Mod Team Fortress 2 détecté"
+		"de"		"Team Fortress 2 Mod gefunden"
+		"pl"		"Wykryto Mod Team Fortress 2"
+		"ru"		"Обнаружен мод Team Fortress 2"
+	}
+
+	"L4D"
+	{
+		"en"		"Detected Mod Left 4 Dead"
+		"fr"		"Mod Left 4 Dead détecté"
+		"de"		"Left 4 Dead Mod gefunden"
+		"pl"		"Wykryto Mod Left 4 Dead"
+		"ru"		"Обнаружен мод Left 4 Dead"
+	}
+
+	"CS"
+	{
+		"en"		"Detected Mod Counter-Strike"
+		"fr"		"Mod Counter-Strike détecté"
+		"de"		"Counter-Strike Mod gefunden"
+		"pl"		"Wykryto Mod Counter-Strike"
+		"ru"		"Обнаружен мод Counter-Strike"
+	}
+
+	"PVKII"
+	{
+		"en"		"Detected Mod PVKII"
+		"fr"		"Mod PVKII détecté"
+		"de"		"PVKII Mod gefunden"
+		"pl"		"Wykryto Mod PVK II"
+		"ru"		"Обнаружен мод PVKII"
+	}
+
+
+	// Debug Messages
+
+
+	// Plugin Messages
+
+	// Menu Messages
+	"Menu_Title"
+	{
+		"#format"	"{1:s}"
+		"en"		"Team Attacked by {1}"
+	}
+
+	"Menu_Forgive"
+	{
+		"en"		"Forgive Team Attacker"
+	}
+
+	"Menu_NoForgive"
+	{
+		"en"		"Do not forgive Team Attacker"
+	}
+
+	"Menu_Slay"
+	{
+		"en"		"Slay Team Attacker"
+	}
+
+	"Menu_Slap"
+	{
+		"#format"	"{1:i}"
+		"en"		"Slap Team Attacker for {1} damage"
+	}
+
+	"Menu_Beacon"
+	{
+		"en"		"Beacon Team Attacker"
+	}
+
+	"Menu_Burn"
+	{
+		"#format"	"{1:i}"
+		"en"		"Burn Team Attacker for {1} seconds"
+	}
+
+	"Menu_FireBomb"
+	{
+		"#format"	"{1:i}"
+		"en"		"FireBomb Team Attacker for {1} seconds"
+	}
+
+	"Menu_Freeze"
+	{
+		"#format"	"{1:i}"
+		"en"		"Freeze Team Attacker for {1} seconds"
+	}
+
+	"Menu_FreezeBomb"
+	{
+		"#format"	"{1:i}"
+		"en"		"FreezeBomb Team Attacker for {1} seconds"
+	}
+
+	"Menu_Slow"
+	{
+		"en"		"Slow Team Attacker"
+	}
+
+	"Menu_Blind"
+	{
+		"en"		"Blind Team Attacker"
+	}
+
+	"Menu_Drug"
+	{
+		"en"		"Drug Team Attacker"
+	}
+	"Menu_TimeBomb"
+	{
+		"#format"	"{1:i}"
+		"en"		"TimeBomb Team Attacker for {1} seconds"
+	}
+	"Menu_Resources"
+	{
+		"#format"	"{1:i}"
+		"en"		"Remove {1} resources from Team Attacker"
+	}
+
+
+	// Announce Messages
+	"Eject_Announce_Kick"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been kicked for exceeding the Team Attack limit."
+	}
+
+	"Eject_Announce_Ban"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been banned for exceeding the Team Attack limit."
+	}
+
+
+	// Log Messages
+	"Ban_Log"
+	{
+		"#format"	"{1:L}"
+		"en"		"{1} is being banned for exceeding the Team Attack limit."
+	}
+
+
+	// Victim Messages
+	"TK_Message_Victim"
+	{
+		"#format"	"{1:s}"
+		"en"		"You were Team Attacked by {1}."
+	}
+
+
+	"Eject_Message_Victim_Kick"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been kicked for Team Attacking you."
+	}
+
+	"Eject_Message_Victim_Ban"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been banned for Team Attacking you."
+	}
+
+
+	"Inform_Message_Victim_Forgive_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been forgiven for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_NoForgive_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has not been forgiven for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slay_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been slayed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slap_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been slapped for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Beacon_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been beaconed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Burn_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been set on fire for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_FireBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been fire bombed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Freeze_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been frozen for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_FreezeBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been freeze bombed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slow_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been slowed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Blind_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been blinded for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Drug_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been drugged for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_TimeBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has been time bombed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Resources_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} has had resources removed for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Forgive_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be forgiven for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_NoForgive_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will not be forgiven for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slay_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be slayed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slap_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be slapped next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Beacon_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be beaconed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Burn_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be set on fire next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_FireBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be fire bombed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Freeze_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be frozen next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_FreezeBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be freeze bombed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Slow_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be slowed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Blind_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be blinded next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Drug_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be drugged next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_TimeBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will be time bombed next round for Team Attacking you."
+	}
+
+	"Inform_Message_Victim_Resources_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} will have resources removed next round for Team Attacking you."
+	}
+
+	// TKer Messages
+	"TK_Message_TKer"
+	{
+		"#format"	"{1:s}"
+		"en"		"You Team Attacked {1}."
+	}
+
+	"Eject_Message_Kick_TKer"
+	{
+		"en"		"You have been kicked for exceeding the Team Attack limit on this server."
+	}
+
+	"Eject_Message_Ban_TKer"
+	{
+		"en"		"You have been banned for exceeding the Team Attack limit on this server."
+	}
+
+	"Inform_Message_TKer_Forgive_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been forgiven for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_NoForgive_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have not been forgiven for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slay_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been slayed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slap_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been slapped for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Beacon_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been beaconed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Burn_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been set on fire for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_FireBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been fire bombed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Freeze_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been frozen for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_FreezeBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been freeze bombed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slow_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been slowed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Blind_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been blinded for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Drug_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been drugged for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_TimeBomb_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have been time bombed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Resources_Now"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have had resources removed for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Forgive_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be forgiven for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_NoForgive_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will not be forgiven for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slay_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be slayed next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slap_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be slapped next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Beacon_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be beaconed next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Burn_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be set on fire next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_FireBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be fire bombed next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Freeze_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be frozen next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_FreezeBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be freeze bombed next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Slow_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be slowed next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Blind_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be blinded next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_Drug_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be drugged next spawn for Team Attacking {1}."
+	}
+
+	"Inform_Message_TKer_TimeBomb_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will be time bombed next spawn for Team Attacking {1}."
+	}
+	"Inform_Message_TKer_Resources_Spawn"
+	{
+		"#format"	"{1:s}"
+		"en"		"You will have resources removed next round for Team Attacking {1}."
+	}
+}
