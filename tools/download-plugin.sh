@@ -23,20 +23,24 @@ TMP_PATH="/tmp/sourcemod"
 # GitHub settings
 GITHUB_USER="jaredballou"
 GITHUB_REPO="insurgency-sourcemod"
-GITHUB_URL="https://github.com/${GITHUB_USER}/${GITHUB_REPO}/blob/master"
+GITHUB_BRANCH="master"
+GITHUB_URL="https://github.com/${GITHUB_USER}/${GITHUB_REPO}/blob/${GITHUB_BRANCH}"
 
 # Load the last commit hash, and get the latest one from the Github Web interface. Since their API locks me out... Grumble
 # TODO: Use this: https://api.github.com/repos/jaredballou/insurgency-sourcemod/commits/master
 GITHUB_COMMIT_FILE="${TMP_PATH}/last-commit"
-GITHUB_LOCAL_COMMIT=$(cat $GITHUB_COMMIT_FILE)
+GITHUB_LOCAL_COMMIT=$(cat "${GITHUB_COMMIT_FILE}" 2>/dev/null)
 
 # Get the latest commit hash
-curl -s "https://github.com/${GITHUB_USER}/${GITHUB_REPO}" | grep 'commit-tease-sha' | sed -e 's/^.*commit\/\([^"]*\).*/\1/g' > $GITHUB_COMMIT_FILE
-GITHUB_REMOTE_COMMIT=$(cat $GITHUB_COMMIT_FILE)
+curl -sL "https://github.com/${GITHUB_USER}/${GITHUB_REPO}" | grep 'commit-tease-sha' | sed -e 's/^.*commit\/\([^"]*\).*/\1/g' > "${GITHUB_COMMIT_FILE}"
+GITHUB_REMOTE_COMMIT=$(cat "${GITHUB_COMMIT_FILE}" 2>/dev/null)
 
 # List of plugins
 PLUGINS_SOURCE="doc/plugins.jballou.txt"
 PLUGINS_LIST="${TMP_PATH}/plugins.txt"
+
+# Readme file (for geting names)
+README_FILE="${TMP_PATH}/README.md"
 
 # Location of updater files. These are used to get a list of files that are required.
 UPDATE_PATH="${GITHUB_URL}/updater-data"
@@ -46,9 +50,9 @@ echo "Local Git commit: ${GITHUB_LOCAL_COMMIT}"
 echo "Latest Remote Git commit: ${GITHUB_REMOTE_COMMIT}"
 
 # Create temp dir if not created
-if [ ! -e $TMP_PATH ]
+if [ ! -e "${TMP_PATH}" ]
 then
-	mkdir -p $TMP_PATH
+	mkdir -p "${TMP_PATH}"
 fi
 
 # Doenload a file from GitHub
@@ -88,18 +92,19 @@ get_github_file() {
 	# If needed, download file
 	if [ $download -gt 0 ]
 	then
-		echo ">> Fetching ${filename}..."
-		curl -L "${fileurl}" 2>/dev/null 1> "${filepath}"
+		echo ">> Downloading \"${filename}\" to \"${filepath}\""
+		curl -sL "${fileurl}" 2>/dev/null 1> "${filepath}"
 	else
-		echo ">> ${filename} is up to date, skipping"
+		echo ">> \"${filename}\" is up to date"
 	fi
 }
 
+get_github_file "README.md" "${README_FILE}"
 get_github_file "${PLUGINS_SOURCE}" "${PLUGINS_LIST}"
 
+# No arguments, list all and exit
 if [ $# -lt 1 ]
 then
-	# No arguments, list all and exit
 	echo "================================================================================"
 	echo "Plugin Listing"
 	echo "================================================================================"
@@ -111,14 +116,19 @@ then
 		else
 			echo -n "[ ] "
 		fi
-		echo $PLUGIN
+		grep "^ \* <a href='#user-content-${PLUGIN}'>" "${README_FILE}" | sed -e "s/^.*user-content-\([^']\+\)[^>]\+>\([^<]\+\).*$/\1: \2/g"
+		#echo $PLUGIN
 	done
 	exit 1
 elif [ $# -lt 2 ]
 then
 	# One argument, just the plugin name
-	ACTION="install"
 	PLUGIN=$1
+	if [ -e "${SOURCEMOD_PATH}/plugins/${PLUGIN}.smx" ]; then
+		ACTION="update"
+	else
+		ACTION="install"
+	fi
 else
 	# More than one argument, for now get ACTION PLUGIN
 	ACTION=$1
@@ -128,14 +138,14 @@ fi
 # Only install right now, later may add update or checks?
 if [ $(grep -c "^${PLUGIN}\$" "${PLUGINS_LIST}") -gt 0 ]
 then
-	echo "> Installing ${PLUGIN}"
+	echo "> ${ACTION} ${PLUGIN}"
 
 	# Get the updater file
 	UPDATE_FILE="${TMP_PATH}/update-${PLUGIN}.txt"
 	get_github_file "updater-data/update-${PLUGIN}.txt" "${UPDATE_FILE}" 1
 
 	# Pull all Plugin and Source items from the file
-	FILE_LIST=$(egrep '"(Plugin|Source)"' "${UPDATE_FILE}" | cut -d'"' -f4 | sed -e 's/^Path_SM\///g')
+	FILE_LIST=$(egrep '^[[:space:]]*"(Plugin|Source)"' "${UPDATE_FILE}" | cut -d'"' -f4 | sed -e 's/^Path_SM\///g')
 
 	# Get all files. The function will check for file existence and checksums, so this is safe.
 	for FILE in $FILE_LIST
