@@ -13,7 +13,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.1</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.2</a>
  * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
@@ -239,7 +239,7 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.1</a>
+### Insurgency Support Library 1.3.2</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)

@@ -1,0 +1,62 @@
+﻿"Phrases"
+{
+	"Client Command Success"
+	{
+		"en"			"Rules have been displayed to:"
+		"pl"			"Zasady zostały wyświetlone dla:"
+		"de"			"Die Regeln wurden angezeigt für:"
+	}
+	"Player agrees to rules"
+	{
+		"en"			"Thank you.  Have fun and welcome to our community!"
+		"pl"			"Witaj w naszej społeczności, miłej zabawy!"
+		"de"			"Danke sehr. Hab Spaß und willkommen in unserer Gemeinschaft!"
+	}
+	"Player disagrees to rules"
+	{
+		"en"			"Sorry, you must agree to our rules and conditions"
+		"pl"			"Przepraszamy, musisz zaakceptować nasze warunki oraz zasady."
+		"de"			"Entschuldigung, du musst unseren Regeln und Bedingungen zustimmen."
+	}
+	"Player disagreed public"
+	{
+		"en"			"did not like our rules and conditions."
+		"pl"			"nie spodobały się nasze zasady i warunki."
+		"de"			"mochte unsere Regeln und Bedingungen nicht."
+	}
+	"Rules menu title"
+	{
+		"en"			"Server Rules & Conditions"
+		"pl"			"Zasady & Warunki Serwera"
+		"de"			"Server Regeln und Bedingungen"
+	}
+	"Agree Question"
+	{
+		"en"			"Do you agree to abide by our rules and conditions?"
+		"pl"			"Czy akceptujesz nasze zasady i warunki?"
+		"de"			"Stimmst du zu unsere Regeln und Bedingungen zu befolgen?"
+	}
+	"Yes Option"
+	{
+		"en"			"Yes, I agree"
+		"pl"			"Tak, akceptuję."
+		"de"			"Ja, ich stimme zu."
+	}
+	"No Option"
+	{
+		"en"			"No, I do not agree"
+		"pl"			"Nie, nie akceptuję."
+		"de"			"Nein, ich stimme nicht zu."
+	}
+	"Close Option"
+	{
+		"en" 			"Close Window"
+		"pl"			"Zamknij okno"
+		"de"      "Fenster schlieben"
+	}
+	"Log kick message"
+	{
+		"en"			"Player disagreed to rules (kicked):"
+		"pl"			"Gracz odrzucił zasady (wykopany):"
+	}
+}

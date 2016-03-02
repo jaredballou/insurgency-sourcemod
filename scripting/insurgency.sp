@@ -9,7 +9,7 @@
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.3.1"
+#define PLUGIN_VERSION "1.3.2"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -415,6 +415,7 @@ DoRoundAwards()
 	}
 	GiveRoundAward(STAT_SCORE,1,iHighStat[STAT_SCORE],"round_mvp","score");
 	GiveRoundAward(STAT_KILLS,1,iHighStat[STAT_KILLS],"round_kills","kills");
+/*
 	GiveRoundAward(STAT_DEATHS,-1,iLowStat[STAT_DEATHS],"round_deaths","deaths");
 	GiveRoundAward(STAT_SHOTS,1,iHighStat[STAT_SHOTS],"round_shots","shots");
 	GiveRoundAward(STAT_HITS,1,iHighStat[STAT_HITS],"round_hits","hits");
@@ -425,6 +426,7 @@ DoRoundAwards()
 	GiveRoundAward(STAT_DMG_GIVEN,1,iHighStat[STAT_DMG_GIVEN],"round_dmg_given","dmg_given");
 	GiveRoundAward(STAT_DMG_TAKEN,-1,iLowStat[STAT_DMG_TAKEN],"round_dmg_taken","dmg_taken");
 	GiveRoundAward(STAT_SUPPRESSIONS,1,iHighStat[STAT_SUPPRESSIONS],"round_suppressions","suppressions");
+*/
 }
 GiveRoundAward(RoundStatFields:stat,high,value,String:award[32],String:valname[32])
 {

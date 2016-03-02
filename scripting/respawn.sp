@@ -101,6 +101,7 @@ public OnPluginStart()
 	GetGameFolderName(game, sizeof(game));
 	if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
+		PrintToServer("[RESPAWN] Starting OnPluginLoad stuff");
 		// Next 14 lines of text are taken from Andersso's DoDs respawn plugin. Thanks :)
 		g_hGameConfig = LoadGameConfigFile("plugin.respawn");
 
@@ -116,6 +117,8 @@ public OnPluginStart()
 		}
 		if (StrEqual(game, "insurgency"))
 		{
+			PrintToServer("[RESPAWN] ForceRespawn for Insurgency");
+			//#AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "ForceRespawn");
 		}
 		g_hPlayerRespawn = EndPrepSDKCall();
@@ -357,6 +360,8 @@ public CreateRespawnTimer(client)
 
 public RespawnPlayer(client, target)
 {
+	PrintToServer("[RESPAWN] Starting RespawnPlayer");
+
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
 	LogAction(client, target, "\"%L\" respawned \"%L\"", client, target);
@@ -371,6 +376,8 @@ public RespawnPlayer(client, target)
 	}
 	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
+		PrintToServer("[RESPAWN] SDKCall");
+
 		SDKCall(g_hPlayerRespawn, target);
 	}
 }
