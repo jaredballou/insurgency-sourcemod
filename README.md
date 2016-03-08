@@ -26,8 +26,8 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
- * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.1</a>
- * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
+ * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.3</a>
 
 <a name='ammocheck'>
@@ -500,7 +500,7 @@ Adds a number of new ways to get score, or remove score for players
 
 <a name='sprinklers'>
 ---
-### Sprinkler Removal 0.0.1</a>
+### Sprinkler Removal 0.0.2</a>
 Plugin for removing Sprinkers
 
  * [Plugin - sprinklers.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinklers.smx?raw=true)
@@ -512,7 +512,7 @@ Plugin for removing Sprinkers
 
 <a name='suicide_bomb'>
 ---
-### Suicide Bombers 0.0.5</a>
+### Suicide Bombers 0.0.6</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)
@@ -526,6 +526,7 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
 #### CVAR List
  * "sm_suicidebomb_" "" //
  * "sm_suicidebomb_enabled" "0" //sets whether suicide bombs are enabled
+ * "sm_suicidebomb_spawn_delay" "30" //Do not detonate if player has been alive less than this many seconds
  * "sm_suicidebomb_explode_armed" "0" //Explode when killed if C4 or IED is in hand
  * "sm_suicidebomb_death_chance" "0.1" //Chance as a fraction of 1 that a bomber will explode when killed
  * "sm_suicidebomb_bots_only" "1" //Only apply suicide bomber code to bots

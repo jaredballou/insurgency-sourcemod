@@ -22,7 +22,7 @@
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
- * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.1</a>
- * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
+ * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.3</a>
 

@@ -3,7 +3,6 @@ backblast
 botcount
 botnames
 botspawns
-compass
 cooplobby
 cvarlist
 damagemod
