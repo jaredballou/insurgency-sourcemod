@@ -1,6 +1,6 @@
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.2</a>
+### Insurgency Support Library 1.3.3</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)

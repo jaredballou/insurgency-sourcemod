@@ -4,12 +4,11 @@
  * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
  * <a href='#user-content-botnames'>Bot Names 1.0</a>
  * <a href='#user-content-botspawns'>Bot spawns 0.2.7</a>
- * <a href='#user-content-compass'>Compass 0.0.6</a>
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.2</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
  * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
  * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
