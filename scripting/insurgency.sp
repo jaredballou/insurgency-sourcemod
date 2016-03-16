@@ -111,7 +111,7 @@ public OnPluginStart()
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "(0) do nothing, (1) disable for everyone, (2) disable for Security, (3) disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 
