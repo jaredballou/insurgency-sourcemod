@@ -3,7 +3,7 @@
 ### Score Modifiers 0.0.1</a>
 Adds a number of new ways to get score, or remove score for players
 
- * [Plugin - score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/score.smx?raw=true)
+ * [Plugin - score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/score.smx?raw=true)
  * [Source - score.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/score.sp?raw=true)
 
 

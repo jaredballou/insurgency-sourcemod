@@ -16,31 +16,46 @@
 
 #Files to update
 DOC_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Root SourceMod directory
 SOURCEMOD_PATH="$(dirname "${DOC_PATH}")"
 
+# GitHub URL to pull from
 GITHUB_URL="https://github.com/jaredballou/insurgency-sourcemod/blob/master"
 
+# List of plugins
 PLUGINS_FILE="${DOC_PATH}/plugins.jballou.txt"
 PLUGINS_LIST=$(cat "${PLUGINS_FILE}")
 
+# Table of Contents file
 TOC_FILE="${DOC_PATH}/include/TOC.md"
 
+# Finished README file
+README_FILE="${SOURCEMOD_PATH}/README.md"
+
+# Directory for storing Updater manifests
 UPDATE_PATH="${SOURCEMOD_PATH}/updater-data"
+
+# URL base for Updater manifests
 UPDATE_URLBASE="http://ins.jballou.com/sourcemod"
 
+# Libraries to ignore when creating dependency lists
 LIBRARY_IGNORE="updater"
 
+# Add a file to the Updater manifest
 function add_file_to_update() {
-	FILETYPE="${1}"
-	FILEPATH="Path_SM/${2}"
-	if [ $(grep -c -i "\"${FILETYPE}\"[^\"]*\"${FILEPATH}\"" "${DOC_UPDATER_FILE}") -eq 0 ]
+	LINE="${1}"
+	if [ $(grep -c -i "^${LINE}\$" "${DOC_UPDATER_FILE}") -eq 0 ]
 	then
-		echo "Adding ${2} to Files for ${ITEM}"
-		echo -e "\t\t\"${FILETYPE}\"\t\"${FILEPATH}\"" >> "${DOC_UPDATER_FILE}"
+		echo "Adding ${LINE} to Files for ${ITEM}"
+		echo "${LINE}" >> "${DOC_UPDATER_FILE}"
 	fi
 }
-#Loop through all files
+
+# Blank out TOC file
 echo > "${TOC_FILE}"
+
+#Loop through all files
 for ITEM in $PLUGINS_LIST
 do
 	echo "Processing ${ITEM}"
@@ -49,6 +64,23 @@ do
 	# These paths refer to their location relative to SourceMod root
 	PLUGIN_PATH="plugins/${ITEM}.smx"
 	SCRIPT_PATH="scripting/${ITEM}.sp"
+
+	# If the plugin doesn't exist, assume it is disabled
+	if [ ! -e "../${PLUGIN_PATH}" ]; then
+		PLUGIN_PATH="plugins/disabled/${ITEM}.smx"
+	fi
+
+	# If the plugin is still not present, or is older than the source script, compile
+	if [ ! -e "../${PLUGIN_PATH}" ] || [ "../${PLUGIN_PATH}" -ot "../${SCRIPT_PATH}" ]; then
+		echo "Compiling ${ITEM}"
+		../scripting/spcomp "../${SCRIPT_PATH}" -o"../${PLUGIN_PATH}"
+		if [ $? -gt 0 ]; then
+			echo "ABORT: Compilation of \"../${SCRIPT_PATH}\" failed!"
+			exit
+		else
+			git add "../${PLUGIN_PATH}"
+		fi
+	fi
 
 	# These are the actual on-disk paths for the files themselves
 	PLUGIN="${SOURCEMOD_PATH}/${PLUGIN_PATH}"
@@ -81,36 +113,46 @@ do
 	done
 
 	# Merge items in the updater file and anything we added manually to the plugins/updater text file
-	egrep '"(Plugin|Source)"' "${UPDATE}" >> "${DOC_UPDATER_FILE}"
+	for LINE in $(egrep '(Plugin|Source)[":]' "${UPDATE}" | tr -d \" | awk '{print $1":"$2}'); do
+		add_file_to_update "${LINE}"
+	done
+# >> "${DOC_UPDATER_FILE}"
 
 	# These are lists of the items that we need to put into the updater
-	add_file_to_update "Plugin" "${PLUGIN_PATH}"
-	add_file_to_update "Source" "${SCRIPT_PATH}"
+	add_file_to_update "Plugin:Path_SM/${PLUGIN_PATH/disabled\//}"
+	add_file_to_update "Source:Path_SM/${SCRIPT_PATH}"
 
 	# Collect CVARs
 	grep CreateConVar "${SCRIPT}" | grep -v '_version"' | sed -e 's/""/NULLSTRING/g' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | sed -e 's/"//g' | awk -F',' '{print $1" "$2" "$3}' | sed -e 's/;;/,/g' | awk '{printf " * \""$1"\" \""$2"\" //"$3;for(i=4;i<=NF;i++){printf " %s", $i}printf "\n"}' | sed -e 's/NULLSTRING//g' > "${DOC_CVAR_FILE}"
 
 	# Colelct dependencies
 	echo -ne > "${DOC_DEPENDENCY_FILE}"
-	INCLUDES=$(grep -o '^#include <[^>]\+' "${SCRIPT}" | cut -d'<' -f2)
-	for INC in $INCLUDES
+
+	# Included files
+	for INCLUDE in $(grep -o '^#include <[^>]\+' "${SCRIPT}" | cut -d'<' -f2)
 	do
-		if [ $(grep "^$(basename "${INC}")\$" "${PLUGINS_FILE}" -c) -gt 0 ]
+		if [ $(grep "^$(basename "${INCLUDE}")\$" "${PLUGINS_FILE}" -c) -gt 0 ]
 		then
-			echo " * [Source Include - ${INC}.inc](${GITHUB_URL}/scripting/include/${INC}.inc?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
-			add_file_to_update "Source" "scripting/include/${INC}.inc"
+			echo " * [Source Include - ${INCLUDE}.inc](${GITHUB_URL}/scripting/include/${INCLUDE}.inc?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
+			add_file_to_update "Source:Path_SM/scripting/include/${INCLUDE}.inc"
 		fi
 	done
-	for CFGFILE in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
+
+	# Gamedata files
+	for GAMEDATA in $(grep -Po 'LoadGameConfigFile\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
-		echo " * [gamedata/${CFGFILE}.txt](${GITHUB_URL}/gamedata/${CFGFILE}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
-		add_file_to_update "Plugin" "gamedata/${CFGFILE}.txt"
+		echo " * [gamedata/${GAMEDATA}.txt](${GITHUB_URL}/gamedata/${GAMEDATA}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
+		add_file_to_update "Plugin:Path_SM/gamedata/${GAMEDATA}.txt"
 	done
-	for TRANSFILE in $(grep -Po 'LoadTranslations\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
+
+	# Translations
+	for TRANSLATION in $(grep -Po 'LoadTranslations\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
-		echo " * [translations/${TRANSFILE}.txt](${GITHUB_URL}/translations/${TRANSFILE}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
-		add_file_to_update "Plugin" "translations/${TRANSFILE}.txt"
+		echo " * [translations/${TRANSLATION}.txt](${GITHUB_URL}/translations/${TRANSLATION}.txt?raw=true)" >> "${DOC_DEPENDENCY_FILE}"
+		add_file_to_update "Plugin:Path_SM/translations/${TRANSLATION}.txt"
 	done
+
+	# Libraries
 	for LIBRARY in $(grep -Po 'LibraryExists\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
 		if [ "$(grep "${LIBRARY}" "${DOC_PATH}/plugins.jballou.txt")" == "${LIBRARY}" ]
@@ -125,44 +167,53 @@ do
 		fi
 	done
 
+	# Make sure the Updater URL in the source script is correct
         CURURL=$(grep -i '^#define.*UPDATE_URL' "${SCRIPT}" | cut -d'"' -f2)
 	NEWURL="${UPDATE_URLBASE}/update-${ITEM}.txt"
 
+	# Make sure the version and name in the Updater file is correct
 	CURVER=$(grep '"Latest".*"[0-9\.]*"' "${UPDATE}" | cut -d'"' -f4)
 	NEWVER=$(grep -i '^#define.*_version' "${SCRIPT}" | cut -d'"' -f2)
+
+	# Get name from source script
         NEWNAME=$(grep -i '^#define.*PLUGIN_NAME' "${SCRIPT}" | cut -d'"' -f2)
         if [ "${NEWNAME}" == "" ]
         then
                 NEWNAME=$(grep -m1 -P '^[\s]*name[\s]*=.*"' "${SCRIPT}" | cut -d'"' -f2)
         fi
+	# Remove "[INS] " prefix from name
 	NEWNAME=$(echo "${NEWNAME}" | sed -e 's/\[INS\] //')
+
+	# Get the description from the source script
         NEWDESC=$(grep -i '^#define.*PLUGIN_DESCRIPTION' "${SCRIPT}" | cut -d'"' -f2)
         if [ "${NEWDESC}" == "" ]
         then
                 NEWDESC=$(grep -m1 -P '^[\s]*description[\s]*=.*"' "${SCRIPT}" | cut -d'"' -f2)
         fi
 
+	# Update Notes line with name of plugin and description
 	CURNOTES=$(grep -m1 -i '"Notes".*"' "${UPDATE}" | cut -d'"' -f4|sed -e 's/[]\/$*.^|[]/\\&/g')
 	NEWNOTES=$(echo "${NEWNAME} - ${NEWDESC}" | sed -e 's/[]\/$*.^|[]/\\&/g')
 
+	# Create GitHub friendly title and link name for anchor
         NEWTITLE="${NEWNAME} ${NEWVER}"
         NEWHREF=$(echo "${NEWTITLE}" | sed -e 's/ /-/g' -e 's/[^a-zA-Z0-9-]//g')
 
-	# Update updater manifests
+	# Update URL in script to point to Updater file
 	if [ "${CURURL}" != "${NEWURL}" ]
 	then
 		echo "Changing ${ITEM} UPDATE_URL from \"${CURURL}\" to \"${NEWURL}\""
 		sed -e "s,^\#define.*UPDATE_URL[\s].*\$,\#define UPDATE_URL \"${NEWURL}\"," -i "${SCRIPT}"
 	fi
 
-	#Update Name in update file
+	# Update Name in Updater file
 	if [ "${CURNOTES}" != "${NEWNOTES}" ]
 	then
 		echo "Changing ${ITEM} Title Note from \"${CURNOTES}\" to \"${NEWNOTES}\""
 		sed -e "s\`\"Notes\".*\$\`\"Notes\"\t\t\"${NEWNOTES}\"\`" -i "${UPDATE}"
 	fi
 
-	#Update Version in update file
+	# Update Version in Updater file
 	if [ "${CURVER}" != "${NEWVER}" ]
 	then
 		echo "Bumping ${ITEM} from ${CURVER} to ${NEWVER}"
@@ -170,28 +221,43 @@ do
 	fi
 
 	# Update plugin documentation for readme
+
+	# Add entry to Table of Contents
 	echo -e " * <a href='#user-content-${ITEM}'>${NEWNAME} ${NEWVER}</a>" >> "${TOC_FILE}"
 
+	# Create plugin document file
 	echo -e "<a name='${ITEM}'>\n---\n### ${NEWTITLE}</a>" > "${DOC_PLUGIN_FILE}"
+
+	# Short description
 	echo "${NEWDESC}" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
-	echo " * [Plugin - ${ITEM}.smx](${GITHUB_URL}/plugins/${ITEM}.smx?raw=true)" >> "${DOC_PLUGIN_FILE}"
-	echo " * [Source - ${ITEM}.sp](${GITHUB_URL}/scripting/${ITEM}.sp?raw=true)" >> "${DOC_PLUGIN_FILE}"
+
+	# Download links
+	echo " * [Plugin - ${ITEM}.smx](${GITHUB_URL}/${PLUGIN_PATH}?raw=true)" >> "${DOC_PLUGIN_FILE}"
+	echo " * [Source - ${ITEM}.sp](${GITHUB_URL}/${SCRIPT_PATH}?raw=true)" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
+
+	# Include longer Description document if available
 	cat "${DOC_DESC_FILE}" >> "${DOC_PLUGIN_FILE}"
 	echo "" >> "${DOC_PLUGIN_FILE}"
+
+	# Include dependency information
 	if [ $(wc "${DOC_DEPENDENCY_FILE}" | awk '{print $2}') -gt 0 ]
 	then
 		echo "#### Dependencies" >> "${DOC_PLUGIN_FILE}"
 		cat "${DOC_DEPENDENCY_FILE}" >> "${DOC_PLUGIN_FILE}"
 		echo "" >> "${DOC_PLUGIN_FILE}"
 	fi
+
+	# Include CVAR listing
 	if [ $(wc "${DOC_CVAR_FILE}" | awk '{print $2}') -gt 0 ]
 	then
 		echo "#### CVAR List" >> "${DOC_PLUGIN_FILE}"
 		cat "${DOC_CVAR_FILE}" >> "${DOC_PLUGIN_FILE}"
 		echo "" >> "${DOC_PLUGIN_FILE}"
 	fi
+
+	# Include TODO file
 	if [ $(wc "${DOC_TODO_FILE}" | awk '{print $2}') -gt 0 ]
 	then
 		echo "#### Todo" >> "${DOC_PLUGIN_FILE}"
@@ -201,13 +267,18 @@ do
 
 	# Update the updater files with the Plugin and Source items we have collected
 	# TODO: Fix this hacky shitshow and do this a better way
-	sed -e 's/#.*//' -e 's/[ ^I]*$//' -e '/^$/ d' "${DOC_UPDATER_FILE}" > /tmp/updater-cache
-	awk '{print "\t\t"$1"\t"$2}' /tmp/updater-cache | sort -u > "${DOC_UPDATER_FILE}"
 	perl -i -p0e 's/("Files"[^\{]*\{)[^\}]*\}/\1\nPUT_FILES_HERE\n\t\}/s' "${UPDATE}"
 	sed -i -e "/PUT_FILES_HERE/{r ${DOC_UPDATER_FILE}" -e 'd}' "${UPDATE}"
+	sed -i -e 's/\(Plugin\|Source\):\(.*\)$/\t\t"\1"\t"\2"/g' "${UPDATE}"
+
+#	UPDATER_FILES=$(sort -u "${DOC_UPDATER_FILE}" | sed -e 's/#.*//' -e 's/[ ^I]*$//' -e '/^$/ d')
+#	sed -i -e "/PUT_FILES_HERE/{r ${DOC_UPDATER_FILE}" -e 'd}' "${UPDATE}"
+#	sed -i -e "#PUT_FILES_HERE#$(echo $UPDATER_FILES | sed -e 's/[ \t]\+/\n/g' | 
+#	echo $UPDATER_FILES | sed -e 's/[ \t]\+/\n/g' | sed -e "s/^\([^:]*\):\(.*\)$/\t\t'\1'\t'\2'/g"
 
 done
 echo >> "${TOC_FILE}"
-cat "${DOC_PATH}/include/HEADER.md" "${DOC_PATH}/include/TOC.md" "${DOC_PATH}/plugins/"*.md "${DOC_PATH}/include/FOOTER.md" > "${SOURCEMOD_PATH}/README.md"
+# Create finished README
+cat "${DOC_PATH}/include/HEADER.md" "${DOC_PATH}/include/TOC.md" "${DOC_PATH}/plugins/"*.md "${DOC_PATH}/include/FOOTER.md" > "${README_FILE}"
 
 git add *
