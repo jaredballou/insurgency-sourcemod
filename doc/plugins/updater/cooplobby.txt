@@ -1,2 +1,2 @@
-		"Plugin"	"Path_SM/plugins/cooplobby.smx"
-		"Source"	"Path_SM/scripting/cooplobby.sp"
+Plugin:Path_SM/plugins/cooplobby.smx
+Source:Path_SM/scripting/cooplobby.sp

@@ -11,7 +11,7 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_DESCRIPTION "Plugin for removing Sprinkers"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-sprinklers.txt"
 
@@ -64,7 +64,7 @@ public remove_sprinklers()
 		if(GetEdictClassname(i, name, sizeof(name))){
 			if(StrEqual("prop_sprinkler", name,false)){
 				RemoveEdict(i);
-				PrintToServer("Deleted sprinkler");
+				PrintToServer("Deleted sprinkler %d",i);
 			}
 		}
 	}

@@ -1,0 +1,51 @@
+﻿"Phrases"
+{
+	"Rule Line 1"
+	{
+		"en"			"* Loud-mouthed punk kids (LMPKs) will be permabanned"
+    "de"			"*Dumm-schreiende Kleingeister werden permanent gebannt"
+	}
+	"Rule Line 2"
+	{
+		"en"			"* Racists will be permabanned"
+    "de"			"* Rassisten werden permanent gebannt"
+	}
+	"Rule Line 3"
+	{
+		"en"			"* Porno peddlers will be permabanned"
+    "de"			"* Porno-Händler werden permanent gebannt"
+	}
+	"Rule Line 4"
+	{
+		"en"			"* No cursing - the occasional piss, damn or hell are fine"
+    "de"			"* Kein Fluchen - ein gelegentliches Verflucht, Mist, oder zur Hölle sind ok"
+	}
+	"Rule Line 5"
+	{
+		"en"			"* No spamming text or voice"
+    "de"			"* Kein Spammen von Chat oder Voice"
+	}
+	"Rule Line 6"
+	{
+		"en"			"* No derogatory or inflammatory comments (pwnt, raped, newb, etc)"
+    "de"			"* Keine Abfälligen oder aufrührerischen Kommentare (pwnt, raped, newb, etc)"
+	}
+	"Rule Line 7"
+	{
+		"en"			"* Do not use hacks, exploits or glitches"
+    "de"			"* Benutzt keine Cheats, Bugs oder Mapfehler"
+	}
+	"Rule Line 8"
+	{
+		"en"			"* Have Fun!"
+    "de"			"* Habt Spaß!"
+	}
+	"Rule Line 9"
+	{
+		"en"			""
+	}
+	"Rule Line 10"
+	{
+		"en"			""
+	}
+}

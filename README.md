@@ -4,30 +4,23 @@ This repository has a complete installation of SourceMod, including all my plugi
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
  * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
- * <a href='#user-content-backblast'>Backblast 0.0.2</a>
  * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
  * <a href='#user-content-botnames'>Bot Names 1.0</a>
  * <a href='#user-content-botspawns'>Bot spawns 0.2.7</a>
- * <a href='#user-content-compass'>Compass 0.0.6</a>
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.1</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
  * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
- * <a href='#user-content-navmesh-chat'>Navmesh Chat 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
- * <a href='#user-content-looting'>Looting 0.0.1</a>
  * <a href='#user-content-nofog'>No Fog 0.0.1</a>
- * <a href='#user-content-noobj'>No Objectives 0.0.1</a>
- * <a href='#user-content-pistolsonly'>Pistols Only 0.0.3</a>
- * <a href='#user-content-prop_dynamic'>Prop Removal 0.0.1</a>
  * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
- * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.1</a>
- * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.5</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
+ * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.3</a>
 
 <a name='ammocheck'>
@@ -118,7 +111,7 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 ### Bot spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
- * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+ * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/botspawns.smx?raw=true)
  * [Source - botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
@@ -239,7 +232,7 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
 
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.1</a>
+### Insurgency Support Library 1.3.3</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
@@ -258,7 +251,7 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
  * "sm_insurgency_infinite_ammo" "0" //Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_infinite_magazine" "0" //Infinite magazine, will never need reloading.
- * "sm_insurgency_disable_sliding" "0" //
+ * "sm_insurgency_disable_sliding" "0" //0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents
  * "sm_insurgency_log_level" "error" //Logging level, values can be: all, trace, debug, info, warn, error
 
 #### Todo
@@ -330,7 +323,7 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
 ### Navmesh Export 0.0.3</a>
 Exports navmesh data in JSON format
 
- * [Plugin - navmesh-export.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh-export.smx?raw=true)
+ * [Plugin - navmesh-export.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/navmesh-export.smx?raw=true)
  * [Source - navmesh-export.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh-export.sp?raw=true)
 
 Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should need this, but it's released for completeness.
@@ -346,7 +339,7 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 ### SourcePawn Navigation Mesh Parser 1.0.3</a>
 A plugin that can read Valve's Navigation Mesh.
 
- * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh.smx?raw=true)
+ * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/navmesh.smx?raw=true)
  * [Source - navmesh.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh.sp?raw=true)
 
 Navmesh parser, created by KitRifty and modified by me to support Hiding Spots and other natives that were missing.
@@ -477,7 +470,7 @@ Add slight nudges to in-flight rockets to reduce punishment of laser beam RPGs. 
 ### Score Modifiers 0.0.1</a>
 Adds a number of new ways to get score, or remove score for players
 
- * [Plugin - score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/score.smx?raw=true)
+ * [Plugin - score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/score.smx?raw=true)
  * [Source - score.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/score.sp?raw=true)
 
 
@@ -500,7 +493,7 @@ Adds a number of new ways to get score, or remove score for players
 
 <a name='sprinklers'>
 ---
-### Sprinkler Removal 0.0.1</a>
+### Sprinkler Removal 0.0.2</a>
 Plugin for removing Sprinkers
 
  * [Plugin - sprinklers.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinklers.smx?raw=true)
@@ -512,7 +505,7 @@ Plugin for removing Sprinkers
 
 <a name='suicide_bomb'>
 ---
-### Suicide Bombers 0.0.5</a>
+### Suicide Bombers 0.0.6</a>
 Adds suicide bomb for bots
 
  * [Plugin - suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)
@@ -526,6 +519,7 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
 #### CVAR List
  * "sm_suicidebomb_" "" //
  * "sm_suicidebomb_enabled" "0" //sets whether suicide bombs are enabled
+ * "sm_suicidebomb_spawn_delay" "30" //Do not detonate if player has been alive less than this many seconds
  * "sm_suicidebomb_explode_armed" "0" //Explode when killed if C4 or IED is in hand
  * "sm_suicidebomb_death_chance" "0.1" //Chance as a fraction of 1 that a bomber will explode when killed
  * "sm_suicidebomb_bots_only" "1" //Only apply suicide bomber code to bots

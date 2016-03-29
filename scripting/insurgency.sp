@@ -9,7 +9,7 @@
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.3.1"
+#define PLUGIN_VERSION "1.3.3"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
@@ -111,7 +111,7 @@ public OnPluginStart()
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "(0) do nothing, (1) disable for everyone, (2) disable for Security, (3) disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 
@@ -413,6 +413,7 @@ DoRoundAwards()
 		}
 //		reset_round_stats(i);
 	}
+/*
 	GiveRoundAward(STAT_SCORE,1,iHighStat[STAT_SCORE],"round_mvp","score");
 	GiveRoundAward(STAT_KILLS,1,iHighStat[STAT_KILLS],"round_kills","kills");
 	GiveRoundAward(STAT_DEATHS,-1,iLowStat[STAT_DEATHS],"round_deaths","deaths");
@@ -425,6 +426,7 @@ DoRoundAwards()
 	GiveRoundAward(STAT_DMG_GIVEN,1,iHighStat[STAT_DMG_GIVEN],"round_dmg_given","dmg_given");
 	GiveRoundAward(STAT_DMG_TAKEN,-1,iLowStat[STAT_DMG_TAKEN],"round_dmg_taken","dmg_taken");
 	GiveRoundAward(STAT_SUPPRESSIONS,1,iHighStat[STAT_SUPPRESSIONS],"round_suppressions","suppressions");
+*/
 }
 GiveRoundAward(RoundStatFields:stat,high,value,String:award[32],String:valname[32])
 {
@@ -1628,7 +1630,8 @@ public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBro
 			//return Plugin_Stop;
 		}
 	}
-	DoRoundAwards();
+// jballou 10MAR2016 - Disabling until I can fix these. Will likely break out into a new plugin.
+//	DoRoundAwards();
 	return Plugin_Continue;
 }
 public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )

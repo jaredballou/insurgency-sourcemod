@@ -1,2 +1,2 @@
-		"Plugin"	"Path_SM/plugins/damagemod.smx"
-		"Source"	"Path_SM/scripting/damagemod.sp"
+Plugin:Path_SM/plugins/damagemod.smx
+Source:Path_SM/scripting/damagemod.sp

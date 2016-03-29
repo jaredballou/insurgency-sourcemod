@@ -26,6 +26,12 @@ GITHUB_REPO="insurgency-sourcemod"
 GITHUB_BRANCH="master"
 GITHUB_URL="https://github.com/${GITHUB_USER}/${GITHUB_REPO}/blob/${GITHUB_BRANCH}"
 
+# Create temp dir if not created
+if [ ! -e "${TMP_PATH}" ]
+then
+	mkdir -p "${TMP_PATH}"
+fi
+
 # Load the last commit hash, and get the latest one from the Github Web interface. Since their API locks me out... Grumble
 # TODO: Use this: https://api.github.com/repos/jaredballou/insurgency-sourcemod/commits/master
 GITHUB_COMMIT_FILE="${TMP_PATH}/last-commit"
@@ -48,12 +54,6 @@ UPDATE_PATH="${GITHUB_URL}/updater-data"
 # Display commit hashes
 echo "Local Git commit: ${GITHUB_LOCAL_COMMIT}"
 echo "Latest Remote Git commit: ${GITHUB_REMOTE_COMMIT}"
-
-# Create temp dir if not created
-if [ ! -e "${TMP_PATH}" ]
-then
-	mkdir -p "${TMP_PATH}"
-fi
 
 # Doenload a file from GitHub
 get_github_file() {
@@ -99,12 +99,7 @@ get_github_file() {
 	fi
 }
 
-get_github_file "README.md" "${README_FILE}"
-get_github_file "${PLUGINS_SOURCE}" "${PLUGINS_LIST}"
-
-# No arguments, list all and exit
-if [ $# -lt 1 ]
-then
+list_plugins() {
 	echo "================================================================================"
 	echo "Plugin Listing"
 	echo "================================================================================"
@@ -119,6 +114,24 @@ then
 		grep "^ \* <a href='#user-content-${PLUGIN}'>" "${README_FILE}" | sed -e "s/^.*user-content-\([^']\+\)[^>]\+>\([^<]\+\).*$/\1: \2/g"
 		#echo $PLUGIN
 	done
+	echo " "
+}
+
+display_help() {
+	echo "To install a plugin:"
+	echo "${BASH_SOURCE[0]} <PLUGIN>"
+	echo "Where <PLUGIN> is one of the following:"
+	echo $(cat "${PLUGINS_LIST}")
+	echo " "
+}
+get_github_file "README.md" "${README_FILE}"
+get_github_file "${PLUGINS_SOURCE}" "${PLUGINS_LIST}"
+
+# No arguments, list all and exit
+if [ $# -lt 1 ]
+then
+	list_plugins
+	display_help
 	exit 1
 elif [ $# -lt 2 ]
 then

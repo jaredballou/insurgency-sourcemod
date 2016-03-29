@@ -1,2 +1,0 @@
-		"Plugin"	"Path_SM/plugins/backblast.smx"
-		"Source"	"Path_SM/scripting/backblast.sp"

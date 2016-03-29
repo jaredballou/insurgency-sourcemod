@@ -1,0 +1,44 @@
+---
+plugins:
+  build:
+    - ammocheck
+    - botcount
+    - botnames
+    - botspawns
+    - cooplobby
+    - cvarlist
+    - damagemod
+    - hlstatsx
+    - insurgency
+    - navmesh
+    - navmesh-export
+    - nofog
+    - respawn
+    - restrictedarea
+    - rpgdrift
+    - score
+    - sprinklers
+    - suicide_bomb
+    - theaterpicker
+  disabled:
+  nobuild:
+    - backblast
+    - navmesh-chat
+    - looting
+    - noobj
+    - pistolsonly
+    - prop_dynamic
+  thirdparty:
+    - advertisements
+    - afk_manager
+    - clientprefs
+    - gem_damage_report
+    - killer_info_display
+    - serverhop
+    - simple-chatprocessor
+    - sm_downloader
+    - smtactics
+    - sourcebans_listener
+    - sourcebans
+    - updater
+    - webshortcuts

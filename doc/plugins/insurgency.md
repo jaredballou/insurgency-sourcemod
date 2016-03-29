@@ -1,6 +1,6 @@
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.1</a>
+### Insurgency Support Library 1.3.3</a>
 Provides functions to support Insurgency and fixes logging
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
@@ -19,7 +19,7 @@ Creates hooks and events for Insurgency-specific stat logging, entities, and eve
  * "sm_insurgency_checkpoint_counterattack_capture" "0" //Enable counterattack by bots to capture points in Checkpoint
  * "sm_insurgency_infinite_ammo" "0" //Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_infinite_magazine" "0" //Infinite magazine, will never need reloading.
- * "sm_insurgency_disable_sliding" "0" //
+ * "sm_insurgency_disable_sliding" "0" //0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents
  * "sm_insurgency_log_level" "error" //Logging level, values can be: all, trace, debug, info, warn, error
 
 #### Todo

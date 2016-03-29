@@ -4,16 +4,16 @@
 	{
 		"Version"
 		{
-			"Latest"		"1.3.1"
+			"Latest"		"1.3.3"
 		}
 		"Notes"		"Insurgency Support Library - Provides functions to support Insurgency and fixes logging"
 	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
 		"Plugin"	"Path_SM/plugins/insurgency.smx"
-		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/insurgency.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
+		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
 	}
 }

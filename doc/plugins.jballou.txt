@@ -1,22 +1,15 @@
 ammocheck
-backblast
 botcount
 botnames
 botspawns
-compass
 cooplobby
 cvarlist
 damagemod
 hlstatsx
 insurgency
 navmesh
-navmesh-chat
 navmesh-export
-looting
 nofog
-noobj
-pistolsonly
-prop_dynamic
 respawn
 restrictedarea
 rpgdrift
@@ -24,3 +17,4 @@ score
 sprinklers
 suicide_bomb
 theaterpicker
+
