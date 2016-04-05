@@ -8,17 +8,23 @@
 #include <sdktools>
 #include <navmesh>
 
-#define PLUGIN_VERSION "1.0.3"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-navmesh.txt"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Read navigation mesh"
+#define PLUGIN_NAME "[INS] Navmesh Parser"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "1.0.4"
+#define PLUGIN_WORKING 1
 
-public Plugin:myinfo = 
-{
-    name = "SourcePawn Navigation Mesh Parser",
-    author	= "KitRifty",
-    description	= "A plugin that can read Valve's Navigation Mesh.",
-    version = PLUGIN_VERSION,
-    url = ""
-}
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-navmesh.txt"
 
 #define UNSIGNED_INT_BYTE_SIZE 4
 #define UNSIGNED_CHAR_BYTE_SIZE 1

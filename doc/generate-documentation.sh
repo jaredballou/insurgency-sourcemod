@@ -17,18 +17,24 @@
 #Files to update
 DOC_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Temp path
+TMP_PATH="${DOC_PATH}/tmp"
+
 # Root SourceMod directory
 SOURCEMOD_PATH="$(dirname "${DOC_PATH}")"
 
 # GitHub URL to pull from
-GITHUB_URL="https://github.com/jaredballou/insurgency-sourcemod/blob/master"
+GITHUB_USER="jaredballou"
+GITHUB_REPO="insurgency-sourcemod"
+GITHUB_BRANCH="master"
+GITHUB_URL="https://github.com/${GITHUB_USER}/${GITHUB_REPO}/blob/${GITHUB_BRANCH}"
 
 # List of plugins
 PLUGINS_FILE="${DOC_PATH}/plugins.jballou.txt"
 PLUGINS_LIST=$(cat "${PLUGINS_FILE}")
 
 # Table of Contents file
-TOC_FILE="${DOC_PATH}/include/TOC.md"
+TOC_FILE="${TMP_PATH}/__TOC.md"
 
 # Finished README file
 README_FILE="${SOURCEMOD_PATH}/README.md"
@@ -88,12 +94,12 @@ do
 	UPDATE="${UPDATE_PATH}/update-${ITEM}.txt"
 
 	# And these are all the pieces that make up each plugin's documentation
-	DOC_UPDATER_FILE="${DOC_PATH}/plugins/updater/${ITEM}.txt"
-	DOC_DEPENDENCY_FILE="${DOC_PATH}/plugins/dependencies/${ITEM}.md"
-	DOC_DESC_FILE="${DOC_PATH}/plugins/description/${ITEM}.md"
-	DOC_TODO_FILE="${DOC_PATH}/plugins/todo/${ITEM}.md"
-	DOC_CVAR_FILE="${DOC_PATH}/plugins/cvar/${ITEM}.md"
-	DOC_PLUGIN_FILE="${DOC_PATH}/plugins/${ITEM}.md"
+	DOC_UPDATER_FILE="${TMP_PATH}/updater/${ITEM}.txt"
+	DOC_DEPENDENCY_FILE="${TMP_PATH}/dependencies/${ITEM}.md"
+	DOC_DESC_FILE="${TMP_PATH}/description/${ITEM}.md"
+	DOC_TODO_FILE="${TMP_PATH}/todo/${ITEM}.md"
+	DOC_CVAR_FILE="${TMP_PATH}/cvar/${ITEM}.md"
+	DOC_PLUGIN_FILE="${TMP_PATH}/${ITEM}.md"
 
 	# Create updater file if missing
 	if [ ! -e "${UPDATE}" ]
@@ -155,7 +161,7 @@ do
 	# Libraries
 	for LIBRARY in $(grep -Po 'LibraryExists\([^\)]+\)' "${SCRIPT}" | cut -d'"' -f2)
 	do
-		if [ "$(grep "${LIBRARY}" "${DOC_PATH}/plugins.jballou.txt")" == "${LIBRARY}" ]
+		if [ "$(grep "${LIBRARY}" "${PLUGINS_FILE}")" == "${LIBRARY}" ]
 		then
 			echo " * [Plugin - ${LIBRARY}](#${LIBRARY})" >> "${DOC_DEPENDENCY_FILE}"
 		else
@@ -279,6 +285,6 @@ do
 done
 echo >> "${TOC_FILE}"
 # Create finished README
-cat "${DOC_PATH}/include/HEADER.md" "${DOC_PATH}/include/TOC.md" "${DOC_PATH}/plugins/"*.md "${DOC_PATH}/include/FOOTER.md" > "${README_FILE}"
+cat "${DOC_PATH}/include/HEADER.md" "${TMP_PATH}/"*.md "${DOC_PATH}/include/FOOTER.md" > "${README_FILE}"
 
 git add *

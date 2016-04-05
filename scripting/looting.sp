@@ -9,21 +9,25 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds ability to loot items from dead bodies"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-looting.txt"
+#define PLUGIN_NAME "[INS] Looting"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_WORKING 0
 
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-looting.txt"
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarMode = INVALID_HANDLE;
-
-public Plugin:myinfo = {
-	name= "[INS] Looting",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {

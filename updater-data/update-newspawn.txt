@@ -1,0 +1,19 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"New Spawn - New spawning plugin"
+	}
+	"Files"
+	{
+Notes:MyPlugin
+		"Plugin"	"Path_SM/plugins/newspawn.smx"
+		"Source"	"Path_SM/scripting/newspawn.sp"
+		"Plugin"	"Path_SM/plugins/newspawn.smx"
+		"Source"	"Path_SM/scripting/newspawn.sp"
+	}
+}

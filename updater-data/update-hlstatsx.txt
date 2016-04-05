@@ -6,7 +6,7 @@
 		{
 			"Latest"		"1.6.19"
 		}
-		"Notes"		"HLstatsX CE Ingame Plugin - Provides ingame functionality for interaction from an HLstatsX CE installation"
+		"Notes"		"HLStatsX CE Ingame Plugin - Provides ingame functionality for interaction from an HLstatsX CE installation"
 	}
 	"Files"
 	{

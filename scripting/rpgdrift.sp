@@ -13,8 +13,22 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adjusts behavior of RPG rounds"
+#define PLUGIN_NAME "[INS] RPG Adjustments"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-rpgdrift.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -22,14 +36,6 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarAmount = INVALID_HANDLE;
 new Handle:cvarChance = INVALID_HANDLE;
 new Handle:cvarAlwaysBots = INVALID_HANDLE;
-
-public Plugin:myinfo = {
-	name= "[INS] RPG Adjustments",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {

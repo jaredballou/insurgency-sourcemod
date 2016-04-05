@@ -1,6 +1,5 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
-
 #pragma semicolon 1
 #pragma unused cvarVersion
 #include <sourcemod>
@@ -13,8 +12,22 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_VERSION "0.2.7"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
+#define PLUGIN_NAME "[INS] Bot Spawns"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_VERSION "0.2.7"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -83,13 +96,6 @@ enum RepawnModes {
         RepawnMode_Immediate,
         RepawnMode_Waves,
         RepawnMode_Fireteams,
-};
-public Plugin:myinfo = {
-	name		= "[INS] Bot spawns",
-	author  	= "Jared Ballou (jballou)",
-	description 	= PLUGIN_DESCRIPTION,
-	version 	= PLUGIN_VERSION,
-	url 		= "http://jballou.com/"
 };
 
 public OnPluginStart()

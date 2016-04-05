@@ -30,8 +30,21 @@
 #include <cstrike>
 #include <clientprefs>
  
-#define PLUGIN_VERSION "1.6.19"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Provides ingame functionality for interaction from an HLstatsX CE installation"
+#define PLUGIN_NAME "[INS] HLStatsX CE Ingame Plugin"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "1.6.19"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-hlstatsx.txt"
 #define HLXTAG "HLstatsX:CE"
 
@@ -128,13 +141,6 @@ new EngineVersion:g_GameEngine = Engine_Unknown;
 
 #define SVTAGSIZE 128
 
-public Plugin:myinfo = {
-	name = "HLstatsX CE Ingame Plugin",
-	author = "psychonic",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://www.hlxcommunity.com"
-};
 
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)

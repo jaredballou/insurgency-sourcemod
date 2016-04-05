@@ -9,8 +9,21 @@
 
 #pragma unused cvarVersion
 #pragma unused g_hNavMeshVisibleAreas
-#define PLUGIN_VERSION				"0.0.3"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Exports navmesh data in JSON format"
+#define PLUGIN_NAME "[INS] Navmesh JSON Export"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-navmesh-export.txt"
 
 new Handle:g_hNavMeshPlaces;
@@ -30,15 +43,6 @@ new g_iOverviewPosX = 0;
 new g_iOverviewPosY = 0;
 new g_iOverviewRotate = 0;
 new Float:g_fOverviewScale = 1.0;
-
-public Plugin:myinfo =
-{
-	name = "[INS] Navmesh Export",
-	author = "Jared Ballou",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com"
-};
 
 public OnPluginStart()
 {

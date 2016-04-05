@@ -6,7 +6,7 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"CVAR List - CVAR List"
+		"Notes"		"CVAR List - Upholder of the [BFG], modified by Jared Ballou (jballou)"
 	}
 	"Files"
 	{

@@ -12,6 +12,21 @@
 #undef REQUIRE_PLUGIN
 #include <adminmenu>
 
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
+#define PLUGIN_NAME "[INS] Player Respawn"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "1.7.1"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 new Handle:hAdminMenu = INVALID_HANDLE;
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
@@ -38,18 +53,9 @@ new Handle:sm_respawn_reset_each_objective = INVALID_HANDLE;
 
 new g_iSpawnTokens[MAXPLAYERS];
 new g_iRespawnCount[4];
-#define PLUGIN_VERSION "1.7.1"
-#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
 
-public Plugin:myinfo =
-{
-	name = "[INS] Player Respawn",
-	author = "Jared Ballou",
-	version = PLUGIN_VERSION,
-	description = PLUGIN_DESCRIPTION,
-	url = "http://jballou.com"
-};
+
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
 
 public OnPluginStart()
 {

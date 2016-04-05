@@ -5,15 +5,17 @@ These plugins are all provided as-is, I do my best to document and describe them
 
  * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
  * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
- * <a href='#user-content-botnames'>Bot Names 1.0</a>
- * <a href='#user-content-botspawns'>Bot spawns 0.2.7</a>
+ * <a href='#user-content-botnames'>Bot Names 1.0.1</a>
+ * <a href='#user-content-botspawns'>Bot Spawns 0.2.7</a>
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
- * <a href='#user-content-damagemod'>Damage Modifier 0.0.1</a>
- * <a href='#user-content-hlstatsx'>HLstatsX CE Ingame Plugin 1.6.19</a>
+ * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
+ * <a href='#user-content-insmaps'>Map List 1.4.1</a>
  * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
- * <a href='#user-content-navmesh'>SourcePawn Navigation Mesh Parser 1.0.3</a>
- * <a href='#user-content-navmesh-export'>Navmesh Export 0.0.3</a>
+ * <a href='#user-content-magnifier'>Magnifier 0.0.1</a>
+ * <a href='#user-content-navmesh-export'>Navmesh JSON Export 0.0.4</a>
+ * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>
+ * <a href='#user-content-newspawn'>New Spawn 0.0.1</a>
  * <a href='#user-content-nofog'>No Fog 0.0.1</a>
  * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
@@ -21,7 +23,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
  * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
  * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
- * <a href='#user-content-theaterpicker'>Theater Picker 0.0.3</a>
+ * <a href='#user-content-theaterpicker'>Theater Picker 0.0.4</a>
 
 <a name='ammocheck'>
 ---
@@ -87,7 +89,7 @@ Displays a popup to players every 60 seconds by default identifying remaining en
 
 <a name='botnames'>
 ---
-### Bot Names 1.0</a>
+### Bot Names 1.0.1</a>
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
@@ -108,7 +110,7 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 
 <a name='botspawns'>
 ---
-### Bot spawns 0.2.7</a>
+### Bot Spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
  * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/botspawns.smx?raw=true)
@@ -191,7 +193,7 @@ Increases max for mp_cooplobbysize from 8 to 16. Requires custom theaters to all
 <a name='cvarlist'>
 ---
 ### CVAR List 0.0.1</a>
-CVAR List
+Upholder of the [BFG], modified by Jared Ballou (jballou)
 
  * [Plugin - cvarlist.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cvarlist.smx?raw=true)
  * [Source - cvarlist.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cvarlist.sp?raw=true)
@@ -212,7 +214,7 @@ Enable world-wide modification of damage values (i.e. for doing training mission
 
 <a name='hlstatsx'>
 ---
-### HLstatsX CE Ingame Plugin 1.6.19</a>
+### HLStatsX CE Ingame Plugin 1.6.19</a>
 Provides ingame functionality for interaction from an HLstatsX CE installation
 
  * [Plugin - hlstatsx.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/hlstatsx.smx?raw=true)
@@ -229,6 +231,18 @@ Adds in-game support for HLStatsX servers to connect and send messages and other
  * "hlx_message_prefix" "" //Define the prefix displayed on every HLstatsX ingame message
  * "hlx_protect_address" "" //Address to be protected for logging/forwarding
  * "hlx_server_tag" "1" //If enabled, adds \HLstatsX:CE\ to server tags on supported games. 1 = Enabled
+
+<a name='insmaps'>
+---
+### Map List 1.4.1</a>
+Lists all maps and modes available
+
+ * [Plugin - insmaps.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/insmaps.smx?raw=true)
+ * [Source - insmaps.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insmaps.sp?raw=true)
+
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 <a name='insurgency'>
 ---
@@ -286,6 +300,23 @@ Allows looting bodies for ammo. Not yet functional.
  * [ ] Get model for magazines for dropped mags.
  * [ ] Add CVAR option to simply drop ammo box or all magazines on death (like a munitions pinata).
 
+<a name='magnifier'>
+---
+### Magnifier 0.0.1</a>
+Adds FOV switch to emulate flip to side magnifiers
+
+ * [Plugin - magnifier.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/magnifier.smx?raw=true)
+ * [Source - magnifier.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/magnifier.sp?raw=true)
+
+
+#### Dependencies
+ * [translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
+
+#### CVAR List
+ * "sm_magnifier_zoom" "60" //zoom level for magnifier
+ * "sm_magnifier_shots" "0" //Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.);
+ * "sm_magnifier_adminflag" "0" //Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....);
+
 <a name='navmesh-chat'>
 ---
 ### Navmesh Chat 0.0.1</a>
@@ -320,7 +351,7 @@ Adds prefix to all chat messages (selectable team or all) that includes grid coo
 
 <a name='navmesh-export'>
 ---
-### Navmesh Export 0.0.3</a>
+### Navmesh JSON Export 0.0.4</a>
 Exports navmesh data in JSON format
 
  * [Plugin - navmesh-export.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/navmesh-export.smx?raw=true)
@@ -336,8 +367,8 @@ Exports Navmesh data as JSON for parsing by the Insurgency Tools. Nobody should 
 
 <a name='navmesh'>
 ---
-### SourcePawn Navigation Mesh Parser 1.0.3</a>
-A plugin that can read Valve's Navigation Mesh.
+### Navmesh Parser 1.0.4</a>
+Read navigation mesh
 
  * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/navmesh.smx?raw=true)
  * [Source - navmesh.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh.sp?raw=true)
@@ -346,6 +377,18 @@ Navmesh parser, created by KitRifty and modified by me to support Hiding Spots a
 
 #### Dependencies
  * [Source Include - navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
+
+<a name='newspawn'>
+---
+### New Spawn 0.0.1</a>
+New spawning plugin
+
+ * [Plugin - newspawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/newspawn.smx?raw=true)
+ * [Source - newspawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/newspawn.sp?raw=true)
+
+
+#### CVAR List
+ * "sm_sprinklers_enabled" "0" //Set to 1 to remove sprinklers. 0 leaves them alone.
 
 <a name='nofog'>
 ---
@@ -541,7 +584,7 @@ Adds a suicide bomb effect that creates an IED at the player's origin and immedi
 
 <a name='theaterpicker'>
 ---
-### Theater Picker 0.0.3</a>
+### Theater Picker 0.0.4</a>
 Allows admins to set theater, and clients to vote
 
  * [Plugin - theaterpicker.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theaterpicker.smx?raw=true)

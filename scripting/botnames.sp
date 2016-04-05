@@ -4,8 +4,21 @@
 #pragma semicolon 1
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
+#define PLUGIN_NAME "[INS] Bot Names"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_VERSION "1.0.1"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botnames.txt"
 #define BOT_NAME_PATH "configs/botnames"
 
@@ -30,15 +43,6 @@ new Handle:cvarRandom = INVALID_HANDLE; // use random-order names?
 new Handle:cvarNameList = INVALID_HANDLE; // list to use
 new Handle:cvarAnnounce = INVALID_HANDLE; // announce new bots?
 new Handle:cvarSuppress = INVALID_HANDLE; // supress join/team/namechange messages?
-
-public Plugin:myinfo =
-{
-	name = "Bot Names",
-	author = "Rakeri",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = ""
-}
 
 // a function to generate name_redirects
 GenerateRedirects()

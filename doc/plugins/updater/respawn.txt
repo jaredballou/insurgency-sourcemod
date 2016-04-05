@@ -1,6 +1,0 @@
-Plugin:Path_SM/plugins/respawn.smx
-Source:Path_SM/scripting/respawn.sp
-Source:Path_SM/scripting/include/insurgency.inc
-Plugin:Path_SM/gamedata/plugin.respawn.txt
-Plugin:Path_SM/translations/common.phrases.txt
-Plugin:Path_SM/translations/respawn.phrases.txt

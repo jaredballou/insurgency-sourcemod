@@ -6,7 +6,7 @@
 		{
 			"Latest"		"0.2.7"
 		}
-		"Notes"		"Bot spawns - Adds a number of options and ways to handle bot spawns"
+		"Notes"		"Bot Spawns - Adds a number of options and ways to handle bot spawns"
 	}
 	"Files"
 	{

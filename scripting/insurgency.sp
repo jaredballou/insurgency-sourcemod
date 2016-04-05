@@ -9,8 +9,22 @@
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "1.3.3"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
+#define PLUGIN_NAME "[INS] Insurgency Support Library"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "1.3.3"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 #define INS
@@ -63,15 +77,6 @@ new String:g_sLogLevel[6][32] = {
 //new String:Players[100];    // Stores the total number of players & bots active
 //new String:Edicts[100];    // Stores total number of edicts used
 //============================================================================================================
-
-public Plugin:myinfo =
-{
-	name = "[INS] Insurgency Support Library",
-	author = "Jared Ballou",
-	version = PLUGIN_VERSION,
-	description = PLUGIN_DESCRIPTION,
-	url = "http://jballou.com"
-};
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {

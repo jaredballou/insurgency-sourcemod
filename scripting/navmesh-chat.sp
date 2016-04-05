@@ -8,8 +8,21 @@
 #include <updater>
 
 #pragma unused cvarVersion
-#define PLUGIN_VERSION				"0.0.1"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Puts navmesh area into chat"
+#define PLUGIN_NAME "[INS] Navmesh Chat"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-navmesh-chat.txt"
 
 new Handle:g_hNavMeshPlaces;
@@ -29,15 +42,6 @@ new Handle:cvarGrid = INVALID_HANDLE;
 new Handle:cvarPlace = INVALID_HANDLE;
 new Handle:cvarDistance = INVALID_HANDLE;
 new Handle:cvarDirection = INVALID_HANDLE;
-
-public Plugin:myinfo =
-{
-	name = "[INS] Navmesh Chat",
-	author = "Jared Ballou",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com"
-};
 
 public OnPluginStart()
 {

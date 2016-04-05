@@ -10,19 +10,24 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 #define IN_SPEED        (1 << 17)
-#define PLUGIN_VERSION "0.0.1"
+
+#define PLUGIN_AUTHOR "Daimyo"
 #define PLUGIN_DESCRIPTION "Plugin for Pulling prop_ragdoll bodies"
+#define PLUGIN_NAME "[INS] Pull Rag"
+#define PLUGIN_URL ""
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
 
 #define MAX_BUTTONS 25
 new g_LastButtons[MAXPLAYERS+1];
-
-public Plugin:myinfo = {
-        name        = "[INS] Pull Rag",
-        author      = "Daimyo",
-        description = PLUGIN_DESCRIPTION,
-        version     = PLUGIN_VERSION,
-        url         = ""
-};
 
 public OnPluginStart()
 {

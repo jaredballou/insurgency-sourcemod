@@ -10,20 +10,25 @@ new Handle:g_aMaps = INVALID_HANDLE;
 new Handle:g_aMapList = INVALID_HANDLE;
 new Handle:g_aGameModes = INVALID_HANDLE;
 
-#define PLUGIN_VERSION		"1.4.1"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Lists all maps and modes available"
+#define PLUGIN_NAME "[INS] Map List"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "1.4.1"
+#define PLUGIN_WORKING 0
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-insmaps.txt"
 
 
 new Handle:g_version=INVALID_HANDLE;
-
-public Plugin:myinfo = 
-{
-	name = "[INS] Map List",
-	author = "jballou",
-	description = "Lists all maps and modes available",
-	version = PLUGIN_VERSION,
-	url = "http://www.sourcemod.net"
-}
 
 public OnPluginStart()
 {

@@ -1,2 +1,0 @@
-Plugin:Path_SM/plugins/sprinklers.smx
-Source:Path_SM/scripting/sprinklers.sp

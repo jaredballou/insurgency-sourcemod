@@ -1,3 +1,0 @@
-Plugin:Path_SM/plugins/navmesh.smx
-Source:Path_SM/scripting/navmesh.sp
-Source:Path_SM/scripting/include/navmesh.inc

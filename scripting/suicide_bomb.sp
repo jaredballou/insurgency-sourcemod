@@ -15,8 +15,22 @@
 
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "0.0.6"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
+#define PLUGIN_NAME "[INS] Suicide Bombers"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.6"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -34,14 +48,6 @@ new Handle:cvarDeathChance = INVALID_HANDLE;
 new String:g_client_last_classstring[MAXPLAYERS+1][64];
 new g_client_spawn_time[MAXPLAYERS+1];
 new bool:bEnabled = false;
-
-public Plugin:myinfo = {
-	name= "[INS] Suicide Bombers",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {

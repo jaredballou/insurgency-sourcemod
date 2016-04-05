@@ -10,21 +10,27 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds a timer that displays the captured points count for each team for competitive mode"
+#define PLUGIN_NAME "[INS] Captire Count"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-capture_count.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new g_iCaptures[4],g_iCaches[4];
-
-public Plugin:myinfo = {
-	name= "[INS] Capture Count",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {
