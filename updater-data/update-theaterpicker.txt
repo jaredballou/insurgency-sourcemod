@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"		"0.0.3"
+			"Latest"		"0.0.4"
 		}
 		"Notes"		"Theater Picker - Allows admins to set theater, and clients to vote"
 	}

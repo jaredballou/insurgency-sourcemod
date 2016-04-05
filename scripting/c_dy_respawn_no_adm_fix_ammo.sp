@@ -10,6 +10,21 @@
 #include <navmesh>
 #include <insurgency>
 
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
+#define PLUGIN_NAME "[INS] Player Respawns"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_VERSION "1.7.0"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define Gren_M67 68
 #define Gren_Incen 73
 #define Gren_Molot 74
@@ -145,18 +160,7 @@ new Float:g_iDeadRagdollVectors[MAXPLAYERS+1][3];
 new g_ClientRagdolls[MAXPLAYERS+1];
 new g_iRespawnCount[4];
 new Float:g_SecurityCounterSpawn[3];
-#define PLUGIN_VERSION "1.7.0"
-#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
 
-public Plugin:myinfo =
-{
-	name = "[INS] Player Respawn",
-	author = "Jared Ballou",
-	version = PLUGIN_VERSION,
-	description = PLUGIN_DESCRIPTION,
-	url = "http://jballou.com"
-};
 public OnPluginStart()
 {
 	decl String:gamemod[40];

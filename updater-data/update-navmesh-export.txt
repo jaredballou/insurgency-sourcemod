@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"		"0.0.3"
+			"Latest"		"0.0.4"
 		}
-		"Notes"		"Navmesh Export - Exports navmesh data in JSON format"
+		"Notes"		"Navmesh JSON Export - Exports navmesh data in JSON format"
 	}
 	"Files"
 	{

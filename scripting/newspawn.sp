@@ -13,19 +13,26 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "New spawning plugin"
+#define PLUGIN_NAME "[INS] New Spawn"
+#define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_DESCRIPTION "[INS] New Spawn"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-newspawn.txt"
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
-public Plugin:myinfo = {
-	name= PLUGIN_DESCRIPTION,
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {

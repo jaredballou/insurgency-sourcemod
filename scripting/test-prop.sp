@@ -1,19 +1,23 @@
 #include <sourcemod>
 #include <sdktools>
 #include <smlib>
-#define PLUGIN_VERSION				"0.0.1"
+
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Test props"
+#define PLUGIN_NAME "[INS] Test Props"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
 
 new g_WeaponParent;
-
-public Plugin:myinfo =
-{
-	name = "[INS] Test Props",
-	author = "Jared Ballou",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com"
-};
 
 public OnPluginStart()
 {

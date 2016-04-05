@@ -10,23 +10,27 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define PLUGIN_VERSION "0.0.7"
-#define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
+
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
+#define PLUGIN_NAME "[INS] Ammo Check"
+#define PLUGIN_VERSION "0.0.7"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:h_AmmoTimers[MAXPLAYERS+1];
 new i_TimerWeapon[MAXPLAYERS+1];
-
-public Plugin:myinfo = {
-	name= "[INS] Ammo Check",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
-
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_ammocheck_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);

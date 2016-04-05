@@ -1,0 +1,20 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"		"1.4.1"
+		}
+		"Notes"		"Map List - Lists all maps and modes available"
+	}
+	"Files"
+	{
+Notes:MyPlugin
+		"Plugin"	"Path_SM/plugins/insmaps.smx"
+		"Source"	"Path_SM/scripting/insmaps.sp"
+		"Plugin"	"Path_SM/plugins/insmaps.smx"
+		"Source"	"Path_SM/scripting/insmaps.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+	}
+}

@@ -11,7 +11,22 @@ new Handle:g_aMaps = INVALID_HANDLE;
 new Handle:g_aMapList = INVALID_HANDLE;
 new Handle:g_aGameModes = INVALID_HANDLE;
 
-#define PLUGIN_VERSION		"0.0.3"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Allows admins to set theater, and clients to vote"
+#define PLUGIN_NAME "[INS] Theater Picker"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+
 #define UPDATE_URL "http://ins.jballou.com/sourcemod/update-theaterpicker.txt"
 
 
@@ -19,15 +34,6 @@ new Handle:g_version=INVALID_HANDLE;
 new Handle:g_theaterfile=INVALID_HANDLE;
 new Handle:g_config=INVALID_HANDLE;
 //new Handle:g_=INVALID_HANDLE;
-
-public Plugin:myinfo = 
-{
-	name = "Theater Picker",
-	author = "jballou",
-	description = "Allows admins to set theater, and clients to vote",
-	version = PLUGIN_VERSION,
-	url = "http://www.sourcemod.net"
-}
 
 public OnPluginStart()
 {

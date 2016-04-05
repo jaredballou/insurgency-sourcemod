@@ -14,8 +14,21 @@
 
 #pragma unused cvarVersion
 
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
+#define PLUGIN_NAME "[INS] Suicide Bombers"
+#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_WORKING 1
+
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
 #define UPDATE_URL    ""
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -39,13 +52,6 @@ leftLeg = 6
 rightLeg = 7
 Gear = 8 ?
 */
-public Plugin:myinfo = {
-	name= "[INS] Suicide Bombers",
-	author  = "Jared Ballou (jballou)",
-	description = PLUGIN_DESCRIPTION,
-	version = PLUGIN_VERSION,
-	url = "http://jballou.com/"
-};
 
 public OnPluginStart()
 {

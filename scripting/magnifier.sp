@@ -1,9 +1,22 @@
 #pragma semicolon 1
 #include <sourcemod>
 
-new Handle:zoomlevel = INVALID_HANDLE;
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Adds FOV switch to emulate flip to side magnifiers"
+#define PLUGIN_NAME "[INS] Magnifier"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_WORKING 0
 
-#define VERSION "3.0"
+public Plugin:myinfo = {
+	name		= PLUGIN_NAME,
+	author		= PLUGIN_AUTHOR,
+	description	= PLUGIN_DESCRIPTION,
+	version		= PLUGIN_VERSION,
+	url		= PLUGIN_URL
+};
+
+new Handle:zoomlevel = INVALID_HANDLE;
 
 new bool:bInMagnifier[MAXPLAYERS+1] = {false, ...};
 
@@ -17,15 +30,6 @@ new bool:noshotsblocked;
 
 new fov_client[MAXPLAYERS+1];
 
-public Plugin:myinfo =
-{
-	name = "[INS] Magnifier",
-	author = "Jared Ballou",
-	description = "Allow toggle for magnifier in zoom",
-	version = VERSION,
-	url = "www.jballou.com"
-};
-
 public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
@@ -37,7 +41,7 @@ public OnPluginStart()
 
 
         zoomlevel = CreateConVar("sm_magnifier_zoom", "60", "zoom level for magnifier", 0, true, 1.0);
-        CreateConVar("sm_magnifier_version", VERSION, "version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_NOTIFY);
+        CreateConVar("sm_magnifier_version", PLUGIN_VERSION, "version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_NOTIFY);
 
         nobloqueardisparos = CreateConVar("sm_magnifier_shots", "0", "Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.");
 	g_CVarAdmFlag = CreateConVar("sm_magnifier_adminflag", "0", "Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....");
