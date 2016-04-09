@@ -70,7 +70,7 @@ new Handle:CvarHostIp;
 new Handle:CvarPort;
 
 /* Database handle */
-new Handle:Database;
+new Handle:objDatabase;
 new Handle:SQLiteDB;
 
 /* Menu file globals */
@@ -288,7 +288,7 @@ public OnMapEnd()
 
 public Action:OnClientPreAdminCheck(client)
 {
-	if(!Database)
+	if(!objDatabase)
 		return Plugin_Continue;
 	
 	if(GetUserAdmin(client) != INVALID_ADMIN_ID)
@@ -319,7 +319,7 @@ public bool:OnClientConnect(client, String:rejectmsg[], maxlen)
 public OnClientAuthorized(client, const String:auth[])
 {
 	/* Do not check bots nor check player with lan steamid. */
-	if(auth[0] == 'B' || auth[9] == 'L' || Database == INVALID_HANDLE)
+	if(auth[0] == 'B' || auth[9] == 'L' || objDatabase == INVALID_HANDLE)
 	{
 		PlayerStatus[client] = true;
 		return;
@@ -332,7 +332,7 @@ public OnClientAuthorized(client, const String:auth[])
 	LogToFile(logFile, "Checking ban for: %s", auth);
 #endif
 	
-	SQL_TQuery(Database, VerifyBan, Query, GetClientUserId(client), DBPrio_High);
+	SQL_TQuery(objDatabase, VerifyBan, Query, GetClientUserId(client), DBPrio_High);
 }
 
 public OnRebuildAdminCache(AdminCachePart:part)
@@ -347,14 +347,14 @@ public OnRebuildAdminCache(AdminCachePart:part)
 		case AdminCache_Admins:
 			loadAdmins = true;
 	}
-	if(Database == INVALID_HANDLE) {
+	if(objDatabase == INVALID_HANDLE) {
 		if(!g_bConnecting) {
 			g_bConnecting = true;
 			SQL_TConnect(GotDatabase,"sourcebans");
 		}
 	}
 	else {
-		GotDatabase(Database,Database,"",0);
+		GotDatabase(objDatabase,objDatabase,"",0);
 	}
 }
 
@@ -527,7 +527,7 @@ public Action:CommandBanIp(client, args)
 	FormatEx(Query, sizeof(Query), "SELECT bid FROM %s_bans WHERE type = 1 AND ip     = '%s' AND (length = 0 OR ends > UNIX_TIMESTAMP()) AND RemoveType IS NULL",
 																	DatabasePrefix, arg);
 	
-	SQL_TQuery(Database, SelectBanIpCallback,  Query, dataPack, DBPrio_High);
+	SQL_TQuery(objDatabase, SelectBanIpCallback,  Query, dataPack, DBPrio_High);
 	return Plugin_Handled;
 }
 
@@ -576,7 +576,7 @@ public Action:CommandUnban(client, args)
 	} else {
 		Format(query, sizeof(query), "SELECT bid FROM %s_bans WHERE (type = 1 AND ip     = '%s') AND (length = '0' OR ends > UNIX_TIMESTAMP()) AND RemoveType IS NULL", DatabasePrefix, arg);
 	}
-	SQL_TQuery(Database, SelectUnbanCallback, query, dataPack);
+	SQL_TQuery(objDatabase, SelectUnbanCallback, query, dataPack);
 	return Plugin_Handled;
 }
 
@@ -649,7 +649,7 @@ public Action:CommandAddBan(client, args)
 	FormatEx(Query, sizeof(Query), "SELECT bid FROM %s_bans WHERE type = 0 AND authid = '%s' AND (length = 0 OR ends > UNIX_TIMESTAMP()) AND RemoveType IS NULL",
 																	DatabasePrefix, authid);
 	
-	SQL_TQuery(Database, SelectAddbanCallback, Query, dataPack, DBPrio_High);
+	SQL_TQuery(objDatabase, SelectAddbanCallback, Query, dataPack, DBPrio_High);
 	return Plugin_Handled;
 }
 
@@ -952,11 +952,11 @@ public GotDatabase(Handle:owner, Handle:hndl, const String:error[], any:data)
 		return;
 	}
 
-	Database = hndl;
+	objDatabase = hndl;
 
 	decl String:query[1024];
 	FormatEx(query, sizeof(query), "SET NAMES \"UTF8\"");
-	SQL_TQuery(Database, ErrorCheckCallback, query);
+	SQL_TQuery(objDatabase, ErrorCheckCallback, query);
 
 	InsertServerInfo();
 
@@ -965,7 +965,7 @@ public GotDatabase(Handle:owner, Handle:hndl, const String:error[], any:data)
 	if(loadOverrides)
 	{
 		Format(query, 1024, "SELECT type, name, flags FROM %s_overrides", DatabasePrefix);
-		SQL_TQuery(Database, OverridesDone, query);
+		SQL_TQuery(objDatabase, OverridesDone, query);
 		loadOverrides = false;
 	}
 
@@ -974,7 +974,7 @@ public GotDatabase(Handle:owner, Handle:hndl, const String:error[], any:data)
 		FormatEx(query,1024,"SELECT name, flags, immunity, groups_immune   \
 					FROM %s_srvgroups ORDER BY id",DatabasePrefix);
 		curLoading++;
-		SQL_TQuery(Database,GroupsDone,query);
+		SQL_TQuery(objDatabase,GroupsDone,query);
 		
 #if defined DEBUG
 	LogToFile(logFile, "Fetching Group List");
@@ -1008,7 +1008,7 @@ public GotDatabase(Handle:owner, Handle:hndl, const String:error[], any:data)
 					DatabasePrefix, DatabasePrefix,DatabasePrefix, queryLastLogin, serverID, DatabasePrefix, serverID);
 		}
 		curLoading++;
-		SQL_TQuery(Database,AdminsDone,query);
+		SQL_TQuery(objDatabase,AdminsDone,query);
 
 #if defined DEBUG
         LogToFile(logFile, "Fetching Admin List");
@@ -1111,7 +1111,7 @@ public SelectBanIpCallback(Handle:owner, Handle:hndl, const String:error[], any:
 	ReadPackString(data, ip,        sizeof(ip));
 	ReadPackString(data, adminAuth, sizeof(adminAuth));
 	ReadPackString(data, adminIp,   sizeof(adminIp));
-	SQL_EscapeString(Database, reason, banReason, sizeof(banReason));
+	SQL_EscapeString(objDatabase, reason, banReason, sizeof(banReason));
 	
 	if(error[0])
 	{
@@ -1143,7 +1143,7 @@ public SelectBanIpCallback(Handle:owner, Handle:hndl, const String:error[], any:
 						DatabasePrefix, ip, (minutes*60), (minutes*60), banReason, DatabasePrefix, adminAuth, adminAuth[8], adminIp, serverID);
 	}
 	
-	SQL_TQuery(Database, InsertBanIpCallback, Query, data, DBPrio_High);
+	SQL_TQuery(objDatabase, InsertBanIpCallback, Query, data, DBPrio_High);
 }
 
 public InsertBanIpCallback(Handle:owner, Handle:hndl, const String:error[], any:data)
@@ -1194,7 +1194,7 @@ public SelectUnbanCallback(Handle:owner, Handle:hndl, const String:error[], any:
 	ReadPackString(data, reason, sizeof(reason));
 	ReadPackString(data, arg, sizeof(arg));
 	ReadPackString(data, adminAuth, sizeof(adminAuth));
-	SQL_EscapeString(Database, reason, unbanReason, sizeof(unbanReason));
+	SQL_EscapeString(objDatabase, reason, unbanReason, sizeof(unbanReason));
 	
 	// If error is not an empty string the query failed
 	if(error[0] != '\0')
@@ -1229,7 +1229,7 @@ public SelectUnbanCallback(Handle:owner, Handle:hndl, const String:error[], any:
 		Format(query, sizeof(query), "UPDATE %s_bans SET RemovedBy = (SELECT aid FROM %s_admins WHERE authid = '%s' OR authid REGEXP '^STEAM_[0-9]:%s$'), RemoveType = 'U', RemovedOn = UNIX_TIMESTAMP(), ureason = '%s' WHERE bid = %d",
 																	DatabasePrefix, DatabasePrefix, adminAuth, adminAuth[8], unbanReason, bid);
 		
-		SQL_TQuery(Database, InsertUnbanCallback, query, data);
+		SQL_TQuery(objDatabase, InsertUnbanCallback, query, data);
 	}
 	return;
 }
@@ -1280,7 +1280,7 @@ public SelectAddbanCallback(Handle:owner, Handle:hndl, const String:error[], any
 	ReadPackString(data, authid,    sizeof(authid));
 	ReadPackString(data, adminAuth, sizeof(adminAuth));
 	ReadPackString(data, adminIp,   sizeof(adminIp));
-	SQL_EscapeString(Database, reason, banReason, sizeof(banReason));
+	SQL_EscapeString(objDatabase, reason, banReason, sizeof(banReason));
 	
 	if(error[0])
 	{
@@ -1312,7 +1312,7 @@ public SelectAddbanCallback(Handle:owner, Handle:hndl, const String:error[], any
 						DatabasePrefix, authid, (minutes*60), (minutes*60), banReason, DatabasePrefix, adminAuth, adminAuth[8], adminIp, serverID);
 	}
 	
-	SQL_TQuery(Database, InsertAddbanCallback, Query, data, DBPrio_High);
+	SQL_TQuery(objDatabase, InsertAddbanCallback, Query, data, DBPrio_High);
 }
 
 public InsertAddbanCallback(Handle:owner, Handle:hndl, const String:error[], any:data)
@@ -1409,7 +1409,7 @@ public ProcessQueueCallback(Handle:owner, Handle:hndl, const String:error[], any
 			new Handle:authPack = CreateDataPack();
 			WritePackString(authPack, auth);
 			ResetPack(authPack);
-			SQL_TQuery(Database, AddedFromSQLiteCallback, query, authPack);
+			SQL_TQuery(objDatabase, AddedFromSQLiteCallback, query, authPack);
 		} else {
 			// The ban is no longer valid and should be deleted from the queue
 			FormatEx(query, sizeof(query), "DELETE FROM queue WHERE steam_id = '%s'", auth);
@@ -1456,7 +1456,7 @@ public ServerInfoCallback(Handle:owner, Handle:hndl, const String:error[], any:d
 		decl String:desc[64], String:query[200];
 		GetGameFolderName(desc, sizeof(desc));
 		FormatEx(query, sizeof(query), "INSERT INTO %s_servers (ip, port, rcon, modid) VALUES ('%s', '%s', '', (SELECT mid FROM %s_mods WHERE modfolder = '%s'))", DatabasePrefix, ServerIp, ServerPort, DatabasePrefix, desc);
-		SQL_TQuery(Database, ErrorCheckCallback, query);
+		SQL_TQuery(objDatabase, ErrorCheckCallback, query);
 	}
 }
 
@@ -1494,7 +1494,7 @@ public VerifyBan(Handle:owner, Handle:hndl, const String:error[], any:userid)
 		decl String:Name[128];
 		decl String:Query[512];
 		
-		SQL_EscapeString(Database, clientName, Name, sizeof(Name));
+		SQL_EscapeString(objDatabase, clientName, Name, sizeof(Name));
 		if( serverID == -1 )
 		{
 			FormatEx(Query, sizeof(Query), "INSERT INTO %s_banlog (sid ,time ,name ,bid) VALUES  \
@@ -1510,7 +1510,7 @@ public VerifyBan(Handle:owner, Handle:hndl, const String:error[], any:userid)
 				DatabasePrefix, serverID, Name, DatabasePrefix, clientAuth[8], clientIp);
 		}
 		
-		SQL_TQuery(Database, ErrorCheckCallback, Query, client, DBPrio_High);
+		SQL_TQuery(objDatabase, ErrorCheckCallback, Query, client, DBPrio_High);
 		FormatEx(buffer, sizeof(buffer), "banid 5 %s", clientAuth);
 		ServerCommand(buffer);
 		KickClient(client, "%t", "Banned Check Site", WebsiteAddress);
@@ -1794,13 +1794,13 @@ public GroupsDone(Handle:owner, Handle:hndl, const String:error[], any:data)
 	// Load the group overrides
 	decl String:query[512];
 	FormatEx(query, 512, "SELECT sg.name, so.type, so.name, so.access FROM %s_srvgroups_overrides so LEFT JOIN %s_srvgroups sg ON sg.id = so.group_id ORDER BY sg.id", DatabasePrefix, DatabasePrefix);
-	SQL_TQuery(Database, LoadGroupsOverrides, query);
+	SQL_TQuery(objDatabase, LoadGroupsOverrides, query);
 	
 	/*if (reparse)
 	{
 		decl String:query[512];
 		FormatEx(query,512,"SELECT name, immunity, groups_immune FROM %s_srvgroups ORDER BY id",DatabasePrefix);
-		SQL_TQuery(Database,GroupsSecondPass,query);
+		SQL_TQuery(objDatabase,GroupsSecondPass,query);
 	}
 	else
 	{
@@ -1995,7 +1995,7 @@ public Action:PruneBans(Handle:timer)
 			"UPDATE %s_bans SET RemovedBy = 0, RemoveType = 'E', RemovedOn = UNIX_TIMESTAMP() WHERE length != '0' AND ends < UNIX_TIMESTAMP()",
 			DatabasePrefix);
 			
-	SQL_TQuery(Database, ErrorCheckCallback, Query);
+	SQL_TQuery(objDatabase, ErrorCheckCallback, Query);
 	return Plugin_Continue;
 }
 */
@@ -2268,7 +2268,7 @@ public bool:CreateBan(client, target, time, String:reason[])
 	if(reason[0] != '\0')
 	{
 		// if we have a valid reason pass move forward with the ban
-		if(Database != INVALID_HANDLE)
+		if(objDatabase != INVALID_HANDLE)
 		{
 			UTIL_InsertBan(time, name, auth, ip, reason, adminAuth, adminIp, dataPack);
 		} else {
@@ -2291,8 +2291,8 @@ stock UTIL_InsertBan(time, const String:Name[], const String:Authid[], const Str
 	decl String:banName[128];
 	decl String:banReason[256];
 	decl String:Query[1024];
-	SQL_EscapeString(Database, Name, banName, sizeof(banName));
-	SQL_EscapeString(Database, Reason, banReason, sizeof(banReason));
+	SQL_EscapeString(objDatabase, Name, banName, sizeof(banName));
+	SQL_EscapeString(objDatabase, Reason, banReason, sizeof(banReason));
 	if( serverID == -1 )
 	{
 		FormatEx(Query, sizeof(Query), "INSERT INTO %s_bans (ip, authid, name, created, ends, length, reason, aid, adminIp, sid, country) VALUES \
@@ -2306,7 +2306,7 @@ stock UTIL_InsertBan(time, const String:Name[], const String:Authid[], const Str
 						DatabasePrefix, Ip, Authid, banName, (time*60), (time*60), banReason, DatabasePrefix, AdminAuthid, AdminAuthid[8], AdminIp, serverID);
 	}
 	
-	SQL_TQuery(Database, VerifyInsert, Query, Pack, DBPrio_High);
+	SQL_TQuery(objDatabase, VerifyInsert, Query, Pack, DBPrio_High);
 }
 
 stock UTIL_InsertTempBan(time, const String:name[], const String:auth[], const String:ip[], const String:reason[], const String:adminAuth[], const String:adminIp[], Handle:dataPack)
@@ -2352,7 +2352,7 @@ stock CheckLoadAdmins()
 
 stock InsertServerInfo()
 {
-	if(Database == INVALID_HANDLE)
+	if(objDatabase == INVALID_HANDLE)
 	{
 		return;
 	}
@@ -2369,7 +2369,7 @@ stock InsertServerInfo()
 	if(AutoAdd != false)
 	{
 		FormatEx(query, sizeof(query), "SELECT sid FROM %s_servers WHERE ip = '%s' AND port = '%s'", DatabasePrefix, ServerIp, ServerPort);
-		SQL_TQuery(Database, ServerInfoCallback, query);
+		SQL_TQuery(objDatabase, ServerInfoCallback, query);
 	}
 }
 
