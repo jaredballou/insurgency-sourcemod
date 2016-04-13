@@ -1,0 +1,54 @@
+"Advertisements"
+{
+        "1"
+        {
+                "type"          "S"
+                "text"          "HLStatsX - http://stats.jballou.com/ - To see in-game, open chat and type '!stats'"
+        }
+        "2"
+        {
+                "type"          "S"
+                "text"          "Bind a key to check_ammo to check your current magazine."
+        }
+        "3"
+        {
+                "type"          "S"
+                "text"          "Sourcebans - http://stats.jballou.com/sourcebans - To see in-game, open chat and type '!sourcebans'"
+        }
+        "4"
+        {
+                "type"          "S"
+                "text"          "Don't rush! Slow is smooth, and smooth is fast!"
+        }
+        "5"
+        {
+                "type"          "S"
+                "text"          "Move as a team, follow orders, and call out contacts!"
+        }
+        "6"
+        {
+                "type"          "S"
+                "text"          "Clear the area before taking a point! Cover your teammates!"
+        }
+        "7"
+        {
+                "type"          "S"
+                "text"          "The SAW is modified to be inaccurate while moving or standing. The SAW is for defense, the Galil with drum magazines if the assault machinegun."
+        }
+        "8"
+        {
+                "type"          "S"
+                "text"          "There is no resupply timer, so use as much ammunition and explosives as you want."
+        }
+        "9"
+        {
+                "type"          "S"
+                "text"          "Bots cannot recapture points. You do NOT need to stand on the point for a counterattack."
+        }
+        "10"
+        {
+                "type"          "S"
+                "text"          "Wait until teammates are ready before capturing or destroying a point."
+        }
+}
+
