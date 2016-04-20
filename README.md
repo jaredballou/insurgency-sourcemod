@@ -2,29 +2,6 @@
 This repository has a complete installation of SourceMod, including all my plugins and source files. It's updated regularly, kept in sync with upstream, and includes a ton of stuff. It's still very much a development branch, so be aware that almost all the plugins I am working on are still pretty new and could be buggy.
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
-
- * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
- * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
- * <a href='#user-content-botnames'>Bot Names 1.0.1</a>
- * <a href='#user-content-botspawns'>Bot Spawns 0.2.7</a>
- * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
- * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
- * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#user-content-insmaps'>Map List 1.4.1</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
- * <a href='#user-content-magnifier'>Magnifier 0.0.1</a>
- * <a href='#user-content-navmesh-export'>Navmesh JSON Export 0.0.4</a>
- * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>
- * <a href='#user-content-newspawn'>New Spawn 0.0.1</a>
- * <a href='#user-content-nofog'>No Fog 0.0.1</a>
- * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
- * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
- * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
- * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
- * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
- * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
- * <a href='#user-content-theaterpicker'>Theater Picker 0.0.4</a>
-
 <a name='ammocheck'>
 ---
 ### Ammo Check 0.0.7</a>
@@ -597,6 +574,45 @@ Allows admins to set theater, and clients to vote
 #### CVAR List
  * "sm_theaterpicker_file" "PLUGIN_VERSION" //Custom theater file name
  * "sm_theaterpicker_config" "PLUGIN_VERSION" //Custom theater file name
+
+
+ * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
+ * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
+ * <a href='#user-content-botnames'>Bot Names 1.0.1</a>
+ * <a href='#user-content-botspawns'>Bot Spawns 0.2.7</a>
+ * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
+ * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
+ * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
+ * <a href='#user-content-insmaps'>Map List 1.4.1</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
+ * <a href='#user-content-magnifier'>Magnifier 0.0.1</a>
+ * <a href='#user-content-navmesh-export'>Navmesh JSON Export 0.0.4</a>
+ * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>
+ * <a href='#user-content-newspawn'>New Spawn 0.0.1</a>
+ * <a href='#user-content-nofog'>No Fog 0.0.1</a>
+ * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
+ * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
+ * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
+ * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
+ * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.6</a>
+ * <a href='#user-content-theaterpicker'>Theater Picker 0.0.4</a>
+ * <a href='#user-content-weapon_pickup'>Weapon Pickup 0.0.1</a>
+
+<a name='weapon_pickup'>
+---
+### Weapon Pickup 0.0.1</a>
+Weapon Pickup logic for manipulating player inventory
+
+ * [Plugin - weapon_pickup.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/weapon_pickup.smx?raw=true)
+ * [Source - weapon_pickup.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/weapon_pickup.sp?raw=true)
+
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+
+#### CVAR List
+ * "sm_weapon_pickup_enabled" "1" //sets whether weapon pickup manipulation is enabled
 
 ## Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.

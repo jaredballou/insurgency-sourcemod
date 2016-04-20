@@ -21,6 +21,7 @@ build:
   - sprinklers
   - suicide_bomb
   - theaterpicker
+  - weapon_pickup
 disabled:
 nobuild:
   - backblast
