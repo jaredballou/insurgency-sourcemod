@@ -1,3 +1,16 @@
+/*
+================================================================================
+weapon_pickup
+
+Allow manipulation of weapons and items in the game world.
+* Allow taking explosives and adding them to ammo for items we already have
+* Allow modifying loadout and ammo counts on weapons that get selected
+* Drop weapons that aren't part of the player's loadout when resupplying
+* Drop one entity per ammo for grenades (i.e. drop 3 M67s)
+* Perhaps add "Ammo drop" as part of dropping a weapon that allows getting the
+  ammo
+================================================================================
+*/
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
 
@@ -38,6 +51,7 @@ new OwnerOfWeapon[2048] = 0;
 new m_hActiveWeapon;
 new m_hMyWeapons;
 
+// Hook weaponcanuse (called at weapon deployment) and drop
 public OnClientPutInServer(client)
 {
 	SDKHook(client, SDKHook_WeaponCanUse, OnWeaponCanUse);
@@ -48,37 +62,54 @@ public OnWeaponDropPost(client, weapon)
 {
 	OwnerOfWeapon[weapon] = client; 
 }
-
+// Dump data about weapon entity
 public Action:OnWeaponCanUse(client, weapon)
 {
+	new String:weaponClass[64];
+	GetEntityClassname(weapon, weaponClass, sizeof(weaponClass));
+	PrintToServer("[WPNPICK] weaponClass %s",weaponClass);
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return Plugin_Continue;
 	}
-	new String:weaponClass[64];
-	GetEntityClassname(weapon, weaponClass, sizeof(weaponClass));
-	Ins_Log(LOG_LEVEL:DEBUG,"weaponClass %s",weaponClass);
+
+	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
+	new bool:m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+	new m_iAmmo = -1;
+	new m_iPrimaryAmmoCount = -1;
+	if (m_iPrimaryAmmoType != -1) {
+		m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
+	}
+	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
+	PrintToServer("[WPNPICK] %d\t%s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", weapon, weaponClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
 /*
+	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
+	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+	new m_iAmmo = -1;//GetEntProp(client, Prop_Data, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+	new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
+	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
 		new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-		new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
-		new m_iClip1 = GetEntProp(weapon, Prop_Send, "m_iClip1"); // weapon clip amount bullets
-		new m_iAmmo_prim = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
-		new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoCount");
-		InsLog(DEBUG,"weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo_prim %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo_prim,m_iPrimaryAmmoCount);
-		SetEntProp(client, Prop_Send, "m_iAmmo", 99, _, m_iPrimaryAmmoType); // Set player ammunition of this weapon primary ammo type
+		new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
+		new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+		new m_iAmmo = GetEntProp(client, Prop_Data, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+		new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
+		InsLog(DEBUG,"weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+		SetEntProp(client, Prop_Data, "m_iAmmo", 99, _, m_iPrimaryAmmoType); // Set player ammunition of this weapon primary ammo type
 
 if (OwnerOfWeapon[weapon] == client)
 	if(GetClientTeam(client) == 3)
 	{
-		return Plugin_Continue;
+		return Plugin_Handled;
 	}
 */
-	return Plugin_Handled;
+	return Plugin_Continue;
 }  
 //SDKHooks_DropWeapon(client, weapon, const Float:vecTarget[3]=NULL_VECTOR, const Float:vecVelocity[3]=NULL_VECTOR);
 
 
-
+// List weapons in each slot
 public Action:Command_ListWeaponSlots(client, argc)
 {
     new target = -1;
@@ -92,7 +123,7 @@ public Action:Command_ListWeaponSlots(client, argc)
     
     if (target <= 0)
     {
-        ReplyToCommand(client, "Lists weapon slots. Usage: zrtest_weaponlist [target]");
+        ReplyToCommand(client, "Lists weapon slots. Usage: wp_weaponlist [target]");
         return Plugin_Handled;
     }
     
@@ -108,6 +139,7 @@ public Action:Command_ListWeaponSlots(client, argc)
     return Plugin_Handled;
 }
 
+// List all weapons
 public Action:Command_ListWeapons(client, argc)
 {
     new target = -1;
@@ -121,7 +153,7 @@ public Action:Command_ListWeapons(client, argc)
     
     if (target <= 0)
     {
-        ReplyToCommand(client, "Lists all weapon. Usage: zrtest_weaponlist [target]");
+        ReplyToCommand(client, "Lists all weapon. Usage: wp_weaponlist [target]");
         return Plugin_Handled;
     }
     
@@ -137,6 +169,7 @@ public Action:Command_ListWeapons(client, argc)
     return Plugin_Handled;
 }
 
+// Give knife
 public Action:Command_Knife(client, argc)
 {
     new target = -1;
@@ -150,7 +183,7 @@ public Action:Command_Knife(client, argc)
     
     if (target <= 0)
     {
-        ReplyToCommand(client, "Gives a knife. Usage: zrtest_knife [target]");
+        ReplyToCommand(client, "Gives a knife. Usage: wp_knife [target]");
         return Plugin_Handled;
     }
     
@@ -166,6 +199,7 @@ public Action:Command_Knife(client, argc)
     return Plugin_Handled;
 }
 
+// Remove all weapons from a player
 public Action:Command_RemoveWeapons(client, argc)
 {
     new target = -1;
@@ -179,7 +213,7 @@ public Action:Command_RemoveWeapons(client, argc)
     
     if (target <= 0)
     {
-        ReplyToCommand(client, "Removes all weapons. Usage: zrtest_removeweapons [target]");
+        ReplyToCommand(client, "Removes all weapons. Usage: wp_removeweapons [target]");
         return Plugin_Handled;
     }
     
@@ -243,11 +277,21 @@ ListWeapons(client, observer)
             ReplyToCommand(observer, "%d\t(empty/invalid)", offset);
             continue;
         }
-        
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         new String:classname[64];
         GetEntityClassname(weapon, classname, sizeof(classname));
+	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
+	new bool:m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+	new m_iAmmo = -1;
+	new m_iPrimaryAmmoCount = -1;
+	if (m_iPrimaryAmmoType != -1) {
+		m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
+	}
+	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
+        ReplyToCommand(observer, "%d\t%d\t%s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d",offset, weapon, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
         
-        ReplyToCommand(observer, "%d\t%d\t%s", offset, weapon, classname);
     }
 }
 
@@ -280,11 +324,35 @@ RemoveAllClientWeapons(client, observer, count = 5)
     }
 }
 
+// Give knife
 GiveKnife(client)
 {
-    GivePlayerItem(client, "weapon_knife");
+    GivePlayerItem(client, "weapon_gurkha");
 }
 
+/*
+public CheckInfiniteAmmo(client)
+{
+	if (GetConVarBool(cvarInfiniteAmmo))
+	{
+		new weapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+		new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
+		new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+		new m_iAmmo = GetEntProp(client, Prop_Data, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+		new m_iPrimaryAmmoCount = -1;//GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
+		InsLog(DEBUG,"weapon %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d",weapon,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+		SetEntProp(client, Prop_Data, "m_iAmmo", 99, _, m_iPrimaryAmmoType); // Set player ammunition of this weapon primary ammo type
+
+		//new ammo = GetEntProp(ActiveWeapon, Prop_Data, "m_iClip1", 1);
+	}
+	if (GetConVarBool(cvarInfiniteMagazine))
+	{
+		new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+		new maxammo = Ins_GetWeaponGetMaxClip1(ActiveWeapon);
+		SetEntProp(ActiveWeapon, Prop_Data, "m_iClip1", maxammo);
+	}
+}
+*/
 
 
 
@@ -292,10 +360,36 @@ GiveKnife(client)
 
 
 
+// Hook entity creation so that all attempts to use it get checked
+public OnEntityCreated(entity, const String:classname[])
+{
+    if(entity > MaxClients && IsValidEntity(entity))
+    {
+        SDKHook(entity, SDKHook_Use, OnEntityUse);
+    }
+}
 
-
-
-
+// Called every time a player uses anything, need to add logic to only work on weapons
+public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
+{
+	if( activator > 0 && activator < MaxClients + 1 ) {
+	        new String:classname[64];
+        	GetEntityClassname(entity, classname, sizeof(classname));
+		new m_iPrimaryAmmoType = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoType");
+		new bool:m_bChamberedRound = GetEntData(entity, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+		new m_iClip1 = GetEntProp(entity, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+		new m_iAmmo = -1;
+		new m_iPrimaryAmmoCount = -1;
+		if (m_iPrimaryAmmoType != -1) {
+			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
+		}
+		new maxammo = Ins_GetWeaponGetMaxClip1(entity);
+		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
+// Loop through player weapons
+// If item is in inventory, extract ammo from entity and Kill it
+	}
+}
 
 
 
@@ -343,16 +437,16 @@ public OnPluginStart()
         LogError("Can't find CBasePlayer::m_hActiveWeapon");
     }
     
-    m_hMyWeapons = FindSendPropOffs("CInsPlayer", "m_hMyWeapons");
+    m_hMyWeapons = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
     if (m_hMyWeapons == -1)
     {
-        LogError("Can't find CInsPlayer::m_hMyWeapons");
+        LogError("Can't find CINSPlayer::m_hMyWeapons");
     }
     
-    RegConsoleCmd("zrtest_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: zrtest_weaponslots [target]");
-    RegConsoleCmd("zrtest_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: zrtest_weaponlist [target]");
-    RegConsoleCmd("zrtest_knife", Command_Knife, "Gives a knife. Usage: zrtest_knife [target]");
-    RegConsoleCmd("zrtest_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: zrtest_removeweapons [target]");
+    RegConsoleCmd("wp_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: wp_weaponslots [target]");
+    RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
+    RegConsoleCmd("wp_knife", Command_Knife, "Gives a knife. Usage: wp_knife [target]");
+    RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
 }
 
 
@@ -363,27 +457,3 @@ public OnLibraryAdded(const String:name[])
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
-/*
-public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
-{
-	remove_fog();
-}
-public remove_fog()
-{
-	if (!GetConVarBool(cvarEnabled))
-	{
-		return true;
-	}
-	new String:name[32];
-	for(new i=0;i<= GetMaxEntities() ;i++){
-		if(!IsValidEntity(i))
-			continue;
-		if(GetEdictClassname(i, name, sizeof(name))){
-			if (StrEqual("env_fog_controller", name,false)) {
-				RemoveEdict(i);
-			}
-		}
-	}
-	return true;
-}
-*/
