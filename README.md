@@ -178,8 +178,8 @@ Upholder of the [BFG], modified by Jared Ballou (jballou)
 
 <a name='damagemod'>
 ---
-### Damage Modifier 0.0.1</a>
-Modifies all damage applied
+### Damage Modifier 0.0.2</a>
+Modifies damage before applying to players
 
  * [Plugin - damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
  * [Source - damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
@@ -187,7 +187,8 @@ Modifies all damage applied
 Enable world-wide modification of damage values (i.e. for doing training missions where damage is set to 0). Still in the wireframe phase, not fucntional at all.
 
 #### CVAR List
- * "sm_damagemod_enabled" "0" //sets whether log fixing is enabled
+ * "sm_damagemod_enabled" "1" //Enable Damage Mod plugin
+ * "sm_damagemod_ff_min_distance" "120" //Minimum distance between players for Friendly Fire to register
 
 <a name='hlstatsx'>
 ---
@@ -582,6 +583,7 @@ Allows admins to set theater, and clients to vote
  * <a href='#user-content-botspawns'>Bot Spawns 0.2.7</a>
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
+ * <a href='#user-content-damagemod'>Damage Modifier 0.0.2</a>
  * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#user-content-insmaps'>Map List 1.4.1</a>
  * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>

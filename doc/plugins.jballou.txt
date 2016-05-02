@@ -4,6 +4,7 @@ botnames
 botspawns
 cooplobby
 cvarlist
+damagemod
 hlstatsx
 insmaps
 insurgency

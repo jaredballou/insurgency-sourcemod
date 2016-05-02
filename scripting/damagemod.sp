@@ -11,8 +11,8 @@ new Handle:cvarFFMinDistance = INVALID_HANDLE; // Minimum Friendly Fire distance
 
 //============================================================================================================
 
-#define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_DESCRIPTION "Modifies all damage applied"
+#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_DESCRIPTION "Modifies damage before applying to players"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-damagemod.txt"
 
 public Plugin:myinfo =

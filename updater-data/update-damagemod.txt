@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"		"0.0.2"
 		}
-		"Notes"		"Damage Modifier - Modifies all damage applied"
+		"Notes"		"Damage Modifier - Modifies damage before applying to players"
 	}
 	"Files"
 	{
