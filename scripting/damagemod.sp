@@ -7,6 +7,7 @@
 #define INS
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
+new Handle:cvarFFMinDistance = INVALID_HANDLE; // Minimum Friendly Fire distance
 
 //============================================================================================================
 
@@ -26,7 +27,8 @@ public Plugin:myinfo =
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_damagemod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_damagemod_enabled", "0", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_damagemod_enabled", "1", "Enable Damage Mod plugin", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarFFMinDistance = CreateConVar("sm_damagemod_ff_min_distance", "120", "Minimum distance between players for Friendly Fire to register", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	PrintToServer("[DAMAGEMOD] Starting");
 	HookEvent("player_hurt", Event_PlayerHurt);
 	HookEvent("weapon_fire", Event_WeaponFired);
@@ -132,10 +134,10 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[DMG] PlayerHurt");
+	//PrintToServer("[DMG] PlayerHurt");
 	if (!GetConVarBool(cvarEnabled))
 	{
-		PrintToServer("[DMG] Not enabled");
+		//PrintToServer("[DMG] Not enabled");
 		return Plugin_Continue;
 	}
 	//"userid" "short"
@@ -147,20 +149,21 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	//"health" "byte"
 	new attacker  = GetClientOfUserId(GetEventInt(event, "attacker"));
 	new victim = GetClientOfUserId(GetEventInt(event, "userid"));
-	PrintToServer("[DMG] attacker %d %N victim %d %N",attacker,attacker,victim,victim);
+	//PrintToServer("[DMG] attacker %d %N victim %d %N",attacker,attacker,victim,victim);
 	if (attacker > 0 && attacker != victim) {
-		PrintToServer("[DMG] Attacker valid");
+		//PrintToServer("[DMG] Attacker valid");
 		if (GetClientTeam(attacker) == GetClientTeam(victim)) {
-			PrintToServer("[DMG] Team Damage");
+			//PrintToServer("[DMG] Team Damage");
 			decl Float:attackerPos[3], Float:victimPos[3],Float:flDistance;
 			GetClientAbsOrigin(attacker, attackerPos);
 			GetClientAbsOrigin(victim, victimPos);
 			flDistance = GetVectorDistance(attackerPos, victimPos);
-			PrintToServer("[DMG] Distance is %f");
-			if (flDistance <= 80.0) {
-				PrintToServer("[DMG] Distance triggered");
-				PrintToChat(attacker, "Close range FF against %N", victim);
-				PrintToChat(victim, "Close range FF from %N",attacker);
+			//PrintToServer("[DMG] Distance is %f",flDistance);
+			if (flDistance <= GetConVarFloat(cvarFFMinDistance)) {
+				//PrintToServer("[DMG] Distance triggered");
+				//PrintToChat(attacker, "Close range FF against %N", victim);
+				//PrintToChat(victim, "Close range FF from %N",attacker);
+				return Plugin_Handled;
 			}
 		}
 	}
