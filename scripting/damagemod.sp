@@ -132,8 +132,10 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 
 public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	PrintToServer("[DMG] PlayerHurt");
 	if (!GetConVarBool(cvarEnabled))
 	{
+		PrintToServer("[DMG] Not enabled");
 		return Plugin_Continue;
 	}
 	//"userid" "short"
@@ -143,10 +145,27 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	//"attacker" "short"
 	//"dmg_health" "short"
 	//"health" "byte"
-/*
-	decl String:weapon[MAX_WEAPON_LEN];
 	new attacker  = GetClientOfUserId(GetEventInt(event, "attacker"));
 	new victim = GetClientOfUserId(GetEventInt(event, "userid"));
+	PrintToServer("[DMG] attacker %d %N victim %d %N",attacker,attacker,victim,victim);
+	if (attacker > 0 && attacker != victim) {
+		PrintToServer("[DMG] Attacker valid");
+		if (GetClientTeam(attacker) == GetClientTeam(victim)) {
+			PrintToServer("[DMG] Team Damage");
+			decl Float:attackerPos[3], Float:victimPos[3],Float:flDistance;
+			GetClientAbsOrigin(attacker, attackerPos);
+			GetClientAbsOrigin(victim, victimPos);
+			flDistance = GetVectorDistance(attackerPos, victimPos);
+			PrintToServer("[DMG] Distance is %f");
+			if (flDistance <= 80.0) {
+				PrintToServer("[DMG] Distance triggered");
+				PrintToChat(attacker, "Close range FF against %N", victim);
+				PrintToChat(victim, "Close range FF from %N",attacker);
+			}
+		}
+	}
+/*
+	decl String:weapon[MAX_WEAPON_LEN];
 	GetEventString(event, "weapon", weapon, sizeof(weapon));
 
 	if (StrEqual(weapon,"player")) {
