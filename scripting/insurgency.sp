@@ -14,7 +14,7 @@
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "1.3.3"
-#define PLUGIN_WORKING 1
+#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,

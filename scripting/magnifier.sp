@@ -6,7 +6,8 @@
 #define PLUGIN_NAME "[INS] Magnifier"
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_WORKING 0
+#define PLUGIN_WORKING "0"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-magnifier.txt"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,

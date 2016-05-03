@@ -20,6 +20,8 @@ DOC_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Temp path
 TMP_PATH="${DOC_PATH}/tmp"
 
+TMP_SUBDIRS="cvar dependencies description todo updater"
+
 # Root SourceMod directory
 SOURCEMOD_PATH="$(dirname "${DOC_PATH}")"
 
@@ -57,6 +59,15 @@ function add_file_to_update() {
 		echo "${LINE}" >> "${DOC_UPDATER_FILE}"
 	fi
 }
+
+# Create dirs
+for DIR in $TMP_SUBDIRS
+do
+	DIR="${TMP_PATH}/${DIR}"
+	if [ ! -e "${DIR}" ]; then
+		mkdir -pv "${DIR}"
+	fi
+done
 
 # Blank out TOC file
 echo > "${TOC_FILE}"

@@ -31,7 +31,7 @@ Allow manipulation of weapons and items in the game world.
 #define PLUGIN_DESCRIPTION "Weapon Pickup logic for manipulating player inventory"
 #define PLUGIN_NAME "[INS] Weapon Pickup"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_WORKING 0
 
 public Plugin:myinfo = {
@@ -67,7 +67,7 @@ public Action:OnWeaponCanUse(client, weapon)
 {
 	new String:weaponClass[64];
 	GetEntityClassname(weapon, weaponClass, sizeof(weaponClass));
-	PrintToServer("[WPNPICK] weaponClass %s",weaponClass);
+	//PrintToServer("[WPNPICK] weaponClass %s",weaponClass);
 	if (!GetConVarBool(cvarEnabled))
 	{
 		return Plugin_Continue;
@@ -83,7 +83,7 @@ public Action:OnWeaponCanUse(client, weapon)
 		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
 	}
 	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
-	PrintToServer("[WPNPICK] %d\t%s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", weapon, weaponClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
+	//PrintToServer("[WPNPICK] %d\t%s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", weapon, weaponClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
 /*
 	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
 	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
@@ -385,7 +385,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
 		new maxammo = Ins_GetWeaponGetMaxClip1(entity);
-		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
+		//PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
 // Loop through player weapons
 // If item is in inventory, extract ammo from entity and Kill it
 	}

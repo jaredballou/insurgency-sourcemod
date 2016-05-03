@@ -19,7 +19,7 @@
 #define PLUGIN_DESCRIPTION "Adds suicide bomb for bots"
 #define PLUGIN_NAME "[INS] Suicide Bombers"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.6"
+#define PLUGIN_VERSION "0.0.7"
 #define PLUGIN_WORKING 1
 
 public Plugin:myinfo = {
@@ -33,6 +33,8 @@ public Plugin:myinfo = {
 
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
 
+#define MAX_CLASS_LIST 12
+#define MAX_CLASS_NAME 32
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarSpawnDelay = INVALID_HANDLE;
@@ -97,7 +99,7 @@ public ConVarChanged(Handle:cvar, const String:oldVal[], const String:newVal[])
 }
 public Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[SUICIDE] Running Event_PlayerPickSquad");
+	//PrintToServer("[SUICIDE] Running Event_PlayerPickSquad");
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	decl String:class_template[64];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
@@ -135,38 +137,38 @@ public CheckExplode(client) {
 	new Float:fDeathChance = GetConVarFloat(cvarDeathChance);
 	new iSpawnDelay = GetConVarInt(cvarSpawnDelay);
 
-	PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N class %s",client,client,g_client_last_classstring[client]);
+	//PrintToServer("[SUICIDE] Running CheckExplode for client %d name %N class %s",client,client,g_client_last_classstring[client]);
 	if (!bEnabled)
 	{
-		PrintToServer("[SUICIDE] Plugin disabled");
+		//PrintToServer("[SUICIDE] Plugin disabled");
 		return;
 	}
 	if (!IsClientInGame(client) || !IsPlayerAlive(client))
 	{
-		PrintToServer("[SUICIDE] Client not alive and in game");
+		//PrintToServer("[SUICIDE] Client not alive and in game");
 		return;
 	}
 	new lifetime = (GetTime() - g_client_spawn_time[client]);
 	if (lifetime < iSpawnDelay)
 	{
-		PrintToServer("[SUICIDE] Not alive long enough, needed %d but only alive for %d",iSpawnDelay,lifetime);
+		//PrintToServer("[SUICIDE] Not alive long enough, needed %d but only alive for %d",iSpawnDelay,lifetime);
 		return;
 	}
 
 	// Check player class
 	new String:tmp[256];
-	new String:classes[12][32];
+	new String:classes[MAX_CLASS_LIST][MAX_CLASS_NAME];
 	GetConVarString(cvarPlayerClasses, tmp, sizeof(tmp));
-	ExplodeString(tmp, " ", classes, 12, 32);
+	ExplodeString(tmp, " ", classes, MAX_CLASS_LIST, MAX_CLASS_NAME);
 	new classmatch = 0;
 	for (new i=0;i<12;i++)
 	{
-		PrintToServer("[SUICIDE] Checking for %s",classes[i]);
 		if (StrEqual(classes[i],"") || StrEqual(classes[i],"\0"))
 		{
 		}
 		else
 		{
+			//PrintToServer("[SUICIDE] Checking for %s",classes[i]);
 			if ((StrContains(g_client_last_classstring[client], classes[i]) > -1))
 			{
 				classmatch=1;
@@ -174,7 +176,7 @@ public CheckExplode(client) {
 		}
 	}
 	if (!classmatch) {
-		PrintToServer("[SUICIDE] Classname does not match");
+		//PrintToServer("[SUICIDE] Classname does not match");
 		return;
 	}
 
