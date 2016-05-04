@@ -12,5 +12,6 @@
 	{
 		"Plugin"	"Path_SM/plugins/damagemod.smx"
 		"Source"	"Path_SM/scripting/damagemod.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
 	}
 }

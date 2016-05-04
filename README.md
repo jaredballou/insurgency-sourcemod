@@ -55,7 +55,7 @@ Gives automatic names to bots on creation.
 ### Bot Spawns 0.2.7</a>
 Adds a number of options and ways to handle bot spawns
 
- * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/botspawns.smx?raw=true)
+ * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
  * [Source - botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
 
 
@@ -113,6 +113,9 @@ Modifies damage before applying to players
  * [Plugin - damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
  * [Source - damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
 
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
  * "sm_damagemod_enabled" "PLUGIN_WORKING" //Enable Damage Mod plugin
@@ -209,7 +212,7 @@ Exports navmesh data in JSON format
 ### Navmesh Parser 1.0.4</a>
 Read navigation mesh
 
- * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/navmesh.smx?raw=true)
+ * [Plugin - navmesh.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/navmesh.smx?raw=true)
  * [Source - navmesh.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/navmesh.sp?raw=true)
 
 
