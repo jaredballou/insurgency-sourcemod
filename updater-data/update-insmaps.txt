@@ -10,6 +10,9 @@
 	}
 	"Files"
 	{
+Notes:MyPlugin
+		"Plugin"	"Path_SM/plugins/insmaps.smx"
+		"Source"	"Path_SM/scripting/insmaps.sp"
 		"Plugin"	"Path_SM/plugins/insmaps.smx"
 		"Source"	"Path_SM/scripting/insmaps.sp"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"

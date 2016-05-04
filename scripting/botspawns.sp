@@ -16,8 +16,8 @@
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "[INS] Bot Spawns"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "0.2.7"
-#define PLUGIN_WORKING 1
+#define PLUGIN_VERSION "0.3.0"
+#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -60,6 +60,7 @@ new bool:g_bEnabled, g_iSpawnMode, g_iRespawnMode, g_iCounterattackMode, g_iCoun
 new Handle:g_hHidingSpots = INVALID_HANDLE;
 #define MAX_OBJECTIVES 13
 #define MAX_HIDING_SPOTS 2048
+// Minimum space between players, so we don't telefrag
 #define MIN_PLAYER_DISTANCE 128.0
 new g_iCPHidingSpots[MAX_OBJECTIVES][MAX_HIDING_SPOTS];
 new g_iCPHidingSpotCount[MAX_OBJECTIVES];
@@ -70,7 +71,7 @@ new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
 new Handle:g_hRespawnTimer[MAXPLAYERS+1];
 new g_iHidingSpotCount;
-new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS+1], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS+1],g_iSpawning[MAXPLAYERS+1],Float:g_vecOrigin[MAXPLAYERS+1][3];
+new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS+1], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS+1],g_iNeedSpawn[MAXPLAYERS+1],Float:g_vecOrigin[MAXPLAYERS+1][3];
 new bot_team = 3;
 
 #pragma unused g_bRemoveUnseenWhenCapping
@@ -177,8 +178,6 @@ public OnPluginStart()
 	}
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
-	HookEvent("player_pick_squad", Event_PlayerPickSquad);
-	HookEvent("object_destroyed", Event_ObjectDestroyed);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
 	CreateTimer(1.0, Timer_ProcessQueue, _, TIMER_REPEAT);
@@ -225,11 +224,18 @@ public OnLibraryAdded(const String:name[])
 public OnMapStart()
 {
 	UpdateCvars();
+/*
 	new String:sGameMode[32],String:sLogicEnt[64];
 	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
 	Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
 	PrintToServer("[BOTSPAWNS] gamemode %s logicent %s",sGameMode,sLogicEnt);
 	if (!StrEqual(sGameMode,"checkpoint")) return;
+*/
+	RestartBotQueue();
+	return;
+}
+
+public GetHidingSpots() {
 	if (!NavMesh_Exists()) return;
 	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
 	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
@@ -271,85 +277,83 @@ public OnMapStart()
 		}
 		PrintToServer("[BOTSPAWNS] Found hiding count: a %d b %d c %d d %d e %d f %d g %d h %d i %d j %d k %d l %d m %d",g_iCPHidingSpotCount[0],g_iCPHidingSpotCount[1],g_iCPHidingSpotCount[2],g_iCPHidingSpotCount[3],g_iCPHidingSpotCount[4],g_iCPHidingSpotCount[5],g_iCPHidingSpotCount[6],g_iCPHidingSpotCount[7],g_iCPHidingSpotCount[8],g_iCPHidingSpotCount[9],g_iCPHidingSpotCount[10],g_iCPHidingSpotCount[11],g_iCPHidingSpotCount[12]);
 	}
-	RestartBotQueue();
-	return;
 }
-CheckHidingSpotRules(m_nActivePushPointIndex,iCPHIndex,iSpot,client)
-{
-	new m_iTeam = GetClientTeam(client);
-	new Float:distance,Float:furthest,Float:closest=-1.0,Float:flHidingSpot[3];
-	new Float:vecOrigin[3];
-
-	GetClientAbsOrigin(client,vecOrigin);
+Float:GetHidingSpotVector(iSpot) {
+	new Float:flHidingSpot[3];
 	flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
 	flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
 	flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
-	for (new iTarget = 1; iTarget < MaxClients; iTarget++)
-	{
+	return flHidingSpot;
+}
+CheckSpawnPoint(Float:vecSpawn[3],client) {
+//Ins_InCounterAttack
+	new m_iTeam = GetClientTeam(client);
+	new Float:distance,Float:furthest,Float:closest=-1.0;
+	new Float:vecOrigin[3];
+
+	GetClientAbsOrigin(client,vecOrigin);
+	for (new iTarget = 1; iTarget < MaxClients; iTarget++) {
 		if (!IsValidClient(iTarget))
 			continue;
 		if (!IsClientInGame(iTarget))
 			continue;
-		distance = GetVectorDistance(flHidingSpot,g_vecOrigin[iTarget]);
 		//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d is %f",iTarget,iSpot,distance);
-		if (GetClientTeam(iTarget) != m_iTeam)
-		{
-			if (distance > furthest)
-				furthest = distance;
-			if ((distance < closest) || (closest < 0))
-				closest = distance;
-			if ((distance < g_flMinPlayerDistance) || ((IsVectorInSightRange(iTarget, flHidingSpot, 120.0)) && (ClientCanSeeVector(iTarget, flHidingSpot, g_flMaxPlayerDistance))))
-			{
-				PrintToServer("[BOTSPAWNS] Cannot spawn %N at iSpot %d since it is in sight of %N",client,iSpot,iTarget);
+		distance = GetVectorDistance(vecSpawn,g_vecOrigin[iTarget]);
+		if (distance > furthest)
+			furthest = distance;
+		if ((distance < closest) || (closest < 0))
+			closest = distance;
+		// If any player is close enough to telefrag
+		if (distance < MIN_PLAYER_DISTANCE) {
+			return 0;
+		}
+		if (GetClientTeam(iTarget) != m_iTeam) {
+			// If we are too close
+			if (distance < g_flMinPlayerDistance) {
+				return 0;
+			}
+			// If the player can see the spawn point
+			if ((IsVectorInSightRange(iTarget, vecSpawn, 120.0)) && (ClientCanSeeVector(iTarget, vecSpawn, g_flMaxPlayerDistance))) {
 				return 0;
 			}
 		}
-		if (distance < MIN_PLAYER_DISTANCE)
-		{
-			PrintToServer("[BOTSPAWNS] Distance too small from %N to iSpot %d distance %f",iTarget,iSpot,distance);
-			return 0;
-		}
 	}
-	if (closest > g_flMaxPlayerDistance)
-	{
-		PrintToServer("[BOTSPAWNS] iSpot %d is too far from nearest player distance %f",iSpot,closest);
+	// If any player is too far
+	if (closest > g_flMaxPlayerDistance) {
 		return 0;
 	}
-	if (Ins_InCounterAttack())
-	{
-		distance = GetVectorDistance(flHidingSpot,m_vCPPositions[m_nActivePushPointIndex]);
-		if (distance < g_flMinCounterattackDistance)
-		{
-			PrintToServer("[BOTSPAWNS] iSpot %d is too close counterattack point distance %f",iSpot,distance);
+	// Check distance to point in counterattack
+	if (Ins_InCounterAttack()) {
+		new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
+		distance = GetVectorDistance(vecSpawn,m_vCPPositions[m_nActivePushPointIndex]);
+		if (distance < g_flMinCounterattackDistance) {
 			return 0;
 		}
 	}
-	distance = GetVectorDistance(flHidingSpot,vecOrigin);
-	PrintToServer("[BOTSPAWNS] Selected spot for %N, iCPHIndex %d iSpot %d distance %f",client,iCPHIndex,iSpot,distance);
 	return 1;
 }
-GetBestHidingSpot(client,iteration=0)
-{
+
+GetSpawnPoint_HidingSpot(client,iteration=0) {
 	UpdatePlayerOrigins();
 	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
-//	if (Ins_InCounterAttack())
-//		m_nActivePushPointIndex--;
 
 	new minidx = (iteration) ? 0 : g_iCPLastHidingSpot[m_nActivePushPointIndex];
 	new maxidx = (iteration) ? g_iCPLastHidingSpot[m_nActivePushPointIndex] : g_iCPHidingSpotCount[m_nActivePushPointIndex];
-	for (new iCPHIndex = minidx; iCPHIndex < maxidx; iCPHIndex++)
-	{
+	for (new iCPHIndex = minidx; iCPHIndex < maxidx; iCPHIndex++) {
 		new iSpot = g_iCPHidingSpots[m_nActivePushPointIndex][iCPHIndex];
-		if (CheckHidingSpotRules(m_nActivePushPointIndex,iCPHIndex,iSpot,client))
-		{
+		new Float:vecSpawn[3];
+		vecSpawn = GetHidingSpotVector(iSpot);
+
+		if (CheckSpawnPoint(vecSpawn,client)) {
 			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
 			return iSpot;
 		}
 	}
 	if (iteration)
 		return -1;
-	return GetBestHidingSpot(client,1);
+	return GetSpawnPoint_HidingSpot(client,1);
 }
+
 public UpdatePlayerOrigins()
 {
 	for (new i = 1; i < MaxClients; i++)
@@ -360,6 +364,7 @@ public UpdatePlayerOrigins()
 		}
 	}
 }
+
 //This should be executed every time a point is taken, round starts, or any time a wave would be spawned.
 RestartBotQueue()
 {
@@ -375,7 +380,7 @@ public JoinQueue(client,bool:spawning)
 	{
 		return;
 	}
-	if ((g_iInQueue[client]) || (g_iSpawning[client]))
+	if ((g_iInQueue[client]) || (g_iNeedSpawn[client]))
 		return;
 	PrintToServer("[BOTSPAWNS] called JoinQueue for %N (%d) g_iBotsToSpawn %d spawning %b",client,client,g_iBotsToSpawn,spawning);
 	g_iInQueue[client] = 1;
@@ -387,6 +392,7 @@ public JoinQueue(client,bool:spawning)
 		}
 	}
 }
+
 //Run this to mark a bot as ready to spawn. Add tokens if you want them to be able to spawn.
 PreSpawn(client,tokens=0,instant=0)
 {
@@ -396,7 +402,7 @@ PreSpawn(client,tokens=0,instant=0)
 	}
 	g_iSpawnTokens[client]+=tokens;
 	g_iNumReady++;
-	g_iSpawning[client] = 1;
+	g_iNeedSpawn[client] = 1;
 	g_iInQueue[client] = 0;
 
 	if (g_iBotsToSpawn)
@@ -415,6 +421,11 @@ PreSpawn(client,tokens=0,instant=0)
 		g_hRespawnTimer[client] = CreateTimer(fSpawnDelay, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE);
 }
 
+public UpdateBotCounters() {
+	g_iBotsAlive = Team_CountAlivePlayers(bot_team);
+	g_iBotsTotal = Team_CountPlayers(bot_team);
+}
+
 //Loop every second, this keeps track of the bots and adds/removes them as needed.
 public Action:Timer_ProcessQueue(Handle:timer)
 {
@@ -422,8 +433,7 @@ public Action:Timer_ProcessQueue(Handle:timer)
 	{
 		return;
 	}
-	g_iBotsAlive = Team_CountAlivePlayers(bot_team);
-	g_iBotsTotal = Team_CountPlayers(bot_team);
+	UpdateBotCounters();
 
 //	new iStart = RoundToFloor(GetRandomFloat(0.0,1.0) * 64);
 //	new iBotCountMin = RoundToFloor(Float:g_iBotsTotal * g_flMinFracInGame);
@@ -439,7 +449,7 @@ public Action:Timer_ProcessQueue(Handle:timer)
 		for (new i = 1; i <= MaxClients; i++) {
 			if (((iBotCountMax > (g_iBotsAlive + g_iNumReady)) && ((g_iBotsAlive + g_iNumReady) < g_iBotsTotal)) && ((g_iBotsToSpawn) || (g_iBotsToSpawn < 0)))
 			{
-				if ((IsValidClient(i)) && (GetClientTeam(i) == bot_team) && (IsFakeClient(i)) && (!IsPlayerAlive(i)) && (g_iInQueue[i]) && (!g_iSpawning[i]))
+				if ((IsValidClient(i)) && (GetClientTeam(i) == bot_team) && (IsFakeClient(i)) && (!IsPlayerAlive(i)) && (g_iInQueue[i]) && (!g_iNeedSpawn[i]))
 				{
 					PreSpawn(i,1);
 				}
@@ -462,26 +472,40 @@ public Action:Timer_Spawn(Handle:timer, any:client)
 public Action:Timer_PostSpawn(Handle:timer, any:client)
 {
 	PrintToServer("[BOTSPAWNS] called Timer_PostSpawn for client %N (%d)",client,client);
-	g_iSpawning[client] = 0;
-	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots))
-	{
-		new Float:flHidingSpot[3],Float:vecOrigin[3];
-		new iSpot = GetBestHidingSpot(client);
-		if (iSpot > -1)
-		{
-			flHidingSpot[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
-			flHidingSpot[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
-			flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
-			GetClientAbsOrigin(client,vecOrigin);
-			new Float:distance = GetVectorDistance(flHidingSpot,vecOrigin);
-
-			PrintToServer("[BOTSPAWNS] Teleporting %N to hiding spot %d at %f,%f,%f distance %f",client,iSpot,flHidingSpot[0],flHidingSpot[1],flHidingSpot[2],distance);
-			TeleportEntity(client, flHidingSpot, NULL_VECTOR, NULL_VECTOR);
-		}
-	}
+	SpawnClient(client);
+}
+public SpawnClient(client) {
+	g_iNeedSpawn[client] = 0;
+	new Float:vecSpawn[3];
+	vecSpawn = GetSpawnPoint(client);
+	TeleportEntity(client, vecSpawn, NULL_VECTOR, NULL_VECTOR);
 	g_hRespawnTimer[client] = INVALID_HANDLE;
 }
 
+Float:GetSpawnPoint(client) {
+	new Float:vecSpawn[3];
+	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots))
+	{
+		new iSpot = GetSpawnPoint_HidingSpot(client);
+		if (iSpot > -1)
+		{
+/*
+			new Float:vecOrigin[3];
+			vecOrigin[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
+			vecOrigin[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
+			vecOrigin[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+			GetClientAbsOrigin(client,vecOrigin);
+			new Float:distance = GetVectorDistance(vecOrigin,vecOrigin);
+			PrintToServer("[BOTSPAWNS] Teleporting %N to hiding spot %d at %f,%f,%f distance %f",client,iSpot,vecOrigin[0],vecOrigin[1],vecOrigin[2],distance);
+			TeleportEntity(client, vecOrigin, NULL_VECTOR, NULL_VECTOR);
+*/
+			vecSpawn[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
+			vecSpawn[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
+			vecSpawn[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+		}
+	}
+	return vecSpawn;
+}
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
@@ -524,39 +548,6 @@ public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool
 		return Plugin_Continue;
 	}
 	RestartBotQueue();
-/*
-	//"priority" "short"
-	//"cp" "byte"
-	//"cappers" "string"
-	//"cpname" "string"
-	//"team" "byte"
-	decl String:cappers[256],String:cpname[64];
-	//new priority = GetEventInt(event, "priority");
-	new cp = GetEventInt(event, "cp");
-	GetEventString(event, "cappers", cappers, sizeof(cappers));
-	GetEventString(event, "cpname", cpname, sizeof(cpname));
-	new team = GetEventInt(event, "team");
-	new capperlen = GetCharBytes(cappers);
-	PrintToServer("[LOGGER] Event_ControlPointCaptured cp %d capperlen %d cpname %s team %d", cp,capperlen,cpname,team);
-
-	//"cp" "byte" - for naming, currently not needed
-	for (new i = 0; i < strlen(cappers); i++)
-	{
-		new client = cappers[i];
-		PrintToServer("[LOGGER] Event_ControlPointCaptured parsing capper id %d client %d",i,client);
-		if(client > 0 && client <= MaxClients && IsClientInGame(client))
-		{
-			decl String:player_authid[64];
-			if (!GetClientAuthString(client, player_authid, sizeof(player_authid)))
-			{
-				strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
-			}
-			new player_userid = GetClientUserId(client);
-			new player_team_index = GetClientTeam(client);
-			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_captured\"", client, player_userid, player_authid, g_team_list[player_team_index]);
-		}
-	}
-*/
 	return Plugin_Continue;
 }
 public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bool:dontBroadcast)
@@ -578,7 +569,14 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 }
 public Action:Timer_RemoveRagdoll(Handle:timer, any:_iEntity)
 {
+	if (_iEntity < 0) {
+		return Plugin_Continue;
+	}
+	if (!IsValidEntity(_iEntity)) {
+		return Plugin_Continue;
+	}
 	AcceptEntityInput(_iEntity, "Kill");
+	return Plugin_Continue;
 }
 public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -629,99 +627,5 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	//"x" "float"
 	//"z" "float"
 	//"assister" "short"
-	return Plugin_Continue;
-}
-public Action:Event_ObjectDestroyed(Handle:event, const String:name[], bool:dontBroadcast)
-{
-	if (!g_bEnabled)
-	{
-		return Plugin_Continue;
-	}
-	PrintToServer("[BOTSPAWNS] Calling Event_ObjectDestroyed");
-	RestartBotQueue();
-/*
-	decl String:attacker_authid[64],String:assister_authid[64],String:classname[64];
-	//"team" "byte"
-	//"attacker" "byte"
-	//"cp" "short"
-	//"index" "short"
-	//"type" "byte"
-	//"weapon" "string"
-	//"weaponid" "short"
-	//"assister" "byte"
-	//"attackerteam" "byte"
-	new team = GetEventInt(event, "team");
-	new attacker = GetEventInt(event, "attacker");
-	new attackerteam = GetEventInt(event, "attackerteam");
-	new cp = GetEventInt(event, "cp");
-	new index = GetEventInt(event, "index");
-	new type = GetEventInt(event, "type");
-	new weaponid = GetEventInt(event, "weaponid");
-	new assister = GetEventInt(event, "assister");
-	new assister_userid = -1;
-	new attacker_userid = -1;
-	new assisterteam = -1;
-	if (index)
-	{
-		GetEdictClassname(index, classname, sizeof(classname));
-	}
-	if ((assister) && (assister != attacker))
-	{
-		assister_userid = GetClientUserId(assister);
-		if (assister_userid)
-		{
-			assisterteam = GetClientTeam(assister);
-			if (!GetClientAuthString(assister, assister_authid, sizeof(assister_authid)))
-			{
-				strcopy(assister_authid, sizeof(assister_authid), "UNKNOWN");
-			}
-			LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", assister, assister_userid, assister_authid, g_team_list[assisterteam]);
-		}
-	}
-
-	if (attacker)
-	{
-		attacker_userid = GetClientUserId(attacker);
-		if (!GetClientAuthString(attacker, attacker_authid, sizeof(attacker_authid)))
-		{
-			strcopy(attacker_authid, sizeof(attacker_authid), "UNKNOWN");
-		}
-		LogToGame("\"%N<%d><%s><%s>\" triggered \"ins_cp_destroyed\"", attacker, attacker_userid, attacker_authid, g_team_list[attackerteam]);
-	}
-	PrintToServer("[LOGGER] Event_ObjectDestroyed: team %d attacker %d attacker_userid %d cp %d classname %s index %d type %d weaponid %d assister %d assister_userid %d attackerteam %d",team,attacker,attacker_userid,cp,classname,index,type,weaponid,assister,assister_userid,attackerteam);
-*/
-	return Plugin_Continue;
-}
-
-public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
-{
-/*
-	//"squad_slot" "byte"
-	//"squad" "byte"
-	//"userid" "short"
-	//"class_template" "string"
-	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
-	//new squad = GetEventInt( event, "squad" );
-	//new squad_slot = GetEventInt( event, "squad_slot" );
-	decl String:class_template[64];
-	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	ReplaceString(class_template,sizeof(class_template),"template_","",false);
-	ReplaceString(class_template,sizeof(class_template),"_training","",false);
-	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
-	ReplaceString(class_template,sizeof(class_template),"coop_","",false);
-	ReplaceString(class_template,sizeof(class_template),"_security","",false);
-	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
-	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
-
-
-	//PrintToServer("[LOGGER] squad: %d squad_slot: %d class_template: %s",squad,squad_slot,class_template);
-
-	if( client == 0)
-		return Plugin_Continue;
-	if(!StrEqual(g_client_last_classstring[client],class_template)) {
-		LogRoleChange( client, class_template );
-		g_client_last_classstring[client] = class_template;
-	}
-*/
 	return Plugin_Continue;
 }
