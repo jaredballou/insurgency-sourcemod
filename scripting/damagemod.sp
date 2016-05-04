@@ -1,6 +1,8 @@
 #include <sourcemod>
 #include <regex>
+#include <insurgency>
 #include <sdktools>
+#include <sdkhooks>
 #undef REQUIRE_PLUGIN
 #include <updater>
 #pragma unused cvarVersion
@@ -29,15 +31,19 @@ public Plugin:myinfo = {
 
 public OnPluginStart()
 {
+	PrintToServer("[DAMAGEMOD] Starting");
+
 	cvarVersion = CreateConVar("sm_damagemod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_damagemod_enabled", PLUGIN_WORKING, "Enable Damage Mod plugin", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarFFMinDistance = CreateConVar("sm_damagemod_ff_min_distance", "120", "Minimum distance between players for Friendly Fire to register", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	PrintToServer("[DAMAGEMOD] Starting");
+
 	HookEvent("player_hurt", Event_PlayerHurt);
+	HookEvent("player_hurt", Event_PlayerHurtPre, EventHookMode_Pre);
 	HookEvent("weapon_fire", Event_WeaponFired);
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("player_suppressed", Event_PlayerSuppressed);
+
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
@@ -135,38 +141,64 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 */
 }
 
-public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroadcast)
+public Action Event_PlayerHurtPre(Event event, const char[] name, bool dontBroadcast)
 {
-	//PrintToServer("[DMG] PlayerHurt");
+	//PrintToServer("[DMG] PlayerHurtPre");
 	if (!GetConVarBool(cvarEnabled))
 	{
 		//PrintToServer("[DMG] Not enabled");
 		return Plugin_Continue;
 	}
-	decl String:weapon[64];
-	new priority  = GetClientOfUserId(GetEventInt(event, "priority"));
-	new attacker  = GetClientOfUserId(GetEventInt(event, "attacker"));
-	new dmg_health  = GetClientOfUserId(GetEventInt(event, "dmg_health"));
-	new health  = GetClientOfUserId(GetEventInt(event, "health"));
-	new damagebits  = GetClientOfUserId(GetEventInt(event, "damagebits"));
-	new hitgroup  = GetClientOfUserId(GetEventInt(event, "hitgroup"));
-	GetEventString(event, "weapon", weapon, sizeof(weapon));
-	new userid  = GetClientOfUserId(GetEventInt(event, "userid"));
+/*
+	int priority = event.GetInt("priority");
+	int attacker = GetClientOfUserId(event.GetInt("attacker"));
+	int dmg_health = event.GetInt("dmg_health");
+	int health = event.GetInt("health");
+	int damagebits = event.GetInt("damagebits");
+	int hitgroup = event.GetInt("hitgroup");
+	char weapon[64];
+	event.GetString("weapon", weapon, sizeof(weapon));
+	int userid = GetClientOfUserId(event.GetInt("userid"));
+
 	PrintToServer("[DMG] priority %d attacker %d %N dmg_health %d health %d damagebits %d hitgroup %d weapon %s userid %d %N",priority,attacker,attacker,dmg_health,health,damagebits,hitgroup,weapon,userid,userid);
+*/
+	return Plugin_Continue;
+}
+public Action Event_PlayerHurt(Event event, const char[] name, bool dontBroadcast) {
+	//PrintToServer("[DMG] PlayerHurt");
+	if (!GetConVarBool(cvarEnabled)) {
+		//PrintToServer("[DMG] Not enabled");
+		return Plugin_Continue;
+	}
+	int priority = event.GetInt("priority");
+	int attacker = GetClientOfUserId(event.GetInt("attacker"));
+	int dmg_health = event.GetInt("dmg_health");
+	int health = event.GetInt("health");
+	int damagebits = event.GetInt("damagebits");
+	int hitgroup = event.GetInt("hitgroup");
+	char weapon[64];
+	event.GetString("weapon", weapon, sizeof(weapon));
+	int userid = GetClientOfUserId(event.GetInt("userid"));
+
+	if (hitgroup <= LOG_HIT_OFFSET) {
+		hitgroup += LOG_HIT_OFFSET;
+	}
+
+	char sValDump[2048];
+	Format(sValDump, sizeof(sValDump), "priority %d attacker %d %N dmg_health %d health %d damagebits %d hitgroup %d weapon %s userid %d %N",priority,attacker,attacker,dmg_health,health,damagebits,hitgroup,weapon,userid,userid);
 
 	if (attacker > 0 && attacker != userid) {
 		//PrintToServer("[DMG] Attacker valid");
 		if (GetClientTeam(attacker) == GetClientTeam(userid)) {
 			//PrintToServer("[DMG] Team Damage");
-			decl Float:attackerPos[3], Float:useridPos[3],Float:flDistance;
-			GetClientAbsOrigin(attacker, attackerPos);
-			GetClientAbsOrigin(userid, useridPos);
-			flDistance = GetVectorDistance(attackerPos, useridPos);
-			//PrintToServer("[DMG] Distance is %f",flDistance);
-			if (flDistance <= GetConVarFloat(cvarFFMinDistance)) {
-				//PrintToServer("[DMG] Distance triggered");
-				//PrintToChat(attacker, "Close range FF against %N", userid);
-				//PrintToChat(userid, "Close range FF from %N",attacker);
+			decl Float:vecAttacker[3], Float:vecUserid[3],Float:flDistance;
+			GetClientAbsOrigin(attacker, vecAttacker);
+			GetClientAbsOrigin(userid, vecUserid);
+			flDistance = GetVectorDistance(vecAttacker, vecUserid);
+			if ((damagebits & DMG_BULLET) && (flDistance <= GetConVarFloat(cvarFFMinDistance))) {
+				PrintToServer("[DMG] Friendly Fire Blocked for Distance %f",flDistance);
+				PrintToChat(attacker, "Close range FF against %N blocked due to proximity", userid);
+				PrintToChat(userid, "Close range FF from %N blocked due to proximity",attacker);
 				return Plugin_Handled;
 			}
 		}
@@ -189,10 +221,6 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	if (attacker > 0 && attacker != userid)
 	{
 		new hitgroup  = GetEventInt(event, "hitgroup");
-		if (hitgroup < 8)
-		{
-			hitgroup += LOG_HIT_OFFSET;
-		}
 		
 		
 		decl String:clientname[64];

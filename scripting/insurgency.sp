@@ -457,6 +457,9 @@ GiveRoundAward(RoundStatFields:stat,high,value,String:award[32],String:valname[3
 }
 GetWeaponId(i)
 {
+	if (i < 0) {
+		return i;
+	}
 	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
 	new String:name[32];
 	GetEdictClassname(i, name, sizeof(name));

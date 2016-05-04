@@ -71,7 +71,7 @@ enum Hitgroups
 	HITGROUP_LEFTLEG,
 	HITGROUP_RIGHTLEG,
 }
-#define LOG_HIT_OFFSET     7 
+
 enum WeaponStatFields
 {
 	LOG_HIT_SHOTS = 0,
@@ -90,6 +90,7 @@ enum WeaponStatFields
 	LOG_HIT_LEFTLEG,
 	LOG_HIT_RIGHTLEG,
 }
+#define LOG_HIT_OFFSET 7
 
 enum LOG_LEVEL
 {
