@@ -50,5 +50,9 @@
                 "type"          "S"
                 "text"          "Wait until teammates are ready before capturing or destroying a point."
         }
+        "11"
+        {
+                "type"          "S"
+                "text"          "See upcoming mods, submit bugs, and request new features on our Trello board. https://trello.com/b/4W2CNdnL/very-not-fun-servers"
+        }
 }
-
