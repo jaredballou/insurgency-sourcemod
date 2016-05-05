@@ -13,11 +13,11 @@
 #include <adminmenu>
 
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Respawn dead players via admincommand or by queues"
+#define PLUGIN_DESCRIPTION "Respawn players"
 #define PLUGIN_NAME "[INS] Player Respawn"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.7.1"
-#define PLUGIN_WORKING 1
+#define PLUGIN_VERSION "1.8.0"
+#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -30,7 +30,7 @@ public Plugin:myinfo = {
 new Handle:hAdminMenu = INVALID_HANDLE;
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
-new Handle:h_RespawnTimers[MAXPLAYERS+1] = INVALID_HANDLE;
+new Handle:g_hRespawnTimer[MAXPLAYERS+1] = INVALID_HANDLE;
 
 
 // This will be used for checking which team the player is on before repsawning them
@@ -351,17 +351,17 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 }
 public KillRespawnTimer(client)
 {
-	if (h_RespawnTimers[client] != INVALID_HANDLE)
+	if (g_hRespawnTimer[client] != INVALID_HANDLE)
 	{
-		KillTimer(h_RespawnTimers[client]);
-		h_RespawnTimers[client] = INVALID_HANDLE;
+		KillTimer(g_hRespawnTimer[client]);
+		g_hRespawnTimer[client] = INVALID_HANDLE;
 	}
 }
 
 public CreateRespawnTimer(client)
 {
 	KillRespawnTimer(client);
-	h_RespawnTimers[client] = CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
+	g_hRespawnTimer[client] = CreateTimer(GetConVarFloat(sm_respawn_delay), RespawnPlayer2, client, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public RespawnPlayer(client, target)

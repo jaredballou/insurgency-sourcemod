@@ -103,7 +103,6 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
 #### CVAR List
  * "sm_botspawns_enabled" "0" //Enable enhanced bot spawning features
  * "sm_botspawns_spawn_mode" "0" //Only normal spawnpoints at the objective, the old way
- * "sm_botspawns_respawn_mode" "0" //Do not respawn
  * "sm_botspawns_counterattack_mode" "0" //Do not alter default game spawning during counterattacks
  * "sm_botspawns_counterattack_finale_infinite" "0" //Obey sm_botspawns_counterattack_respawn_mode
  * "sm_botspawns_counterattack_frac" "0.5" //Multiplier to total bots for spawning in counterattack wave
@@ -428,8 +427,8 @@ Removes all prop_dynamic entities.
 
 <a name='respawn'>
 ---
-### Player Respawn 1.7.1</a>
-Respawn dead players via admincommand or by queues
+### Player Respawn 1.8.0</a>
+Respawn players
 
  * [Plugin - respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
  * [Source - respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
@@ -595,7 +594,7 @@ Allows admins to set theater, and clients to vote
  * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>
  * <a href='#user-content-newspawn'>New Spawn 0.0.1</a>
  * <a href='#user-content-nofog'>No Fog 0.0.1</a>
- * <a href='#user-content-respawn'>Player Respawn 1.7.1</a>
+ * <a href='#user-content-respawn'>Player Respawn 1.8.0</a>
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>

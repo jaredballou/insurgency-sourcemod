@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"		"1.7.1"
+			"Latest"		"1.8.0"
 		}
-		"Notes"		"Player Respawn - Respawn dead players via admincommand or by queues"
+		"Notes"		"Player Respawn - Respawn players"
 	}
 	"Files"
 	{
