@@ -20,7 +20,7 @@ DOC_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Temp path
 TMP_PATH="${DOC_PATH}/tmp"
 
-TMP_SUBDIRS="cvar dependencies description todo updater"
+TMP_SUBDIRS="commands cvar dependencies description todo updater"
 
 # Root SourceMod directory
 SOURCEMOD_PATH="$(dirname "${DOC_PATH}")"
@@ -109,6 +109,7 @@ do
 	DOC_DEPENDENCY_FILE="${TMP_PATH}/dependencies/${ITEM}.md"
 	DOC_DESC_FILE="${TMP_PATH}/description/${ITEM}.md"
 	DOC_TODO_FILE="${TMP_PATH}/todo/${ITEM}.md"
+	DOC_COMMANDS_FILE="${TMP_PATH}/commands/${ITEM}.md"
 	DOC_CVAR_FILE="${TMP_PATH}/cvar/${ITEM}.md"
 	DOC_PLUGIN_FILE="${TMP_PATH}/${ITEM}.md"
 
@@ -141,6 +142,9 @@ do
 
 	# Collect CVARs
 	grep CreateConVar "${SCRIPT}" | grep -v '_version"' | sed -e 's/""/NULLSTRING/g' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | sed -e 's/"//g' | awk -F',' '{print $1" "$2" "$3}' | sed -e 's/;;/,/g' | awk '{printf " * \""$1"\" \""$2"\" //"$3;for(i=4;i<=NF;i++){printf " %s", $i}printf "\n"}' | sed -e 's/NULLSTRING//g' > "${DOC_CVAR_FILE}"
+
+	# Collect commands
+	grep RegConsoleCmd "${SCRIPT}" | sed -e 's/""/NULLSTRING/g' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | cut -d')' -f1 | sed -e 's/"//g' | awk -F',' '{print $1" "$2" "$3}' | sed -e 's/;;/,/g' | awk '{printf " * \""$1"\" // "$2;for(i=4;i<=NF;i++){printf " %s", $i}printf "\n"}' | sed -e 's/NULLSTRING//g' > "${DOC_COMMANDS_FILE}"
 
 	# Colelct dependencies
 	echo -ne > "${DOC_DEPENDENCY_FILE}"
@@ -271,6 +275,14 @@ do
 	then
 		echo "#### CVAR List" >> "${DOC_PLUGIN_FILE}"
 		cat "${DOC_CVAR_FILE}" >> "${DOC_PLUGIN_FILE}"
+		echo "" >> "${DOC_PLUGIN_FILE}"
+	fi
+
+	# Include command listing
+	if [ $(wc "${DOC_COMMANDS_FILE}" | awk '{print $2}') -gt 0 ]
+	then
+		echo "#### Command List" >> "${DOC_PLUGIN_FILE}"
+		cat "${DOC_COMMANDS_FILE}" >> "${DOC_PLUGIN_FILE}"
 		echo "" >> "${DOC_PLUGIN_FILE}"
 	fi
 

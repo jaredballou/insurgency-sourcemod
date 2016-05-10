@@ -5,6 +5,7 @@ botspawns
 cooplobby
 cvarlist
 damagemod
+dropweapon
 hlstatsx
 insmaps
 insurgency

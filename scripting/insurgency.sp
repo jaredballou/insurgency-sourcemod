@@ -465,8 +465,7 @@ GetWeaponId(i)
 	GetEdictClassname(i, name, sizeof(name));
 	decl String:strBuf[32];
 	GetArrayString(g_weap_array, m_hWeaponDefinitionHandle, strBuf, sizeof(strBuf));
-	if(!StrEqual(name, strBuf))
-	{
+	if(!StrEqual(name, strBuf)) {
 		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, name);
 		InsLog(DEBUG,"Weapons %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
 	}

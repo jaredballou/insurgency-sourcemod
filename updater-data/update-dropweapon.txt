@@ -1,0 +1,20 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"Drop Weapon - Adds a drop command"
+	}
+	"Files"
+	{
+Notes:MyPlugin
+		"Plugin"	"Path_SM/plugins/dropweapon.smx"
+		"Source"	"Path_SM/scripting/dropweapon.sp"
+		"Plugin"	"Path_SM/plugins/dropweapon.smx"
+		"Source"	"Path_SM/scripting/dropweapon.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+	}
+}

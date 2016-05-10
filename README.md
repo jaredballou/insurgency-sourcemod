@@ -18,6 +18,9 @@ Adds check_ammo command that client runs and gets RO2-style "Mag feels mostly fu
 #### CVAR List
  * "sm_ammocheck_enabled" "1" //sets whether ammo check is enabled
 
+#### Command List
+ * "check_ammo" // Command_Check_Ammo
+
 #### Todo
  * [ ] Add client-side config on enable, display location, and to show after mag change
  * [ ] Show a reload animation partially to animate the check
@@ -192,6 +195,24 @@ Enable world-wide modification of damage values (i.e. for doing training mission
  * "sm_damagemod_enabled" "PLUGIN_WORKING" //Enable Damage Mod plugin
  * "sm_damagemod_ff_min_distance" "120" //Minimum distance between players for Friendly Fire to register
 
+<a name='dropweapon'>
+---
+### Drop Weapon 0.0.1</a>
+Adds a drop command
+
+ * [Plugin - dropweapon.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/dropweapon.smx?raw=true)
+ * [Source - dropweapon.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/dropweapon.sp?raw=true)
+
+
+#### Dependencies
+ * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+
+#### CVAR List
+ * "sm_dropweapon_enabled" "PLUGIN_WORKING" //sets whether weapon dropping is enabled
+
+#### Command List
+ * "drop" // Command_Drop
+
 <a name='hlstatsx'>
 ---
 ### HLStatsX CE Ingame Plugin 1.6.19</a>
@@ -296,6 +317,9 @@ Adds FOV switch to emulate flip to side magnifiers
  * "sm_magnifier_zoom" "60" //zoom level for magnifier
  * "sm_magnifier_shots" "0" //Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.);
  * "sm_magnifier_adminflag" "0" //Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....);
+
+#### Command List
+ * "sm_magnifier" // ToggleMagnifier
 
 <a name='navmesh-chat'>
 ---
@@ -505,6 +529,9 @@ Adds a number of new ways to get score, or remove score for players
 #### CVAR List
  * "sm_score_enabled" "1" //sets whether score modifier is enabled
 
+#### Command List
+ * "check_score" // Command_check_score
+
 <a name='sprinkler'>
 ---
 ###  </a>
@@ -586,6 +613,7 @@ Allows admins to set theater, and clients to vote
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.2</a>
+ * <a href='#user-content-dropweapon'>Drop Weapon 0.0.1</a>
  * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#user-content-insmaps'>Map List 1.4.1</a>
  * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.3</a>
@@ -617,6 +645,12 @@ Weapon Pickup logic for manipulating player inventory
 
 #### CVAR List
  * "sm_weapon_pickup_enabled" "1" //sets whether weapon pickup manipulation is enabled
+
+#### Command List
+ * "wp_weaponslots" // Command_ListWeaponSlots weapon slots. Usage: wp_weaponslots [target]
+ * "wp_weaponlist" // Command_ListWeapons all weapons. Usage: wp_weaponlist [target]
+ * "wp_knife" // Command_Knife a knife. Usage: wp_knife [target]
+ * "wp_removeweapons" // Command_RemoveWeapons all weapons. Usage: wp_removeweapons [target]
 
 ## Ideas to develop
 This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on.
