@@ -34,7 +34,8 @@ public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_dropweapon_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_dropweapon_enabled", PLUGIN_WORKING, "sets whether weapon dropping is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	RegConsoleCmd("drop", Command_Drop);
+	RegConsoleCmd("drop_weapon", Command_Drop_Weapon);
+	AddCommandListener(CmdLstnr_Drop, "drop");
 	//HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	PrintToServer("[DROPWEAPON] Started!");
 	if (LibraryExists("updater"))
@@ -43,33 +44,58 @@ public OnPluginStart()
 	}
 }
 
+public Action:CmdLstnr_Drop(client, const String:command[], argc)
+{
+	if(!client)
+		return Plugin_Continue;
+	return Drop_Weapon(client);
+}
+
 public OnLibraryAdded(const String:name[]) {
 	if (StrEqual(name, "updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
 
-public Action:Command_Drop(client, args) {
-	return Drop(client);
+public Action:Command_Drop_Weapon(client, args) {
+	return Drop_Weapon(client);
 }
-public Action:Drop(client) {
+public Action:Drop_Weapon(client) {
 	//PrintToServer("[DROPWEAPON] Check_Ammo!");
 	// If disabled, return
 	if (!GetConVarBool(cvarEnabled)) {
-		return Plugin_Handled;
+		return Plugin_Continue;
 	}
 	// If no active weapon, return
 	new m_hActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (m_hActiveWeapon < 0) {
-		return Plugin_Handled;
+		return Plugin_Continue;
 	}
 	// Do not drop knives
 	decl String:strBuf[32];
-	Ins_GetWeaponName(m_hActiveWeapon, strBuf, sizeof(strBuf));
+	GetEdictClassname(m_hActiveWeapon, strBuf, sizeof(strBuf));
 	if(StrEqual("weapon_knife", strBuf) || StrEqual("weapon_kabar", strBuf) || StrEqual("weapon_gurkha", strBuf) || StrEqual("weapon_kukri", strBuf)) {
-		return Plugin_Handled;
+		return Plugin_Continue;
 	}
 	// Drop weapon
-	SDKHooks_DropWeapon(client,m_hActiveWeapon);
-	return Plugin_Handled;
+	// Create weapon entity
+	CreateWorldWeapon(client,m_hActiveWeapon);
+
+	//SDKHooks_DropWeapon(client,m_hActiveWeapon);
+	return Plugin_Continue;
 }
+CreateWorldWeapon(client,weapon) {
+	decl String:strBuf[32];
+	GetEdictClassname(weapon, strBuf, sizeof(strBuf));
+	new ent = CreateEntityByName(strBuf);
+	new Float:cllocation[3];
+	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
+	cllocation[2]+=20;
+	PrintToServer("[DROPWEAPON] dropping %s from %N ent %d loc %f %f %f",strBuf,client,ent,cllocation[0],cllocation[1],cllocation[2]);
+	TeleportEntity(ent,cllocation, NULL_VECTOR, NULL_VECTOR);
+	DispatchSpawn(ent);
+	ActivateEntity(ent);
+	//SetEntProp(ent, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
+	//SetEntProp(ent, Prop_Send, "m_iClip1", clip);
+}
+		

@@ -51,6 +51,7 @@ new OwnerOfWeapon[2048] = 0;
 new m_hActiveWeapon;
 new m_hMyWeapons;
 
+
 // Hook weaponcanuse (called at weapon deployment) and drop
 public OnClientPutInServer(client)
 {
@@ -427,6 +428,9 @@ public OnPluginStart()
 	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 	remove_fog();
 */
+	HookEvent("player_use", Event_PlayerUse);
+	HookEvent("inventory_open", Event_InventoryOpen);
+	HookEvent("inventory_close", Event_InventoryClose);
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
@@ -449,11 +453,36 @@ public OnPluginStart()
     RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
 }
 
-
 public OnLibraryAdded(const String:name[])
 {
 	if (StrEqual(name, "updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
 	}
+}
+
+
+public Action:Event_InventoryOpen(Handle:event, const String:name[], bool:dontBroadcast) {
+	PrintToServer("[WPNPICK] Event_InventoryOpen");
+	return Plugin_Continue;
+}
+public Action:Event_InventoryClose(Handle:event, const String:name[], bool:dontBroadcast) {
+	PrintToServer("[WPNPICK] Event_InventoryClose");
+	return Plugin_Continue;
+}
+public Action:Event_PlayerUse(Handle:event, const String:name[], bool:dontBroadcast) {
+	PrintToServer("[WPNPICK] Event_PlayerUse");
+	new userid = GetEventInt(event, "userid");
+	new client = GetClientOfUserId(userid);
+	new entity = GetEventInt(event, "entity");
+	if(!IsClientInGame(client))
+		return Plugin_Continue;
+	PrintToServer("[WPNPICK] userid %d client %d (%N) entity %d",userid,client,client,entity);
+/*
+	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+	if (ActiveWeapon < 0)
+		return Plugin_Continue;
+	CreateAmmoTimer(client,ActiveWeapon);
+*/
+	return Plugin_Continue;
 }

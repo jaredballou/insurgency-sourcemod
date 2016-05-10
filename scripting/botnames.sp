@@ -163,6 +163,7 @@ public OnPluginStart()
 	// hook team change, connect to supress messages
 	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
 	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
+	HookEvent("player_changename", Event_PlayerChangeName, EventHookMode_Pre);
 
 	// trickier... name changes are user messages, so...
 	//HookUserMessage(GetUserMessageId("SayText"), UserMessage_SayText2, true);
@@ -275,6 +276,24 @@ public Action:Event_PlayerTeam(Handle:event, const String:name[], bool:dontBroad
 		return Plugin_Changed;
 	}
 
+	return Plugin_Continue;
+}
+// handle player team change, to supress bot messages
+public Action:Event_PlayerChangeName(Handle:event, const String:name[], bool:dontBroadcast) {
+/*
+	if (!(GetConVarBool(cvarEnabled) && GetConVarBool(cvarSuppress))) {
+		return Plugin_Continue;
+	}
+*/
+	//PrintToServer("[BOTNAMES]: Triggered Event_PlayerChangeName");
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if (client == 0) {
+		return Plugin_Continue;
+	}
+	if (IsFakeClient(client)) {
+		//PrintToServer("[BOTNAMES]: Bot, suppressing name change event");
+		return Plugin_Handled;
+	}
 	return Plugin_Continue;
 }
 
