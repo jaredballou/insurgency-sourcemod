@@ -92,6 +92,10 @@ CreateWorldWeapon(client,weapon) {
 	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
 	cllocation[2]+=20;
 	PrintToServer("[DROPWEAPON] dropping %s from %N ent %d loc %f %f %f",strBuf,client,ent,cllocation[0],cllocation[1],cllocation[2]);
+	char model[PLATFORM_MAX_PATH];
+	int modelidx = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
+	ModelIndexToString(modelidx, model, sizeof(model));
+SetEntProp(Entity, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
 	TeleportEntity(ent,cllocation, NULL_VECTOR, NULL_VECTOR);
 	DispatchSpawn(ent);
 	ActivateEntity(ent);
