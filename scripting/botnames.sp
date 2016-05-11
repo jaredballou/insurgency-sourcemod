@@ -8,8 +8,8 @@
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
 #define PLUGIN_NAME "[INS] Bot Names"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "1.0.1"
-#define PLUGIN_WORKING 1
+#define PLUGIN_VERSION "1.0.2"
+#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -165,10 +165,6 @@ public OnPluginStart()
 	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
 	HookEvent("player_changename", Event_PlayerChangeName, EventHookMode_Pre);
 
-	// trickier... name changes are user messages, so...
-	//HookUserMessage(GetUserMessageId("SayText"), UserMessage_SayText2, true);
-	//HookUserMessage(GetUserMessageId("SayText2"), UserMessage_SayText2, true);
-
 	// register our commands
 	RegServerCmd("sm_botnames_reload", Command_Reload);
 	RegServerCmd("sm_botnames_rename_all", Command_Rename_All);
@@ -235,26 +231,7 @@ public bool:RenameBot(client)
 	}
 	return true;
 }
-// handle "SayText2" usermessages, including name change notifies!
-public Action:UserMessage_SayText2(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
-{
-/*
-	if (!(GetConVarBool(cvarEnabled) && GetConVarBool(cvarSuppress)))
-	{
-		return Plugin_Continue;
-	}
-*/
-	decl String:message[256];
-	BfReadString(bf, message, sizeof(message));
-	PrintToServer("[BOTNAMES] 1 message %s",message);
-	BfReadString(bf, message, sizeof(message));
-	PrintToServer("[BOTNAMES] 2 message %s",message);
-	if (StrContains(message, "Name_Change") != -1)
-	{
-		return Plugin_Handled;
-	}
-	return Plugin_Continue;
-}
+
 // handle player team change, to supress bot messages
 public Action:Event_PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
 {
