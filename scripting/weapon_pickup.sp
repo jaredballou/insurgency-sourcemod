@@ -245,16 +245,13 @@ ListWeaponSlots(client, observer, count = 10)
     for (new slot = 0; slot < count; slot++)
     {
         new weapon = GetPlayerWeaponSlot(client, slot);
-            
         if (weapon < 0)
         {
             ReplyToCommand(observer, "%d\t(empty/invalid)", slot);
             continue;
         }
-        
         new String:classname[64];
         GetEntityClassname(weapon, classname, sizeof(classname));
-        
         ReplyToCommand(observer, "%d\t%d\t%s", slot, weapon, classname);
     }
 }
@@ -373,6 +370,7 @@ public OnEntityCreated(entity, const String:classname[])
 // Called every time a player uses anything, need to add logic to only work on weapons
 public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 {
+	PrintToServer("[WPNPICK] OnEntityUse called");
 	if( activator > 0 && activator < MaxClients + 1 ) {
 	        new String:classname[64];
         	GetEntityClassname(entity, classname, sizeof(classname));
@@ -385,12 +383,28 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
-		new maxammo = Ins_GetWeaponGetMaxClip1(entity);
-		//PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
-// Loop through player weapons
-// If item is in inventory, extract ammo from entity and Kill it
+		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+		int iOffset = FindInventoryItem(activator,classname);
+		if (iOffset > -1) {
+			//m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+			new inc = 1; // TODO: Handle magazines and ammo type mismatches
+			SetEntProp(activator, Prop_Send, "m_iAmmo", m_iAmmo+inc, _, m_iPrimaryAmmoType);
+			PrintToServer("[WPNPICK] Added %d ammo for %s to %N (%d)",inc,classname,activator,activator);
+			RemoveEdict(entity);
+			return Plugin_Handled;
+		}
 	}
+
+
+/*
+	new ActiveWeapon = GetEntPropEnt(activator, Prop_Data, "m_hActiveWeapon");
+	if (ActiveWeapon < 0)
+		return Plugin_Continue;
+	CreateAmmoTimer(client,ActiveWeapon);
+*/
+	return Plugin_Continue;
 }
+
 
 
 
@@ -428,7 +442,7 @@ public OnPluginStart()
 	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 	remove_fog();
 */
-	HookEvent("player_use", Event_PlayerUse);
+	HookEvent("player_use", Event_PlayerUse, EventHookMode_Pre);
 	HookEvent("inventory_open", Event_InventoryOpen);
 	HookEvent("inventory_close", Event_InventoryClose);
 	if (LibraryExists("updater"))
@@ -471,13 +485,33 @@ public Action:Event_InventoryClose(Handle:event, const String:name[], bool:dontB
 	return Plugin_Continue;
 }
 public Action:Event_PlayerUse(Handle:event, const String:name[], bool:dontBroadcast) {
+	// Temporatily disable
+	return Plugin_Continue;
+
 	PrintToServer("[WPNPICK] Event_PlayerUse");
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
 	new entity = GetEventInt(event, "entity");
 	if(!IsClientInGame(client))
 		return Plugin_Continue;
-	PrintToServer("[WPNPICK] userid %d client %d (%N) entity %d",userid,client,client,entity);
+	new String:weaponClass[64];
+	GetEntityClassname(entity, weaponClass, sizeof(weaponClass));
+	PrintToServer("[WPNPICK] userid %d client %d (%N) entity %d classname %s",userid,client,client,entity,weaponClass);
+
+	int iOffset = FindInventoryItem(client,weaponClass);
+	if (iOffset > -1) {
+		PrintToServer("[WPNPICK] %s in player inventory at offset %d",weaponClass,iOffset);
+		new m_iPrimaryAmmoType = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoType");
+		new m_iClip1 = GetEntProp(entity, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+		new m_iAmmo = -1;
+		new m_iPrimaryAmmoCount = -1;
+		if (m_iPrimaryAmmoType != -1) {
+			m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
+			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
+		}
+		PrintToServer("[WPNPICK] m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+	}
+
 /*
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0)
@@ -485,4 +519,22 @@ public Action:Event_PlayerUse(Handle:event, const String:name[], bool:dontBroadc
 	CreateAmmoTimer(client,ActiveWeapon);
 */
 	return Plugin_Continue;
+}
+FindInventoryItem(client,const String:sClassname[]) {
+	if (!IsValidClient(client)) {
+		return -1;
+	}
+	new String:classname[64];
+	for(new offset = 0; offset < 128; offset += 4) {
+		new weapon = GetEntDataEnt2(client, m_hMyWeapons + offset);
+		if (weapon < 0) {
+			continue;
+		}
+		GetEntityClassname(weapon, classname, sizeof(classname));
+		if (StrEqual(sClassname,classname)) {
+			PrintToServer("[WPNPICK] Found %s in inventory for %N (%d) at offset %d",classname,client,client,offset);
+			return offset;
+		}
+	}
+	return -1;
 }

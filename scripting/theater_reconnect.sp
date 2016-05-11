@@ -32,26 +32,32 @@ public OnPluginStart()
 	cvarEnabled = CreateConVar("sm_theater_reconnect_enabled", "1", "sets whether theater reconnect is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	// hook team change, connect to supress messages
-	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
+	//HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Post);
 
 	AutoExecConfig();
 }
 
-// handle client connection, to change the names...
-public bool:OnClientConnect(client, String:rejectmsg[], maxlen) {
-	QueryClientConVar(client, "mp_theater_override", ConVarQueryFinished:ClientConVar, client);
-	return true;
+//public OnClientConnected(client) {
+public OnClientAuthorized(client, const String:auth[]) {
+	PrintToServer("[TR] OnClientAuthorized client %d %N",client,client);
+	QueryClientConVar(client, "mp_theater_override", ConVarQueryFinished:CheckClientTheater, client);
 }
-public ClientConVar(QueryCookie:cookie, client, ConVarQueryResult:result, const String:cvarName[], const String:cvarValue[]) {
+public CheckClientTheater(QueryCookie:cookie, client, ConVarQueryResult:result, const String:cvarName[], const String:cvarValue[]) {
 	new String:sTheaterOverride[32];
         GetConVarString(FindConVar("mp_theater_override"),sTheaterOverride, sizeof(sTheaterOverride));
 	PrintToServer("[TR] Server theater is \"%s\" client is \"%s\"",sTheaterOverride,cvarValue);
+//ClientCommand(client, "retry");
 }
-
+/*
 // handle player connect, to supress bot messages
 public Action:Event_PlayerConnect(Handle:event, const String:name[], bool:dontBroadcast) {
 	if (!(GetConVarBool(cvarEnabled))) {
 		return Plugin_Continue;
 	}
+	new userid = GetEventInt(event, "userid");
+	new client = GetClientOfUserId(userid);
+	PrintToServer("[TR] Event_PlayerConnect userid %d client %d %N",userid,client,client);
+	QueryClientConVar(client, "mp_theater_override", ConVarQueryFinished:ClientConVar, client);
 	return Plugin_Continue;
 }
+*/
