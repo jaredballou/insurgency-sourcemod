@@ -429,11 +429,11 @@ If a player connects with their mp_theater_override set to something other than 
  * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.7</a>
  * <a href='#user-content-theater_reconnect'>Theater Reconnect 0.0.1</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.4</a>
- * <a href='#user-content-weapon_pickup'>Weapon Pickup 0.0.2</a>
+ * <a href='#user-content-weapon_pickup'>Weapon Pickup 0.0.3</a>
 
 <a name='weapon_pickup'>
 ---
-### Weapon Pickup 0.0.2</a>
+### Weapon Pickup 0.0.3</a>
 Weapon Pickup logic for manipulating player inventory
 
  * [Plugin - weapon_pickup.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/weapon_pickup.smx?raw=true)
@@ -444,12 +444,12 @@ Weapon Pickup logic for manipulating player inventory
  * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
- * "sm_weapon_pickup_enabled" "1" //sets whether weapon pickup manipulation is enabled
+ * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" //sets whether weapon pickup manipulation is enabled
+ * "sm_weapon_pickup_ammo" "1" //sets whether picking up a weapon the player already has will add to the player's ammo count
 
 #### Command List
  * "wp_weaponslots" // Command_ListWeaponSlots weapon slots. Usage: wp_weaponslots [target]
  * "wp_weaponlist" // Command_ListWeapons all weapons. Usage: wp_weaponlist [target]
- * "wp_knife" // Command_Knife a knife. Usage: wp_knife [target]
  * "wp_removeweapons" // Command_RemoveWeapons all weapons. Usage: wp_removeweapons [target]
 
 ## Ideas to develop

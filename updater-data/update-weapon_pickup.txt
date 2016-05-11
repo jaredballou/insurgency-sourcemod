@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"		"0.0.2"
+			"Latest"		"0.0.3"
 		}
 		"Notes"		"Weapon Pickup - Weapon Pickup logic for manipulating player inventory"
 	}
