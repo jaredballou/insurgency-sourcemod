@@ -1,0 +1,19 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"0.0.1"
+		}
+		"Notes"		"Theater Reconnect - If a player connects with their mp_theater_override set to something other than what the server uses, set the cvar and retonnect them."
+	}
+	"Files"
+	{
+Notes:MyPlugin
+		"Plugin"	"Path_SM/plugins/theater_reconnect.smx"
+		"Source"	"Path_SM/scripting/theater_reconnect.sp"
+		"Plugin"	"Path_SM/plugins/theater_reconnect.smx"
+		"Source"	"Path_SM/scripting/theater_reconnect.sp"
+	}
+}

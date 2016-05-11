@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"		"1.0.1"
+			"Latest"		"1.0.2"
 		}
 		"Notes"		"Bot Names - Gives automatic names to bots on creation."
 	}

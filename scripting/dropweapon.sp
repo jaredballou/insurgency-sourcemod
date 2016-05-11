@@ -15,9 +15,9 @@
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds a drop command"
 #define PLUGIN_NAME "[INS] Drop Weapon"
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_WORKING "1"
+#define PLUGIN_WORKING "0"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -92,10 +92,13 @@ CreateWorldWeapon(client,weapon) {
 	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
 	cllocation[2]+=20;
 	PrintToServer("[DROPWEAPON] dropping %s from %N ent %d loc %f %f %f",strBuf,client,ent,cllocation[0],cllocation[1],cllocation[2]);
+/*
 	char model[PLATFORM_MAX_PATH];
 	int modelidx = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
 	ModelIndexToString(modelidx, model, sizeof(model));
-SetEntProp(Entity, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
+
+	SetEntProp(ent, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
+*/
 	TeleportEntity(ent,cllocation, NULL_VECTOR, NULL_VECTOR);
 	DispatchSpawn(ent);
 	ActivateEntity(ent);

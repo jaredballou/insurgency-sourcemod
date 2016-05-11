@@ -22,6 +22,7 @@ build:
   - score
   - sprinklers
   - suicide_bomb
+  - theater_reconnect
   - theaterpicker
   - weapon_pickup
 disabled:
