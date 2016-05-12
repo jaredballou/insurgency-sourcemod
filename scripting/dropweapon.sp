@@ -27,6 +27,8 @@ public Plugin:myinfo = {
 	url		= PLUGIN_URL
 };
 
+#define EF_NODRAW 32
+
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
@@ -92,16 +94,25 @@ CreateWorldWeapon(client,weapon) {
 	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
 	cllocation[2]+=20;
 	PrintToServer("[DROPWEAPON] dropping %s from %N ent %d loc %f %f %f",strBuf,client,ent,cllocation[0],cllocation[1],cllocation[2]);
-/*
-	char model[PLATFORM_MAX_PATH];
-	int modelidx = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
-	ModelIndexToString(modelidx, model, sizeof(model));
+	char sModel[PLATFORM_MAX_PATH];
+	int m_iWorldModelIndex = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
+	int m_fEffects = GetEntProp(weapon, Prop_Send, "m_fEffects");
+	int m_iState = GetEntProp(weapon, Prop_Send, "m_iState");
+//	ModelIndexToString(m_iWorldModelIndex, sModel, sizeof(sModel));
 
-	SetEntProp(ent, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
-*/
+	//SetEntProp(ent, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
+
+	// Not owned
+	SetEntProp(ent, Prop_Send, "m_iState", 0);
+
+	m_fEffects = GetEntProp(ent, Prop_Send, "m_fEffects");
+	m_fEffects |= EF_NODRAW;
+	SetEntProp(ent, Prop_Send, "m_fEffects", m_fEffects);
+
 	TeleportEntity(ent,cllocation, NULL_VECTOR, NULL_VECTOR);
 	DispatchSpawn(ent);
 	ActivateEntity(ent);
+	PrintToServer("[DROP] m_iWorldModelIndex %d m_fEffects %d m_iState %d",m_iWorldModelIndex,m_fEffects,m_iState);
 	//SetEntProp(ent, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
 	//SetEntProp(ent, Prop_Send, "m_iClip1", clip);
 }
