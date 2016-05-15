@@ -15,6 +15,7 @@
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds a drop command"
 #define PLUGIN_NAME "[INS] Drop Weapon"
+#define PLUGIN_LOG_PREFIX "DROPWPN"
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_URL "http://jballou.com/"
 #define PLUGIN_WORKING "0"

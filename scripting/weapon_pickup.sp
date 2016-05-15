@@ -29,6 +29,7 @@ Allow manipulation of weapons and items in the game world.
 #define AUTOLOAD_EXTENSIONS
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Weapon Pickup logic for manipulating player inventory"
+#define PLUGIN_LOG_PREFIX "WPNPICK"
 #define PLUGIN_NAME "[INS] Weapon Pickup"
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "0.0.3"

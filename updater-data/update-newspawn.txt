@@ -10,9 +10,10 @@
 	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/newspawn.smx"
-		"Source"	"Path_SM/scripting/newspawn.sp"
+Notes:MyPlugin
 		"Plugin"	"Path_SM/plugins/newspawn.smx"
 		"Source"	"Path_SM/scripting/newspawn.sp"
+		"Plugin"	"Path_SM/plugins/newspawn.smx"
+		"Source"	"Path_SM/scripting/newspawn.sp"
 	}
 }

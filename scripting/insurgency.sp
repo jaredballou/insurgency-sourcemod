@@ -10,10 +10,11 @@
 #pragma unused cvarVersion
 
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency and fixes logging"
+#define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
+#define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.3.3"
+#define PLUGIN_VERSION "1.3.4"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -28,6 +29,7 @@ public Plugin:myinfo = {
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 #define INS
+
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
@@ -36,6 +38,7 @@ new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs relo
 new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
 new Handle:cvarDisableSliding = INVALID_HANDLE; // Disable Sliding
 new Handle:cvarLogLevel = INVALID_HANDLE; // Log level
+new Handle:cvarClassStripWords = INVALID_HANDLE;
 
 new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
@@ -46,7 +49,6 @@ new g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
 
 new String:g_classes[Teams][MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
 
-new LOG_LEVEL:g_iLogLevel;
 new g_weapon_stats[MAXPLAYERS+1][MAX_DEFINABLE_WEAPONS][WeaponStatFields];
 new g_round_stats[MAXPLAYERS+1][RoundStatFields];
 new g_client_last_weapon[MAXPLAYERS+1] = {-1, ...};
@@ -60,14 +62,8 @@ new String:g_client_last_classstring[MAXPLAYERS+1][64];
 new Handle:kill_regex = INVALID_HANDLE;
 new Handle:suicide_regex = INVALID_HANDLE;
 
-new String:g_sLogLevel[6][32] = {
-	"default",
-	"trace",
-	"debug",
-	"info",
-	"warn",
-	"error"
-};
+#define MAX_STRIP_LEN 32
+#define MAX_STRIP_COUNT 16
 //new String:ServerName[100];// Stores the server name.
 //new String:Version[100];    // Stores the update version number
 //new String:IP_Port[100];    // Stores the IP address & port number
@@ -111,13 +107,14 @@ public OnLibraryRemoved(const String:name[])
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_insurgency_enabled", "1", "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarClassStripWords = CreateConVar("sm_insurgency_class_strip_words", "template training coop security insurgent survival", "Strings to strip out of player class (squad slot) names", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 
 	InsLog(DEFAULT,"Starting");
@@ -176,7 +173,7 @@ public OnPluginStart()
 
 	//Begin Engine LogHooks
 	AddGameLogHook(LogEvent);
-	
+
 //	LoadTranslations("insurgency.phrases");
 
 	if (LibraryExists("updater"))
@@ -282,13 +279,7 @@ hook_wstats()
 public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 {
 	decl String:class_template[MAX_CLASS_LEN];
-	Format(class_template,MAX_CLASS_LEN,"%s",raw_class_template);
-	ReplaceString(class_template,sizeof(class_template),"template_","",false);
-	ReplaceString(class_template,sizeof(class_template),"_training","",false);
-	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
-	ReplaceString(class_template,sizeof(class_template),"_security","",false);
-	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
-	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
+	FormatPlayerClassName(class_template,sizeof(class_template),raw_class_template);
 	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
 	{
 		InsLog(DEBUG,"team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
@@ -381,79 +372,6 @@ reset_round_stats_all()
 	{
 		reset_round_stats(i);
 	}
-}
-/*
-DoRoundAwards
-At the end of each round, give awards for "best" of each stat
-TODO:
- * Avoid giving least deaths and best accuracy to those who just joined or didn't take part.
- * Add K/D counter to help with this or add points?
- * Find a way to give points to actual in-game score before final tally is generated.
-*/
-
-DoRoundAwards()
-{
-	InsLog(DEBUG,"Running DoRoundAwards");
-	new iHighStat[RoundStatFields],iLowStat[RoundStatFields], val;
-	for (new i = 1; i < MaxClients; i++)
-	{
-		if (IsValidClient(i))
-		{
-			new m_iPlayerScore = Ins_GetPlayerScore(i);
-			g_round_stats[i][STAT_SCORE] = (m_iPlayerScore - g_round_stats[i][STAT_SCORE]);
-			g_round_stats[i][STAT_ACCURACY] = RoundToFloor((Float:g_round_stats[i][STAT_HITS] / Float:g_round_stats[i][STAT_SHOTS]) * 100.0);
-			for (new s;s<sizeof(iHighStat);s++)
-			{
-				val = g_round_stats[i][s];
-				if (val > iHighStat[s])
-				{
-					iHighStat[s] = val;
-				}
-				if ((val < iLowStat[s]) || (i == 1))
-				{
-					iLowStat[s] = val;
-				}
-			}
-			InsLog(DEBUG,"Client %N KILLS %d, DEATHS %d, SHOTS %d, HITS %d, GRENADES %d, CAPTURES %d, CACHES %d, DMG_GIVEN %d, DMG_TAKEN %d, TEAMKILLS %d SCORE %d (total %d) SUPPRESSIONS %d",i,g_round_stats[i][STAT_KILLS],g_round_stats[i][STAT_DEATHS],g_round_stats[i][STAT_SHOTS],g_round_stats[i][STAT_HITS],g_round_stats[i][STAT_GRENADES],g_round_stats[i][STAT_CAPTURES],g_round_stats[i][STAT_CACHES],g_round_stats[i][STAT_DMG_GIVEN],g_round_stats[i][STAT_DMG_TAKEN],g_round_stats[i][STAT_TEAMKILLS],g_round_stats[i][STAT_SCORE],m_iPlayerScore,g_round_stats[i][STAT_SUPPRESSIONS]);
-		}
-//		reset_round_stats(i);
-	}
-/*
-	GiveRoundAward(STAT_SCORE,1,iHighStat[STAT_SCORE],"round_mvp","score");
-	GiveRoundAward(STAT_KILLS,1,iHighStat[STAT_KILLS],"round_kills","kills");
-	GiveRoundAward(STAT_DEATHS,-1,iLowStat[STAT_DEATHS],"round_deaths","deaths");
-	GiveRoundAward(STAT_SHOTS,1,iHighStat[STAT_SHOTS],"round_shots","shots");
-	GiveRoundAward(STAT_HITS,1,iHighStat[STAT_HITS],"round_hits","hits");
-	GiveRoundAward(STAT_ACCURACY,1,iHighStat[STAT_ACCURACY],"round_accuracy","accuracy");
-	GiveRoundAward(STAT_GRENADES,1,iHighStat[STAT_GRENADES],"round_grenades","grenades");
-	GiveRoundAward(STAT_CAPTURES,1,iHighStat[STAT_CAPTURES],"round_captures","captures");
-	GiveRoundAward(STAT_CACHES,1,iHighStat[STAT_CACHES],"round_caches","caches");
-	GiveRoundAward(STAT_DMG_GIVEN,1,iHighStat[STAT_DMG_GIVEN],"round_dmg_given","dmg_given");
-	GiveRoundAward(STAT_DMG_TAKEN,-1,iLowStat[STAT_DMG_TAKEN],"round_dmg_taken","dmg_taken");
-	GiveRoundAward(STAT_SUPPRESSIONS,1,iHighStat[STAT_SUPPRESSIONS],"round_suppressions","suppressions");
-*/
-}
-GiveRoundAward(RoundStatFields:stat,high,value,String:award[32],String:valname[32])
-{
-	new String:buffer[256];
-	if (high)
-	{
-		if (value <= 0)
-		{
-			return;
-		}
-	}
-	for (new i = 1; i < MaxClients; i++)
-	{
-		if (IsValidClient(i))
-		{
-			Format(buffer, sizeof(buffer), " (%s \"%d\")",valname,value);
-			if (((high) && (g_round_stats[i][stat] >= value)) || (g_round_stats[i][stat] <= value))
-			{
-				LogPlayerEvent(i, "triggered", award, false, buffer);
-			}
-		}
-	}	
 }
 GetWeaponId(i)
 {
@@ -585,16 +503,6 @@ public Native_Log(Handle:plugin, numParams)
 	FormatNativeString(0, 2, 3, sizeof(buffer), _,buffer);
 	InsLog(level,buffer);
 	return 0;
-}
-
-InsLog(LOG_LEVEL:level,const String:format[], any:...)
-{
-	if ((level) && (level > g_iLogLevel))
-		return;
-	decl String:buffer[512],String:sLevel[32];
-	String_ToUpper(g_sLogLevel[level],sLevel,sizeof(sLevel));
-	VFormat(buffer, sizeof(buffer), format, 3);
-	PrintToServer("[INSLIB] [%s] %s",sLevel,buffer);
 }
 
 public Native_GetPlayerScore(Handle:plugin, numParams)
@@ -1671,21 +1579,33 @@ public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dont
 	new squad_slot = GetEventInt( event, "squad_slot" );
 	new team = GetClientTeam(client);
 	decl String:class_template[MAX_CLASS_LEN];
+	decl String:sClassName[MAX_CLASS_LEN];
 	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	ReplaceString(class_template,sizeof(class_template),"template_","",false);
-	ReplaceString(class_template,sizeof(class_template),"_training","",false);
-	ReplaceString(class_template,sizeof(class_template),"_coop","",false);
-	ReplaceString(class_template,sizeof(class_template),"coop_","",false);
-	ReplaceString(class_template,sizeof(class_template),"_security","",false);
-	ReplaceString(class_template,sizeof(class_template),"_insurgent","",false);
-	ReplaceString(class_template,sizeof(class_template),"_survival","",false);
-	UpdateClassName(team,squad,squad_slot,class_template);
+	FormatPlayerClassName(sClassName,sizeof(sClassName),class_template);
+	UpdateClassName(team,squad,squad_slot,sClassName);
 
 	if( client == 0)
 		return Plugin_Continue;
-	if(!StrEqual(g_client_last_classstring[client],class_template)) {
-		LogRoleChange( client, class_template );
-		g_client_last_classstring[client] = class_template;
+	if(!StrEqual(g_client_last_classstring[client],sClassName)) {
+		LogRoleChange( client, sClassName );
+		g_client_last_classstring[client] = sClassName;
 	}
 	return Plugin_Continue;
+}
+FormatPlayerClassName(String:sClassName[],iSize,const String:class_template[]) {
+	// Check player class
+	new String:sTmp[256],String:sReplace[MAX_STRIP_LEN+1];
+	new String:sStripWords[MAX_STRIP_COUNT][MAX_STRIP_LEN];
+	Format(sClassName,iSize,"%s",class_template);
+	GetConVarString(cvarClassStripWords, sTmp, sizeof(sTmp));
+	ExplodeString(sTmp, " ", sStripWords, MAX_STRIP_COUNT, MAX_STRIP_LEN);
+	for (new i=0;i<MAX_STRIP_COUNT;i++) {
+		if (StrEqual(sStripWords[i],"") || StrEqual(sStripWords[i],"\0")) {
+		} else {
+			Format(sReplace,sizeof(sReplace),"_%s",sStripWords[i]);
+			ReplaceString(sClassName,iSize,sReplace,"",false);
+			Format(sReplace,sizeof(sReplace),"%s_",sStripWords[i]);
+			ReplaceString(sClassName,iSize,sReplace,"",false);
+		}
+	}
 }

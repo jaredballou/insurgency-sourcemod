@@ -7,6 +7,8 @@
 //#include <sdktools>
 //#include <loghelper>
 
+#define PLUGIN_LOG_PREFIX "INSLIB"
+
 #define MAX_DEFINABLE_WEAPONS 100
 #define MAX_WEAPON_LEN 32
 #define MAX_SQUAD_LEN 32
@@ -100,6 +102,26 @@ enum LOG_LEVEL
 	INFO,
 	WARN,
 	ERROR
+}
+
+new String:g_sLogLevel[6][32] = {
+	"default",
+	"trace",
+	"debug",
+	"info",
+	"warn",
+	"error"
+};
+new LOG_LEVEL:g_iLogLevel;// = sizeof(g_sLogLevel);
+
+stock InsLog(LOG_LEVEL:level,const String:format[], any:...)
+{
+	if ((level) && (level > g_iLogLevel))
+		return;
+	decl String:buffer[512],String:sLevel[32];
+	String_ToUpper(g_sLogLevel[level],sLevel,sizeof(sLevel));
+	VFormat(buffer, sizeof(buffer), format, 3);
+	PrintToServer("[%s] [%s] %s",PLUGIN_LOG_PREFIX,sLevel,buffer);
 }
 
 stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
