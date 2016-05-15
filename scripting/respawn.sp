@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Respawn players"
 #define PLUGIN_NAME "[INS] Player Respawn"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.8.0"
+#define PLUGIN_VERSION "1.8.1"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -31,6 +31,7 @@ new Handle:hAdminMenu = INVALID_HANDLE;
 new Handle:g_hPlayerRespawn;
 new Handle:g_hGameConfig;
 new Handle:g_hRespawnTimer[MAXPLAYERS+1] = INVALID_HANDLE;
+new g_bHasClass[MAXPLAYERS+1];
 
 
 // This will be used for checking which team the player is on before repsawning them
@@ -42,6 +43,7 @@ new Handle:g_hRespawnTimer[MAXPLAYERS+1] = INVALID_HANDLE;
 new bool:TF2 = false;
 
 new Handle:sm_respawn_enabled = INVALID_HANDLE;
+new Handle:sm_respawn_auto = INVALID_HANDLE;
 new Handle:sm_respawn_delay = INVALID_HANDLE;
 new Handle:sm_respawn_count = INVALID_HANDLE;
 new Handle:sm_respawn_counterattack = INVALID_HANDLE;
@@ -68,7 +70,8 @@ public OnPluginStart()
 	}
 
 	CreateConVar("sm_respawn_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
+	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", PLUGIN_WORKING, "Enable respawn plugin");
+	sm_respawn_auto = CreateConVar("sm_respawn_auto", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
 	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");
 	sm_respawn_counterattack = CreateConVar("sm_respawn_counterattack", "0", "Respawn during counterattack? (0: no, 1: yes, 2: infinite)");
 	sm_respawn_final_counterattack = CreateConVar("sm_respawn_final_counterattack", "0", "Respawn during final counterattack? (0: no, 1: yes, 2: infinite)");
@@ -90,6 +93,7 @@ public OnPluginStart()
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 
 	HookConVarChange(sm_respawn_enabled, EnableChanged);
+	//HookConVarChange(sm_respawn_auto, EnableChanged);
 	HookConVarChange(sm_respawn_count, UpdateRespawnCountConVar);
 	HookConVarChange(sm_respawn_count_team2, UpdateRespawnCountConVar);
 	HookConVarChange(sm_respawn_count_team3, UpdateRespawnCountConVar);
@@ -154,13 +158,13 @@ public OnConfigsExecuted()
 	else
 		TagsCheck("respawntimes", true);
 }
-public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast)
-{
+public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast) {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	if(client > 0 && IsClientInGame(client))
 	{
 		KillRespawnTimer(client);
-	}	
+	}
+	g_bHasClass[client] = 0;
 	return Plugin_Continue;
 }
 
@@ -304,6 +308,7 @@ public Event_PlayerPickSquad( Handle:event, const String:name[], bool:dontBroadc
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
 		return;	
+	g_bHasClass[client] = 1;
 	SetPlayerSpawns( client );
 }
 
@@ -312,7 +317,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	new team = GetClientTeam(client);
 
-	if (GetConVarInt(sm_respawn_enabled) == 1)
+	if (GetConVarInt(sm_respawn_auto) == 1)
 	{
 		if (IsClientInGame(client) && (team == TEAM_1 || team == TEAM_2))
 		{
@@ -341,18 +346,14 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			{
 				//PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
-			}
-			if (g_iSpawnTokens[client] > 0)
-			{
+			} if (g_iSpawnTokens[client] > 0) {
 				CreateRespawnTimer(client);
 			}
 		}
 	}
 }
-public KillRespawnTimer(client)
-{
-	if (g_hRespawnTimer[client] != INVALID_HANDLE)
-	{
+public KillRespawnTimer(client) {
+	if (g_hRespawnTimer[client] != INVALID_HANDLE) {
 		KillTimer(g_hRespawnTimer[client]);
 		g_hRespawnTimer[client] = INVALID_HANDLE;
 	}
@@ -382,9 +383,9 @@ public RespawnPlayer(client, target)
 	}
 	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
-		PrintToServer("[RESPAWN] SDKCall");
-
-		SDKCall(g_hPlayerRespawn, target);
+		if (g_bHasClass[target]) {
+			SDKCall(g_hPlayerRespawn, target);
+		}
 	}
 }
 
@@ -404,7 +405,9 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	}
 	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
 	{
-		SDKCall(g_hPlayerRespawn, client);
+		if (g_bHasClass[client]) {
+			SDKCall(g_hPlayerRespawn, client);
+		}
 	}
 }
 

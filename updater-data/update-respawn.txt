@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"		"1.8.0"
+			"Latest"		"1.8.1"
 		}
 		"Notes"		"Player Respawn - Respawn players"
 	}

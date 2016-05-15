@@ -452,7 +452,7 @@ Removes all prop_dynamic entities.
 
 <a name='respawn'>
 ---
-### Player Respawn 1.8.0</a>
+### Player Respawn 1.8.1</a>
 Respawn players
 
  * [Plugin - respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
@@ -468,7 +468,8 @@ Allows respawning of players or bots. Support for some customization of per roun
  * [Third-Party Plugin: adminmenu](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/adminmenu.smx?raw=true)
 
 #### CVAR List
- * "sm_respawn_enabled" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);
+ * "sm_respawn_enabled" "PLUGIN_WORKING" //Enable respawn plugin);
+ * "sm_respawn_auto" "0" //Automatically respawn players when they die; 0 - disabled, 1 - enabled);
  * "sm_respawn_delay" "1.0" //How many seconds to delay the respawn);
  * "sm_respawn_counterattack" "0" //Respawn during counterattack?
  * "sm_respawn_final_counterattack" "0" //Respawn during final counterattack?
@@ -635,7 +636,7 @@ If a player connects with their mp_theater_override set to something other than 
  * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>
  * <a href='#user-content-newspawn'>New Spawn 0.0.1</a>
  * <a href='#user-content-nofog'>No Fog 0.0.1</a>
- * <a href='#user-content-respawn'>Player Respawn 1.8.0</a>
+ * <a href='#user-content-respawn'>Player Respawn 1.8.1</a>
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
