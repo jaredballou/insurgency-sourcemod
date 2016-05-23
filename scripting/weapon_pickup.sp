@@ -252,6 +252,7 @@ ListWeapons(client, observer)
 	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
 	new m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
 	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+	new m_hWeaponDefinitionHandle = GetEntProp(weapon, Prop_Send, "m_hWeaponDefinitionHandle");
 	new m_iAmmo = -1;
 	new m_iPrimaryAmmoCount = -1;
 	if (m_iPrimaryAmmoType != -1) {
@@ -259,8 +260,7 @@ ListWeapons(client, observer)
 		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
 	}
 	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
-        ReplyToCommand(observer, "%d\t%d\t%s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d",offset, weapon, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount,maxammo);
-        
+        ReplyToCommand(observer, "%d\t%d\t%s m_hWeaponDefinitionHandle %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d",offset, weapon, classname, m_hWeaponDefinitionHandle, m_bChamberedRound, m_iPrimaryAmmoType, m_iClip1, m_iAmmo, m_iPrimaryAmmoCount, maxammo);
     }
 }
 

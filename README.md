@@ -247,7 +247,7 @@ Lists all maps and modes available
 
 <a name='insurgency'>
 ---
-### Insurgency Support Library 1.3.4</a>
+### Insurgency Support Library 1.3.5</a>
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
 
  * [Plugin - insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
@@ -630,7 +630,7 @@ If a player connects with their mp_theater_override set to something other than 
  * <a href='#user-content-dropweapon'>Drop Weapon 0.0.2</a>
  * <a href='#user-content-hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#user-content-insmaps'>Map List 1.4.1</a>
- * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.4</a>
+ * <a href='#user-content-insurgency'>Insurgency Support Library 1.3.5</a>
  * <a href='#user-content-magnifier'>Magnifier 0.0.1</a>
  * <a href='#user-content-navmesh-export'>Navmesh JSON Export 0.0.4</a>
  * <a href='#user-content-navmesh'>Navmesh Parser 1.0.4</a>

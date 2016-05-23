@@ -14,7 +14,7 @@
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.3.4"
+#define PLUGIN_VERSION "1.3.5"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -376,7 +376,7 @@ reset_round_stats_all()
 GetWeaponId(i)
 {
 	if (i < 0) {
-		return i;
+		return -1;
 	}
 	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
 	new String:name[32];
@@ -385,7 +385,7 @@ GetWeaponId(i)
 	GetArrayString(g_weap_array, m_hWeaponDefinitionHandle, strBuf, sizeof(strBuf));
 	if(!StrEqual(name, strBuf)) {
 		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, name);
-		InsLog(DEBUG,"Weapons %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
+		InsLog(DEBUG,"Weapon %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
 	}
 	return m_hWeaponDefinitionHandle;
 }
@@ -1099,7 +1099,10 @@ public Action:Event_PlayerSuppressed( Handle:event, const String:name[], bool:do
 	//"victim" "short"
 	new victim   = GetClientOfUserId(GetEventInt(event, "victim"));
 	new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-	if (attacker == 0 || victim == 0 || attacker == victim)
+	int victim_team = GetClientTeam(victim);
+	int attacker_team = GetClientTeam(attacker);
+	// If attacker or victim is invalid, attacker is victim, or same team, do not reward
+	if (attacker <= 0 || victim <= 0 || attacker == victim || victim_team == attacker_team)
 	{
 		return Plugin_Continue;
 	}
@@ -1298,8 +1301,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	g_weapon_stats[victim][weapon_index][LOG_HIT_DEATHS]++;
 	g_round_stats[attacker][STAT_KILLS]++;
 	g_round_stats[victim][STAT_DEATHS]++;
-	if (GetClientTeam(attacker) == GetClientTeam(victim))
-	{
+	if (GetClientTeam(attacker) == GetClientTeam(victim)) {
 		g_weapon_stats[attacker][weapon_index][LOG_HIT_TEAMKILLS]++;
 		g_round_stats[attacker][STAT_TEAMKILLS]++;
 	}

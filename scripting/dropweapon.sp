@@ -87,34 +87,39 @@ public Action:Drop_Weapon(client) {
 	//SDKHooks_DropWeapon(client,m_hActiveWeapon);
 	return Plugin_Continue;
 }
+
 CreateWorldWeapon(client,weapon) {
 	decl String:strBuf[32];
 	GetEdictClassname(weapon, strBuf, sizeof(strBuf));
-	new ent = CreateEntityByName(strBuf);
+	//new ent = CreateEntityByName(strBuf);
 	new Float:cllocation[3];
 	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
 	cllocation[2]+=20;
-	PrintToServer("[DROPWEAPON] dropping %s from %N ent %d loc %f %f %f",strBuf,client,ent,cllocation[0],cllocation[1],cllocation[2]);
+	PrintToServer("[DROPWEAPON] dropping %s from %N weapon %d loc %f %f %f",strBuf,client,weapon,cllocation[0],cllocation[1],cllocation[2]);
 	char sModel[PLATFORM_MAX_PATH];
 	int m_iWorldModelIndex = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
 	int m_fEffects = GetEntProp(weapon, Prop_Send, "m_fEffects");
 	int m_iState = GetEntProp(weapon, Prop_Send, "m_iState");
+	int m_hOwnerEntity = GetEntProp(weapon, Prop_Send, "m_hOwnerEntity");
+	int m_hOwner = GetEntProp(weapon, Prop_Send, "m_hOwner");
+	PrintToServer("[DROPWEAPON] CreateWorldWeapon client %N (%d) weapon %d classname %s m_iWorldModelIndex %d m_fEffects %0.2f m_iState %d m_hOwnerEntity %d m_hOwner %d",client, client, weapon, strBuf, m_iWorldModelIndex, m_fEffects, m_iState, m_hOwnerEntity, m_hOwner);
+
 //	ModelIndexToString(m_iWorldModelIndex, sModel, sizeof(sModel));
 
 	//SetEntProp(ent, Prop_Send, "m_iItemDefinitionIndex", StringToInt(index));
 
 	// Not owned
-	SetEntProp(ent, Prop_Send, "m_iState", 0);
+	SetEntProp(weapon, Prop_Send, "m_iState", 0);
 
-	m_fEffects = GetEntProp(ent, Prop_Send, "m_fEffects");
+	m_fEffects = GetEntProp(weapon, Prop_Send, "m_fEffects");
 	m_fEffects |= EF_NODRAW;
-	SetEntProp(ent, Prop_Send, "m_fEffects", m_fEffects);
+	SetEntProp(weapon, Prop_Send, "m_fEffects", m_fEffects);
 
-	TeleportEntity(ent,cllocation, NULL_VECTOR, NULL_VECTOR);
-	DispatchSpawn(ent);
-	ActivateEntity(ent);
+	TeleportEntity(weapon,cllocation, NULL_VECTOR, NULL_VECTOR);
+	//DispatchSpawn(weapon);
+	ActivateEntity(weapon);
 	PrintToServer("[DROP] m_iWorldModelIndex %d m_fEffects %d m_iState %d",m_iWorldModelIndex,m_fEffects,m_iState);
-	//SetEntProp(ent, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
-	//SetEntProp(ent, Prop_Send, "m_iClip1", clip);
+	//SetEntProp(weapon, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
+	//SetEntProp(weapon, Prop_Send, "m_iClip1", clip);
 }
 		

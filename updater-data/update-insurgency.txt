@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"		"1.3.4"
+			"Latest"		"1.3.5"
 		}
 		"Notes"		"Insurgency Support Library - Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 	}
