@@ -10,9 +10,6 @@
 	}
 	"Files"
 	{
-Notes:MyPlugin
-		"Plugin"	"Path_SM/plugins/dropweapon.smx"
-		"Source"	"Path_SM/scripting/dropweapon.sp"
 		"Plugin"	"Path_SM/plugins/dropweapon.smx"
 		"Source"	"Path_SM/scripting/dropweapon.sp"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"

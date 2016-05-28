@@ -10,8 +10,6 @@
 	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/theater_reconnect.smx"
-		"Source"	"Path_SM/scripting/theater_reconnect.sp"
 		"Plugin"	"Path_SM/plugins/theater_reconnect.smx"
 		"Source"	"Path_SM/scripting/theater_reconnect.sp"
 	}

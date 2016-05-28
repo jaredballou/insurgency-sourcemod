@@ -8,7 +8,7 @@
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
 #define PLUGIN_NAME "[INS] Bot Names"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "1.0.2"
+#define PLUGIN_VERSION "1.0.3"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -43,6 +43,36 @@ new Handle:cvarRandom = INVALID_HANDLE; // use random-order names?
 new Handle:cvarNameList = INVALID_HANDLE; // list to use
 new Handle:cvarAnnounce = INVALID_HANDLE; // announce new bots?
 new Handle:cvarSuppress = INVALID_HANDLE; // supress join/team/namechange messages?
+
+// called when the plugin loads
+public OnPluginStart()
+{
+	// cvars!
+	cvarVersion = CreateConVar("sm_botnames_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_botnames_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarPrefix = CreateConVar("sm_botnames_prefix", "", "sets a prefix for bot names (include a trailing space, if needed!)", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarRandom = CreateConVar("sm_botnames_random", "1", "sets whether to randomize names used", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarAnnounce = CreateConVar("sm_botnames_announce", "0", "sets whether to announce bots when added", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarSuppress = CreateConVar("sm_botnames_suppress", "1", "sets whether to supress join/team change/name change bot messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarNameList = CreateConVar("sm_botnames_list", "default", "Set list to use for bots", FCVAR_NOTIFY | FCVAR_PLUGIN);	
+
+	// hook team change, connect to supress messages
+	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
+	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
+	HookEvent("player_changename", Event_PlayerChangeName, EventHookMode_Pre);
+
+	// register our commands
+	RegServerCmd("sm_botnames_reload", Command_Reload);
+	RegServerCmd("sm_botnames_rename_all", Command_Rename_All);
+
+	AutoExecConfig();
+}
+
+public OnMapStart()
+{
+	ReloadNames();
+	GenerateRedirects();
+}
 
 // a function to generate name_redirects
 GenerateRedirects()
@@ -148,35 +178,6 @@ ReloadNames()
 	CloseHandle(file);
 }
 
-// called when the plugin loads
-public OnPluginStart()
-{
-	// cvars!
-	cvarVersion = CreateConVar("sm_botnames_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_botnames_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarPrefix = CreateConVar("sm_botnames_prefix", "", "sets a prefix for bot names (include a trailing space, if needed!)", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarRandom = CreateConVar("sm_botnames_random", "1", "sets whether to randomize names used", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarAnnounce = CreateConVar("sm_botnames_announce", "0", "sets whether to announce bots when added", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarSuppress = CreateConVar("sm_botnames_suppress", "1", "sets whether to supress join/team change/name change bot messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarNameList = CreateConVar("sm_botnames_list", "default", "Set list to use for bots", FCVAR_NOTIFY | FCVAR_PLUGIN);	
-
-	// hook team change, connect to supress messages
-	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
-	HookEvent("player_team", Event_PlayerTeam, EventHookMode_Pre);
-	HookEvent("player_changename", Event_PlayerChangeName, EventHookMode_Pre);
-
-	// register our commands
-	RegServerCmd("sm_botnames_reload", Command_Reload);
-	RegServerCmd("sm_botnames_rename_all", Command_Rename_All);
-
-	AutoExecConfig();
-}
-
-public OnMapStart()
-{
-	ReloadNames();
-	GenerateRedirects();
-}
 
 // reload bot name, via console
 public Action:Command_Reload(args)
@@ -257,11 +258,9 @@ public Action:Event_PlayerTeam(Handle:event, const String:name[], bool:dontBroad
 }
 // handle player team change, to supress bot messages
 public Action:Event_PlayerChangeName(Handle:event, const String:name[], bool:dontBroadcast) {
-/*
 	if (!(GetConVarBool(cvarEnabled) && GetConVarBool(cvarSuppress))) {
 		return Plugin_Continue;
 	}
-*/
 	//PrintToServer("[BOTNAMES]: Triggered Event_PlayerChangeName");
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	if (client == 0) {
