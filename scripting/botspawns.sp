@@ -38,6 +38,7 @@ new Handle:cvarCounterattackMode = INVALID_HANDLE; //Use standard spawning for c
 new Handle:cvarCounterattackFinaleInfinite = INVALID_HANDLE; //Infinite finale?
 new Handle:cvarCounterattackFrac = INVALID_HANDLE; //Multiplier to total bots to take part in counterattack
 new Handle:cvarMinCounterattackDistance = INVALID_HANDLE; //Min distance from counterattack objective to spawn
+new Handle:cvarSpawnAttackDelay = INVALID_HANDLE; //Attack delay for spawning bots
 new Handle:cvarMinSpawnDelay = INVALID_HANDLE; //Min delay for spawning. Set to 0 for instant.
 new Handle:cvarMaxSpawnDelay = INVALID_HANDLE; //Max delay for spawning. Set to 0 for instant.
 new Handle:cvarMinPlayerDistance = INVALID_HANDLE; //Min/max distance from players to spawn
@@ -104,6 +105,8 @@ public OnPluginStart()
 	cvarCounterattackFrac = CreateConVar("sm_botspawns_counterattack_frac", "0.5", "Multiplier to total bots for spawning in counterattack wave", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarMinCounterattackDistance = CreateConVar("sm_botspawns_min_counterattack_distance", "3600", "Min distance from counterattack objective to spawn", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	cvarSpawnAttackDelay = CreateConVar("sm_botspawns_spawn_attack_delay", "10", "Delay in seconds for spawning bots to wait before firing.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarMinSpawnDelay = CreateConVar("sm_botspawns_min_spawn_delay", "1", "Min delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarMaxSpawnDelay = CreateConVar("sm_botspawns_max_spawn_delay", "30", "Max delay in seconds for spawning. Set to 0 for instant.", FCVAR_NOTIFY | FCVAR_PLUGIN);
@@ -487,27 +490,29 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
-	if (!g_bEnabled)
-	{
+	if (!g_bEnabled) {
 		return Plugin_Continue;
+	}
+	if (!IsFakeClient(client)) {
+		return Plugin_Continue;
+	}
+	float m_flNextAttack = GetConVarFloat(cvarSpawnAttackDelay);
+	SetEntProp(client, Prop_Send, "m_flNextAttack", m_flNextAttack);
+	new m_hActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+	if (m_hActiveWeapon > -1) {
+		SetEntProp(m_hActiveWeapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
 	}
 	if (g_iSpawnMode)
 	{
-		if (IsFakeClient(client))
-		{
-			if (!g_iInQueue[client])
-				BeginSpawnClient(client,1,1);
+		if (!g_iInQueue[client])
+			BeginSpawnClient(client,1,1);
 /*
-			if (g_iSpawnTokens[client])
-			{
-				TeleportClient(client);
-			}
-			else
-			{
-				JoinQueue(client,1);
-			}
-*/
+		if (g_iSpawnTokens[client]) {
+			TeleportClient(client);
+		} else {
+			JoinQueue(client,1);
 		}
+*/
 	}
 	return Plugin_Continue;
 }
