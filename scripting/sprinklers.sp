@@ -15,8 +15,8 @@
 #define PLUGIN_DESCRIPTION "Plugin for removing Sprinkers"
 #define PLUGIN_NAME "[INS] Sprinkler Removal"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.2"
-#define PLUGIN_WORKING 1
+#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -35,7 +35,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_sprinklers_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_sprinklers_enabled", "0", "Set to 1 to remove sprinklers. 0 leaves them alone.", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_sprinklers_enabled", PLUGIN_WORKING, "Set to 1 to remove sprinklers. 0 leaves them alone.", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	HookEvent("server_spawn", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);
@@ -70,7 +70,8 @@ public remove_sprinklers()
 			continue;
 		if(GetEdictClassname(i, name, sizeof(name))){
 			if(StrEqual("prop_sprinkler", name,false)){
-				RemoveEdict(i);
+				//RemoveEdict(i);
+				AcceptEntityInput(i, "Kill");
 				PrintToServer("Deleted sprinkler %d",i);
 			}
 		}
