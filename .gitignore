@@ -12,6 +12,7 @@ configs/sourcebans/sourcebans.cfg
 data/sqlite/clientprefs-sqlite.sq3
 *.sq3
 data/updater.txt
+data/dumps/*
 doc/tmp/*
 data/antitk.txt
 gamedata/sm-tf2.games.txt
