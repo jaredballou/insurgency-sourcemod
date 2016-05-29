@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "[INS] Bot Spawns"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "0.3.0"
+#define PLUGIN_VERSION "0.3.1"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -87,7 +87,7 @@ new bot_team = 3;
 #pragma unused g_iMinFireteamSize
 
 enum SpawnModes {
-        SpawnMode_Normal = 0,
+SpawnMode_Normal = 0,
 	SpawnMode_HidingSpots,
 	SpawnMode_SpawnPoints,
 };
@@ -163,8 +163,12 @@ public OnPluginStart()
 	{
 		SetFailState("Fatal Error: Unable to find signature for \"Respawn\"!");
 	}
+	//HookEvent("player_spawn", Event_SpawnPre, EventHookMode_Pre);
 	HookEvent("player_spawn", Event_Spawn);
+	HookEvent("player_spawn", Event_SpawnPost, EventHookMode_Post);
+	//HookEvent("round_begin", Event_RoundBeginPre, EventHookMode_Pre);
 	HookEvent("round_begin", Event_RoundBegin);
+	//HookEvent("round_begin", Event_RoundBeginPost, EventHookMode_Post);
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
@@ -496,25 +500,45 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 	if (!IsFakeClient(client)) {
 		return Plugin_Continue;
 	}
-	float m_flNextAttack = GetConVarFloat(cvarSpawnAttackDelay);
-	SetEntProp(client, Prop_Send, "m_flNextAttack", m_flNextAttack);
-	new m_hActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-	if (m_hActiveWeapon > -1) {
-		SetEntProp(m_hActiveWeapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
-	}
-	if (g_iSpawnMode)
-	{
+	if (g_iSpawnMode) {
 		if (!g_iInQueue[client])
 			BeginSpawnClient(client,1,1);
-/*
 		if (g_iSpawnTokens[client]) {
 			TeleportClient(client);
 		} else {
 			JoinQueue(client,1);
 		}
-*/
 	}
 	return Plugin_Continue;
+}
+
+public Action:Event_SpawnPost(Handle:event, const String:name[], bool:dontBroadcast) {
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
+	if (!g_bEnabled) {
+		return Plugin_Continue;
+	}
+	if (!IsFakeClient(client)) {
+		return Plugin_Continue;
+	}
+	SetNextAttack(client);
+	return Plugin_Continue;
+}
+
+SetNextAttack(client) {
+	float m_flNextAttack = GetConVarFloat(cvarSpawnAttackDelay);
+	PrintToServer("[BOTSPAWNS] SetNextAttack %f for %N (%d)",m_flNextAttack,client,client);
+	new m_hMyWeapons = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
+
+// Loop through entries in m_hMyWeapons.
+	for(new offset = 0; offset < 128; offset += 4) {
+		new weapon = GetEntDataEnt2(client, m_hMyWeapons + offset);
+		if (weapon < 0) {
+			continue;
+		}
+		PrintToServer("[BOTSPAWNS] SetNextAttack weapon %d",weapon);
+		SetEntProp(weapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
+	}
 }
 
 public Action:Event_RoundBegin(Handle:event, const String:name[], bool:dontBroadcast)
