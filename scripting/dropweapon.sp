@@ -38,13 +38,26 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_dropweapon_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_dropweapon_enabled", PLUGIN_WORKING, "sets whether weapon dropping is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	RegConsoleCmd("drop_weapon", Command_Drop_Weapon);
-	AddCommandListener(CmdLstnr_Drop, "drop");
+	//AddCommandListener(CmdLstnr_Drop, "drop");
 	//HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
+
+	HookEvent("player_first_spawn", Event_PlayerSpawn);
+	HookEvent("player_spawn", Event_PlayerSpawn);
+
 	PrintToServer("[DROPWEAPON] Started!");
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
 	}
+}
+
+public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	if( client == 0 || !IsClientInGame(client) )
+		return Plugin_Continue;	
+	SetEntProp(client, Prop_Send, "m_bDropEnabled", 1);
+	return Plugin_Continue;
 }
 
 public Action:CmdLstnr_Drop(client, const String:command[], argc)

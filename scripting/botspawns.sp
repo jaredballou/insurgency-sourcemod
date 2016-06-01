@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "[INS] Bot Spawns"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "0.3.1"
+#define PLUGIN_VERSION "0.3.2"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -506,7 +506,7 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 		if (g_iSpawnTokens[client]) {
 			TeleportClient(client);
 		} else {
-			JoinQueue(client,1);
+			JoinQueue(client,true);
 		}
 	}
 	return Plugin_Continue;
@@ -537,7 +537,7 @@ SetNextAttack(client) {
 			continue;
 		}
 		PrintToServer("[BOTSPAWNS] SetNextAttack weapon %d",weapon);
-		SetEntProp(weapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
+		SetEntPropFloat(weapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
 	}
 }
 
