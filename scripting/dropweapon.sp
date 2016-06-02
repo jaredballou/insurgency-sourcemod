@@ -3,14 +3,6 @@
 
 #pragma semicolon 1
 #pragma unused cvarVersion
-#include <sourcemod>
-#include <sdktools>
-#include <sdkhooks>
-#include <insurgency>
-#undef REQUIRE_PLUGIN
-#include <updater>
-
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-dropweapon.txt"
 
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Adds a drop command"
@@ -19,6 +11,14 @@
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_URL "http://jballou.com/"
 #define PLUGIN_WORKING "0"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-dropweapon.txt"
+
+#include <sourcemod>
+#include <sdktools>
+#include <sdkhooks>
+#include <insurgency>
+#undef REQUIRE_PLUGIN
+#include <updater>
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -97,7 +97,6 @@ public Action:Drop_Weapon(client) {
 	// Create weapon entity
 	CreateWorldWeapon(client,m_hActiveWeapon);
 
-	//SDKHooks_DropWeapon(client,m_hActiveWeapon);
 	return Plugin_Continue;
 }
 
@@ -109,6 +108,10 @@ CreateWorldWeapon(client,weapon) {
 	GetEntPropVector(client, Prop_Send, "m_vecOrigin", cllocation);
 	cllocation[2]+=20;
 	PrintToServer("[DROPWEAPON] dropping %s from %N weapon %d loc %f %f %f",strBuf,client,weapon,cllocation[0],cllocation[1],cllocation[2]);
+
+	SDKHooks_DropWeapon(client, weapon);
+//, cllocation, cllocation);
+/*
 	char sModel[PLATFORM_MAX_PATH];
 	int m_iWorldModelIndex = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
 	int m_fEffects = GetEntProp(weapon, Prop_Send, "m_fEffects");
@@ -134,5 +137,6 @@ CreateWorldWeapon(client,weapon) {
 	PrintToServer("[DROP] m_iWorldModelIndex %d m_fEffects %d m_iState %d",m_iWorldModelIndex,m_fEffects,m_iState);
 	//SetEntProp(weapon, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
 	//SetEntProp(weapon, Prop_Send, "m_iClip1", clip);
+*/
 }
 		

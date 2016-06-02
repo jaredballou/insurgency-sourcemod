@@ -16,8 +16,19 @@ Allow manipulation of weapons and items in the game world.
 
 #pragma semicolon 1
 #pragma unused cvarVersion
+
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_DESCRIPTION "Weapon Pickup logic for manipulating player inventory"
+#define PLUGIN_LOG_PREFIX "WPNPICK"
+#define PLUGIN_NAME "[INS] Weapon Pickup"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_WORKING "1"
+#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-weapon_pickup.txt"
+
 #include <sourcemod>
 #include <sdktools>
+#include <sdkhooks>
 #include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
@@ -27,13 +38,6 @@ Allow manipulation of weapons and items in the game world.
 #define REQUIRE_EXTENSIONS
 
 #define AUTOLOAD_EXTENSIONS
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Weapon Pickup logic for manipulating player inventory"
-#define PLUGIN_LOG_PREFIX "WPNPICK"
-#define PLUGIN_NAME "[INS] Weapon Pickup"
-#define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.3"
-#define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -43,26 +47,28 @@ public Plugin:myinfo = {
 	url		= PLUGIN_URL
 };
 
-
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-weapon_pickup.txt"
-
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarAmmoPickup = INVALID_HANDLE; // allow picking up weapons as ammo?
+//new Handle:cvarMode = INVALID_HANDLE; // What mode to use
+new Handle:cvarMaxExplosive = INVALID_HANDLE; // Maximum number of explosive ammo
+new Handle:cvarMaxMagazine = INVALID_HANDLE; // Maximum number of magazines that can be picked up
+
 new OwnerOfWeapon[2048] = 0;
 new m_hActiveWeapon;
 new m_hMyWeapons;
 
-public OnPluginStart()
-{
+public OnPluginStart() {
 	cvarVersion = CreateConVar("sm_weapon_pickup_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_weapon_pickup_enabled", PLUGIN_WORKING, "sets whether weapon pickup manipulation is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	cvarAmmoPickup = CreateConVar("sm_weapon_pickup_ammo", "1", "sets whether picking up a weapon the player already has will add to the player's ammo count", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	if (LibraryExists("updater"))
-	{
+	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
-	m_hActiveWeapon = FindSendPropInfo("CBasePlayer", "m_hActiveWeapon");
+	m_hActiveWeapon = FindSendPropInfo("CINSPlayer", "m_hActiveWeapon");
 	if (m_hActiveWeapon == -1) {
 		LogError("Can't find CBasePlayer::m_hActiveWeapon");
 	}
@@ -75,6 +81,12 @@ public OnPluginStart()
 	RegConsoleCmd("wp_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: wp_weaponslots [target]");
 	RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
 	RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
+}
+
+public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
+{
+	new weapon = GetNativeCell(1);
+	return Weapon_GetMaxClip1(weapon);
 }
 
 public OnLibraryAdded(const String:name[])
@@ -107,7 +119,7 @@ public Action:OnWeaponCanUse(client, weapon)
 		return Plugin_Continue;
 	}
 	return Plugin_Continue;
-}  
+}
 //SDKHooks_DropWeapon(client, weapon, const Float:vecTarget[3]=NULL_VECTOR, const Float:vecVelocity[3]=NULL_VECTOR);
 
 
@@ -327,9 +339,28 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
 		int iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
+//cvarMaxExplosive
+//cvarMaxMagazine
 			//m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			new inc = 1; // TODO: Handle magazines and ammo type mismatches
 			SetEntProp(activator, Prop_Send, "m_iAmmo", m_iAmmo+inc, _, m_iPrimaryAmmoType);
+/*
+//int CBaseCombatCharacter::GiveAmmo(int, int, bool)
+new Handle:hGiveAmmo;
+        offset = GameConfGetOffset(temp, "GiveAmmo");
+        hGiveAmmo = DHookCreate(offset, HookType_Entity, ReturnType_Int, ThisPointer_CBaseEntity, GiveAmmo);
+        DHookAddParam(hGiveAmmo, HookParamType_Int);
+        DHookAddParam(hGiveAmmo, HookParamType_Int);
+        DHookAddParam(hGiveAmmo, HookParamType_Bool);
+        DHookEntity(hGiveAmmo, false, client);
+// int CBaseCombatCharacter::GiveAmmo(int, int, bool)
+// int CBaseCombatCharacter::GiveAmmo(int, int, bool)
+public MRESReturn:GiveAmmo(pThis, Handle:hReturn, Handle:hParams)
+{
+        PrintToChat(pThis, "Giving %i of %i supress %i", DHookGetParam(hParams, 1), DHookGetParam(hParams, 2), DHookGetParam(hParams, 3));
+        return MRES_Ignored;
+}
+*/
 			PrintToServer("[WPNPICK] Added %d ammo for %s to %N (%d)",inc,classname,activator,activator);
 			PrintHintText(activator,"Added %d ammo for %s",inc,classname);
 			RemoveEdict(entity);
@@ -357,3 +388,36 @@ FindInventoryItem(client,const String:sClassname[]) {
 	}
 	return -1;
 }
+
+
+
+/*
+	new Handle:hGameConfIns = INVALID_HANDLE;
+	new Handle:hGameConfSDK = INVALID_HANDLE;
+	hGameConfIns = LoadGameConfigFile("insurgency.games");
+	hGameConfSDK = LoadGameConfigFile("sdkhooks.games/engine.insurgency");
+
+Weapon_Drop(weapon)
+{
+	StartPrepSDKCall(SDKCall_Entity);
+	if(!PrepSDKCall_SetFromConf(hGameConfSDK, SDKConf_Virtual, "Weapon_Drop")) {
+		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+	}
+	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
+	new Handle:hCall = EndPrepSDKCall();
+	new value = SDKCall(hCall, weapon);
+	CloseHandle(hCall);
+	return value;
+}
+
+new Handle:hCanHaveAmmo;
+	offset = GameConfGetOffset(hGameConf, "CanHaveAmmo");
+	hCanHaveAmmo = DHookCreate(offset, HookType_GameRules, ReturnType_Bool, ThisPointer_Ignore, CanHaveAmmoPost);
+	DHookAddParam(hCanHaveAmmo, HookParamType_CBaseEntity);
+	DHookAddParam(hCanHaveAmmo, HookParamType_Int);
+	offset = GameConfGetOffset(hGameConf, "GiveAmmo");
+	hGiveAmmo = DHookCreate(offset, HookType_Entity, ReturnType_Int, ThisPointer_CBaseEntity, GiveAmmo);
+	DHookAddParam(hGiveAmmo, HookParamType_Int);
+	DHookAddParam(hGiveAmmo, HookParamType_Int);
+	DHookAddParam(hGiveAmmo, HookParamType_Bool);
+*/

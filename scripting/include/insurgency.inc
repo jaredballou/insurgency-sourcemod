@@ -6,8 +6,9 @@
 //#include <sourcemod>
 //#include <sdktools>
 //#include <loghelper>
-
-#define PLUGIN_LOG_PREFIX "INSLIB"
+#if !defined PLUGIN_LOG_PREFIX
+  #define PLUGIN_LOG_PREFIX "INSLIB"
+#endif
 
 #define MAX_DEFINABLE_WEAPONS 128
 #define MAX_DEFINABLE_GEAR 32

@@ -4,6 +4,25 @@
 	{
 		"Offsets"
 		{
+			"GiveNamedItem"
+			{
+				"windows"	"398"
+				"linux"		"402"
+				"mac"		"402"
+			}
+			"RemovePlayerItem"
+			{
+				"windows"	"271"
+				"linux"		"272"
+				"mac"		"272"
+			}
+			"Weapon_GetSlot"
+			{
+				"windows"	"269"
+				"linux"		"270"
+				"mac"		"270"
+			}
+
 			"CheckReload"
 			{
 				"windows"	"283"
