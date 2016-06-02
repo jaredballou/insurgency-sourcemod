@@ -56,7 +56,7 @@ public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBro
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
 		return Plugin_Continue;	
-	SetEntProp(client, Prop_Send, "m_bDropEnabled", 1);
+	SetEntProp(client, Prop_Data, "m_bDropEnabled", 1);
 	return Plugin_Continue;
 }
 

@@ -16,19 +16,22 @@ Allow manipulation of weapons and items in the game world.
 
 #pragma semicolon 1
 #pragma unused cvarVersion
+#pragma unused cvarMaxExplosive
+#pragma unused cvarMaxMagazine
 
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Weapon Pickup logic for manipulating player inventory"
 #define PLUGIN_LOG_PREFIX "WPNPICK"
 #define PLUGIN_NAME "[INS] Weapon Pickup"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.4"
+#define PLUGIN_VERSION "0.1.0"
 #define PLUGIN_WORKING "1"
 #define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-weapon_pickup.txt"
 
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#include <smlib>
 #include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
@@ -73,6 +76,11 @@ public OnPluginStart() {
 		LogError("Can't find CBasePlayer::m_hActiveWeapon");
 	}
 
+
+        HookEvent("player_first_spawn", Event_Player_First_Spawn);
+        HookEvent("player_spawn", Event_Player_Spawn);
+        HookEvent("weapon_pickup", Event_Weapon_Pickup);
+
 	m_hMyWeapons = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
 	if (m_hMyWeapons == -1) {
 		LogError("Can't find CINSPlayer::m_hMyWeapons");
@@ -83,12 +91,40 @@ public OnPluginStart() {
 	RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
 }
 
+public Action:Event_Weapon_Pickup(Handle:event, const String:name[], bool:dontBroadcast) {
+        new userid = GetEventInt(event, "userid");
+        new weaponid = GetEventInt(event, "weaponid");
+        if (userid > 0 && weaponid > 0) {
+                new client = GetClientOfUserId(userid);
+                if (client) {
+			PrintToServer("[WP] Event_Weapon_Pickup userid %d client %N (%d) weaponid %d",userid,client,client,weaponid);
+                }
+        }
+}
+public Action:Event_Player_Spawn( Handle:event, const String:name[], bool:dontBroadcast ) {
+        new userid = GetEventInt(event, "userid");
+        new client = GetClientOfUserId(userid);
+        if( client == 0 || !IsClientInGame(client) )
+                return Plugin_Continue;
+        PrintToServer("Event_Player_Spawn userid %d client %N (%d)",userid,client,client);
+        return Plugin_Continue;
+}
+public Action:Event_Player_First_Spawn( Handle:event, const String:name[], bool:dontBroadcast ) {
+        new userid = GetEventInt(event, "userid");
+        new client = GetClientOfUserId(userid);
+        if( client == 0 || !IsClientInGame(client) )
+                return Plugin_Continue;
+        PrintToServer("Event_Player_First_Spawn userid %d client %N (%d)",userid,client,client);
+        return Plugin_Continue;
+}
+
+/*
 public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
 {
 	new weapon = GetNativeCell(1);
 	return Weapon_GetMaxClip1(weapon);
 }
-
+*/
 public OnLibraryAdded(const String:name[])
 {
 	if (StrEqual(name, "updater"))
@@ -260,19 +296,36 @@ ListWeapons(client, observer)
         }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         new String:classname[64];
+	new String:sNetClass[32];
+	new iOffset;
+	GetEntityNetClass(weapon, sNetClass, sizeof(sNetClass));
         GetEntityClassname(weapon, classname, sizeof(classname));
 	new m_iPrimaryAmmoType = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoType");
-	new m_bChamberedRound = GetEntData(weapon, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+	new m_bChamberedRound = 0;
+	iOffset = FindSendPropInfo(sNetClass, "m_bChamberedRound");
+	if (iOffset > -1) {
+		m_bChamberedRound = GetEntData(weapon, iOffset, 1);
+	}
 	new m_iClip1 = GetEntProp(weapon, Prop_Data, "m_iClip1"); // weapon clip amount bullets
 	new m_hWeaponDefinitionHandle = GetEntProp(weapon, Prop_Send, "m_hWeaponDefinitionHandle");
 	new m_iAmmo = -1;
 	new m_iPrimaryAmmoCount = -1;
+	new m_bHammerDown = 0;
+	new m_eBoltState = 0;
+	iOffset = FindSendPropInfo(sNetClass, "m_bHammerDown");
+	if (iOffset > -1) {
+		m_bHammerDown = GetEntData(weapon, iOffset, 1);
+	}
+	iOffset = FindSendPropInfo(sNetClass, "m_eBoltState");
+	if (iOffset > -1) {
+		m_eBoltState = GetEntData(weapon, iOffset, 1);
+	}
 	if (m_iPrimaryAmmoType != -1) {
 		m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
 	}
 	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
-        ReplyToCommand(observer, "%d\t%d\t%s m_hWeaponDefinitionHandle %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d",offset, weapon, classname, m_hWeaponDefinitionHandle, m_bChamberedRound, m_iPrimaryAmmoType, m_iClip1, m_iAmmo, m_iPrimaryAmmoCount, maxammo);
+        ReplyToCommand(observer, "%d\t%d\t%s m_hWeaponDefinitionHandle %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d m_bHammerDown %d m_eBoltState %d",offset, weapon, classname, m_hWeaponDefinitionHandle, m_bChamberedRound, m_iPrimaryAmmoType, m_iClip1, m_iAmmo, m_iPrimaryAmmoCount, maxammo,m_bHammerDown,m_eBoltState);
     }
 }
 
@@ -326,9 +379,12 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			return Plugin_Continue;
 		}
 	        new String:classname[64];
+//		if (StrEqual(sClassname,classname)) {
+               	new String:sNetClass[32];
+		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
         	GetEntityClassname(entity, classname, sizeof(classname));
 		new m_iPrimaryAmmoType = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoType");
-		new m_bChamberedRound = GetEntData(entity, FindSendPropInfo("CINSWeaponBallistic", "m_bChamberedRound"),1);
+		new m_bChamberedRound = GetEntData(entity, FindSendPropInfo(sNetClass, "m_bChamberedRound"),1);
 		new m_iClip1 = GetEntProp(entity, Prop_Data, "m_iClip1"); // weapon clip amount bullets
 		new m_iAmmo = -1;
 		new m_iPrimaryAmmoCount = -1;
@@ -339,6 +395,8 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
 		int iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
+	                InsLog(DEBUG,"sNetClass %s",sNetClass);
+
 //cvarMaxExplosive
 //cvarMaxMagazine
 			//m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
