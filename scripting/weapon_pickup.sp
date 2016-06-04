@@ -379,21 +379,39 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			return Plugin_Continue;
 		}
 	        new String:classname[64];
-//		if (StrEqual(sClassname,classname)) {
                	new String:sNetClass[32];
+
+
+
+		new iOffset;
 		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
-        	GetEntityClassname(entity, classname, sizeof(classname));
+	        GetEntityClassname(entity, classname, sizeof(classname));
 		new m_iPrimaryAmmoType = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoType");
-		new m_bChamberedRound = GetEntData(entity, FindSendPropInfo(sNetClass, "m_bChamberedRound"),1);
+		new m_bChamberedRound = 0;
+		iOffset = FindSendPropInfo(sNetClass, "m_bChamberedRound");
+		if (iOffset > -1) {
+			m_bChamberedRound = GetEntData(entity, iOffset, 1);
+		}
 		new m_iClip1 = GetEntProp(entity, Prop_Data, "m_iClip1"); // weapon clip amount bullets
+		new m_hWeaponDefinitionHandle = GetEntProp(entity, Prop_Send, "m_hWeaponDefinitionHandle");
 		new m_iAmmo = -1;
 		new m_iPrimaryAmmoCount = -1;
+		new m_bHammerDown = 0;
+		new m_eBoltState = 0;
+		iOffset = FindSendPropInfo(sNetClass, "m_bHammerDown");
+		if (iOffset > -1) {
+			m_bHammerDown = GetEntData(entity, iOffset, 1);
+		}
+		iOffset = FindSendPropInfo(sNetClass, "m_eBoltState");
+		if (iOffset > -1) {
+			m_eBoltState = GetEntData(entity, iOffset, 1);
+		}
 		if (m_iPrimaryAmmoType != -1) {
 			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
 		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
-		int iOffset = FindInventoryItem(activator,classname);
+		iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
 	                InsLog(DEBUG,"sNetClass %s",sNetClass);
 
