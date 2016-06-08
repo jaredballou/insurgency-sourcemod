@@ -6,6 +6,7 @@
 //#include <sourcemod>
 //#include <sdktools>
 //#include <loghelper>
+#include <smlib>
 #if !defined PLUGIN_LOG_PREFIX
   #define PLUGIN_LOG_PREFIX "INSLIB"
 #endif

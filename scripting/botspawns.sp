@@ -4,6 +4,7 @@
 #pragma unused cvarVersion
 #include <sourcemod>
 #include <sdktools>
+#include <smlib>
 #include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <navmesh>
@@ -16,7 +17,7 @@
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "[INS] Bot Spawns"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "0.3.5"
+#define PLUGIN_VERSION "0.4.0"
 #define PLUGIN_WORKING "0"
 
 public Plugin:myinfo = {
@@ -96,7 +97,7 @@ new m_hMyWeapons, m_flNextPrimaryAttack, m_flNextSecondaryAttack;
 
 public OnPluginStart()
 {
-	PrintToServer("[BOTSPAWNS] Starting up");
+	InsLog(DEBUG, "Starting up");
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botspawns_enabled", PLUGIN_WORKING, "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
@@ -238,7 +239,7 @@ public OnMapStart()
 	new String:sGameMode[32],String:sLogicEnt[64];
 	GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
 	Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
-	PrintToServer("[BOTSPAWNS] gamemode %s logicent %s",sGameMode,sLogicEnt);
+	InsLog(DEBUG, "gamemode %s logicent %s",sGameMode,sLogicEnt);
 	if (!StrEqual(sGameMode,"checkpoint")) return;
 */
 	RestartBotQueue();
@@ -253,10 +254,10 @@ public GetHidingSpots() {
 	new Float:dist,Float:closest = -1.0,pointidx=-1;
 
 	m_iNumControlPoints = Ins_ObjectiveResource_GetProp("m_iNumControlPoints");
-	PrintToServer("[BOTSPAWNS] m_iNumControlPoints %d",m_iNumControlPoints);
+	InsLog(DEBUG, "m_iNumControlPoints %d",m_iNumControlPoints);
 	for (new i = 0; i < m_iNumControlPoints; i++) {
 		Ins_ObjectiveResource_GetPropVector("m_vCPPositions",m_vCPPositions[i],i);
-		PrintToServer("[BOTSPAWNS] i %d (%f,%f,%f)",i,m_vCPPositions[i][0],m_vCPPositions[i][1],m_vCPPositions[i][2]);
+		InsLog(DEBUG, "i %d (%f,%f,%f)",i,m_vCPPositions[i][0],m_vCPPositions[i][1],m_vCPPositions[i][2]);
 	}
 	for (new iCP = 0; iCP < m_iNumControlPoints; iCP++) {
 		g_iCPLastHidingSpot[iCP] = 0;
@@ -281,7 +282,7 @@ public GetHidingSpots() {
 				g_iCPHidingSpotCount[pointidx]++;
 			}
 		}
-		PrintToServer("[BOTSPAWNS] Found hiding count: a %d b %d c %d d %d e %d f %d g %d h %d i %d j %d k %d l %d m %d",g_iCPHidingSpotCount[0],g_iCPHidingSpotCount[1],g_iCPHidingSpotCount[2],g_iCPHidingSpotCount[3],g_iCPHidingSpotCount[4],g_iCPHidingSpotCount[5],g_iCPHidingSpotCount[6],g_iCPHidingSpotCount[7],g_iCPHidingSpotCount[8],g_iCPHidingSpotCount[9],g_iCPHidingSpotCount[10],g_iCPHidingSpotCount[11],g_iCPHidingSpotCount[12]);
+		InsLog(DEBUG, "Found hiding count: a %d b %d c %d d %d e %d f %d g %d h %d i %d j %d k %d l %d m %d",g_iCPHidingSpotCount[0],g_iCPHidingSpotCount[1],g_iCPHidingSpotCount[2],g_iCPHidingSpotCount[3],g_iCPHidingSpotCount[4],g_iCPHidingSpotCount[5],g_iCPHidingSpotCount[6],g_iCPHidingSpotCount[7],g_iCPHidingSpotCount[8],g_iCPHidingSpotCount[9],g_iCPHidingSpotCount[10],g_iCPHidingSpotCount[11],g_iCPHidingSpotCount[12]);
 	}
 }
 Float:GetHidingSpotVector(iSpot) {
@@ -304,7 +305,7 @@ CheckSpawnPoint(Float:vecSpawn[3],client) {
 			continue;
 		if (!IsClientInGame(iTarget))
 			continue;
-		//PrintToServer("[BOTSPAWNS] Distance from %N to iSpot %d is %f",iTarget,iSpot,distance);
+		//InsLog(DEBUG, "Distance from %N to iSpot %d is %f",iTarget,iSpot,distance);
 		distance = GetVectorDistance(vecSpawn,g_vecOrigin[iTarget]);
 		if (distance > furthest)
 			furthest = distance;
@@ -357,26 +358,38 @@ float GetSpawnPoint_HidingSpot(client,iteration=0) {
 
 		if (CheckSpawnPoint(vecSpawn,client)) {
 			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
+			InsLog(DEBUG,"FOUND! %N (%d) hiding spot %d at (%f, %f, %f)", client, client, iSpot, vecSpawn[0], vecSpawn[1], vecSpawn[2]);
 			return vecSpawn;
 		}
 	}
-	if (iteration)
+	if (iteration) {
+		InsLog(DEBUG,"Unable to find hiding spot for %N (%d)", client, client);
 		return vecOrigin;
+	}
+	InsLog(DEBUG,"Running second iteration for hiding spot %N (%d)", client, client);
 	return GetSpawnPoint_HidingSpot(client,1);
 }
 
 float GetSpawnPoint_SpawnPoint(client) {
-//	float vecSpawn[3];
+	int m_iTeam = GetClientTeam(client);
+	int m_iTeamNum;
+	float vecSpawn[3];
 	float vecOrigin[3];
 	GetClientAbsOrigin(client,vecOrigin);
 	new point = FindEntityByClassname(-1, "ins_spawnpoint");
 	while (point != -1) {
 		// Check to make sure it is the same team
-		// Check spawnzone
-		// Check distances to players and objectives
-		// if it checks out, return it
+		m_iTeamNum = GetEntProp(point, Prop_Send, "m_iTeamNum");
+		if (m_iTeamNum == m_iTeam) {
+			GetEntPropVector(point, Prop_Send, "m_vecOrigin", vecSpawn);
+			if (CheckSpawnPoint(vecSpawn,client)) {
+				InsLog(DEBUG,"FOUND! %N (%d) spawnpoint %d at (%f, %f, %f)", client, client, point, vecSpawn[0], vecSpawn[1], vecSpawn[2]);
+				return vecSpawn;
+			}
+		}
 		point = FindEntityByClassname(point, "ins_spawnpoint");
 	}
+	InsLog(DEBUG,"Could not find acceptable ins_spawnzone for %N (%d)", client, client);
 	return vecOrigin;
 }
 
@@ -392,7 +405,7 @@ public UpdatePlayerOrigins() {
 RestartBotQueue() {
 	//TODO: Kill all bots at this time?
 	g_iBotsToSpawn = RoundToFloor(Float:Team_CountPlayers(bot_team) * g_flTotalSpawnFrac);
-	PrintToServer("[BOTSPAWNS] Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),g_flTotalSpawnFrac,g_iBotsToSpawn);
+	InsLog(DEBUG,"Calling RestartBotQueue, TCP is %d TSF is %0.2f g_iBotsToSpawn is %d",Team_CountPlayers(bot_team),g_flTotalSpawnFrac,g_iBotsToSpawn);
 }
 
 //Move a bot to the queue. This will silently kill them and remove ragdoll.
@@ -404,7 +417,7 @@ public JoinQueue(client,bool:spawning)
 	}
 	if ((g_iInQueue[client]) || (g_iNeedSpawn[client]))
 		return;
-	PrintToServer("[BOTSPAWNS] called JoinQueue for %N (%d) g_iBotsToSpawn %d spawning %b",client,client,g_iBotsToSpawn,spawning);
+	InsLog(DEBUG, "called JoinQueue for %N (%d) g_iBotsToSpawn %d spawning %b",client,client,g_iBotsToSpawn,spawning);
 	g_iInQueue[client] = 1;
 	if (!spawning)
 	{
@@ -432,7 +445,7 @@ BeginSpawnClient(client,tokens=0,instant=0) {
 	if (flSpawnDelay < 0.1) {
 		flSpawnDelay = 0.1;
 	}
-	PrintToServer("[BOTSPAWNS] called BeginSpawnClient for %d flSpawnDelay %0.2f g_iBotsToSpawn %d g_iSpawnTokens %d",client,flSpawnDelay,g_iBotsToSpawn,g_iSpawnTokens[client]);
+	InsLog(DEBUG, "called BeginSpawnClient for %d flSpawnDelay %0.2f g_iBotsToSpawn %d g_iSpawnTokens %d",client,flSpawnDelay,g_iBotsToSpawn,g_iSpawnTokens[client]);
 	if (!IsPlayerAlive(client))
 		g_hSpawnTimer[client] = CreateTimer(flSpawnDelay, Timer_Spawn, client, TIMER_FLAG_NO_MAPCHANGE);
 	else
@@ -478,7 +491,7 @@ public Action:Timer_ProcessQueue(Handle:timer) {
 //This timer actually spawns the bot
 public Action:Timer_Spawn(Handle:timer, any:client)
 {
-	PrintToServer("[BOTSPAWNS] called Timer_Spawn for client %N (%d)",client,client);
+	InsLog(DEBUG, "called Timer_Spawn for client %N (%d)",client,client);
 	g_iSpawnTokens[client]--; //Remove one token
 	SDKCall(g_hForceRespawn, client); //Perform respawn
 	g_hSpawnTimer[client] = CreateTimer(0.1, Timer_PostSpawn, client, TIMER_FLAG_NO_MAPCHANGE); //Do the post-spawn stuff like moving to final "spawnpoint" selected
@@ -487,7 +500,7 @@ public Action:Timer_Spawn(Handle:timer, any:client)
 //Handle any work that needs to happen after the client is in the game
 public Action:Timer_PostSpawn(Handle:timer, any:client)
 {
-	PrintToServer("[BOTSPAWNS] called Timer_PostSpawn for client %N (%d)",client,client);
+	InsLog(DEBUG, "called Timer_PostSpawn for client %N (%d)",client,client);
 	TeleportClient(client);
 }
 public TeleportClient(client) {
@@ -505,7 +518,7 @@ float GetSpawnPoint(client) {
 	} else {
 		vecSpawn = GetSpawnPoint_SpawnPoint(client);
 	}
-	PrintToServer("[BOTSPAWNS] Could not find spawn point for %N (%d)", client, client);
+	InsLog(DEBUG, "Could not find spawn point for %N (%d)", client, client);
 	return vecSpawn;
 }
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
@@ -520,9 +533,9 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 	new Float:vecOrigin[3];
 	GetClientAbsOrigin(client,vecOrigin);
 	int iCanSpawn = CheckSpawnPoint(vecOrigin,client);
-	PrintToServer("[BOTSPAWNS] Event_Spawn iCanSpawn %d", iCanSpawn);
+	InsLog(DEBUG, "Event_Spawn iCanSpawn %d", iCanSpawn);
 	if (!iCanSpawn) {
-		PrintToServer("[BOTSPAWNS] Teleporting %N (%d)", client, client);
+		InsLog(DEBUG, "Teleporting %N (%d)", client, client);
 		TeleportClient(client);
 	}
 	if (g_iSpawnMode) {
@@ -539,7 +552,7 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 
 public Action:Event_SpawnPost(Handle:event, const String:name[], bool:dontBroadcast) {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
+	//InsLog(DEBUG, "Event_Spawn called");
 	if (!g_bEnabled) {
 		return Plugin_Continue;
 	}
@@ -553,7 +566,7 @@ public Action:Event_SpawnPost(Handle:event, const String:name[], bool:dontBroadc
 SetNextAttack(client) {
 	float flTime = GetGameTime();
 	float flDelay = GetConVarFloat(cvarSpawnAttackDelay);
-//	PrintToServer("[BOTSPAWNS] SetNextAttack %f for %N (%d)",flDelay,client,client);
+//	InsLog(DEBUG, "SetNextAttack %f for %N (%d)",flDelay,client,client);
 /*
 	new weapons = GetEntDataEnt2(activator, m_hMyWeapons + (1 * 4));
 	SetEntDataFloat(weapons, m_flNextPrimaryAttack,   time + flDelay);
@@ -567,7 +580,7 @@ SetNextAttack(client) {
 		if (weapon < 0) {
 			continue;
 		}
-//		PrintToServer("[BOTSPAWNS] SetNextAttack weapon %d", weapon);
+//		InsLog(DEBUG, "SetNextAttack weapon %d", weapon);
 		SetEntDataFloat(weapon, m_flNextPrimaryAttack, flTime + flDelay);
 		SetEntDataFloat(weapon, m_flNextSecondaryAttack, flTime + flDelay);
 	}
@@ -575,7 +588,7 @@ SetNextAttack(client) {
 
 public Action:Event_RoundBegin(Handle:event, const String:name[], bool:dontBroadcast)
 {
-//	PrintToServer("[BOTSPAWNS] Calling Event_RoundBegin");
+//	InsLog(DEBUG, "Calling Event_RoundBegin");
 	RestartBotQueue();
 	return Plugin_Continue;
 }
@@ -602,7 +615,7 @@ public Action:Event_ControlPointStartTouch(Handle:event, const String:name[], bo
 	//new team = GetEventInt(event, "team");
 	//new owner = GetEventInt(event, "owner");
 	//new type = GetEventInt(event, "type");
-	//PrintToServer("[LOGGER] Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,object,player,team,owner,type);
+	//InsLog(DEBUG, "Event_ControlPointStartTouch: player %N area %d object %d player %d team %d owner %d type %d",player,area,object,player,team,owner,type);
 	return Plugin_Continue;
 }
 public Action:Timer_RemoveRagdoll(Handle:timer, any:_iEntity)
@@ -622,7 +635,7 @@ public Action:Event_PlayerDeathPre(Handle:event, const String:name[], bool:dontB
 	{
 		return Plugin_Continue;
 	}
-	//PrintToServer("[BOTSPAWNS] Calling Event_PlayerDeathPre");
+	//InsLog(DEBUG, "Calling Event_PlayerDeathPre");
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	//If this client is in the queue (being killed so that they can wait for a 'proper' spawn), remove ragdoll and do not print death message.
 	if (g_iInQueue[client]) {
@@ -648,7 +661,7 @@ public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroa
 	{
 		return Plugin_Continue;
 	}
-	//PrintToServer("[BOTSPAWNS] Calling Event_PlayerDeath");
+	//InsLog(DEBUG, "Calling Event_PlayerDeath");
 	//"deathflags" "short"
 	//"attacker" "short"
 	//"customkill" "short"

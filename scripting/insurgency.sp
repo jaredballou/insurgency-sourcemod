@@ -3,7 +3,6 @@
 #include <sdktools>
 #include <insurgency>
 #include <loghelper>
-#include <smlib>
 #undef REQUIRE_PLUGIN
 #include <updater>
 //Add ammo to 99 code in weapon_deploy
