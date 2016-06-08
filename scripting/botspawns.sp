@@ -340,26 +340,44 @@ CheckSpawnPoint(Float:vecSpawn[3],client) {
 	return 1;
 }
 
-GetSpawnPoint_HidingSpot(client,iteration=0) {
+float GetSpawnPoint_HidingSpot(client,iteration=0) {
+	float vecSpawn[3];
+	float vecOrigin[3];
+	GetClientAbsOrigin(client,vecOrigin);
+
 	UpdatePlayerOrigins();
 	new m_nActivePushPointIndex = Ins_ObjectiveResource_GetProp("m_nActivePushPointIndex");
 
 	new minidx = (iteration) ? 0 : g_iCPLastHidingSpot[m_nActivePushPointIndex];
 	new maxidx = (iteration) ? g_iCPLastHidingSpot[m_nActivePushPointIndex] : g_iCPHidingSpotCount[m_nActivePushPointIndex];
 	new iSpot;
-	new Float:vecSpawn[3];
 	for (new iCPHIndex = minidx; iCPHIndex < maxidx; iCPHIndex++) {
 		iSpot = g_iCPHidingSpots[m_nActivePushPointIndex][iCPHIndex];
 		vecSpawn = GetHidingSpotVector(iSpot);
 
 		if (CheckSpawnPoint(vecSpawn,client)) {
 			g_iCPLastHidingSpot[m_nActivePushPointIndex] = iCPHIndex;
-			return iSpot;
+			return vecSpawn;
 		}
 	}
 	if (iteration)
-		return -1;
+		return vecOrigin;
 	return GetSpawnPoint_HidingSpot(client,1);
+}
+
+float GetSpawnPoint_SpawnPoint(client) {
+//	float vecSpawn[3];
+	float vecOrigin[3];
+	GetClientAbsOrigin(client,vecOrigin);
+	new point = FindEntityByClassname(-1, "ins_spawnpoint");
+	while (point != -1) {
+		// Check to make sure it is the same team
+		// Check spawnzone
+		// Check distances to players and objectives
+		// if it checks out, return it
+		point = FindEntityByClassname(point, "ins_spawnpoint");
+	}
+	return vecOrigin;
 }
 
 public UpdatePlayerOrigins() {
@@ -480,38 +498,15 @@ public TeleportClient(client) {
 	g_hSpawnTimer[client] = INVALID_HANDLE;
 }
 
-Float:GetSpawnPoint(client) {
-	new Float:vecOrigin[3];
-	GetClientAbsOrigin(client,vecOrigin);
+float GetSpawnPoint(client) {
 	new Float:vecSpawn[3];
-	int iSpot, iCanSpawn;
-	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots))
-	{
-		iSpot = GetSpawnPoint_HidingSpot(client);
-		if (iSpot > -1)
-		{
-/*
-			new Float:vecOrigin[3];
-			vecOrigin[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
-			vecOrigin[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
-			vecOrigin[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
-			GetClientAbsOrigin(client,vecOrigin);
-			new Float:distance = GetVectorDistance(vecOrigin,vecOrigin);
-			PrintToServer("[BOTSPAWNS] Teleporting %N to hiding spot %d at %f,%f,%f distance %f",client,iSpot,vecOrigin[0],vecOrigin[1],vecOrigin[2],distance);
-			TeleportEntity(client, vecOrigin, NULL_VECTOR, NULL_VECTOR);
-*/
-			vecSpawn[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
-			vecSpawn[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
-			vecSpawn[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
-			iCanSpawn = CheckSpawnPoint(vecSpawn,client);
-			if (iCanSpawn) {
-				PrintToServer("[BOTSPAWNS] Selecting hiding spot %d (%f %f %f) for %N (%d)", iSpot, vecSpawn[0], vecSpawn[1], vecSpawn[2], client, client);
-				return vecSpawn;
-			}
-		}
+	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots)) {
+		vecSpawn = GetSpawnPoint_HidingSpot(client);
+	} else {
+		vecSpawn = GetSpawnPoint_SpawnPoint(client);
 	}
 	PrintToServer("[BOTSPAWNS] Could not find spawn point for %N (%d)", client, client);
-	return vecOrigin;
+	return vecSpawn;
 }
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
