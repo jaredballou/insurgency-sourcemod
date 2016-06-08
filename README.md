@@ -69,7 +69,7 @@ Displays a popup to players every 60 seconds by default identifying remaining en
 
 <a name='botnames'>
 ---
-### Bot Names 1.0.2</a>
+### Bot Names 1.0.3</a>
 Gives automatic names to bots on creation.
 
  * [Plugin - botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
@@ -90,10 +90,10 @@ Changes bot names to selectable lists of names. Included are Arabic, Pashtun, an
 
 <a name='botspawns'>
 ---
-### Bot Spawns 0.3.0</a>
+### Bot Spawns 0.3.2</a>
 Adds a number of options and ways to handle bot spawns
 
- * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+ * [Plugin - botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/disabled/botspawns.smx?raw=true)
  * [Source - botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
 
 Adjust bot spawning and rules to increase game control. In early beta, only navmesh spawning and multiple lives supported right now.
@@ -110,6 +110,7 @@ Adjust bot spawning and rules to increase game control. In early beta, only navm
  * "sm_botspawns_counterattack_finale_infinite" "0" //Obey sm_botspawns_counterattack_respawn_mode
  * "sm_botspawns_counterattack_frac" "0.5" //Multiplier to total bots for spawning in counterattack wave
  * "sm_botspawns_min_counterattack_distance" "3600" //Min distance from counterattack objective to spawn
+ * "sm_botspawns_spawn_attack_delay" "10" //Delay in seconds for spawning bots to wait before firing.
  * "sm_botspawns_min_spawn_delay" "1" //Min delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_max_spawn_delay" "30" //Max delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_player_distance" "1200" //Min distance from players to spawn
@@ -545,7 +546,7 @@ Adds a number of new ways to get score, or remove score for players
 
 <a name='sprinklers'>
 ---
-### Sprinkler Removal 0.0.2</a>
+### Sprinkler Removal 0.0.3</a>
 Plugin for removing Sprinkers
 
  * [Plugin - sprinklers.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinklers.smx?raw=true)
@@ -553,7 +554,7 @@ Plugin for removing Sprinkers
 
 
 #### CVAR List
- * "sm_sprinklers_enabled" "0" //Set to 1 to remove sprinklers. 0 leaves them alone.
+ * "sm_sprinklers_enabled" "PLUGIN_WORKING" //Set to 1 to remove sprinklers. 0 leaves them alone.
 
 <a name='suicide_bomb'>
 ---
@@ -622,8 +623,8 @@ If a player connects with their mp_theater_override set to something other than 
 
  * <a href='#user-content-ammocheck'>Ammo Check 0.0.7</a>
  * <a href='#user-content-botcount'>Bot Counter 0.0.2</a>
- * <a href='#user-content-botnames'>Bot Names 1.0.2</a>
- * <a href='#user-content-botspawns'>Bot Spawns 0.3.0</a>
+ * <a href='#user-content-botnames'>Bot Names 1.0.3</a>
+ * <a href='#user-content-botspawns'>Bot Spawns 0.3.2</a>
  * <a href='#user-content-cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#user-content-cvarlist'>CVAR List 0.0.1</a>
  * <a href='#user-content-damagemod'>Damage Modifier 0.0.2</a>
@@ -640,15 +641,15 @@ If a player connects with their mp_theater_override set to something other than 
  * <a href='#user-content-restrictedarea'>Restricted Area Removal 0.0.1</a>
  * <a href='#user-content-rpgdrift'>RPG Adjustments 0.0.3</a>
  * <a href='#user-content-score'>Score Modifiers 0.0.1</a>
- * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.2</a>
+ * <a href='#user-content-sprinklers'>Sprinkler Removal 0.0.3</a>
  * <a href='#user-content-suicide_bomb'>Suicide Bombers 0.0.7</a>
  * <a href='#user-content-theater_reconnect'>Theater Reconnect 0.0.1</a>
  * <a href='#user-content-theaterpicker'>Theater Picker 0.0.4</a>
- * <a href='#user-content-weapon_pickup'>Weapon Pickup 0.0.3</a>
+ * <a href='#user-content-weapon_pickup'>Weapon Pickup 0.1.0</a>
 
 <a name='weapon_pickup'>
 ---
-### Weapon Pickup 0.0.3</a>
+### Weapon Pickup 0.1.0</a>
 Weapon Pickup logic for manipulating player inventory
 
  * [Plugin - weapon_pickup.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/weapon_pickup.smx?raw=true)
@@ -657,10 +658,14 @@ Weapon Pickup logic for manipulating player inventory
 
 #### Dependencies
  * [Source Include - insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+ * [gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
+ * [gamedata/sdkhooks.games/engine.insurgency.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/sdkhooks.games/engine.insurgency.txt?raw=true)
 
 #### CVAR List
  * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" //sets whether weapon pickup manipulation is enabled
  * "sm_weapon_pickup_ammo" "1" //sets whether picking up a weapon the player already has will add to the player's ammo count
+ * "sm_weapon_pickup_max_explosive" "3" //Maximum number of ammo that can be carried for explosives
+ * "sm_weapon_pickup_max_magazine" "12" //Maximum number of magazines that can be carried
 
 #### Command List
  * "wp_weaponslots" // Command_ListWeaponSlots weapon slots. Usage: wp_weaponslots [target]
