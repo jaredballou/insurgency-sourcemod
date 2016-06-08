@@ -380,9 +380,6 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 		}
 	        new String:classname[64];
                	new String:sNetClass[32];
-
-
-
 		new iOffset;
 		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
 	        GetEntityClassname(entity, classname, sizeof(classname));
@@ -410,7 +407,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
-		PrintToServer("callback OnEntityUse, entity %i activator %i entity %d classname %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+		PrintToServer("[WPNPICK] OnEntityUse, entity %i activator %i entity %d classname %s netclass %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, sNetClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
 		iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
 	                InsLog(DEBUG,"sNetClass %s",sNetClass);

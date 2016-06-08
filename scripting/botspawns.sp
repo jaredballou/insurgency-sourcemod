@@ -4,9 +4,9 @@
 #pragma unused cvarVersion
 #include <sourcemod>
 #include <sdktools>
-#include <navmesh>
 #include <insurgency>
 #undef REQUIRE_PLUGIN
+#include <navmesh>
 #include <updater>
 
 #define AUTOLOAD_EXTENSIONS
@@ -16,8 +16,8 @@
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "[INS] Bot Spawns"
 #define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_VERSION "0.3.2"
-#define PLUGIN_WORKING "1"
+#define PLUGIN_VERSION "0.3.5"
+#define PLUGIN_WORKING "0"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -92,11 +92,13 @@ SpawnMode_Normal = 0,
 	SpawnMode_SpawnPoints,
 };
 
+new m_hMyWeapons, m_flNextPrimaryAttack, m_flNextSecondaryAttack;
+
 public OnPluginStart()
 {
 	PrintToServer("[BOTSPAWNS] Starting up");
 	cvarVersion = CreateConVar("sm_botspawns_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_botspawns_enabled", "0", "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_botspawns_enabled", PLUGIN_WORKING, "Enable enhanced bot spawning features", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
 	cvarSpawnMode = CreateConVar("sm_botspawns_spawn_mode", "0", "Only normal spawnpoints at the objective, the old way (0), spawn in hiding spots following rules (1), spawnpoints that meet rules (2)", FCVAR_NOTIFY | FCVAR_PLUGIN);
 
@@ -163,6 +165,18 @@ public OnPluginStart()
 	{
 		SetFailState("Fatal Error: Unable to find signature for \"Respawn\"!");
 	}
+	if ((m_hMyWeapons = FindSendPropOffs("CBasePlayer", "m_hMyWeapons")) == -1) {
+		SetFailState("Fatal Error: Unable to find property offset \"CBasePlayer::m_hMyWeapons\" !");
+	}
+
+	if ((m_flNextPrimaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
+		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextPrimaryAttack\" !");
+	}
+
+	if ((m_flNextSecondaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
+		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
+	}
+
 	//HookEvent("player_spawn", Event_SpawnPre, EventHookMode_Pre);
 	HookEvent("player_spawn", Event_Spawn);
 	HookEvent("player_spawn", Event_SpawnPost, EventHookMode_Post);
@@ -277,6 +291,7 @@ Float:GetHidingSpotVector(iSpot) {
 	flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
 	return flHidingSpot;
 }
+
 CheckSpawnPoint(Float:vecSpawn[3],client) {
 //Ins_InCounterAttack
 	new m_iTeam = GetClientTeam(client);
@@ -466,8 +481,10 @@ public TeleportClient(client) {
 }
 
 Float:GetSpawnPoint(client) {
+	new Float:vecOrigin[3];
+	GetClientAbsOrigin(client,vecOrigin);
 	new Float:vecSpawn[3];
-	new iSpot;
+	int iSpot, iCanSpawn;
 	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots))
 	{
 		iSpot = GetSpawnPoint_HidingSpot(client);
@@ -486,19 +503,32 @@ Float:GetSpawnPoint(client) {
 			vecSpawn[0] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_X);
 			vecSpawn[1] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Y);
 			vecSpawn[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
+			iCanSpawn = CheckSpawnPoint(vecSpawn,client);
+			if (iCanSpawn) {
+				PrintToServer("[BOTSPAWNS] Selecting hiding spot %d (%f %f %f) for %N (%d)", iSpot, vecSpawn[0], vecSpawn[1], vecSpawn[2], client, client);
+				return vecSpawn;
+			}
 		}
 	}
-	return vecSpawn;
+	PrintToServer("[BOTSPAWNS] Could not find spawn point for %N (%d)", client, client);
+	return vecOrigin;
 }
 public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	//PrintToServer("[BOTSPAWNS] Event_Spawn called");
 	if (!g_bEnabled) {
 		return Plugin_Continue;
 	}
 	if (!IsFakeClient(client)) {
 		return Plugin_Continue;
+	}
+	new Float:vecOrigin[3];
+	GetClientAbsOrigin(client,vecOrigin);
+	int iCanSpawn = CheckSpawnPoint(vecOrigin,client);
+	PrintToServer("[BOTSPAWNS] Event_Spawn iCanSpawn %d", iCanSpawn);
+	if (!iCanSpawn) {
+		PrintToServer("[BOTSPAWNS] Teleporting %N (%d)", client, client);
+		TeleportClient(client);
 	}
 	if (g_iSpawnMode) {
 		if (!g_iInQueue[client])
@@ -526,9 +556,15 @@ public Action:Event_SpawnPost(Handle:event, const String:name[], bool:dontBroadc
 }
 
 SetNextAttack(client) {
-	float m_flNextAttack = GetConVarFloat(cvarSpawnAttackDelay);
-	PrintToServer("[BOTSPAWNS] SetNextAttack %f for %N (%d)",m_flNextAttack,client,client);
+	float flTime = GetGameTime();
+	float flDelay = GetConVarFloat(cvarSpawnAttackDelay);
+//	PrintToServer("[BOTSPAWNS] SetNextAttack %f for %N (%d)",flDelay,client,client);
+/*
+	new weapons = GetEntDataEnt2(activator, m_hMyWeapons + (1 * 4));
+	SetEntDataFloat(weapons, m_flNextPrimaryAttack,   time + flDelay);
+	SetEntDataFloat(weapons, m_flNextSecondaryAttack, time + flDelay);
 	new m_hMyWeapons = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
+*/
 
 // Loop through entries in m_hMyWeapons.
 	for(new offset = 0; offset < 128; offset += 4) {
@@ -536,14 +572,15 @@ SetNextAttack(client) {
 		if (weapon < 0) {
 			continue;
 		}
-		PrintToServer("[BOTSPAWNS] SetNextAttack weapon %d",weapon);
-		SetEntPropFloat(weapon, Prop_Send, "m_flNextAttack", m_flNextAttack);
+//		PrintToServer("[BOTSPAWNS] SetNextAttack weapon %d", weapon);
+		SetEntDataFloat(weapon, m_flNextPrimaryAttack, flTime + flDelay);
+		SetEntDataFloat(weapon, m_flNextSecondaryAttack, flTime + flDelay);
 	}
 }
 
 public Action:Event_RoundBegin(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	PrintToServer("[BOTSPAWNS] Calling Event_RoundBegin");
+//	PrintToServer("[BOTSPAWNS] Calling Event_RoundBegin");
 	RestartBotQueue();
 	return Plugin_Continue;
 }
