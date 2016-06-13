@@ -89,6 +89,42 @@ public OnPluginStart() {
 	RegConsoleCmd("wp_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: wp_weaponslots [target]");
 	RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
 	RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
+	HookEverything();
+}
+HookEverything() {
+	InsLog(DEBUG, "HookEverything");
+	for(new i=0;i<= GetMaxEntities() ;i++){
+		if(!IsValidEntity(i))
+			continue;
+		if (i > MaxClients) {
+			HookEntity(i);
+		} else {
+			HookClient(i);
+		}
+	}
+}
+// Hook entity creation so that all attempts to use it get checked
+public OnEntityCreated(entity, const String:classname[]) {
+	HookEntity(entity);
+}
+HookEntity(entity) {
+	if(entity > MaxClients && IsValidEntity(entity)) {
+		InsLog(DEBUG, "HookEntity %d", entity);
+		SDKHook(entity, SDKHook_Use, OnEntityUse);
+	}
+}
+
+// Hook weaponcanuse (called at weapon deployment) and drop
+public OnClientPutInServer(client) {
+	HookClient(client);
+}
+
+HookClient(client) {
+	if (!IsValidClient(client))
+		return;
+	InsLog(DEBUG, "HookClient %N (%d)", client, client);
+	SDKHook(client, SDKHook_WeaponCanUse, OnWeaponCanUse);
+	SDKHook(client, SDKHook_WeaponDropPost, OnWeaponDropPost);
 }
 
 public Action:Event_Weapon_Pickup(Handle:event, const String:name[], bool:dontBroadcast) {
@@ -97,7 +133,7 @@ public Action:Event_Weapon_Pickup(Handle:event, const String:name[], bool:dontBr
         if (userid > 0 && weaponid > 0) {
                 new client = GetClientOfUserId(userid);
                 if (client) {
-			PrintToServer("[WP] Event_Weapon_Pickup userid %d client %N (%d) weaponid %d",userid,client,client,weaponid);
+			InsLog(DEBUG, "Event_Weapon_Pickup userid %d client %N (%d) weaponid %d",userid,client,client,weaponid);
                 }
         }
 }
@@ -106,7 +142,7 @@ public Action:Event_Player_Spawn( Handle:event, const String:name[], bool:dontBr
         new client = GetClientOfUserId(userid);
         if( client == 0 || !IsClientInGame(client) )
                 return Plugin_Continue;
-        PrintToServer("Event_Player_Spawn userid %d client %N (%d)",userid,client,client);
+	InsLog(DEBUG, "Event_Player_Spawn userid %d client %N (%d)",userid,client,client);
         return Plugin_Continue;
 }
 public Action:Event_Player_First_Spawn( Handle:event, const String:name[], bool:dontBroadcast ) {
@@ -114,35 +150,18 @@ public Action:Event_Player_First_Spawn( Handle:event, const String:name[], bool:
         new client = GetClientOfUserId(userid);
         if( client == 0 || !IsClientInGame(client) )
                 return Plugin_Continue;
-        PrintToServer("Event_Player_First_Spawn userid %d client %N (%d)",userid,client,client);
+	InsLog(DEBUG, "Event_Player_First_Spawn userid %d client %N (%d)",userid,client,client);
         return Plugin_Continue;
 }
 
-/*
-public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
-{
-	new weapon = GetNativeCell(1);
-	return Weapon_GetMaxClip1(weapon);
-}
-*/
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
+public OnLibraryAdded(const String:name[]) {
+	if (StrEqual(name, "updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
 
 
-// Hook weaponcanuse (called at weapon deployment) and drop
-public OnClientPutInServer(client)
-{
-	SDKHook(client, SDKHook_WeaponCanUse, OnWeaponCanUse);
-	SDKHook(client, SDKHook_WeaponDropPost, OnWeaponDropPost);
-}
-
-public OnWeaponDropPost(client, weapon)
-{
+public OnWeaponDropPost(client, weapon) {
 	OwnerOfWeapon[weapon] = client; 
 }
 // Dump data about weapon entity
@@ -358,14 +377,6 @@ RemoveAllClientWeapons(client, observer, count = 5)
     }
 }
 
-// Hook entity creation so that all attempts to use it get checked
-public OnEntityCreated(entity, const String:classname[])
-{
-    if(entity > MaxClients && IsValidEntity(entity))
-    {
-        SDKHook(entity, SDKHook_Use, OnEntityUse);
-    }
-}
 
 // Called every time a player uses anything, need to add logic to only work on weapons
 public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
@@ -373,7 +384,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 	if (!GetConVarBool(cvarEnabled)) {
 		return Plugin_Continue;
 	}
-	PrintToServer("[WPNPICK] OnEntityUse called");
+	InsLog(DEBUG, "OnEntityUse called");
 	if( activator > 0 && activator < MaxClients + 1 ) {
 		if (!GetConVarBool(cvarAmmoPickup)) {
 			return Plugin_Continue;
@@ -407,7 +418,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
-		PrintToServer("[WPNPICK] OnEntityUse, entity %i activator %i entity %d classname %s netclass %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d", entity, activator, entity, classname, sNetClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount);
+		InsLog(DEBUG, "OnEntityUse, entity %i activator %i entity %d classname %s netclass %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d m_bHammerDown %d m_eBoltState %d m_hWeaponDefinitionHandle %d", entity, activator, entity, classname, sNetClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount, m_bHammerDown, m_eBoltState, m_hWeaponDefinitionHandle);
 		iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
 	                InsLog(DEBUG,"sNetClass %s",sNetClass);
@@ -430,11 +441,11 @@ new Handle:hGiveAmmo;
 // int CBaseCombatCharacter::GiveAmmo(int, int, bool)
 public MRESReturn:GiveAmmo(pThis, Handle:hReturn, Handle:hParams)
 {
-        PrintToChat(pThis, "Giving %i of %i supress %i", DHookGetParam(hParams, 1), DHookGetParam(hParams, 2), DHookGetParam(hParams, 3));
+	PrintToChat(pThis, "Giving %i of %i supress %i", DHookGetParam(hParams, 1), DHookGetParam(hParams, 2), DHookGetParam(hParams, 3));
         return MRES_Ignored;
 }
 */
-			PrintToServer("[WPNPICK] Added %d ammo for %s to %N (%d)",inc,classname,activator,activator);
+			InsLog(DEBUG, "Added %d ammo for %s to %N (%d)",inc,classname,activator,activator);
 			PrintHintText(activator,"Added %d ammo for %s",inc,classname);
 			RemoveEdict(entity);
 			return Plugin_Handled;
@@ -455,7 +466,7 @@ FindInventoryItem(client,const String:sClassname[]) {
 		}
 		GetEntityClassname(weapon, classname, sizeof(classname));
 		if (StrEqual(sClassname,classname)) {
-			PrintToServer("[WPNPICK] Found %s in inventory for %N (%d) at offset %d",classname,client,client,offset);
+	        	InsLog(DEBUG, "Found %s in inventory for %N (%d) at offset %d",classname,client,client,offset);
 			return offset;
 		}
 	}
