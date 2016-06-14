@@ -1,17 +1,21 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"0.0.4"
-		}
-		"Notes"		"Navmesh JSON Export - Exports navmesh data in JSON format"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/navmesh-export.smx"
-		"Source"	"Path_SM/scripting/navmesh-export.sp"
-		"Source"	"Path_SM/scripting/include/navmesh.inc"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/navmesh.inc"
+		"Source" "Path_SM/scripting/include/smlib.inc"
+		"Source" "Path_SM/scripting/include/loghelper.inc"
+		"Source" "Path_SM/scripting/include/smjansson.inc"
+		"Source" "Path_SM/scripting/navmesh-export.sp"
+		"Plugin" "Path_SM/plugins/navmesh-export.smx"
+	}
+	"Information"
+	{
+		"Notes" "Exports navmesh data in JSON format"
+		"Version"
+		{
+			"Latest" "0.0.4"
+		}
 	}
 }

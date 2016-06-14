@@ -1,17 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"0.0.2"
-		}
-		"Notes"		"Drop Weapon - Adds a drop command"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/dropweapon.smx"
-		"Source"	"Path_SM/scripting/dropweapon.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/sdkhooks.inc"
+		"Source" "Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/dropweapon.sp"
+		"Plugin" "Path_SM/plugins/dropweapon.smx"
+	}
+	"Information"
+	{
+		"Notes" "Adds a drop command"
+		"Version"
+		{
+			"Latest" "0.0.2"
+		}
 	}
 }

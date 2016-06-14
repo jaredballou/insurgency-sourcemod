@@ -22,4 +22,5 @@ sprinklers
 suicide_bomb
 theater_reconnect
 theaterpicker
+votelog
 weapon_pickup

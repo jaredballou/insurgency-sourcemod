@@ -1,16 +1,17 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"0.0.3"
-		}
-		"Notes"		"Sprinkler Removal - Plugin for removing Sprinkers"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/sprinklers.smx"
-		"Source"	"Path_SM/scripting/sprinklers.sp"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/sprinklers.sp"
+		"Plugin" "Path_SM/plugins/sprinklers.smx"
+	}
+	"Information"
+	{
+		"Notes" "Plugin for removing Sprinkers"
+		"Version"
+		{
+			"Latest" "0.0.3"
+		}
 	}
 }

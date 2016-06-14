@@ -1,19 +1,21 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"	"0.0.1"
-		}
-		"Notes"		"Score Modifiers - Adds a number of new ways to get score, or remove score for players"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/score.smx"
-		"Source"	"Path_SM/scripting/score.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Plugin"	"Path_SM/translations/common.phrases.txt"
-		"Plugin"	"Path_SM/translations/score.phrases.txt"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/sdkhooks.inc"
+		"Source" "Path_SM/scripting/include/insurgency.inc"
+		"Plugin" "Path_SM/translations/common.phrases.txt"
+		"Plugin" "Path_SM/translations/score.phrases.txt"
+		"Source" "Path_SM/scripting/score.sp"
+		"Plugin" "Path_SM/plugins/score.smx"
+	}
+	"Information"
+	{
+		"Notes" "Adds a number of new ways to get score, or remove score for players"
+		"Version"
+		{
+			"Latest" "0.0.1"
+		}
 	}
 }

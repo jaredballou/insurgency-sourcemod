@@ -1,16 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"0.0.3"
-		}
-		"Notes"		"RPG Adjustments - Adjusts behavior of RPG rounds"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/rpgdrift.smx"
-		"Source"	"Path_SM/scripting/rpgdrift.sp"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/sdkhooks.inc"
+		"Source" "Path_SM/scripting/include/smlib/entities.inc"
+		"Source" "Path_SM/scripting/rpgdrift.sp"
+		"Plugin" "Path_SM/plugins/rpgdrift.smx"
+	}
+	"Information"
+	{
+		"Notes" "Adjusts behavior of RPG rounds"
+		"Version"
+		{
+			"Latest" "0.0.3"
+		}
 	}
 }

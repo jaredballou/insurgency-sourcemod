@@ -1,17 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"0.0.2"
-		}
-		"Notes"		"Damage Modifier - Modifies damage before applying to players"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/damagemod.smx"
-		"Source"	"Path_SM/scripting/damagemod.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/sdkhooks.inc"
+		"Source" "Path_SM/scripting/damagemod.sp"
+		"Plugin" "Path_SM/plugins/damagemod.smx"
+	}
+	"Information"
+	{
+		"Notes" "Modifies damage before applying to players"
+		"Version"
+		{
+			"Latest" "0.0.2"
+		}
 	}
 }

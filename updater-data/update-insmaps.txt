@@ -1,17 +1,18 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"		"1.4.1"
-		}
-		"Notes"		"Map List - Lists all maps and modes available"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/insmaps.smx"
-		"Source"	"Path_SM/scripting/insmaps.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/include/insurgency.inc"
+		"Source" "Path_SM/scripting/insmaps.sp"
+		"Plugin" "Path_SM/plugins/insmaps.smx"
+	}
+	"Information"
+	{
+		"Notes" "Lists all maps and modes available"
+		"Version"
+		{
+			"Latest" "1.4.1"
+		}
 	}
 }

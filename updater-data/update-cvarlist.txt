@@ -1,16 +1,16 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"	"0.0.1"
-		}
-		"Notes"		"CVAR List - Upholder of the [BFG], modified by Jared Ballou (jballou)"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/cvarlist.smx"
-		"Source"	"Path_SM/scripting/cvarlist.sp"
+		"Source" "Path_SM/scripting/cvarlist.sp"
+		"Plugin" "Path_SM/plugins/cvarlist.smx"
+	}
+	"Information"
+	{
+		"Notes" "Upholder of the [BFG], modified by Jared Ballou (jballou)"
+		"Version"
+		{
+			"Latest" "0.0.1"
+		}
 	}
 }

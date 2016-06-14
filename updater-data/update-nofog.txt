@@ -1,16 +1,17 @@
 "Updater"
 {
-	"Information"
-	{
-		"Version"
-		{
-			"Latest"	"0.0.1"
-		}
-		"Notes"		"No Fog - Removes fog"
-	}
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/nofog.smx"
-		"Source"	"Path_SM/scripting/nofog.sp"
+		"Source" "Path_SM/scripting/include/sdktools.inc"
+		"Source" "Path_SM/scripting/nofog.sp"
+		"Plugin" "Path_SM/plugins/nofog.smx"
+	}
+	"Information"
+	{
+		"Notes" "Removes fog"
+		"Version"
+		{
+			"Latest" "0.0.1"
+		}
 	}
 }

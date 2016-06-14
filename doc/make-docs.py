@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: latin-1 -*-
+
 ################################################################################
 #
 # generate-documentation.py
@@ -14,23 +16,30 @@
 #
 ################################################################################
 
-import os, sys, yaml, pprint, re
+import os, sys, yaml, re
 from keyvalues import KeyValues
+from pprint import pprint
+from collections import defaultdict
+
+import vdf
+
 sys.path.append("pysmx")
+
+
 import smx
+import pycparser
+
 # Set variables
 
 # Paths
-cwd = os.getcwd()
-root = os.path.dirname(cwd)
+root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+#print root
 paths = {
-	'doc':		cwd,
-	'tmp':		os.path.join(cwd,"tmp"),
-	'include':	os.path.join(cwd,"include"),
 	'root':		root,
+	'doc':		os.path.join(root,"doc"),
 	'plugins':	os.path.join(root,"plugins"),
 	'scripting':	os.path.join(root,"scripting"),
-	'libraries':	os.path.join(root,"scripting","include"),
+	'include':	os.path.join(root,"scripting","include"),
 	'gamedata':	os.path.join(root,"gamedata"),
 	'translations':	os.path.join(root,"translations"),
 	'updater':	os.path.join(root,"updater-data"),
@@ -40,12 +49,14 @@ paths = {
 github_user = "jaredballou"
 github_repo = "insurgency-sourcemod"
 github_branch = "master"
+
 urls = {
 	'github':	"https://github.com/%s/%s/blob/%s" % (github_user,github_repo,github_branch),
 	'updater':	"http://ins.jballou.com/sourcemod",
 }
 
 # File paths
+
 files = {
 	'compiler':	os.path.join(paths['scripting'],'spcomp'),
 	'plugins':	os.path.join(paths['doc'],"plugins.yaml"),
@@ -55,18 +66,18 @@ files = {
 	'footer':	os.path.join(paths['include'],"FOOTER.md"),
 }
 
+#updater_template = open(os.path.join(paths['updater'],"_template.txt")).read()
+#updater = vdf.loads(updater_template, mapper=vdf.VDFDict)
+#updater = KeyValues()
+#updater.load_from_file(
+
 # Main function
 def main():
 	plugins = get_yaml_file(files['plugins'])
 	libraries = get_yaml_file(files['libraries'])
 	for plugin in plugins['build']:
-		check_plugin(plugin)
-	create_readme_file()
-#	pprint.pprint(plugins)
-#	pprint.pprint(libraries)
-#	pprint.pprint(paths)
-#	pprint.pprint(urls)
-#	pprint.pprint(files)
+		what = SourceModPlugin(plugin)
+#		print(what.files)
 
 # Get YAML file
 def get_yaml_file(yaml_file):
@@ -76,15 +87,203 @@ def get_yaml_file(yaml_file):
 		except yaml.YAMLError as exc:
 			print(exc)
 			sys.exit()
+
+class SourceModPlugin(object):
+
+	def __init__(self,name=None):
+		self.cvars = {}
+		self.todo = {}
+		self.files = defaultdict(list)
+		self.compile = False
+		self.myinfo = {}
+		if not name is None:
+			self.name = name
+		else:
+			self.name = "UNKNOWN"
+		self.get_files()
+		self.process_source()
+		self.process_plugin()
+		self.create_updater_file()
+		self.create_plugin_file()
+
+
+	# Get values from plugin
+	def get_files(self):
+		sp_file = os.path.join(paths['root'],"scripting","%s.sp" % self.name)
+		if not os.path.isfile(sp_file):
+			print("ERROR: Cannot find plugin source file \"%s\"!" % sp_file)
+			return dict()
+		smx_file = os.path.join(paths['root'],"plugins","%s.smx" % self.name)
+		if not os.path.isfile(smx_file):
+			smx_file = os.path.join(paths['root'],"plugins/disabled","%s.smx" % self.name)
+		if not os.path.isfile(smx_file):
+			self.compile = True
+		self.sp_file = sp_file
+		self.smx_file = smx_file
+
+	def process_source(self):
+		with open(self.sp_file, 'r') as stream:
+			try:
+				self.source = stream.read()
+				self.files['scripting'] = os.path.basename(self.sp_file)
+			except:
+				print("Could not load \"%s\"!" % self.sp_file)
+				return
+		for func_type,func_name in {'cvars': 'CreateConVar', 'translations': 'LoadTranslations', 'gamedata': 'LoadGameConfigFile'}.iteritems():
+			for func in re.findall(r"%s\s*\((.*)\);" % func_name, self.source):
+				parts = [p.strip("""'" \t""") for p in func.split(',')]
+				if func_type == 'cvars':
+					self.cvars[parts[0]] = {'value': parts[1], 'desc': parts[2]}
+				else:
+					if not parts[0] in self.files[func_type]:
+						self.files[func_type].append("%s.txt" % parts[0])
+
+		include_ignore = ['adminmenu','regex','sourcemod','updater']
+		for include in re.findall(r"#include[\t ]*<([^>]+)>", self.source):
+			if include in include_ignore or include in self.files['include']:
+				continue
+			self.files['include'].append("%s.inc" % include)
+
+	def process_plugin(self):
+		with open(self.smx_file, 'rb') as fp:
+			try:
+				self.plugin = smx.SourcePawnPlugin(fp)
+				self.files['plugins'] = os.path.basename(self.smx_file)
+			except:
+				print("Could not load \"%s\"!" % self.smx_file)
+				return
+		self.myinfo = self.plugin.myinfo
+
+	# Compile plugin if missing our out of date, default to disabled
+	def check_plugin_compile(self):
+		pass
+
+	def create_updater_file(self):
+		file_dict = vdf.VDFDict()
+		file_dict.clear()
+		for file_type, file_list in self.files.iteritems():
+			fpath = file_type
+			if file_type == "scripting" or file_type == "include":
+				ftype = "Source"
+				if file_type == "include":
+					fpath = "scripting/include"
+			else:
+				ftype = "Plugin"
+			if isinstance(file_list,list):
+				for file in file_list:
+					file_dict[ftype] = ("Path_SM/%s/%s" % (fpath, file))
+			else:
+				file_dict[ftype] = ("Path_SM/%s/%s" % (fpath, file_list))
+		uf = vdf.VDFDict({"Updater": {"Information": {"Notes": self.myinfo["description"], "Version": {"Latest": self.myinfo["version"]}},"Files": file_dict}})
+		fp = open(os.path.join(paths['updater'],"update-%s.txt" % self.name), 'w')
+		update_content = vdf.dump(obj=uf, fp=fp, pretty=True)
+		fp.close()
+
+	def create_plugin_file(self):
+		pass
+if __name__ == "__main__":
+	main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 # Process a plugin
 def check_plugin(plugin):
 	data = get_plugin_data(plugin)
 	check_plugin_compile(plugin,data)
 	create_updater_file(plugin,data)
-	create_dependency_file(plugin,data)
-	create_desc_file(plugin,data)
-	create_todo_file(plugin,data)
-	create_cvar_file(plugin,data)
 	create_plugin_file(plugin,data)
 #	sys.exit()
 
@@ -103,8 +302,8 @@ def get_plugin_data(plugin):
 	return process_plugin(sp_file,smx_file)
 
 def process_plugin(sp_file,smx_file):
-	pprint.pprint(sp_file)
-	pprint.pprint(smx_file)
+#	pprint(sp_file)
+#	pprint(smx_file)
 	with open(sp_file, 'r') as stream:
 		try:
 			source = stream.read()
@@ -121,9 +320,9 @@ def process_plugin(sp_file,smx_file):
 #	p = re.compile("CreateConVar\s*\(.*\)")
 #	print(source)
 #	print(p.match(source).groups())
-#	pprint.pprint(fn_match)
+#	pprint(fn_match)
 #	fn_dict = fn_match.groupdict()
-#	pprint.pprint(fn_dict)
+#	pprint(fn_dict)
 #	sys.exit()
 #	del fn_dict['args']
 #	fn_dict['arg'] = [arg.strip() for arg in fn_dict['arg'].split(',')]
@@ -132,27 +331,19 @@ def process_plugin(sp_file,smx_file):
 
 	with open(smx_file, 'rb') as fp:
 		plugin = smx.SourcePawnPlugin(fp)
-#		pprint.pprint(dir(plugin))
+		pprint(dir(plugin))
 		print 'Loaded %s...' % plugin
-		"""
-		print plugin.base
-		print plugin.extract_from_buffer
-		print plugin.name
-		print plugin.natives
-		print plugin.pcode
-		print plugin.publics
-		"""
-		print plugin.stringbase
-		print plugin.stringtab
-		print plugin.stringtable
-		print plugin.tags
-		print plugin.myinfo
-		for item in plugin.publics:
-			pprint.pprint(item)
-			pprint.pprint(dir(item))
+#'base', 'extract_from_buffer', 'name', 'natives', 'publics', 
+		for field in ['stringbase', 'stringtab', 'stringtable', 'myinfo']:
+			print("plugin.%s: " % (field))
+			pprint(getattr(plugin,field))
+#		for item in plugin.publics:
+#			pprint(item)
+#			pprint(dir(item))
 #			print("%s: %s" % (item.name,item.value))
-		sys.exit()
+#		sys.exit()
 	return ""
+
 # Compile plugin if missing our out of date, default to disabled
 def check_plugin_compile(plugin,data):
 	return ""
@@ -162,34 +353,14 @@ def create_updater_file(plugin,data):
 	updater = KeyValues()
 	template_file = os.path.join(paths['updater'],"_template.txt")
 	updater.load_from_file(template_file)
+	print(template_file)
 	print(updater.kv)
 #	updater.recurse_keyvalues()
 
-# Create Dependency file
-def create_dependency_file(plugin,data):
-	return ""
-
-# Create Description file
-def create_desc_file(plugin,data):
-	return ""
-
-# Create Todo file
-def create_todo_file(plugin,data):
-	return ""
-
-# Create CVAR file
-def create_cvar_file(plugin,data):
-	return ""
-
-# Create Plugin Readme file
 def create_plugin_file(plugin,data):
-	return ""
+	pass
 
-# Create complete README.md
-def create_readme_file():
-	return ""
 
-"""
 #files to update
 doc_path="$( cd "$( dirname "${bash_source[0]}" )" && pwd )"
 
@@ -459,5 +630,3 @@ cat "${doc_path}/include/header.md" "${doc_path}/include/toc.md" "${doc_path}/pl
 
 git add *
 """
-if __name__ == "__main__":
-	main()

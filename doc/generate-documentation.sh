@@ -52,7 +52,7 @@ LIBRARY_IGNORE="updater"
 
 # Add a file to the Updater manifest
 function add_file_to_update() {
-	LINE="${1}"
+	LINE=$(echo "${1}")
 	if [ $(grep -c -i "^${LINE}\$" "${DOC_UPDATER_FILE}") -eq 0 ]
 	then
 		echo "Adding ${LINE} to Files for ${ITEM}"
@@ -73,7 +73,7 @@ done
 echo > "${TOC_FILE}"
 
 #Loop through all files
-for ITEM in $PLUGINS_LIST
+for ITEM in $(echo $PLUGINS_LIST)
 do
 	echo "Processing ${ITEM}"
 
@@ -132,13 +132,13 @@ do
 
 	# Merge items in the updater file and anything we added manually to the plugins/updater text file
 	for LINE in $(egrep '(Plugin|Source)[":]' "${UPDATE}" | tr -d \" | awk '{print $1":"$2}'); do
-		add_file_to_update "${LINE}"
+		add_file_to_update "$(echo $LINE)"
 	done
 # >> "${DOC_UPDATER_FILE}"
 
 	# These are lists of the items that we need to put into the updater
-	add_file_to_update "Plugin:Path_SM/${PLUGIN_PATH/disabled\//}"
-	add_file_to_update "Source:Path_SM/${SCRIPT_PATH}"
+	add_file_to_update "$(echo "Plugin:Path_SM/${PLUGIN_PATH/disabled\//}")"
+	add_file_to_update "($echo "Source:Path_SM/${SCRIPT_PATH}")"
 
 	# Collect CVARs
 	grep CreateConVar "${SCRIPT}" | grep -v '_version"' | sed -e 's/""/NULLSTRING/g' | awk -F'"' -v OFS='' '{ for (i=2; i<=NF; i+=2) gsub(",", ";;", $i) } 1' | cut -d'(' -f2 | sed -e 's/"//g' | awk -F',' '{print $1" "$2" "$3}' | sed -e 's/;;/,/g' | awk '{printf " * \""$1"\" \""$2"\" //"$3;for(i=4;i<=NF;i++){printf " %s", $i}printf "\n"}' | sed -e 's/NULLSTRING//g' > "${DOC_CVAR_FILE}"
@@ -207,8 +207,7 @@ do
 
 	# Get the description from the source script
         NEWDESC=$(grep -i '^#define.*PLUGIN_DESCRIPTION' "${SCRIPT}" | cut -d'"' -f2)
-        if [ "${NEWDESC}" == "" ]
-        then
+        if [ "${NEWDESC}" == "" ]; then
                 NEWDESC=$(grep -m1 -P '^[\s]*description[\s]*=.*"' "${SCRIPT}" | cut -d'"' -f2)
         fi
 

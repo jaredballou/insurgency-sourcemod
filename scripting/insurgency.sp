@@ -1,3 +1,5 @@
+#define PLUGIN_LOG_PREFIX "INSLIB"
+
 #include <sourcemod>
 #include <regex>
 #include <sdktools>
@@ -10,7 +12,6 @@
 
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
-#define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "1.3.5"
