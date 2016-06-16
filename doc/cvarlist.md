@@ -1,4 +1,5 @@
-### [INS] CVAR List 0.0.1
+### cvarlist
+'''[INS] CVAR List 0.0.1'''
 
 Upholder of the [BFG], modified by Jared Ballou (jballou)
 

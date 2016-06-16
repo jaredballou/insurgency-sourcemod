@@ -12,7 +12,8 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/suicide_bomb.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Plugin"	"Path_SM/plugins/suicide_bomb.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+
 	}
 }

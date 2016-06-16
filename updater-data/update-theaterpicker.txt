@@ -12,8 +12,9 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/theaterpicker.sp"
+		"Plugin"	"Path_SM/plugins/theaterpicker.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/smjansson.inc"
-		"Plugin"	"Path_SM/plugins/theaterpicker.smx"
+
 	}
 }

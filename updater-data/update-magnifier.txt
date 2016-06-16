@@ -12,7 +12,8 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/magnifier.sp"
-		"Plugin"	"Path_SM/translations/common.phrases.txt"
 		"Plugin"	"Path_SM/plugins/magnifier.smx"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+
 	}
 }

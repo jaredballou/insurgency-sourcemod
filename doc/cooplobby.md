@@ -1,4 +1,5 @@
-### [INS] Coop Lobby Override 0.0.1
+### cooplobby
+'''[INS] Coop Lobby Override 0.0.1'''
 
 Plugin for overriding Insurgency Coop to 16 players
 

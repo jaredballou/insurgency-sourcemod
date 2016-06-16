@@ -13,5 +13,6 @@
 	{
 		"Source"	"Path_SM/scripting/cvarlist.sp"
 		"Plugin"	"Path_SM/plugins/cvarlist.smx"
+
 	}
 }

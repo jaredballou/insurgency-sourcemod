@@ -1,3 +1,10 @@
+#def ListFiles(data)
+#for $section in $data
+#for $file in $data[$section]
+		"${section}"	"Path_SM/${file}"
+#end for
+#end for
+#end def
 "Updater"
 {
 	"Information"
@@ -11,10 +18,6 @@
 	}
 	"Files"
 	{
-#for $section in $plugin.files
-#for $file in $plugin.files[$section]
-		"${section}"	"Path_SM/${file}"
-#end for
-#end for
+$ListFiles($plugin.files)$ListFiles($plugin.dependencies)
 	}
 }

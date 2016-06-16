@@ -12,7 +12,8 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/ammocheck.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Plugin"	"Path_SM/plugins/ammocheck.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+
 	}
 }

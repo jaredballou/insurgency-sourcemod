@@ -12,7 +12,8 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/rpgdrift.sp"
-		"Source"	"Path_SM/scripting/include/smlib/entities.inc"
 		"Plugin"	"Path_SM/plugins/rpgdrift.smx"
+		"Source"	"Path_SM/scripting/include/smlib/entities.inc"
+
 	}
 }

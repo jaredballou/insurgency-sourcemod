@@ -1,4 +1,5 @@
-### [INS] No Fog 0.0.1
+### nofog
+'''[INS] No Fog 0.0.1'''
 
 Removes fog
 
@@ -7,5 +8,5 @@ Removes fog
 
 #### Dependencies
 #### CVAR List
- * "sm_nofog_enabled" "1" // ${data['description']}
- * "sm_nofog_version" "PLUGIN_VERSION" // ${data['description']}
+ * "sm_nofog_enabled" "1" // $data['description']
+ * "sm_nofog_version" "PLUGIN_VERSION" // $data['description']

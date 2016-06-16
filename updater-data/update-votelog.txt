@@ -12,8 +12,9 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/votelog.sp"
+		"Plugin"	"Path_SM/plugins/votelog.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Plugin"	"Path_SM/plugins/votelog.smx"
+
 	}
 }

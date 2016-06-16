@@ -12,10 +12,11 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/weapon_pickup.sp"
+		"Plugin"	"Path_SM/plugins/weapon_pickup.smx"
 		"Source"	"Path_SM/scripting/include/smlib.inc"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
 		"Plugin"	"Path_SM/gamedata/sdkhooks.games/engine.insurgency.txt"
-		"Plugin"	"Path_SM/plugins/weapon_pickup.smx"
+
 	}
 }

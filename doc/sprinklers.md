@@ -1,4 +1,5 @@
-### [INS] Sprinkler Removal 0.0.3
+### sprinklers
+'''[INS] Sprinkler Removal 0.0.3'''
 
 Plugin for removing Sprinkers
 
@@ -7,5 +8,5 @@ Plugin for removing Sprinkers
 
 #### Dependencies
 #### CVAR List
- * "sm_sprinklers_enabled" "PLUGIN_WORKING" // ${data['description']}
- * "sm_sprinklers_version" "PLUGIN_VERSION" // ${data['description']}
+ * "sm_sprinklers_enabled" "PLUGIN_WORKING" // $data['description']
+ * "sm_sprinklers_version" "PLUGIN_VERSION" // $data['description']

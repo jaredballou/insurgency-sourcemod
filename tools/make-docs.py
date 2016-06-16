@@ -25,22 +25,9 @@ from Cheetah.Template import Template
 sys.path.append("pysmx")
 import smx
 
-# Set variables
-
-# Paths
-root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-#print root
-paths = {
-	'root':		root,
-	'doc':		os.path.join(root,"doc"),
-	'plugins':	os.path.join(root,"plugins"),
-	'scripting':	os.path.join(root,"scripting"),
-	'include':	os.path.join(root,"scripting","include"),
-	'gamedata':	os.path.join(root,"gamedata"),
-	'tools':	os.path.join(root,"tools"),
-	'translations':	os.path.join(root,"translations"),
-	'updater':	os.path.join(root,"updater-data"),
-}
+def getpath(path):
+	root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+	return os.path.join(root,path)
 
 # GitHub URL to pull from
 github_user = "jaredballou"
@@ -52,13 +39,6 @@ urls = {
 	'updater':	"http://ins.jballou.com/sourcemod",
 }
 
-# File paths
-
-files = {
-	'compiler':	os.path.join(paths['scripting'],'spcomp'),
-	'config':	os.path.join(paths['tools'],"config.yaml"),
-	'readme':	os.path.join(paths['root'],"README.md"),
-}
 
 # Get YAML file
 def get_yaml_file(yaml_file):
@@ -68,7 +48,8 @@ def get_yaml_file(yaml_file):
 		except yaml.YAMLError as exc:
 			print(exc)
 			sys.exit()
-config = get_yaml_file(files['config'])
+
+config = get_yaml_file(getpath("tools/config.yaml"))
 
 # Main function
 def main():
@@ -100,13 +81,13 @@ class SourceModPlugin(object):
 
 	# Get values from plugin
 	def get_files(self):
-		sp_file = os.path.join(paths['root'],"scripting","%s.sp" % self.name)
+		sp_file = getpath("scripting/%s.sp" % self.name)
 		if not os.path.isfile(sp_file):
 			print("ERROR: Cannot find plugin source file \"%s\"!" % sp_file)
 			return dict()
-		smx_file = os.path.join(paths['root'],"plugins","%s.smx" % self.name)
+		smx_file = getpath("plugins/%s.smx" % self.name)
 		if not os.path.isfile(smx_file):
-			smx_file = os.path.join(paths['root'],"plugins/disabled","%s.smx" % self.name)
+			smx_file = getpath("plugins/disabled/%s.smx" % self.name)
 		if not os.path.isfile(smx_file):
 			self.compile = True
 		self.sp_file = sp_file
@@ -132,13 +113,16 @@ class SourceModPlugin(object):
 				else:
 					file = "%s/%s.txt" % (func_type, parts[0])
 					if not file in self.files['Plugin']:
-						self.files['Plugin'].append(file)
+						self.dependencies['Plugin'].append(file)
 
 		for include in re.findall(r"#include[\t ]*<([^>]+)>", self.source):
 			incfile = "scripting/include/%s.inc" % include
 			if include in config['libraries']['ignore'] or incfile in self.files['Source']:
 				continue
-			self.files['Source'].append(incfile)
+			if include == self.name:
+				self.files['Source'].append(incfile)
+			else:
+				self.dependencies['Source'].append(incfile)
 
 	def process_plugin(self):
 		with open(self.smx_file, 'rb') as fp:
@@ -155,14 +139,14 @@ class SourceModPlugin(object):
 		pass
 
 	def create_updater_file(self):
-		fp = open(os.path.join(paths['updater'],"update-%s.txt" % self.name), 'w')
+		fp = open(getpath("updater-data/update-%s.txt" % self.name), 'w')
 		tmpl = str(Template ( file = "templates/update.tmpl", searchList = [{ 'plugin': self }] ))
 		fp.write(tmpl)
 		fp.close()
 		return
 
 	def create_plugin_file(self):
-		fp = open(os.path.join(paths['doc'],"%s.md" % self.name), 'w')
+		fp = open(getpath("doc/%s.md" % self.name), 'w')
 		tmpl = str(Template ( file = "templates/plugin.tmpl", searchList = [{ 'plugin': self }] ))
 		fp.write(tmpl)
 		fp.close()

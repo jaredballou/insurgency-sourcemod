@@ -12,9 +12,10 @@
 	"Files"
 	{
 		"Source"	"Path_SM/scripting/score.sp"
+		"Plugin"	"Path_SM/plugins/score.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Plugin"	"Path_SM/translations/common.phrases.txt"
 		"Plugin"	"Path_SM/translations/score.phrases.txt"
-		"Plugin"	"Path_SM/plugins/score.smx"
+
 	}
 }

@@ -1,4 +1,5 @@
-### [INS] Restricted Area Removal 0.0.1
+### restrictedarea
+'''[INS] Restricted Area Removal 0.0.1'''
 
 Plugin for removing Restricted Areas
 
@@ -7,5 +8,5 @@ Plugin for removing Restricted Areas
 
 #### Dependencies
 #### CVAR List
- * "sm_restrictedarea_version" "PLUGIN_VERSION" // ${data['description']}
- * "sm_restrictedarea_enabled" "1" // ${data['description']}
+ * "sm_restrictedarea_version" "PLUGIN_VERSION" // $data['description']
+ * "sm_restrictedarea_enabled" "1" // $data['description']

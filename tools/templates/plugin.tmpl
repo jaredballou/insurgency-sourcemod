@@ -1,4 +1,5 @@
-\#\#\# ${plugin.myinfo["name"]} ${plugin.myinfo["version"]}
+\#\#\# ${plugin.name}
+'''${plugin.myinfo["name"]} ${plugin.myinfo["version"]}'''
 
 ${plugin.myinfo["description"]}
 
@@ -19,13 +20,13 @@ ${plugin.myinfo["description"]}
 #if $plugin.cvars
 \#\#\#\# CVAR List
 #for $cvar,$data in $plugin.cvars.items()
- * "${cvar}" "${data["value"]}"#if $data.has_key('description') then " // ${data['description']}" else ""#
+ * "${cvar}" "${data["value"]}"#if $data.has_key('description') then " // $data['description']" else ""#
 #end for
 #end if
 #if $plugin.commands
 \#\#\#\# Command List
 #for $command,$data in $plugin.commands.items()
- * "${command}"#if $data.has_key('description') then " // ${data['description']}" else ""#
+ * "${command}"#if $data.has_key('description') then " // $data['description']" else ""#
 #end for
 #end if
 #if $plugin.todos
