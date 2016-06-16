@@ -1,0 +1,20 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	"${plugin.myinfo["version"]}"
+		}
+		"Notes"		"${plugin.myinfo["description"]}"
+		"Name"		"${plugin.myinfo["name"]}"
+	}
+	"Files"
+	{
+#for $section in $plugin.files
+#for $file in $plugin.files[$section]
+		"${section}"	"Path_SM/${file}"
+#end for
+#end for
+	}
+}

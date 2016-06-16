@@ -1,0 +1,36 @@
+\#\#\# ${plugin.myinfo["name"]} ${plugin.myinfo["version"]}
+
+${plugin.myinfo["description"]}
+
+#for $section in $plugin.files
+#for $file in $plugin.files[$section]
+ * [$section - ${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
+#end for
+#end for
+
+#if $getVar("plugin.dependencies","")
+\#\#\#\# Dependencies
+#for $section in $plugin.dependencies
+#for $file in $plugin.dependencies[$section]
+ * [$section - ${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
+#end for
+#end for
+#end if
+#if $plugin.cvars
+\#\#\#\# CVAR List
+#for $cvar,$data in $plugin.cvars.items()
+ * "${cvar}" "${data["value"]}"#if $data.has_key('description') then " // ${data['description']}" else ""#
+#end for
+#end if
+#if $plugin.commands
+\#\#\#\# Command List
+#for $command,$data in $plugin.commands.items()
+ * "${command}"#if $data.has_key('description') then " // ${data['description']}" else ""#
+#end for
+#end if
+#if $plugin.todos
+\#\#\#\# ToDo
+#for $todo in $plugin.todos
+ * [ ] ${todo}
+#end for
+#end if

@@ -1,20 +1,20 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/loghelper.inc"
-		"Source" "Path_SM/scripting/include/cstrike.inc"
-		"Source" "Path_SM/scripting/include/clientprefs.inc"
-		"Source" "Path_SM/scripting/hlstatsx.sp"
-		"Plugin" "Path_SM/plugins/hlstatsx.smx"
-	}
 	"Information"
 	{
-		"Notes" "Provides ingame functionality for interaction from an HLstatsX CE installation"
 		"Version"
 		{
-			"Latest" "1.6.19"
+			"Latest"	"1.6.19"
 		}
+		"Notes"		"Provides ingame functionality for interaction from an HLstatsX CE installation"
+		"Name"		"[INS] HLStatsX CE Ingame Plugin"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/hlstatsx.sp"
+		"Source"	"Path_SM/scripting/include/loghelper.inc"
+		"Source"	"Path_SM/scripting/include/cstrike.inc"
+		"Source"	"Path_SM/scripting/include/clientprefs.inc"
+		"Plugin"	"Path_SM/plugins/hlstatsx.smx"
 	}
 }

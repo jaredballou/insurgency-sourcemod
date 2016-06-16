@@ -1,19 +1,19 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/insurgency.inc"
-		"Source" "Path_SM/scripting/include/smjansson.inc"
-		"Source" "Path_SM/scripting/theaterpicker.sp"
-		"Plugin" "Path_SM/plugins/theaterpicker.smx"
-	}
 	"Information"
 	{
-		"Notes" "Allows admins to set theater, and clients to vote"
 		"Version"
 		{
-			"Latest" "0.0.4"
+			"Latest"	"0.0.4"
 		}
+		"Notes"		"Allows admins to set theater, and clients to vote"
+		"Name"		"[INS] Theater Picker"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/theaterpicker.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/smjansson.inc"
+		"Plugin"	"Path_SM/plugins/theaterpicker.smx"
 	}
 }

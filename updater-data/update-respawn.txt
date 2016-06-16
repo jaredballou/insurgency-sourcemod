@@ -1,24 +1,24 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/insurgency.inc"
-		"Source" "Path_SM/scripting/include/cstrike.inc"
-		"Source" "Path_SM/scripting/include/tf2.inc"
-		"Source" "Path_SM/scripting/include/tf2_stocks.inc"
-		"Plugin" "Path_SM/translations/common.phrases.txt"
-		"Plugin" "Path_SM/translations/respawn.phrases.txt"
-		"Plugin" "Path_SM/gamedata/plugin.respawn.txt"
-		"Source" "Path_SM/scripting/respawn.sp"
-		"Plugin" "Path_SM/plugins/respawn.smx"
-	}
 	"Information"
 	{
-		"Notes" "Respawn players"
 		"Version"
 		{
-			"Latest" "1.8.1"
+			"Latest"	"1.8.1"
 		}
+		"Notes"		"Respawn players"
+		"Name"		"[INS] Player Respawn"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/respawn.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/cstrike.inc"
+		"Source"	"Path_SM/scripting/include/tf2.inc"
+		"Source"	"Path_SM/scripting/include/tf2_stocks.inc"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+		"Plugin"	"Path_SM/translations/respawn.phrases.txt"
+		"Plugin"	"Path_SM/gamedata/plugin.respawn.txt"
+		"Plugin"	"Path_SM/plugins/respawn.smx"
 	}
 }

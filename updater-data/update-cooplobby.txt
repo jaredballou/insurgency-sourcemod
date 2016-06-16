@@ -1,16 +1,17 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/cooplobby.sp"
-		"Plugin" "Path_SM/plugins/cooplobby.smx"
-	}
 	"Information"
 	{
-		"Notes" "Plugin for overriding Insurgency Coop to 16 players"
 		"Version"
 		{
-			"Latest" "0.0.1"
+			"Latest"	"0.0.1"
 		}
+		"Notes"		"Plugin for overriding Insurgency Coop to 16 players"
+		"Name"		"[INS] Coop Lobby Override"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/cooplobby.sp"
+		"Plugin"	"Path_SM/plugins/cooplobby.smx"
 	}
 }

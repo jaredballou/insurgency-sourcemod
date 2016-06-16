@@ -1,19 +1,18 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/sdkhooks.inc"
-		"Source" "Path_SM/scripting/include/insurgency.inc"
-		"Source" "Path_SM/scripting/suicide_bomb.sp"
-		"Plugin" "Path_SM/plugins/suicide_bomb.smx"
-	}
 	"Information"
 	{
-		"Notes" "Adds suicide bomb for bots"
 		"Version"
 		{
-			"Latest" "0.0.7"
+			"Latest"	"0.0.7"
 		}
+		"Notes"		"Adds suicide bomb for bots"
+		"Name"		"[INS] Suicide Bombers"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/suicide_bomb.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Plugin"	"Path_SM/plugins/suicide_bomb.smx"
 	}
 }

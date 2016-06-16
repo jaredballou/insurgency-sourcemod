@@ -1,17 +1,18 @@
 "Updater"
 {
-	"Files"
-	{
-		"Plugin" "Path_SM/translations/common.phrases.txt"
-		"Source" "Path_SM/scripting/magnifier.sp"
-		"Plugin" "Path_SM/plugins/magnifier.smx"
-	}
 	"Information"
 	{
-		"Notes" "Adds FOV switch to emulate flip to side magnifiers"
 		"Version"
 		{
-			"Latest" "0.0.1"
+			"Latest"	"0.0.1"
 		}
+		"Notes"		"Adds FOV switch to emulate flip to side magnifiers"
+		"Name"		"[INS] Magnifier"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/magnifier.sp"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+		"Plugin"	"Path_SM/plugins/magnifier.smx"
 	}
 }

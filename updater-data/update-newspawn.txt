@@ -1,17 +1,17 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/newspawn.sp"
-		"Plugin" "Path_SM/plugins/newspawn.smx"
-	}
 	"Information"
 	{
-		"Notes" "New spawning plugin"
 		"Version"
 		{
-			"Latest" "0.0.1"
+			"Latest"	"0.0.1"
 		}
+		"Notes"		"New spawning plugin"
+		"Name"		"[INS] New Spawn"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/newspawn.sp"
+		"Plugin"	"Path_SM/plugins/newspawn.smx"
 	}
 }

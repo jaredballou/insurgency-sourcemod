@@ -1,17 +1,17 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/restrictedarea.sp"
-		"Plugin" "Path_SM/plugins/restrictedarea.smx"
-	}
 	"Information"
 	{
-		"Notes" "Plugin for removing Restricted Areas"
 		"Version"
 		{
-			"Latest" "0.0.1"
+			"Latest"	"0.0.1"
 		}
+		"Notes"		"Plugin for removing Restricted Areas"
+		"Name"		"[INS] Restricted Area Removal"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/restrictedarea.sp"
+		"Plugin"	"Path_SM/plugins/restrictedarea.smx"
 	}
 }

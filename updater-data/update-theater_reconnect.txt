@@ -1,17 +1,17 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/theater_reconnect.sp"
-		"Plugin" "Path_SM/plugins/theater_reconnect.smx"
-	}
 	"Information"
 	{
-		"Notes" "If a player connects with their mp_theater_override set to something other than what the server uses, set the cvar and retonnect them."
 		"Version"
 		{
-			"Latest" "0.0.1"
+			"Latest"	"0.0.1"
 		}
+		"Notes"		"If a player connects with their mp_theater_override set to something other than what the server uses, set the cvar and retonnect them."
+		"Name"		"[INS] Theater Reconnect"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/theater_reconnect.sp"
+		"Plugin"	"Path_SM/plugins/theater_reconnect.smx"
 	}
 }

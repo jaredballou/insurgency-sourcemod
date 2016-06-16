@@ -1,21 +1,21 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/insurgency.inc"
-		"Source" "Path_SM/scripting/include/loghelper.inc"
-		"Plugin" "Path_SM/translations/insurgency.phrases.txt"
-		"Plugin" "Path_SM/gamedata/insurgency.games.txt"
-		"Source" "Path_SM/scripting/insurgency.sp"
-		"Plugin" "Path_SM/plugins/insurgency.smx"
-	}
 	"Information"
 	{
-		"Notes" "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 		"Version"
 		{
-			"Latest" "1.3.5"
+			"Latest"	"1.3.5"
 		}
+		"Notes"		"Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
+		"Name"		"[INS] Insurgency Support Library"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/insurgency.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/loghelper.inc"
+		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
+		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
+		"Plugin"	"Path_SM/plugins/insurgency.smx"
 	}
 }

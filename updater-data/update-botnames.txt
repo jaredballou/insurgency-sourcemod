@@ -1,17 +1,17 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/botnames.sp"
-		"Plugin" "Path_SM/plugins/botnames.smx"
-	}
 	"Information"
 	{
-		"Notes" "Gives automatic names to bots on creation."
 		"Version"
 		{
-			"Latest" "1.0.3"
+			"Latest"	"1.0.3"
 		}
+		"Notes"		"Gives automatic names to bots on creation."
+		"Name"		"[INS] Bot Names"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/botnames.sp"
+		"Plugin"	"Path_SM/plugins/botnames.smx"
 	}
 }

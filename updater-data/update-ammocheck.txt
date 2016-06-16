@@ -1,19 +1,18 @@
 "Updater"
 {
-	"Files"
-	{
-		"Source" "Path_SM/scripting/include/sdktools.inc"
-		"Source" "Path_SM/scripting/include/sdkhooks.inc"
-		"Source" "Path_SM/scripting/include/insurgency.inc"
-		"Source" "Path_SM/scripting/ammocheck.sp"
-		"Plugin" "Path_SM/plugins/ammocheck.smx"
-	}
 	"Information"
 	{
-		"Notes" "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 		"Version"
 		{
-			"Latest" "0.0.7"
+			"Latest"	"0.0.7"
 		}
+		"Notes"		"Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
+		"Name"		"[INS] Ammo Check"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/ammocheck.sp"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Plugin"	"Path_SM/plugins/ammocheck.smx"
 	}
 }
