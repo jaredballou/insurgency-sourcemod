@@ -13,6 +13,5 @@ Shows Bots Left Alive
 #### CVAR List
 
  * "sm_botcount_timer" "60" // Frequency to show count
- * "sm_botcount_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_botcount_enabled" "0" // sets whether bot naming is enabled
 

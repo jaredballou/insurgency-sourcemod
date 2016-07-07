@@ -19,7 +19,6 @@ Respawn players
 
  * "sm_respawn_enabled" "PLUGIN_WORKING" // Enable respawn plugin
  * "sm_respawn_reset_each_round" "1" // Reset player respawn counts each round
- * "sm_respawn_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_respawn_final_counterattack" "0" // Respawn during final counterattack? (0: no
  * "sm_respawn_auto" "0" // Automatically respawn players when they die; 0 - disabled
  * "sm_respawn_delay" "1.0" // How many seconds to delay the respawn

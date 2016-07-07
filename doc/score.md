@@ -13,7 +13,6 @@ Adds a number of new ways to get score, or remove score for players
 
 #### CVAR List
 
- * "sm_score_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_score_enabled" "1" // sets whether score modifier is enabled
 
 #### Command List

@@ -14,5 +14,4 @@ Logs voting events
 #### CVAR List
 
  * "sm_votelog_enabled" "PLUGIN_WORKING" // Enable vote logging
- * "sm_votelog_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 

@@ -11,5 +11,4 @@ Removes fog
 #### CVAR List
 
  * "sm_nofog_enabled" "1" // sets whether bot naming is enabled
- * "sm_nofog_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 

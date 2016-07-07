@@ -12,7 +12,6 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
 #### CVAR List
 
- * "sm_ammocheck_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_ammocheck_attack_delay" "1" // Delay in seconds until next attack when checking ammo
  * "sm_ammocheck_enabled" "1" // sets whether ammo check is enabled
 

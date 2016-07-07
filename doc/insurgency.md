@@ -17,7 +17,6 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
  * "sm_insurgency_class_strip_words" "template training coop security insurgent survival" // Strings to strip out of player class (squad slot) names
  * "sm_insurgency_checkpoint_capture_player_ratio" "0.5" // Fraction of living players required to capture in Checkpoint
- * "sm_insurgency_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_insurgency_infinite_magazine" "0" // Infinite magazine
  * "sm_insurgency_enabled" "PLUGIN_WORKING" // sets whether log fixing is enabled
  * "sm_insurgency_disable_sliding" "0" // 0: do nothing

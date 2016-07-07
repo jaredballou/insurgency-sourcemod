@@ -10,6 +10,5 @@ Plugin for removing Restricted Areas
 
 #### CVAR List
 
- * "sm_restrictedarea_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_restrictedarea_enabled" "1" // sets whether bot naming is enabled
 

@@ -9,7 +9,3 @@ Lists all maps and modes available
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
-#### CVAR List
-
- * "sm_insmaps_version" "PLUGIN_VERSION" // SM Ins Maps Version
-

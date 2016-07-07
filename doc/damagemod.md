@@ -11,7 +11,6 @@ Modifies damage before applying to players
 
 #### CVAR List
 
- * "sm_damagemod_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
  * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
 

@@ -113,6 +113,8 @@ class SourceModPlugin(object):
 			for func in re.findall(r"(%s)\s*\((.*)\);" % func_name, self.source):
 				parts = [p.strip("""'" \t""") for p in func[1].split(',')]
 				if func_type == 'cvars':
+					if parts[0].endswith('_version'):
+						continue
 					self.cvars[parts[0]] = {'value': parts[1], 'description': parts[2]}
 				elif func_type == 'commands':
 					self.commands[parts[0]] = {'function': parts[1]}

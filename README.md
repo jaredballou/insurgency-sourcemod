@@ -42,7 +42,6 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
 #### CVAR List
 
- * "sm_ammocheck_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_ammocheck_attack_delay" "1" // Delay in seconds until next attack when checking ammo
  * "sm_ammocheck_enabled" "1" // sets whether ammo check is enabled
 
@@ -65,7 +64,6 @@ Shows Bots Left Alive
 #### CVAR List
 
  * "sm_botcount_timer" "60" // Frequency to show count
- * "sm_botcount_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_botcount_enabled" "0" // sets whether bot naming is enabled
 
 <a name="botnames">
@@ -84,7 +82,6 @@ Gives automatic names to bots on creation.
  * "sm_botnames_list" "default" // Set list to use for bots
  * "sm_botnames_enabled" "1" // sets whether bot naming is enabled
  * "sm_botnames_suppress" "1" // sets whether to supress join/team change/name change bot messages
- * "sm_botnames_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_botnames_random" "1" // sets whether to randomize names used
  * "sm_botnames_prefix" "" // sets a prefix for bot names (include a trailing space
  * "sm_botnames_announce" "0" // sets whether to announce bots when added
@@ -111,28 +108,27 @@ Adds a number of options and ways to handle bot spawns
 
 #### CVAR List
 
- * "sm_botspawns_enabled" "PLUGIN_WORKING" // Enable enhanced bot spawning features
- * "sm_botspawns_min_spawn_delay" "1" // Min delay in seconds for spawning. Set to 0 for instant.
- * "sm_botspawns_min_fireteam_size" "3" // Min number of bots to spawn per fireteam. Default 3
+ * "sm_botspawns_min_player_distance" "1200" // Min distance from players to spawn
  * "sm_botspawns_spawn_mode" "0" // Only normal spawnpoints at the objective
  * "sm_botspawns_counterattack_finale_infinite" "0" // Obey sm_botspawns_counterattack_respawn_mode (0)
- * "sm_botspawns_counterattack_mode" "0" // Do not alter default game spawning during counterattacks (0)
- * "sm_botspawns_max_fireteam_size" "5" // Max number of bots to spawn per fireteam. Default 5
- * "sm_botspawns_total_spawn_frac" "1.75" // Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard
  * "sm_botspawns_spawn_attack_delay" "10" // Delay in seconds for spawning bots to wait before firing.
+ * "sm_botspawns_remove_unseen_when_capping" "1" // Silently kill off all unseen bots when capping next point (1
+ * "sm_botspawns_counterattack_mode" "0" // Do not alter default game spawning during counterattacks (0)
+ * "sm_botspawns_total_spawn_frac" "1.75" // Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard
  * "sm_botspawns_spawn_snipers_alone" "1" // Spawn snipers alone
+ * "sm_botspawns_min_spawn_delay" "1" // Min delay in seconds for spawning. Set to 0 for instant.
+ * "sm_botspawns_max_fireteam_size" "5" // Max number of bots to spawn per fireteam. Default 5
+ * "sm_botspawns_min_objective_distance" "1" // Min distance from next objective to spawn
+ * "sm_botspawns_counterattack_frac" "0.5" // Multiplier to total bots for spawning in counterattack wave
  * "sm_botspawns_max_objective_distance" "12000" // Max distance from next objective to spawn
  * "sm_botspawns_max_player_distance" "16000" // Max distance from players to spawn
  * "sm_botspawns_max_spawn_delay" "30" // Max delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_counterattack_distance" "3600" // Min distance from counterattack objective to spawn
- * "sm_botspawns_min_player_distance" "1200" // Min distance from players to spawn
- * "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1
- * "sm_botspawns_remove_unseen_when_capping" "1" // Silently kill off all unseen bots when capping next point (1
- * "sm_botspawns_min_objective_distance" "1" // Min distance from next objective to spawn
- * "sm_botspawns_counterattack_frac" "0.5" // Multiplier to total bots for spawning in counterattack wave
- * "sm_botspawns_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
+ * "sm_botspawns_enabled" "PLUGIN_WORKING" // Enable enhanced bot spawning features
  * "sm_botspawns_max_frac_in_game" "1" // Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
  * "sm_botspawns_min_frac_in_game" "0.75" // Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
+ * "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1
+ * "sm_botspawns_min_fireteam_size" "3" // Min number of bots to spawn per fireteam. Default 3
 
 <a name="cooplobby">
 ### Coop Lobby Override 0.0.1
@@ -174,7 +170,6 @@ Modifies damage before applying to players
 
 #### CVAR List
 
- * "sm_damagemod_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
  * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
 
@@ -192,7 +187,6 @@ Adds a drop command
 #### CVAR List
 
  * "sm_dropweapon_enabled" "PLUGIN_WORKING" // sets whether weapon dropping is enabled
- * "sm_dropweapon_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 #### Command List
 
@@ -212,7 +206,6 @@ Log events to client or server
 #### CVAR List
 
  * "sm_events_prefix" "sPrefix" // What to prefix on event messages
- * "sm_events_version" "PLUGIN_VERSION" // Version of Event Info on this server
 
 #### Command List
 
@@ -240,12 +233,10 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 #### CVAR List
 
- * "hlxce_version" "" // HLstatsX:CE
- * "hlxce_plugin_version" "PLUGIN_VERSION" // HLstatsX:CE Ingame Plugin
  * "hlx_block_commands" "1" // If activated HLstatsX commands are blocked from the chat area
  * "hlx_protect_address" "" // Address to be protected for logging/forwarding
- * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
  * "hlxce_webpage" "http://www.hlxcommunity.com" // http://www.hlxcommunity.com
+ * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
 
 #### Command List
 
@@ -278,10 +269,6 @@ Lists all maps and modes available
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
-#### CVAR List
-
- * "sm_insmaps_version" "PLUGIN_VERSION" // SM Ins Maps Version
-
 <a name="insurgency">
 ### [INS] Insurgency Support Library 1.3.5
 
@@ -301,7 +288,6 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
  * "sm_insurgency_class_strip_words" "template training coop security insurgent survival" // Strings to strip out of player class (squad slot) names
  * "sm_insurgency_checkpoint_capture_player_ratio" "0.5" // Fraction of living players required to capture in Checkpoint
- * "sm_insurgency_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_insurgency_infinite_magazine" "0" // Infinite magazine
  * "sm_insurgency_enabled" "PLUGIN_WORKING" // sets whether log fixing is enabled
  * "sm_insurgency_disable_sliding" "0" // 0: do nothing
@@ -322,10 +308,9 @@ Adds FOV switch to emulate flip to side magnifiers
 
 #### CVAR List
 
- * "sm_magnifier_version" "PLUGIN_VERSION" // version
+ * "sm_magnifier_adminflag" "0" // Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....
  * "sm_magnifier_zoom" "60" // zoom level for magnifier
  * "sm_magnifier_shots" "0" // Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.
- * "sm_magnifier_adminflag" "0" // Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....
 
 #### Command List
 
@@ -344,7 +329,6 @@ Removes fog
 #### CVAR List
 
  * "sm_nofog_enabled" "1" // sets whether bot naming is enabled
- * "sm_nofog_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 <a name="respawn">
 ### [INS] Player Respawn 1.8.1
@@ -367,7 +351,6 @@ Respawn players
 
  * "sm_respawn_enabled" "PLUGIN_WORKING" // Enable respawn plugin
  * "sm_respawn_reset_each_round" "1" // Reset player respawn counts each round
- * "sm_respawn_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_respawn_final_counterattack" "0" // Respawn during final counterattack? (0: no
  * "sm_respawn_auto" "0" // Automatically respawn players when they die; 0 - disabled
  * "sm_respawn_delay" "1.0" // How many seconds to delay the respawn
@@ -393,7 +376,6 @@ Plugin for removing Restricted Areas
 
 #### CVAR List
 
- * "sm_restrictedarea_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_restrictedarea_enabled" "1" // sets whether bot naming is enabled
 
 <a name="rpgdrift">
@@ -413,7 +395,6 @@ Adjusts behavior of RPG rounds
  * "sm_rpgdrift_always_bots" "1" // Always affect bot-fired rockets
  * "sm_rpgdrift_chance" "0.25" // Chance as a fraction of 1 that a player-fired rocket will be affected
  * "sm_rpgdrift_amount" "2.0" // Sets RPG drift max change per tick
- * "sm_rpgdrift_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 <a name="score">
 ### [INS] Score Modifiers 0.0.1
@@ -430,7 +411,6 @@ Adds a number of new ways to get score, or remove score for players
 
 #### CVAR List
 
- * "sm_score_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_score_enabled" "1" // sets whether score modifier is enabled
 
 #### Command List
@@ -450,7 +430,6 @@ Plugin for removing Sprinkers
 #### CVAR List
 
  * "sm_sprinklers_enabled" "PLUGIN_WORKING" // Set to 1 to remove sprinklers. 0 leaves them alone.
- * "sm_sprinklers_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 <a name="suicide_bomb">
 ### [INS] Suicide Bombers 0.0.7
@@ -468,7 +447,6 @@ Adds suicide bomb for bots
  * "sm_suicidebomb_auto_detonate_range" "0" // Range at which to automatically set off the bomb (0 is disabled)
  * "sm_suicidebomb_" "" // 
  * "sm_suicidebomb_player_classes" "sapper bomber suicide" // Player classes to apply suicide bomber changes to
- * "sm_suicidebomb_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_suicidebomb_enabled" "0" // sets whether suicide bombs are enabled
  * "sm_suicidebomb_spawn_delay" "30" // Do not detonate if player has been alive less than this many seconds
  * "sm_suicidebomb_auto_detonate_count" "2" // Do not detonate until this many enemies are in range
@@ -489,7 +467,6 @@ If a player connects with their mp_theater_override set to something other than 
 
 #### CVAR List
 
- * "sm_theater_reconnect_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_theater_reconnect_enabled" "1" // sets whether theater reconnect is enabled
 
 <a name="theaterpicker">
@@ -507,7 +484,6 @@ Allows admins to set theater, and clients to vote
 #### CVAR List
 
  * "sm_theaterpicker_file" "PLUGIN_VERSION" // Custom theater file name
- * "sm_theaterpicker_version" "PLUGIN_VERSION" // Theater picker version
  * "sm_theaterpicker_config" "PLUGIN_VERSION" // Custom theater file name
 
 <a name="votelog">
@@ -526,7 +502,6 @@ Logs voting events
 #### CVAR List
 
  * "sm_votelog_enabled" "PLUGIN_WORKING" // Enable vote logging
- * "sm_votelog_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 <a name="weapon_pickup">
 ### [INS] Weapon Pickup 0.1.0
@@ -544,11 +519,10 @@ Weapon Pickup logic for manipulating player inventory
 
 #### CVAR List
 
- * "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
  * "sm_weapon_pickup_ammo" "1" // sets whether picking up a weapon the player already has will add to the player's ammo count
- * "sm_weapon_pickup_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
- * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" // sets whether weapon pickup manipulation is enabled
  * "sm_weapon_pickup_max_explosive" "3" // Maximum number of ammo that can be carried for explosives
+ * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" // sets whether weapon pickup manipulation is enabled
+ * "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
 
 #### Command List
 

@@ -13,12 +13,10 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 #### CVAR List
 
- * "hlxce_version" "" // HLstatsX:CE
- * "hlxce_plugin_version" "PLUGIN_VERSION" // HLstatsX:CE Ingame Plugin
  * "hlx_block_commands" "1" // If activated HLstatsX commands are blocked from the chat area
  * "hlx_protect_address" "" // Address to be protected for logging/forwarding
- * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
  * "hlxce_webpage" "http://www.hlxcommunity.com" // http://www.hlxcommunity.com
+ * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
 
 #### Command List
 

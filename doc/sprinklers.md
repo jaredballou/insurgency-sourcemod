@@ -11,5 +11,4 @@ Plugin for removing Sprinkers
 #### CVAR List
 
  * "sm_sprinklers_enabled" "PLUGIN_WORKING" // Set to 1 to remove sprinklers. 0 leaves them alone.
- * "sm_sprinklers_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 

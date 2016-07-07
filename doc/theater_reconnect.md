@@ -10,6 +10,5 @@ If a player connects with their mp_theater_override set to something other than 
 
 #### CVAR List
 
- * "sm_theater_reconnect_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_theater_reconnect_enabled" "1" // sets whether theater reconnect is enabled
 

@@ -14,11 +14,10 @@ Weapon Pickup logic for manipulating player inventory
 
 #### CVAR List
 
- * "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
  * "sm_weapon_pickup_ammo" "1" // sets whether picking up a weapon the player already has will add to the player's ammo count
- * "sm_weapon_pickup_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
- * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" // sets whether weapon pickup manipulation is enabled
  * "sm_weapon_pickup_max_explosive" "3" // Maximum number of ammo that can be carried for explosives
+ * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" // sets whether weapon pickup manipulation is enabled
+ * "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
 
 #### Command List
 

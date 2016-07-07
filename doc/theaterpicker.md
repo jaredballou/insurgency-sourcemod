@@ -13,6 +13,5 @@ Allows admins to set theater, and clients to vote
 #### CVAR List
 
  * "sm_theaterpicker_file" "PLUGIN_VERSION" // Custom theater file name
- * "sm_theaterpicker_version" "PLUGIN_VERSION" // Theater picker version
  * "sm_theaterpicker_config" "PLUGIN_VERSION" // Custom theater file name
 

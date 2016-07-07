@@ -12,7 +12,6 @@ Log events to client or server
 #### CVAR List
 
  * "sm_events_prefix" "sPrefix" // What to prefix on event messages
- * "sm_events_version" "PLUGIN_VERSION" // Version of Event Info on this server
 
 #### Command List
 

@@ -12,7 +12,6 @@ Adds a drop command
 #### CVAR List
 
  * "sm_dropweapon_enabled" "PLUGIN_WORKING" // sets whether weapon dropping is enabled
- * "sm_dropweapon_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
 
 #### Command List
 
