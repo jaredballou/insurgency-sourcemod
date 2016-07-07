@@ -1,17 +1,18 @@
-### botnames
-'''[INS] Bot Names 1.0.3'''
-
+<a name="botnames">
+### Bot Names 1.0.3
 Gives automatic names to bots on creation.
-
  * [Source - scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
  * [Plugin - plugins/botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
-
 #### Dependencies
+ * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 #### CVAR List
- * "sm_botnames_list" "default" // $data['description']
- * "sm_botnames_enabled" "1" // $data['description']
- * "sm_botnames_suppress" "1" // $data['description']
- * "sm_botnames_version" "PLUGIN_VERSION" // $data['description']
- * "sm_botnames_random" "1" // $data['description']
- * "sm_botnames_prefix" "" // $data['description']
- * "sm_botnames_announce" "0" // $data['description']
+ * "sm_botnames_list" "default" // Set list to use for bots
+ * "sm_botnames_enabled" "1" // sets whether bot naming is enabled
+ * "sm_botnames_suppress" "1" // sets whether to supress join/team change/name change bot messages
+ * "sm_botnames_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
+ * "sm_botnames_random" "1" // sets whether to randomize names used
+ * "sm_botnames_prefix" "" // sets a prefix for bot names (include a trailing space
+ * "sm_botnames_announce" "0" // sets whether to announce bots when added
+#### Command List
+ * "sm_botnames_reload"
+ * "sm_botnames_rename_all"

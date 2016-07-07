@@ -1,0 +1,19 @@
+<a name="events">
+### Event Logger 0.0.1
+Log events to client or server
+ * [Source - scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
+ * [Plugin - plugins/events.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/events.smx?raw=true)
+#### Dependencies
+ * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
+#### CVAR List
+ * "sm_events_prefix" "sPrefix" // What to prefix on event messages
+ * "sm_events_version" "PLUGIN_VERSION" // Version of Event Info on this server
+#### Command List
+ * "sm_events_keylistentoall" // Start listening to all event keys
+ * "sm_events_stoplisten" // Stop listening to all events and keys
+ * "sm_events_listkeys" // List all keys for an event
+ * "sm_events_listevents" // List all hooked events
+ * "sm_events_searchevents" // Search for events
+ * "sm_events_keylisten" // Start or stop listening to an event's keys
+ * "sm_events_listentoall" // Start listening to all events
+ * "sm_events_listen" // Start or stop listening to an event

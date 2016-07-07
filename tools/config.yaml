@@ -23,12 +23,11 @@ plugins:
     - cvarlist
     - damagemod
     - dropweapon
+    - events
     - hlstatsx
     - insmaps
     - insurgency
     - magnifier
-    - navmesh-export
-    - navmesh
     - nofog
     - respawn
     - restrictedarea
@@ -44,6 +43,8 @@ plugins:
   nobuild:
     - backblast
     - navmesh-chat
+    - navmesh-export
+    - navmesh
     - looting
     - noobj
     - pistolsonly

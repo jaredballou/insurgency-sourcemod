@@ -4,10 +4,10 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"	"0.0.2"
 		}
 		"Notes"		"Logs voting events"
-		"Name"		"[INS] Vote Logging"
+		"Name"		"Vote Logging"
 	}
 	"Files"
 	{
@@ -15,6 +15,7 @@
 		"Plugin"	"Path_SM/plugins/votelog.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/loghelper.inc"
+		"Source"	"Path_SM/scripting/include/myinfo.inc"
 
 	}
 }

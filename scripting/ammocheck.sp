@@ -1,8 +1,9 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
+
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define PLUGIN_NAME "Ammo Check"
-#define PLUGIN_VERSION "0.0.7"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_FILE "ammocheck"
 #define PLUGIN_LOG_PREFIX "AMMOCHECK"
@@ -22,14 +23,29 @@ new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:h_AmmoTimers[MAXPLAYERS+1];
 new i_TimerWeapon[MAXPLAYERS+1];
+
+
+new Handle:cvarAttackDelay = INVALID_HANDLE; //Attack delay for spawning bots
+new m_flNextPrimaryAttack, m_flNextSecondaryAttack;
+
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_ammocheck_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	RegConsoleCmd("check_ammo", Command_Check_Ammo);
+
+	cvarAttackDelay = CreateConVar("sm_ammocheck_attack_delay", "1", "Delay in seconds until next attack when checking ammo", FCVAR_NOTIFY | FCVAR_PLUGIN);
+
+	RegConsoleCmd("check_ammo", Command_Check_Ammo, "Check ammo of the current weapon");
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
-	PrintToServer("[AMMOCHECK] Started!");
+	if ((m_flNextPrimaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
+		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextPrimaryAttack\" !");
+	}
+
+	if ((m_flNextSecondaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
+		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
+	}
+
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);
@@ -74,13 +90,11 @@ public CreateAmmoTimer(client,ActiveWeapon)
 {
 	KillAmmoTimer(client);
 	i_TimerWeapon[client] = ActiveWeapon;
-	new Float:timedone = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
-	//PrintToServer("[AMMOCHECK] Reload Timer Started with %f time is %f timer is %f!",timedone,GetGameTime(),(timedone-GetGameTime()));
-	h_AmmoTimers[client] = CreateTimer((timedone-GetGameTime())+0.5, Timer_Check_Ammo, client);
+	float flNextPrimaryAttack = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
+	h_AmmoTimers[client] = CreateTimer((flNextPrimaryAttack-GetGameTime())+0.5, Timer_Check_Ammo, client);
 }
 public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	//PrintToServer("[AMMOCHECK] Event_WeaponReload! name %s",name);
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	if(!IsClientInGame(client))
 		return Plugin_Continue;
@@ -93,43 +107,58 @@ public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBro
 
 public Action:Timer_Check_Ammo(Handle:event, any:client)
 {
-	//PrintToServer("[AMMOCHECK] Reload timer finished!");
 	Check_Ammo(client);
 	return Plugin_Stop;
 }
 
 public Action:Command_Check_Ammo(client, args)
 {
-	return Check_Ammo(client);
+	if (CheckAndSetAttackDelay(client)) {
+		return Check_Ammo(client);
+	}
+	return Plugin_Continue;
 }
-public Action:Check_Ammo(client)
-{
-	//PrintToServer("[AMMOCHECK] Check_Ammo!");
-	if (!GetConVarBool(cvarEnabled))
-	{
-		KillAmmoTimer(client);
-		return Plugin_Handled;
-	}
+float CheckAndSetAttackDelay(client) {
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-	if (ActiveWeapon < 0)
-	{
+	if (ActiveWeapon < 0) {
+		return 0.0;
+	}
+	// Don't allow checking if next attack time is in the future
+	float flNextPrimaryAttack = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
+	float flNextSecondaryAttack = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextSecondaryAttack");
+	if (flNextPrimaryAttack > GetGameTime() || flNextSecondaryAttack > GetGameTime()){
+		return 0.0;
+	}
+	float flDelay = GetGameTime() + GetConVarFloat(cvarAttackDelay);
+	SetEntDataFloat(ActiveWeapon, m_flNextPrimaryAttack, flDelay);
+	SetEntDataFloat(ActiveWeapon, m_flNextSecondaryAttack, flDelay);
+	return flDelay;
+}
+public Action:Check_Ammo(client) {
+	if (!GetConVarBool(cvarEnabled)) {
 		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
-	if ((i_TimerWeapon[client]) && (i_TimerWeapon[client] != ActiveWeapon))
-	{
+	// Don't run if no active weapon
+	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
+	if (ActiveWeapon < 0) {
 		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
+
+	// Don't run if the active weapon doesn't match the timer
+	if ((i_TimerWeapon[client]) && (i_TimerWeapon[client] != ActiveWeapon)) {
+		KillAmmoTimer(client);
+		return Plugin_Handled;
+	}
+
 	new maxammo = Ins_GetWeaponGetMaxClip1(ActiveWeapon);
 	new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
-	if (maxammo <= 2) //Don't do it if we have a small magazine, usually means single shot weapon
-	{
+	//Don't do it if we have a small magazine, usually means single shot weapon
+	if (maxammo <= 2) {
 		KillAmmoTimer(client);
 		return Plugin_Handled;
 	}
-	//PrintHintText(client, "sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
-	//PrintToServer("[AMMOCHECK] sWeapon %s ActiveWeapon %d ammo %d maxammo %d",sWeapon,ActiveWeapon,ammo,maxammo);
 	if (ammo >= maxammo) {
 		PrintHintText(client, "Mag is full");
 	} else if (ammo > (maxammo * 0.85)) {
@@ -147,14 +176,11 @@ public Action:Check_Ammo(client)
 	return Plugin_Handled;
 }
 
-public OnClientPutInServer(client)
-{
+public OnClientPutInServer(client) {
 	SDKHook(client, SDKHook_WeaponEquip, Weapon_Equip);
 }
 
-public Action:Weapon_Equip(client, weapon)
-{
-	//PrintToServer("[AMMOCHECK] Weapon_Equip!");
+public Action:Weapon_Equip(client, weapon) {
 	Check_Ammo(client);
 	return Plugin_Continue;
 }

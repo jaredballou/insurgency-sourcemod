@@ -14,6 +14,7 @@
 		"Source"	"Path_SM/scripting/botcount.sp"
 		"Plugin"	"Path_SM/plugins/botcount.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
+		"Source"	"Path_SM/scripting/include/myinfo.inc"
 
 	}
 }

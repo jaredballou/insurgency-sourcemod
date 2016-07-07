@@ -6,13 +6,13 @@
 		{
 			"Latest"	"0.0.1"
 		}
-		"Notes"		"CVAR and command list dumper"
-		"Name"		"CVAR List"
+		"Notes"		"Log events to client or server"
+		"Name"		"Event Logger"
 	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/cvarlist.sp"
-		"Plugin"	"Path_SM/plugins/cvarlist.smx"
+		"Source"	"Path_SM/scripting/events.sp"
+		"Plugin"	"Path_SM/plugins/events.smx"
 		"Source"	"Path_SM/scripting/include/myinfo.inc"
 
 	}

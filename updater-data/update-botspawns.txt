@@ -7,7 +7,7 @@
 			"Latest"	"0.4.0"
 		}
 		"Notes"		"Adds a number of options and ways to handle bot spawns"
-		"Name"		"[INS] Bot Spawns"
+		"Name"		"Bot Spawns"
 	}
 	"Files"
 	{
@@ -16,6 +16,7 @@
 		"Source"	"Path_SM/scripting/include/smlib.inc"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/navmesh.inc"
+		"Source"	"Path_SM/scripting/include/myinfo.inc"
 		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
 
 	}

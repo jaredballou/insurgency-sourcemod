@@ -51,11 +51,19 @@ def get_yaml_file(yaml_file):
 
 config = get_yaml_file(getpath("tools/config.yaml"))
 
+def create_readme(plugins):
+	sortedKeys = sorted(plugins.keys())
+	fp = open(getpath("README.md"), 'w')
+	tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': plugins, 'sortedKeys': sortedKeys }] ))
+	fp.write(tmpl)
+	fp.close()
+
 # Main function
 def main():
+	plugins = {}
 	for name in config['plugins']['build']:
-		plugin = SourceModPlugin(name)
-
+		plugins[name] = SourceModPlugin(name)
+	create_readme(plugins)
 
 class SourceModPlugin(object):
 
@@ -101,15 +109,19 @@ class SourceModPlugin(object):
 			except:
 				print("Could not load \"%s\"!" % self.sp_file)
 				return
-		for func_type,func_name in {'commands': 'RegConsoleCmd', 'cvars': 'CreateConVar', 'translations': 'LoadTranslations', 'gamedata': 'LoadGameConfigFile'}.iteritems():
-			for func in re.findall(r"%s\s*\((.*)\);" % func_name, self.source):
-				parts = [p.strip("""'" \t""") for p in func.split(',')]
+		for func_type,func_name in {'commands': 'Reg[A-Za-z]*Cmd', 'cvars': 'CreateConVar', 'translations': 'LoadTranslations', 'gamedata': 'LoadGameConfigFile'}.iteritems():
+			for func in re.findall(r"(%s)\s*\((.*)\);" % func_name, self.source):
+				parts = [p.strip("""'" \t""") for p in func[1].split(',')]
 				if func_type == 'cvars':
 					self.cvars[parts[0]] = {'value': parts[1], 'description': parts[2]}
 				elif func_type == 'commands':
 					self.commands[parts[0]] = {'function': parts[1]}
-					if len(parts) > 2:
-						self.commands[parts[0]]["description"] = parts[2]
+					if func[0] == 'RegAdminCmd':
+						desc_idx = 3
+					else:
+						desc_idx = 2
+					if len(parts) > desc_idx:
+						self.commands[parts[0]]["description"] = parts[desc_idx]
 				else:
 					file = "%s/%s.txt" % (func_type, parts[0])
 					if not file in self.files['Plugin']:

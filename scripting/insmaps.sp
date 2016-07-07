@@ -74,14 +74,12 @@ ReadMapFile(String:sFileName[],String:sMap[]){
 	}
 
 	PushArrayString(g_aMaps, sMap);
-	do
-	{
+	do {
 		KvGetSectionName(kv, sGameMode, sizeof(sGameMode));
 		Format(sBuffer, sizeof(sBuffer), "%s %s",sMap,sGameMode);
 		PushArrayString(g_aMapList,sBuffer);
 		PrintToServer("[INSMAPS] Map %s file %s gamemode %s",sMap,sFileName,sGameMode);
-	}
-	while(KvGotoNextKey(kv))
+	} while(KvGotoNextKey(kv))
 }
 
 ReadFileFolder(String:sPath[],bool:bRecurse=false){
