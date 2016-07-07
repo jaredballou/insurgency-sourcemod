@@ -315,7 +315,7 @@ native Float:NavMeshLadder_GetLength(iLadderID);
 
 
 // Shortest-path cost function for NavMesh_BuildPath.
-public NavMeshShortestPathCost(iAreaIndex, iFromAreaIndex, iLadderIndex, any:data)
+stock NavMeshShortestPathCost(iAreaIndex, iFromAreaIndex, iLadderIndex, any:data)
 {
 	if (iFromAreaIndex == -1)
 	{

@@ -4,7 +4,7 @@
 #define PLUGIN_NAME "Bot Spawns"
 #define PLUGIN_VERSION "0.4.0"
 #define PLUGIN_WORKING "0"
-#define PLUGIN_FILE "botspawns"
+#define PLUGIN_FILE botspawns
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
 
 #pragma semicolon 1
@@ -236,9 +236,9 @@ public OnMapStart()
 	RestartBotQueue();
 	return;
 }
-
+/*
 public GetHidingSpots() {
-	if (!NavMesh_Exists()) return;
+	if (!LibraryExists("navmesh")) return;
 	if (g_hHidingSpots == INVALID_HANDLE) g_hHidingSpots = NavMesh_GetHidingSpots();
 	g_iHidingSpotCount = GetArraySize(g_hHidingSpots);
 	new Float:flHidingSpot[3];//, iHidingSpotFlags;
@@ -283,7 +283,7 @@ Float:GetHidingSpotVector(iSpot) {
 	flHidingSpot[2] = GetArrayCell(g_hHidingSpots, iSpot, NavMeshHidingSpot_Z);
 	return flHidingSpot;
 }
-
+*/
 CheckSpawnPoint(Float:vecSpawn[3],client) {
 //Ins_InCounterAttack
 	new m_iTeam = GetClientTeam(client);
@@ -331,7 +331,7 @@ CheckSpawnPoint(Float:vecSpawn[3],client) {
 	}
 	return 1;
 }
-
+/*
 float GetSpawnPoint_HidingSpot(client,iteration=0) {
 	float vecSpawn[3];
 	float vecOrigin[3];
@@ -360,7 +360,7 @@ float GetSpawnPoint_HidingSpot(client,iteration=0) {
 	InsLog(DEBUG,"Running second iteration for hiding spot %N (%d)", client, client);
 	return GetSpawnPoint_HidingSpot(client,1);
 }
-
+*/
 float GetSpawnPoint_SpawnPoint(client) {
 	int m_iTeam = GetClientTeam(client);
 	int m_iTeamNum;
@@ -504,11 +504,13 @@ public TeleportClient(client) {
 
 float GetSpawnPoint(client) {
 	new Float:vecSpawn[3];
+/*
 	if ((g_iHidingSpotCount) && (g_iSpawnMode == _:SpawnMode_HidingSpots)) {
 		vecSpawn = GetSpawnPoint_HidingSpot(client);
 	} else {
+*/
 		vecSpawn = GetSpawnPoint_SpawnPoint(client);
-	}
+//	}
 	InsLog(DEBUG, "Could not find spawn point for %N (%d)", client, client);
 	return vecSpawn;
 }

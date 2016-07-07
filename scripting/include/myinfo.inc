@@ -20,10 +20,12 @@
 #define PLUGIN_LOG_PREFIX "INS"
 #endif
 #if !defined PLUGIN_FILE
-#define PLUGIN_FILE "newplugin"
+#define PLUGIN_FILE newplugin
+#endif
+#if !defined UPDATE_URL_FORMAT
+#define UPDATE_URL_FORMAT(%1)    "http://ins.jballou.com/sourcemod/update-%1.txt"
 #endif
 #if !defined UPDATE_URL
-#define UPDATE_URL_FORMAT(%1)    "http://ins.jballou.com/sourcemod/update-%1.txt"
 #define UPDATE_URL UPDATE_URL_FORMAT(PLUGIN_FILE)
 #endif
 
