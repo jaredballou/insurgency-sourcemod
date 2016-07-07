@@ -10,22 +10,13 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Plugin for overriding Insurgency Coop to 16 players"
-#define PLUGIN_NAME "[INS] Coop Lobby Override"
-#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_NAME "Coop Lobby Override"
 #define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_WORKING 1
-
-public Plugin:myinfo = {
-	name		= PLUGIN_NAME,
-	author		= PLUGIN_AUTHOR,
-	description	= PLUGIN_DESCRIPTION,
-	version		= PLUGIN_VERSION,
-	url		= PLUGIN_URL
-};
-
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-cooplobby.txt"
+#define PLUGIN_WORKING "1"
+#define PLUGIN_FILE "cooplobby"
+#define PLUGIN_LOG_PREFIX "COOPLOBBY"
+#include <myinfo>
 
 public OnPluginStart()
 {

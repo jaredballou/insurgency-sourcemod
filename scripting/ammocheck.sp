@@ -1,5 +1,11 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
+#define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
+#define PLUGIN_NAME "Ammo Check"
+#define PLUGIN_VERSION "0.0.7"
+#define PLUGIN_WORKING "1"
+#define PLUGIN_FILE "ammocheck"
+#define PLUGIN_LOG_PREFIX "AMMOCHECK"
 
 #pragma semicolon 1
 #pragma unused cvarVersion
@@ -10,22 +16,7 @@
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
-
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
-#define PLUGIN_NAME "[INS] Ammo Check"
-#define PLUGIN_VERSION "0.0.7"
-#define PLUGIN_URL "http://jballou.com/"
-#define PLUGIN_WORKING 1
-
-public Plugin:myinfo = {
-	name		= PLUGIN_NAME,
-	author		= PLUGIN_AUTHOR,
-	description	= PLUGIN_DESCRIPTION,
-	version		= PLUGIN_VERSION,
-	url		= PLUGIN_URL
-};
+#include <myinfo>
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

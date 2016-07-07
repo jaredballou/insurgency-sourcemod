@@ -1,3 +1,8 @@
+#define PLUGIN_DESCRIPTION "Logs voting events"
+#define PLUGIN_NAME "Vote Logging"
+#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_WORKING "1"
+#define PLUGIN_FILE "votelog"
 #define PLUGIN_LOG_PREFIX "VOTE"
 
 #include <sourcemod>
@@ -5,26 +10,11 @@
 #include <loghelper>
 #undef REQUIRE_PLUGIN
 #include <updater>
+
+#include <myinfo>
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Logs voting events"
-#define PLUGIN_NAME "[INS] Vote Logging"
-#define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_WORKING "1"
-
-public Plugin:myinfo = {
-	name		= PLUGIN_NAME,
-	author		= PLUGIN_AUTHOR,
-	description	= PLUGIN_DESCRIPTION,
-	version		= PLUGIN_VERSION,
-	url		= PLUGIN_URL
-};
-
-
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-votelog.txt"
 
 #define INS
 
@@ -32,7 +22,7 @@ new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart() {
 	cvarVersion = CreateConVar("sm_votelog_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_votelog_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarEnabled = CreateConVar("sm_votelog_enabled", PLUGIN_WORKING, "Enable vote logging", FCVAR_NOTIFY | FCVAR_PLUGIN);
 	InsLog(DEBUG,"Starting");
 	HookEvent("vote_started", Event_vote_started);
 	HookEvent("vote_changed", Event_vote_changed);
@@ -131,3 +121,4 @@ public Action:Event_vote_options(Handle:event, const String:name[], bool:dontBro
 	LogToGame("[EVENT] triggered \"vote_options\" count \"%d\" option4 \"%s\" option5 \"%s\" option2 \"%s\" option3 \"%s\" option1 \"%s\"", i_count, i_option4, i_option5, i_option2, i_option3, i_option1);
 	return Plugin_Continue;
 }
+

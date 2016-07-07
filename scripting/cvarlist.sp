@@ -1,22 +1,13 @@
 #pragma semicolon 1
 #include <sourcemod>
 
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
-#define PLUGIN_DESCRIPTION "Upholder of the [BFG], modified by Jared Ballou (jballou)"
-#define PLUGIN_NAME "[INS] CVAR List"
-#define PLUGIN_URL "http://jballou.com/insurgency"
+#define PLUGIN_DESCRIPTION "CVAR and command list dumper"
+#define PLUGIN_NAME "CVAR List"
 #define PLUGIN_VERSION "0.0.1"
-#define PLUGIN_WORKING 1
-
-public Plugin:myinfo = {
-	name		= PLUGIN_NAME,
-	author		= PLUGIN_AUTHOR,
-	description	= PLUGIN_DESCRIPTION,
-	version		= PLUGIN_VERSION,
-	url		= PLUGIN_URL
-};
-
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-cvarlist.txt"
+#define PLUGIN_WORKING "1"
+#define PLUGIN_FILE "cvarlist"
+#define PLUGIN_LOG_PREFIX "CVARLIST"
+#include <myinfo>
 
 
 public OnPluginStart()

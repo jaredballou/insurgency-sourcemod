@@ -4,22 +4,14 @@
 #pragma semicolon 1
 #pragma unused cvarVersion
 
-#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
-#define PLUGIN_NAME "[INS] Bot Names"
-#define PLUGIN_URL "http://jballou.com/"
+#define PLUGIN_NAME "Bot Names"
 #define PLUGIN_VERSION "1.0.3"
 #define PLUGIN_WORKING "1"
+#define PLUGIN_FILE "botnames"
+#define PLUGIN_LOG_PREFIX "BOTNAMES"
+#include <myinfo>
 
-public Plugin:myinfo = {
-	name		= PLUGIN_NAME,
-	author		= PLUGIN_AUTHOR,
-	description	= PLUGIN_DESCRIPTION,
-	version		= PLUGIN_VERSION,
-	url		= PLUGIN_URL
-};
-
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botnames.txt"
 #define BOT_NAME_PATH "configs/botnames"
 
 // this array will store the names loaded

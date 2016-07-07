@@ -1,0 +1,16 @@
+#def Define(name,value)
+\#if !defined $name
+\#define $name "$value"
+\#endif
+#end def
+#def MyInfo()
+public Plugin:myinfo = {
+#for $name,$value in $myinfo_vars.items()
+        $name = PLUGIN_$name.upper(),
+#end for
+};
+#end def
+#for $name,$value in $myinfo_defines.items()
+$Define($name,$value)
+#end for
+$MyInfo()
