@@ -52,7 +52,7 @@ public Action:Event_vote_started(Handle:event, const String:name[], bool:dontBro
 	decl String:i_param1[256];
 	GetEventString(event, "param1", i_param1, sizeof(i_param1));
 	new i_team = GetEventInt(event, "team");
-	LogToGame("[EVENT] triggered \"vote_started\" initiator \"%d\" issue \"%s\" param1 \"%s\" team \"%d\"", i_initiator, i_issue, i_param1, i_team);
+	LogToGame("[VOTELOG] triggered \"vote_started\" initiator \"%d\" issue \"%s\" param1 \"%s\" team \"%d\"", i_initiator, i_issue, i_param1, i_team);
 	return Plugin_Continue;
 }
 
@@ -66,7 +66,7 @@ public Action:Event_vote_changed(Handle:event, const String:name[], bool:dontBro
 	new i_vote_option1 = GetEventInt(event, "vote_option1");
 	new i_vote_option2 = GetEventInt(event, "vote_option2");
 	new i_vote_option3 = GetEventInt(event, "vote_option3");
-	LogToGame("[EVENT] triggered \"vote_changed\" potentialVotes \"%d\" vote_option4 \"%d\" vote_option5 \"%d\" vote_option1 \"%d\" vote_option2 \"%d\" vote_option3 \"%d\"", i_potentialVotes, i_vote_option4, i_vote_option5, i_vote_option1, i_vote_option2, i_vote_option3);
+	LogToGame("[VOTELOG] triggered \"vote_changed\" potentialVotes \"%d\" vote_option4 \"%d\" vote_option5 \"%d\" vote_option1 \"%d\" vote_option2 \"%d\" vote_option3 \"%d\"", i_potentialVotes, i_vote_option4, i_vote_option5, i_vote_option1, i_vote_option2, i_vote_option3);
 	return Plugin_Continue;
 }
 
@@ -79,7 +79,7 @@ public Action:Event_vote_passed(Handle:event, const String:name[], bool:dontBroa
 	decl String:i_param1[256];
 	GetEventString(event, "param1", i_param1, sizeof(i_param1));
 	new i_team = GetEventInt(event, "team");
-	LogToGame("[EVENT] triggered \"vote_passed\" details \"%s\" param1 \"%s\" team \"%d\"", i_details, i_param1, i_team);
+	LogToGame("[VOTELOG] triggered \"vote_passed\" details \"%s\" param1 \"%s\" team \"%d\"", i_details, i_param1, i_team);
 	return Plugin_Continue;
 }
 
@@ -88,7 +88,7 @@ public Action:Event_vote_failed(Handle:event, const String:name[], bool:dontBroa
 		return Plugin_Continue;
 	}
 	new i_team = GetEventInt(event, "team");
-	LogToGame("[EVENT] triggered \"vote_failed\" team \"%d\"", i_team);
+	LogToGame("[VOTELOG] triggered \"vote_failed\" team \"%d\"", i_team);
 	return Plugin_Continue;
 }
 
@@ -99,7 +99,7 @@ public Action:Event_vote_cast(Handle:event, const String:name[], bool:dontBroadc
 	new i_entityid = GetEventInt(event, "entityid");
 	new i_vote_option = GetEventInt(event, "vote_option");
 	new i_team = GetEventInt(event, "team");
-	LogToGame("[EVENT] triggered \"vote_cast\" entityid \"%d\" vote_option \"%d\" team \"%d\"", i_entityid, i_vote_option, i_team);
+	LogToGame("[VOTELOG] triggered \"vote_cast\" entityid \"%d\" vote_option \"%d\" team \"%d\"", i_entityid, i_vote_option, i_team);
 	return Plugin_Continue;
 }
 
@@ -118,7 +118,7 @@ public Action:Event_vote_options(Handle:event, const String:name[], bool:dontBro
 	GetEventString(event, "option3", i_option3, sizeof(i_option3));
 	decl String:i_option1[256];
 	GetEventString(event, "option1", i_option1, sizeof(i_option1));
-	LogToGame("[EVENT] triggered \"vote_options\" count \"%d\" option4 \"%s\" option5 \"%s\" option2 \"%s\" option3 \"%s\" option1 \"%s\"", i_count, i_option4, i_option5, i_option2, i_option3, i_option1);
+	LogToGame("[VOTELOG] triggered \"vote_options\" count \"%d\" option4 \"%s\" option5 \"%s\" option2 \"%s\" option3 \"%s\" option1 \"%s\"", i_count, i_option4, i_option5, i_option2, i_option3, i_option1);
 	return Plugin_Continue;
 }
 
