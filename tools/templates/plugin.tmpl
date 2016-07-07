@@ -1,5 +1,6 @@
 <a name="${plugin.name}">
 \#\#\# ${plugin.myinfo["name"]} ${plugin.myinfo["version"]}
+
 ${plugin.myinfo["description"]}
 #for $section in $plugin.files
 #for $file in $plugin.files[$section]
@@ -7,7 +8,9 @@ ${plugin.myinfo["description"]}
 #end for
 #end for
 #if $getVar("plugin.dependencies","")
+
 \#\#\#\# Dependencies
+
 #for $section in $plugin.dependencies
 #for $file in $plugin.dependencies[$section]
  * [$section - ${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
@@ -15,7 +18,9 @@ ${plugin.myinfo["description"]}
 #end for
 #end if
 #if $plugin.cvars
+
 \#\#\#\# CVAR List
+
 #for $cvar,$data in $plugin.cvars.items()
 #if $data.has_key('description')
  * "${cvar}" "${data["value"]}" // $data['description']
@@ -25,7 +30,9 @@ ${plugin.myinfo["description"]}
 #end for
 #end if
 #if $plugin.commands
+
 \#\#\#\# Command List
+
 #for $command,$data in $plugin.commands.items()
 #if $data.has_key('description')
  * "${command}" // $data['description']
@@ -35,8 +42,11 @@ ${plugin.myinfo["description"]}
 #end for
 #end if
 #if $plugin.todos
+
 \#\#\#\# ToDo
+
 #for $todo in $plugin.todos
  * [ ] ${todo}
 #end for
 #end if
+

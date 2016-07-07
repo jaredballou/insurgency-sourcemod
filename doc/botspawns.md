@@ -1,15 +1,20 @@
 <a name="botspawns">
 ### Bot Spawns 0.4.0
+
 Adds a number of options and ways to handle bot spawns
  * [Source - scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
  * [Plugin - plugins/botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+
 #### Dependencies
+
  * [Source - scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
  * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
  * [Plugin - gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
+
 #### CVAR List
+
  * "sm_botspawns_enabled" "PLUGIN_WORKING" // Enable enhanced bot spawning features
  * "sm_botspawns_min_spawn_delay" "1" // Min delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_fireteam_size" "3" // Min number of bots to spawn per fireteam. Default 3
@@ -32,3 +37,4 @@ Adds a number of options and ways to handle bot spawns
  * "sm_botspawns_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
  * "sm_botspawns_max_frac_in_game" "1" // Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
  * "sm_botspawns_min_frac_in_game" "0.75" // Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
+

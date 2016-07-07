@@ -1,9 +1,12 @@
 <a name="respawn">
 ### [INS] Player Respawn 1.8.1
+
 Respawn players
  * [Source - scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
  * [Plugin - plugins/respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
+
 #### Dependencies
+
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/cstrike.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cstrike.inc?raw=true)
  * [Source - scripting/include/tf2.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/tf2.inc?raw=true)
@@ -11,7 +14,9 @@ Respawn players
  * [Plugin - translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
  * [Plugin - translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
  * [Plugin - gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)
+
 #### CVAR List
+
  * "sm_respawn_enabled" "PLUGIN_WORKING" // Enable respawn plugin
  * "sm_respawn_reset_each_round" "1" // Reset player respawn counts each round
  * "sm_respawn_version" "PLUGIN_VERSION" // PLUGIN_DESCRIPTION
@@ -23,5 +28,8 @@ Respawn players
  * "sm_respawn_count_team3" "-1" // Respawn all Team 3 players this many times
  * "sm_respawn_count" "0" // Respawn all players this many times
  * "sm_respawn_reset_each_objective" "1" // Reset player respawn counts each objective
+
 #### Command List
+
  * "sm_respawn" // sm_respawn <#userid|name>
+
