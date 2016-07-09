@@ -1,5 +1,5 @@
 <a name="botspawns">
-### Bot Spawns 0.4.0
+### Bot Spawns 0.4.1
 
 Adds a number of options and ways to handle bot spawns
  * [Source - scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)

@@ -2,7 +2,7 @@
 //Released under GPLv3
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "Bot Spawns"
-#define PLUGIN_VERSION "0.4.0"
+#define PLUGIN_VERSION "0.4.1"
 #define PLUGIN_WORKING "0"
 #define PLUGIN_FILE botspawns
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
@@ -546,13 +546,13 @@ public Action:Event_Spawn(Handle:event, const String:name[], bool:dontBroadcast)
 public Action:Event_SpawnPost(Handle:event, const String:name[], bool:dontBroadcast) {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	//InsLog(DEBUG, "Event_Spawn called");
-	if (!g_bEnabled) {
-		return Plugin_Continue;
-	}
 	if (!IsFakeClient(client)) {
 		return Plugin_Continue;
 	}
 	SetNextAttack(client);
+	if (!g_bEnabled) {
+		return Plugin_Continue;
+	}
 	return Plugin_Continue;
 }
 
