@@ -1,7 +1,7 @@
 #define PLUGIN_AUTHOR "Jared Ballou, based on plugin by McFlurry"
 #define PLUGIN_DESCRIPTION "Log events to client or server"
 #define PLUGIN_NAME "Event Logger"
-#define PLUGIN_VERSION "0.0.1"
+#define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_FILE "events"
 #define PLUGIN_LOG_PREFIX "EVENTS"
