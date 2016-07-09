@@ -20,17 +20,7 @@
 		"fi"		"Vaiennettiin {1}."
 	}
 
-	"Ungagged target"
-	{
-		"fi"		"{1} voi taas puhua."
-	}
-
 	"Unmuted target"
-	{
-		"fi"		"{1} voi taas puhua."
-	}
-
-	"Unsilenced target"
 	{
 		"fi"		"{1} voi taas puhua."
 	}
@@ -42,32 +32,42 @@
 
 	"Gag Player"
 	{
-		"fi"		"Tuki Pelaaja"
+		"fi"		"Tuki pelaaja"
 	}
 
 	"Mute Player"
 	{
-		"fi"		"Hiljennä Pelaaja"
+		"fi"		"Hiljennä pelaaja"
 	}
 
 	"Silence Player"
 	{
-		"fi"		"Vaienna Pelaaja"
+		"fi"		"Vaienna pelaaja"
 	}
 
 	"UnGag Player"
 	{
-		"fi"		"Poista Pelaajan Tukinta"
-	}
-
-	"UnSilence Player"
-	{
-		"fi"		"Poista Pelaajan Vaiennus"
+		"fi"		"Poista pelaajan tukinta"
 	}
 
 	"UnMute Player"
 	{
-		"fi"		"Poista Pelaajan Mykistys"
+		"fi"		"Poista pelaajan mykistys"
+	}
+
+	"UnSilence Player"
+	{
+		"fi"		"Poista pelaajan vaiennus"
+	}
+
+	"Unsilenced target"
+	{
+		"fi"		"{1} voi taas puhua ja kirjoittaa."
+	}
+
+	"Ungagged target"
+	{
+		"fi"		"{1} voi taas kirjoittaa."
 	}
 
 }

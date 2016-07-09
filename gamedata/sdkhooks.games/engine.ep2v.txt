@@ -5,6 +5,12 @@
 	{
 		"Offsets"
 		{
+			"CanBeAutobalanced"
+			{
+				"windows"	"459"
+				"linux"		"460"
+				"mac"		"460"
+			}
 			"EndTouch"
 			{
 				"windows"	"100"

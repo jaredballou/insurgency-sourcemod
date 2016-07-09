@@ -72,7 +72,6 @@
 	{
 		"#supported"
 		{
-			"game"		"garrysmod"
 			"game"		"ship"
 			"game"		"sourceforts"
 			"game"		"FortressForever"
@@ -118,7 +117,6 @@
 	{
 		"#supported"
 		{
-			"game"		"garrysmod"
 			"game"		"ship"
 			"game"		"sourceforts"
 			"game"		"FortressForever"

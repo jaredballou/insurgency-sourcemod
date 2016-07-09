@@ -1,5 +1,5 @@
 /**
- * vim: set ts=4 :
+ * vim: set ts=4 sw=4 tw=99 noet :
  * =============================================================================
  * SourceMod (C)2004-2008 AlliedModders LLC.  All rights reserved.
  * =============================================================================
@@ -35,6 +35,77 @@
 #endif
 #define _datapack_included
 
+
+/**
+ * Opaque handle to a datapack position.
+ */
+ enum DataPackPos: {};
+
+// A DataPack allows serializing multiple variables into a single stream.
+methodmap DataPack < Handle
+{
+	// Creates a new data pack.
+	public native DataPack();
+
+	// Packs a normal cell into a data pack.
+	//
+	// @param cell		Cell to add.
+	public native void WriteCell(any cell);
+
+	// Packs a float into a data pack.
+	//
+	// @param val		Float to add.
+	public native void WriteFloat(float val);
+
+	// Packs a string into a data pack.
+	//
+	// @param str		String to add.
+	public native void WriteString(const char[] str);
+
+	// Packs a function pointer into a data pack.
+	//
+	// @param fktptr	Function pointer to add.
+	public native void WriteFunction(Function fktptr);
+
+	// Reads a cell from a data pack.
+	//
+	// @param pack		Handle to the data pack.
+	public native any ReadCell();
+
+	// Reads a float from a data pack.
+	//
+	// @param pack		Handle to the data pack.
+	public native float ReadFloat();
+
+	// Reads a string from a data pack.
+	//
+	// @param buffer	Destination string buffer.
+	// @param maxlen	Maximum length of output string buffer.
+	public native void ReadString(char[] buffer, int maxlen);
+
+	// Reads a function pointer from a data pack.
+	//
+	// @return			Function pointer.
+	public native Function ReadFunction();
+
+	// Resets the position in a data pack.
+	//
+	// @param clear		If true, clears the contained data.
+	public native void Reset(bool clear=false);
+
+	// Returns whether or not a specified number of bytes from the data pack
+	//  position to the end can be read.
+	//
+	// @param bytes		Number of bytes to simulate reading.
+	public native bool IsReadable();
+	
+	// The read or write position in a data pack.
+	property DataPackPos Position {
+		public native get();
+		public native set(DataPackPos pos);
+	}
+};
+
 /**
  * Creates a new data pack.
  *
@@ -47,7 +118,6 @@ native DataPack CreateDataPack();
  *
  * @param pack		Handle to the data pack.
  * @param cell		Cell to add.
- * @noreturn
  * @error			Invalid handle.
  */
 native void WritePackCell(Handle pack, any cell);
@@ -57,7 +127,6 @@ native void WritePackCell(Handle pack, any cell);
  *
  * @param pack		Handle to the data pack.
  * @param val		Float to add.
- * @noreturn
  * @error			Invalid handle.
  */
 native void WritePackFloat(Handle pack, float val);
@@ -67,7 +136,6 @@ native void WritePackFloat(Handle pack, float val);
  *
  * @param pack		Handle to the data pack.
  * @param str		String to add.
- * @noreturn
  * @error			Invalid handle.
  */
 native void WritePackString(Handle pack, const char[] str);
@@ -77,7 +145,6 @@ native void WritePackString(Handle pack, const char[] str);
  *
  * @param pack		Handle to the data pack.
  * @param fktptr	Function pointer to add.
- * @noreturn
  * @error			Invalid handle.
  */
 native void WritePackFunction(Handle pack, Function fktptr);
@@ -106,10 +173,9 @@ native float ReadPackFloat(Handle pack);
  * @param pack		Handle to the data pack.
  * @param buffer	Destination string buffer.
  * @param maxlen	Maximum length of output string buffer.
- * @noreturn
  * @error			Invalid handle, or bounds error.
  */
-native void ReadPackString(Handle pack, char[] buffer, maxlen);
+native void ReadPackString(Handle pack, char[] buffer, int maxlen);
 
 /**
  * Reads a function pointer from a data pack.
@@ -125,7 +191,6 @@ native Function ReadPackFunction(Handle pack);
  *
  * @param pack		Handle to the data pack.
  * @param clear		If true, clears the contained data.
- * @noreturn
  * @error			Invalid handle.
  */
 native void ResetPack(Handle pack, bool clear=false);
@@ -134,20 +199,19 @@ native void ResetPack(Handle pack, bool clear=false);
  * Returns the read or write position in a data pack.
  *
  * @param pack		Handle to the data pack.
- * @return			Numerical position in the data pack.
+ * @return			Position in the data pack, only usable with calls to SetPackPosition.
  * @error			Invalid handle.
  */
-native int GetPackPosition(Handle pack);
+native DataPackPos GetPackPosition(Handle pack);
 
 /**
  * Sets the read/write position in a data pack.
  *
  * @param pack		Handle to the data pack.
- * @param position	New position to set.
- * @noreturn
+ * @param position	New position to set. Must have been previously retrieved from a call to GetPackPosition.
  * @error			Invalid handle, or position is beyond the pack bounds.
  */
-native void SetPackPosition(Handle pack, int position);
+native void SetPackPosition(Handle pack, DataPackPos position);
 
 /**
  * Returns whether or not a specified number of bytes from the data pack
@@ -159,24 +223,3 @@ native void SetPackPosition(Handle pack, int position);
  * @error			Invalid handle.
  */
 native bool IsPackReadable(Handle pack, int bytes);
-
-methodmap DataPack < Handle
-{
-	public DataPack() = CreateDataPack;
-	public WriteCell() = WritePackCell;
-	public WriteFloat() = WritePackFloat;
-	public WriteString() = WritePackString;
-	public WriteFunction() = WritePackFunction;
-	public ReadCell() = ReadPackCell;
-	public ReadFloat() = ReadPackFloat;
-	public ReadString() = ReadPackString;
-	public ReadFunction() = ReadPackFunction;
-	public Reset() = ResetPack;
-	public IsReadable() = IsPackReadable;
-	
-	property int Position {
-		public get() = GetPackPosition;
-		public set() = SetPackPosition;
-	}
-};
-
