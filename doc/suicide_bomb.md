@@ -12,7 +12,6 @@ Adds suicide bomb for bots
 #### CVAR List
 
  * "sm_suicidebomb_auto_detonate_range" "0" // Range at which to automatically set off the bomb (0 is disabled)
- * "sm_suicidebomb_" "" // 
  * "sm_suicidebomb_player_classes" "sapper bomber suicide" // Player classes to apply suicide bomber changes to
  * "sm_suicidebomb_enabled" "0" // sets whether suicide bombs are enabled
  * "sm_suicidebomb_spawn_delay" "30" // Do not detonate if player has been alive less than this many seconds

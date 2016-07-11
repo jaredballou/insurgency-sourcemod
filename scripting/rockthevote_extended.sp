@@ -89,7 +89,7 @@ public OnPluginStart()
 	RegAdminCmd("mce_forcertv", Command_ForceRTV, ADMFLAG_CHANGEMAP, "Force an RTV vote");
 	
 	// Rock The Vote Extended cvars
-	CreateConVar("rtve_version", MCE_VERSION, "Rock The Vote Extended Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("rtve_version", MCE_VERSION, "Rock The Vote Extended Version",|FCVAR_SPONLY|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 	
 	AutoExecConfig(true, "rtv");
 }

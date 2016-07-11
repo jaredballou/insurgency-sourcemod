@@ -32,11 +32,11 @@ public Plugin:myinfo = {
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_noobj_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_noobj_enabled", "0", "sets whether objective removal is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarCacheDestroy = CreateConVar("sm_noobj_cache_destroy", "1", "Can caches be destroyed?", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarCapture = CreateConVar("sm_noobj_capture", "1", "Can points be captured?", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarRemove = CreateConVar("sm_noobj_remove", "0", "Remove all points?", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_noobj_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_noobj_enabled", "0", "sets whether objective removal is enabled", FCVAR_NOTIFY);
+	cvarCacheDestroy = CreateConVar("sm_noobj_cache_destroy", "1", "Can caches be destroyed?", FCVAR_NOTIFY);
+	cvarCapture = CreateConVar("sm_noobj_capture", "1", "Can points be captured?", FCVAR_NOTIFY);
+	cvarRemove = CreateConVar("sm_noobj_remove", "0", "Remove all points?", FCVAR_NOTIFY);
 
 	HookEvent("server_spawn", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);

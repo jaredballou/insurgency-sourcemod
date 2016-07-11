@@ -19,8 +19,8 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-	g_hCVShowDamage = CreateConVar("sm_botmimic_showdamage", "1", "Show damage when hitting a mimicing bot?", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	g_hCVPlayHitSound = CreateConVar("sm_botmimic_playhitsound", "1", "Play a sound when hitting a mimicing bot?", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	g_hCVShowDamage = CreateConVar("sm_botmimic_showdamage", "1", "Show damage when hitting a mimicing bot?",, true, 0.0, true, 1.0);
+	g_hCVPlayHitSound = CreateConVar("sm_botmimic_playhitsound", "1", "Play a sound when hitting a mimicing bot?",, true, 0.0, true, 1.0);
 	
 	HookEvent("player_hurt", Event_OnPlayerHurt);
 }

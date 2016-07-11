@@ -18,7 +18,6 @@ else
 	list=$(ls *.sp)
 fi
 
-for sourcefile in $list
-do
+for sourcefile in $list; do
 	compile $sourcefile
 done

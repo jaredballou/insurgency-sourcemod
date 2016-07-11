@@ -25,20 +25,20 @@ from Cheetah.Template import Template
 sys.path.append("pysmx")
 import smx
 
+# TODO: Compare the source file and compiled plugin more intelligently than raw file times.
+# TODO: Manage all plugin types, and put in appropriate locations (disabled, nobuild, thirdparty)
+
+# Main function
+def main():
+	config = get_yaml_file(getpath("tools/config.yaml"))
+	plugins = {}
+	for name in config['plugins']['build']:
+		plugins[name] = SourceModPlugin(name=name,config=config)
+	create_readme(plugins)
+
 def getpath(path):
 	root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 	return os.path.join(root,path)
-
-# GitHub URL to pull from
-github_user = "jaredballou"
-github_repo = "insurgency-sourcemod"
-github_branch = "master"
-
-urls = {
-	'github':	"https://github.com/%s/%s/blob/%s" % (github_user,github_repo,github_branch),
-	'updater':	"http://ins.jballou.com/sourcemod",
-}
-
 
 # Get YAML file
 def get_yaml_file(yaml_file):
@@ -49,8 +49,6 @@ def get_yaml_file(yaml_file):
 			print(exc)
 			sys.exit()
 
-config = get_yaml_file(getpath("tools/config.yaml"))
-
 def create_readme(plugins):
 	sortedKeys = sorted(plugins.keys())
 	fp = open(getpath("README.md"), 'w')
@@ -58,16 +56,11 @@ def create_readme(plugins):
 	fp.write(tmpl)
 	fp.close()
 
-# Main function
-def main():
-	plugins = {}
-	for name in config['plugins']['build']:
-		plugins[name] = SourceModPlugin(name)
-	create_readme(plugins)
 
 class SourceModPlugin(object):
 
-	def __init__(self,name=None):
+	def __init__(self,name=None,config=None):
+		self.config = config
 		self.cvars = {}
 		self.commands = {}
 		self.todo = {}
@@ -96,7 +89,7 @@ class SourceModPlugin(object):
 		smx_file = getpath("plugins/%s.smx" % self.name)
 		if not os.path.isfile(smx_file):
 			smx_file = getpath("plugins/disabled/%s.smx" % self.name)
-		if not os.path.isfile(smx_file):
+		if not os.path.isfile(smx_file) or os.stat(sp_file).st_mtime > os.stat(smx_file).st_mtime:
 			self.compile = True
 		self.sp_file = sp_file
 		self.smx_file = smx_file
@@ -131,14 +124,22 @@ class SourceModPlugin(object):
 
 		for include in re.findall(r"#include[\t ]*<([^>]+)>", self.source):
 			incfile = "scripting/include/%s.inc" % include
-			if include in config['libraries']['ignore'] or incfile in self.files['Source']:
+			if include in self.config['libraries']['ignore'] or incfile in self.files['Source']:
 				continue
 			if include == self.name:
 				self.files['Source'].append(incfile)
 			else:
 				self.dependencies['Source'].append(incfile)
 
+	# Compile plugin if missing our out of date, default to disabled
+	def compile_plugin(self):
+		print("Compiling %s" % self.name)
+		os.system("%s %s -o%s -e%s" % (getpath("scripting/spcomp"), self.sp_file, self.smx_file, getpath("scripting/output/%s.out" % self.name)))
+		return os.path.isfile(self.smx_file)
+
 	def process_plugin(self):
+		if not os.path.isfile(self.smx_file) or self.compile:
+			self.compile_plugin()
 		with open(self.smx_file, 'rb') as fp:
 			try:
 				self.plugin = smx.SourcePawnPlugin(fp)
@@ -147,10 +148,6 @@ class SourceModPlugin(object):
 				print("Could not load \"%s\"!" % self.smx_file)
 				return
 		self.myinfo = self.plugin.myinfo
-
-	# Compile plugin if missing our out of date, default to disabled
-	def check_plugin_compile(self):
-		pass
 
 	def create_updater_file(self):
 		fp = open(getpath("updater-data/update-%s.txt" % self.name), 'w')

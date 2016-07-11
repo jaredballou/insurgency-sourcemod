@@ -54,17 +54,17 @@ new
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_compass_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_compass_enabled", "1", "Enables compass", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDirection = CreateConVar("sm_compass_direction", "1", "Display direction in ordinal directions", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarBearing = CreateConVar("sm_compass_bearing", "1", "Display bearing in degrees", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarTimer = CreateConVar("sm_compass_timer", "0", "If greater than 0, display compass to players every X seconds.", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_compass_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_compass_enabled", "1", "Enables compass", FCVAR_NOTIFY);
+	cvarDirection = CreateConVar("sm_compass_direction", "1", "Display direction in ordinal directions", FCVAR_NOTIFY);
+	cvarBearing = CreateConVar("sm_compass_bearing", "1", "Display bearing in degrees", FCVAR_NOTIFY);
+	cvarTimer = CreateConVar("sm_compass_timer", "0", "If greater than 0, display compass to players every X seconds.", FCVAR_NOTIFY);
 
-	cvDefaultEnabled	= CreateConVar("sm_compass_default_enabled",		"1",		"Default compass", FCVAR_PLUGIN);
-	cvDefaultTimer		= CreateConVar("sm_compass_default_timer",		"60",		"Default compass", FCVAR_PLUGIN);
-	cvDefaultDisplay	= CreateConVar("sm_compass_default_display",		"1",		"Default compass", FCVAR_PLUGIN);
-	cvDefaultDirection	= CreateConVar("sm_compass_default_direction",		"1",		"Default compass", FCVAR_PLUGIN);
-	cvDefaultBearing	= CreateConVar("sm_compass_default_bearing",		"1",		"Default compass", FCVAR_PLUGIN);
+	cvDefaultEnabled	= CreateConVar("sm_compass_default_enabled",		"1",		"Default compass",);
+	cvDefaultTimer		= CreateConVar("sm_compass_default_timer",		"60",		"Default compass",);
+	cvDefaultDisplay	= CreateConVar("sm_compass_default_display",		"1",		"Default compass",);
+	cvDefaultDirection	= CreateConVar("sm_compass_default_direction",		"1",		"Default compass",);
+	cvDefaultBearing	= CreateConVar("sm_compass_default_bearing",		"1",		"Default compass",);
 
 	RegConsoleCmd("check_compass", Check_Compass);
 	CreateTimer(1.0, TimerCompass, _, TIMER_REPEAT);

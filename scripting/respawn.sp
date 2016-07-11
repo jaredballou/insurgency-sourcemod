@@ -69,7 +69,7 @@ public OnPluginStart()
 		TF2 = true;
 	}
 
-	CreateConVar("sm_respawn_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
+	CreateConVar("sm_respawn_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	sm_respawn_enabled = CreateConVar("sm_respawn_enabled", PLUGIN_WORKING, "Enable respawn plugin");
 	sm_respawn_auto = CreateConVar("sm_respawn_auto", "0", "Automatically respawn players when they die; 0 - disabled, 1 - enabled");
 	sm_respawn_delay = CreateConVar("sm_respawn_delay", "1.0", "How many seconds to delay the respawn");

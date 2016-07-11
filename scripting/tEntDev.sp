@@ -24,7 +24,7 @@ public Plugin:myinfo =
 };
 
 public OnPluginStart() {
-	CreateConVar("sm_tentdev_version", VERSION, "", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("sm_tentdev_version", VERSION, "",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 
 	GetNetpropFilename();
 

@@ -33,9 +33,9 @@ public OnPluginStart()
 {
 	PrintToServer("[DAMAGEMOD] Starting");
 
-	cvarVersion = CreateConVar("sm_damagemod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_damagemod_enabled", PLUGIN_WORKING, "Enable Damage Mod plugin", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarFFMinDistance = CreateConVar("sm_damagemod_ff_min_distance", "120", "Minimum distance between players for Friendly Fire to register", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_damagemod_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_damagemod_enabled", PLUGIN_WORKING, "Enable Damage Mod plugin", FCVAR_NOTIFY);
+	cvarFFMinDistance = CreateConVar("sm_damagemod_ff_min_distance", "120", "Minimum distance between players for Friendly Fire to register", FCVAR_NOTIFY);
 
 	HookEvent("player_hurt", Event_PlayerHurt);
 	HookEvent("player_hurt", Event_PlayerHurtPre, EventHookMode_Pre);

@@ -1,4 +1,15 @@
 ---
+settings:
+  github_user: "jaredballou"
+  github_repo: "insurgency-sourcemod"
+  github_branch: "master"
+  compile_plugins: true
+  disable_new_plugins: true
+  urls:
+    'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
+    'updater': "http://ins.jballou.com/sourcemod"
+
+
 libraries:
   ignore:
     - adminmenu
@@ -20,31 +31,31 @@ plugins:
     - botnames
     - botspawns
     - cooplobby
-    - cvarlist
-    - damagemod
-    - dropweapon
     - events
     - hlstatsx
-    - insmaps
     - insurgency
-    - magnifier
     - nofog
     - respawn
     - restrictedarea
     - rpgdrift
-    - score
-    - sprinklers
     - suicide_bomb
-    - theater_reconnect
-    - theaterpicker
     - votelog
     - weapon_pickup
   disabled:
+    - damagemod
+    - cvarlist
+    - dropweapon
+    - insmaps
+    - magnifier
+    - navmesh
+    - score
+    - sprinklers
+    - theater_reconnect
+    - theaterpicker
   nobuild:
     - backblast
     - navmesh-chat
     - navmesh-export
-    - navmesh
     - looting
     - noobj
     - pistolsonly

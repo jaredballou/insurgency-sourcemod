@@ -25,11 +25,6 @@
 		"fi"		"Poistettiin onnistuneesti admin tietokannasta."
 	}
 
-	"SQL Admin groups reset"
-	{
-		"fi"		"Resetoitiin adminien ryhmät onnistuneesti."
-	}
-
 	"SQL Admin not found"
 	{
 		"fi"		"Annetuilla arvoilla ei löytynyt adminia."
@@ -73,6 +68,11 @@
 	"Added group to user"
 	{
 		"fi"		"Annetulle ylläpitäjälle lisättiin onnistuneesti yksi ryhmä."
+	}
+
+	"SQL Admin groups reset"
+	{
+		"fi"		"Resetoitiin adminin ryhmät onnistuneesti."
 	}
 
 }

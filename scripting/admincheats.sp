@@ -20,7 +20,7 @@ new Handle:cCheatOverride;
 
 public OnPluginStart()
 {
-	cCheatOverride = CreateConVar("sm_admin_cheats_level","z","Level required to execute cheat commands",FCVAR_PLUGIN);
+	cCheatOverride = CreateConVar("sm_admin_cheats_level","z","Level required to execute cheat commands",);
 	CreateConVar("sm_admin_cheats_version",PLUGIN_VERSION,"Version Information",FCVAR_REPLICATED|FCVAR_NOTIFY);
 	
 	new String:cmdname[128];

@@ -35,8 +35,8 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_score_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_score_enabled", "1", "sets whether score modifier is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_score_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_score_enabled", "1", "sets whether score modifier is enabled", FCVAR_NOTIFY);
 	RegConsoleCmd("check_score", Command_check_score);
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
@@ -100,7 +100,7 @@ public Action:Command_check_score(client, args)
 	}
 	
 	PrintToServer("[SCORE] iPlayerManagerNetClass %s",iPlayerManagerNetClass);
-	new m_iPlayerScore = FindSendPropOffs(iPlayerManagerNetClass, "m_iPlayerScore");
+	new m_iPlayerScore = FindSendPropInfo(iPlayerManagerNetClass, "m_iPlayerScore");
 	if (m_iPlayerScore < 1) {
 		PrintToServer("[SCORE] Unable to find ins_player_manager property m_iPlayerScore");
 		return Plugin_Stop;
@@ -111,7 +111,7 @@ public Action:Command_check_score(client, args)
 		PrintToServer("[SCORE] player %d score %d",i,iScore);
 	}
 // = GetEntPropEnt(iPlayerManager, Prop_Data, "m_iPlayerScore");
-//GetEntData(iPlayerManager, FindSendPropOffs(iPlayerManagerNetClass, prop) + (size * element));
+//GetEntData(iPlayerManager, FindSendPropInfo(iPlayerManagerNetClass, prop) + (size * element));
 	return Plugin_Stop;
 }
 

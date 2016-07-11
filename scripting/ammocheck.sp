@@ -3,9 +3,9 @@
 
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define PLUGIN_NAME "Ammo Check"
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "ammocheck"
+#define PLUGIN_FILE ammocheck
 #define PLUGIN_LOG_PREFIX "AMMOCHECK"
 
 #pragma semicolon 1
@@ -30,24 +30,23 @@ new m_flNextPrimaryAttack, m_flNextSecondaryAttack;
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_ammocheck_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_ammocheck_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY);
 
-	cvarAttackDelay = CreateConVar("sm_ammocheck_attack_delay", "1", "Delay in seconds until next attack when checking ammo", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarAttackDelay = CreateConVar("sm_ammocheck_attack_delay", "1", "Delay in seconds until next attack when checking ammo", FCVAR_NOTIFY);
 
 	RegConsoleCmd("check_ammo", Command_Check_Ammo, "Check ammo of the current weapon");
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
-	if ((m_flNextPrimaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
+	if ((m_flNextPrimaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextPrimaryAttack\" !");
 	}
 
-	if ((m_flNextSecondaryAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
+	if ((m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
 	}
 
-	if (LibraryExists("updater"))
-	{
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }

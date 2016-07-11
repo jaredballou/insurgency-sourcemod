@@ -1,8 +1,3 @@
 "Phrases"
 {
-	"Played sound to target"
-	{
-		"no"		"Spilte av lyd for {1}"
-	}
-
 }

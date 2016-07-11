@@ -47,7 +47,7 @@ public Plugin:myinfo = {
  
 public OnPluginStart()
 {
-	CreateConVar("map_workshop_functions_test_version", VERSION, "Map Workshop Functions Test version", FCVAR_PLUGIN|FCVAR_NOTIFY|FCVAR_DONTRECORD|FCVAR_SPONLY);
+	CreateConVar("map_workshop_functions_test_version", VERSION, "Map Workshop Functions Test version",|FCVAR_NOTIFY|FCVAR_DONTRECORD|FCVAR_SPONLY);
 	RegConsoleCmd("substring", Cmd_Substring, "Test SubString command");
 	RegConsoleCmd("removemappath", Cmd_RemoveMapPath, "Test RemoveMapPath command");
 	RegConsoleCmd("mapequal", Cmd_MapEqual, "Test MapEqual command");

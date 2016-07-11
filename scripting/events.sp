@@ -79,9 +79,9 @@ new bool:bListeningToKey[MAXPLAYERS+1][MAX_EVENTS][MAX_EVENT_KEYS];
 public OnPluginStart()
 {
 	Format(sPrefix, sizeof(sPrefix), "\x04[%s]\x01", PLUGIN_LOG_PREFIX);
-	CreateConVar("sm_events_version", PLUGIN_VERSION, "Version of Event Info on this server", FCVAR_PLUGIN|FCVAR_DONTRECORD|FCVAR_NOTIFY|FCVAR_REPLICATED);
+	CreateConVar("sm_events_version", PLUGIN_VERSION, "Version of Event Info on this server", FCVAR_DONTRECORD|FCVAR_NOTIFY|FCVAR_REPLICATED);
 
-	cvarPrefix = CreateConVar("sm_events_prefix", sPrefix, "What to prefix on event messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarPrefix = CreateConVar("sm_events_prefix", sPrefix, "What to prefix on event messages", FCVAR_NOTIFY);
 	HookConVarChange(cvarPrefix, OnCvarPrefixChange);
 	
 	RegAdminCmd("sm_events_listen", Command_ListenSwitch, ADMFLAG_GENERIC, "Start or stop listening to an event");

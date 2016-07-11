@@ -4,7 +4,7 @@
 	{
 		"Version"
 		{
-			"Latest"	"1.0.0"
+			"Latest"	"1.0.1"
 		}
 		"Notes"		"Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 		"Name"		"Ammo Check"

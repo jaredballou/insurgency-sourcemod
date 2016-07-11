@@ -21,7 +21,7 @@ new g_WeaponParent;
 
 public OnPluginStart()
 {
-	g_WeaponParent = FindSendPropOffs("CINSWeapon", "m_hOwnerEntity");
+	g_WeaponParent = FindSendPropInfo("CINSWeapon", "m_hOwnerEntity");
 	PrintToServer("[TestProp] OnPluginStart");
 	RegConsoleCmd("get_props", Command_GetProps);
 }
@@ -162,7 +162,7 @@ GetProps(client)
 
 	ammoOffset = FindSendPropInfo("CINSPlayer", "m_iAmmo");
 	clipOffset = FindSendPropInfo("CINSWeaponBase", "m_iClip1");
-	new myweaponsoffset = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
+	new myweaponsoffset = FindSendPropInfo("CINSPlayer", "m_hMyWeapons");
 	new weapon = GetEntDataEnt2(client, FindSendPropInfo("CINSPlayer", "m_hActiveWeapon"));
 	if (weapon == -1)
 	{

@@ -62,11 +62,11 @@ new m_hActiveWeapon;
 new m_hMyWeapons;
 
 public OnPluginStart() {
-	cvarVersion = CreateConVar("sm_weapon_pickup_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_weapon_pickup_enabled", PLUGIN_WORKING, "sets whether weapon pickup manipulation is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarAmmoPickup = CreateConVar("sm_weapon_pickup_ammo", "1", "sets whether picking up a weapon the player already has will add to the player's ammo count", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_weapon_pickup_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_weapon_pickup_enabled", PLUGIN_WORKING, "sets whether weapon pickup manipulation is enabled", FCVAR_NOTIFY);
+	cvarAmmoPickup = CreateConVar("sm_weapon_pickup_ammo", "1", "sets whether picking up a weapon the player already has will add to the player's ammo count", FCVAR_NOTIFY);
+	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY);
+	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY);
 
 	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
@@ -81,7 +81,7 @@ public OnPluginStart() {
         HookEvent("player_spawn", Event_Player_Spawn);
         HookEvent("weapon_pickup", Event_Weapon_Pickup);
 
-	m_hMyWeapons = FindSendPropOffs("CINSPlayer", "m_hMyWeapons");
+	m_hMyWeapons = FindSendPropInfo("CINSPlayer", "m_hMyWeapons");
 	if (m_hMyWeapons == -1) {
 		LogError("Can't find CINSPlayer::m_hMyWeapons");
 	}
@@ -343,7 +343,7 @@ ListWeapons(client, observer)
 		m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
 	}
-	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
+	new maxammo = Ins_GetMaxClip1(weapon);
         ReplyToCommand(observer, "%d\t%d\t%s m_hWeaponDefinitionHandle %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d m_bHammerDown %d m_eBoltState %d",offset, weapon, classname, m_hWeaponDefinitionHandle, m_bChamberedRound, m_iPrimaryAmmoType, m_iClip1, m_iAmmo, m_iPrimaryAmmoCount, maxammo,m_bHammerDown,m_eBoltState);
     }
 }

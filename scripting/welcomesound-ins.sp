@@ -23,8 +23,8 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
-	CreateConVar("sm_ins_mikee_join_sound", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	g_hCvarEnabled = CreateConVar("sm_ins_mikee_join_sound_enabled", "1", "Mikee Join Sound Enable [0/1] ._.", FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD, true, 0.0, true, 1.0);
+	CreateConVar("sm_ins_mikee_join_sound", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	g_hCvarEnabled = CreateConVar("sm_ins_mikee_join_sound_enabled", "1", "Mikee Join Sound Enable [0/1] ._.", FCVAR_NOTIFY | FCVAR_DONTRECORD, true, 0.0, true, 1.0);
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 }
 

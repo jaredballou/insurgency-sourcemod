@@ -28,8 +28,8 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart()
 {
 	// cvars!
-	cvarVersion = CreateConVar("sm_theater_reconnect_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_theater_reconnect_enabled", "1", "sets whether theater reconnect is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_theater_reconnect_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_theater_reconnect_enabled", "1", "sets whether theater reconnect is enabled", FCVAR_NOTIFY);
 
 	// hook team change, connect to supress messages
 	//HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Post);

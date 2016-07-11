@@ -47,8 +47,8 @@ new Float:g_fOverviewScale = 1.0;
 public OnPluginStart()
 {
 	PrintToServer("[NMExport] Starting");
-	cvarVersion = CreateConVar("sm_navmesh_export_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_navmesh_export_enabled", "0", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_navmesh_export_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_navmesh_export_enabled", "0", "sets whether this plugin is enabled", FCVAR_NOTIFY);
 	if (LibraryExists("updater"))
 	{
 		Updater_AddPlugin(UPDATE_URL);

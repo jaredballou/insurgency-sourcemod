@@ -42,7 +42,7 @@ public OnPluginStart()
 
 
         zoomlevel = CreateConVar("sm_magnifier_zoom", "60", "zoom level for magnifier", 0, true, 1.0);
-        CreateConVar("sm_magnifier_version", PLUGIN_VERSION, "version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_NOTIFY);
+        CreateConVar("sm_magnifier_version", PLUGIN_VERSION, "version", FCVAR_SPONLY|FCVAR_NOTIFY);
 
         nobloqueardisparos = CreateConVar("sm_magnifier_shots", "0", "Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.");
 	g_CVarAdmFlag = CreateConVar("sm_magnifier_adminflag", "0", "Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....");

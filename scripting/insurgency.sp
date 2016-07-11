@@ -1,8 +1,8 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.3.5"
+#define PLUGIN_VERSION "1.3.6"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "insurgency"
+#define PLUGIN_FILE insurgency
 #define PLUGIN_LOG_PREFIX "INSLIB"
 
 #include <sourcemod>
@@ -66,6 +66,8 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
 	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
+	CreateNative("Ins_GetMaxClip1", Native_Weapon_GetMaxClip1);
+	CreateNative("Ins_GetDefaultClip1", Native_Weapon_GetDefaultClip1);
 	CreateNative("Ins_GetWeaponName", Native_Weapon_GetWeaponName);
 	CreateNative("Ins_GetWeaponId", Native_Weapon_GetWeaponId);
 
@@ -94,15 +96,15 @@ public OnLibraryRemoved(const String:name[])
 */
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarClassStripWords = CreateConVar("sm_insurgency_class_strip_words", "template training coop security insurgent survival", "Strings to strip out of player class (squad slot) names", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
+	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
+	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY);
+	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY);
+	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY);
+	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY);
+	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY);
+	cvarClassStripWords = CreateConVar("sm_insurgency_class_strip_words", "template training coop security insurgent survival", "Strings to strip out of player class (squad slot) names", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 
 	InsLog(DEFAULT,"Starting");
@@ -164,8 +166,7 @@ public OnPluginStart()
 
 //	LoadTranslations("insurgency.phrases");
 
-	if (LibraryExists("updater"))
-	{
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 	//UpdateAllDataSources();
@@ -479,7 +480,7 @@ GetPlayerScore(client)
 	new retval = -1;
 	if ((IsValidClient(client)) && (g_iPlayerManagerEntity > 0))
 	{
-		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropOffs(g_iPlayerManagerEntityNetClass, "m_iPlayerScore") + (4 * client));
+		retval = GetEntData(g_iPlayerManagerEntity, FindSendPropInfo(g_iPlayerManagerEntityNetClass, "m_iPlayerScore") + (4 * client));
 		InsLog(DEBUG,"Client %N m_iPlayerScore %d",client,retval);
 	}
 	return retval;
@@ -514,7 +515,7 @@ bool:InCounterAttack()
 	new bool:retval;
 	if (g_iLogicEntity > 0)
 	{
-		retval = bool:GetEntData(g_iLogicEntity, FindSendPropOffs(g_iLogicEntityNetClass, "m_bCounterAttack"));
+		retval = bool:GetEntData(g_iLogicEntity, FindSendPropInfo(g_iLogicEntityNetClass, "m_bCounterAttack"));
 	}
 	return retval;
 }
@@ -560,11 +561,9 @@ public Native_Weapon_GetWeaponName(Handle:plugin, numParams)
 	SetNativeString(2, strBuf, maxlen+1);
 }
 
-Weapon_GetMaxClip1(weapon)
-{
+Weapon_GetMaxClip1(weapon) {
 	StartPrepSDKCall(SDKCall_Entity);
-	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetMaxClip1")) 
-	{
+	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetMaxClip1")) {
 		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
 	}
 	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
@@ -573,11 +572,28 @@ Weapon_GetMaxClip1(weapon)
 	CloseHandle(hCall);
 	return value;
 }
-public Native_Weapon_GetMaxClip1(Handle:plugin, numParams)
-{
+Weapon_GetDefaultClip1(weapon) {
+	StartPrepSDKCall(SDKCall_Entity);
+	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetDefaultClip1")) {
+		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+	}
+	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
+	new Handle:hCall = EndPrepSDKCall();
+	new value = SDKCall(hCall, weapon);
+	CloseHandle(hCall);
+	return value;
+}
+
+public Native_Weapon_GetMaxClip1(Handle:plugin, numParams) {
 	new weapon = GetNativeCell(1);
 	return Weapon_GetMaxClip1(weapon);
 }
+
+public Native_Weapon_GetDefaultClip1(Handle:plugin, numParams) {
+	new weapon = GetNativeCell(1);
+	return Weapon_GetDefaultClip1(weapon);
+}
+
 public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 {
 	new len;
@@ -593,7 +609,7 @@ public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
+		retval = GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 	return retval;
 }
@@ -612,7 +628,7 @@ public Native_ObjectiveResource_GetPropFloat(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = Float:GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
+		retval = Float:GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 	return _:retval;
 }
@@ -630,7 +646,7 @@ public Native_ObjectiveResource_GetPropEnt(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (4 * element));
+		retval = GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (4 * element));
 	}
 	return retval;
 }
@@ -648,27 +664,26 @@ public Native_ObjectiveResource_GetPropBool(Handle:plugin, numParams)
 	GetObjResEnt();
 	if (g_iObjResEntity > 0)
 	{
-		retval = bool:GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (element));
+		retval = bool:GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (element));
 	}
 	return _:retval;
 }
-public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams)
-{
+public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams) {
 	new len;
 	GetNativeStringLength(1, len);
 	if (len <= 0)
 	{
 	  return false;
 	}
-	new String:prop[len+1],retval=-1;
+	new String:prop[len+1], retval=-1;
 	GetNativeString(1, prop, len+1);
 	new size = 12;
 	new element = GetNativeCell(3);
 	GetObjResEnt();
+	new Float:result[3];
 	if (g_iObjResEntity > 0)
 	{
-		new Float:result[3];
-		retval = GetEntDataVector(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element), result);
+		retval = GetEntDataVector(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element), result);
 		SetNativeArray(2, result, 3);
 	}
 	return retval;
@@ -689,7 +704,7 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 	if (g_iObjResEntity > 0)
 	{
 		//SetNativeString(2, buffer, maxlen+1);
-		//GetEntData(g_iObjResEntity, FindSendPropOffs(g_iObjResEntityNetClass, prop) + (size * element));
+		//GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element));
 	}
 */
 	return retval;
@@ -712,7 +727,7 @@ public CheckInfiniteAmmo(client)
 	if (GetConVarBool(cvarInfiniteMagazine))
 	{
 		new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
-		new maxammo = Ins_GetWeaponGetMaxClip1(ActiveWeapon);
+		new maxammo = Ins_GetMaxClip1(ActiveWeapon);
 		SetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", maxammo);
 	}
 }

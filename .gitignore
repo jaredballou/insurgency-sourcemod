@@ -14,3 +14,8 @@ data/sqlite/clientprefs-sqlite.sq3
 data/updater.txt
 data/dumps/*
 data/antitk.txt
+configs/admin_groups.cfg
+configs/admins.cfg
+configs/admins_simple.ini
+configs/core.cfg
+scripting/output/*

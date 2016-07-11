@@ -21,8 +21,8 @@
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart() {
-	cvarVersion = CreateConVar("sm_votelog_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_votelog_enabled", PLUGIN_WORKING, "Enable vote logging", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_votelog_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_votelog_enabled", PLUGIN_WORKING, "Enable vote logging", FCVAR_NOTIFY);
 	InsLog(DEBUG,"Starting");
 	HookEvent("vote_started", Event_vote_started);
 	HookEvent("vote_changed", Event_vote_changed);

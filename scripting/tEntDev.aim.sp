@@ -15,7 +15,7 @@ public Plugin:myinfo =
 };
 
 public OnPluginStart() {
-	CreateConVar("sm_tentdev_aim_version", VERSION, "", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("sm_tentdev_aim_version", VERSION, "",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 
 	RegAdminCmd("sm_ted_select", Command_MarkEntity, ADMFLAG_ROOT);
 }
