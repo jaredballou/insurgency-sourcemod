@@ -26,7 +26,9 @@
 
 native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
 native Ins_Log(ELOG_LEVEL:level,const String:format[], any:...);
+native Ins_GetMaxClip1(weapon);
 native Ins_GetWeaponGetMaxClip1(weapon);
+native Ins_GetDefaultClip1(weapon);
 native Float:Ins_ObjectiveResource_GetPropFloat(const String:prop[], size=4, element=0);
 native Ins_ObjectiveResource_GetPropEnt(const String:prop[], element=0);
 native bool:Ins_ObjectiveResource_GetPropBool(const String:prop[], element=0);

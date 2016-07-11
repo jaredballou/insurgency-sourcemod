@@ -6,143 +6,109 @@
 		{
 			"GiveNamedItem"
 			{
-				"windows"	"398"
-				"linux"		"402"
-				"mac"		"402"
+				"windows"	"396"
+				"linux"		"400"
+				"mac"		"400"
+			}
+			"CheckReload"
+			{
+				"windows"	"281"
+				"linux"		"282"
+			}
+			"GetDefaultClip1"
+			{
+				"windows"	"325"
+				"linux"		"326"
+			}
+			"GetFireRate"
+			{
+				"windows"	"296"
+				"linux"		"297"
+			}
+			"GetMaxClip1"
+			{
+				"windows"	"323"
+				"linux"		"324"
+			}
+			"GetName"
+			{
+				"windows"	"333"
+				"linux"		"334"
+			}
+			"GetPrintName"
+			{
+				"windows"	"334"
+				"linux"		"335"
+			}
+			"GetSlot"
+			{
+				"windows"	"331"
+				"linux"		"332"
+			}
+			"GetWeight"
+			{
+				"windows"	"327"
+				"linux"		"328"
 			}
 			"RemovePlayerItem"
-			{
-				"windows"	"271"
-				"linux"		"272"
-				"mac"		"272"
-			}
-			"Weapon_GetSlot"
 			{
 				"windows"	"269"
 				"linux"		"270"
 				"mac"		"270"
 			}
-
-			"CheckReload"
-			{
-				"windows"	"283"
-				"linux"		"284"
-			}
-			"GetDefaultClip1"
-			{
-				"windows"	"327"
-				"linux"		"328"
-			}
-			"GetFireRate"
-			{
-				"windows"	"298"
-				"linux"		"299"
-			}
-			"GetMaxClip1"
-			{
-				"windows"	"325"
-				"linux"		"326"
-			}
-			"GetName"
-			{
-				"windows"	"335"
-				"linux"		"336"
-			}
-			"GetPrintName"
-			{
-				"windows"	"336"
-				"linux"		"337"
-			}
-			"GetSlot"
-			{
-				"windows"	"333"
-				"linux"		"334"
-			}
-			"GetWeight"
-			{
-				"windows"	"329"
-				"linux"		"330"
-			}
 			"ShouldBlockPrimaryFire"
 			{
-				"windows"	"281"
-				"linux"		"282"
+				"windows"	"279"
+				"linux"		"280"
 			}
 		}
 		"Signatures"
 		{
-			"AddMags"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN19CINSWeaponMagazines7AddMagsEiii"
-			}
-			"CheckReload"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSWeapon11CheckReloadEv"
-			}
-			"Deafen"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSPlayer6DeafenEf"
-			}
-			"ForceChangeTeam"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSPlayer15ForceChangeTeamEi"
-			}
-                        "ForceRespawn"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
-                        }
-			"GetMagazines"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSPlayer12GetMagazinesEi"
-			}
-			"GetMaxClip1"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZNK10CINSWeapon11GetMaxClip1Ev"
-			}
-			"GetName"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZNK10CINSWeapon7GetNameEv"
-			}
-			"GetPrintName"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZNK10CINSWeapon12GetPrintNameEv"
-			}
-			"GetSlot"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZNK10CINSWeapon7GetSlotEv"
-//                                "linux"         "@_ZNK12CINSGearBase7GetSlotEv"
-			}
-			"GetWeight"
-                        {
-				"library"	"server"
-//                                "linux"         "@_ZNK10CINSPlayer9GetWeightEv"
-                                "linux"         "@_ZNK10CINSWeapon9GetWeightEv"
-			}
-                        "Resupply"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN10CINSPlayer8ResupplyEv"
-                        }
-			"RoundCount"
-                        {
-				"library"	"server"
-                                "linux"         "@_ZN19CINSWeaponMagazines10RoundCountEv"
-			}
                         "Spawn"
                         {
 				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x40\x53\x8B\xD9\x56\x80\xBB\xDE\x19\x00\x00\x00"
                                 "linux"         "@_ZN10CINSPlayer5SpawnEv"
                         }
+                        "ForceRespawn"
+                        {
+				"library"	"server"
+				"windows"	"\x56\x8B\xF1\xE8\x2A\x2A\x2A\x2A\x84\xC0\x74\x2A\x8B\xCE\xE8\x2A\x2A\x2A\x2A\x85\xC0\x74\x2A\x8B\x10\x8B\xC8\x6A\x01"
+                                "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
+                        }
+                        "Resupply"
+                        {
+				"library"	"server"
+				"windows"	"\x55\x8b\xEC\x51\x56\x8B\xF1\x8B\x06\x8B\x2A\x2A\x2A\x2A\x2A\xFF\xD0\x84\xC0\x0F\x84\x2A\x2A\x2A\x2A\x80"
+                                "linux"         "@_ZN10CINSPlayer8ResupplyEv"
+                        }
+			"RoundCount"
+			{
+				"library"	"server"
+				"linux"		"@_ZN19CINSWeaponMagazines10RoundCountEv"
+			}
+			"Deafen"
+			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x20\x56\x8B\xF1\x8B\x06\xFF\x90\x6C\x06\x00\x00"
+				"linux"		"@_ZN10CINSPlayer6DeafenEf"
+			}
+			"ForceChangeTeam"
+			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x51\x53\x56\x8B\x75\x08\x8B\xDE\x57\x8B\xF9"
+				"linux"		"@_ZN10CINSPlayer15ForceChangeTeamEi"
+			}
+			"GetMagazines"
+			{
+				"library"	"server"
+				"linux"		"@_ZN10CINSPlayer12GetMagazinesEi"
+			}
+			"AddMags"
+                        {
+				"library"	"server"
+                                "linux"         "@_ZN19CINSWeaponMagazines7AddMagsEi"
+			}
 		}
 	}
 }

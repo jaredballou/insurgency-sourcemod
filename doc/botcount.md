@@ -1,5 +1,5 @@
 <a name="botcount">
-### [INS] Bot Counter 0.0.2
+### Bot Counter 0.0.2
 
 Shows Bots Left Alive
  * [Source - scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)

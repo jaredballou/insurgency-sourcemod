@@ -1,5 +1,5 @@
 <a name="insurgency">
-### [INS] Insurgency Support Library 1.3.5
+### [INS] Insurgency Support Library 1.3.6
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
  * [Source - scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)

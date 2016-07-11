@@ -138,7 +138,12 @@ class SourceModPlugin(object):
 			else:
 				self.dependencies['Source'].append(incfile)
 
+	def compile_plugin(self):
+		os.system("%s %s -o%s" % (getpath("scripting/spcomp"), self.sp_file, self.smx_file))
+		return os.path.isfile(self.smx_file)
 	def process_plugin(self):
+		if not os.path.isfile(self.smx_file) or self.compile:
+			self.compile_plugin()
 		with open(self.smx_file, 'rb') as fp:
 			try:
 				self.plugin = smx.SourcePawnPlugin(fp)

@@ -3,18 +3,18 @@ This repository has a complete installation of SourceMod, including all my plugi
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
- * <a href='#ammocheck'>Ammo Check 1.0.0</a>
- * <a href='#botcount'>[INS] Bot Counter 0.0.2</a>
+ * <a href='#ammocheck'>Ammo Check 1.0.1</a>
+ * <a href='#botcount'>Bot Counter 0.0.2</a>
  * <a href='#botnames'>Bot Names 1.0.3</a>
  * <a href='#botspawns'>Bot Spawns 0.4.1</a>
  * <a href='#cooplobby'>Coop Lobby Override 0.0.1</a>
  * <a href='#cvarlist'>CVAR List 0.0.1</a>
  * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
  * <a href='#dropweapon'>[INS] Drop Weapon 0.0.2</a>
- * <a href='#events'>Event Logger 0.0.1</a>
+ * <a href='#events'>Event Logger 0.0.2</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#insmaps'>[INS] Map List 1.4.1</a>
- * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.5</a>
+ * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.6</a>
  * <a href='#magnifier'>[INS] Magnifier 0.0.1</a>
  * <a href='#nofog'>[INS] No Fog 0.0.1</a>
  * <a href='#respawn'>[INS] Player Respawn 1.8.1</a>
@@ -29,7 +29,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#weapon_pickup'>[INS] Weapon Pickup 0.1.0</a>
 
 <a name="ammocheck">
-### Ammo Check 1.0.0
+### Ammo Check 1.0.1
 
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
  * [Source - scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)
@@ -50,7 +50,7 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
  * "check_ammo" // Check ammo of the current weapon
 
 <a name="botcount">
-### [INS] Bot Counter 0.0.2
+### Bot Counter 0.0.2
 
 Shows Bots Left Alive
  * [Source - scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)
@@ -193,7 +193,7 @@ Adds a drop command
  * "drop_weapon"
 
 <a name="events">
-### Event Logger 0.0.1
+### Event Logger 0.0.2
 
 Log events to client or server
  * [Source - scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
@@ -270,7 +270,7 @@ Lists all maps and modes available
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 <a name="insurgency">
-### [INS] Insurgency Support Library 1.3.5
+### [INS] Insurgency Support Library 1.3.6
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
  * [Source - scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)

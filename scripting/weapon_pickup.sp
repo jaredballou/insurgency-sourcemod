@@ -343,7 +343,7 @@ ListWeapons(client, observer)
 		m_iAmmo = GetEntProp(client, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 		m_iPrimaryAmmoCount = GetEntProp(weapon, Prop_Data, "m_iPrimaryAmmoCount");
 	}
-	new maxammo = Ins_GetWeaponGetMaxClip1(weapon);
+	new maxammo = Ins_GetMaxClip1(weapon);
         ReplyToCommand(observer, "%d\t%d\t%s m_hWeaponDefinitionHandle %d m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d maxammo %d m_bHammerDown %d m_eBoltState %d",offset, weapon, classname, m_hWeaponDefinitionHandle, m_bChamberedRound, m_iPrimaryAmmoType, m_iClip1, m_iAmmo, m_iPrimaryAmmoCount, maxammo,m_bHammerDown,m_eBoltState);
     }
 }

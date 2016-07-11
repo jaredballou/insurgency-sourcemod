@@ -1,5 +1,5 @@
 <a name="events">
-### Event Logger 0.0.1
+### Event Logger 0.0.2
 
 Log events to client or server
  * [Source - scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
