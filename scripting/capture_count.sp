@@ -34,8 +34,8 @@ new g_iCaptures[4],g_iCaches[4];
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_capture_count_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_capture_count_enabled", "0", "sets whether plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_capture_count_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_capture_count_enabled", "0", "sets whether plugin is enabled", FCVAR_NOTIFY);
 	RegConsoleCmd("check_captures", Command_Check_Captures);
 	RegConsoleCmd("capture_count", Command_Check_Captures);
 	RegConsoleCmd("check_capture", Command_Check_Captures);

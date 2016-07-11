@@ -188,16 +188,16 @@ public OnMapStart()
 
 public OnPluginStart()
 {
-	CreateConVar("playertrails_version", PLUGIN_VERSION, "Player Trails Version", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_DONTRECORD|FCVAR_NOTIFY);
+	CreateConVar("playertrails_version", PLUGIN_VERSION, "Player Trails Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_DONTRECORD|FCVAR_NOTIFY);
 	
-	gH_Cvar_TrailsEnabled = CreateConVar("sm_playertrails_enable", "0", "Enables/Disables Player Trails", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	gH_Cvar_DonatorsOnly = CreateConVar("sm_playertrails_donatoronly", "0", "Specifies whether everyone or only donators will receive trails", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	gH_Cvar_DonatorFlags = CreateConVar("sm_playertrails_adminflags", "sz", "Admin flags which will have access to grenade trails. empty=all admins", FCVAR_PLUGIN);
+	gH_Cvar_TrailsEnabled = CreateConVar("sm_playertrails_enable", "0", "Enables/Disables Player Trails",, true, 0.0, true, 1.0);
+	gH_Cvar_DonatorsOnly = CreateConVar("sm_playertrails_donatoronly", "0", "Specifies whether everyone or only donators will receive trails",, true, 0.0, true, 1.0);
+	gH_Cvar_DonatorFlags = CreateConVar("sm_playertrails_adminflags", "sz", "Admin flags which will have access to grenade trails. empty=all admins",);
 	
-	gH_Cvar_Lifetime = CreateConVar("sm_playertrails_lifetime", "1.0", "Seconds a trail will continue before disappearing.", FCVAR_PLUGIN);
-	gH_Cvar_StartWidth = CreateConVar("sm_playertrails_startwidth", "22.0", "Meters the trail is wide at the beginning of life.", FCVAR_PLUGIN);
-	gH_Cvar_EndWidth = CreateConVar("sm_playertrails_endwidth", "0.0", "Meters the trail is wide at the end of life.", FCVAR_PLUGIN);
-	gH_Cvar_RenderMode = CreateConVar("sm_playertrails_rendermode", "5", "The render mode of trails.", FCVAR_PLUGIN);
+	gH_Cvar_Lifetime = CreateConVar("sm_playertrails_lifetime", "1.0", "Seconds a trail will continue before disappearing.",);
+	gH_Cvar_StartWidth = CreateConVar("sm_playertrails_startwidth", "22.0", "Meters the trail is wide at the beginning of life.",);
+	gH_Cvar_EndWidth = CreateConVar("sm_playertrails_endwidth", "0.0", "Meters the trail is wide at the end of life.",);
+	gH_Cvar_RenderMode = CreateConVar("sm_playertrails_rendermode", "5", "The render mode of trails.",);
 	g_Cvar_ChatPrefix = RegisterConVar("sm_playertrails_chatprefix", "\x03[xG] \x01", "The prefix before each chat message.", TYPE_STRING);
 	
 	RegConsoleCmd("sm_trails", Command_Trails);

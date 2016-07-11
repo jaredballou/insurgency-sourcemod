@@ -213,7 +213,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
-	CreateConVar("superlogs_tf_version", VERSION, NAME, FCVAR_PLUGIN|FCVAR_NOTIFY);
+	CreateConVar("superlogs_tf_version", VERSION, NAME,|FCVAR_NOTIFY);
 
 	cvar_crits = FindConVar("tf_weapon_criticals");
 	cvar_actions = CreateConVar("superlogs_actions", "1", "Enable logging of most player actions, such as \"stun\" (default on)", 0, true, 0.0, true, 1.0);

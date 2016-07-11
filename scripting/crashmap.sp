@@ -63,7 +63,7 @@ public Plugin:myinfo =
 }
 
 public OnPluginStart(){
-	CreateConVar("sm_crashmap_version", PLUGIN_VERSION, "Crashed Map Recovery Version", FCVAR_PLUGIN | FCVAR_SPONLY | FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	CreateConVar("sm_crashmap_version", PLUGIN_VERSION, "Crashed Map Recovery Version", | FCVAR_SPONLY | FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	sm_crashmap_enabled = CreateConVar("sm_crashmap_enabled", "1", "Enable Crashed Map Recovery? (1=yes 0=no)", FCVAR_NOTIFY, true, 0.0, true, 1.0)
 	sm_crashmap_recovertime = CreateConVar("sm_crashmap_recovertime", "0", "Recover timelimit? (1=yes 0=no)", FCVAR_NOTIFY, true, 0.0, true, 1.0)
 	sm_crashmap_interval = CreateConVar("sm_crashmap_interval", "20", "Interval between timeleft updates (in seconds)", FCVAR_NOTIFY, true, 1.0)

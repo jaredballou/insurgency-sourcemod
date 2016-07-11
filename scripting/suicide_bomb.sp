@@ -54,17 +54,16 @@ new bool:bEnabled = false;
 public OnPluginStart()
 {
 	PrintToServer("[SUICIDE] Starting");
-//	 = CreateConVar("sm_suicidebomb_", "", "", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarSpawnDelay = CreateConVar("sm_suicidebomb_spawn_delay", "30", "Do not detonate if player has been alive less than this many seconds", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarExplodeArmed = CreateConVar("sm_suicidebomb_explode_armed", "0", "Explode when killed if C4 or IED is in hand", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarDeathChance = CreateConVar("sm_suicidebomb_death_chance", "0.1", "Chance as a fraction of 1 that a bomber will explode when killed", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarBotsOnly = CreateConVar("sm_suicidebomb_bots_only", "1", "Only apply suicide bomber code to bots", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarAutoDetonateRange = CreateConVar("sm_suicidebomb_auto_detonate_range", "0", "Range at which to automatically set off the bomb (0 is disabled)", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarAutoDetonateCount = CreateConVar("sm_suicidebomb_auto_detonate_count", "2", "Do not detonate until this many enemies are in range", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarStripWeapons = CreateConVar("sm_suicidebomb_strip_weapons", "1", "Remove all weapons from suicide bombers except the bomb", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarPlayerClasses = CreateConVar("sm_suicidebomb_player_classes", "sapper bomber suicide", "Player classes to apply suicide bomber changes to", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "0", "sets whether suicide bombs are enabled", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarSpawnDelay = CreateConVar("sm_suicidebomb_spawn_delay", "30", "Do not detonate if player has been alive less than this many seconds", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarExplodeArmed = CreateConVar("sm_suicidebomb_explode_armed", "0", "Explode when killed if C4 or IED is in hand", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarDeathChance = CreateConVar("sm_suicidebomb_death_chance", "0.1", "Chance as a fraction of 1 that a bomber will explode when killed", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarBotsOnly = CreateConVar("sm_suicidebomb_bots_only", "1", "Only apply suicide bomber code to bots", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarAutoDetonateRange = CreateConVar("sm_suicidebomb_auto_detonate_range", "0", "Range at which to automatically set off the bomb (0 is disabled)", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarAutoDetonateCount = CreateConVar("sm_suicidebomb_auto_detonate_count", "2", "Do not detonate until this many enemies are in range", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarStripWeapons = CreateConVar("sm_suicidebomb_strip_weapons", "1", "Remove all weapons from suicide bombers except the bomb", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarPlayerClasses = CreateConVar("sm_suicidebomb_player_classes", "sapper bomber suicide", "Player classes to apply suicide bomber changes to", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 
 	HookConVarChange(cvarEnabled,ConVarChanged);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);

@@ -8,23 +8,14 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#botnames'>Bot Names 1.0.3</a>
  * <a href='#botspawns'>Bot Spawns 0.4.1</a>
  * <a href='#cooplobby'>Coop Lobby Override 0.0.1</a>
- * <a href='#cvarlist'>CVAR List 0.0.1</a>
- * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
- * <a href='#dropweapon'>[INS] Drop Weapon 0.0.2</a>
  * <a href='#events'>Event Logger 0.0.2</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insmaps'>[INS] Map List 1.4.1</a>
  * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.6</a>
- * <a href='#magnifier'>[INS] Magnifier 0.0.1</a>
  * <a href='#nofog'>[INS] No Fog 0.0.1</a>
  * <a href='#respawn'>[INS] Player Respawn 1.8.1</a>
  * <a href='#restrictedarea'>[INS] Restricted Area Removal 0.0.1</a>
  * <a href='#rpgdrift'>[INS] RPG Adjustments 0.0.3</a>
- * <a href='#score'>[INS] Score Modifiers 0.0.1</a>
- * <a href='#sprinklers'>[INS] Sprinkler Removal 0.0.3</a>
  * <a href='#suicide_bomb'>[INS] Suicide Bombers 0.0.7</a>
- * <a href='#theater_reconnect'>[INS] Theater Reconnect 0.0.1</a>
- * <a href='#theaterpicker'>[INS] Theater Picker 0.0.4</a>
  * <a href='#votelog'>Vote Logging 0.0.2</a>
  * <a href='#weapon_pickup'>[INS] Weapon Pickup 0.1.0</a>
 
@@ -141,57 +132,6 @@ Plugin for overriding Insurgency Coop to 16 players
 
  * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
-<a name="cvarlist">
-### CVAR List 0.0.1
-
-CVAR and command list dumper
- * [Source - scripting/cvarlist.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cvarlist.sp?raw=true)
- * [Plugin - plugins/cvarlist.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cvarlist.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
-
-#### Command List
-
- * "sm_cvarlist"
- * "sm_cmdlist"
-
-<a name="damagemod">
-### [INS] Damage Modifier 0.0.2
-
-Modifies damage before applying to players
- * [Source - scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
- * [Plugin - plugins/damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-
-#### CVAR List
-
- * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
- * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
-
-<a name="dropweapon">
-### [INS] Drop Weapon 0.0.2
-
-Adds a drop command
- * [Source - scripting/dropweapon.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/dropweapon.sp?raw=true)
- * [Plugin - plugins/dropweapon.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/dropweapon.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-
-#### CVAR List
-
- * "sm_dropweapon_enabled" "PLUGIN_WORKING" // sets whether weapon dropping is enabled
-
-#### Command List
-
- * "drop_weapon"
-
 <a name="events">
 ### Event Logger 0.0.2
 
@@ -236,6 +176,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
  * "hlx_block_commands" "1" // If activated HLstatsX commands are blocked from the chat area
  * "hlx_protect_address" "" // Address to be protected for logging/forwarding
  * "hlxce_webpage" "http://www.hlxcommunity.com" // http://www.hlxcommunity.com
+ * "hlx_server_tag" "1" // If enabled
  * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
 
 #### Command List
@@ -257,17 +198,6 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
  * "hlx_message_prefix_clear"
  * "logaddress_delall"
  * "hlx_sm_player_action"
-
-<a name="insmaps">
-### [INS] Map List 1.4.1
-
-Lists all maps and modes available
- * [Source - scripting/insmaps.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insmaps.sp?raw=true)
- * [Plugin - plugins/insmaps.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insmaps.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 <a name="insurgency">
 ### [INS] Insurgency Support Library 1.3.6
@@ -294,27 +224,6 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
  * "sm_insurgency_log_level" "error" // Logging level
  * "sm_insurgency_infinite_ammo" "0" // Infinite ammo
  * "sm_insurgency_checkpoint_counterattack_capture" "0" // Enable counterattack by bots to capture points in Checkpoint
-
-<a name="magnifier">
-### [INS] Magnifier 0.0.1
-
-Adds FOV switch to emulate flip to side magnifiers
- * [Source - scripting/magnifier.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/magnifier.sp?raw=true)
- * [Plugin - plugins/magnifier.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/magnifier.smx?raw=true)
-
-#### Dependencies
-
- * [Plugin - translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
-
-#### CVAR List
-
- * "sm_magnifier_adminflag" "0" // Admin flag required to use magnifier. 0 = No flag needed. Can use a b c ....
- * "sm_magnifier_zoom" "60" // zoom level for magnifier
- * "sm_magnifier_shots" "0" // Allow or disallow shots while using magnifier. 1 = allow. 0 = disallow.
-
-#### Command List
-
- * "sm_magnifier"
 
 <a name="nofog">
 ### [INS] No Fog 0.0.1
@@ -396,41 +305,6 @@ Adjusts behavior of RPG rounds
  * "sm_rpgdrift_chance" "0.25" // Chance as a fraction of 1 that a player-fired rocket will be affected
  * "sm_rpgdrift_amount" "2.0" // Sets RPG drift max change per tick
 
-<a name="score">
-### [INS] Score Modifiers 0.0.1
-
-Adds a number of new ways to get score, or remove score for players
- * [Source - scripting/score.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/score.sp?raw=true)
- * [Plugin - plugins/score.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/score.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Plugin - translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
- * [Plugin - translations/score.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/score.phrases.txt?raw=true)
-
-#### CVAR List
-
- * "sm_score_enabled" "1" // sets whether score modifier is enabled
-
-#### Command List
-
- * "check_score"
-
-<a name="sprinklers">
-### [INS] Sprinkler Removal 0.0.3
-
-Plugin for removing Sprinkers
- * [Source - scripting/sprinklers.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/sprinklers.sp?raw=true)
- * [Plugin - plugins/sprinklers.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/sprinklers.smx?raw=true)
-
-#### Dependencies
-
-
-#### CVAR List
-
- * "sm_sprinklers_enabled" "PLUGIN_WORKING" // Set to 1 to remove sprinklers. 0 leaves them alone.
-
 <a name="suicide_bomb">
 ### [INS] Suicide Bombers 0.0.7
 
@@ -445,7 +319,6 @@ Adds suicide bomb for bots
 #### CVAR List
 
  * "sm_suicidebomb_auto_detonate_range" "0" // Range at which to automatically set off the bomb (0 is disabled)
- * "sm_suicidebomb_" "" // 
  * "sm_suicidebomb_player_classes" "sapper bomber suicide" // Player classes to apply suicide bomber changes to
  * "sm_suicidebomb_enabled" "0" // sets whether suicide bombs are enabled
  * "sm_suicidebomb_spawn_delay" "30" // Do not detonate if player has been alive less than this many seconds
@@ -454,37 +327,6 @@ Adds suicide bomb for bots
  * "sm_suicidebomb_strip_weapons" "1" // Remove all weapons from suicide bombers except the bomb
  * "sm_suicidebomb_death_chance" "0.1" // Chance as a fraction of 1 that a bomber will explode when killed
  * "sm_suicidebomb_bots_only" "1" // Only apply suicide bomber code to bots
-
-<a name="theater_reconnect">
-### [INS] Theater Reconnect 0.0.1
-
-If a player connects with their mp_theater_override set to something other than what the server uses, set the cvar and retonnect them.
- * [Source - scripting/theater_reconnect.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/theater_reconnect.sp?raw=true)
- * [Plugin - plugins/theater_reconnect.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theater_reconnect.smx?raw=true)
-
-#### Dependencies
-
-
-#### CVAR List
-
- * "sm_theater_reconnect_enabled" "1" // sets whether theater reconnect is enabled
-
-<a name="theaterpicker">
-### [INS] Theater Picker 0.0.4
-
-Allows admins to set theater, and clients to vote
- * [Source - scripting/theaterpicker.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/theaterpicker.sp?raw=true)
- * [Plugin - plugins/theaterpicker.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/theaterpicker.smx?raw=true)
-
-#### Dependencies
-
- * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/smjansson.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smjansson.inc?raw=true)
-
-#### CVAR List
-
- * "sm_theaterpicker_file" "PLUGIN_VERSION" // Custom theater file name
- * "sm_theaterpicker_config" "PLUGIN_VERSION" // Custom theater file name
 
 <a name="votelog">
 ### Vote Logging 0.0.2

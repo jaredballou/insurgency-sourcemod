@@ -45,19 +45,19 @@ public Plugin:myinfo = {
 
 public OnPluginStart()
 {
-	if ((g_iFlashDuration = FindSendPropOffs("CINSPlayer", "m_flFlashDuration")) == -1)
+	if ((g_iFlashDuration = FindSendPropInfo("CINSPlayer", "m_flFlashDuration")) == -1)
 		SetFailState("[BACKBLAST] Failed to find \"m_flFlashDuration\".");
-	if ((g_iFlashAlpha = FindSendPropOffs("CINSPlayer", "m_flFlashMaxAlpha")) == -1)
+	if ((g_iFlashAlpha = FindSendPropInfo("CINSPlayer", "m_flFlashMaxAlpha")) == -1)
 		SetFailState("[BACKBLAST] Failed to find \"m_flFlashMaxAlpha\".");
 
-	cvarVersion = CreateConVar("sm_backblast_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_backblast_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_backblast_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_backblast_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY);
 
-	cvarDamage = CreateConVar("sm_backblast_damage", "80", "Max damage from backblast", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDamageRange = CreateConVar("sm_backblast_damage_range", "15", "Distance in meters from firing to hurt players in backblast", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMaxRange = CreateConVar("sm_backblast_max_range", "25", "Max range for backblast to affect players visually", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarConeAngle = CreateConVar("sm_backblast_cone_angle", "90", "Angle behind firing to include in backblast effect", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarWallDistance = CreateConVar("sm_backblast_wall_distance", "5", "Distance in meters to wall where player firing will hurt himself", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarDamage = CreateConVar("sm_backblast_damage", "80", "Max damage from backblast", FCVAR_NOTIFY);
+	cvarDamageRange = CreateConVar("sm_backblast_damage_range", "15", "Distance in meters from firing to hurt players in backblast", FCVAR_NOTIFY);
+	cvarMaxRange = CreateConVar("sm_backblast_max_range", "25", "Max range for backblast to affect players visually", FCVAR_NOTIFY);
+	cvarConeAngle = CreateConVar("sm_backblast_cone_angle", "90", "Angle behind firing to include in backblast effect", FCVAR_NOTIFY);
+	cvarWallDistance = CreateConVar("sm_backblast_wall_distance", "5", "Distance in meters to wall where player firing will hurt himself", FCVAR_NOTIFY);
 
 	HookConVarChange(cvarDamageRange, OnSettingsChange);
 	HookConVarChange(cvarMaxRange, OnSettingsChange);

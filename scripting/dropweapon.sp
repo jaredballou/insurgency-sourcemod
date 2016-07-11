@@ -35,8 +35,8 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_dropweapon_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_dropweapon_enabled", PLUGIN_WORKING, "sets whether weapon dropping is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_dropweapon_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_dropweapon_enabled", PLUGIN_WORKING, "sets whether weapon dropping is enabled", FCVAR_NOTIFY);
 	RegConsoleCmd("drop_weapon", Command_Drop_Weapon);
 	//AddCommandListener(CmdLstnr_Drop, "drop");
 	//HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);

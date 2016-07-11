@@ -46,13 +46,13 @@ new Handle:cvarDirection = INVALID_HANDLE;
 public OnPluginStart()
 {
 //	LoadTranslations("insurgency.phrases");
-	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether this plugin is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarTeamOnly = CreateConVar("sm_navmesh_chat_teamonly", "1", "sets whether to prepend to all messages or just team messages", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarGrid = CreateConVar("sm_navmesh_chat_grid", "1", "Include grid coordinates", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarPlace = CreateConVar("sm_navmesh_chat_place", "1", "Include place name from navmesh", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDistance = CreateConVar("sm_navmesh_chat_distance", "1", "Include distance to speaker", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarDirection = CreateConVar("sm_navmesh_chat_direction", "1", "Include direction to speaker", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_navmesh_chat_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_navmesh_chat_enabled", "1", "sets whether this plugin is enabled", FCVAR_NOTIFY);
+	cvarTeamOnly = CreateConVar("sm_navmesh_chat_teamonly", "1", "sets whether to prepend to all messages or just team messages", FCVAR_NOTIFY);
+	cvarGrid = CreateConVar("sm_navmesh_chat_grid", "1", "Include grid coordinates", FCVAR_NOTIFY);
+	cvarPlace = CreateConVar("sm_navmesh_chat_place", "1", "Include place name from navmesh", FCVAR_NOTIFY);
+	cvarDistance = CreateConVar("sm_navmesh_chat_distance", "1", "Include distance to speaker", FCVAR_NOTIFY);
+	cvarDirection = CreateConVar("sm_navmesh_chat_direction", "1", "Include direction to speaker", FCVAR_NOTIFY);
 	HookUserMessage(GetUserMessageId("VoiceSubtitle"), VoiceHook, true);
 	if (!g_bOverviewLoaded) {
 		OnMapStart();

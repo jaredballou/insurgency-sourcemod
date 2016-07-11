@@ -28,8 +28,8 @@ public Plugin:myinfo = {
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_pistolsonly_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_pistolsonly_enabled", "0", "sets whether ammo check is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_pistolsonly_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_pistolsonly_enabled", "0", "sets whether ammo check is enabled", FCVAR_NOTIFY);
 	//RegConsoleCmd("check_ammo", Check_Ammo);
 	HookEvent("weapon_pickup", Event_WeaponPickup);
 	HookEvent("weapon_deploy", Event_WeaponDeploy);

@@ -35,8 +35,8 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_awards_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_awards_enabled", PLUGIN_WORKING, "Enable end-round awards", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_awards_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_awards_enabled", PLUGIN_WORKING, "Enable end-round awards", FCVAR_NOTIFY);
 
 	if (LibraryExists("updater"))
 	{

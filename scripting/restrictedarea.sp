@@ -34,8 +34,8 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_restrictedarea_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_restrictedarea_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_restrictedarea_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_restrictedarea_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY);
 	HookEvent("server_spawn", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);

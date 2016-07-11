@@ -56,12 +56,12 @@ Gear = 8 ?
 public OnPluginStart()
 {
 	//PrintToServer("[SUICIDE] Starting");
-	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "1", "sets whether suicide bombs are enabled", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarDeathChance = CreateConVar("sm_suicidebomb_death_chance", "0.0", "Chance as a fraction of 1 that a bomber will explode when killed", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarIncenDeathChance = CreateConVar("sm_suicidebomb_incen_death_chance", "0.15", "Chance as a fraction of 1 that a bomber will explode when hurt by incen/molotov", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarExplosiveDeathChance = CreateConVar("sm_suicidebomb_explosive_death_chance", "0.75", "Chance as a fraction of 1 that a bomber will explode when hurt by explosive", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	cvarChestStomachDeathChance = CreateConVar("sm_suicidebomb_chest_stomach_death_chance", "0.50", "Chance as a fraction of 1 that a bomber will explode if shot in stomach/chest", FCVAR_NOTIFY | FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	cvarVersion = CreateConVar("sm_suicidebomb_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_suicidebomb_enabled", "1", "sets whether suicide bombs are enabled", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarDeathChance = CreateConVar("sm_suicidebomb_death_chance", "0.0", "Chance as a fraction of 1 that a bomber will explode when killed", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarIncenDeathChance = CreateConVar("sm_suicidebomb_incen_death_chance", "0.15", "Chance as a fraction of 1 that a bomber will explode when hurt by incen/molotov", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarExplosiveDeathChance = CreateConVar("sm_suicidebomb_explosive_death_chance", "0.75", "Chance as a fraction of 1 that a bomber will explode when hurt by explosive", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	cvarChestStomachDeathChance = CreateConVar("sm_suicidebomb_chest_stomach_death_chance", "0.50", "Chance as a fraction of 1 that a bomber will explode if shot in stomach/chest", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	
 	HookConVarChange(cvarEnabled,ConVarChanged);
 	HookEvent("player_hurt", Event_PlayerHurt, EventHookMode_Pre);

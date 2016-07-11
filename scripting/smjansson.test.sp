@@ -14,7 +14,7 @@ public Plugin:myinfo = {
 };
 
 public OnPluginStart() {
-	CreateConVar("sm_smjansson_test_version", VERSION, "Tests all SMJansson natives.", FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("sm_smjansson_test_version", VERSION, "Tests all SMJansson natives.",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 
 	new bool:bStepSuccess = false;
 

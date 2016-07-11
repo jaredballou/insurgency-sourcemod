@@ -18,3 +18,4 @@ configs/admin_groups.cfg
 configs/admins.cfg
 configs/admins_simple.ini
 configs/core.cfg
+scripting/output/*

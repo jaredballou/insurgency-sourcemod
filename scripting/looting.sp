@@ -31,9 +31,9 @@ new Handle:cvarMode = INVALID_HANDLE;
 
 public OnPluginStart()
 {
-	cvarVersion = CreateConVar("sm_looting_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_PLUGIN | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_looting_enabled", "1", "sets whether looting is enabled", FCVAR_NOTIFY | FCVAR_PLUGIN);
-	cvarMode = CreateConVar("sm_looting_mode", "1", "sets looting mode - 0: Loot per mag, 1: Loot all ammo", FCVAR_NOTIFY | FCVAR_PLUGIN);
+	cvarVersion = CreateConVar("sm_looting_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	cvarEnabled = CreateConVar("sm_looting_enabled", "1", "sets whether looting is enabled", FCVAR_NOTIFY);
+	cvarMode = CreateConVar("sm_looting_mode", "1", "sets looting mode - 0: Loot per mag, 1: Loot all ammo", FCVAR_NOTIFY);
 	RegConsoleCmd("loot", Loot_Body);
 	HookEvent("weapon_pickup", Event_WeaponPickup);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
