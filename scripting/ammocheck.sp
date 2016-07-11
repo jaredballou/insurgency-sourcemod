@@ -5,7 +5,7 @@
 #define PLUGIN_NAME "Ammo Check"
 #define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "ammocheck"
+#define PLUGIN_FILE ammocheck
 #define PLUGIN_LOG_PREFIX "AMMOCHECK"
 
 #pragma semicolon 1
@@ -46,8 +46,7 @@ public OnPluginStart()
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
 	}
 
-	if (LibraryExists("updater"))
-	{
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }

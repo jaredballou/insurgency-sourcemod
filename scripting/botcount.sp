@@ -14,7 +14,7 @@
 #define PLUGIN_NAME "Bot Counter"
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "botcount"
+#define PLUGIN_FILE botcount
 #define PLUGIN_LOG_PREFIX "BOTCOUNT"
 #include <myinfo>
 

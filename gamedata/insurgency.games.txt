@@ -6,60 +6,60 @@
 		{
 			"GiveNamedItem"
 			{
-				"windows"	"396"
-				"linux"		"400"
-				"mac"		"400"
+				"windows"	"397"
+				"linux"		"401"
+				"mac"		"401"
 			}
 			"CheckReload"
 			{
-				"windows"	"281"
-				"linux"		"282"
+				"windows"	"282"
+				"linux"		"283"
 			}
 			"GetDefaultClip1"
 			{
-				"windows"	"325"
-				"linux"		"326"
+				"windows"	"326"
+				"linux"		"327"
 			}
 			"GetFireRate"
 			{
-				"windows"	"296"
-				"linux"		"297"
+				"windows"	"297"
+				"linux"		"298"
 			}
 			"GetMaxClip1"
 			{
-				"windows"	"323"
-				"linux"		"324"
+				"windows"	"324"
+				"linux"		"325"
 			}
 			"GetName"
-			{
-				"windows"	"333"
-				"linux"		"334"
-			}
-			"GetPrintName"
 			{
 				"windows"	"334"
 				"linux"		"335"
 			}
+			"GetPrintName"
+			{
+				"windows"	"335"
+				"linux"		"336"
+			}
 			"GetSlot"
 			{
-				"windows"	"331"
-				"linux"		"332"
+				"windows"	"332"
+				"linux"		"333"
 			}
 			"GetWeight"
 			{
-				"windows"	"327"
-				"linux"		"328"
+				"windows"	"328"
+				"linux"		"329"
 			}
 			"RemovePlayerItem"
 			{
-				"windows"	"269"
-				"linux"		"270"
-				"mac"		"270"
+				"windows"	"270"
+				"linux"		"271"
+				"mac"		"271"
 			}
 			"ShouldBlockPrimaryFire"
 			{
-				"windows"	"279"
-				"linux"		"280"
+				"windows"	"280"
+				"linux"		"281"
 			}
 		}
 		"Signatures"

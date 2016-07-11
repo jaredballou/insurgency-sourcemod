@@ -2,7 +2,7 @@
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
 #define PLUGIN_VERSION "1.3.6"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "insurgency"
+#define PLUGIN_FILE insurgency
 #define PLUGIN_LOG_PREFIX "INSLIB"
 
 #include <sourcemod>
@@ -166,8 +166,7 @@ public OnPluginStart()
 
 //	LoadTranslations("insurgency.phrases");
 
-	if (LibraryExists("updater"))
-	{
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 	//UpdateAllDataSources();

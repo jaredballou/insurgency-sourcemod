@@ -133,6 +133,7 @@ class SourceModPlugin(object):
 
 	# Compile plugin if missing our out of date, default to disabled
 	def compile_plugin(self):
+		print("Compiling %s" % self.name)
 		os.system("%s %s -o%s -e%s" % (getpath("scripting/spcomp"), self.sp_file, self.smx_file, getpath("scripting/output/%s.out" % self.name)))
 		return os.path.isfile(self.smx_file)
 
