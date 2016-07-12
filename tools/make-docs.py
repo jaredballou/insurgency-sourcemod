@@ -27,6 +27,14 @@ import smx
 
 # TODO: Compare the source file and compiled plugin more intelligently than raw file times.
 # TODO: Manage all plugin types, and put in appropriate locations (disabled, nobuild, thirdparty)
+# TODO: Collect errors from compilation and show to user
+# TODO: Allow configurable compiler command
+# TODO: Add command-line arguments to control script
+# TODO: Move scripting files around according to their status in the config
+# TODO: Identify upstream plugins as a separate set
+# TODO: Flag all unclassified plugins and script files
+# TODO: Handle extensions
+# TODO: Process gamedata files, translations, etc.
 
 # Main function
 def main():
@@ -38,16 +46,16 @@ class SourceMod(object):
 		self.load_plugins()
 		self.create_readme()
 
-	def load_plugins(self):
-		self.plugins = {}
-		for name in self.config['plugins']['build']:
-			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
-
 	def load_config(self,config_file=None):
 		if config_file is None:
 			config_file = self.getpath("tools/config.yaml")
 		self.config_file = config_file
 		self.config = self.get_yaml_file(self.config_file)
+
+	def load_plugins(self):
+		self.plugins = {}
+		for name in self.config['plugins']['build']:
+			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
 
 	def getpath(self,path=""):
 		root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -60,10 +68,10 @@ class SourceMod(object):
 			except yaml.YAMLError as exc:
 				print(exc)
 				sys.exit()
+
 	def create_readme(self):
-		sortedKeys = sorted(self.plugins.keys())
 		fp = open(self.getpath("README.md"), 'w')
-		tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': self.plugins, 'sortedKeys': sortedKeys }] ))
+		tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': self.plugins, 'sortedKeys': sorted(self.plugins.keys()) }] ))
 		fp.write(tmpl)
 		fp.close()
 
