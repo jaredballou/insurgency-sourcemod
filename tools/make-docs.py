@@ -41,13 +41,13 @@ class SourceMod(object):
 	def load_plugins(self):
 		self.plugins = {}
 		for name in self.config['plugins']['build']:
-			self.plugins[name] = SourceModPlugin(name=name,config=config)
+			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
 
 	def load_config(self,config_file=None):
 		if config_file is None:
-			config_file = getpath("tools/config.yaml")
+			config_file = self.getpath("tools/config.yaml")
 		self.config_file = config_file
-		self.config = get_yaml_file(self.config_file)
+		self.config = self.get_yaml_file(self.config_file)
 
 	def getpath(self,path=""):
 		root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -62,7 +62,7 @@ class SourceMod(object):
 				sys.exit()
 	def create_readme(self):
 		sortedKeys = sorted(self.plugins.keys())
-		fp = open(getpath("README.md"), 'w')
+		fp = open(self.getpath("README.md"), 'w')
 		tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': self.plugins, 'sortedKeys': sortedKeys }] ))
 		fp.write(tmpl)
 		fp.close()
@@ -102,7 +102,7 @@ class SourceMod(object):
 
 class SourceModPlugin(object):
 
-	def __init__(self,name=None,config=None):
+	def __init__(self,name=None,config=None,parent=None):
 		self.config = config
 		self.cvars = {}
 		self.commands = {}
@@ -112,6 +112,8 @@ class SourceModPlugin(object):
 		self.compile = False
 		self.myinfo = {}
 		self.todos = {}
+		if not parent is None:
+			self.parent = parent
 		if not name is None:
 			self.name = name
 		else:
@@ -125,13 +127,13 @@ class SourceModPlugin(object):
 
 	# Get values from plugin
 	def get_files(self):
-		sp_file = getpath("scripting/%s.sp" % self.name)
+		sp_file = self.parent.getpath("scripting/%s.sp" % self.name)
 		if not os.path.isfile(sp_file):
 			print("ERROR: Cannot find plugin source file \"%s\"!" % sp_file)
 			return dict()
-		smx_file = getpath("plugins/%s.smx" % self.name)
+		smx_file = self.parent.getpath("plugins/%s.smx" % self.name)
 		if not os.path.isfile(smx_file):
-			smx_file = getpath("plugins/disabled/%s.smx" % self.name)
+			smx_file = self.parent.getpath("plugins/disabled/%s.smx" % self.name)
 		if not os.path.isfile(smx_file) or os.stat(sp_file).st_mtime > os.stat(smx_file).st_mtime:
 			self.compile = True
 		self.sp_file = sp_file
@@ -177,7 +179,7 @@ class SourceModPlugin(object):
 	# Compile plugin if missing our out of date, default to disabled
 	def compile_plugin(self):
 		print("Compiling %s" % self.name)
-		os.system("%s %s -o%s -e%s" % (getpath("scripting/spcomp"), self.sp_file, self.smx_file, getpath("scripting/output/%s.out" % self.name)))
+		os.system("%s %s -o%s -e%s" % (self.parent.getpath("scripting/spcomp"), self.sp_file, self.smx_file, self.parent.getpath("scripting/output/%s.out" % self.name)))
 		return os.path.isfile(self.smx_file)
 
 	def process_plugin(self):
@@ -193,14 +195,14 @@ class SourceModPlugin(object):
 		self.myinfo = self.plugin.myinfo
 
 	def create_updater_file(self):
-		fp = open(getpath("updater-data/update-%s.txt" % self.name), 'w')
+		fp = open(self.parent.getpath("updater-data/update-%s.txt" % self.name), 'w')
 		tmpl = str(Template ( file = "templates/update.tmpl", searchList = [{ 'plugin': self }] ))
 		fp.write(tmpl)
 		fp.close()
 		return
 
 	def create_plugin_file(self):
-		fp = open(getpath("doc/%s.md" % self.name), 'w')
+		fp = open(self.parent.getpath("doc/%s.md" % self.name), 'w')
 		tmpl = str(Template ( file = "templates/plugin.tmpl", searchList = [{ 'plugin': self }] ))
 		fp.write(tmpl)
 		fp.close()
