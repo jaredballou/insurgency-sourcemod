@@ -18,11 +18,11 @@
 
 import os, sys, yaml, re
 from pprint import pprint
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 from Cheetah.Template import Template
 
-sys.path.append("pysmx")
+sys.path.append(os.path.join(os.getcwd(),"pysmx"))
 import smx
 
 # TODO: Compare the source file and compiled plugin more intelligently than raw file times.
@@ -30,32 +30,75 @@ import smx
 
 # Main function
 def main():
-	config = get_yaml_file(getpath("tools/config.yaml"))
-	plugins = {}
-	for name in config['plugins']['build']:
-		plugins[name] = SourceModPlugin(name=name,config=config)
-	create_readme(plugins)
+	sm = SourceMod()
 
-def getpath(path):
-	root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-	return os.path.join(root,path)
+class SourceMod(object):
+	def __init__(self,config_file=None):
+		self.load_config(config_file=config_file)
+		self.load_plugins()
+		self.create_readme()
 
-# Get YAML file
-def get_yaml_file(yaml_file):
-	with open(yaml_file, 'r') as stream:
-		try:
-			return(yaml.load(stream))
-		except yaml.YAMLError as exc:
-			print(exc)
-			sys.exit()
+	def load_plugins(self):
+		self.plugins = {}
+		for name in self.config['plugins']['build']:
+			self.plugins[name] = SourceModPlugin(name=name,config=config)
 
-def create_readme(plugins):
-	sortedKeys = sorted(plugins.keys())
-	fp = open(getpath("README.md"), 'w')
-	tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': plugins, 'sortedKeys': sortedKeys }] ))
-	fp.write(tmpl)
-	fp.close()
+	def load_config(self,config_file=None):
+		if config_file is None:
+			config_file = getpath("tools/config.yaml")
+		self.config_file = config_file
+		self.config = get_yaml_file(self.config_file)
 
+	def getpath(self,path=""):
+		root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+		return os.path.join(root,path)
+
+	def get_yaml_file(self,yaml_file):
+		with open(yaml_file, 'r') as stream:
+			try:
+				return(yaml.load(stream))
+			except yaml.YAMLError as exc:
+				print(exc)
+				sys.exit()
+	def create_readme(self):
+		sortedKeys = sorted(self.plugins.keys())
+		fp = open(getpath("README.md"), 'w')
+		tmpl = str(Template ( file = "templates/readme.tmpl", searchList = [{ 'plugins': self.plugins, 'sortedKeys': sortedKeys }] ))
+		fp.write(tmpl)
+		fp.close()
+
+	def interpolate(self, key=None, data=None, interpolate_data=None):
+		val = ""
+		if data is None:
+			data = self.config
+		if interpolate_data is None:
+			interpolate_data = data
+
+		if key is None:
+			item = data
+		else:
+			if not key in data.keys():
+				return
+			item = data[key]
+
+		kt = type(item)
+		if kt in [str, int]:
+			val = item
+		if kt in [list]:
+			val = ', '.join(map(str, item))
+		if kt in [set,tuple]:
+			val = item.join(", ")
+		if kt in [OrderedDict, dict]:
+			vals = dict()
+			for skey in item.keys():
+				vals[skey] = self.interpolate(key=skey,data=item,interpolate_data=interpolate_data)
+			return vals
+ 		try:
+			while (val.find('%') != -1):
+				val = (val) % interpolate_data
+		except:
+			return val
+		return val
 
 class SourceModPlugin(object):
 

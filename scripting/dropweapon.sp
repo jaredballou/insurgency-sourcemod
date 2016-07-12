@@ -45,14 +45,12 @@ public OnPluginStart()
 	HookEvent("player_spawn", Event_PlayerSpawn);
 
 	PrintToServer("[DROPWEAPON] Started!");
-	if (LibraryExists("updater"))
-	{
+	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}
 }
 
-public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
-{
+public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast ) {
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	if( client == 0 || !IsClientInGame(client) )
 		return Plugin_Continue;	
@@ -60,8 +58,7 @@ public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBro
 	return Plugin_Continue;
 }
 
-public Action:CmdLstnr_Drop(client, const String:command[], argc)
-{
+public Action:CmdLstnr_Drop(client, const String:command[], argc) {
 	if(!client)
 		return Plugin_Continue;
 	return Drop_Weapon(client);
@@ -94,12 +91,14 @@ public Action:Drop_Weapon(client) {
 		return Plugin_Continue;
 	}
 	// Drop weapon
+	SDKHooks_DropWeapon(client, m_hActiveWeapon, NULL_VECTOR, NULL_VECTOR);
+/*
 	// Create weapon entity
 	CreateWorldWeapon(client,m_hActiveWeapon);
-
+*/
 	return Plugin_Continue;
 }
-
+/*
 CreateWorldWeapon(client,weapon) {
 	decl String:strBuf[32];
 	GetEdictClassname(weapon, strBuf, sizeof(strBuf));
@@ -111,6 +110,8 @@ CreateWorldWeapon(client,weapon) {
 
 	SDKHooks_DropWeapon(client, weapon);
 //, cllocation, cllocation);
+}
+*/
 /*
 	char sModel[PLATFORM_MAX_PATH];
 	int m_iWorldModelIndex = GetEntProp(weapon, Prop_Send, "m_iWorldModelIndex");
@@ -138,5 +139,3 @@ CreateWorldWeapon(client,weapon) {
 	//SetEntProp(weapon, Prop_Send, "m_iExtraPrimaryAmmo", ammo);
 	//SetEntProp(weapon, Prop_Send, "m_iClip1", clip);
 */
-}
-		

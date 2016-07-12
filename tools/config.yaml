@@ -8,8 +8,13 @@ settings:
   urls:
     'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
     'updater': "http://ins.jballou.com/sourcemod"
-
-
+paths:
+  scripting: "%(root)s/scripting"
+  include: "%(scripting)s/include"
+  plugins: "%(root)s/plugins"
+  plugins_disabled: "%(plugins)s/disabled"
+  scripting_disabled: "%(scripting)s/disabled"
+  scripting_outdated: "%(scripting)s/outdated"
 libraries:
   ignore:
     - adminmenu
@@ -52,7 +57,7 @@ plugins:
     - sprinklers
     - theater_reconnect
     - theaterpicker
-  nobuild:
+  outdated:
     - backblast
     - navmesh-chat
     - navmesh-export

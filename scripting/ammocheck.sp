@@ -47,15 +47,14 @@ public OnPluginStart()
 	}
 
 	if (LibraryExists("updater")) {
-		Updater_AddPlugin(UPDATE_URL);
+		Updater_AddPlugin(UPDATE_URL_FORMAT(PLUGIN_FILE));
 	}
 }
 
 public OnLibraryAdded(const String:name[])
 {
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
+	if (StrEqual(name, "updater")) {
+		Updater_AddPlugin(UPDATE_URL_FORMAT(PLUGIN_FILE));
 	}
 }
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
