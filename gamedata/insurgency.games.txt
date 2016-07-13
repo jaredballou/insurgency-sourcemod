@@ -4,6 +4,61 @@
 	{
 		"Offsets"
 		{
+			"CINSWeapon::GiveDefaultAmmo"
+			{
+				"linux"		"393"
+				"windows"	"392"
+			}
+			"CINSWeapon::HasChamberedRound"
+			{
+				"linux"		"441"
+				"windows"	"440"
+			}
+			"CINSWeapon::ChamberRound"
+			{
+				"linux"		"442"
+				"windows"	"441"
+			}
+			"CINSWeapon::IsEmpty"
+			{
+				"linux"		"443"
+				"windows"	"442"
+			}
+			"CINSWeapon::UseChamberRound"
+			{
+				"linux"		"444"
+				"windows"	"443"
+			}
+			"CINSWeapon::DecrementAmmo"
+			{
+				"linux"		"445"
+				"windows"	"444"
+			}
+			"CINSWeapon::CreateRecoil"
+			{
+				"linux"		"446"
+				"windows"	"445"
+			}
+			"CINSWeapon::HasFireMode"
+			{
+				"linux"		"447"
+				"windows"	"446"
+			}
+			"CINSWeapon::IsFireMode"
+			{
+				"linux"		"448"
+				"windows"	"447"
+			}
+			"CINSWeapon::GetFireMode"
+			{
+				"linux"		"449"
+				"windows"	"448"
+			}
+			"CINSWeapon::UsesFireModes"
+			{
+				"linux"		"450"
+				"windows"	"449"
+			}
 			"GiveNamedItem"
 			{
 				"windows"	"397"
