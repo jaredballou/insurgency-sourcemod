@@ -15,7 +15,6 @@
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Plugin"	"Path_SM/plugins/insurgency.smx"
 		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Source"	"Path_SM/scripting/include/myinfo.inc"
 		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
 		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
 

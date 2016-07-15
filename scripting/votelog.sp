@@ -1,17 +1,25 @@
 #define PLUGIN_DESCRIPTION "Logs voting events"
 #define PLUGIN_NAME "Vote Logging"
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "votelog"
 #define PLUGIN_LOG_PREFIX "VOTE"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-votelog.txt"
 
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 #include <sourcemod>
 #include <insurgency>
 #include <loghelper>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#include <myinfo>
 //Add ammo to 99 code in weapon_deploy
 #pragma unused cvarVersion
 

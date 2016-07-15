@@ -9,7 +9,6 @@ Logs voting events
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 

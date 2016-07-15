@@ -10,7 +10,6 @@ Adds a number of options and ways to handle bot spawns
  * [Source - scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
  * [Plugin - gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
 
 #### CVAR List

@@ -8,7 +8,6 @@ Shows Bots Left Alive
 #### Dependencies
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 

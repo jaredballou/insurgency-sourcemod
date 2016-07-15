@@ -29,7 +29,6 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 #### Dependencies
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 
@@ -50,7 +49,6 @@ Shows Bots Left Alive
 #### Dependencies
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 
@@ -66,7 +64,6 @@ Gives automatic names to bots on creation.
 
 #### Dependencies
 
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 
@@ -94,7 +91,6 @@ Adds a number of options and ways to handle bot spawns
  * [Source - scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/navmesh.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/navmesh.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
  * [Plugin - gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
 
 #### CVAR List
@@ -130,7 +126,6 @@ Plugin for overriding Insurgency Coop to 16 players
 
 #### Dependencies
 
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 <a name="events">
 ### Event Logger 0.0.2
@@ -141,7 +136,6 @@ Log events to client or server
 
 #### Dependencies
 
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 
@@ -168,8 +162,6 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 #### Dependencies
 
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
- * [Source - scripting/include/cstrike.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cstrike.inc?raw=true)
- * [Source - scripting/include/clientprefs.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/clientprefs.inc?raw=true)
 
 #### CVAR List
 
@@ -210,7 +202,6 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 #### Dependencies
 
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
  * [Plugin - translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)
  * [Plugin - gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
 
@@ -249,9 +240,6 @@ Respawn players
 #### Dependencies
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/cstrike.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cstrike.inc?raw=true)
- * [Source - scripting/include/tf2.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/tf2.inc?raw=true)
- * [Source - scripting/include/tf2_stocks.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/tf2_stocks.inc?raw=true)
  * [Plugin - translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
  * [Plugin - translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
  * [Plugin - gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)
@@ -339,7 +327,6 @@ Logs voting events
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 

@@ -14,8 +14,6 @@
 		"Source"	"Path_SM/scripting/hlstatsx.sp"
 		"Plugin"	"Path_SM/plugins/hlstatsx.smx"
 		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Source"	"Path_SM/scripting/include/cstrike.inc"
-		"Source"	"Path_SM/scripting/include/clientprefs.inc"
 
 	}
 }

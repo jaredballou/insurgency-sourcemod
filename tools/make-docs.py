@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
-
 ################################################################################
 #
 # generate-documentation.py
 # 
-# This script reads the two lists in this directory, my plugins and third party
-# ones. This script pulls the information from the plugin source files and
+# This script pulls the information from the plugin source files and
 # creates updater manifests and the Readme. Take a look in plugins for a better
-# idea of how this works, note that dependencies and cvars are regenerated from
-# scratch each run, so don't make any manual edits to those files.
+# idea of how this works.
 # 
 # (C) 2015,2016 Jared Ballou <insurgency@jballou.com>
 # Released under the GPLv2
@@ -19,7 +16,7 @@
 import os, sys, yaml, re
 from pprint import pprint
 from collections import defaultdict, OrderedDict
-
+from glob import glob
 from Cheetah.Template import Template
 
 sys.path.append(os.path.join(os.getcwd(),"pysmx"))
@@ -42,15 +39,26 @@ def main():
 
 class SourceMod(object):
 	def __init__(self,config_file=None):
+		self.root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 		self.load_config(config_file=config_file)
+		self.load_files()
 		self.load_plugins()
 		self.create_readme()
+
+	def load_files(self):
+		self.files = {}
+		for path in self.config['files'].keys():
+			pr = "%s/" % self.getpath(self.config['paths'][path])
+			pe = ".%s" % self.config['files'][path]
+			self.files[path] = [y.replace(pr,"").replace(pe,"") for x in os.walk(pr) for y in glob(os.path.join(x[0], "*%s" % pe))]
 
 	def load_config(self,config_file=None):
 		if config_file is None:
 			config_file = self.getpath("tools/config.yaml")
 		self.config_file = config_file
 		self.config = self.get_yaml_file(self.config_file)
+		for key in ['settings','paths']:
+			self.config[key] = self.interpolate(data=self.config[key])
 
 	def load_plugins(self):
 		self.plugins = {}
@@ -58,8 +66,7 @@ class SourceMod(object):
 			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
 
 	def getpath(self,path=""):
-		root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-		return os.path.join(root,path)
+		return os.path.join(self.root,path)
 
 	def get_yaml_file(self,yaml_file):
 		with open(yaml_file, 'r') as stream:
@@ -102,7 +109,7 @@ class SourceMod(object):
 				vals[skey] = self.interpolate(key=skey,data=item,interpolate_data=interpolate_data)
 			return vals
  		try:
-			while (val.find('%') != -1):
+			while (val.find('%(') != -1):
 				val = (val) % interpolate_data
 		except:
 			return val
@@ -177,7 +184,7 @@ class SourceModPlugin(object):
 
 		for include in re.findall(r"#include[\t ]*<([^>]+)>", self.source):
 			incfile = "scripting/include/%s.inc" % include
-			if include in self.config['libraries']['ignore'] or incfile in self.files['Source']:
+			if include in self.config['libraries']['stock'] or include in self.config['libraries']['thirdparty'] or incfile in self.files['Source']:
 				continue
 			if include == self.name:
 				self.files['Source'].append(incfile)

@@ -16,7 +16,6 @@
 		"Source"	"Path_SM/scripting/include/smlib.inc"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/navmesh.inc"
-		"Source"	"Path_SM/scripting/include/myinfo.inc"
 		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
 
 	}

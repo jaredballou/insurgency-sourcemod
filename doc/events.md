@@ -7,7 +7,6 @@ Log events to client or server
 
 #### Dependencies
 
- * [Source - scripting/include/myinfo.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/myinfo.inc?raw=true)
 
 #### CVAR List
 

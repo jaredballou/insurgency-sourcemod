@@ -1,16 +1,23 @@
 #define PLUGIN_AUTHOR "Jared Ballou, based on plugin by McFlurry"
 #define PLUGIN_DESCRIPTION "Log events to client or server"
 #define PLUGIN_NAME "Event Logger"
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE "events"
 #define PLUGIN_LOG_PREFIX "EVENTS"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-events.txt"
 
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 #include <sourcemod>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
-#include <myinfo>
 
 #pragma semicolon 1
 

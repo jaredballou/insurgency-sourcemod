@@ -12,12 +12,20 @@
 //Define CVARS
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
 #define PLUGIN_NAME "Bot Counter"
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "0.0.3"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE botcount
 #define PLUGIN_LOG_PREFIX "BOTCOUNT"
-#include <myinfo>
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botcount.txt"
 
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarTimer = INVALID_HANDLE; // Frequency

@@ -8,8 +8,6 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 #### Dependencies
 
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
- * [Source - scripting/include/cstrike.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cstrike.inc?raw=true)
- * [Source - scripting/include/clientprefs.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/clientprefs.inc?raw=true)
 
 #### CVAR List
 

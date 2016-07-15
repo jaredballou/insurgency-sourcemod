@@ -4,31 +4,106 @@ settings:
   github_repo: "insurgency-sourcemod"
   github_branch: "master"
   compile_plugins: true
-  disable_new_plugins: true
   urls:
     'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
     'updater': "http://ins.jballou.com/sourcemod"
+  prefix: "[INS] "
+
+myinfo_vars:
+  "author": "Jared Ballou (jballou)"
+  "description": "New Plugin"
+  "name": "New Plugin"
+  "url": "http://jballou.com/insurgency"
+  "version": "0.0.1"
+
+myinfo_defines:
+  "PLUGIN_WORKING": "0"
+  "PLUGIN_FILE": ""
+  "PLUGIN_LOG_PREFIX": ""
+  "UPDATE_URL": "http://ins.jballou.com/sourcemod/update-%(name).txt"
+
+files:
+  plugins: "smx"
+  libraries: "inc"
+  scripting: "sp"
 paths:
-  scripting: "%(root)s/scripting"
-  include: "%(scripting)s/include"
-  plugins: "%(root)s/plugins"
-  plugins_disabled: "%(plugins)s/disabled"
-  scripting_disabled: "%(scripting)s/disabled"
-  scripting_outdated: "%(scripting)s/outdated"
+  plugins: "plugins"
+  scripting: "scripting"
+  libraries: "scripting/include"
+  plugins_disabled: "disabled"
+  scripting_disabled: "disabled"
+  scripting_outdated: "outdated"
 libraries:
-  ignore:
-    - adminmenu
-    - regex
-    - sdkhooks
-    - sdktools
-    - sourcemod
-    - updater
   thirdparty:
+    - updater
+  stock:
+    - admin
     - adminmenu
+    - adt
+    - adt_array
+    - adt_stack
+    - adt_trie
+    - banning
+    - basecomm
+    - bitbuffer
+    - clientprefs
+    - clients
+    - commandfilters
+    - commandline
+    - console
+    - convars
+    - core
+    - cstrike
+    - datapack
+    - dbi
+    - entity
+    - entity_prop_stocks
+    - events
+    - files
+    - float
+    - functions
+    - geoip
+    - halflife
+    - handles
+    - helpers
+    - keyvalues
+    - lang
+    - logging
+    - mapchooser
+    - menus
+    - nextmap
+    - profiler
+    - protobuf
     - regex
     - sdkhooks
     - sdktools
-    - updater
+    - sdktools_client
+    - sdktools_engine
+    - sdktools_entinput
+    - sdktools_entoutput
+    - sdktools_functions
+    - sdktools_gamerules
+    - sdktools_hooks
+    - sdktools_sound
+    - sdktools_stocks
+    - sdktools_stringtables
+    - sdktools_tempents
+    - sdktools_tempents_stocks
+    - sdktools_trace
+    - sdktools_voice
+    - sorting
+    - sourcemod
+    - string
+    - testing
+    - textparse
+    - tf2
+    - tf2_stocks
+    - timers
+    - topmenus
+    - usermessages
+    - vector
+    - version
+    - version_auto
 plugins:
   build:
     - ammocheck
@@ -54,6 +129,9 @@ plugins:
     - magnifier
     - navmesh
     - score
+    - simple-chatprocessor
+    - sm_downloader
+    - smtactics
     - sprinklers
     - theater_reconnect
     - theaterpicker
@@ -72,10 +150,89 @@ plugins:
     - gem_damage_report
     - killer_info_display
     - serverhop
-    - simple-chatprocessor
-    - sm_downloader
-    - smtactics
     - sourcebans_listener
     - sourcebans
     - updater
     - webshortcuts
+  stock:
+    - admin-flatfile/admin-flatfile
+    - admin-flatfile/admin-groups
+    - admin-flatfile/admin-overrides
+    - admin-flatfile/admin-simple
+    - admin-flatfile/admin-users
+    - admin-sql-prefetch
+    - admin-sql-threaded
+    - adminhelp
+    - adminmenu
+    - adminmenu/dynamicmenu
+    - antiflood
+    - basebans
+    - basebans/ban
+    - basechat
+    - basecomm
+    - basecomm/forwards
+    - basecomm/gag
+    - basecomm/natives
+    - basecommands
+    - basecommands/cancelvote
+    - basecommands/execcfg
+    - basecommands/kick
+    - basecommands/map
+    - basecommands/reloadadmins
+    - basecommands/who
+    - basetriggers
+    - basevotes
+    - basevotes/voteban
+    - basevotes/votekick
+    - basevotes/votemap
+    - clientprefs
+    - funcommands
+    - funcommands/beacon
+    - funcommands/blind
+    - funcommands/drug
+    - funcommands/fire
+    - funcommands/gravity
+    - funcommands/ice
+    - funcommands/noclip
+    - funcommands/timebomb
+    - funvotes
+    - funvotes/votealltalk
+    - funvotes/voteburn
+    - funvotes/voteff
+    - funvotes/votegravity
+    - funvotes/voteslay
+    - mapchooser
+    - nextmap
+    - nominations
+    - playercommands
+    - playercommands/rename
+    - playercommands/slap
+    - playercommands/slay
+    - randomcycle
+    - reservedslots
+    - rockthevote
+    - sounds
+    - sql-admin-manager
+    - testsuite/benchmark
+    - testsuite/bug4059
+    - testsuite/callfunctest
+    - testsuite/capstest
+    - testsuite/clientprefstest
+    - testsuite/cstrike-test
+    - testsuite/entpropelements
+    - testsuite/fakenative1
+    - testsuite/fakenative2
+    - testsuite/filetest
+    - testsuite/fwdtest1
+    - testsuite/fwdtest2
+    - testsuite/gamerules-props
+    - testsuite/goto_test
+    - testsuite/keyvalues
+    - testsuite/outputtest
+    - testsuite/ptstest
+    - testsuite/sorttest
+    - testsuite/sqltest
+    - testsuite/stacktest
+    - testsuite/structtest
+    - testsuite/tf2-test
+    - testsuite/tries

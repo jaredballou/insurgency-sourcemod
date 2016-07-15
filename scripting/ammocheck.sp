@@ -3,10 +3,20 @@
 
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define PLUGIN_NAME "Ammo Check"
-#define PLUGIN_VERSION "1.0.1"
+#define PLUGIN_VERSION "1.0.2"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE ammocheck
 #define PLUGIN_LOG_PREFIX "AMMOCHECK"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
+
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 
 #pragma semicolon 1
 #pragma unused cvarVersion
@@ -16,8 +26,6 @@
 #include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
-
-#include <myinfo>
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?

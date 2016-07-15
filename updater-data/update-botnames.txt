@@ -13,7 +13,6 @@
 	{
 		"Source"	"Path_SM/scripting/botnames.sp"
 		"Plugin"	"Path_SM/plugins/botnames.smx"
-		"Source"	"Path_SM/scripting/include/myinfo.inc"
 
 	}
 }

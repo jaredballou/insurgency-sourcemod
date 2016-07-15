@@ -8,9 +8,6 @@ Respawn players
 #### Dependencies
 
  * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
- * [Source - scripting/include/cstrike.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cstrike.inc?raw=true)
- * [Source - scripting/include/tf2.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/tf2.inc?raw=true)
- * [Source - scripting/include/tf2_stocks.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/tf2_stocks.inc?raw=true)
  * [Plugin - translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
  * [Plugin - translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
  * [Plugin - gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)

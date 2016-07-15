@@ -1,10 +1,19 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.3.6"
+#define PLUGIN_VERSION "1.3.7"
 #define PLUGIN_WORKING "1"
-#define PLUGIN_FILE insurgency
 #define PLUGIN_LOG_PREFIX "INSLIB"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 #include <sourcemod>
 #include <regex>
 #include <sdktools>
@@ -14,7 +23,6 @@
 #include <updater>
 #pragma unused cvarVersion
 
-#include <myinfo>
 
 #define INS
 

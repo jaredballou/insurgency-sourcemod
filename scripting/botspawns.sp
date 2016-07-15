@@ -2,11 +2,20 @@
 //Released under GPLv3
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "Bot Spawns"
-#define PLUGIN_VERSION "0.4.1"
+#define PLUGIN_VERSION "0.4.2"
 #define PLUGIN_WORKING "0"
-#define PLUGIN_FILE botspawns
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
+#define PLUGIN_AUTHOR "Jared Ballou (jballou)"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
 #pragma semicolon 1
 #pragma unused cvarVersion
 #include <sourcemod>
@@ -20,7 +29,6 @@
 #define AUTOLOAD_EXTENSIONS
 #define REQUIRE_EXTENSIONS
 
-#include <myinfo>
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
