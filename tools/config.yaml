@@ -143,6 +143,7 @@ plugins:
     - clientprefs
     - gem_damage_report
     - killer_info_display
+    - sernix/c_dy_respawn_naong
     - serverhop
     - sm_downloader
     - sourcebans_listener

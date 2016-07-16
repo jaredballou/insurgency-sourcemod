@@ -109,7 +109,7 @@ public OnPluginStart()
 	OnVersionChanged(hCvar, "", "");
 	HookConVarChange(hCvar, OnVersionChanged);
 	
-	hCvar = CreateConVar("sm_updater", "2", "Determines update functionality. (1 = Notify, 2 = Download, 3 = Include source code)",, true, 1.0, true, 3.0);
+	hCvar = CreateConVar("sm_updater", "2", "Determines update functionality. (1 = Notify, 2 = Download, 3 = Include source code)",0, true, 1.0, true, 3.0);
 	OnSettingsChanged(hCvar, "", "");
 	HookConVarChange(hCvar, OnSettingsChanged);
 	
