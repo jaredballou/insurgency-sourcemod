@@ -1,5 +1,5 @@
 <a name="votelog">
-### Vote Logging 0.0.2
+### Vote Logging 0.0.3
 
 Logs voting events
  * [Source - scripting/votelog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/votelog.sp?raw=true)

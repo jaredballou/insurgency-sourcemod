@@ -1,5 +1,5 @@
 <a name="botnames">
-### Bot Names 1.0.3
+### Bot Names 1.0.4
 
 Gives automatic names to bots on creation.
  * [Source - scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)

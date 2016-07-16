@@ -4,19 +4,19 @@ This repository has a complete installation of SourceMod, including all my plugi
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
  * <a href='#ammocheck'>Ammo Check 1.0.1</a>
- * <a href='#botcount'>Bot Counter 0.0.2</a>
- * <a href='#botnames'>Bot Names 1.0.3</a>
- * <a href='#botspawns'>Bot Spawns 0.4.1</a>
+ * <a href='#botcount'>Bot Counter 0.0.3</a>
+ * <a href='#botnames'>Bot Names 1.0.4</a>
+ * <a href='#botspawns'>Bot Spawns 0.4.2</a>
  * <a href='#cooplobby'>Coop Lobby Override 0.0.1</a>
- * <a href='#events'>Event Logger 0.0.2</a>
+ * <a href='#events'>Event Logger 0.0.3</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.6</a>
+ * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.7</a>
  * <a href='#nofog'>[INS] No Fog 0.0.1</a>
  * <a href='#respawn'>[INS] Player Respawn 1.8.1</a>
  * <a href='#restrictedarea'>[INS] Restricted Area Removal 0.0.1</a>
  * <a href='#rpgdrift'>[INS] RPG Adjustments 0.0.3</a>
  * <a href='#suicide_bomb'>[INS] Suicide Bombers 0.0.7</a>
- * <a href='#votelog'>Vote Logging 0.0.2</a>
+ * <a href='#votelog'>Vote Logging 0.0.3</a>
  * <a href='#weapon_pickup'>[INS] Weapon Pickup 0.1.0</a>
 
 <a name="ammocheck">
@@ -40,7 +40,7 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
  * "check_ammo" // Check ammo of the current weapon
 
 <a name="botcount">
-### Bot Counter 0.0.2
+### Bot Counter 0.0.3
 
 Shows Bots Left Alive
  * [Source - scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)
@@ -56,7 +56,7 @@ Shows Bots Left Alive
  * "sm_botcount_enabled" "0" // sets whether bot naming is enabled
 
 <a name="botnames">
-### Bot Names 1.0.3
+### Bot Names 1.0.4
 
 Gives automatic names to bots on creation.
  * [Source - scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
@@ -80,7 +80,7 @@ Gives automatic names to bots on creation.
  * "sm_botnames_rename_all"
 
 <a name="botspawns">
-### Bot Spawns 0.4.1
+### Bot Spawns 0.4.2
 
 Adds a number of options and ways to handle bot spawns
  * [Source - scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
@@ -128,7 +128,7 @@ Plugin for overriding Insurgency Coop to 16 players
 
 
 <a name="events">
-### Event Logger 0.0.2
+### Event Logger 0.0.3
 
 Log events to client or server
  * [Source - scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
@@ -192,7 +192,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
  * "hlx_sm_player_action"
 
 <a name="insurgency">
-### [INS] Insurgency Support Library 1.3.6
+### [INS] Insurgency Support Library 1.3.7
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
  * [Source - scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)
@@ -317,7 +317,7 @@ Adds suicide bomb for bots
  * "sm_suicidebomb_bots_only" "1" // Only apply suicide bomber code to bots
 
 <a name="votelog">
-### Vote Logging 0.0.2
+### Vote Logging 0.0.3
 
 Logs voting events
  * [Source - scripting/votelog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/votelog.sp?raw=true)
