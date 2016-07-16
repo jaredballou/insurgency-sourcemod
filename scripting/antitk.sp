@@ -932,7 +932,7 @@ RegisterCvars()
 	// Register all console variables
 	LogDebug(false, "Running RegisterCvars()");
 
-	CreateConVar("sm_antitk_version", VERSION, "Anti-TK management plugin",|FCVAR_SPONLY|FCVAR_UNLOGGED| FCVAR_DONTRECORD|FCVAR_REPLICATED|FCVAR_NOTIFY);
+	CreateConVar("sm_antitk_version", VERSION, "Anti-TK management plugin",FCVAR_SPONLY|FCVAR_UNLOGGED| FCVAR_DONTRECORD|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	g_Cvar_Enabled = CreateConVar("sm_antitk_enable", "1", "Is the Anti-TK Manager enabled or disabled? [0 = FALSE, 1 = TRUE]", 0, true, 0.0, true, 1.0);
 	g_Cvar_AdminsImmune = CreateConVar("sm_antitk_admins_immune", "0", "Are Admins immune to the Anti-TK Manager? [0 = FALSE, 1 = TRUE]", 0, true, 0.0, true, 1.0);
 	g_Cvar_AdminsFlag = CreateConVar("sm_antitk_admins_flag", "", "Admin Flag for immunity? Leave Blank for any flag.");

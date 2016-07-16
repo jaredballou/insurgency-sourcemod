@@ -17,7 +17,7 @@ public OnPluginStart()
 {
 	RegAdminCmd("sm_dumpcommands", DumpCommandList, ADMFLAG_ROOT, "Dumps all SM commands and their info to a file.");
 	v_Output = CreateConVar("sm_commanddump_use_csv", "0", "Output to a CSV file instead of a .txt 1/0", 0, true, 0.0, true, 1.0);
-	CreateConVar("sm_commanddump_version", PLUGIN_VERSION, "Plugin Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+	CreateConVar("sm_commanddump_version", PLUGIN_VERSION, "Plugin Version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 }
 
 public Action:DumpCommandList(client, args)

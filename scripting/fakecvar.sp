@@ -17,7 +17,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-	CreateConVar("sm_fcvar_version", PLUGIN_VERSION, "Fake cvar Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+	CreateConVar("sm_fcvar_version", PLUGIN_VERSION, "Fake cvar Version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	RegAdminCmd("sm_fcvar", Command_fcvar, ADMFLAG_CUSTOM1, "Usage: sm_fcvar <name/#userid> <cvar> <value>");
 }
 

@@ -118,7 +118,7 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 // Hook events on plugin start
 public OnPluginStart(){
-  g_versionConVar = CreateConVar("sm_damage_report_version", PLUGIN_VERSION, "Damage report version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+  g_versionConVar = CreateConVar("sm_damage_report_version", PLUGIN_VERSION, "Damage report version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
   SetConVarString(g_versionConVar, PLUGIN_VERSION);
   HookEvent("player_death", Event_PlayerDeath);
   HookEvent("player_hurt", Event_PlayerHurt);

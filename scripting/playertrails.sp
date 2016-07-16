@@ -188,7 +188,7 @@ public OnMapStart()
 
 public OnPluginStart()
 {
-	CreateConVar("playertrails_version", PLUGIN_VERSION, "Player Trails Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_DONTRECORD|FCVAR_NOTIFY);
+	CreateConVar("playertrails_version", PLUGIN_VERSION, "Player Trails Version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_DONTRECORD|FCVAR_NOTIFY);
 	
 	gH_Cvar_TrailsEnabled = CreateConVar("sm_playertrails_enable", "0", "Enables/Disables Player Trails",, true, 0.0, true, 1.0);
 	gH_Cvar_DonatorsOnly = CreateConVar("sm_playertrails_donatoronly", "0", "Specifies whether everyone or only donators will receive trails",, true, 0.0, true, 1.0);

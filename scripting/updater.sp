@@ -105,7 +105,7 @@ public OnPluginStart()
 	// Convars.
 	new Handle:hCvar = INVALID_HANDLE;
 	
-	hCvar = CreateConVar("sm_updater_version", PLUGIN_VERSION, PLUGIN_NAME,|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	hCvar = CreateConVar("sm_updater_version", PLUGIN_VERSION, PLUGIN_NAME,FCVAR_NOTIFY|FCVAR_DONTRECORD);
 	OnVersionChanged(hCvar, "", "");
 	HookConVarChange(hCvar, OnVersionChanged);
 	

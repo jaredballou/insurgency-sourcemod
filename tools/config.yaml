@@ -8,31 +8,27 @@ settings:
     'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
     'updater': "http://ins.jballou.com/sourcemod"
   prefix: "[INS] "
-
 myinfo_vars:
   "author": "Jared Ballou (jballou)"
   "description": "New Plugin"
   "name": "New Plugin"
   "url": "http://jballou.com/insurgency"
   "version": "0.0.1"
-
 myinfo_defines:
   "PLUGIN_WORKING": "0"
   "PLUGIN_FILE": ""
   "PLUGIN_LOG_PREFIX": ""
-  "UPDATE_URL": "http://ins.jballou.com/sourcemod/update-%(name).txt"
-
+  "UPDATE_URL": "http://ins.jballou.com/sourcemod/update-%(name)s.txt"
 files:
-  plugins: "smx"
-  libraries: "inc"
-  scripting: "sp"
-paths:
-  plugins: "plugins"
-  scripting: "scripting"
-  libraries: "scripting/include"
-  plugins_disabled: "disabled"
-  scripting_disabled: "disabled"
-  scripting_outdated: "outdated"
+  plugins:
+    ext: "smx"
+    path: "plugins"
+  libraries:
+    ext: "inc"
+    path: "scripting/include"
+  scripting:
+    ext: "sp"
+    path: "scripting"
 libraries:
   thirdparty:
     - updater
@@ -111,6 +107,7 @@ plugins:
     - botnames
     - botspawns
     - cooplobby
+    - damagemod
     - events
     - hlstatsx
     - insurgency
@@ -122,27 +119,24 @@ plugins:
     - votelog
     - weapon_pickup
   disabled:
-    - damagemod
+    - backblast
     - cvarlist
     - dropweapon
     - insmaps
+    - looting
     - magnifier
     - navmesh
+    - navmesh-chat
+    - navmesh-export
+    - noobj
+    - pistolsonly
+    - prop_dynamic
     - score
     - simple-chatprocessor
-    - sm_downloader
     - smtactics
     - sprinklers
     - theater_reconnect
     - theaterpicker
-  outdated:
-    - backblast
-    - navmesh-chat
-    - navmesh-export
-    - looting
-    - noobj
-    - pistolsonly
-    - prop_dynamic
   thirdparty:
     - advertisements
     - afk_manager
@@ -150,6 +144,7 @@ plugins:
     - gem_damage_report
     - killer_info_display
     - serverhop
+    - sm_downloader
     - sourcebans_listener
     - sourcebans
     - updater

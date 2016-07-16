@@ -1,5 +1,5 @@
 <a name="ammocheck">
-### Ammo Check 1.0.1
+### Ammo Check 1.0.2
 
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
  * [Source - scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)

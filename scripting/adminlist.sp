@@ -19,7 +19,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-	CreateConVar("adminlist_version", "1.3c", "Admin List Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+	CreateConVar("adminlist_version", "1.3c", "Admin List Version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	AdminListEnabled = CreateConVar("adminlist_on", "1", "turns on and off admin list, 1=on ,0=off");
 	AdminListMode = CreateConVar("adminlist_mode", "1", "mode that changes how the list appears..");
 	AdminListAdminFlag = CreateConVar("adminlist_adminflag", "d", "admin flag to use for list. must be in char format");

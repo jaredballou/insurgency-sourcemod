@@ -25,7 +25,7 @@ new Handle:cookie_show_health = INVALID_HANDLE;
 
 public OnPluginStart()
 {
-	CreateConVar("sm_show_health_version", PLUGIN_VERSION, "Show Health Version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
+	CreateConVar("sm_show_health_version", PLUGIN_VERSION, "Show Health Version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_DONTRECORD);
 	cvar_show_health = CreateConVar("sm_show_health", "1", "Enabled/Disabled show health functionality, 0 = off/1 = on",, true, 0.0, true, 1.0);
 	cvar_show_health_on_hit_only = CreateConVar("sm_show_health_on_hit_only", "1", "Defines the weather when to show a health text:\n0 = always show your health on a screen\n1 = show your health only when somebody hit you",, true, 0.0, true, 1.0);
 	cvar_show_health_text_area = CreateConVar("sm_show_health_text_area", "1", "Defines the area for health text:\n 1 = in the hint text area\n 2 = in the center of the screen",, true, 1.0, true, 2.0);

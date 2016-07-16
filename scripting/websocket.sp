@@ -110,7 +110,7 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
-	new Handle:hVersion = CreateConVar("sm_websocket_version", PLUGIN_VERSION, "",|FCVAR_NOTIFY|FCVAR_REPLICATED|FCVAR_DONTRECORD);
+	new Handle:hVersion = CreateConVar("sm_websocket_version", PLUGIN_VERSION, "",FCVAR_NOTIFY|FCVAR_REPLICATED|FCVAR_DONTRECORD);
 	if(hVersion != INVALID_HANDLE)
 		SetConVarString(hVersion, PLUGIN_VERSION);
 	

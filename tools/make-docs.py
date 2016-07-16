@@ -41,29 +41,34 @@ class SourceMod(object):
 	def __init__(self,config_file=None):
 		self.root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 		self.load_config(config_file=config_file)
+		pprint(self.config)
 		self.load_files()
+		pprint(self.files)
 		self.load_plugins()
 		self.create_readme()
 
 	def load_files(self):
 		self.files = {}
-		for path in self.config['files'].keys():
-			pr = "%s/" % self.getpath(self.config['paths'][path])
-			pe = ".%s" % self.config['files'][path]
-			self.files[path] = [y.replace(pr,"").replace(pe,"") for x in os.walk(pr) for y in glob(os.path.join(x[0], "*%s" % pe))]
+		for ft in self.config['files'].keys():
+			pr = "%s/" % self.getpath(self.config['files'][ft]['path'])
+			pe = ".%s" % self.config['files'][ft]['ext']
+			self.files[ft] = [y.replace(pr,"").replace(pe,"") for x in os.walk(pr) for y in glob(os.path.join(x[0], "*%s" % pe))]
 
 	def load_config(self,config_file=None):
 		if config_file is None:
 			config_file = self.getpath("tools/config.yaml")
 		self.config_file = config_file
 		self.config = self.get_yaml_file(self.config_file)
-		for key in ['settings','paths']:
-			self.config[key] = self.interpolate(data=self.config[key])
 
 	def load_plugins(self):
 		self.plugins = {}
 		for name in self.config['plugins']['build']:
 			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
+		for name in self.config['plugins']['disabled']:
+			if os.path.isfile(self.getpath("plugins/%s.smx" % name)):
+				print "move %s.smx" % name
+			if os.path.isfile(self.getpath("scripting/%s.sp" % name)):
+				print "move %s.sp" % name
 
 	def getpath(self,path=""):
 		return os.path.join(self.root,path)
@@ -147,8 +152,6 @@ class SourceModPlugin(object):
 			print("ERROR: Cannot find plugin source file \"%s\"!" % sp_file)
 			return dict()
 		smx_file = self.parent.getpath("plugins/%s.smx" % self.name)
-		if not os.path.isfile(smx_file):
-			smx_file = self.parent.getpath("plugins/disabled/%s.smx" % self.name)
 		if not os.path.isfile(smx_file) or os.stat(sp_file).st_mtime > os.stat(smx_file).st_mtime:
 			self.compile = True
 		self.sp_file = sp_file

@@ -3,11 +3,12 @@ This repository has a complete installation of SourceMod, including all my plugi
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
- * <a href='#ammocheck'>Ammo Check 1.0.1</a>
+ * <a href='#ammocheck'>Ammo Check 1.0.2</a>
  * <a href='#botcount'>Bot Counter 0.0.3</a>
  * <a href='#botnames'>Bot Names 1.0.4</a>
  * <a href='#botspawns'>Bot Spawns 0.4.2</a>
  * <a href='#cooplobby'>Coop Lobby Override 0.0.1</a>
+ * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
  * <a href='#events'>Event Logger 0.0.3</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.7</a>
@@ -20,7 +21,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#weapon_pickup'>[INS] Weapon Pickup 0.1.0</a>
 
 <a name="ammocheck">
-### Ammo Check 1.0.1
+### Ammo Check 1.0.2
 
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
  * [Source - scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)
@@ -126,6 +127,22 @@ Plugin for overriding Insurgency Coop to 16 players
 
 #### Dependencies
 
+
+<a name="damagemod">
+### [INS] Damage Modifier 0.0.2
+
+Modifies damage before applying to players
+ * [Source - scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
+ * [Plugin - plugins/damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
+
+#### Dependencies
+
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+
+#### CVAR List
+
+ * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
+ * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
 
 <a name="events">
 ### Event Logger 0.0.3

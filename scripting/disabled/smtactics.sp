@@ -105,7 +105,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-	new Handle:hVersion = CreateConVar("sm_tactics_version", PLUGIN_VERSION, "Tactics version",|FCVAR_NOTIFY|FCVAR_REPLICATED|FCVAR_DONTRECORD);
+	new Handle:hVersion = CreateConVar("sm_tactics_version", PLUGIN_VERSION, "Tactics version",FCVAR_NOTIFY|FCVAR_REPLICATED|FCVAR_DONTRECORD);
 	if(hVersion != INVALID_HANDLE)
 		SetConVarString(hVersion, PLUGIN_VERSION);
 	

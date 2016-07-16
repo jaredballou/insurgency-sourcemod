@@ -14,7 +14,7 @@ public Plugin:myinfo =
 };
 public OnPluginStart()
 {
-	CreateConVar("sm_cheat_version", PLUGIN_VERSION, "Cheat commands version",|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);	
+	CreateConVar("sm_cheat_version", PLUGIN_VERSION, "Cheat commands version",FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);	
 	RegAdminCmd("sm_cheat", Command_cheat_command, ADMFLAG_ROOT);
 }
 

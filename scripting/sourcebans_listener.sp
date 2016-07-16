@@ -53,7 +53,9 @@ public Action:OnBanClient(client, time, flags, const String:reason[], const Stri
 	}
 	if (g_bSBAvailable)
 	{
-		SBBanPlayer(source, client, time, reason);
+		decl String:ban_message[128];
+		Format(ban_message, sizeof(ban_message), "%s", reason);
+		SBBanPlayer(source, client, time, ban_message);
 	}
 	else
 	{
