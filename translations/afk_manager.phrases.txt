@@ -1,4 +1,4 @@
-"Phrases"
+﻿"Phrases"
 {
 	// Mod Detection (Debug Messages)
 	"Insurgency"
@@ -12,6 +12,7 @@
 		"es"		"Detectado Modo Insurgency"
 		"pt"		"Mod detectado Insurgency"
 		"tr"		"Insurgency Mod Tespit Edildi"
+		"no"		"Insugency Mod Oppdaget"
 	}
 
 	"Synergy"
@@ -25,6 +26,7 @@
 		"es"		"Detectado Modo Synergy"
 		"pt"		"Mod detectado Synergy"
 		"tr"		"Synergy Mod Tespit Edildi"
+		"no"		"Synergy Mod Oppdaget"
 	}
 
 	"TF2"
@@ -38,19 +40,35 @@
 		"es"		"Detectado Modo Team Fortress 2"
 		"pt"		"Mod detectado Team Fortress 2"
 		"tr"		"Team Fortress 2 Mod Tespit Edildi"
+		"no"		"Team Fortress 2 Mod Oppdaget"
 	}
 
 	"CSTRIKE"
 	{
-		"en"		"Detected Mod Counter-Strike"
-		"de"		"Mod Counter-Strike erkannt"
-		"fr"		"Counter-Strike detecté"
-		"pl"		"Wykryto Mod Counter-Strike"
-		"hu"		"Counter-Strike játékmód észlelve"
-		"ru"		"Обнаружен мод Counter-Strike"
-		"es"		"Detectado Modo Counter-Strike"
+		"en"		"Detected Mod Counter-Strike Source"
+		"de"		"Mod Counter-Strike Source erkannt"
+		"fr"		"Counter-Strike Source detecté"
+		"pl"		"Wykryto Mod Counter-Strike Source"
+		"hu"		"Counter-Strike Source játékmód észlelve"
+		"ru"		"Обнаружен мод Counter-Strike Source"
+		"es"		"Detectado Modo Counter-Strike Source"
 		"pt"		"Mod detectado Counter Strike Source"
 		"tr"		"Counter Strike Source Mod Tespit Edildi"
+		"no"		"Counter Strike Source Mod Oppdaget"
+	}
+
+	"CSGO"
+	{
+		"en"		"Detected Mod Counter-Strike Global Offensive"
+		"de"		"Mod Counter-Strike Global Offensive erkannt"
+		"fr"		"Counter-Strike Global Offensive detecté"
+		"pl"		"Wykryto Mod Counter-Strike Global Offensive"
+		"hu"		"Counter-Strike Global Offensive játékmód észlelve"
+		"ru"		"Обнаружен мод Counter-Strike Global Offensive"
+		"es"		"Detectado Modo Counter-Strike Global Offensive"
+		"pt"		"Mod detectado Counter Strike Global Offensive"
+		"tr"		"Counter Strike Global Offensive Mod Tespit Edildi"
+		"no"		"Counter Strike Global Offensive Mod Oppdaget"
 	}
 
 	"L4D"
@@ -64,6 +82,7 @@
 		"es"		"Detectado Modo Left 4 Dead"
 		"pt"		"Mod detectado Left 4 Dead"
 		"tr"		"Left 4 Dead Mod Tespit Edildi"
+		"no"		"Left 4 Dead Mod Oppdaget"
 	}
 
 
@@ -78,11 +97,12 @@
 		"de"		"Zwingt Spieler {1} in den Zuschauermodus."
 		"fr"		"{1} a été déplacé en spectateur."
 		"pl"		"Wymuszono na graczu {1} dołączenie do obserwatorów."
-		"hu"		"{1} áthelyezve nézőnek"
+		"hu"		"{1} áthelyezve nézőnek."
 		"ru"		"Игрок {1} был принудительно перемещен в наблюдатели."
 		"es"		"Forzado el Jugador {1} a estar en espectador."
 		"pt"		"Jogador {1} foi forcado a entrar de espectador."
 		"tr"		"{1} isimli oyuncu izleyicilere atılıyor."
+		"no"		"Spiller{1} Ble Flyttet Til Spectator Laget."
 	}
 
 	"Spawn_Move_Warning"
@@ -97,6 +117,7 @@
 		"es"		"Advertencia: Si usted no se mueve de su lugar de regeneramiento en {1} segundos, usted será movido a espectador."
 		"pt"		"PERIGO: Se voce nao sair da base em {1} segundos, voce sera movido para espectador."
 		"tr"		"Dikkat: Bulunduğunuz yerden {1} saniye içinde ayrılmazsanız izleyicilere atılacaksınız."
+		"no"		"Advarsel: Om Du Ikke Beveger Deg Fra Spawn Lokasjonen innen {1} Sekunder, Vill Du Bli Flyttet Til Spectate."
 	}
 
 	"Move_Warning"
@@ -112,6 +133,7 @@
 		"es"		"Advertencia: Si usted no se mueve en {1} segundos, usted será movido a espectador."
 		"pt"		"PERIGO: se voce nao se mover em {1} segundos, voce sera movido para espectador."
 		"tr"		"Dikkat: {1} saniye içinde hareket etmezseniz izleyicilere atılacaksınız."
+		"no"		"Advarsel: Om Du Ikke Beveger Deg Fra Spawn Lokasjonen innen {1} Sekunder, Vill Du Bli Flyttet Til Spectate."
 	}
 
 	"Spawn_Kick_Warning"
@@ -126,6 +148,7 @@
 		"es"		"Advertencia: Si usted no se mueve de su lugar de regeneramiento en {1} segundos, usted será expulsado."
 		"pt"		"PERIGO: Se voce nao sair da base em {1} segundos, voce sera kickado."
 		"tr"		"Dikkat: Doğuş blögesinden {1} saniye içinde ayrılmazsanız oyundan atılacaksınız."
+		"no"		"Advarsel: Om Du Ikke Beveger Deg Fra Spawn Lokasjonen innen {1} Sekunder, Vill Du Bli Flyttet Til Spectate."
 	}
 
 	"Kick_Warning"
@@ -141,6 +164,7 @@
 		"es"		"Advertencia: Si usted no se mueve en {1} segundos, usted será expulsado."
 		"pt"		"PERIGO: Se voce nao se mover em {1} segundos, voce sera kickado."
 		"tr"		"Dikkat: {1} saniye içinde ayrılmazsanız oyundan atılacaksınız."
+		"no"		"Advarsel: Om Du Ikke Beveger Deg innen {1} Sekunder, Vill Du Bli Kastet Ut."
 	}
 
 	"Move_Announce"
@@ -156,6 +180,7 @@
 		"es"		"{1} fue movido a espectador por estar AFK."
 		"pt"		"{1} Foi movido para spectador por ficar AFK."
 		"tr"		"{1} uzun süre AFK olduğu için izleyicilere atıldı."
+		"no"		"{1} Ble Flyttet Til Spectate Fordi Var Ikke Tilstede."
 	}
 
 	"Move_Log"
@@ -171,6 +196,7 @@
 		"es"		"{1} fue movido a espectador por estar AFK."
 		"pt"		"{1} foi movido para spectador por ficar AFK."
 		"tr"		"{1} uzun süre AFK olduğu için izleyicilere atıldı."
+		"no"		"{1} Ble Flyttet Til Spectate Fordi Var Ikke Tilstede."
 	}
 
 	"Kick_Announce"
@@ -186,6 +212,7 @@
 		"es"		"{1} fue expulsado por estar AFK."
 		"pt"		"{1} foi kickado por ficar AFK."
 		"tr"		"{1} uzun süre AFK olduğu için oyundan atıldı."
+		"no"		"{1} Ble Kastet Ut Fordi Var Ikke Tilstede."
 	}
 
 	"Kick_Message"
@@ -200,6 +227,7 @@
 		"es"		"Usted fue expulsado por estar demasiado tiempo AFK (Lejos del teclado)."
 		"pt"		"Voce foi kickado por ficar AFK."
 		"tr"		"Uzun süre AFK olduğunuz için oyundan atıldınız."
+		"no"		"Du Ble KAstet Ut Fordi Du Var Ikke Tilstede."
 	}
 
 	"Kick_Log"
@@ -215,5 +243,6 @@
 		"es"		"{1} fue expulsado por estar AFK."
 		"pt"		"{1} foi kickado por ficar muito tempo AFK."
 		"tr"		"{1} uzun süre AFK olduğu için oyundan atıldı."
+		"no"		"{1} Ble Kastet Ut Fordi Var Ikke Tilstede."
 	}
 }

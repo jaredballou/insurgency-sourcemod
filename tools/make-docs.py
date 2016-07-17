@@ -41,9 +41,9 @@ class SourceMod(object):
 	def __init__(self,config_file=None):
 		self.root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 		self.load_config(config_file=config_file)
-		pprint(self.config)
+		#pprint(self.config)
 		self.load_files()
-		pprint(self.files)
+		#pprint(self.files)
 		self.load_plugins()
 		self.create_readme()
 

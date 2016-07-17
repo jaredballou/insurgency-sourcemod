@@ -54,6 +54,11 @@ public OnPluginStart()
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
 	}
 
+	new String:myFile[PLATFORM_MAX_PATH];
+	GetPluginFilename(INVALID_HANDLE, myFile, sizeof(myFile));
+	ReplaceString(myFile, sizeof(myFile), ".smx", "");
+	PrintToServer("[AMMOCHECK] Plugin name %s", myFile);
+
 	if (LibraryExists("updater")) {
 		Updater_AddPlugin(UPDATE_URL);
 	}

@@ -394,6 +394,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 		new iOffset;
 		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
 	        GetEntityClassname(entity, classname, sizeof(classname));
+		InsLog(DEBUG, "OnEntityUse, entity %i activator %i classname %s netclass %s", entity, activator, classname, sNetClass);
 		new m_iPrimaryAmmoType = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoType");
 		new m_bChamberedRound = 0;
 		iOffset = FindSendPropInfo(sNetClass, "m_bChamberedRound");
@@ -418,7 +419,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			m_iAmmo = GetEntProp(activator, Prop_Send, "m_iAmmo", _, m_iPrimaryAmmoType); // Player ammunition for this weapon ammo type
 			m_iPrimaryAmmoCount = GetEntProp(entity, Prop_Data, "m_iPrimaryAmmoCount");
 		}
-		InsLog(DEBUG, "OnEntityUse, entity %i activator %i entity %d classname %s netclass %s m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d m_bHammerDown %d m_eBoltState %d m_hWeaponDefinitionHandle %d", entity, activator, entity, classname, sNetClass, m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount, m_bHammerDown, m_eBoltState, m_hWeaponDefinitionHandle);
+		InsLog(DEBUG, "OnEntityUse m_bChamberedRound %d m_iPrimaryAmmoType %d m_iClip1 %d m_iAmmo %d m_iPrimaryAmmoCount %d m_bHammerDown %d m_eBoltState %d m_hWeaponDefinitionHandle %d", m_bChamberedRound,m_iPrimaryAmmoType,m_iClip1,m_iAmmo,m_iPrimaryAmmoCount, m_bHammerDown, m_eBoltState, m_hWeaponDefinitionHandle);
 		iOffset = FindInventoryItem(activator,classname);
 		if (iOffset > -1) {
 	                InsLog(DEBUG,"sNetClass %s",sNetClass);
