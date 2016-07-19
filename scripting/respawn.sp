@@ -57,8 +57,6 @@ new g_iSpawnTokens[MAXPLAYERS];
 new g_iRespawnCount[4];
 
 
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-respawn.txt"
-
 public OnPluginStart()
 {
 	decl String:gamemod[40];
@@ -142,6 +140,7 @@ public OnPluginStart()
 	LoadTranslations("common.phrases");
 	LoadTranslations("respawn.phrases");
 	AutoExecConfig(true, "respawn");
+	HookUpdater();
 }
 
 public OnMapStart()

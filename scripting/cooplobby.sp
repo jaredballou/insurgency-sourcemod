@@ -4,6 +4,7 @@
 #pragma semicolon 1
 
 #include <sourcemod>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
@@ -17,7 +18,6 @@
 #define PLUGIN_LOG_PREFIX "COOPLOBBY"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-cooplobby.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -38,21 +38,14 @@ public OnPluginStart()
                 HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 		set_lobbysize();
        	}
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
-public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
-{
+
+public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast) {
 	set_lobbysize();
 }
 

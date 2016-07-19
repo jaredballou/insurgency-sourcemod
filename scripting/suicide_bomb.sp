@@ -31,8 +31,6 @@ public Plugin:myinfo = {
 };
 
 
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-suicide_bomb.txt"
-
 #define MAX_CLASS_LIST 12
 #define MAX_CLASS_NAME 32
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
@@ -70,10 +68,7 @@ public OnPluginStart()
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
 	HookEvent("player_spawn", Event_PlayerSpawn);
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBroadcast )
 {
@@ -84,13 +79,10 @@ public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBro
 	return Plugin_Continue;
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
+
 public ConVarChanged(Handle:cvar, const String:oldVal[], const String:newVal[])
 {
 	if(cvar == cvarEnabled)

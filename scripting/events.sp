@@ -5,7 +5,6 @@
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "EVENTS"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-events.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -15,6 +14,7 @@ public Plugin:myinfo = {
         url             = PLUGIN_URL
 };
 #include <sourcemod>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
 
@@ -99,6 +99,7 @@ public OnPluginStart()
 	RegAdminCmd("sm_events_listevents", Command_ListEvents, ADMFLAG_GENERIC, "List all hooked events");
 	RegAdminCmd("sm_events_listkeys", Command_ListKeys, ADMFLAG_GENERIC, "List all keys for an event");
 	RegAdminCmd("sm_events_searchevents", Command_SearchEvents, ADMFLAG_GENERIC, "Search for events");
+	HookUpdater();
 }
 
 //GetConVarString(cvarPrefix, sPrefix, sizeof(sPrefix));

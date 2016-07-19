@@ -6,6 +6,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
+#include <insurgency>
 #undef REQUIRE_PLUGIN
 #include <updater>
 #include <smlib/entities>
@@ -29,8 +30,6 @@ public Plugin:myinfo = {
 };
 
 
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-rpgdrift.txt"
-
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarAmount = INVALID_HANDLE;
@@ -45,20 +44,13 @@ public OnPluginStart()
 	cvarChance = CreateConVar("sm_rpgdrift_chance", "0.25", "Chance as a fraction of 1 that a player-fired rocket will be affected", FCVAR_NOTIFY);
 	cvarAlwaysBots = CreateConVar("sm_rpgdrift_always_bots", "1", "Always affect bot-fired rockets", FCVAR_NOTIFY);
 	HookEvent("missile_launched", Event_MissileLaunched);
-	
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
+
 public Action:Event_MissileLaunched(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))

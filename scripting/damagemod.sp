@@ -19,7 +19,6 @@ new Handle:cvarFFMinDistance = INVALID_HANDLE; // Minimum Friendly Fire distance
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "0.0.2"
 #define PLUGIN_WORKING "1"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-damagemod.txt"
 
 public Plugin:myinfo = {
 	name		= PLUGIN_NAME,
@@ -43,19 +42,11 @@ public OnPluginStart()
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("player_suppressed", Event_PlayerSuppressed);
-
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
 public Action:Event_WeaponFired(Handle:event, const String:name[], bool:dontBroadcast)
 {

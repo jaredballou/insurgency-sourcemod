@@ -5,7 +5,7 @@
 #end for
 
 #for $name in $sortedKeys
-#include raw "../doc/"+str($name)+".md"
+${plugins[$name].readme}
 #end for
 
 #include "templates/footer.tmpl"

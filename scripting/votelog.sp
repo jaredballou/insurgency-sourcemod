@@ -5,7 +5,6 @@
 #define PLUGIN_LOG_PREFIX "VOTE"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-votelog.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -38,10 +37,7 @@ public OnPluginStart() {
 	HookEvent("vote_failed", Event_vote_failed);
 	HookEvent("vote_cast", Event_vote_cast);
 	HookEvent("vote_options", Event_vote_options);
-
-	if (LibraryExists("updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
 public OnPluginEnd() {

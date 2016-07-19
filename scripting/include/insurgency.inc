@@ -2,12 +2,17 @@
   #endinput
 #endif
 #define _insurgency_included
+#define UPDATE_URL_FORMAT "http://ins.jballou.com/sourcemod/update-%s.txt"
 
-//#include <sourcemod>
-//#include <sdktools>
-//#include <loghelper>
+#if defined REQUIRE_PLUGIN
+#undef REQUIRE_PLUGIN
+#include <updater>
 #include <smlib>
-
+#define REQUIRE_PLUGIN
+#else
+#include <updater>
+#include <smlib>
+#endif
 #define MAX_DEFINABLE_WEAPONS 128
 #define MAX_DEFINABLE_GEAR 32
 #define MAX_DEFINABLE_AMMO 128
@@ -308,4 +313,17 @@ stock bool:IsVectorInSightRange(client, Float:targetpos[3], Float:angle=90.0, Fl
 	}
 	else
 		return false;
+}
+stock bool:HookUpdater() {
+	if (LibraryExists("updater")) {
+		new String:myFile[PLATFORM_MAX_PATH];
+		new String:myURL[PLATFORM_MAX_PATH];
+		GetPluginFilename(INVALID_HANDLE, myFile, sizeof(myFile));
+		File_GetFileName(myFile, myFile, sizeof(myFile));
+		Format(myURL,sizeof(myURL),UPDATE_URL_FORMAT,myFile);
+		//Updater_AddPlugin(GetMyHandle(), myURL);
+		Updater_AddPlugin(myURL);
+		return true;
+	}
+	return false;
 }

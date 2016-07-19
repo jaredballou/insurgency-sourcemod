@@ -17,7 +17,6 @@
 #define PLUGIN_LOG_PREFIX "BOTCOUNT"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botcount.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -26,6 +25,7 @@ public Plugin:myinfo = {
         version         = PLUGIN_VERSION,
         url             = PLUGIN_URL
 };
+new Handle:PanelTimers[MAXPLAYERS+1];
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarTimer = INVALID_HANDLE; // Frequency
@@ -35,21 +35,13 @@ public OnPluginStart()
 	cvarVersion = CreateConVar("sm_botcount_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_botcount_enabled", "0", "sets whether bot naming is enabled", FCVAR_NOTIFY);
 	cvarTimer = CreateConVar("sm_botcount_timer", "60", "Frequency to show count", FCVAR_NOTIFY);
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
-new Handle:PanelTimers[MAXPLAYERS+1];
- 
+
 public OnClientPutInServer(client)
 {
 	PanelTimers[client] = CreateTimer(GetConVarFloat(cvarTimer), RefreshPanel, client, TIMER_REPEAT);

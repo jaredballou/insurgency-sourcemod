@@ -7,7 +7,6 @@
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botspawns.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -183,15 +182,15 @@ public OnPluginStart()
 	//HookEvent("round_begin", Event_RoundBeginPre, EventHookMode_Pre);
 	HookEvent("round_begin", Event_RoundBegin);
 	//HookEvent("round_begin", Event_RoundBeginPost, EventHookMode_Post);
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
 	HookEvent("player_death", Event_PlayerDeathPre, EventHookMode_Pre);
 	HookEvent("player_death", Event_PlayerDeath);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
 	HookEvent("controlpoint_starttouch", Event_ControlPointStartTouch);
 	CreateTimer(1.0, Timer_ProcessQueue, _, TIMER_REPEAT);
+	HookUpdater();
+}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
 
 public CvarChange(Handle:cvar, const String:oldvalue[], const String:newvalue[])
@@ -224,13 +223,6 @@ public UpdateCvars()
 	g_bSpawnSnipersAlone = GetConVarBool(cvarSpawnSnipersAlone);
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
-}
 public OnMapStart()
 {
 	UpdateCvars();

@@ -13,6 +13,7 @@
 	{
 		"Source"	"Path_SM/scripting/events.sp"
 		"Plugin"	"Path_SM/plugins/events.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
 
 	}
 }

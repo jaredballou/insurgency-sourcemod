@@ -6,6 +6,7 @@
 #include <sourcemod>
 #include <sdktools>
 #undef REQUIRE_PLUGIN
+#include <insurgency>
 #include <updater>
 
 #define AUTOLOAD_EXTENSIONS
@@ -27,8 +28,6 @@ public Plugin:myinfo = {
 };
 
 
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-nofog.txt"
-
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 
@@ -42,18 +41,11 @@ public OnPluginStart()
 	HookEvent("game_start", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_newmap", Event_GameStart, EventHookMode_Pre);
 	remove_fog();
-	if (LibraryExists("updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
 public Event_GameStart(Handle:event, const String:name[], bool:dontBroadcast)
 {

@@ -40,6 +40,7 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
  * "check_ammo" // Check ammo of the current weapon
 
+
 <a name="botcount">
 ### Bot Counter 0.0.3
 
@@ -56,6 +57,7 @@ Shows Bots Left Alive
  * "sm_botcount_timer" "60" // Frequency to show count
  * "sm_botcount_enabled" "0" // sets whether bot naming is enabled
 
+
 <a name="botnames">
 ### Bot Names 1.0.4
 
@@ -65,6 +67,7 @@ Gives automatic names to bots on creation.
 
 #### Dependencies
 
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
 
@@ -79,6 +82,7 @@ Gives automatic names to bots on creation.
 
  * "sm_botnames_reload"
  * "sm_botnames_rename_all"
+
 
 <a name="botspawns">
 ### Bot Spawns 0.4.2
@@ -118,6 +122,7 @@ Adds a number of options and ways to handle bot spawns
  * "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1
  * "sm_botspawns_min_fireteam_size" "3" // Min number of bots to spawn per fireteam. Default 3
 
+
 <a name="cooplobby">
 ### Coop Lobby Override 0.0.1
 
@@ -126,6 +131,8 @@ Plugin for overriding Insurgency Coop to 16 players
  * [Plugin - plugins/cooplobby.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cooplobby.smx?raw=true)
 
 #### Dependencies
+
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 
 <a name="damagemod">
@@ -144,6 +151,7 @@ Modifies damage before applying to players
  * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
  * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
 
+
 <a name="events">
 ### Event Logger 0.0.3
 
@@ -153,6 +161,7 @@ Log events to client or server
 
 #### Dependencies
 
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
 
@@ -169,6 +178,7 @@ Log events to client or server
  * "sm_events_listentoall" // Start listening to all events
  * "sm_events_listen" // Start or stop listening to an event
 
+
 <a name="hlstatsx">
 ### [INS] HLStatsX CE Ingame Plugin 1.6.19
 
@@ -179,6 +189,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 #### Dependencies
 
  * [Source - scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
 
@@ -208,6 +219,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
  * "logaddress_delall"
  * "hlx_sm_player_action"
 
+
 <a name="insurgency">
 ### [INS] Insurgency Support Library 1.3.7
 
@@ -233,6 +245,7 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
  * "sm_insurgency_infinite_ammo" "0" // Infinite ammo
  * "sm_insurgency_checkpoint_counterattack_capture" "0" // Enable counterattack by bots to capture points in Checkpoint
 
+
 <a name="nofog">
 ### [INS] No Fog 0.0.1
 
@@ -242,10 +255,12 @@ Removes fog
 
 #### Dependencies
 
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
 
  * "sm_nofog_enabled" "1" // sets whether bot naming is enabled
+
 
 <a name="respawn">
 ### [INS] Player Respawn 1.8.1
@@ -278,6 +293,7 @@ Respawn players
 
  * "sm_respawn" // sm_respawn <#userid|name>
 
+
 <a name="restrictedarea">
 ### [INS] Restricted Area Removal 0.0.1
 
@@ -287,10 +303,12 @@ Plugin for removing Restricted Areas
 
 #### Dependencies
 
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
 
 #### CVAR List
 
  * "sm_restrictedarea_enabled" "1" // sets whether bot naming is enabled
+
 
 <a name="rpgdrift">
 ### [INS] RPG Adjustments 0.0.3
@@ -301,6 +319,7 @@ Adjusts behavior of RPG rounds
 
 #### Dependencies
 
+ * [Source - scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
  * [Source - scripting/include/smlib/entities.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib/entities.inc?raw=true)
 
 #### CVAR List
@@ -309,6 +328,7 @@ Adjusts behavior of RPG rounds
  * "sm_rpgdrift_always_bots" "1" // Always affect bot-fired rockets
  * "sm_rpgdrift_chance" "0.25" // Chance as a fraction of 1 that a player-fired rocket will be affected
  * "sm_rpgdrift_amount" "2.0" // Sets RPG drift max change per tick
+
 
 <a name="suicide_bomb">
 ### [INS] Suicide Bombers 0.0.7
@@ -333,6 +353,7 @@ Adds suicide bomb for bots
  * "sm_suicidebomb_death_chance" "0.1" // Chance as a fraction of 1 that a bomber will explode when killed
  * "sm_suicidebomb_bots_only" "1" // Only apply suicide bomber code to bots
 
+
 <a name="votelog">
 ### Vote Logging 0.0.3
 
@@ -348,6 +369,7 @@ Logs voting events
 #### CVAR List
 
  * "sm_votelog_enabled" "PLUGIN_WORKING" // Enable vote logging
+
 
 <a name="weapon_pickup">
 ### [INS] Weapon Pickup 0.1.0
@@ -375,6 +397,7 @@ Weapon Pickup logic for manipulating player inventory
  * "wp_weaponlist" // Lists all weapons. Usage: wp_weaponlist [target]
  * "wp_weaponslots" // Lists weapon slots. Usage: wp_weaponslots [target]
  * "wp_removeweapons" // Removes all weapons. Usage: wp_removeweapons [target]
+
 
 
 

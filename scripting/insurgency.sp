@@ -5,7 +5,6 @@
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-insurgency.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -174,10 +173,8 @@ public OnPluginStart()
 
 //	LoadTranslations("insurgency.phrases");
 
-	if (LibraryExists("updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
 	//UpdateAllDataSources();
+	HookUpdater();
 }
 public OnCvarLogLevelChange(Handle:cvar, const String:oldVal[], const String:newVal[])
 {
@@ -246,12 +243,8 @@ public GetStatus()
 //}
 //CloseHandle(fileHandle);
 }
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater"))
-	{
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
 OnPlayerDisconnect(client)
 {

@@ -26,7 +26,6 @@ Allow manipulation of weapons and items in the game world.
 #define PLUGIN_URL "http://jballou.com/insurgency"
 #define PLUGIN_VERSION "0.1.0"
 #define PLUGIN_WORKING "1"
-#define UPDATE_URL    "http://ins.jballou.com/sourcemod/update-weapon_pickup.txt"
 
 #include <sourcemod>
 #include <sdktools>
@@ -68,9 +67,6 @@ public OnPluginStart() {
 	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY);
 	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY);
 
-	if (LibraryExists("updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
 	m_hActiveWeapon = FindSendPropInfo("CINSPlayer", "m_hActiveWeapon");
 	if (m_hActiveWeapon == -1) {
 		LogError("Can't find CBasePlayer::m_hActiveWeapon");
@@ -90,6 +86,7 @@ public OnPluginStart() {
 	RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
 	RegConsoleCmd("wp_removeweapons", Command_RemoveWeapons, "Removes all weapons. Usage: wp_removeweapons [target]");
 	HookEverything();
+	HookUpdater();
 }
 HookEverything() {
 	InsLog(DEBUG, "HookEverything");
@@ -155,9 +152,7 @@ public Action:Event_Player_First_Spawn( Handle:event, const String:name[], bool:
 }
 
 public OnLibraryAdded(const String:name[]) {
-	if (StrEqual(name, "updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
 

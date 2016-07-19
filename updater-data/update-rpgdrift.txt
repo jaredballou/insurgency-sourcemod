@@ -13,6 +13,7 @@
 	{
 		"Source"	"Path_SM/scripting/rpgdrift.sp"
 		"Plugin"	"Path_SM/plugins/rpgdrift.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/smlib/entities.inc"
 
 	}

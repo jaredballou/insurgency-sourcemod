@@ -27,6 +27,7 @@
 #include <sdktools>
 #include <loghelper>
 #undef REQUIRE_EXTENSIONS
+#include <insurgency>
 #include <cstrike>
 #include <clientprefs>
  
@@ -45,7 +46,6 @@ public Plugin:myinfo = {
 	url		= PLUGIN_URL
 };
 
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-hlstatsx.txt"
 #define HLXTAG "HLstatsX:CE"
 
 enum GameType {
@@ -256,6 +256,7 @@ public OnPluginStart()
 	message_recipients = CreateStack();
 	
 	GetTeams(gamemod == Game_INSMOD);
+	HookUpdater();
 }
 
 

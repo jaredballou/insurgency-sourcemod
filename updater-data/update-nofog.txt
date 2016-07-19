@@ -13,6 +13,7 @@
 	{
 		"Source"	"Path_SM/scripting/nofog.sp"
 		"Plugin"	"Path_SM/plugins/nofog.smx"
+		"Source"	"Path_SM/scripting/include/insurgency.inc"
 
 	}
 }

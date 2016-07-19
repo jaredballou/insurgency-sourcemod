@@ -8,7 +8,6 @@
 #define PLUGIN_LOG_PREFIX "AMMOCHECK"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-ammocheck.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -53,23 +52,13 @@ public OnPluginStart()
 	if ((m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
 	}
-
-	new String:myFile[PLATFORM_MAX_PATH];
-	GetPluginFilename(INVALID_HANDLE, myFile, sizeof(myFile));
-	ReplaceString(myFile, sizeof(myFile), ".smx", "");
-	PrintToServer("[AMMOCHECK] Plugin name %s", myFile);
-
-	if (LibraryExists("updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
+	HookUpdater();
 }
 
-public OnLibraryAdded(const String:name[])
-{
-	if (StrEqual(name, "updater")) {
-		Updater_AddPlugin(UPDATE_URL);
-	}
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
+
 public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	new victimId = GetEventInt(event, "victim");

@@ -1,5 +1,6 @@
 #include <sourcemod>
 #include <sdktools>
+#include <insurgency>
 
 #pragma semicolon 1
 #pragma unused cvarVersion
@@ -11,7 +12,6 @@
 #define PLUGIN_LOG_PREFIX "BOTNAMES"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define UPDATE_URL "http://ins.jballou.com/sourcemod/update-botnames.txt"
 
 public Plugin:myinfo = {
         name            = PLUGIN_NAME,
@@ -66,6 +66,11 @@ public OnPluginStart()
 	RegServerCmd("sm_botnames_rename_all", Command_Rename_All);
 
 	AutoExecConfig();
+	HookUpdater();
+}
+
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
 }
 
 public OnMapStart()
