@@ -58,6 +58,7 @@ class SourceMod(object):
 			pass
 		else:
 			self.plugins[name] = SourceModPlugin(name=name,config=self.config,parent=self)
+			#self.plugins[name].plugin.run()
 
 	def getpath(self,path=""):
 		return os.path.join(self.root,path)

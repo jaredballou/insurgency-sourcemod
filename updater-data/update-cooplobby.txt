@@ -4,9 +4,9 @@
 	{
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"	"0.0.2"
 		}
-		"Notes"		"Plugin for overriding Insurgency Coop to 16 players"
+		"Notes"		"Plugin for overriding Insurgency Coop to 32 players"
 		"Name"		"Coop Lobby Override"
 	}
 	"Files"

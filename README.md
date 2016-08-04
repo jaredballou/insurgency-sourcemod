@@ -7,7 +7,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#botcount'>Bot Counter 0.0.3</a>
  * <a href='#botnames'>Bot Names 1.0.4</a>
  * <a href='#botspawns'>Bot Spawns 0.4.2</a>
- * <a href='#cooplobby'>Coop Lobby Override 0.0.1</a>
+ * <a href='#cooplobby'>Coop Lobby Override 0.0.2</a>
  * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
  * <a href='#events'>Event Logger 0.0.3</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
@@ -124,9 +124,9 @@ Adds a number of options and ways to handle bot spawns
 
 
 <a name="cooplobby">
-### Coop Lobby Override 0.0.1
+### Coop Lobby Override 0.0.2
 
-Plugin for overriding Insurgency Coop to 16 players
+Plugin for overriding Insurgency Coop to 32 players
  * [Source - scripting/cooplobby.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cooplobby.sp?raw=true)
  * [Plugin - plugins/cooplobby.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cooplobby.smx?raw=true)
 
