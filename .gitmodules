@@ -1,3 +1,4 @@
 [submodule "tools/pysmx"]
 	path = tools/pysmx
 	url = git@github.com:jaredballou/pysmx.git
+	branch = master
