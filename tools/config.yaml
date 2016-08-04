@@ -7,7 +7,8 @@ settings:
   urls:
     'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
     'updater': "http://ins.jballou.com/sourcemod"
-  prefix: "[INS] "
+  prefixes:
+    - "[INS]"
 myinfo_vars:
   "author": "Jared Ballou (jballou)"
   "description": "New Plugin"
@@ -42,22 +43,31 @@ source_parser:
       regex: '#include[\t ]*<([^>]+)>'
       file_path: "scripting/include/%s.inc"
       file_type: "Source"
-
 templates:
   header:
-    - "#raw"
-    - "# SourceMod for Insurgency"
-    - "This repository has a complete installation of SourceMod, including all my plugins and source files. It's updated regularly, kept in sync with upstream, and includes a ton of stuff. It's still very much a development branch, so be aware that almost all the plugins I am working on are still pretty new and could be buggy."
-    - "##Plugin list"
-    - "These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working."
-    - "#end raw"
+    content:
+      - "#raw"
+      - "# SourceMod for Insurgency"
+      - "This repository has a complete installation of SourceMod, including all my plugins and source files. It's updated regularly, kept in sync with upstream, and includes a ton of stuff. It's still very much a development branch, so be aware that almost all the plugins I am working on are still pretty new and could be buggy."
+      - "##Plugin list"
+      - "These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working."
+      - "#end raw"
   footer:
-    - "#raw"
-    - ""
-    - "## Ideas to develop"
-    - "This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on."
-    - "TODO"
-    - "#end raw"
+    content:
+      - "#raw"
+      - ""
+      - "## Ideas to develop"
+      - "This is a sort of scratchpad and todo list for things that I think of or people ask for me to work on."
+      - "TODO"
+      - "#end raw"
+  myinfo:
+    file: templates/myinfo.tmpl
+  plugin:
+    file: templates/plugin.tmpl
+  readme:
+    file: templates/readme.tmpl
+  update:
+    file: templates/update.tmpl
 todo:
   "Remove counterattack capture ability in checkpoint coop mode via a cvar. Having to capture a building and then stand inside it while it gets assaulted instead of choosing good firing positions outside makes the game switch from tight, careful action to Call of Duty twitch shooter.": 1
   "Review bot CVARs and changes from last two patches to see if there are any new options to try or setting changes that can help get the bots to behave like mildly well trained, scared teenagers instead of a guy on a sunday stroll who can hipshoot you at a hundred meters.": 1
@@ -82,13 +92,13 @@ files:
   plugins:
     ext: "smx"
     path: "plugins"
-  libraries:
+  include:
     ext: "inc"
     path: "scripting/include"
   scripting:
     ext: "sp"
     path: "scripting"
-libraries:
+include:
   thirdparty:
     - updater
   stock:

@@ -1,4 +1,5 @@
 #!/bin/bash
+# DEPRECATED - Will produce a new tool for this at a later date
 ################################################################################
 #
 # download-plugin.sh

@@ -1,4 +1,5 @@
 #!/bin/bash
+# DEPRECATED - Will be merged into Python tools
 # This script downloads the latest SourceMod distributions and merges it into
 # this tree.
 
