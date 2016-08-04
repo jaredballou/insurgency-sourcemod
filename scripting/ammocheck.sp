@@ -28,30 +28,33 @@ public Plugin:myinfo = {
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
-new Handle:h_AmmoTimers[MAXPLAYERS+1];
-new i_TimerWeapon[MAXPLAYERS+1];
+
+new Handle:g_hReloadTimers[MAXPLAYERS+1];
+int g_iReloadTimer[MAXPLAYERS+1];
+float g_flAttackDelay[MAXPLAYERS+1];
 
 
 new Handle:cvarAttackDelay = INVALID_HANDLE; //Attack delay for spawning bots
-new m_flNextPrimaryAttack, m_flNextSecondaryAttack;
+new g_flNextPrimaryAttack, g_flNextSecondaryAttack;
 
-public OnPluginStart()
-{
+public OnPluginStart() {
 	cvarVersion = CreateConVar("sm_ammocheck_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "sets whether ammo check is enabled", FCVAR_NOTIFY);
+	cvarEnabled = CreateConVar("sm_ammocheck_enabled", "1", "Allow clients to use check_ammo and post-reload ammo checks", FCVAR_NOTIFY);
 
 	cvarAttackDelay = CreateConVar("sm_ammocheck_attack_delay", "1", "Delay in seconds until next attack when checking ammo", FCVAR_NOTIFY);
 
 	RegConsoleCmd("check_ammo", Command_Check_Ammo, "Check ammo of the current weapon");
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
-	if ((m_flNextPrimaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
+
+	if ((g_flNextPrimaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextPrimaryAttack\" !");
 	}
 
-	if ((m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
+	if ((g_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
 	}
+
 	HookUpdater();
 }
 
@@ -59,65 +62,85 @@ public OnLibraryAdded(const String:name[]) {
 	HookUpdater();
 }
 
-public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
-{
+public Action:Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast) {
 	new victimId = GetEventInt(event, "victim");
-	if (victimId > 0)
-	{
+	if (victimId > 0) {
 		new victim = GetClientOfUserId(victimId);
-		KillAmmoTimer(victim);
+		KillReloadTimer(victim);
 	}
 	return Plugin_Continue;
 }
-public OnMapStart()
-{
+public OnClientDisconnect(client) {
+	KillReloadTimer(client);
 }
-public OnClientDisconnect(client)
-{
-	KillAmmoTimer(client);
-}
-public KillAmmoTimer(client)
-{
-	if (h_AmmoTimers[client] != INVALID_HANDLE)
-	{
-		KillTimer(h_AmmoTimers[client]);
-		h_AmmoTimers[client] = INVALID_HANDLE;
-		i_TimerWeapon[client] = -1;
+/**
+ * Kill the ammo check timer for a client
+ *
+ * @param client	Client number
+ */
+public KillReloadTimer(client) {
+	if (g_hReloadTimers[client] != INVALID_HANDLE) {
+		KillTimer(g_hReloadTimers[client]);
+		g_hReloadTimers[client] = INVALID_HANDLE;
 	}
+	g_iReloadTimer[client] = -1;
+	g_flAttackDelay[client] = 0.0;
 }
 
-public CreateAmmoTimer(client,ActiveWeapon)
-{
-	KillAmmoTimer(client);
-	i_TimerWeapon[client] = ActiveWeapon;
+/**
+ * Create the ammo check timer for a client
+ *
+ * @param client	Client number
+ * @param ActiveWeapon	Weapon entity ID, so that we only run the check for this weapon.
+ */
+public CreateReloadTimer(client,ActiveWeapon) {
+	KillReloadTimer(client);
+	g_iReloadTimer[client] = ActiveWeapon;
 	float flNextPrimaryAttack = GetEntPropFloat(ActiveWeapon,Prop_Data,"m_flNextPrimaryAttack");
-	h_AmmoTimers[client] = CreateTimer((flNextPrimaryAttack-GetGameTime())+0.5, Timer_Check_Ammo, client);
+	g_hReloadTimers[client] = CreateTimer((flNextPrimaryAttack-GetGameTime())+0.5, Timer_Check_Ammo, client);
 }
-public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBroadcast)
-{
+
+public Action:Event_WeaponReload(Handle:event, const String:name[], bool:dontBroadcast) {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
 	if(!IsClientInGame(client))
 		return Plugin_Continue;
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0)
 		return Plugin_Continue;
-	CreateAmmoTimer(client,ActiveWeapon);
+	CreateReloadTimer(client,ActiveWeapon);
 	return Plugin_Continue;
 }
 
-public Action:Timer_Check_Ammo(Handle:event, any:client)
-{
+/**
+ * Called by timer after reload to check ammo
+ *
+ * @param event		Event handle
+ * @param client	Client number
+ */
+public Action:Timer_Check_Ammo(Handle:event, any:client) {
 	Check_Ammo(client);
 	return Plugin_Stop;
 }
 
-public Action:Command_Check_Ammo(client, args)
-{
+/**
+ * Run each time the command is called by a client
+ *
+ * @param client	Client number
+ */
+public Action:Command_Check_Ammo(client, args) {
 	if (CheckAndSetAttackDelay(client)) {
 		return Check_Ammo(client);
 	}
 	return Plugin_Continue;
 }
+
+/**
+ * Make sure that the client ammo check can be executed, and set an attack
+ * delay. This is so that calling the check_ammo command will have a small
+ * penalty for using the command. This is not called by the post-reload check.
+ *
+ * @param client	Client number
+ */
 float CheckAndSetAttackDelay(client) {
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0) {
@@ -130,33 +153,39 @@ float CheckAndSetAttackDelay(client) {
 		return 0.0;
 	}
 	float flDelay = GetGameTime() + GetConVarFloat(cvarAttackDelay);
-	SetEntDataFloat(ActiveWeapon, m_flNextPrimaryAttack, flDelay);
-	SetEntDataFloat(ActiveWeapon, m_flNextSecondaryAttack, flDelay);
+	SetEntDataFloat(ActiveWeapon, g_flNextPrimaryAttack, flDelay);
+	SetEntDataFloat(ActiveWeapon, g_flNextSecondaryAttack, flDelay);
+	g_flAttackDelay[client] = flDelay;
 	return flDelay;
 }
+
+/**
+ * Do the actual check and display result to client.
+ *
+ * @param client	Client number
+ */
 public Action:Check_Ammo(client) {
 	if (!GetConVarBool(cvarEnabled)) {
-		KillAmmoTimer(client);
+		KillReloadTimer(client);
 		return Plugin_Handled;
 	}
 	// Don't run if no active weapon
 	new ActiveWeapon = GetEntPropEnt(client, Prop_Data, "m_hActiveWeapon");
 	if (ActiveWeapon < 0) {
-		KillAmmoTimer(client);
+		KillReloadTimer(client);
 		return Plugin_Handled;
 	}
 
 	// Don't run if the active weapon doesn't match the timer
-	if ((i_TimerWeapon[client]) && (i_TimerWeapon[client] != ActiveWeapon)) {
-		KillAmmoTimer(client);
+	if ((g_iReloadTimer[client]) && (g_iReloadTimer[client] != ActiveWeapon)) {
+		KillReloadTimer(client);
 		return Plugin_Handled;
 	}
-
 	new maxammo = Ins_GetWeaponGetMaxClip1(ActiveWeapon);
 	new ammo = GetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", 1);
 	//Don't do it if we have a small magazine, usually means single shot weapon
 	if (maxammo <= 2) {
-		KillAmmoTimer(client);
+		KillReloadTimer(client);
 		return Plugin_Handled;
 	}
 	if (ammo >= maxammo) {
@@ -172,7 +201,7 @@ public Action:Check_Ammo(client) {
 	} else {
 		PrintHintText(client, "Mag feels empty");
 	}
-	KillAmmoTimer(client);
+	KillReloadTimer(client);
 	return Plugin_Handled;
 }
 

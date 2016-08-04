@@ -25,6 +25,7 @@ public Plugin:myinfo = {
         version         = PLUGIN_VERSION,
         url             = PLUGIN_URL
 };
+
 new Handle:PanelTimers[MAXPLAYERS+1];
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
