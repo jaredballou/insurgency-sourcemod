@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Respawn players"
 #define PLUGIN_NAME "[INS] Player Respawn"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.8.2"
+#define PLUGIN_VERSION "1.8.3"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {

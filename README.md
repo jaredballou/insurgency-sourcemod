@@ -3,26 +3,26 @@ This repository has a complete installation of SourceMod, including all my plugi
 ##Plugin list
 These plugins are all provided as-is, I do my best to document and describe them but they are all potentially broken, so be aware. Please send me feedback and bug reports to help keep these working.
 
- * <a href='#ammocheck'>Ammo Check 1.0.3</a>
- * <a href='#botcount'>Bot Counter 0.0.3</a>
- * <a href='#botnames'>Bot Names 1.0.4</a>
- * <a href='#botspawns'>Bot Spawns 0.4.3</a>
- * <a href='#cooplobby'>Coop Lobby Override 0.0.2</a>
- * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
- * <a href='#events'>Event Logger 0.0.3</a>
+ * <a href='#ammocheck'>Ammo Check 1.0.4</a>
+ * <a href='#botcount'>Bot Counter 1.0.0</a>
+ * <a href='#botnames'>Bot Names 1.0.5</a>
+ * <a href='#botspawns'>Bot Spawns 1.0.0</a>
+ * <a href='#cooplobby'>Coop Lobby Override 1.0.0</a>
+ * <a href='#damagemod'>[INS] Damage Modifier 1.0.0</a>
+ * <a href='#events'>Event Logger 1.0.0</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.7</a>
- * <a href='#nofog'>[INS] No Fog 0.0.1</a>
- * <a href='#respawn'>[INS] Player Respawn 1.8.2</a>
- * <a href='#restrictedarea'>[INS] Restricted Area Removal 0.0.1</a>
- * <a href='#rpgdrift'>[INS] RPG Adjustments 0.0.3</a>
+ * <a href='#insurgency'>[INS] Insurgency Support Library 1.4.0</a>
+ * <a href='#nofog'>[INS] No Fog 1.0.0</a>
+ * <a href='#respawn'>[INS] Player Respawn 1.8.3</a>
+ * <a href='#restrictedarea'>[INS] Restricted Area Removal 1.0.0</a>
+ * <a href='#rpgdrift'>[INS] RPG Adjustments 1.0.0</a>
  * <a href='#suicide_bomb'>[INS] Suicide Bombers 0.0.7</a>
  * <a href='#updater'>Updater 1.2.1</a>
- * <a href='#votelog'>Vote Logging 0.0.3</a>
- * <a href='#weapon_pickup'>[INS] Weapon Pickup 0.1.0</a>
+ * <a href='#votelog'>Vote Logging 1.0.0</a>
+ * <a href='#weapon_pickup'>[INS] Weapon Pickup 1.0.0</a>
 
 <a name="ammocheck">
-### Ammo Check 1.0.3
+### Ammo Check 1.0.4
 
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
  * [Source - scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)
@@ -44,7 +44,7 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
 
 <a name="botcount">
-### Bot Counter 0.0.3
+### Bot Counter 1.0.0
 
 Shows Bots Left Alive
  * [Source - scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)
@@ -62,7 +62,7 @@ Shows Bots Left Alive
 
 
 <a name="botnames">
-### Bot Names 1.0.4
+### Bot Names 1.0.5
 
 Gives automatic names to bots on creation.
  * [Source - scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
@@ -88,7 +88,7 @@ Gives automatic names to bots on creation.
 
 
 <a name="botspawns">
-### Bot Spawns 0.4.3
+### Bot Spawns 1.0.0
 
 Adds a number of options and ways to handle bot spawns
  * [Source - scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
@@ -127,7 +127,7 @@ Adds a number of options and ways to handle bot spawns
 
 
 <a name="cooplobby">
-### Coop Lobby Override 0.0.2
+### Coop Lobby Override 1.0.0
 
 Plugin for overriding Insurgency Coop to 32 players
  * [Source - scripting/cooplobby.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cooplobby.sp?raw=true)
@@ -140,7 +140,7 @@ Plugin for overriding Insurgency Coop to 32 players
 
 
 <a name="damagemod">
-### [INS] Damage Modifier 0.0.2
+### [INS] Damage Modifier 1.0.0
 
 Modifies damage before applying to players
  * [Source - scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
@@ -158,7 +158,7 @@ Modifies damage before applying to players
 
 
 <a name="events">
-### Event Logger 0.0.3
+### Event Logger 1.0.0
 
 Log events to client or server
  * [Source - scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
@@ -227,7 +227,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 
 <a name="insurgency">
-### [INS] Insurgency Support Library 1.3.7
+### [INS] Insurgency Support Library 1.4.0
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
  * [Source - scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)
@@ -254,7 +254,7 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
 
 <a name="nofog">
-### [INS] No Fog 0.0.1
+### [INS] No Fog 1.0.0
 
 Removes fog
  * [Source - scripting/nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)
@@ -271,7 +271,7 @@ Removes fog
 
 
 <a name="respawn">
-### [INS] Player Respawn 1.8.2
+### [INS] Player Respawn 1.8.3
 
 Respawn players
  * [Source - scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
@@ -303,7 +303,7 @@ Respawn players
 
 
 <a name="restrictedarea">
-### [INS] Restricted Area Removal 0.0.1
+### [INS] Restricted Area Removal 1.0.0
 
 Plugin for removing Restricted Areas
  * [Source - scripting/restrictedarea.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/restrictedarea.sp?raw=true)
@@ -320,7 +320,7 @@ Plugin for removing Restricted Areas
 
 
 <a name="rpgdrift">
-### [INS] RPG Adjustments 0.0.3
+### [INS] RPG Adjustments 1.0.0
 
 Adjusts behavior of RPG rounds
  * [Source - scripting/rpgdrift.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/rpgdrift.sp?raw=true)
@@ -390,7 +390,7 @@ Automatically updates SourceMod plugins and files
 
 
 <a name="votelog">
-### Vote Logging 0.0.3
+### Vote Logging 1.0.0
 
 Logs voting events
  * [Source - scripting/votelog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/votelog.sp?raw=true)
@@ -408,7 +408,7 @@ Logs voting events
 
 
 <a name="weapon_pickup">
-### [INS] Weapon Pickup 0.1.0
+### [INS] Weapon Pickup 1.0.0
 
 Weapon Pickup logic for manipulating player inventory
  * [Source - scripting/weapon_pickup.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/weapon_pickup.sp?raw=true)

@@ -18,7 +18,7 @@
 #define PLUGIN_DESCRIPTION "Adjusts behavior of RPG rounds"
 #define PLUGIN_NAME "[INS] RPG Adjustments"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING 1
 
 public Plugin:myinfo = {

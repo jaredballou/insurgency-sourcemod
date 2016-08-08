@@ -24,7 +24,7 @@ Allow manipulation of weapons and items in the game world.
 #define PLUGIN_LOG_PREFIX "WPNPICK"
 #define PLUGIN_NAME "[INS] Weapon Pickup"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.1.0"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 
 #include <sourcemod>

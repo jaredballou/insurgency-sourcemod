@@ -12,7 +12,7 @@
 //Define CVARS
 #define PLUGIN_DESCRIPTION "Shows Bots Left Alive"
 #define PLUGIN_NAME "Bot Counter"
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "BOTCOUNT"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"

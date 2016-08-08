@@ -2,7 +2,7 @@
 //Released under GPLv3
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "Bot Spawns"
-#define PLUGIN_VERSION "0.4.3"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "0"
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"

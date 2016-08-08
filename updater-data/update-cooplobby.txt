@@ -5,10 +5,10 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"0.0.2"
+			"Latest"	"1.0.0"
 		}
+		"Notes"		"Coop Lobby Override"
 		"Notes"		"Plugin for overriding Insurgency Coop to 32 players"
-		"Name"		"Coop Lobby Override"
 	}
 	"Files"
 	{

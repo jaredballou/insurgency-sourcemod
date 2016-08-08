@@ -7,7 +7,7 @@
 
 #define PLUGIN_DESCRIPTION "Gives automatic names to bots on creation."
 #define PLUGIN_NAME "Bot Names"
-#define PLUGIN_VERSION "1.0.4"
+#define PLUGIN_VERSION "1.0.5"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "BOTNAMES"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"

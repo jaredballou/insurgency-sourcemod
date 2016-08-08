@@ -13,7 +13,7 @@
 
 #define PLUGIN_DESCRIPTION "Plugin for overriding Insurgency Coop to 32 players"
 #define PLUGIN_NAME "Coop Lobby Override"
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "COOPLOBBY"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"

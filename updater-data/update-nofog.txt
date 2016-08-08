@@ -5,10 +5,10 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"	"1.0.0"
 		}
+		"Notes"		"[INS] No Fog"
 		"Notes"		"Removes fog"
-		"Name"		"[INS] No Fog"
 	}
 	"Files"
 	{

@@ -5,10 +5,10 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"0.0.1"
+			"Latest"	"1.0.0"
 		}
+		"Notes"		"[INS] Restricted Area Removal"
 		"Notes"		"Plugin for removing Restricted Areas"
-		"Name"		"[INS] Restricted Area Removal"
 	}
 	"Files"
 	{

@@ -17,7 +17,7 @@ new Handle:cvarFFMinDistance = INVALID_HANDLE; // Minimum Friendly Fire distance
 #define PLUGIN_DESCRIPTION "Modifies damage before applying to players"
 #define PLUGIN_NAME "[INS] Damage Modifier"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "0.0.2"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {

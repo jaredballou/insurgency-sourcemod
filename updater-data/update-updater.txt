@@ -1,0 +1,23 @@
+"Updater"
+{
+	"Information"
+	{
+		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
+		"Version"
+		{
+			"Latest"	"1.2.1"
+		}
+		"Notes"		"Updater"
+		"Notes"		"Automatically updates SourceMod plugins and files"
+	}
+	"Files"
+	{
+		"Source"	"Path_SM/scripting/updater.sp"
+		"Plugin"	"Path_SM/plugins/updater.smx"
+		"Source"	"Path_SM/scripting/include/cURL.inc"
+		"Source"	"Path_SM/scripting/include/socket.inc"
+		"Source"	"Path_SM/scripting/include/steamtools.inc"
+		"Plugin"	"Path_SM/translations/common.phrases.txt"
+
+	}
+}

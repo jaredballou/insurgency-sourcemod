@@ -5,10 +5,10 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"0.0.3"
+			"Latest"	"1.0.0"
 		}
+		"Notes"		"[INS] RPG Adjustments"
 		"Notes"		"Adjusts behavior of RPG rounds"
-		"Name"		"[INS] RPG Adjustments"
 	}
 	"Files"
 	{

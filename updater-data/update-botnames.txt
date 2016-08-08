@@ -5,10 +5,10 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"1.0.4"
+			"Latest"	"1.0.5"
 		}
+		"Notes"		"Bot Names"
 		"Notes"		"Gives automatic names to bots on creation."
-		"Name"		"Bot Names"
 	}
 	"Files"
 	{

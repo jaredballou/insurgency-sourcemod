@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Logs voting events"
 #define PLUGIN_NAME "Vote Logging"
-#define PLUGIN_VERSION "0.0.3"
+#define PLUGIN_VERSION "1.0.0"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "VOTE"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
