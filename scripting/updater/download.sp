@@ -5,7 +5,7 @@
 #include "updater/download_socket.sp"
 #include "updater/download_steamtools.sp"
 
-static QueuePack_URL = 0;
+static DataPackPos:QueuePack_URL;
 
 FinalizeDownload(index)
 {
@@ -52,10 +52,8 @@ AbortDownload(index)
 	ClearArray(hFiles);
 }
 
-ProcessDownloadQueue(bool:force=false)
-{
-	if (!force && (g_bDownloading || !GetArraySize(g_hDownloadQueue)))
-	{
+ProcessDownloadQueue(bool:force=false) {
+	if (!force && (g_bDownloading || !GetArraySize(g_hDownloadQueue))) {
 		return;
 	}
 	
@@ -79,36 +77,26 @@ ProcessDownloadQueue(bool:force=false)
 	
 	g_bDownloading = true;
 	
-	if (STEAMTOOLS_AVAILABLE())
-	{
-		if (g_bSteamLoaded)
-		{
+	if (STEAMTOOLS_AVAILABLE()) {
+		if (g_bSteamLoaded) {
 			Download_SteamTools(url, dest);
-		}
-		else
-		{
+		} else {
 			CreateTimer(10.0, Timer_RetryQueue);
 		}
-	}
-	else if (CURL_AVAILABLE())
-	{
+	} else if (CURL_AVAILABLE()) {
 		Download_cURL(url, dest);
-	}
-	else if (SOCKET_AVAILABLE())
-	{
+	} else if (SOCKET_AVAILABLE()) {
 		Download_Socket(url, dest);
 	}
 }
 
-public Action:Timer_RetryQueue(Handle:timer)
-{
+public Action:Timer_RetryQueue(Handle:timer) {
 	ProcessDownloadQueue(true);
 	
 	return Plugin_Stop;
 }
 
-AddToDownloadQueue(index, const String:url[], const String:dest[])
-{
+AddToDownloadQueue(index, const String:url[], const String:dest[]) {
 	new Handle:hQueuePack = CreateDataPack();
 	WritePackCell(hQueuePack, index);
 	

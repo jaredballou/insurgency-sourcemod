@@ -40,27 +40,21 @@ Download_cURL(const String:url[], const String:dest[])
 	new Handle:curl = curl_easy_init();
 	curl_easy_setopt_int_array(curl, CURL_Default_opt, sizeof(CURL_Default_opt));
 	curl_easy_setopt_handle(curl, CURLOPT_WRITEDATA, hFile);
-//	new String:url[512];
-//	Format(class_template,MAX_CLASS_LEN,"%s",url);
 	curl_easy_setopt_string(curl, CURLOPT_URL, sURL);
 	curl_easy_setopt_handle(curl, CURLOPT_HTTPHEADER, headers);
 	curl_easy_perform_thread(curl, OnCurlComplete, hDLPack);
 }
 
-public OnCurlComplete(Handle:curl, CURLcode:code, any:hDLPack)
-{
+public OnCurlComplete(Handle:curl, CURLcode:code, any:hDLPack) {
 	ResetPack(hDLPack);
 	CloseHandle(Handle:ReadPackCell(hDLPack));	// hFile
 	CloseHandle(Handle:ReadPackCell(hDLPack));	// headers
 	CloseHandle(hDLPack);
 	CloseHandle(curl);
 	
-	if(code == CURLE_OK)
-	{
+	if(code == CURLE_OK) {
 		DownloadEnded(true);
-	}
-	else
-	{
+	} else {
 		decl String:sError[256];
 		curl_easy_strerror(code, sError, sizeof(sError));
 		Format(sError, sizeof(sError), "cURL error: %s", sError);

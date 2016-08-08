@@ -111,8 +111,7 @@ static Handle:SMC_DataTrie;
 static Handle:SMC_DataPack;
 static SMC_LineNum;
 
-bool:ParseUpdateFile(index, const String:path[])
-{
+bool:ParseUpdateFile(index, const String:path[]) {
 	/* Return true if an update was available. */
 	SMC_Sections = CreateArray(64);
 	SMC_DataTrie = CreateTrie();
@@ -128,8 +127,7 @@ bool:ParseUpdateFile(index, const String:path[])
 	new bool:bUpdate = false;
 	new SMCError:err = SMC_ParseFile(smc, path);
 	
-	if (err == SMCError_Okay)
-	{
+	if (err == SMCError_Okay) {
 		// Initialize data
 		new Handle:hPlugin = IndexToPlugin(index);
 		new Handle:hFiles = Updater_GetFiles(index);
@@ -177,6 +175,14 @@ bool:ParseUpdateFile(index, const String:path[])
 					ReadPackString(hPack, sBuffer, sizeof(sBuffer));
 					Updater_Log("  [%i]  %s", iCount++, sBuffer);
 				}
+			}
+			
+			if (GetTrieValue(SMC_DataTrie, "information->baseurl", hPack)) {
+				ResetPack(hPack);
+				new String:sBaseURL[MAX_URL_LENGTH];
+				ReadPackString(hPack, sBaseURL, sizeof(sBaseURL));
+				Updater_SetBaseURL(index, sBaseURL);
+				PrintToServer("[UPDATER] sBaseURL %s", sBaseURL);
 			}
 			
 			// Log update notes, save file list, and begin downloading.
@@ -248,16 +254,13 @@ bool:ParseUpdateFile(index, const String:path[])
 		Updater_DebugLog("END SMC DEBUG");
 		Updater_DebugLog(" ");
 #endif
-	}
-	else
-	{
+	} else {
 		Updater_Log("SMC parsing error on line %d", SMC_LineNum);
-		
+
 		Updater_GetURL(index, sBuffer, sizeof(sBuffer));
 		Updater_Log("  [0]  URL: %s", sBuffer);
-		
-		if (SMC_GetErrorString(err, sBuffer, sizeof(sBuffer)))
-		{
+
+		if (SMC_GetErrorString(err, sBuffer, sizeof(sBuffer))) {
 			Updater_Log("  [1]  ERROR: %s", sBuffer);
 		}
 	}
@@ -287,8 +290,7 @@ ParseSMCFilePack(index, Handle:hPack, Handle:hFiles)
 {
 	// Prepare URL
 	decl String:urlprefix[MAX_URL_LENGTH], String:url[MAX_URL_LENGTH], String:dest[PLATFORM_MAX_PATH], String:sBuffer[MAX_URL_LENGTH];
-	Updater_GetURL(index, urlprefix, sizeof(urlprefix));
-	StripPathFilename(urlprefix);
+	Updater_GetBaseURL(index, urlprefix, sizeof(urlprefix));
 
 	ResetPack(hPack);
 
@@ -298,10 +300,13 @@ ParseSMCFilePack(index, Handle:hPack, Handle:hFiles)
 		
 		// Merge url.
 		ParseSMCPathForDownload(sBuffer, url, sizeof(url));
+		PrintToServer("[UPDATER] url %s", url);
 		Format(url, sizeof(url), "%s%s", urlprefix, url);
+		PrintToServer("[UPDATER] url post-merge %s", url);
 		
 		// Make sure the current plugin path matches the update.
 		ParseSMCPathForLocal(sBuffer, dest, sizeof(dest));
+		PrintToServer("[UPDATER] dest %s", dest);
 		
 		decl String:sLocalBase[64], String:sPluginBase[64], String:sFilename[64];
 		GetPathBasename(dest, sLocalBase, sizeof(sLocalBase));

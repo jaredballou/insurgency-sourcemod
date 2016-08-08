@@ -2,6 +2,7 @@
 {
 	"Information"
 	{
+		"BaseURL"	"https://raw.githubusercontent.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
 			"Latest"	"0.0.1"

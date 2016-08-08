@@ -69,8 +69,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //new String:Edicts[100];    // Stores total number of edicts used
 //============================================================================================================
 
-public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
-{
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
 	RegPluginLibrary("insurgency");	
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetMaxClip1", Native_Weapon_GetMaxClip1);
@@ -92,17 +91,8 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 	CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
 	return APLRes_Success;
 }
-/*
-public OnLibraryRemoved(const String:name[])
-{
-	if (StrEqual(name, "insurgency"))
-	{
-		SetFailState("Insurgency Library not present, disabling plugin...");
-	}
-}
-*/
-public OnPluginStart()
-{
+
+public OnPluginStart() {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
 	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
@@ -115,16 +105,14 @@ public OnPluginStart()
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 
 	InsLog(DEFAULT,"Starting");
-/*
-	AddFolderToDownloadTable("materials/overviews");
-	AddFolderToDownloadTable("materials/vgui/backgrounds/maps");
-	AddFolderToDownloadTable("materials/vgui/endroundlobby/maps");
-*/
+
 	kill_regex = CompileRegex(KILL_REGEX_PATTERN);
 	suicide_regex = CompileRegex(SUICIDE_REGEX_PATTERN);
 	
 	//Begin HookEvents
 	hook_wstats();
+
+	// Hook events
 	HookEvent("player_hurt", Event_PlayerHurt);
 	HookEvent("weapon_fire", Event_WeaponFire);
 	HookEvent("weapon_firemode", Event_WeaponFireMode);

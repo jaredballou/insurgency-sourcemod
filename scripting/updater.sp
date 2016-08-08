@@ -44,7 +44,7 @@ enum UpdateStatus {
 
 new bool:g_bGetDownload, bool:g_bGetSource;
 
-new Handle:g_hPluginPacks = INVALID_HANDLE;
+new Handle:g_hPluginPacks;
 new Handle:g_hDownloadQueue = INVALID_HANDLE;
 new Handle:g_hRemoveQueue = INVALID_HANDLE;
 new bool:g_bDownloading = false;
@@ -246,10 +246,8 @@ public Updater_OnPluginUpdated()
 }
 #endif
 
-Updater_Check(index)
-{
-	if (Fwd_OnPluginChecking(IndexToPlugin(index)) == Plugin_Continue)
-	{
+Updater_Check(index) {
+	if (Fwd_OnPluginChecking(IndexToPlugin(index)) == Plugin_Continue) {
 		decl String:url[MAX_URL_LENGTH];
 		Updater_GetURL(index, url, sizeof(url));
 		Updater_SetStatus(index, Status_Checking);
@@ -257,11 +255,9 @@ Updater_Check(index)
 	}
 }
 
-Updater_FreeMemory()
-{
+Updater_FreeMemory() {
 	// Make sure that no threads are active.
-	if (g_bDownloading || GetArraySize(g_hDownloadQueue))
-	{
+	if (g_bDownloading || GetArraySize(g_hDownloadQueue)) {
 		return;
 	}
 	

@@ -47,13 +47,8 @@ public OnPluginStart() {
 	HookEvent("weapon_reload", Event_WeaponReload,  EventHookMode_Post);
 	HookEvent("player_death", Event_PlayerDeath, EventHookMode_Pre);
 
-	if ((g_flNextPrimaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextPrimaryAttack")) == -1) {
-		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextPrimaryAttack\" !");
-	}
-
-	if ((g_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack")) == -1) {
-		SetFailState("Fatal Error: Unable to find property offset \"CBaseCombatWeapon::m_flNextSecondaryAttack\" !");
-	}
+	g_flNextPrimaryAttack = GetSendProp("CBaseCombatWeapon", "m_flNextPrimaryAttack");
+	g_flNextSecondaryAttack = GetSendProp("CBaseCombatWeapon", "m_flNextSecondaryAttack");
 
 	HookUpdater();
 }

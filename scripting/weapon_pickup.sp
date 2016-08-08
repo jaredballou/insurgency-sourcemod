@@ -52,11 +52,10 @@ public Plugin:myinfo = {
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar!
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 new Handle:cvarAmmoPickup = INVALID_HANDLE; // allow picking up weapons as ammo?
-//new Handle:cvarMode = INVALID_HANDLE; // What mode to use
 new Handle:cvarMaxExplosive = INVALID_HANDLE; // Maximum number of explosive ammo
 new Handle:cvarMaxMagazine = INVALID_HANDLE; // Maximum number of magazines that can be picked up
 
-new OwnerOfWeapon[2048] = 0;
+new g_WeaponOwner[2048] = 0;
 new m_hActiveWeapon;
 new m_hMyWeapons;
 
@@ -67,20 +66,13 @@ public OnPluginStart() {
 	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY);
 	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY);
 
-	m_hActiveWeapon = FindSendPropInfo("CINSPlayer", "m_hActiveWeapon");
-	if (m_hActiveWeapon == -1) {
-		LogError("Can't find CBasePlayer::m_hActiveWeapon");
-	}
-
+	m_hActiveWeapon = GetSendProp("CINSPlayer", "m_hActiveWeapon");
 
         HookEvent("player_first_spawn", Event_Player_First_Spawn);
         HookEvent("player_spawn", Event_Player_Spawn);
         HookEvent("weapon_pickup", Event_Weapon_Pickup);
 
-	m_hMyWeapons = FindSendPropInfo("CINSPlayer", "m_hMyWeapons");
-	if (m_hMyWeapons == -1) {
-		LogError("Can't find CINSPlayer::m_hMyWeapons");
-	}
+	m_hMyWeapons = GetSendProp("CINSPlayer", "m_hMyWeapons");
 
 	RegConsoleCmd("wp_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: wp_weaponslots [target]");
 	RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
@@ -88,6 +80,7 @@ public OnPluginStart() {
 	HookEverything();
 	HookUpdater();
 }
+
 HookEverything() {
 	InsLog(DEBUG, "HookEverything");
 	for(new i=0;i<= GetMaxEntities() ;i++){
@@ -104,10 +97,19 @@ HookEverything() {
 public OnEntityCreated(entity, const String:classname[]) {
 	HookEntity(entity);
 }
+
 HookEntity(entity) {
 	if(entity > MaxClients && IsValidEntity(entity)) {
 		InsLog(DEBUG, "HookEntity %d", entity);
+		new String:sNetClass[32];
+	        new String:sClassname[64];
+		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
+	        GetEntityClassname(entity, sClassname, sizeof(sClassname));
+		PrintToServer("[WP] sNetClass %s sClassname %s", sNetClass, sClassname);
+		// TODO: Only hook weapons/grenades. Need to do some magic here.
 		SDKHook(entity, SDKHook_Use, OnEntityUse);
+//		new m_iPrimaryAmmoCount = GetSendProp(sNetClass, "m_iPrimaryAmmoCount", 0);
+//		if (m_iPrimaryAmmoCount > -1) {
 	}
 }
 
@@ -157,7 +159,7 @@ public OnLibraryAdded(const String:name[]) {
 
 
 public OnWeaponDropPost(client, weapon) {
-	OwnerOfWeapon[weapon] = client; 
+	g_WeaponOwner[weapon] = client; 
 }
 // Dump data about weapon entity
 public Action:OnWeaponCanUse(client, weapon)

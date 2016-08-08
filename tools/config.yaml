@@ -98,9 +98,9 @@ files:
   scripting:
     ext: "sp"
     path: "scripting"
-include:
+libraries:
   thirdparty:
-    - updater
+    - navmesh
   stock:
     - admin
     - adminmenu
@@ -186,6 +186,7 @@ plugins:
     - rpgdrift
     - suicide_bomb
     - votelog
+    - updater
     - weapon_pickup
   disabled:
     - backblast
@@ -217,7 +218,6 @@ plugins:
     - sm_downloader
     - sourcebans_listener
     - sourcebans
-    - updater
     - webshortcuts
   stock:
     - admin-flatfile/admin-flatfile

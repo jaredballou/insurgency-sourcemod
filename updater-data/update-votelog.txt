@@ -15,6 +15,7 @@
 		"Plugin"	"Path_SM/plugins/votelog.smx"
 		"Source"	"Path_SM/scripting/include/insurgency.inc"
 		"Source"	"Path_SM/scripting/include/loghelper.inc"
+		"Source"	"Path_SM/scripting/include/updater.inc"
 
 	}
 }

@@ -50,6 +50,8 @@ native Ins_GetClassName(squad,squad_slot);
 native Ins_GetWeaponName(weaponid, String:buffer[], maxlen);
 native Ins_GetWeaponId(String:weapon_name[]);
 
+// Team numbers. This is Insurgency specific right now
+// TODO: Add support for DoI style factions, or make it load from a cfg file
 enum Teams
 {
 	TEAM_NONE = 0,
@@ -57,6 +59,8 @@ enum Teams
 	TEAM_SECURITY,
 	TEAM_INSURGENTS,
 }
+
+// Round stats for players
 enum RoundStatFields
 {
 	STAT_KILLS = 0,
@@ -73,6 +77,8 @@ enum RoundStatFields
 	STAT_SUPPRESSIONS,
 	STAT_ACCURACY,
 }
+
+// Damage hitgroups
 enum Hitgroups
 {
 	HITGROUP_GENERIC = 0,
@@ -85,6 +91,7 @@ enum Hitgroups
 	HITGROUP_RIGHTLEG,
 }
 
+// Weapon stat fields
 enum WeaponStatFields
 {
 	LOG_HIT_SHOTS = 0,
@@ -103,10 +110,12 @@ enum WeaponStatFields
 	LOG_HIT_LEFTLEG,
 	LOG_HIT_RIGHTLEG,
 }
+
+// Offset of end of weaponstats/beginning of weaponstats2
 #define LOG_HIT_OFFSET 7
 
-enum LOG_LEVEL
-{
+// Log levels
+enum LOG_LEVEL {
 	DEFAULT = 0,
 	TRACE,
 	DEBUG,
@@ -115,6 +124,7 @@ enum LOG_LEVEL
 	ERROR
 }
 
+// Log level names
 new String:g_sLogLevel[6][32] = {
 	"default",
 	"trace",
@@ -123,10 +133,16 @@ new String:g_sLogLevel[6][32] = {
 	"warn",
 	"error"
 };
+
+// Global log level variable
 new LOG_LEVEL:g_iLogLevel;// = sizeof(g_sLogLevel);
 
-stock InsLog(LOG_LEVEL:level,const String:format[], any:...)
-{
+/**
+ * Log events to console, based upon level
+ *
+ * @param level
+ */
+stock InsLog(LOG_LEVEL:level,const String:format[], any:...) {
 	if ((level) && (level > g_iLogLevel))
 		return;
 	decl String:buffer[512],String:sLevel[32];
@@ -135,6 +151,11 @@ stock InsLog(LOG_LEVEL:level,const String:format[], any:...)
 	PrintToServer("[%s] [%s] %s",PLUGIN_LOG_PREFIX,sLevel,buffer);
 }
 
+/**
+ * 
+ *
+ * @param 
+ */
 stock AddFolderToDownloadTable(const String:Directory[], bool:recursive=false)
 {
 	decl String:FileName[64], String:Path[512];
@@ -222,14 +243,23 @@ stock Client_IsValid(client, bool:checkConnected)
 }
 */
 
-stock bool:ClientCanSeeClient(client, target, Float:distance = 0.0, Float:height = 50.0) 
-{
+/**
+ * 
+ *
+ * @param 
+ */
+stock bool:ClientCanSeeClient(client, target, Float:distance = 0.0, Float:height = 50.0) {
 	new Float:vTargetPosition[3];
 	GetEntPropVector(target, Prop_Send, "m_vecOrigin", vTargetPosition);
 	return ClientCanSeeVector(client,targetpos,distance,height);
 }
-stock bool:ClientCanSeeVector(client, Float:vTargetPosition[3], Float:distance = 0.0, Float:height = 50.0) 
-{ 
+
+/**
+ * 
+ *
+ * @param 
+ */
+stock bool:ClientCanSeeVector(client, Float:vTargetPosition[3], Float:distance = 0.0, Float:height = 50.0) { 
 
         new Float:vClientPosition[3];
          
@@ -253,27 +283,37 @@ stock bool:ClientCanSeeVector(client, Float:vTargetPosition[3], Float:distance =
         return false; 
 } 
 
-public bool:Base_TraceFilter(entity, contentsMask, any:data) 
-{ 
+/**
+ * 
+ *
+ * @param 
+ */
+public bool:Base_TraceFilter(entity, contentsMask, any:data) { 
     if(entity != data) 
         return (false); 
 
     return (true); 
 }  
 
-
-
-
-stock bool:IsClientInSightRange(client, target, Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false)
-{
+/**
+ * 
+ *
+ * @param 
+ */
+stock bool:IsClientInSightRange(client, target, Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false) {
 	new Float:targetpos[3];
 //	if(!isClientConnectedIngameAlive(target))
 //		ThrowError("Target is not Alive.");
 	GetClientAbsOrigin(target, targetpos);
 	return IsVectorInSightRange(client,targetpos,angle,distance,heightcheck,negativeangle);
 }
-stock bool:IsVectorInSightRange(client, Float:targetpos[3], Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false)
-{
+
+/**
+ * 
+ *
+ * @param 
+ */
+stock bool:IsVectorInSightRange(client, Float:targetpos[3], Float:angle=90.0, Float:distance=0.0, bool:heightcheck=true, bool:negativeangle=false) {
 	if(angle > 360.0 || angle < 0.0)
 		ThrowError("Angle Max : 360 & Min : 0. %d isn't proper angle.", angle);
 //	if(!isClientConnectedIngameAlive(client))
@@ -314,6 +354,12 @@ stock bool:IsVectorInSightRange(client, Float:targetpos[3], Float:angle=90.0, Fl
 	else
 		return false;
 }
+
+/**
+ * 
+ *
+ * @param 
+ */
 stock bool:HookUpdater() {
 	if (LibraryExists("updater")) {
 		new String:myFile[PLATFORM_MAX_PATH];
@@ -326,4 +372,19 @@ stock bool:HookUpdater() {
 		return true;
 	}
 	return false;
+}
+
+/**
+ * 
+ *
+ * @param 
+ */
+stock GetSendProp(const String:sNetClass[], const String:sPropName[], iFail=1) {
+	int m_iProp = FindSendPropInfo(sNetClass, sPropName);
+	if (iFail) {
+	       	if (m_iProp == -1) {
+        	       	LogError("Can't find %s::%s", sNetClass, sPropName);
+	        }
+        }
+	return m_iProp;
 }
