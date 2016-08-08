@@ -105,8 +105,13 @@ class SourceModPlugin(object):
 		if not os.path.isfile(self.smx_file) or self.compile:
 			self.compile_plugin()
 		self.read_plugin_smx()
+		try:
+			for prefix in self.parent.config['settings']['prefixes']:
+				if self.plugin.myinfo['name'].startswith(prefix):
+					self.plugin.myinfo['name'] = self.plugin.myinfo['name'][len(prefix):].strip()
+		except:
+			pass
 		self.myinfo = self.plugin.myinfo
-
 	def read_plugin_smx(self):
 		with open(self.smx_file, 'rb') as fp:
 			try:

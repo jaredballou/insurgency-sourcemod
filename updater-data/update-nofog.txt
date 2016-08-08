@@ -7,7 +7,7 @@
 		{
 			"Latest"	"1.0.0"
 		}
-		"Notes"		"[INS] No Fog"
+		"Notes"		"No Fog"
 		"Notes"		"Removes fog"
 	}
 	"Files"

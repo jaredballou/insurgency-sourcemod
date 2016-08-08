@@ -8,18 +8,18 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#botnames'>Bot Names 1.0.5</a>
  * <a href='#botspawns'>Bot Spawns 1.0.0</a>
  * <a href='#cooplobby'>Coop Lobby Override 1.0.0</a>
- * <a href='#damagemod'>[INS] Damage Modifier 1.0.0</a>
+ * <a href='#damagemod'>Damage Modifier 1.0.0</a>
  * <a href='#events'>Event Logger 1.0.0</a>
- * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insurgency'>[INS] Insurgency Support Library 1.4.0</a>
- * <a href='#nofog'>[INS] No Fog 1.0.0</a>
- * <a href='#respawn'>[INS] Player Respawn 1.8.3</a>
- * <a href='#restrictedarea'>[INS] Restricted Area Removal 1.0.0</a>
- * <a href='#rpgdrift'>[INS] RPG Adjustments 1.0.0</a>
- * <a href='#suicide_bomb'>[INS] Suicide Bombers 0.0.7</a>
+ * <a href='#hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
+ * <a href='#insurgency'>Insurgency Support Library 1.4.0</a>
+ * <a href='#nofog'>No Fog 1.0.0</a>
+ * <a href='#respawn'>Player Respawn 1.8.3</a>
+ * <a href='#restrictedarea'>Restricted Area Removal 1.0.0</a>
+ * <a href='#rpgdrift'>RPG Adjustments 1.0.0</a>
+ * <a href='#suicide_bomb'>Suicide Bombers 0.0.7</a>
  * <a href='#updater'>Updater 1.2.1</a>
  * <a href='#votelog'>Vote Logging 1.0.0</a>
- * <a href='#weapon_pickup'>[INS] Weapon Pickup 1.0.0</a>
+ * <a href='#weapon_pickup'>Weapon Pickup 1.0.0</a>
 
 <a name="ammocheck">
 ### Ammo Check 1.0.4
@@ -140,7 +140,7 @@ Plugin for overriding Insurgency Coop to 32 players
 
 
 <a name="damagemod">
-### [INS] Damage Modifier 1.0.0
+### Damage Modifier 1.0.0
 
 Modifies damage before applying to players
  * [Source - scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
@@ -186,7 +186,7 @@ Log events to client or server
 
 
 <a name="hlstatsx">
-### [INS] HLStatsX CE Ingame Plugin 1.6.19
+### HLStatsX CE Ingame Plugin 1.6.19
 
 Provides ingame functionality for interaction from an HLstatsX CE installation
  * [Source - scripting/hlstatsx.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/hlstatsx.sp?raw=true)
@@ -227,7 +227,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 
 <a name="insurgency">
-### [INS] Insurgency Support Library 1.4.0
+### Insurgency Support Library 1.4.0
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
  * [Source - scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)
@@ -254,7 +254,7 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
 
 <a name="nofog">
-### [INS] No Fog 1.0.0
+### No Fog 1.0.0
 
 Removes fog
  * [Source - scripting/nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)
@@ -271,7 +271,7 @@ Removes fog
 
 
 <a name="respawn">
-### [INS] Player Respawn 1.8.3
+### Player Respawn 1.8.3
 
 Respawn players
  * [Source - scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
@@ -303,7 +303,7 @@ Respawn players
 
 
 <a name="restrictedarea">
-### [INS] Restricted Area Removal 1.0.0
+### Restricted Area Removal 1.0.0
 
 Plugin for removing Restricted Areas
  * [Source - scripting/restrictedarea.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/restrictedarea.sp?raw=true)
@@ -320,7 +320,7 @@ Plugin for removing Restricted Areas
 
 
 <a name="rpgdrift">
-### [INS] RPG Adjustments 1.0.0
+### RPG Adjustments 1.0.0
 
 Adjusts behavior of RPG rounds
  * [Source - scripting/rpgdrift.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/rpgdrift.sp?raw=true)
@@ -341,7 +341,7 @@ Adjusts behavior of RPG rounds
 
 
 <a name="suicide_bomb">
-### [INS] Suicide Bombers 0.0.7
+### Suicide Bombers 0.0.7
 
 Adds suicide bomb for bots
  * [Source - scripting/suicide_bomb.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/suicide_bomb.sp?raw=true)
@@ -408,7 +408,7 @@ Logs voting events
 
 
 <a name="weapon_pickup">
-### [INS] Weapon Pickup 1.0.0
+### Weapon Pickup 1.0.0
 
 Weapon Pickup logic for manipulating player inventory
  * [Source - scripting/weapon_pickup.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/weapon_pickup.sp?raw=true)

@@ -7,7 +7,7 @@
 		{
 			"Latest"	"1.8.3"
 		}
-		"Notes"		"[INS] Player Respawn"
+		"Notes"		"Player Respawn"
 		"Notes"		"Respawn players"
 	}
 	"Files"

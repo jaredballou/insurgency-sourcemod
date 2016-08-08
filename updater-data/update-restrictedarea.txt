@@ -7,7 +7,7 @@
 		{
 			"Latest"	"1.0.0"
 		}
-		"Notes"		"[INS] Restricted Area Removal"
+		"Notes"		"Restricted Area Removal"
 		"Notes"		"Plugin for removing Restricted Areas"
 	}
 	"Files"

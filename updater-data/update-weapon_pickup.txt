@@ -7,7 +7,7 @@
 		{
 			"Latest"	"1.0.0"
 		}
-		"Notes"		"[INS] Weapon Pickup"
+		"Notes"		"Weapon Pickup"
 		"Notes"		"Weapon Pickup logic for manipulating player inventory"
 	}
 	"Files"

@@ -7,7 +7,7 @@
 		{
 			"Latest"	"1.0.0"
 		}
-		"Notes"		"[INS] Damage Modifier"
+		"Notes"		"Damage Modifier"
 		"Notes"		"Modifies damage before applying to players"
 	}
 	"Files"

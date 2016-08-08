@@ -7,7 +7,7 @@
 		{
 			"Latest"	"0.0.7"
 		}
-		"Notes"		"[INS] Suicide Bombers"
+		"Notes"		"Suicide Bombers"
 		"Notes"		"Adds suicide bomb for bots"
 	}
 	"Files"
