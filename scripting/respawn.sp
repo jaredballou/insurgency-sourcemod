@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Respawn players"
 #define PLUGIN_NAME "[INS] Player Respawn"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.8.1"
+#define PLUGIN_VERSION "1.8.2"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -107,27 +107,26 @@ public OnPluginStart()
 
 	decl String:game[40];
 	GetGameFolderName(game, sizeof(game));
-	if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
-	{
+	if (StrEqual(game, "dod") || StrEqual(game, "insurgency") || StrEqual(game, "doi")) {
 		PrintToServer("[RESPAWN] Starting OnPluginLoad stuff");
 		// Next 14 lines of text are taken from Andersso's DoDs respawn plugin. Thanks :)
 		g_hGameConfig = LoadGameConfigFile("plugin.respawn");
 
-		if (g_hGameConfig == INVALID_HANDLE)
-		{
+		if (g_hGameConfig == INVALID_HANDLE) {
 			SetFailState("Fatal Error: Missing File \"plugin.respawn\"!");
 		}
 
 		StartPrepSDKCall(SDKCall_Player);
-		if (StrEqual(game, "dod"))
-		{
+		if (StrEqual(game, "dod")) {
 			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "DODRespawn");
 		}
-		if (StrEqual(game, "insurgency"))
-		{
+		if (StrEqual(game, "insurgency")) {
 			PrintToServer("[RESPAWN] ForceRespawn for Insurgency");
-			//#AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "ForceRespawn");
+		}
+		if (StrEqual(game, "doi")) {
+			PrintToServer("[RESPAWN] ForceRespawn for DoI");
+			PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Virtual, "ForceRespawn");
 		}
 		g_hPlayerRespawn = EndPrepSDKCall();
 
@@ -380,7 +379,7 @@ public RespawnPlayer(client, target)
 	{
 		TF2_RespawnPlayer(target);
 	}
-	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
+	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency") || StrEqual(game, "doi"))
 	{
 		if (g_bHasClass[target]) {
 			SDKCall(g_hPlayerRespawn, target);
@@ -402,8 +401,7 @@ public Action:RespawnPlayer2(Handle:Timer, any:client)
 	{
 		TF2_RespawnPlayer(client);
 	}
-	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency"))
-	{
+	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency") || StrEqual(game, "doi")) {
 		if (g_bHasClass[client]) {
 			SDKCall(g_hPlayerRespawn, client);
 		}

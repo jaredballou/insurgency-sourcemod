@@ -105,7 +105,7 @@ HookEntity(entity) {
 	        new String:sClassname[64];
 		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
 	        GetEntityClassname(entity, sClassname, sizeof(sClassname));
-		PrintToServer("[WP] sNetClass %s sClassname %s", sNetClass, sClassname);
+		//PrintToServer("[WP] sNetClass %s sClassname %s", sNetClass, sClassname);
 		// TODO: Only hook weapons/grenades. Need to do some magic here.
 		SDKHook(entity, SDKHook_Use, OnEntityUse);
 //		new m_iPrimaryAmmoCount = GetSendProp(sNetClass, "m_iPrimaryAmmoCount", 0);

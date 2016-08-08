@@ -117,7 +117,7 @@ class SourceModPlugin(object):
 				return
 
 	def create_plugin_updater(self):
-		self.updater = str(Template ( file = self.parent.getpath("tools/templates/update.tmpl"), searchList = [{ 'plugin': self }] ))
+		self.updater = str(Template ( file = self.parent.getpath("tools/templates/update.tmpl"), searchList = [{ 'plugin': self, 'config': self.parent.interpolate(data=self.parent.config) }] ))
 
 	def write_plugin_updater(self,filename=None):
 		self.create_plugin_updater()

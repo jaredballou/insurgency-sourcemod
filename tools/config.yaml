@@ -4,9 +4,8 @@ settings:
   github_repo: "insurgency-sourcemod"
   github_branch: "master"
   compile_plugins: true
-  urls:
-    'github': "https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
-    'updater': "http://ins.jballou.com/sourcemod"
+  baseurl: "https://raw.github.com/%(github_user)s/%(github_repo)s/%(github_branch)s"
+#"https://github.com/%(github_user)s/%(github_repo)s/blob/%(github_branch)s"
   prefixes:
     - "[INS]"
 myinfo_vars:

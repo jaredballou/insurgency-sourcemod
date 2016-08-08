@@ -166,4 +166,31 @@
 			}
 		}
 	}
+        "doi"
+        {
+//23	22	CDOIPlayer::Spawn()
+//121	120	CBaseEntity::Respawn()
+//348	347	CINSPlayer::SharedSpawn()
+//349	348	CINSPlayer::ForceRespawn()
+//350	349	CBasePlayer::PostSpawnPointSelection()
+//351	350	CDOIPlayer::InitialSpawn()
+//476	475	CDOIPlayer::IsReadyToSpawn()
+//477	476	CINSPlayer::ShouldGainInstantSpawn()
+//478	477	CINSPlayer::ResetPerRoundStats()
+//479	478	CINSPlayer::ResetScores()
+
+		"Offsets"
+		{
+                        "Spawn"
+                        {
+				"linux"		"23"
+				"windows"	"22"
+                        }
+                        "ForceRespawn"
+                        {
+				"linux"		"349"
+				"windows"	"348"
+                        }
+		}
+	}
 }

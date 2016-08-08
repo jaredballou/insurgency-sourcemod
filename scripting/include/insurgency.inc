@@ -2,7 +2,7 @@
   #endinput
 #endif
 #define _insurgency_included
-#define UPDATE_URL_FORMAT "http://ins.jballou.com/sourcemod/update-%s.txt"
+#define UPDATE_URL_FORMAT "https://raw.github.com/jaredballou/insurgency-sourcemod/master/updater-data/update-%s.txt"
 
 #if defined REQUIRE_PLUGIN
 #undef REQUIRE_PLUGIN

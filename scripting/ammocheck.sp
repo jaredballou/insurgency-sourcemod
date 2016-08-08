@@ -17,6 +17,7 @@ public Plugin:myinfo = {
         url             = PLUGIN_URL
 };
 
+//#pragma newdecls required
 #pragma semicolon 1
 #pragma unused cvarVersion
 #include <sourcemod>

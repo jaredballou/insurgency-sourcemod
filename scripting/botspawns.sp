@@ -2,7 +2,7 @@
 //Released under GPLv3
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "Bot Spawns"
-#define PLUGIN_VERSION "0.4.2"
+#define PLUGIN_VERSION "0.4.3"
 #define PLUGIN_WORKING "0"
 #define PLUGIN_LOG_PREFIX "BOTSPAWNS"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -56,20 +56,23 @@ new bool:g_bEnabled, g_iSpawnMode, g_iCounterattackMode, g_iCounterattackFinaleI
 //Until I add functionality
 
 
+/*
 new Handle:g_hHidingSpots = INVALID_HANDLE;
+new g_iCPHidingSpots[MAX_OBJECTIVES][MAX_HIDING_SPOTS];
+new g_iCPHidingSpotCount[MAX_OBJECTIVES];
+new g_iCPLastHidingSpot[MAX_OBJECTIVES];
+new g_iHidingSpotCount;
+int m_iNumControlPoints;
+*/
 #define MAX_OBJECTIVES 13
 #define MAX_HIDING_SPOTS 2048
 // Minimum space between players, so we don't telefrag
 #define MIN_PLAYER_DISTANCE 128.0
-new g_iCPHidingSpots[MAX_OBJECTIVES][MAX_HIDING_SPOTS];
-new g_iCPHidingSpotCount[MAX_OBJECTIVES];
-new g_iCPLastHidingSpot[MAX_OBJECTIVES];
-new Float:m_vCPPositions[MAX_OBJECTIVES][3],m_iNumControlPoints;
+float m_vCPPositions[MAX_OBJECTIVES][3];
 
 new Handle:g_hForceRespawn;
 new Handle:g_hGameConfig;
 new Handle:g_hSpawnTimer[MAXPLAYERS+1];
-new g_iHidingSpotCount;
 new g_iBotsToSpawn, g_iSpawnTokens[MAXPLAYERS+1], g_iNumReady, g_iBotsAlive,g_iBotsTotal,g_iInQueue[MAXPLAYERS+1],g_iNeedSpawn[MAXPLAYERS+1],Float:g_vecOrigin[MAXPLAYERS+1][3];
 new bot_team = 3;
 
@@ -153,16 +156,23 @@ public OnPluginStart()
 	UpdateCvars();
 
 	g_hGameConfig = LoadGameConfigFile("insurgency.games");
-	if (g_hGameConfig == INVALID_HANDLE)
-	{
+	if (g_hGameConfig == INVALID_HANDLE) {
 		SetFailState("Fatal Error: Missing File \"insurgency.games\"!");
 	}
 	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "ForceRespawn");
+	decl String:game[40];
+	GetGameFolderName(game, sizeof(game));
+	if (StrEqual(game, "insurgency")) {
+		PrintToServer("[RESPAWN] ForceRespawn for Insurgency");
+		PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Signature, "ForceRespawn");
+	}
+	if (StrEqual(game, "doi")) {
+		PrintToServer("[RESPAWN] ForceRespawn for DoI");
+		PrepSDKCall_SetFromConf(g_hGameConfig, SDKConf_Virtual, "ForceRespawn");
+	}
 	g_hForceRespawn = EndPrepSDKCall();
-	if (g_hForceRespawn == INVALID_HANDLE)
-	{
-		SetFailState("Fatal Error: Unable to find signature for \"Respawn\"!");
+	if (g_hForceRespawn == INVALID_HANDLE) {
+		SetFailState("Fatal Error: Unable to find signature for \"ForceRespawn\"!");
 	}
 	if ((m_hMyWeapons = FindSendPropInfo("CBasePlayer", "m_hMyWeapons")) == -1) {
 		SetFailState("Fatal Error: Unable to find property offset \"CBasePlayer::m_hMyWeapons\" !");
@@ -509,7 +519,7 @@ float GetSpawnPoint(client) {
 		vecSpawn = GetSpawnPoint_HidingSpot(client);
 	} else {
 */
-		vecSpawn = GetSpawnPoint_SpawnPoint(client);
+	vecSpawn = GetSpawnPoint_SpawnPoint(client);
 //	}
 	InsLog(DEBUG, "Could not find spawn point for %N (%d)", client, client);
 	return vecSpawn;

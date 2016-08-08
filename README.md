@@ -6,14 +6,14 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#ammocheck'>Ammo Check 1.0.3</a>
  * <a href='#botcount'>Bot Counter 0.0.3</a>
  * <a href='#botnames'>Bot Names 1.0.4</a>
- * <a href='#botspawns'>Bot Spawns 0.4.2</a>
+ * <a href='#botspawns'>Bot Spawns 0.4.3</a>
  * <a href='#cooplobby'>Coop Lobby Override 0.0.2</a>
  * <a href='#damagemod'>[INS] Damage Modifier 0.0.2</a>
  * <a href='#events'>Event Logger 0.0.3</a>
  * <a href='#hlstatsx'>[INS] HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#insurgency'>[INS] Insurgency Support Library 1.3.7</a>
  * <a href='#nofog'>[INS] No Fog 0.0.1</a>
- * <a href='#respawn'>[INS] Player Respawn 1.8.1</a>
+ * <a href='#respawn'>[INS] Player Respawn 1.8.2</a>
  * <a href='#restrictedarea'>[INS] Restricted Area Removal 0.0.1</a>
  * <a href='#rpgdrift'>[INS] RPG Adjustments 0.0.3</a>
  * <a href='#suicide_bomb'>[INS] Suicide Bombers 0.0.7</a>
@@ -88,7 +88,7 @@ Gives automatic names to bots on creation.
 
 
 <a name="botspawns">
-### Bot Spawns 0.4.2
+### Bot Spawns 0.4.3
 
 Adds a number of options and ways to handle bot spawns
  * [Source - scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
@@ -271,7 +271,7 @@ Removes fog
 
 
 <a name="respawn">
-### [INS] Player Respawn 1.8.1
+### [INS] Player Respawn 1.8.2
 
 Respawn players
  * [Source - scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)

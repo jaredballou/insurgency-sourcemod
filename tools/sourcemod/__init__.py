@@ -2,6 +2,7 @@ import os
 import sys
 import yaml
 import re
+
 from pprint import pprint
 from collections import defaultdict, OrderedDict
 from glob import glob
@@ -106,6 +107,7 @@ class SourceMod(object):
 			val = item
 	 		try:
 				while (val.find('%(') != -1):
+					val = (val) % data
 					val = (val) % interpolate_data
 			except:
 				pass

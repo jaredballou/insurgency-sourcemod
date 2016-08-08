@@ -28,11 +28,32 @@
 				"windows"	"\x56\x8B\xF1\xE8\x2A\x2A\x2A\x2A\x84\xC0\x74\x2A\x8B\xCE\xE8\x2A\x2A\x2A\x2A\x85\xC0\x74\x2A\x8B\x10\x8B\xC8\x6A\x01"
                                 "linux"         "@_ZN10CINSPlayer12ForceRespawnEv"
                         }
-                        "Resupply"
+		}
+	}
+        "doi"
+        {
+//23	22	CDOIPlayer::Spawn()
+//121	120	CBaseEntity::Respawn()
+//348	347	CINSPlayer::SharedSpawn()
+//349	348	CINSPlayer::ForceRespawn()
+//350	349	CBasePlayer::PostSpawnPointSelection()
+//351	350	CDOIPlayer::InitialSpawn()
+//476	475	CDOIPlayer::IsReadyToSpawn()
+//477	476	CINSPlayer::ShouldGainInstantSpawn()
+//478	477	CINSPlayer::ResetPerRoundStats()
+//479	478	CINSPlayer::ResetScores()
+
+		"Offsets"
+		{
+                        "Spawn"
                         {
-				"library"	"server"
-				"windows"	"\x55\x8b\xEC\x51\x56\x8B\xF1\x8B\x06\x8B\x2A\x2A\x2A\x2A\x2A\xFF\xD0\x84\xC0\x0F\x84\x2A\x2A\x2A\x2A\x80"
-                                "linux"         "@_ZN10CINSPlayer8ResupplyEv"
+				"linux"		"23"
+				"windows"	"22"
+                        }
+                        "ForceRespawn"
+                        {
+				"linux"		"349"
+				"windows"	"348"
                         }
 		}
 	}
