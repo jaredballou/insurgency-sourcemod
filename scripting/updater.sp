@@ -22,7 +22,7 @@ public Plugin:myinfo =
 };
 
 /* Globals */
-//#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
+#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
 
 #define CURL_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "curl_easy_init") == FeatureStatus_Available)
 #define SOCKET_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "SocketCreate") == FeatureStatus_Available)
@@ -93,10 +93,8 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 	return APLRes_Success;
 }
 
-public OnPluginStart()
-{
-	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE())
-	{
+public OnPluginStart() {
+	if (!CURL_AVAILABLE() && !SOCKET_AVAILABLE() && !STEAMTOOLS_AVAILABLE()) {
 		SetFailState(EXTENSION_ERROR);
 	}
 	
