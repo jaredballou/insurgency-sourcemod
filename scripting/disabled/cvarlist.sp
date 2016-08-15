@@ -12,11 +12,11 @@
 
 public OnPluginStart()
 {
-	RegAdminCmd("sm_cvarlist", Command_Mycvrlist, ADMFLAG_CONVARS);
+	RegAdminCmd("sm_cvarlist", Command_Mycvarlist, ADMFLAG_CONVARS);
 	RegAdminCmd("sm_cmdlist",  Command_Mycmdlist, ADMFLAG_CONVARS);
 }
 
-public Action:Command_Mycvrlist(client, args)
+public Action:Command_Mycvarlist(client, args)
 {
 	decl Handle:iter;
 	decl String:value[256], String:buffer[256], flags, bool:isCommand;
