@@ -553,7 +553,7 @@ public Native_Weapon_GetWeaponName(Handle:plugin, numParams)
 Weapon_GetMaxClip1(weapon) {
 	StartPrepSDKCall(SDKCall_Entity);
 	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetMaxClip1")) {
-		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+		SetFailState("PrepSDKCall_SetFromConf GetMaxClip1 failed"); 
 	}
 	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
 	new Handle:hCall = EndPrepSDKCall();
@@ -564,7 +564,7 @@ Weapon_GetMaxClip1(weapon) {
 Weapon_GetDefaultClip1(weapon) {
 	StartPrepSDKCall(SDKCall_Entity);
 	if(!PrepSDKCall_SetFromConf(hGameConf, SDKConf_Virtual, "GetDefaultClip1")) {
-		SetFailState("PrepSDKCall_SetFromConf false, nothing found"); 
+		SetFailState("PrepSDKCall_SetFromConf GetDefaultClip1 failed"); 
 	}
 	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_ByValue);
 	new Handle:hCall = EndPrepSDKCall();
