@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Respawn players"
 #define PLUGIN_NAME "[INS] Player Respawn"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.8.3"
+#define PLUGIN_VERSION "1.9.0"
 #define PLUGIN_WORKING "1"
 
 public Plugin:myinfo = {
@@ -84,11 +84,13 @@ public OnPluginStart()
 	HookEvent("round_start", Event_RoundStart);
 
 	HookEvent("player_pick_squad", Event_PlayerPickSquad);
-	//HookEvent("player_spawn", Event_PlayerSpawn);
+	HookEvent("player_spawn", Event_PlayerSpawn);
+	HookEvent("player_first_spawn", Event_PlayerFirstSpawn);
 
 	HookEvent("object_destroyed", Event_ObjectDestroyed);
 	HookEvent("controlpoint_captured", Event_ControlPointCaptured);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
+	HookEvent("player_connect", Event_PlayerConnect, EventHookMode_Pre);
 
 	HookConVarChange(sm_respawn_enabled, EnableChanged);
 	//HookConVarChange(sm_respawn_auto, EnableChanged);
@@ -156,10 +158,17 @@ public OnConfigsExecuted()
 	else
 		TagsCheck("respawntimes", true);
 }
+public Action:Event_PlayerConnect(Handle:event, const String:name[], bool:dontBroadcast) {
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	if(client > 0 && IsClientInGame(client)) {
+		KillRespawnTimer(client);
+	}
+	g_bHasClass[client] = 0;
+	return Plugin_Continue;
+}
 public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:dontBroadcast) {
 	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	if(client > 0 && IsClientInGame(client))
-	{
+	if(client > 0 && IsClientInGame(client)) {
 		KillRespawnTimer(client);
 	}
 	g_bHasClass[client] = 0;
@@ -170,6 +179,13 @@ public Action:Event_PlayerSpawn( Handle:event, const String:name[], bool:dontBro
 {
 	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
 	KillRespawnTimer(client);
+	return Plugin_Continue;
+}
+
+public Action:Event_PlayerFirstSpawn( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	g_bHasClass[client] = 1;
 	return Plugin_Continue;
 }
 
@@ -212,8 +228,7 @@ public Action:Command_Respawn(client, args)
 		target = target_list[i];
 		team = GetClientTeam(target);
 
-		if(team >= 2)
-		{
+		if(team >= 2) {
 			target_list[new_target_count] = target; // re-order
 			new_target_count++;
 		}
@@ -344,7 +359,8 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 			{
 				//PrintToServer("[RESPAWN] Not respawning %N due to counterattack ncp %d acp %d",client,ncp,acp);
 				return;
-			} if (g_iSpawnTokens[client] > 0) {
+			}
+			if (g_iSpawnTokens[client] > 0) {
 				CreateRespawnTimer(client);
 			}
 		}
@@ -381,7 +397,7 @@ public RespawnPlayer(client, target)
 	}
 	else if ((StrEqual(game, "dod")) || StrEqual(game, "insurgency") || StrEqual(game, "doi"))
 	{
-		if (g_bHasClass[target]) {
+		if (g_bHasClass[target])  {
 			SDKCall(g_hPlayerRespawn, target);
 		}
 	}

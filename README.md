@@ -13,7 +13,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
  * <a href='#insurgency'>Insurgency Support Library 1.4.0</a>
  * <a href='#nofog'>No Fog 1.0.0</a>
- * <a href='#respawn'>Player Respawn 1.8.3</a>
+ * <a href='#respawn'>Player Respawn 1.9.0</a>
  * <a href='#restrictedarea'>Restricted Area Removal 1.0.0</a>
  * <a href='#rpgdrift'>RPG Adjustments 1.0.0</a>
  * <a href='#suicide_bomb'>Suicide Bombers 0.0.7</a>
@@ -271,7 +271,7 @@ Removes fog
 
 
 <a name="respawn">
-### Player Respawn 1.8.3
+### Player Respawn 1.9.0
 
 Respawn players
  * [Source - scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
