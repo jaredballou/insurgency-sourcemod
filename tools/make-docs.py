@@ -1,17 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: latin-1 -*-
-################################################################################
-#
-# make-docs.py
-# 
-# This script pulls the information from the plugin source files and
-# creates updater manifests and the Readme. Take a look in plugins for a better
-# idea of how this works.
-# 
-# (C) 2015,2016 Jared Ballou <insurgency@jballou.com>
-# Released under the GPLv2
-#
-################################################################################
+# -*- coding: utf-8 -*-
+"""This script pulls the information from the plugin source files and
+creates updater manifests and the Readme. Take a look in plugins for a better
+idea of how this works.
+ 
+(C) 2015,2016 Jared Ballou <insurgency@jballou.com>
+Released under the GPLv2
+"""
 
 import argparse
 import logging

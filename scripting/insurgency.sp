@@ -69,8 +69,8 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //new String:Edicts[100];    // Stores total number of edicts used
 //============================================================================================================
 
-public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
-	RegPluginLibrary("insurgency");	
+
+public Plugin_Setup_natives() {
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetDefaultClip1", Native_Weapon_GetDefaultClip1);
@@ -89,10 +89,106 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) 
 
 	CreateNative("Ins_GetPlayerScore", Native_GetPlayerScore);
 	CreateNative("Ins_GetPlayerClass", Native_GetPlayerClass);
+
 	return APLRes_Success;
 }
 
-public OnPluginStart() {
+/*
+	"flag_pickup"
+	{
+		"priority" "short"
+		"userid" "short"
+	}
+
+	"flag_drop"
+	{
+		"priority" "short"
+		"userid" "short"
+	}
+
+	"flag_captured"
+	{
+		"priority" "short"
+		"cp" "short"
+		"userid" "short"
+	}
+
+	"flag_returned"
+	{
+		"priority" "short"
+		"userid" "short"
+	}
+
+	"flag_reset"
+	{
+		"priority" "short"
+		"team" "short"
+	}
+
+	"object_destroyed"
+	{
+		"team" "byte"
+		"attacker" "byte"
+		"cp" "short"
+		"index" "short"
+		"type" "byte"
+		"weapon" "string"
+		"weaponid" "short"
+		"assister" "byte"
+		"attackerteam" "byte"
+	}
+	"radio_requested"
+	{
+		"requesting_player"		"short"
+		"team"					"short"
+	}
+
+	"artillery_requested"
+	{
+		"requesting_player"		"short"
+		"radio_player"			"short"
+		"team"					"short"
+		"type"					"string"
+		"lethal"				"bool"
+		"target_x"				"float"
+		"target_y"				"float"
+		"target_z"				"float"
+	}
+	
+	"artillery_failed"
+	{
+		"requesting_player"		"short"
+		"radio_player"			"short"
+		"team"					"short"
+		"type"					"string"
+		"lethal"				"bool"
+		"reason"				"string"
+	}
+	
+	"artillery_called"
+	{
+		"requesting_player"		"short"
+		"radio_player"			"short"
+		"team"					"short"
+		"type"					"string"
+		"lethal"				"bool"
+		"target_x"				"float"
+		"target_y"				"float"
+		"target_z"				"float"		
+	}
+	"flag_pickup"
+	"flag_drop"
+	"flag_captured"
+	"flag_returned"
+	"flag_reset"
+	"object_destroyed"
+	"radio_requested"
+	"artillery_requested"
+	"artillery_failed"
+	"artillery_called"
+
+*/
+public Plugin_Setup_cvar() {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
 	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
@@ -103,15 +199,16 @@ public OnPluginStart() {
 	cvarLogLevel = CreateConVar("sm_insurgency_log_level", "error", "Logging level, values can be: all, trace, debug, info, warn, error", FCVAR_NOTIFY);
 	cvarClassStripWords = CreateConVar("sm_insurgency_class_strip_words", "template training coop security insurgent survival", "Strings to strip out of player class (squad slot) names", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
+}
 
-	InsLog(DEFAULT,"Starting");
-
+public Plugin_Setup_stats(); {
 	kill_regex = CompileRegex(KILL_REGEX_PATTERN);
 	suicide_regex = CompileRegex(SUICIDE_REGEX_PATTERN);
 	
 	//Begin HookEvents
 	hook_wstats();
-
+}
+public Plugin_Setup_events() {
 	// Hook events
 	HookEvent("player_hurt", Event_PlayerHurt);
 	HookEvent("weapon_fire", Event_WeaponFire);
@@ -153,7 +250,18 @@ public OnPluginStart() {
 
 	HookEvent("enter_spawnzone", Event_EnterSpawnZone);
 	HookEvent("exit_spawnzone", Event_ExitSpawnZone);
+}
 
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
+	RegPluginLibrary("insurgency");
+	return Plugin_Setup_natives();
+}
+
+public OnPluginStart() {
+	InsLog(DEFAULT,"Starting");
+	Plugin_Setup_cvar();
+	Plugin_Setup_events();
+	Plugin_Setup_stats();
 	hGameConf = LoadGameConfigFile("insurgency.games");
 
 	//Begin Engine LogHooks
@@ -164,6 +272,7 @@ public OnPluginStart() {
 	//UpdateAllDataSources();
 	HookUpdater();
 }
+
 public OnCvarLogLevelChange(Handle:cvar, const String:oldVal[], const String:newVal[])
 {
 	// If nothing has changed, exit
