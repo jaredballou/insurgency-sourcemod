@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.4.0"
+#define PLUGIN_VERSION "1.4.1"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -70,7 +70,7 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //============================================================================================================
 
 
-public Plugin_Setup_natives() {
+public APLRes:Plugin_Setup_natives() {
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetMaxClip1", Native_Weapon_GetMaxClip1);
 	CreateNative("Ins_GetDefaultClip1", Native_Weapon_GetDefaultClip1);
@@ -201,7 +201,7 @@ public Plugin_Setup_cvar() {
 	HookConVarChange(cvarLogLevel,OnCvarLogLevelChange);
 }
 
-public Plugin_Setup_stats(); {
+public Plugin_Setup_stats() {
 	kill_regex = CompileRegex(KILL_REGEX_PATTERN);
 	suicide_regex = CompileRegex(SUICIDE_REGEX_PATTERN);
 	
@@ -362,7 +362,7 @@ hook_wstats()
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
-
+// Update array tracking the class of each player
 public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 {
 	decl String:class_template[MAX_CLASS_LEN];
@@ -414,21 +414,20 @@ GetPlayerManagerEnt(always=0) {
 	InsLog(WARN,"GetPlayerManagerEnt failed!");
 	return -1;
 }
-public GetWeaponData()
-{
-	if (g_weap_array == INVALID_HANDLE)
-	{
+// Get data for each weapon type in game. Tracks classname and id
+// TODO: Get print name localization
+public GetWeaponData() {
+	if (g_weap_array == INVALID_HANDLE) {
 		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
-		for (new i;i<MAX_DEFINABLE_WEAPONS;i++)
-		{
+		for (new i;i<MAX_DEFINABLE_WEAPONS;i++) {
 			PushArrayString(g_weap_array, "");
 		}
 		InsLog(DEBUG,"starting LoadValues");
 		new String:name[32];
-		for(new i=0;i<= GetMaxEntities() ;i++){
+		for(new i=0;i<= GetMaxEntities() ;i++) {
 			if(!IsValidEntity(i))
 				continue;
-			if(GetEdictClassname(i, name, sizeof(name))){
+			if(GetEdictClassname(i, name, sizeof(name))) {
 				if (StrContains(name,"weapon_") == 0) {
 					GetWeaponId(i);
 				}
@@ -437,8 +436,7 @@ public GetWeaponData()
 	}
 }
 
-reset_round_stats(client)
-{
+reset_round_stats(client) {
 	for (new i = 1; i < sizeof(g_round_stats[]); i++)
 	{
 		g_round_stats[client][i] = 0;
@@ -460,8 +458,8 @@ reset_round_stats_all()
 		reset_round_stats(i);
 	}
 }
-GetWeaponId(i)
-{
+// Get weapon id of a given weapon entity
+GetWeaponId(i) {
 	if (i < 0) {
 		return -1;
 	}
@@ -769,22 +767,20 @@ public Native_ObjectiveResource_GetPropBool(Handle:plugin, numParams)
 public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams) {
 	new len;
 	GetNativeStringLength(1, len);
-	if (len <= 0)
-	{
+	if (len <= 0) {
 	  return false;
 	}
-	new String:prop[len+1], retval=-1;
+	new String:prop[len+1];
+	new size = 12; // Size of data slice - 3x4-byte floats
 	GetNativeString(1, prop, len+1);
-	new size = 12;
 	new element = GetNativeCell(3);
 	GetObjResEnt();
 	new Float:result[3];
-	if (g_iObjResEntity > 0)
-	{
-		retval = GetEntDataVector(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element), result);
+	if (g_iObjResEntity > 0) {
+		GetEntDataVector(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element), result);
 		SetNativeArray(2, result, 3);
 	}
-	return retval;
+	return 1;
 }
 public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 {

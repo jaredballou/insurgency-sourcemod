@@ -5,7 +5,7 @@
 		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
 		"Version"
 		{
-			"Latest"	"1.4.0"
+			"Latest"	"1.4.1"
 		}
 		"Notes"		"Insurgency Support Library"
 		"Notes"		"Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."

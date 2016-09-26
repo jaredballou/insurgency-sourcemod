@@ -14,21 +14,21 @@
 #include <updater>
 #include <smlib>
 #endif
-#define MAX_DEFINABLE_WEAPONS 128
-#define MAX_DEFINABLE_GEAR 32
-#define MAX_DEFINABLE_AMMO 128
-#define MAX_DEFINABLE_EXPLOSIVES 16
+#define MAX_DEFINABLE_WEAPONS 256
+#define MAX_DEFINABLE_GEAR 256
+#define MAX_DEFINABLE_AMMO 256
+#define MAX_DEFINABLE_EXPLOSIVES 256
 #define MAX_DEFINABLE_WEAPON_UPGRADES 256
 
 #define MAX_WEAPON_LEN 32
 #define MAX_SQUAD_LEN 32
 #define MAX_CLASS_LEN 64
-#define MAX_CONTROLPOINTS 32
+#define MAX_CONTROLPOINTS 64
 #define PREFIX_LEN 7
-#define MAX_SQUADS 8
-#define SQUAD_SIZE 8
+#define MAX_SQUADS 16
+#define SQUAD_SIZE 32
 #define MAX_MAPS 256
-#define MAX_GAMEMODES 16
+#define MAX_GAMEMODES 32
 
 native Ins_ObjectiveResource_GetProp(const String:prop[], size=4, element=0);
 native Ins_Log(ELOG_LEVEL:level,const String:format[], any:...);
