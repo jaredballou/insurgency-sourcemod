@@ -124,7 +124,7 @@ Adds a number of options and ways to handle bot spawns
 "sm_botspawns_max_player_distance" "16000" // Max distance from players to spawn
 "sm_botspawns_max_spawn_delay" "30" // Max delay in seconds for spawning. Set to 0 for instant.
 "sm_botspawns_min_counterattack_distance" "3600" // Min distance from counterattack objective to spawn
-"sm_botspawns_enabled" ""0"" // Enable enhanced bot spawning features
+"sm_botspawns_enabled" "0" // Enable enhanced bot spawning features
 "sm_botspawns_max_frac_in_game" "1" // Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
 "sm_botspawns_min_frac_in_game" "0.75" // Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
 "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1, default)
@@ -160,7 +160,7 @@ Modifies damage before applying to players
 #### CVAR List
 ```
 "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
-"sm_damagemod_enabled" ""1"" // Enable Damage Mod plugin
+"sm_damagemod_enabled" "1" // Enable Damage Mod plugin
 ```
 
 
@@ -254,7 +254,7 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 "sm_insurgency_class_strip_words" "template training coop security insurgent survival" // Strings to strip out of player class (squad slot) names
 "sm_insurgency_checkpoint_capture_player_ratio" "0.5" // Fraction of living players required to capture in Checkpoint
 "sm_insurgency_infinite_magazine" "0" // Infinite magazine, will never need reloading.
-"sm_insurgency_enabled" ""1"" // sets whether log fixing is enabled
+"sm_insurgency_enabled" "1" // sets whether log fixing is enabled
 "sm_insurgency_disable_sliding" "0" // 0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents
 "sm_insurgency_log_level" "error" // Logging level, values can be: all, trace, debug, info, warn, error
 "sm_insurgency_infinite_ammo" "0" // Infinite ammo, still uses magazines and needs to reload
@@ -296,7 +296,7 @@ Respawn players
 
 #### CVAR List
 ```
-"sm_respawn_enabled" ""1"" // Enable respawn plugin
+"sm_respawn_enabled" "1" // Enable respawn plugin
 "sm_respawn_reset_each_round" "1" // Reset player respawn counts each round
 "sm_respawn_final_counterattack" "0" // Respawn during final counterattack? (0: no, 1: yes, 2: infinite)
 "sm_respawn_auto" "0" // Automatically respawn players when they die; 0 - disabled, 1 - enabled
@@ -422,7 +422,7 @@ Logs voting events
 
 #### CVAR List
 ```
-"sm_votelog_enabled" ""1"" // Enable vote logging
+"sm_votelog_enabled" "1" // Enable vote logging
 ```
 
 
@@ -446,7 +446,7 @@ Weapon Pickup logic for manipulating player inventory
 ```
 "sm_weapon_pickup_ammo" "1" // sets whether picking up a weapon the player already has will add to the player's ammo count
 "sm_weapon_pickup_max_explosive" "3" // Maximum number of ammo that can be carried for explosives
-"sm_weapon_pickup_enabled" ""1"" // sets whether weapon pickup manipulation is enabled
+"sm_weapon_pickup_enabled" "1" // sets whether weapon pickup manipulation is enabled
 "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
 ```
 

@@ -90,7 +90,7 @@ class SourceModPlugin(object):
     def parse_plugin_source_defines(self):
         """Find all #define values"""
         for define in re.findall(r".*#define[\t ]*([^\s]*)[\t ]*([^\r\n]*)", self.source):
-            self.defines[define[0]] = define[1]
+            self.defines[define[0]] = define[1].strip("""'" \t""")
 
     def interpolate(self, data):
         """Interpolate #define values"""
@@ -104,7 +104,7 @@ class SourceModPlugin(object):
         for func_type in sp['functions'].keys():
             for func_name in sp['functions'][func_type].keys():
                 for func in re.findall(r"(%s)\s*\((.*)\);" % func_name, self.source):
-                    parts = [re.sub(r",$","",w) for w in shlex.split(func[1])]
+                    parts = [re.sub(r",$","",w).strip("""'" \t""") for w in shlex.split(func[1])]
 
                     if func_type == 'cvars':
                         if parts[0].endswith('_version'):
