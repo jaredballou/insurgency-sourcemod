@@ -1,12 +1,13 @@
-import os
-import sys
-import re
-from pprint import pprint
+from Cheetah.Template import Template
 from collections import defaultdict, OrderedDict
 from glob import glob
-from Cheetah.Template import Template
+import os
+from pprint import pprint
+import logging
+import re
 import smx
 import subprocess
+import sys
 
 class SourceModPlugin(object):
 

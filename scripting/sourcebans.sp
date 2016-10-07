@@ -33,10 +33,12 @@
 #tryinclude <updater>
 
 #define SB_VERSION "1.5.4.6F"
-#define SBR_VERSION "1.5.4.6"
+#define SBR_VERSION "1.5.4.7"
 
 #if defined _updater_included
-#define UPDATE_URL "https://sarabveer.github.io/SourceBans-Fork/updater/updatefile.txt"
+
+#define UPDATE_URL "https://raw.githubusercontent.com/sbpp/sourcebans-pp/gh-pages/updater/updatefile.txt"
+//#define UPDATE_URL "https://sarabveer.github.io/SourceBans-Fork/updater/updatefile.txt"
 #endif
 
 //GLOBAL DEFINES

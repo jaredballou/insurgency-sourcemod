@@ -17,7 +17,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#restrictedarea'>Restricted Area Removal 1.0.0</a>
  * <a href='#rpgdrift'>RPG Adjustments 1.0.0</a>
  * <a href='#suicide_bomb'>Suicide Bombers 0.0.7</a>
- * <a href='#updater'>Updater 1.2.1</a>
+ * <a href='#updater'>Updater 1.3.0</a>
  * <a href='#votelog'>Vote Logging 1.0.0</a>
  * <a href='#weapon_pickup'>Weapon Pickup 1.0.0</a>
 
@@ -366,7 +366,7 @@ Adds suicide bomb for bots
 
 
 <a name="updater">
-### Updater 1.2.1
+### Updater 1.3.0
 
 Automatically updates SourceMod plugins and files
  * [Source - scripting/updater.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/updater.sp?raw=true)
