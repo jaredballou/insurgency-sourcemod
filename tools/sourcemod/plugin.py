@@ -1,10 +1,12 @@
 from Cheetah.Template import Template
 from collections import defaultdict, OrderedDict
+import csv
 from glob import glob
 import os
 from pprint import pprint
 import logging
 import re
+import shlex
 import smx
 import subprocess
 import sys
@@ -14,13 +16,14 @@ class SourceModPlugin(object):
     def __init__(self, name, parent, config=None, write_doc=False, write_updater=True, run=False, compile=True):
         self.parent = parent
         self.name = name
-        print(self.name)
+        #print(self.name)
         #if self.parent.plugins_write_doc:
         #if self.parent.plugins_write_updater:
         #if self.parent.plugins_compile:
         #if self.parent.plugins_run:
 
         self.config = config
+        self.defines = {}
         self.cvars = {}
         self.commands = {}
         self.todo = {}
@@ -61,6 +64,7 @@ class SourceModPlugin(object):
 
     def process_plugin_source(self):
         self.read_plugin_source()
+        self.parse_plugin_source_defines()
         self.parse_plugin_source_functions()
         self.parse_plugin_source_includes()
 
@@ -73,16 +77,34 @@ class SourceModPlugin(object):
                 logging.error("Could not load \"%s\"!" % self.sp_file)
                 return
 
+    def parse_plugin_source_defines(self):
+        """Find all #define values"""
+        sp = self.parent.config['source_parser']
+        print("parse_plugin_source_defines")
+        #"^.*#define[\s]+([^\s]+)[\s]+(.*)$"
+        for define in re.findall(r".*#define[\t ]*([^\s]*)[\t ]*([^\r\n]*)", self.source):
+            self.defines[define[0]] = define[1]
+
+    def interpolate(self, data):
+        """Interpolate #define values"""
+        if data in self.defines.keys():
+            return self.defines[data]
+        else:
+            return data
+
     def parse_plugin_source_functions(self):
         sp = self.parent.config['source_parser']
         for func_type in sp['functions'].keys():
             for func_name in sp['functions'][func_type].keys():
                 for func in re.findall(r"(%s)\s*\((.*)\);" % func_name, self.source):
-                    parts = [p.strip("""'" \t""") for p in func[1].split(',')]
+                    #parts = [p.strip("""'" \t""") for p in func[1].split(',')]
+                    #parts = csv.reader(func[1], skipinitialspace=True)
+                    parts = [re.sub(r",$","",w) for w in shlex.split(func[1])]
+
                     if func_type == 'cvars':
                         if parts[0].endswith('_version'):
                             continue
-                        self.cvars[parts[0]] = {'value': parts[1], 'description': parts[2]}
+                        self.cvars[parts[0]] = {'value': self.interpolate(parts[1]), 'description': self.interpolate(parts[2])}
                     elif func_type == 'commands':
                         self.commands[parts[0]] = {'function': parts[1]}
                         desc_idx = 2 + (func[0] == 'RegAdminCmd')

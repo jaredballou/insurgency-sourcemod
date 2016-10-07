@@ -78,7 +78,7 @@ Gives automatic names to bots on creation.
  * "sm_botnames_enabled" "1" // sets whether bot naming is enabled
  * "sm_botnames_suppress" "1" // sets whether to supress join/team change/name change bot messages
  * "sm_botnames_random" "1" // sets whether to randomize names used
- * "sm_botnames_prefix" "" // sets a prefix for bot names (include a trailing space
+ * "sm_botnames_prefix" "" // sets a prefix for bot names (include a trailing space, if needed!)
  * "sm_botnames_announce" "0" // sets whether to announce bots when added
 
 #### Command List
@@ -104,13 +104,13 @@ Adds a number of options and ways to handle bot spawns
 #### CVAR List
 
  * "sm_botspawns_min_player_distance" "1200" // Min distance from players to spawn
- * "sm_botspawns_spawn_mode" "0" // Only normal spawnpoints at the objective
- * "sm_botspawns_counterattack_finale_infinite" "0" // Obey sm_botspawns_counterattack_respawn_mode (0)
+ * "sm_botspawns_spawn_mode" "0" // Only normal spawnpoints at the objective, the old way (0), spawn in hiding spots following rules (1), spawnpoints that meet rules (2)
+ * "sm_botspawns_counterattack_finale_infinite" "0" // Obey sm_botspawns_counterattack_respawn_mode (0), use rules and do infinite respawns (1)
  * "sm_botspawns_spawn_attack_delay" "10" // Delay in seconds for spawning bots to wait before firing.
- * "sm_botspawns_remove_unseen_when_capping" "1" // Silently kill off all unseen bots when capping next point (1
- * "sm_botspawns_counterattack_mode" "0" // Do not alter default game spawning during counterattacks (0)
- * "sm_botspawns_total_spawn_frac" "1.75" // Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard
- * "sm_botspawns_spawn_snipers_alone" "1" // Spawn snipers alone
+ * "sm_botspawns_remove_unseen_when_capping" "1" // Silently kill off all unseen bots when capping next point (1, default)
+ * "sm_botspawns_counterattack_mode" "0" // Do not alter default game spawning during counterattacks (0), Respawn using new rules during counterattack by following sm_botspawns_respawn_mode (1)
+ * "sm_botspawns_total_spawn_frac" "1.75" // Total number of bots to spawn as multiple of number of bots in game to simulate larger numbers. 1 is standard, values less than 1 are not supported.
+ * "sm_botspawns_spawn_snipers_alone" "1" // Spawn snipers alone, can be 50% further from the objective than normal bots if this is enabled?
  * "sm_botspawns_min_spawn_delay" "1" // Min delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_max_fireteam_size" "5" // Max number of bots to spawn per fireteam. Default 5
  * "sm_botspawns_min_objective_distance" "1" // Min distance from next objective to spawn
@@ -119,10 +119,10 @@ Adds a number of options and ways to handle bot spawns
  * "sm_botspawns_max_player_distance" "16000" // Max distance from players to spawn
  * "sm_botspawns_max_spawn_delay" "30" // Max delay in seconds for spawning. Set to 0 for instant.
  * "sm_botspawns_min_counterattack_distance" "3600" // Min distance from counterattack objective to spawn
- * "sm_botspawns_enabled" "PLUGIN_WORKING" // Enable enhanced bot spawning features
+ * "sm_botspawns_enabled" ""0"" // Enable enhanced bot spawning features
  * "sm_botspawns_max_frac_in_game" "1" // Max multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
  * "sm_botspawns_min_frac_in_game" "0.75" // Min multiplier of bot quota to have alive at any time. Set to 1 to emulate standard spawning.
- * "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1
+ * "sm_botspawns_stop_spawning_at_objective" "1" // Stop spawning new bots when near next objective (1, default)
  * "sm_botspawns_min_fireteam_size" "3" // Min number of bots to spawn per fireteam. Default 3
 
 
@@ -154,7 +154,7 @@ Modifies damage before applying to players
 #### CVAR List
 
  * "sm_damagemod_ff_min_distance" "120" // Minimum distance between players for Friendly Fire to register
- * "sm_damagemod_enabled" "PLUGIN_WORKING" // Enable Damage Mod plugin
+ * "sm_damagemod_enabled" ""1"" // Enable Damage Mod plugin
 
 
 <a name="events">
@@ -202,7 +202,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
  * "hlx_block_commands" "1" // If activated HLstatsX commands are blocked from the chat area
  * "hlx_protect_address" "" // Address to be protected for logging/forwarding
  * "hlxce_webpage" "http://www.hlxcommunity.com" // http://www.hlxcommunity.com
- * "hlx_server_tag" "1" // If enabled
+ * "hlx_server_tag" "1" // If enabled, adds "HLstatsX:CE" to server tags on supported games. 1 = Enabled (default), 0 = Disabled
  * "hlx_message_prefix" "" // Define the prefix displayed on every HLstatsX ingame message
 
 #### Command List
@@ -245,11 +245,11 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
  * "sm_insurgency_class_strip_words" "template training coop security insurgent survival" // Strings to strip out of player class (squad slot) names
  * "sm_insurgency_checkpoint_capture_player_ratio" "0.5" // Fraction of living players required to capture in Checkpoint
- * "sm_insurgency_infinite_magazine" "0" // Infinite magazine
- * "sm_insurgency_enabled" "PLUGIN_WORKING" // sets whether log fixing is enabled
- * "sm_insurgency_disable_sliding" "0" // 0: do nothing
- * "sm_insurgency_log_level" "error" // Logging level
- * "sm_insurgency_infinite_ammo" "0" // Infinite ammo
+ * "sm_insurgency_infinite_magazine" "0" // Infinite magazine, will never need reloading.
+ * "sm_insurgency_enabled" ""1"" // sets whether log fixing is enabled
+ * "sm_insurgency_disable_sliding" "0" // 0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents
+ * "sm_insurgency_log_level" "error" // Logging level, values can be: all, trace, debug, info, warn, error
+ * "sm_insurgency_infinite_ammo" "0" // Infinite ammo, still uses magazines and needs to reload
  * "sm_insurgency_checkpoint_counterattack_capture" "0" // Enable counterattack by bots to capture points in Checkpoint
 
 
@@ -286,12 +286,12 @@ Respawn players
 
 #### CVAR List
 
- * "sm_respawn_enabled" "PLUGIN_WORKING" // Enable respawn plugin
+ * "sm_respawn_enabled" ""1"" // Enable respawn plugin
  * "sm_respawn_reset_each_round" "1" // Reset player respawn counts each round
- * "sm_respawn_final_counterattack" "0" // Respawn during final counterattack? (0: no
- * "sm_respawn_auto" "0" // Automatically respawn players when they die; 0 - disabled
+ * "sm_respawn_final_counterattack" "0" // Respawn during final counterattack? (0: no, 1: yes, 2: infinite)
+ * "sm_respawn_auto" "0" // Automatically respawn players when they die; 0 - disabled, 1 - enabled
  * "sm_respawn_delay" "1.0" // How many seconds to delay the respawn
- * "sm_respawn_counterattack" "0" // Respawn during counterattack? (0: no
+ * "sm_respawn_counterattack" "0" // Respawn during counterattack? (0: no, 1: yes, 2: infinite)
  * "sm_respawn_count_team2" "-1" // Respawn all Team 2 players this many times
  * "sm_respawn_count_team3" "-1" // Respawn all Team 3 players this many times
  * "sm_respawn_count" "0" // Respawn all players this many times
@@ -381,7 +381,7 @@ Automatically updates SourceMod plugins and files
 
 #### CVAR List
 
- * "sm_updater" "2" // Determines update functionality. (1 = Notify
+ * "sm_updater" "2" // Determines update functionality. (1 = Notify, 2 = Download, 3 = Include source code),0
 
 #### Command List
 
@@ -404,7 +404,7 @@ Logs voting events
 
 #### CVAR List
 
- * "sm_votelog_enabled" "PLUGIN_WORKING" // Enable vote logging
+ * "sm_votelog_enabled" ""1"" // Enable vote logging
 
 
 <a name="weapon_pickup">
@@ -426,7 +426,7 @@ Weapon Pickup logic for manipulating player inventory
 
  * "sm_weapon_pickup_ammo" "1" // sets whether picking up a weapon the player already has will add to the player's ammo count
  * "sm_weapon_pickup_max_explosive" "3" // Maximum number of ammo that can be carried for explosives
- * "sm_weapon_pickup_enabled" "PLUGIN_WORKING" // sets whether weapon pickup manipulation is enabled
+ * "sm_weapon_pickup_enabled" ""1"" // sets whether weapon pickup manipulation is enabled
  * "sm_weapon_pickup_max_magazine" "12" // Maximum number of magazines that can be carried
 
 #### Command List
