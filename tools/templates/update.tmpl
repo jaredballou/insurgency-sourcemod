@@ -9,7 +9,9 @@
 {
 	"Information"
 	{
+#if $config['settings'].has_key('baseurl')
 		"BaseURL"	"${config['settings']['baseurl']}"
+#end if
 		"Version"
 		{
 			"Latest"	"${plugin.myinfo["version"]}"
@@ -19,6 +21,6 @@
 	}
 	"Files"
 	{
-$ListFiles($plugin.files)$ListFiles($plugin.dependencies)
+$ListFiles($plugin.files)
 	}
 }

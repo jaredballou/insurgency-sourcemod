@@ -1,23 +1,21 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"Bot Spawns"
-		"Notes"		"Adds a number of options and ways to handle bot spawns"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/botspawns.sp"
-		"Plugin"	"Path_SM/plugins/botspawns.smx"
-		"Source"	"Path_SM/scripting/include/smlib.inc"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
-
+		"Plugin" "gamedata/insurgency.games.txt"
+		"Plugin" "plugins/botspawns.smx"
+		"Source" "scripting/botspawns.sp"
+		"Source" "scripting/include/smlib.inc"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "Bot Spawns"
+		"Notes"   "Adds a number of options and ways to handle bot spawns"
 	}
 }

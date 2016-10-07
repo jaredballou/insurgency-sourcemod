@@ -1,20 +1,18 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.5"
-		}
-		"Notes"		"Bot Names"
-		"Notes"		"Gives automatic names to bots on creation."
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/botnames.sp"
-		"Plugin"	"Path_SM/plugins/botnames.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-
+		"Plugin" "plugins/botnames.smx"
+		"Source" "scripting/botnames.sp"
+		"Source" "scripting/include/insurgency.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.5"
+		}
+		"Notes"   "Bot Names"
+		"Notes"   "Gives automatic names to bots on creation."
 	}
 }

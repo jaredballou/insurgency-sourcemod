@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"0.0.7"
-		}
-		"Notes"		"Suicide Bombers"
-		"Notes"		"Adds suicide bomb for bots"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/suicide_bomb.sp"
-		"Plugin"	"Path_SM/plugins/suicide_bomb.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-
+		"Plugin" "plugins/suicide_bomb.smx"
+		"Source" "scripting/suicide_bomb.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "0.0.7"
+		}
+		"Notes"   "Suicide Bombers"
+		"Notes"   "Adds suicide bomb for bots"
 	}
 }

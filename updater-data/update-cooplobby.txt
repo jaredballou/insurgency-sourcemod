@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"Coop Lobby Override"
-		"Notes"		"Plugin for overriding Insurgency Coop to 32 players"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/cooplobby.sp"
-		"Plugin"	"Path_SM/plugins/cooplobby.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-
+		"Plugin" "plugins/cooplobby.smx"
+		"Source" "scripting/cooplobby.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "Coop Lobby Override"
+		"Notes"   "Plugin for overriding Insurgency Coop to 32 players"
 	}
 }

@@ -1,3 +1,4 @@
+//Depends: insurgency
 #include <sourcemod>
 #include <regex>
 #include <insurgency>

@@ -2,44 +2,45 @@
 \#\#\# ${plugin.myinfo["name"]} ${plugin.myinfo["version"]}
 
 ${plugin.myinfo["description"]}
-#for $section in $plugin.files
+#for $section in ["Plugin", "Source"]
+\#\#\#\# ${section}
 #for $file in $plugin.files[$section]
- * [$section - ${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
+[${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
 #end for
-#end for
-#if $getVar("plugin.dependencies","")
-
+#if $section == "Plugin"
+#if $plugin.dependencies
 \#\#\#\# Dependencies
-
-#for $section in $plugin.dependencies
-#for $file in $plugin.dependencies[$section]
- * [$section - ${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
-#end for
+#for dependency in $plugin.dependencies
+<a href='#${dependency}'>${dependency}</a>
 #end for
 #end if
+#end if
+#end for
 #if $plugin.cvars
 
 \#\#\#\# CVAR List
-
+```
 #for $cvar,$data in $plugin.cvars.items()
 #if $data.has_key('description')
- * "${cvar}" "${data["value"]}" // $data['description']
+"${cvar}" "${data["value"]}" // $data['description']
 #else
- * "${cvar}" "${data["value"]}"
+"${cvar}" "${data["value"]}"
 #end if
 #end for
+```
 #end if
 #if $plugin.commands
 
 \#\#\#\# Command List
-
+```
 #for $command,$data in $plugin.commands.items()
 #if $data.has_key('description')
- * "${command}" // $data['description']
+"${command}" // $data['description']
 #else
- * "${command}"
+"${command}"
 #end if
 #end for
+```
 #end if
 #if $plugin.todos
 

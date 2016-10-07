@@ -1,24 +1,22 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.4.1"
-		}
-		"Notes"		"Insurgency Support Library"
-		"Notes"		"Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/insurgency.sp"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Plugin"	"Path_SM/plugins/insurgency.smx"
-		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-		"Plugin"	"Path_SM/translations/insurgency.phrases.txt"
-		"Plugin"	"Path_SM/gamedata/insurgency.games.txt"
-
+		"Plugin" "translations/insurgency.phrases.txt"
+		"Plugin" "gamedata/insurgency.games.txt"
+		"Plugin" "plugins/insurgency.smx"
+		"Source" "scripting/insurgency.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/loghelper.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.4.1"
+		}
+		"Notes"   "Insurgency Support Library"
+		"Notes"   "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 	}
 }

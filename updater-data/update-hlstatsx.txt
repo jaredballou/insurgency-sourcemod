@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.6.19"
-		}
-		"Notes"		"HLStatsX CE Ingame Plugin"
-		"Notes"		"Provides ingame functionality for interaction from an HLstatsX CE installation"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/hlstatsx.sp"
-		"Plugin"	"Path_SM/plugins/hlstatsx.smx"
-		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-
+		"Plugin" "plugins/hlstatsx.smx"
+		"Source" "scripting/hlstatsx.sp"
+		"Source" "scripting/include/loghelper.inc"
+		"Source" "scripting/include/insurgency.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.6.19"
+		}
+		"Notes"   "HLStatsX CE Ingame Plugin"
+		"Notes"   "Provides ingame functionality for interaction from an HLstatsX CE installation"
 	}
 }

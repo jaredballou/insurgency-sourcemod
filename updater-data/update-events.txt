@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"Event Logger"
-		"Notes"		"Log events to client or server"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/events.sp"
-		"Plugin"	"Path_SM/plugins/events.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-
+		"Plugin" "plugins/events.smx"
+		"Source" "scripting/events.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "Event Logger"
+		"Notes"   "Log events to client or server"
 	}
 }

@@ -1,23 +1,21 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.9.0"
-		}
-		"Notes"		"Player Respawn"
-		"Notes"		"Respawn players"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/respawn.sp"
-		"Plugin"	"Path_SM/plugins/respawn.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Plugin"	"Path_SM/translations/common.phrases.txt"
-		"Plugin"	"Path_SM/translations/respawn.phrases.txt"
-		"Plugin"	"Path_SM/gamedata/plugin.respawn.txt"
-
+		"Plugin" "translations/common.phrases.txt"
+		"Plugin" "translations/respawn.phrases.txt"
+		"Plugin" "gamedata/plugin.respawn.txt"
+		"Plugin" "plugins/respawn.smx"
+		"Source" "scripting/respawn.sp"
+		"Source" "scripting/include/insurgency.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.9.0"
+		}
+		"Notes"   "Player Respawn"
+		"Notes"   "Respawn players"
 	}
 }

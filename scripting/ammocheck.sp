@@ -1,6 +1,6 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
-
+//Depends: insurgency
 #define PLUGIN_DESCRIPTION "Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine"
 #define PLUGIN_NAME "Ammo Check"
 #define PLUGIN_VERSION "1.0.4"

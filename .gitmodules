@@ -2,3 +2,6 @@
 	path = tools/pysmx
 	url = git@github.com:jaredballou/pysmx.git
 	branch = master
+[submodule "tools/pyvdf"]
+	path = tools/pyvdf
+	url = git@github.com:jaredballou/vdf.git

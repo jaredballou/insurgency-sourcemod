@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"No Fog"
-		"Notes"		"Removes fog"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/nofog.sp"
-		"Plugin"	"Path_SM/plugins/nofog.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-
+		"Plugin" "plugins/nofog.smx"
+		"Source" "scripting/nofog.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "No Fog"
+		"Notes"   "Removes fog"
 	}
 }

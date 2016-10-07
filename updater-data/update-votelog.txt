@@ -1,22 +1,20 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"Vote Logging"
-		"Notes"		"Logs voting events"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/votelog.sp"
-		"Plugin"	"Path_SM/plugins/votelog.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/loghelper.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-
+		"Plugin" "plugins/votelog.smx"
+		"Source" "scripting/votelog.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/loghelper.inc"
+		"Source" "scripting/include/updater.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "Vote Logging"
+		"Notes"   "Logs voting events"
 	}
 }

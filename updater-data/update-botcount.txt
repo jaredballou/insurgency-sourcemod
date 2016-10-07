@@ -1,21 +1,19 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"Bot Counter"
-		"Notes"		"Shows Bots Left Alive"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/botcount.sp"
-		"Plugin"	"Path_SM/plugins/botcount.smx"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-
+		"Plugin" "plugins/botcount.smx"
+		"Source" "scripting/botcount.sp"
+		"Source" "scripting/include/updater.inc"
+		"Source" "scripting/include/insurgency.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "Bot Counter"
+		"Notes"   "Shows Bots Left Alive"
 	}
 }

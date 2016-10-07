@@ -1,5 +1,6 @@
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
+//Depends: insurgency
 #define PLUGIN_DESCRIPTION "Adds a number of options and ways to handle bot spawns"
 #define PLUGIN_NAME "Bot Spawns"
 #define PLUGIN_VERSION "1.0.0"

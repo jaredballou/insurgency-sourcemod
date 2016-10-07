@@ -13,7 +13,7 @@ Allow manipulation of weapons and items in the game world.
 */
 //(C) 2014 Jared Ballou <sourcemod@jballou.com>
 //Released under GPLv3
-
+//Depends: insurgency
 #pragma semicolon 1
 #pragma unused cvarVersion
 #pragma unused cvarMaxExplosive

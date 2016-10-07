@@ -1,22 +1,20 @@
 "Updater"
 {
-	"Information"
-	{
-		"BaseURL"	"https://raw.github.com/jaredballou/insurgency-sourcemod/master"
-		"Version"
-		{
-			"Latest"	"1.0.0"
-		}
-		"Notes"		"RPG Adjustments"
-		"Notes"		"Adjusts behavior of RPG rounds"
-	}
 	"Files"
 	{
-		"Source"	"Path_SM/scripting/rpgdrift.sp"
-		"Plugin"	"Path_SM/plugins/rpgdrift.smx"
-		"Source"	"Path_SM/scripting/include/insurgency.inc"
-		"Source"	"Path_SM/scripting/include/updater.inc"
-		"Source"	"Path_SM/scripting/include/smlib/entities.inc"
-
+		"Plugin" "plugins/rpgdrift.smx"
+		"Source" "scripting/rpgdrift.sp"
+		"Source" "scripting/include/insurgency.inc"
+		"Source" "scripting/include/updater.inc"
+		"Source" "scripting/include/smlib/entities.inc"
+	}
+	"Information"
+	{
+		"Version"
+		{
+			"Latest" "1.0.0"
+		}
+		"Notes"   "RPG Adjustments"
+		"Notes"   "Adjusts behavior of RPG rounds"
 	}
 }
