@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.4.1"
+#define PLUGIN_VERSION "1.4.2"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -27,8 +27,8 @@ public Plugin:myinfo = {
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
-new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
-new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
+//new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
+//new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
 new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs reloads)
 new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
 new Handle:cvarDisableSliding = INVALID_HANDLE; // Disable Sliding
@@ -191,8 +191,8 @@ public APLRes:Plugin_Setup_natives() {
 public Plugin_Setup_cvar() {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
-	cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
-	cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY);
+	//cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
+	//cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY);
 	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY);
@@ -851,12 +851,13 @@ public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], b
 	//"cappers" "string"
 	//"cpname" "string"
 	//"team" "byte"
+
+	/*
 	decl String:cappers[256];
 	//new priority = GetEventInt(event, "priority");
 	GetEventString(event, "cappers", cappers, sizeof(cappers));
 	new team = GetEventInt(event, "team");
 	new capperlen = GetCharBytes(cappers);
-
 	if ((InCounterAttack()) && (team == 3) && (!GetConVarBool(cvarCheckpointCounterattackCapture)))
 	{
 		InsLog(DEBUG,"Event_ControlPointCaptured: Want to block CounterAttack Capture!");
@@ -870,6 +871,7 @@ public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], b
 		InsLog(DEBUG,"Event_ControlPointCaptured Blocking due to insufficient friendly players!");
 		//return Plugin_Stop;
 	}
+	*/
 	return Plugin_Continue;
 }
 public Action:Event_ControlPointCaptured(Handle:event, const String:name[], bool:dontBroadcast)
@@ -1636,6 +1638,7 @@ public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBro
 	//"message_string" "string"
 	decl String:message[255];
 	GetEventString(event, "message",message,sizeof(message));
+	/*
 	if (StrEqual(message,"#game_team_winner_obj_checkpoint_regain"))
 	{
 		if (!GetConVarBool(cvarCheckpointCounterattackCapture))
@@ -1644,6 +1647,7 @@ public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBro
 			//return Plugin_Stop;
 		}
 	}
+	*/
 // jballou 10MAR2016 - Disabling until I can fix these. Will likely break out into a new plugin.
 //	DoRoundAwards();
 	return Plugin_Continue;

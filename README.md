@@ -11,7 +11,7 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#damagemod'>Damage Modifier 1.0.0</a>
  * <a href='#events'>Event Logger 1.0.0</a>
  * <a href='#hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insurgency'>Insurgency Support Library 1.4.1</a>
+ * <a href='#insurgency'>Insurgency Support Library 1.4.2</a>
  * <a href='#nofog'>No Fog 1.0.0</a>
  * <a href='#respawn'>Player Respawn 1.9.0</a>
  * <a href='#restrictedarea'>Restricted Area Removal 1.0.0</a>
@@ -236,7 +236,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 
 <a name="insurgency">
-### Insurgency Support Library 1.4.1
+### Insurgency Support Library 1.4.2
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
 #### Plugin
