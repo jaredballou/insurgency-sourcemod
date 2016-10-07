@@ -26,13 +26,13 @@ These plugins are all provided as-is, I do my best to document and describe them
 
 Adds a check_ammo command for clients to get approximate ammo left in magazine, and display the same message when loading a new magazine
 #### Plugin
-[plugins/ammocheck.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/ammocheck.smx?raw=true)
+[plugins/ammocheck.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/ammocheck.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/ammocheck.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/ammocheck.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -51,11 +51,11 @@ Adds a check_ammo command for clients to get approximate ammo left in magazine, 
 
 Shows Bots Left Alive
 #### Plugin
-[plugins/botcount.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botcount.smx?raw=true)
+[plugins/botcount.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botcount.smx?raw=true)<br>
 #### Source
-[scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+[scripting/botcount.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botcount.sp?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -69,10 +69,10 @@ Shows Bots Left Alive
 
 Gives automatic names to bots on creation.
 #### Plugin
-[plugins/botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)
+[plugins/botnames.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botnames.smx?raw=true)<br>
 #### Source
-[scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+[scripting/botnames.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botnames.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -96,15 +96,15 @@ Gives automatic names to bots on creation.
 
 Adds a number of options and ways to handle bot spawns
 #### Plugin
-[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
-[plugins/botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)
+[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)<br>
+[plugins/botspawns.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/botspawns.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)
-[scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/botspawns.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/botspawns.sp?raw=true)<br>
+[scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -137,11 +137,11 @@ Adds a number of options and ways to handle bot spawns
 
 Plugin for overriding Insurgency Coop to 32 players
 #### Plugin
-[plugins/cooplobby.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cooplobby.smx?raw=true)
+[plugins/cooplobby.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/cooplobby.smx?raw=true)<br>
 #### Source
-[scripting/cooplobby.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cooplobby.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/cooplobby.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/cooplobby.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 
 <a name="damagemod">
@@ -149,13 +149,13 @@ Plugin for overriding Insurgency Coop to 32 players
 
 Modifies damage before applying to players
 #### Plugin
-[plugins/damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)
+[plugins/damagemod.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/damagemod.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/damagemod.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/damagemod.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -169,11 +169,11 @@ Modifies damage before applying to players
 
 Log events to client or server
 #### Plugin
-[plugins/events.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/events.smx?raw=true)
+[plugins/events.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/events.smx?raw=true)<br>
 #### Source
-[scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/events.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/events.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -198,11 +198,11 @@ Log events to client or server
 
 Provides ingame functionality for interaction from an HLstatsX CE installation
 #### Plugin
-[plugins/hlstatsx.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/hlstatsx.smx?raw=true)
+[plugins/hlstatsx.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/hlstatsx.smx?raw=true)<br>
 #### Source
-[scripting/hlstatsx.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/hlstatsx.sp?raw=true)
-[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+[scripting/hlstatsx.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/hlstatsx.sp?raw=true)<br>
+[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -240,14 +240,14 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
 #### Plugin
-[translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)
-[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
-[plugins/insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)
+[translations/insurgency.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/insurgency.phrases.txt?raw=true)<br>
+[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)<br>
+[plugins/insurgency.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/insurgency.smx?raw=true)<br>
 #### Source
-[scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/insurgency.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/insurgency.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -267,11 +267,11 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
 Removes fog
 #### Plugin
-[plugins/nofog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/nofog.smx?raw=true)
+[plugins/nofog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/nofog.smx?raw=true)<br>
 #### Source
-[scripting/nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/nofog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/nofog.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -284,15 +284,15 @@ Removes fog
 
 Respawn players
 #### Plugin
-[translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
-[translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)
-[gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)
-[plugins/respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)
+[translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)<br>
+[translations/respawn.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/respawn.phrases.txt?raw=true)<br>
+[gamedata/plugin.respawn.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/plugin.respawn.txt?raw=true)<br>
+[plugins/respawn.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/respawn.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
+[scripting/respawn.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/respawn.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -319,13 +319,13 @@ Respawn players
 
 Plugin for removing Restricted Areas
 #### Plugin
-[plugins/restrictedarea.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/restrictedarea.smx?raw=true)
+[plugins/restrictedarea.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/restrictedarea.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/restrictedarea.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/restrictedarea.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/restrictedarea.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/restrictedarea.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -338,14 +338,14 @@ Plugin for removing Restricted Areas
 
 Adjusts behavior of RPG rounds
 #### Plugin
-[plugins/rpgdrift.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/rpgdrift.smx?raw=true)
+[plugins/rpgdrift.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/rpgdrift.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/rpgdrift.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/rpgdrift.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
-[scripting/include/smlib/entities.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib/entities.inc?raw=true)
+[scripting/rpgdrift.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/rpgdrift.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
+[scripting/include/smlib/entities.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib/entities.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -361,13 +361,13 @@ Adjusts behavior of RPG rounds
 
 Adds suicide bomb for bots
 #### Plugin
-[plugins/suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)
+[plugins/suicide_bomb.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/suicide_bomb.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/suicide_bomb.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/suicide_bomb.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/suicide_bomb.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/suicide_bomb.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -388,13 +388,13 @@ Adds suicide bomb for bots
 
 Automatically updates SourceMod plugins and files
 #### Plugin
-[translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)
-[plugins/updater.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/updater.smx?raw=true)
+[translations/common.phrases.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/translations/common.phrases.txt?raw=true)<br>
+[plugins/updater.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/updater.smx?raw=true)<br>
 #### Source
-[scripting/updater.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/updater.sp?raw=true)
-[scripting/include/cURL.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cURL.inc?raw=true)
-[scripting/include/socket.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/socket.inc?raw=true)
-[scripting/include/steamtools.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/steamtools.inc?raw=true)
+[scripting/updater.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/updater.sp?raw=true)<br>
+[scripting/include/cURL.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/cURL.inc?raw=true)<br>
+[scripting/include/socket.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/socket.inc?raw=true)<br>
+[scripting/include/steamtools.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/steamtools.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -413,12 +413,12 @@ Automatically updates SourceMod plugins and files
 
 Logs voting events
 #### Plugin
-[plugins/votelog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/votelog.smx?raw=true)
+[plugins/votelog.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/votelog.smx?raw=true)<br>
 #### Source
-[scripting/votelog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/votelog.sp?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/votelog.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/votelog.sp?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/loghelper.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/loghelper.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```
@@ -431,16 +431,16 @@ Logs voting events
 
 Weapon Pickup logic for manipulating player inventory
 #### Plugin
-[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)
-[gamedata/sdkhooks.games/engine.insurgency.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/sdkhooks.games/engine.insurgency.txt?raw=true)
-[plugins/weapon_pickup.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/weapon_pickup.smx?raw=true)
+[gamedata/insurgency.games.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/insurgency.games.txt?raw=true)<br>
+[gamedata/sdkhooks.games/engine.insurgency.txt](https://github.com/jaredballou/insurgency-sourcemod/blob/master/gamedata/sdkhooks.games/engine.insurgency.txt?raw=true)<br>
+[plugins/weapon_pickup.smx](https://github.com/jaredballou/insurgency-sourcemod/blob/master/plugins/weapon_pickup.smx?raw=true)<br>
 #### Dependencies
-<a href='#insurgency'>insurgency</a>
+<a href='#insurgency'>insurgency</a><br>
 #### Source
-[scripting/weapon_pickup.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/weapon_pickup.sp?raw=true)
-[scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)
-[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)
-[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)
+[scripting/weapon_pickup.sp](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/weapon_pickup.sp?raw=true)<br>
+[scripting/include/smlib.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/smlib.inc?raw=true)<br>
+[scripting/include/insurgency.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/insurgency.inc?raw=true)<br>
+[scripting/include/updater.inc](https://github.com/jaredballou/insurgency-sourcemod/blob/master/scripting/include/updater.inc?raw=true)<br>
 
 #### CVAR List
 ```

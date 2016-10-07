@@ -5,13 +5,13 @@ ${plugin.myinfo["description"]}
 #for $section in ["Plugin", "Source"]
 \#\#\#\# ${section}
 #for $file in $plugin.files[$section]
-[${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)
+[${file}](https://github.com/jaredballou/insurgency-sourcemod/blob/master/${file}?raw=true)<br>
 #end for
 #if $section == "Plugin"
 #if $plugin.dependencies
 \#\#\#\# Dependencies
 #for dependency in $plugin.dependencies
-<a href='#${dependency}'>${dependency}</a>
+<a href='#${dependency}'>${dependency}</a><br>
 #end for
 #end if
 #end if
