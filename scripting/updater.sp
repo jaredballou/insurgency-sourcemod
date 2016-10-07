@@ -10,19 +10,19 @@
 
 /* Plugin Info */
 #define PLUGIN_NAME 		"Updater"
-#define PLUGIN_VERSION 		"1.2.1"
+#define PLUGIN_VERSION 		"1.3.0"
 
 public Plugin:myinfo =
 {
 	name = PLUGIN_NAME,
-	author = "GoD-Tony",
+	author = "GoD-Tony (Updated by jballou)",
 	description = "Automatically updates SourceMod plugins and files",
 	version = PLUGIN_VERSION,
 	url = "http://forums.alliedmods.net/showthread.php?t=169095"
 };
 
 /* Globals */
-#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
+//#define DEBUG		// This will enable verbose logging. Useful for developers testing their updates.
 
 #define CURL_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "curl_easy_init") == FeatureStatus_Available)
 #define SOCKET_AVAILABLE()		(GetFeatureStatus(FeatureType_Native, "SocketCreate") == FeatureStatus_Available)
