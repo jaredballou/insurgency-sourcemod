@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Removes fog"
 #define PLUGIN_NAME "[INS] No Fog"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_WORKING 1
 
 public Plugin:myinfo = {
