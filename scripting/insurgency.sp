@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.4.2"
+#define PLUGIN_VERSION "1.4.3"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -39,7 +39,7 @@ new Handle:g_weap_array = INVALID_HANDLE;
 new Handle:hGameConf = INVALID_HANDLE;
 
 new g_iObjResEntity, String:g_iObjResEntityNetClass[32];
-new g_iLogicEntity, String:g_iLogicEntityNetClass[32]
+new g_iGameRulesProxy, String:g_iGameRulesProxyNetClass[32]
 new g_iPlayerManagerEntity, String:g_iPlayerManagerEntityNetClass[32];
 
 new String:g_classes[Teams][MAX_SQUADS][SQUAD_SIZE][MAX_CLASS_LEN];
@@ -292,7 +292,7 @@ public OnPluginEnd()
 {
 	WstatsDumpAll();
 	g_weap_array = INVALID_HANDLE;
-	g_iLogicEntity = -1;
+	g_iGameRulesProxy = -1;
 	g_iObjResEntity = -1;
 	g_iPlayerManagerEntity = -1;
 }
@@ -304,9 +304,9 @@ public OnMapStart()
 public UpdateAllDataSources()
 {
 	InsLog(DEBUG,"Starting UpdateAllDataSources");
-	GetObjResEnt(1);
-	GetLogicEnt(1);
-	GetPlayerManagerEnt(1);
+	GetEntity_ObjectiveResource(1);
+	GetEntity_GameRulesProxy(1);
+	GetEntity_PlayerManager(1);
 	GetWeaponData();
 	GetTeams(false);
 	GetStatus();
@@ -363,8 +363,7 @@ hook_wstats()
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
 // Update array tracking the class of each player
-public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
-{
+public UpdateClassName(team,squad,squad_slot,String:raw_class_template[]) {
 	decl String:class_template[MAX_CLASS_LEN];
 	FormatPlayerClassName(class_template,sizeof(class_template),raw_class_template);
 	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
@@ -373,8 +372,7 @@ public UpdateClassName(team,squad,squad_slot,String:raw_class_template[])
 		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
 	}
 }
-GetObjResEnt(always=0)
-{
+GetEntity_ObjectiveResource(always=0) {
 	if (((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity)) || (always))
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
@@ -383,26 +381,50 @@ GetObjResEnt(always=0)
 	}
 	if (g_iObjResEntity)
 		return g_iObjResEntity;
-	InsLog(WARN,"GetObjResEnt failed!");
+	InsLog(WARN,"GetEntity_ObjectiveResource failed!");
 	return -1;
 }
-GetLogicEnt(always=0) {
-	if (((g_iLogicEntity < 1) || !IsValidEntity(g_iLogicEntity)) || (always))
-	{
-		new String:sGameMode[32],String:sLogicEnt[64];
-		GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
-		Format (sLogicEnt,sizeof(sLogicEnt),"logic_%s",sGameMode);
-		if (!StrEqual(sGameMode,"checkpoint")) return -1;
-		g_iLogicEntity = FindEntityByClassname(-1,sLogicEnt);
-		GetEntityNetClass(g_iLogicEntity, g_iLogicEntityNetClass, sizeof(g_iLogicEntityNetClass));
-		InsLog(DEBUG,"g_iLogicEntityNetClass %s",g_iLogicEntityNetClass);
+/*
+CINSRulesProxy (type DT_INSRulesProxy)
+ Table: baseclass (offset 0) (type DT_GameRulesProxy)
+ Table: ins_gamerules_data (offset 0) (type DT_INSRules)
+  Member: m_iWinningTeam (offset 908) (type integer) (bits 5) ()
+  Member: m_flRoundStartTime (offset 916) (type float) (bits 0) (NoScale)
+  Member: m_flGameStartTime (offset 920) (type float) (bits 0) (NoScale)
+  Member: m_flLastPauseTime (offset 924) (type float) (bits 0) (NoScale)
+  Member: m_bTimerPaused (offset 928) (type integer) (bits 1) (Unsigned)
+  Member: m_flRoundLength (offset 932) (type float) (bits 0) (NoScale)
+  Member: m_flRoundMaxTime (offset 936) (type float) (bits 0) (NoScale)
+  Member: m_iGameState (offset 904) (type integer) (bits 8) (Unsigned)
+  Member: m_iRoundPlayedCount (offset 940) (type integer) (bits 32) ()
+  Table: m_flNextReinforcementWave (offset 948) (type m_flNextReinforcementWave)
+   Member: 000 (offset 0) (type float) (bits 0) (NoScale)
+   Member: 001 (offset 4) (type float) (bits 0) (NoScale)
+  Table: m_flLastReinforcementWave (offset 956) (type m_flLastReinforcementWave)
+   Member: 000 (offset 0) (type float) (bits 0) (NoScale)
+   Member: 001 (offset 4) (type float) (bits 0) (NoScale)
+  Member: m_nMaxLives (offset 964) (type integer) (bits 32) ()
+  Member: m_nAttackingTeam (offset 968) (type integer) (bits 32) ()
+  Member: m_iLevel (offset 972) (type integer) (bits 32) ()
+  Member: m_iTheaterTeamOne (offset 976) (type integer) (bits 8) ()
+  Member: m_iTheaterTeamTwo (offset 980) (type integer) (bits 8) ()
+  Member: m_bCounterAttack (offset 912) (type integer) (bits 1) (Unsigned)
+*/
+
+//GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+GetEntity_GameRulesProxy(always=0) {
+	if (((g_iGameRulesProxy < 1) || !IsValidEntity(g_iGameRulesProxy)) || (always)) {
+		g_iGameRulesProxy = FindEntityByClassname(-1,"ins_rulesproxy");
+		GetEntityNetClass(g_iGameRulesProxy, g_iGameRulesProxyNetClass, sizeof(g_iGameRulesProxyNetClass));
+		InsLog(DEBUG,"g_iGameRulesProxyNetClass %s",g_iGameRulesProxyNetClass);
 	}
-	if (g_iLogicEntity)
-		return g_iLogicEntity;
-	InsLog(WARN,"GetLogicEnt failed!");
+	if (g_iGameRulesProxy)
+		return g_iGameRulesProxy;
+	InsLog(WARN,"GetEntity_GameRulesProxy failed!");
 	return -1;
 }
-GetPlayerManagerEnt(always=0) {
+
+GetEntity_PlayerManager(always=0) {
 	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
 	{
 		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
@@ -411,9 +433,10 @@ GetPlayerManagerEnt(always=0) {
 	}
 	if (g_iPlayerManagerEntity)
 		return g_iPlayerManagerEntity;
-	InsLog(WARN,"GetPlayerManagerEnt failed!");
+	InsLog(WARN,"GetEntity_PlayerManager failed!");
 	return -1;
 }
+
 // Get data for each weapon type in game. Tracks classname and id
 // TODO: Get print name localization
 public GetWeaponData() {
@@ -572,7 +595,7 @@ WstatsDumpAll()
 
 GetPlayerScore(client)
 {
-	GetPlayerManagerEnt();
+	GetEntity_PlayerManager();
 	new retval = -1;
 	if ((IsValidClient(client)) && (g_iPlayerManagerEntity > 0))
 	{
@@ -605,13 +628,11 @@ public Native_GetPlayerClass(Handle:plugin, numParams)
 	}
 	return;
 }
-bool:InCounterAttack()
-{
-	GetLogicEnt();
+bool:InCounterAttack() {
+	GetEntity_GameRulesProxy();
 	new bool:retval;
-	if (g_iLogicEntity > 0)
-	{
-		retval = bool:GetEntData(g_iLogicEntity, FindSendPropInfo(g_iLogicEntityNetClass, "m_bCounterAttack"));
+	if (g_iGameRulesProxy > 0) {
+		retval = bool:GetEntData(g_iGameRulesProxy, FindSendPropInfo(g_iGameRulesProxyNetClass, "m_bCounterAttack"));
 	}
 	return retval;
 }
@@ -702,7 +723,7 @@ public Native_ObjectiveResource_GetProp(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 	new size = GetNativeCell(2);
 	new element = GetNativeCell(3);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	if (g_iObjResEntity > 0)
 	{
 		retval = GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element));
@@ -721,7 +742,7 @@ public Native_ObjectiveResource_GetPropFloat(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 	new size = GetNativeCell(2);
 	new element = GetNativeCell(3);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	if (g_iObjResEntity > 0)
 	{
 		retval = Float:GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element));
@@ -739,7 +760,7 @@ public Native_ObjectiveResource_GetPropEnt(Handle:plugin, numParams)
 	new String:prop[len+1],retval=-1;
 	GetNativeString(1, prop, len+1);
 	new element = GetNativeCell(2);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	if (g_iObjResEntity > 0)
 	{
 		retval = GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (4 * element));
@@ -757,7 +778,7 @@ public Native_ObjectiveResource_GetPropBool(Handle:plugin, numParams)
 	new String:prop[len+1],retval=-1;
 	GetNativeString(1, prop, len+1);
 	new element = GetNativeCell(2);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	if (g_iObjResEntity > 0)
 	{
 		retval = bool:GetEntData(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (element));
@@ -774,7 +795,7 @@ public Native_ObjectiveResource_GetPropVector(Handle:plugin, numParams) {
 	new size = 12; // Size of data slice - 3x4-byte floats
 	GetNativeString(1, prop, len+1);
 	new element = GetNativeCell(3);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	new Float:result[3];
 	if (g_iObjResEntity > 0) {
 		GetEntDataVector(g_iObjResEntity, FindSendPropInfo(g_iObjResEntityNetClass, prop) + (size * element), result);
@@ -794,7 +815,7 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 	GetNativeString(1, prop, len+1);
 /*
 	new maxlen = GetNativeCell(3);
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	if (g_iObjResEntity > 0)
 	{
 		//SetNativeString(2, buffer, maxlen+1);
@@ -1665,7 +1686,7 @@ public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadc
 	GetEventString(event, "message_string",message_string,sizeof(message_string));
 	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
 	WstatsDumpAll();
-	GetObjResEnt();
+	GetEntity_ObjectiveResource();
 	return Plugin_Continue;
 }
 
