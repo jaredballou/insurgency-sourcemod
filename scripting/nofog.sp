@@ -16,7 +16,7 @@
 #define PLUGIN_DESCRIPTION "Removes fog"
 #define PLUGIN_NAME "[INS] No Fog"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_WORKING 1
 
 public Plugin:myinfo = {
@@ -34,7 +34,7 @@ new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
 public OnPluginStart()
 {
 	cvarVersion = CreateConVar("sm_nofog_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
-	cvarEnabled = CreateConVar("sm_nofog_enabled", "1", "sets whether bot naming is enabled", FCVAR_NOTIFY);
+	cvarEnabled = CreateConVar("sm_nofog_enabled", "1", "sets whether fog is enabled", FCVAR_NOTIFY);
 
 	HookEvent("server_spawn", Event_GameStart, EventHookMode_Pre);
 	HookEvent("game_init", Event_GameStart, EventHookMode_Pre);
