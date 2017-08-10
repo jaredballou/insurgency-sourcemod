@@ -11,8 +11,8 @@ These plugins are all provided as-is, I do my best to document and describe them
  * <a href='#damagemod'>Damage Modifier 1.0.0</a>
  * <a href='#events'>Event Logger 1.0.0</a>
  * <a href='#hlstatsx'>HLStatsX CE Ingame Plugin 1.6.19</a>
- * <a href='#insurgency'>Insurgency Support Library 1.4.2</a>
- * <a href='#nofog'>No Fog 1.0.0</a>
+ * <a href='#insurgency'>Insurgency Support Library 1.4.4</a>
+ * <a href='#nofog'>No Fog 1.0.1</a>
  * <a href='#respawn'>Player Respawn 1.9.0</a>
  * <a href='#restrictedarea'>Restricted Area Removal 1.0.0</a>
  * <a href='#rpgdrift'>RPG Adjustments 1.0.0</a>
@@ -236,7 +236,7 @@ Provides ingame functionality for interaction from an HLstatsX CE installation
 
 
 <a name="insurgency">
-### Insurgency Support Library 1.4.2
+### Insurgency Support Library 1.4.4
 
 Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more.
 #### Plugin
@@ -263,7 +263,7 @@ Provides functions to support Insurgency. Includes logging, round statistics, we
 
 
 <a name="nofog">
-### No Fog 1.0.0
+### No Fog 1.0.1
 
 Removes fog
 #### Plugin
@@ -275,7 +275,7 @@ Removes fog
 
 #### CVAR List
 ```
-"sm_nofog_enabled" "1" // sets whether bot naming is enabled
+"sm_nofog_enabled" "1" // sets whether fog is enabled
 ```
 
 

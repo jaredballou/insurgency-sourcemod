@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.4.3"
+#define PLUGIN_VERSION "1.4.4"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -24,6 +24,8 @@ public Plugin:myinfo = {
 
 
 #define INS
+//=====================================================================================================
+// BEGIN: globals
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
@@ -69,6 +71,9 @@ new Handle:suicide_regex = INVALID_HANDLE;
 //new String:Edicts[100];    // Stores total number of edicts used
 //============================================================================================================
 
+// END: globals
+//=====================================================================================================
+// BEGIN: plugin
 
 public APLRes:Plugin_Setup_natives() {
 	CreateNative("Ins_GetWeaponGetMaxClip1", Native_Weapon_GetMaxClip1);
@@ -93,101 +98,6 @@ public APLRes:Plugin_Setup_natives() {
 	return APLRes_Success;
 }
 
-/*
-	"flag_pickup"
-	{
-		"priority" "short"
-		"userid" "short"
-	}
-
-	"flag_drop"
-	{
-		"priority" "short"
-		"userid" "short"
-	}
-
-	"flag_captured"
-	{
-		"priority" "short"
-		"cp" "short"
-		"userid" "short"
-	}
-
-	"flag_returned"
-	{
-		"priority" "short"
-		"userid" "short"
-	}
-
-	"flag_reset"
-	{
-		"priority" "short"
-		"team" "short"
-	}
-
-	"object_destroyed"
-	{
-		"team" "byte"
-		"attacker" "byte"
-		"cp" "short"
-		"index" "short"
-		"type" "byte"
-		"weapon" "string"
-		"weaponid" "short"
-		"assister" "byte"
-		"attackerteam" "byte"
-	}
-	"radio_requested"
-	{
-		"requesting_player"		"short"
-		"team"					"short"
-	}
-
-	"artillery_requested"
-	{
-		"requesting_player"		"short"
-		"radio_player"			"short"
-		"team"					"short"
-		"type"					"string"
-		"lethal"				"bool"
-		"target_x"				"float"
-		"target_y"				"float"
-		"target_z"				"float"
-	}
-	
-	"artillery_failed"
-	{
-		"requesting_player"		"short"
-		"radio_player"			"short"
-		"team"					"short"
-		"type"					"string"
-		"lethal"				"bool"
-		"reason"				"string"
-	}
-	
-	"artillery_called"
-	{
-		"requesting_player"		"short"
-		"radio_player"			"short"
-		"team"					"short"
-		"type"					"string"
-		"lethal"				"bool"
-		"target_x"				"float"
-		"target_y"				"float"
-		"target_z"				"float"		
-	}
-	"flag_pickup"
-	"flag_drop"
-	"flag_captured"
-	"flag_returned"
-	"flag_reset"
-	"object_destroyed"
-	"radio_requested"
-	"artillery_requested"
-	"artillery_failed"
-	"artillery_called"
-
-*/
 public Plugin_Setup_cvar() {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
@@ -272,6 +182,38 @@ public OnPluginStart() {
 	//UpdateAllDataSources();
 	HookUpdater();
 }
+public OnPluginEnd()
+{
+	WstatsDumpAll();
+	g_weap_array = INVALID_HANDLE;
+	g_iGameRulesProxy = -1;
+	g_iObjResEntity = -1;
+	g_iPlayerManagerEntity = -1;
+}
+
+public OnMapStart()
+{
+	UpdateAllDataSources();
+}
+
+public OnLibraryAdded(const String:name[]) {
+	HookUpdater();
+}
+
+OnPlayerDisconnect(client)
+{
+	if(client > 0 && IsClientInGame(client))
+	{
+		dump_player_stats(client);
+		reset_player_stats(client);
+		reset_round_stats(client);
+	}
+}
+
+
+// END: plugin
+//=====================================================================================================
+// BEGIN: cvar
 
 public OnCvarLogLevelChange(Handle:cvar, const String:oldVal[], const String:newVal[])
 {
@@ -288,223 +230,36 @@ public OnCvarLogLevelChange(Handle:cvar, const String:oldVal[], const String:new
 	}
 }
 
-public OnPluginEnd()
-{
-	WstatsDumpAll();
-	g_weap_array = INVALID_HANDLE;
-	g_iGameRulesProxy = -1;
-	g_iObjResEntity = -1;
-	g_iPlayerManagerEntity = -1;
-}
-
-public OnMapStart()
-{
-	UpdateAllDataSources();
-}
-public UpdateAllDataSources()
-{
-	InsLog(DEBUG,"Starting UpdateAllDataSources");
-	GetEntity_ObjectiveResource(1);
-	GetEntity_GameRulesProxy(1);
-	GetEntity_PlayerManager(1);
-	GetWeaponData();
-	GetTeams(false);
-	GetStatus();
-//CreateTimer(4.5, GetStatus);
-}
-
-public GetStatus()
-//Action:GetStatus(Handle:Timer)
-{
-	InsLog(DEBUG,"Starting GetStatus");
-	// Grab status output.
-	// 600 characters is enough,
-//	decl String:Output[600];
-//	ServerCommandEx(Output, 600, "version");
-	// Grab the first 8 lines out only
-//	decl String:Derp[8][100];
-//	ExplodeString(Output, "\n", Derp, 8, 100);
-//	ServerName = Derp[0];	// Server name
-//	Version = Derp[1];	// Version number
-//	InsLog(DEBUG,"Derp %s Version %s",Derp,Version);
-//	IP_Port = Derp[2];	// Port & IP
-//	SteamID = Derp[3];	// Server steam ID
-//	Account = Derp[4];	// Steam account logged in
-//	Map = Derp[5];		// Map name
-//	Players = Derp[6];	// Players & bots
-//	Edicts = Derp[7];	// Edict count
-//new Handle:fileHandle=OpenFile(path,"r"); // Opens addons/sourcemod/blank.txt to read from (and only reading)
-//while(!IsEndOfFile(fileHandle)&&ReadFileLine(fileHandle,line,sizeof(line)))
-//{
-//  InsLog(DEBUG,"line %s",line);
-//}
-//CloseHandle(fileHandle);
-}
-public OnLibraryAdded(const String:name[]) {
-	HookUpdater();
-}
-OnPlayerDisconnect(client)
-{
-	if(client > 0 && IsClientInGame(client))
-	{
-		dump_player_stats(client);
-		reset_player_stats(client);
-		reset_round_stats(client);
-	}
-}
-
-
-
+// END: cvar
 //=====================================================================================================
+// BEGIN: stats
 hook_wstats()
 {
 	HookEvent("player_first_spawn", Event_PlayerSpawn);
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	HookEvent("player_disconnect", Event_PlayerDisconnect, EventHookMode_Pre);
 }
-// Update array tracking the class of each player
-public UpdateClassName(team,squad,squad_slot,String:raw_class_template[]) {
-	decl String:class_template[MAX_CLASS_LEN];
-	FormatPlayerClassName(class_template,sizeof(class_template),raw_class_template);
-	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
-	{
-		InsLog(DEBUG,"team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
-		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
-	}
-}
-GetEntity_ObjectiveResource(always=0) {
-	if (((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity)) || (always))
-	{
-		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
-		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
-		InsLog(DEBUG,"g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
-	}
-	if (g_iObjResEntity)
-		return g_iObjResEntity;
-	InsLog(WARN,"GetEntity_ObjectiveResource failed!");
-	return -1;
-}
-/*
-CINSRulesProxy (type DT_INSRulesProxy)
- Table: baseclass (offset 0) (type DT_GameRulesProxy)
- Table: ins_gamerules_data (offset 0) (type DT_INSRules)
-  Member: m_iWinningTeam (offset 908) (type integer) (bits 5) ()
-  Member: m_flRoundStartTime (offset 916) (type float) (bits 0) (NoScale)
-  Member: m_flGameStartTime (offset 920) (type float) (bits 0) (NoScale)
-  Member: m_flLastPauseTime (offset 924) (type float) (bits 0) (NoScale)
-  Member: m_bTimerPaused (offset 928) (type integer) (bits 1) (Unsigned)
-  Member: m_flRoundLength (offset 932) (type float) (bits 0) (NoScale)
-  Member: m_flRoundMaxTime (offset 936) (type float) (bits 0) (NoScale)
-  Member: m_iGameState (offset 904) (type integer) (bits 8) (Unsigned)
-  Member: m_iRoundPlayedCount (offset 940) (type integer) (bits 32) ()
-  Table: m_flNextReinforcementWave (offset 948) (type m_flNextReinforcementWave)
-   Member: 000 (offset 0) (type float) (bits 0) (NoScale)
-   Member: 001 (offset 4) (type float) (bits 0) (NoScale)
-  Table: m_flLastReinforcementWave (offset 956) (type m_flLastReinforcementWave)
-   Member: 000 (offset 0) (type float) (bits 0) (NoScale)
-   Member: 001 (offset 4) (type float) (bits 0) (NoScale)
-  Member: m_nMaxLives (offset 964) (type integer) (bits 32) ()
-  Member: m_nAttackingTeam (offset 968) (type integer) (bits 32) ()
-  Member: m_iLevel (offset 972) (type integer) (bits 32) ()
-  Member: m_iTheaterTeamOne (offset 976) (type integer) (bits 8) ()
-  Member: m_iTheaterTeamTwo (offset 980) (type integer) (bits 8) ()
-  Member: m_bCounterAttack (offset 912) (type integer) (bits 1) (Unsigned)
-*/
-
-//GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
-GetEntity_GameRulesProxy(always=0) {
-	if (((g_iGameRulesProxy < 1) || !IsValidEntity(g_iGameRulesProxy)) || (always)) {
-		g_iGameRulesProxy = FindEntityByClassname(-1,"ins_rulesproxy");
-		GetEntityNetClass(g_iGameRulesProxy, g_iGameRulesProxyNetClass, sizeof(g_iGameRulesProxyNetClass));
-		InsLog(DEBUG,"g_iGameRulesProxyNetClass %s",g_iGameRulesProxyNetClass);
-	}
-	if (g_iGameRulesProxy)
-		return g_iGameRulesProxy;
-	InsLog(WARN,"GetEntity_GameRulesProxy failed!");
-	return -1;
-}
-
-GetEntity_PlayerManager(always=0) {
-	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
-	{
-		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
-		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
-		InsLog(DEBUG,"g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
-	}
-	if (g_iPlayerManagerEntity)
-		return g_iPlayerManagerEntity;
-	InsLog(WARN,"GetEntity_PlayerManager failed!");
-	return -1;
-}
-
-// Get data for each weapon type in game. Tracks classname and id
-// TODO: Get print name localization
-public GetWeaponData() {
-	if (g_weap_array == INVALID_HANDLE) {
-		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
-		for (new i;i<MAX_DEFINABLE_WEAPONS;i++) {
-			PushArrayString(g_weap_array, "");
-		}
-		InsLog(DEBUG,"starting LoadValues");
-		new String:name[32];
-		for(new i=0;i<= GetMaxEntities() ;i++) {
-			if(!IsValidEntity(i))
-				continue;
-			if(GetEdictClassname(i, name, sizeof(name))) {
-				if (StrContains(name,"weapon_") == 0) {
-					GetWeaponId(i);
-				}
-			}
-		}
-	}
-}
 
 reset_round_stats(client) {
-	for (new i = 1; i < sizeof(g_round_stats[]); i++)
-	{
+	for (new i = 1; i < sizeof(g_round_stats[]); i++) {
 		g_round_stats[client][i] = 0;
 	}
-	if (IsValidClient(client))
-	{
+	if (IsValidClient(client)) {
 		InsLog(DEBUG,"Running reset_round_stats for %N",client);
 		g_round_stats[client][STAT_SCORE] = Ins_GetPlayerScore(client);
-	}
-	else
-	{
+	} else {
 		g_round_stats[client][STAT_SCORE] = 0;
 	}
 }
-reset_round_stats_all()
-{
-	for (new i = 1; i < MaxClients; i++)
-	{
+reset_round_stats_all() {
+	for (new i = 1; i < MaxClients; i++) {
 		reset_round_stats(i);
 	}
 }
-// Get weapon id of a given weapon entity
-GetWeaponId(i) {
-	if (i < 0) {
-		return -1;
-	}
-	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
-	new String:name[32];
-	GetEdictClassname(i, name, sizeof(name));
-	decl String:strBuf[32];
-	GetArrayString(g_weap_array, m_hWeaponDefinitionHandle, strBuf, sizeof(strBuf));
-	if(!StrEqual(name, strBuf)) {
-		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, name);
-		InsLog(DEBUG,"Weapon %s not in trie, added as index %d", name,m_hWeaponDefinitionHandle);
-	}
-	return m_hWeaponDefinitionHandle;
-}
-
-dump_player_stats(client)
-{
-	if (IsClientInGame(client) && IsClientConnected(client))
-	{
+dump_player_stats(client) {
+	if (IsClientInGame(client) && IsClientConnected(client)) {
 		decl String: player_authid[64];
-		if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid)))
-		{
+		if (!GetClientAuthId(client, AuthId_Steam2, player_authid, sizeof(player_authid))) {
 			strcopy(player_authid, sizeof(player_authid), "UNKNOWN");
 		}
 		new player_team_index = GetClientTeam(client);
@@ -514,13 +269,11 @@ dump_player_stats(client)
 		//for (new i = 0; (i < MAX_LOG_WEAPONS); i++)
 		//DYNAMIC POPULATE
 		//for (new i = 0; i < GetArraySize(g_weap_array); i++)
-		for (new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
-		{
+		for (new i = 0; i < MAX_DEFINABLE_WEAPONS; i++) {
 			decl String:strBuf[32];
 			Ins_GetWeaponName(i, strBuf, sizeof(strBuf));
 			
-			if (g_weapon_stats[client][i][LOG_HIT_HITS] > 0)
-			{
+			if (g_weapon_stats[client][i][LOG_HIT_HITS] > 0) {
 				LogToGame("\"%N<%d><%s><%s>\" triggered \"weaponstats\" (weapon \"%s\") (shots \"%d\") (hits \"%d\") (kills \"%d\") (headshots \"%d\") (tks \"%d\") (damage \"%d\") (deaths \"%d\")", 
 				client, 
 				player_userid, 
@@ -591,7 +344,120 @@ WstatsDumpAll()
 	}
 }
 
+// END: stats
 //=====================================================================================================
+// BEGIN: data
+public UpdateAllDataSources()
+{
+	InsLog(DEBUG,"Starting UpdateAllDataSources");
+	GetEntity_ObjectiveResource(1);
+	GetEntity_GameRulesProxy(1);
+	GetEntity_PlayerManager(1);
+	GetWeaponData();
+	GetTeams(false);
+}
+
+// END: data
+//=====================================================================================================
+// BEGIN: entities
+
+// Update array tracking the class of each player
+public UpdateClassName(team,squad,squad_slot,String:raw_class_template[]) {
+	decl String:class_template[MAX_CLASS_LEN];
+	FormatPlayerClassName(class_template,sizeof(class_template),raw_class_template);
+	if(!StrEqual(g_classes[team][squad][squad_slot],class_template))
+	{
+		InsLog(DEBUG,"team: %d squad: %d squad_slot: %d class_template: %s",team,squad,squad_slot,class_template);
+		Format(g_classes[team][squad][squad_slot],MAX_CLASS_LEN,"%s",class_template);
+	}
+}
+
+GetEntity_ObjectiveResource(always=0) {
+	if (((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity)) || (always))
+	{
+		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
+		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
+		InsLog(DEBUG,"g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
+	}
+	if (g_iObjResEntity)
+		return g_iObjResEntity;
+	InsLog(WARN,"GetEntity_ObjectiveResource failed!");
+	return -1;
+}
+
+//GetConVarString(FindConVar("mp_gamemode"), sGameMode, sizeof(sGameMode));
+GetEntity_GameRulesProxy(always=0) {
+	if (((g_iGameRulesProxy < 1) || !IsValidEntity(g_iGameRulesProxy)) || (always)) {
+		g_iGameRulesProxy = FindEntityByClassname(-1,"ins_rulesproxy");
+		GetEntityNetClass(g_iGameRulesProxy, g_iGameRulesProxyNetClass, sizeof(g_iGameRulesProxyNetClass));
+		InsLog(DEBUG,"g_iGameRulesProxyNetClass %s",g_iGameRulesProxyNetClass);
+	}
+	if (g_iGameRulesProxy)
+		return g_iGameRulesProxy;
+	InsLog(WARN,"GetEntity_GameRulesProxy failed!");
+	return -1;
+}
+
+GetEntity_PlayerManager(always=0) {
+	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
+	{
+		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
+		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
+		InsLog(DEBUG,"g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
+	}
+	if (g_iPlayerManagerEntity)
+		return g_iPlayerManagerEntity;
+	InsLog(WARN,"GetEntity_PlayerManager failed!");
+	return -1;
+}
+
+// END: entities
+//=====================================================================================================
+// BEGIN: weapons
+// Get data for each weapon type in game. Tracks classname and id
+// TODO: Get print name localization
+public GetWeaponData() {
+	if (g_weap_array == INVALID_HANDLE) {
+		g_weap_array = CreateArray(MAX_DEFINABLE_WEAPONS);
+		for (new i;i<MAX_DEFINABLE_WEAPONS;i++) {
+			PushArrayString(g_weap_array, "");
+		}
+		InsLog(DEBUG,"starting LoadValues");
+		for(new i=0;i<= GetMaxEntities() ;i++) {
+			if(!IsValidEntity(i))
+				continue;
+			GetWeaponId(i);
+/* commented out so that we test all entities. now that GetWeaponId checks for existence of weapon def handle, it should be able to process all weapons regardless of classname.
+			new String:name[32];
+			if(GetEdictClassname(i, name, sizeof(name))) {
+				if (StrContains(name,"weapon_") == 0) {
+					GetWeaponId(i);
+				}
+			}
+*/
+		}
+	}
+}
+
+
+// Get weapon id of a given weapon entity. If the value isn't in the array, add it.
+GetWeaponId(i) {
+	if ((!Entity_IsValid(i)) || (!HasEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle"))) {
+		return -1;
+	}
+	decl String:sClassname[32], String:sWeaponName[32];
+	new m_hWeaponDefinitionHandle = GetEntProp(i, Prop_Send, "m_hWeaponDefinitionHandle");
+	GetArrayString(g_weap_array, m_hWeaponDefinitionHandle, sWeaponName, sizeof(sWeaponName));
+	if(!StrEqual(sClassname, sWeaponName)) {
+		SetArrayString(g_weap_array, m_hWeaponDefinitionHandle, sClassname);
+		InsLog(DEBUG,"Weapon %s not in trie, added as index %d", sClassname, m_hWeaponDefinitionHandle);
+	}
+	return m_hWeaponDefinitionHandle;
+}
+
+// END: weapons
+//=====================================================================================================
+// BEGIN: natives
 
 GetPlayerScore(client)
 {
@@ -604,6 +470,12 @@ GetPlayerScore(client)
 	}
 	return retval;
 }
+public Native_GetPlayerScore(Handle:plugin, numParams)
+{
+	new client = GetNativeCell(1);
+	return GetPlayerScore(client);
+}
+
 public Native_Log(Handle:plugin, numParams)
 {
 	new LOG_LEVEL:level = GetNativeCell(1);
@@ -613,11 +485,6 @@ public Native_Log(Handle:plugin, numParams)
 	return 0;
 }
 
-public Native_GetPlayerScore(Handle:plugin, numParams)
-{
-	new client = GetNativeCell(1);
-	return GetPlayerScore(client);
-}
 public Native_GetPlayerClass(Handle:plugin, numParams)
 {
 	new client = GetNativeCell(1);
@@ -657,9 +524,7 @@ public Native_Weapon_GetWeaponId(Handle:plugin, numParams)
 	if (iEntity)
 	{
 		return GetWeaponId(iEntity);
-	}
-	else
-	{
+	} else {
 		for(new i = 0; i < MAX_DEFINABLE_WEAPONS; i++)
 		{
 			GetArrayString(g_weap_array, i, strBuf, sizeof(strBuf));
@@ -824,6 +689,9 @@ public Native_ObjectiveResource_GetPropString(Handle:plugin, numParams)
 */
 	return retval;
 }
+// END: natives
+//=====================================================================================================
+// BEGIN: ammo
 
 public CheckInfiniteAmmo(client)
 {
@@ -846,6 +714,9 @@ public CheckInfiniteAmmo(client)
 		SetEntProp(ActiveWeapon, Prop_Send, "m_iClip1", maxammo);
 	}
 }
+// END: ammo
+//=====================================================================================================
+// BEGIN: sliding
 
 //=====================================================================================================
 // Disable sliding
@@ -861,6 +732,9 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 	}	
 	return Plugin_Continue;
 }
+// END: sliding
+//=====================================================================================================
+// BEGIN: events
 public Action:Event_ControlPointCapturedPre(Handle:event, const String:name[], bool:dontBroadcast)
 {
 	if (!GetConVarBool(cvarEnabled))
@@ -1502,6 +1376,95 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	return Plugin_Continue;
 }
 
+public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"reason" "byte"
+	//"winner" "byte"
+	//"message" "string"
+	//"message_string" "string"
+	decl String:message[255];
+	GetEventString(event, "message",message,sizeof(message));
+	/*
+	if (StrEqual(message,"#game_team_winner_obj_checkpoint_regain"))
+	{
+		if (!GetConVarBool(cvarCheckpointCounterattackCapture))
+		{
+			InsLog(DEBUG,"Event_RoundEnd: Blocking due to checkpoint recapture disabled!");
+			//return Plugin_Stop;
+		}
+	}
+	*/
+// jballou 10MAR2016 - Disabling until I can fix these. Will likely break out into a new plugin.
+//	DoRoundAwards();
+	return Plugin_Continue;
+}
+public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
+{
+	//"reason" "byte"
+	//"winner" "byte"
+	//"message" "string"
+	//"message_string" "string"
+	new winner = GetEventInt( event, "winner");
+	new reason = GetEventInt( event, "reason");
+	decl String:message[255],String:message_string[255];
+	GetEventString(event, "message",message,sizeof(message));
+	GetEventString(event, "message_string",message_string,sizeof(message_string));
+	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
+	WstatsDumpAll();
+	GetEntity_ObjectiveResource();
+	return Plugin_Continue;
+}
+
+// This adds the player class name (without some bits we don't want) to the list
+// TODO: Handle the "unwanted" bits better, perhaps read strings from theater/game translations?
+public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	//"squad_slot" "byte"
+	//"squad" "byte"
+	//"userid" "short"
+	//"class_template" "string"
+	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
+	new squad = GetEventInt( event, "squad" );
+	new squad_slot = GetEventInt( event, "squad_slot" );
+	new team = GetClientTeam(client);
+	decl String:class_template[MAX_CLASS_LEN];
+	decl String:sClassName[MAX_CLASS_LEN];
+	GetEventString(event, "class_template",class_template,sizeof(class_template));
+	FormatPlayerClassName(sClassName,sizeof(sClassName),class_template);
+	UpdateClassName(team,squad,squad_slot,sClassName);
+
+	if( client == 0)
+		return Plugin_Continue;
+	if(!StrEqual(g_client_last_classstring[client],sClassName)) {
+		LogRoleChange( client, sClassName );
+		g_client_last_classstring[client] = sClassName;
+	}
+	return Plugin_Continue;
+}
+// END: events
+//=====================================================================================================
+// BEGIN: format
+FormatPlayerClassName(String:sClassName[],iSize,const String:class_template[]) {
+	// Check player class
+	new String:sTmp[256],String:sReplace[MAX_STRIP_LEN+1];
+	new String:sStripWords[MAX_STRIP_COUNT][MAX_STRIP_LEN];
+	Format(sClassName,iSize,"%s",class_template);
+	GetConVarString(cvarClassStripWords, sTmp, sizeof(sTmp));
+	ExplodeString(sTmp, " ", sStripWords, MAX_STRIP_COUNT, MAX_STRIP_LEN);
+	for (new i=0;i<MAX_STRIP_COUNT;i++) {
+		if (StrEqual(sStripWords[i],"") || StrEqual(sStripWords[i],"\0")) {
+		} else {
+			Format(sReplace,sizeof(sReplace),"_%s",sStripWords[i]);
+			ReplaceString(sClassName,iSize,sReplace,"",false);
+			Format(sReplace,sizeof(sReplace),"%s_",sStripWords[i]);
+			ReplaceString(sClassName,iSize,sReplace,"",false);
+		}
+	}
+}
+// END: format
+//=====================================================================================================
+// BEGIN: log
+
 public Action:LogEvent(const String:message[])
 {
 	if (!GetConVarBool(cvarEnabled))
@@ -1650,86 +1613,4 @@ public Action:LogEvent(const String:message[])
 	
 	return Plugin_Continue;
 }
-
-public Action:Event_RoundEndPre( Handle:event, const String:name[], bool:dontBroadcast )
-{
-	//"reason" "byte"
-	//"winner" "byte"
-	//"message" "string"
-	//"message_string" "string"
-	decl String:message[255];
-	GetEventString(event, "message",message,sizeof(message));
-	/*
-	if (StrEqual(message,"#game_team_winner_obj_checkpoint_regain"))
-	{
-		if (!GetConVarBool(cvarCheckpointCounterattackCapture))
-		{
-			InsLog(DEBUG,"Event_RoundEnd: Blocking due to checkpoint recapture disabled!");
-			//return Plugin_Stop;
-		}
-	}
-	*/
-// jballou 10MAR2016 - Disabling until I can fix these. Will likely break out into a new plugin.
-//	DoRoundAwards();
-	return Plugin_Continue;
-}
-public Action:Event_RoundEnd( Handle:event, const String:name[], bool:dontBroadcast )
-{
-	//"reason" "byte"
-	//"winner" "byte"
-	//"message" "string"
-	//"message_string" "string"
-	new winner = GetEventInt( event, "winner");
-	new reason = GetEventInt( event, "reason");
-	decl String:message[255],String:message_string[255];
-	GetEventString(event, "message",message,sizeof(message));
-	GetEventString(event, "message_string",message_string,sizeof(message_string));
-	LogToGame("World triggered \"Round_End\" (winner \"%d\") (reason \"%d\") (message \"%s\") (message_string \"%s\")",winner,reason,message,message_string);
-	WstatsDumpAll();
-	GetEntity_ObjectiveResource();
-	return Plugin_Continue;
-}
-
-// This adds the player class name (without some bits we don't want) to the list
-// TODO: Handle the "unwanted" bits better, perhaps read strings from theater/game translations?
-public Action:Event_PlayerPickSquad(Handle:event, const String:name[], bool:dontBroadcast)
-{
-	//"squad_slot" "byte"
-	//"squad" "byte"
-	//"userid" "short"
-	//"class_template" "string"
-	new client = GetClientOfUserId( GetEventInt( event, "userid" ) );
-	new squad = GetEventInt( event, "squad" );
-	new squad_slot = GetEventInt( event, "squad_slot" );
-	new team = GetClientTeam(client);
-	decl String:class_template[MAX_CLASS_LEN];
-	decl String:sClassName[MAX_CLASS_LEN];
-	GetEventString(event, "class_template",class_template,sizeof(class_template));
-	FormatPlayerClassName(sClassName,sizeof(sClassName),class_template);
-	UpdateClassName(team,squad,squad_slot,sClassName);
-
-	if( client == 0)
-		return Plugin_Continue;
-	if(!StrEqual(g_client_last_classstring[client],sClassName)) {
-		LogRoleChange( client, sClassName );
-		g_client_last_classstring[client] = sClassName;
-	}
-	return Plugin_Continue;
-}
-FormatPlayerClassName(String:sClassName[],iSize,const String:class_template[]) {
-	// Check player class
-	new String:sTmp[256],String:sReplace[MAX_STRIP_LEN+1];
-	new String:sStripWords[MAX_STRIP_COUNT][MAX_STRIP_LEN];
-	Format(sClassName,iSize,"%s",class_template);
-	GetConVarString(cvarClassStripWords, sTmp, sizeof(sTmp));
-	ExplodeString(sTmp, " ", sStripWords, MAX_STRIP_COUNT, MAX_STRIP_LEN);
-	for (new i=0;i<MAX_STRIP_COUNT;i++) {
-		if (StrEqual(sStripWords[i],"") || StrEqual(sStripWords[i],"\0")) {
-		} else {
-			Format(sReplace,sizeof(sReplace),"_%s",sStripWords[i]);
-			ReplaceString(sClassName,iSize,sReplace,"",false);
-			Format(sReplace,sizeof(sReplace),"%s_",sStripWords[i]);
-			ReplaceString(sClassName,iSize,sReplace,"",false);
-		}
-	}
-}
+// END: log

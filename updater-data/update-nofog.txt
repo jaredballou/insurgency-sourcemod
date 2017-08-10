@@ -11,7 +11,7 @@
 	{
 		"Version"
 		{
-			"Latest" "1.0.0"
+			"Latest" "1.0.1"
 		}
 		"Notes"   "No Fog"
 		"Notes"   "Removes fog"
