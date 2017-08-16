@@ -1,0 +1,49 @@
+#define PLUGIN_AUTHOR "Jared Ballou"
+#define PLUGIN_DESCRIPTION "Log events to client or server"
+#define PLUGIN_NAME "Event Logger"
+#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_WORKING "1"
+#define PLUGIN_LOG_PREFIX "EVENTS"
+#define PLUGIN_URL "http://jballou.com/insurgency"
+
+public Plugin:myinfo = {
+        name            = PLUGIN_NAME,
+        author          = PLUGIN_AUTHOR,
+        description     = PLUGIN_DESCRIPTION,
+        version         = PLUGIN_VERSION,
+        url             = PLUGIN_URL
+};
+#include <sourcemod>
+#undef REQUIRE_PLUGIN
+#include <updater>
+
+#pragma semicolon 1
+
+public OnPluginStart()
+{
+{% for event, fields in events.iteritems() %}
+	HookEvent("{{ event }}", Event_{{ event|title }});
+{% endfor %}
+	HookUpdater();
+}
+
+{% for event, fields in events.iteritems() %}
+public Action:Event_{{ event|title }}(Handle:event, const String:name[], bool:dontBroadcast) {
+{% for field, type in fields.iteritems() %}
+{% if type in ["byte", "short"] %}
+{% set type = "int" %}
+{% else %}
+{% set type = type %}
+{% endif %}
+{% if type in ["string"] %}
+	decl String:m_{{ field|title }}[256];
+	GetEventString(event, "{{ field }}", m_{{ field|title }}, sizeof(m_{{ field|title }}));
+{% else %}
+	{{ type }} m_{{ field|title }} = GetEvent{{ type|title }}(event, "{{ field }}");
+{% endif %}
+{% endfor %}
+	LogToGame("\"event\": {\"{{ event }}\": { {% for field, type in fields.iteritems() -%}{% if type in ["string"] %}{% set ptype = "s" %}{% else %}{% set ptype = "d" %}{% endif %}\"{{field}}\": \"%{{ptype}}\",{%- endfor %}} } ", {{ fields.keys()|join(', ') }});
+	return Plugin_Continue;
+}
+{% endfor %}
+	

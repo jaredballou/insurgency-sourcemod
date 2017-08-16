@@ -7,6 +7,7 @@ format needed for inclusion in insurgency-data mods format. It supports version
 separation, extracting files from VPK or filesystem, and is managed via the
 config.yaml file.
 """
+from jinja2 import Environment, FileSystemLoader
 import os
 from pprint import pprint
 import sys
@@ -64,7 +65,7 @@ return dict_recurse(self)
 class GameFile(object):
 	def __init__(self, file=None):
 		if file is None:
-			file = "modevents.res"
+			file = "data/modevents.res"
 		self.file = file
 		self.events = {}
 
@@ -115,9 +116,14 @@ class ScriptFile(object):
 		self.hooks = []
 		self.functions = []
 		self.load_gamefile(gamefile)
-		self.process_events()
-		print("\n".join(self.hooks))
-		print("\n\n".join(self.functions))
+		#self.process_events()
+		self.dump_script()
+
+	def dump_script(self):
+		THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+		j2_env = Environment(loader=FileSystemLoader(THIS_DIR), trim_blocks=True)
+		with open('events.sp', 'w') as file:
+			file.write(j2_env.get_template('events.sp.tmpl').render(events=self.gamefile.data))
 
 	def load_gamefile(self, gamefile):
 		self.gamefile = gamefile
@@ -154,6 +160,7 @@ class ScriptFile(object):
 			else:
 				fstr.append("""\t{} {} = GetEvent{}(event, "{}");""".format(type, varname, type.title(), field))
 		fstr.append("\treturn Plugin_Continue;")
+		fstr.append("\treturn Plugin_Continue;")
 		fstr.append("}")
 		fs = "\n".join(fstr)
 		return fs
@@ -161,7 +168,7 @@ class ScriptFile(object):
 class ResFile(object):
 	def __init__(self, file=None):
 		if file is None:
-			file = "modevents.res"
+			file = "data/modevents.res"
 		self.file = file
 		self.hooks = []
 		self.functions = []
