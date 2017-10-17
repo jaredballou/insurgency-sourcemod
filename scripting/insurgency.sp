@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.4.4"
+#define PLUGIN_VERSION "1.5.0"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -376,6 +376,9 @@ GetEntity_ObjectiveResource(always=0) {
 	if (((g_iObjResEntity < 1) || !IsValidEntity(g_iObjResEntity)) || (always))
 	{
 		g_iObjResEntity = FindEntityByClassname(0,"ins_objective_resource");
+		if (g_iObjResEntity < 0) {
+			return -1;
+		}
 		GetEntityNetClass(g_iObjResEntity, g_iObjResEntityNetClass, sizeof(g_iObjResEntityNetClass));
 		InsLog(DEBUG,"g_iObjResEntityNetClass %s",g_iObjResEntityNetClass);
 	}
@@ -389,6 +392,9 @@ GetEntity_ObjectiveResource(always=0) {
 GetEntity_GameRulesProxy(always=0) {
 	if (((g_iGameRulesProxy < 1) || !IsValidEntity(g_iGameRulesProxy)) || (always)) {
 		g_iGameRulesProxy = FindEntityByClassname(-1,"ins_rulesproxy");
+		if (g_iGameRulesProxy < 0) {
+			return -1;
+		}
 		GetEntityNetClass(g_iGameRulesProxy, g_iGameRulesProxyNetClass, sizeof(g_iGameRulesProxyNetClass));
 		InsLog(DEBUG,"g_iGameRulesProxyNetClass %s",g_iGameRulesProxyNetClass);
 	}
@@ -402,6 +408,9 @@ GetEntity_PlayerManager(always=0) {
 	if (((g_iPlayerManagerEntity < 1) || !IsValidEntity(g_iPlayerManagerEntity)) || (always))
 	{
 		g_iPlayerManagerEntity = FindEntityByClassname(-1,"ins_player_manager");
+		if (g_iPlayerManagerEntity < 0) {
+			return -1;
+		}
 		GetEntityNetClass(g_iPlayerManagerEntity, g_iPlayerManagerEntityNetClass, sizeof(g_iPlayerManagerEntityNetClass));
 		InsLog(DEBUG,"g_iPlayerManagerEntityNetClass %s",g_iPlayerManagerEntityNetClass);
 	}
