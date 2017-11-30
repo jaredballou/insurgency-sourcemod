@@ -118,7 +118,6 @@ class SourceModPlugin(object):
                     else:
                         self.add_file(file="%s/%s.txt" % (func_type, parts[0]))
 
-                            
     def add_file(self, file, type='Plugin'):
         if not type in self.files.keys():
             type = 'Plugin'
@@ -135,9 +134,9 @@ class SourceModPlugin(object):
     def compile_plugin(self):
         """Compile plugin if missing our out of date, default to disabled"""
         print("Compiling %s" % self.name)
-        cmd = [self.parent.compiler_path, self.sp_file, "-o", self.smx_file]
+        cmd = [self.parent.compiler_file, self.sp_file, "-o", self.smx_file]
         logging.debug(cmd)
-        result = subprocess.check_output(cmd)
+        result = subprocess.check_output(cmd, cwd=self.parent.getpath(["scripting"]))
         print(result)
         return os.path.isfile(self.smx_file)
 

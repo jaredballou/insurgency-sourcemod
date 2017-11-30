@@ -9,8 +9,8 @@
 #define REQUIRE_EXTENSIONS
 
 /* Plugin Info */
-#define PLUGIN_NAME 		"Updater"
-#define PLUGIN_VERSION 		"1.3.0"
+#define PLUGIN_NAME "Updater"
+#define PLUGIN_VERSION "1.3.0"
 
 public Plugin:myinfo =
 {

@@ -25,7 +25,7 @@ class SourceMod(object):
         if self.platform == "windows":
             self.compiler_file = "spcomp.exe"
         else:
-            self.compiler_file = "spcomp"
+            self.compiler_file = "./spcomp"
         self.plugins_write_doc = plugins_write_doc
         self.write_readme = write_readme
         self.plugins_write_updater = plugins_write_updater
@@ -34,7 +34,6 @@ class SourceMod(object):
         self.find_root(path=root)
         self.load_config(config_file=config_file)
         self.load_file_types()
-        self.compiler_path = self.getpath(["scripting",self.compiler_file])
         self.load_plugins()
         if write_readme:
             self.create_readme()
