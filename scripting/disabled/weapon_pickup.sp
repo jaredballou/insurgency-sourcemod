@@ -24,7 +24,7 @@ Allow manipulation of weapons and items in the game world.
 #define PLUGIN_LOG_PREFIX "WPNPICK"
 #define PLUGIN_NAME "[INS] Weapon Pickup"
 #define PLUGIN_URL "http://jballou.com/insurgency"
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 #define PLUGIN_WORKING "1"
 
 #include <sourcemod>
@@ -56,7 +56,7 @@ new Handle:cvarMaxExplosive = INVALID_HANDLE; // Maximum number of explosive amm
 new Handle:cvarMaxMagazine = INVALID_HANDLE; // Maximum number of magazines that can be picked up
 
 new g_WeaponOwner[2048] = 0;
-new m_hActiveWeapon;
+//new m_hActiveWeapon;
 new m_hMyWeapons;
 
 public OnPluginStart() {
@@ -66,13 +66,13 @@ public OnPluginStart() {
 	cvarMaxExplosive = CreateConVar("sm_weapon_pickup_max_explosive", "3", "Maximum number of ammo that can be carried for explosives", FCVAR_NOTIFY);
 	cvarMaxMagazine = CreateConVar("sm_weapon_pickup_max_magazine", "12", "Maximum number of magazines that can be carried", FCVAR_NOTIFY);
 
-	m_hActiveWeapon = GetSendProp("CINSPlayer", "m_hActiveWeapon");
+	//m_hActiveWeapon = GetSendProp("CDOIPlayer", "m_hActiveWeapon");
 
         HookEvent("player_first_spawn", Event_Player_First_Spawn);
         HookEvent("player_spawn", Event_Player_Spawn);
         HookEvent("weapon_pickup", Event_Weapon_Pickup);
 
-	m_hMyWeapons = GetSendProp("CINSPlayer", "m_hMyWeapons");
+	m_hMyWeapons = GetSendProp("CDOIPlayer", "m_hMyWeapons");
 
 	RegConsoleCmd("wp_weaponslots", Command_ListWeaponSlots, "Lists weapon slots. Usage: wp_weaponslots [target]");
 	RegConsoleCmd("wp_weaponlist", Command_ListWeapons, "Lists all weapons. Usage: wp_weaponlist [target]");
@@ -96,23 +96,29 @@ HookEverything() {
 // Hook entity creation so that all attempts to use it get checked
 public OnEntityCreated(entity, const String:classname[]) {
 	HookEntity(entity);
+	//PrintToServer("[WP] OnEntityCreated classname %s", classname);
 }
 
 HookEntity(entity) {
 	if(entity > MaxClients && IsValidEntity(entity)) {
 		InsLog(DEBUG, "HookEntity %d", entity);
-		new String:sNetClass[32];
-	        new String:sClassname[64];
-		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
-	        GetEntityClassname(entity, sClassname, sizeof(sClassname));
-		//PrintToServer("[WP] sNetClass %s sClassname %s", sNetClass, sClassname);
-		// TODO: Only hook weapons/grenades. Need to do some magic here.
 		SDKHook(entity, SDKHook_Use, OnEntityUse);
+	}
+}
+/*
+		//new String:sNetClass[32];
+	        //new String:sClassname[64];
+		//GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
+		//PrintToServer("[WP] HookEntity sNetClass %s", sNetClass);
+		//GetEntityClassname(entity, sClassname, sizeof(sClassname));
+		//PrintToServer("[WP] sClassname %s", sClassname);
+		// TODO: Only hook weapons/grenades. Need to do some magic here.
+
 //		new m_iPrimaryAmmoCount = GetSendProp(sNetClass, "m_iPrimaryAmmoCount", 0);
 //		if (m_iPrimaryAmmoCount > -1) {
 	}
 }
-
+*/
 // Hook weaponcanuse (called at weapon deployment) and drop
 public OnClientPutInServer(client) {
 	HookClient(client);
@@ -387,7 +393,7 @@ public Action:OnEntityUse(entity, activator, caller, UseType:type, Float:value)
 			return Plugin_Continue;
 		}
 	        new String:classname[64];
-               	new String:sNetClass[32];
+		new String:sNetClass[32];
 		new iOffset;
 		GetEntityNetClass(entity, sNetClass, sizeof(sNetClass));
 	        GetEntityClassname(entity, classname, sizeof(classname));
@@ -464,7 +470,7 @@ FindInventoryItem(client,const String:sClassname[]) {
 		}
 		GetEntityClassname(weapon, classname, sizeof(classname));
 		if (StrEqual(sClassname,classname)) {
-	        	InsLog(DEBUG, "Found %s in inventory for %N (%d) at offset %d",classname,client,client,offset);
+			InsLog(DEBUG, "Found %s in inventory for %N (%d) at offset %d",classname,client,client,offset);
 			return offset;
 		}
 	}

@@ -1,6 +1,6 @@
 #define PLUGIN_DESCRIPTION "Provides functions to support Insurgency. Includes logging, round statistics, weapon names, player class names, and more."
 #define PLUGIN_NAME "[INS] Insurgency Support Library"
-#define PLUGIN_VERSION "1.5.0"
+#define PLUGIN_VERSION "1.5.1"
 #define PLUGIN_WORKING "1"
 #define PLUGIN_LOG_PREFIX "INSLIB"
 #define PLUGIN_AUTHOR "Jared Ballou (jballou)"
@@ -29,11 +29,11 @@ public Plugin:myinfo = {
 
 new Handle:cvarVersion = INVALID_HANDLE; // version cvar
 new Handle:cvarEnabled = INVALID_HANDLE; // are we enabled?
-//new Handle:cvarCheckpointCounterattackCapture = INVALID_HANDLE;
-//new Handle:cvarCheckpointCapturePlayerRatio = INVALID_HANDLE;
+
 new Handle:cvarInfiniteAmmo = INVALID_HANDLE; // Infinite ammo (still needs reloads)
 new Handle:cvarInfiniteMagazine = INVALID_HANDLE; // Infinite magazine (never need to reload)
 new Handle:cvarDisableSliding = INVALID_HANDLE; // Disable Sliding
+
 new Handle:cvarLogLevel = INVALID_HANDLE; // Log level
 new Handle:cvarClassStripWords = INVALID_HANDLE;
 
@@ -101,8 +101,6 @@ public APLRes:Plugin_Setup_natives() {
 public Plugin_Setup_cvar() {
 	cvarVersion = CreateConVar("sm_insurgency_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	cvarEnabled = CreateConVar("sm_insurgency_enabled", PLUGIN_WORKING, "sets whether log fixing is enabled", FCVAR_NOTIFY);
-	//cvarCheckpointCapturePlayerRatio = CreateConVar("sm_insurgency_checkpoint_capture_player_ratio", "0.5", "Fraction of living players required to capture in Checkpoint", FCVAR_NOTIFY);
-	//cvarCheckpointCounterattackCapture = CreateConVar("sm_insurgency_checkpoint_counterattack_capture", "0", "Enable counterattack by bots to capture points in Checkpoint", FCVAR_NOTIFY);
 	cvarInfiniteAmmo = CreateConVar("sm_insurgency_infinite_ammo", "0", "Infinite ammo, still uses magazines and needs to reload", FCVAR_NOTIFY);
 	cvarInfiniteMagazine = CreateConVar("sm_insurgency_infinite_magazine", "0", "Infinite magazine, will never need reloading.", FCVAR_NOTIFY);
 	cvarDisableSliding = CreateConVar("sm_insurgency_disable_sliding", "0", "0: do nothing, 1: disable for everyone, 2: disable for Security, 3: disable for Insurgents", FCVAR_NOTIFY);
@@ -1331,18 +1329,7 @@ public Action:Event_PlayerHurt(Handle:event, const String:name[], bool:dontBroad
 	new attacker  = GetClientOfUserId(GetEventInt(event, "attacker"));
 	new victim = GetClientOfUserId(GetEventInt(event, "userid"));
 	GetEventString(event, "weapon", weapon, sizeof(weapon));
-
-	if (StrEqual(weapon,"player")) {
-		g_client_hurt_weaponstring[victim] = weapon;
-	} else {
-		if(StrContains(weapon, "grenade_") > -1 || StrContains(weapon, "rocket_") > -1) {
-			ReplaceString(weapon, sizeof(weapon), "grenade_c4", "weapon_c4_clicker", false);
-			ReplaceString(weapon, sizeof(weapon), "grenade_ied", "weapon_c4_ied", false);
-			ReplaceString(weapon, sizeof(weapon), "grenade_", "weapon_", false);
-			ReplaceString(weapon, sizeof(weapon), "rocket_", "weapon_", false);
-		}
-		g_client_hurt_weaponstring[victim] = weapon;
-	}
+	g_client_hurt_weaponstring[victim] = weapon;
 	//InsLog(DEBUG,"PlayerHurt attacher %d victim %d weapon %s ghws: %s", attacker, victim, weapon,g_client_hurt_weaponstring[victim]);
 	if (attacker > 0 && attacker != victim)
 	{

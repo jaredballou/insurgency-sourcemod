@@ -167,27 +167,22 @@ libraries:
     version_auto: {}
 plugins:
   build:
-    ammocheck: {}
-    botcount: {}
     botnames: {}
-    botspawns: {}
     cooplobby: {}
-    damagemod: {}
-    events: {}
     hlstatsx: {}
     insurgency: {}
     nofog: {}
-    respawn: {}
     restrictedarea: {}
-    rpgdrift: {}
-    suicide_bomb: {}
-    votelog: {}
     updater: {}
-    weapon_pickup: {}
   disabled:
+    ammocheck: {}
     backblast: {}
+    botcount: {}
+    botspawns: {}
     cvarlist: {}
+    damagemod: {}
     dropweapon: {}
+    events: {}
     insmaps: {}
     looting: {}
     magnifier: {}
@@ -197,12 +192,17 @@ plugins:
     noobj: {}
     pistolsonly: {}
     prop_dynamic: {}
+    respawn: {}
+    rpgdrift: {}
     score: {}
     simple-chatprocessor: {}
     smtactics: {}
     sprinklers: {}
+    suicide_bomb: {}
     theater_reconnect: {}
     theaterpicker: {}
+    votelog: {}
+    weapon_pickup: {}
   thirdparty:
     advertisements: {}
     afk_manager: {}
