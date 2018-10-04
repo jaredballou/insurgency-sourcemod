@@ -212,6 +212,13 @@ native float GetGameTime();
  */
 native int GetGameTickCount();
 
+/** 
+ * Returns the time the Game took processing the last frame.
+ *
+ * @return				Game frame time.
+ */
+native float GetGameFrameTime();
+
 /**
  * Returns the game description from the mod.
  *

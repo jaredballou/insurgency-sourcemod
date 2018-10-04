@@ -66,6 +66,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 			|| StrEqual(game, "garrysmod", false)
 			|| StrEqual(game, "swarm", false)
 			|| StrEqual(game, "bms", false)
+			|| StrEqual(game, "reactivedrop", false)
 			|| engine == Engine_Insurgency
 			|| engine == Engine_DOI)
 	{

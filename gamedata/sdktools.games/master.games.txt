@@ -217,7 +217,7 @@
 	}
 	"game.ios.txt"
 	{
-		"game"		"ios"
+		"game"		"iosoccer"
 	}
 	"game.left4dead2.txt"
 	{
@@ -254,5 +254,9 @@
 	"game.doi.txt"
 	{
 		"game"		"doi"
+	}
+	"game.reactivedrop.txt"
+	{
+		"game"		"reactivedrop"
 	}
 }
