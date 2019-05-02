@@ -19,31 +19,32 @@ public Plugin:myinfo = {
 
 #pragma semicolon 1
 
-public OnPluginStart()
-{
+public OnPluginStart() {
 {% for event, fields in events.iteritems() %}
 	HookEvent("{{ event }}", Event_{{ event|title }});
 {% endfor %}
 	HookUpdater();
 }
 
+public void RecordEvent(const char[] name, const char[] fields) {
+        LogToGame("\"event\": {\"%s\": { %s }}", name, fields);
+}
 {% for event, fields in events.iteritems() %}
-public Action:Event_{{ event|title }}(Handle:event, const String:name[], bool:dontBroadcast) {
+public void Event_{{ event|title }}(Event event, const char[] name, bool dontBroadcast) {
 {% for field, type in fields.iteritems() %}
-{% if type in ["byte", "short"] %}
+{% if type in ["byte", "short", "long"] %}
 {% set type = "int" %}
 {% else %}
 {% set type = type %}
 {% endif %}
 {% if type in ["string"] %}
-	decl String:m_{{ field|title }}[256];
-	GetEventString(event, "{{ field }}", m_{{ field|title }}, sizeof(m_{{ field|title }}));
+	char m_{{ field|title }}[256];
+	event.GetString("{{ field }}", m_{{ field|title }}, sizeof(m_{{ field|title }}));
 {% else %}
-	{{ type }} m_{{ field|title }} = GetEvent{{ type|title }}(event, "{{ field }}");
+	{{ type }} m_{{ field|title }} = event.Get{{ type|title }}("{{ field }}");
 {% endif %}
 {% endfor %}
-	LogToGame("\"event\": {\"{{ event }}\": { {% for field, type in fields.iteritems() -%}{% if type in ["string"] %}{% set ptype = "s" %}{% else %}{% set ptype = "d" %}{% endif %}\"{{field}}\": \"%{{ptype}}\",{%- endfor %}} } ", {{ fields.keys()|join(', ') }});
-	return Plugin_Continue;
+	RecordEvent(name, "{% for field, type in fields.iteritems() -%}{% if type in ["string"] %}{% set ptype = "s" %}{% elif type in ["float"] %}{% set ptype = "f" %}{% else %}{% set ptype = "d" %}{% endif %}\"{{field}}\": \"%{{ptype}}\",{%- endfor %}} } ", {{ fields.keys()|join(', ') }});
 }
 {% endfor %}
 	
